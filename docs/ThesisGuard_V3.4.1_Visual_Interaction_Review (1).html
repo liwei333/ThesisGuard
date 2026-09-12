@@ -1,0 +1,761 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>论衡 ThesisGuard · V3.4.1 Visual Interaction Review</title>
+<style>
+*{box-sizing:border-box}html,body{height:100%;margin:0}body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",Inter,Arial,sans-serif;background:#111218;color:#ececf2;overflow:hidden}
+:root{
+ --wb:#111218;--wb2:#181a22;--wb3:#20222c;--wbline:#2b2e39;--wbink:#f2f2f7;--wbmuted:#9295a4;--wbpurple:#8d7cf6;--wbpurple2:#5e50c9;
+ --canvas:#f3f1f8;--shell:#fff;--ink:#1d1a29;--ink2:#625e70;--ink3:#9994a6;--line:#e8e5ee;--soft:#f7f5fa;--purple:#6c57dc;--purple-dark:#342953;--purple-soft:#ede8fb;
+ --green:#1ca77b;--green-soft:#e6f7f1;--red:#dc5363;--red-soft:#fdecef;--orange:#e49332;--orange-soft:#fff2df;--blue:#4b78d5;--blue-soft:#edf3ff;--cyan:#29a8b7;--cyan-soft:#e8f8fa;
+ --shadow:0 10px 30px rgba(40,30,72,.08);--r:14px;
+}
+button,input,textarea,select{font:inherit}.hidden{display:none!important}
+/* Workbench */
+.wb{height:100%;display:flex;flex-direction:column;background:radial-gradient(900px 430px at 68% -10%,rgba(121,104,224,.13),transparent 68%),var(--wb)}
+.wb-head{padding:20px 28px 18px;border-bottom:1px solid var(--wbline);background:rgba(17,18,24,.96);display:flex;gap:28px;align-items:flex-end;flex:0 0 auto}
+.wb-head-main{max-width:760px}.eyebrow{font:600 10px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.18em;color:#817af1;text-transform:uppercase}.wb-head h1{font-size:23px;line-height:1.2;margin:7px 0 5px;letter-spacing:-.02em}.wb-head p{font-size:12px;line-height:1.7;color:var(--wbmuted);margin:0}.wb-actions{margin-left:auto;display:flex;gap:7px;flex-wrap:wrap;align-items:center;justify-content:flex-end}.wb-chip{border:1px solid var(--wbline);background:#171920;color:#a8abb8;padding:8px 13px;border-radius:999px;font-size:12px;font-weight:600;cursor:pointer;transition:.16s}.wb-chip:hover{border-color:#494d5d;color:white}.wb-chip.on{background:#ebe9ff;color:#252132;border-color:#ebe9ff}.wb-sep{width:1px;height:22px;background:var(--wbline);margin:0 3px}
+.wb-body{flex:1;min-height:0;display:grid;grid-template-columns:minmax(680px,1fr) 340px;overflow:hidden}.stage-col{min-width:0;display:flex;flex-direction:column;border-right:1px solid var(--wbline)}.stage-title{height:44px;display:flex;align-items:center;padding:0 20px;border-bottom:1px solid var(--wbline);font-size:12px;color:#c9cad5}.stage-title i{width:7px;height:7px;border-radius:50%;background:#5ad0a3;margin-right:8px;box-shadow:0 0 0 4px rgba(90,208,163,.08)}.stage-title .meta{margin-left:auto;color:#777b8c;font:500 10px ui-monospace,monospace}.demo-area{flex:1;min-height:0;display:grid;grid-template-columns:206px minmax(0,1fr);overflow:hidden}.scenarios{background:#15171e;border-right:1px solid var(--wbline);padding:15px 12px;overflow:auto}.scenarios h3{font-size:10px;letter-spacing:.18em;color:#656979;margin:3px 8px 10px}.sc-group{font-size:10px;color:#5f6270;margin:14px 8px 5px}.sc-btn{width:100%;border:0;background:transparent;color:#aaaebe;text-align:left;border-radius:9px;padding:8px 9px;cursor:pointer;display:flex;gap:7px;align-items:center;font-size:12px;line-height:1.35}.sc-btn:hover{background:#20232d;color:#fff}.sc-btn.on{background:#2a2845;color:#e5e0ff}.sc-btn .no{font:500 9px ui-monospace,monospace;color:#626578;width:20px}.sc-btn.on .no{color:#9d91ff}.stage-viewport{position:relative;overflow:hidden;background:repeating-linear-gradient(0deg,rgba(255,255,255,.014) 0 1px,transparent 1px 30px),repeating-linear-gradient(90deg,rgba(255,255,255,.014) 0 1px,transparent 1px 30px);display:flex;align-items:center;justify-content:center;padding:18px}.scale-wrap{position:relative}.desktop{width:1180px;height:720px;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 34px 90px rgba(0,0,0,.48);color:var(--ink);transform-origin:top left;position:absolute;left:0;top:0}
+.deck{background:#15171e;padding:16px;overflow:auto}.blk{border:1px solid var(--wbline);border-radius:12px;background:#191b23;padding:13px;margin-bottom:11px}.blk h2{font-size:12px;margin:0 0 8px;color:#dddde6;display:flex;justify-content:space-between}.blk h2 em{font-style:normal;color:#696d7c;font:500 9px ui-monospace,monospace}.blk p,.blk li{font-size:11px;line-height:1.65;color:#8f93a2}.blk p{margin:0}.readout{display:grid;grid-template-columns:1fr 1fr;gap:8px}.ro{background:#20232c;border-radius:9px;padding:9px}.ro span{display:block;font-size:9px;color:#707483;text-transform:uppercase;letter-spacing:.08em}.ro b{display:block;margin-top:4px;font-size:12px;color:#e4e4eb}.dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:5px;background:#5ad0a3}.directs{display:grid;grid-template-columns:1fr 1fr;gap:6px}.directs button{border:1px solid #2c2f3a;background:#20222b;color:#9fa2b0;border-radius:8px;padding:7px 8px;text-align:left;font-size:10.5px;cursor:pointer}.directs button:hover,.directs button.on{border-color:#6e63c7;color:#e8e3ff;background:#27243e}.state-row{display:flex;gap:5px;flex-wrap:wrap}.state-row button{border:1px solid #30333e;background:#20222b;color:#9195a5;border-radius:8px;padding:6px 8px;font-size:10.5px;cursor:pointer}.state-row button.on{color:#fff;background:#4c3fad;border-color:#4c3fad}.rules{margin:0;padding-left:17px}.rules li+li{margin-top:4px}.riskline{display:flex;gap:7px;align-items:center}.riskline .r{font-size:10px;padding:3px 6px;border-radius:5px;background:#332b2d;color:#f1a5a8}.riskline .g{font-size:10px;padding:3px 6px;border-radius:5px;background:#21312d;color:#7edab8}
+/* App shell */
+.app{height:100%;display:grid;grid-template-columns:72px 1fr;background:var(--canvas)}.app-nav{background:#fff;border-right:1px solid var(--line);padding:14px 10px;display:flex;flex-direction:column;align-items:center}.logo{width:38px;height:38px;border-radius:12px;background:linear-gradient(145deg,#282139,#6c57dc);color:#fff;font-weight:800;display:grid;place-items:center;box-shadow:0 7px 16px rgba(76,61,130,.22);margin-bottom:19px}.navset{display:flex;flex-direction:column;gap:4px}.navbtn{width:44px;height:44px;border:0;background:transparent;color:#858093;border-radius:12px;display:grid;place-items:center;cursor:pointer;position:relative}.navbtn:hover{background:#f4f1fa;color:#4d4263}.navbtn.on{background:#302945;color:#fff;box-shadow:0 6px 15px rgba(49,40,70,.18)}.navbtn.on:before{content:"";position:absolute;left:-10px;width:3px;height:19px;border-radius:3px;background:#7b65e9}.navbottom{margin-top:auto}.ico{width:19px;height:19px;display:block;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.app-main{min-width:0;min-height:0;overflow:hidden;display:flex;flex-direction:column}.topbar{height:58px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;padding:0 20px;gap:12px;flex:0 0 auto}.search{width:340px;height:38px;border:1px solid var(--line);border-radius:20px;background:#fff;display:flex;align-items:center;gap:8px;padding:0 13px;color:var(--ink3);font-size:12px}.search .ico{width:15px;height:15px}.agent-online{margin-left:auto;display:flex;align-items:center;gap:6px;padding:7px 10px;border-radius:999px;background:#faf9fc;color:#747080;font-size:11px}.agent-online i{width:7px;height:7px;border-radius:50%;background:#3bc799;box-shadow:0 0 0 4px rgba(59,199,153,.11)}.agent-btn{height:38px;border:0;background:#302945;color:#fff;border-radius:19px;padding:0 14px;font-size:11.5px;font-weight:650;cursor:pointer;display:flex;align-items:center;gap:7px}.round{width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:#fff;color:#655f70;display:grid;place-items:center}.workspace{flex:1;min-height:0;height:0;overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;scrollbar-gutter:stable;padding:18px 18px 36px;background:linear-gradient(180deg,#f8f7fb 0,var(--canvas) 130px)}
+/* shared */
+.page-title{display:flex;align-items:flex-end;gap:12px;margin-bottom:14px}.page-title h1{font-size:21px;letter-spacing:-.02em;margin:0;color:#211d2d}.page-title p{font-size:11.5px;color:var(--ink3);margin:4px 0 0}.page-actions{margin-left:auto;display:flex;gap:7px}.btn{height:34px;border-radius:9px;padding:0 12px;border:1px solid var(--line);background:#fff;color:#5e586a;font-size:11px;font-weight:650;cursor:pointer}.btn.primary{background:#302945;border-color:#302945;color:#fff}.btn.purple{background:var(--purple-soft);border-color:#ded6f8;color:#5848c5}.btn.red{background:var(--red-soft);border-color:#f9d1d8;color:#b94455}.btn.green{background:var(--green-soft);border-color:#ceefe3;color:#12835f}.grid{display:grid;gap:10px}.card{background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 5px 18px rgba(45,35,75,.045);padding:13px}.card h3{font-size:12.5px;margin:0;color:#2e2937}.sub{font-size:10.5px;color:var(--ink3);line-height:1.55}.metric{font-variant-numeric:tabular-nums}.big{font-size:27px;font-weight:780;letter-spacing:-.03em}.xxbig{font-size:43px;font-weight:800;letter-spacing:-.04em}.tag{display:inline-flex;align-items:center;gap:4px;padding:3px 7px;border-radius:999px;font-size:9.5px;font-weight:700}.tag.purple{background:var(--purple-soft);color:#5d49c8}.tag.green{background:var(--green-soft);color:#16805e}.tag.red{background:var(--red-soft);color:#c14859}.tag.orange{background:var(--orange-soft);color:#b16b18}.tag.blue{background:var(--blue-soft);color:#426bbe}.tag.gray{background:#f1eff4;color:#777181}.kicker{font-size:9px;letter-spacing:.15em;text-transform:uppercase;font-weight:700;color:#9d96aa}.divider{height:1px;background:var(--line);margin:11px 0}.rows{display:grid}.row{display:flex;align-items:center;gap:9px;padding:9px 0;border-bottom:1px solid #efedf3}.row:last-child{border-bottom:0}.row .grow{flex:1;min-width:0}.row b{font-size:11.5px}.row small{display:block;color:var(--ink3);font-size:9.5px;margin-top:2px}.pct{font-size:11px;font-weight:700}.bar{height:5px;border-radius:999px;background:#eeeaf3;overflow:hidden}.bar i{display:block;height:100%;border-radius:inherit;background:var(--purple)}.iconbox{width:28px;height:28px;border-radius:9px;display:grid;place-items:center;background:#f4f1fa;color:#6555ca}.iconbox .ico{width:15px;height:15px}.empty-note{padding:12px;border:1px dashed #d9d4e3;border-radius:10px;color:#8b8498;font-size:10.5px;text-align:center}
+
+/* V3.2 · 内层滚动修复 + 高密度驾驶舱 */
+.app{min-height:0;overflow:hidden}
+.app-main{min-height:0!important;overflow:hidden}
+.workspace{min-height:0!important;height:0;overflow-y:auto!important;overflow-x:hidden!important;scrollbar-width:thin;scrollbar-color:#c8b9e6 transparent;scroll-behavior:smooth}
+.workspace::-webkit-scrollbar{width:8px}
+.workspace::-webkit-scrollbar-track{background:transparent}
+.workspace::-webkit-scrollbar-thumb{background:#c8b9e6;border-radius:999px;border:2px solid transparent;background-clip:padding-box}
+.workspace::after{content:"";display:block;height:8px}
+
+/* Dashboard V3.2 */
+.dash-v2{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:10px;align-items:start}
+.dash-v2 .card{padding:12px}
+.dash-market{grid-column:span 3;min-height:138px;background:linear-gradient(145deg,#282039,#4d3972);color:#fff;border:0;position:relative;overflow:hidden}
+.dash-market:after{content:"";position:absolute;width:150px;height:150px;border:1px solid rgba(255,255,255,.13);border-radius:50%;right:-58px;top:-64px}
+.dash-market .kicker{color:#bfb5d6}.dash-market .xxbig{font-size:38px;margin-top:5px}.dash-market .market-line{display:flex;align-items:center;gap:6px;margin-top:2px;font-size:11px}.dash-market .market-line i{width:8px;height:8px;border-radius:50%;background:#ffbd58;box-shadow:0 0 0 4px rgba(255,189,88,.13)}
+.dash-market .market-foot{display:flex;gap:10px;position:absolute;left:12px;right:12px;bottom:11px;font-size:9px;color:#cfc6de}.dash-market .market-foot b{color:#fff;font-size:10px}
+.dash-gate{grid-column:span 3;min-height:138px;background:linear-gradient(180deg,#fff,#fbf9ff)}.dash-gate .big{font-size:25px;color:#493a99;margin:4px 0}.dash-gate .gauge{margin:7px 0 8px}.dash-gate .gate-grid{margin-top:6px}.dash-gate .mini{padding:6px 7px}
+.dash-account{grid-column:span 3;min-height:138px}.dash-discipline{grid-column:span 3;min-height:138px}
+.kpi3{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:8px}.kpi3>div{background:#f7f4fb;border-radius:9px;padding:7px}.kpi3 span{display:block;font-size:8.5px;color:var(--ink3)}.kpi3 b{display:block;margin-top:2px;font-size:13px;color:#332b43}.kpi3 b.warn{color:#bd7520}.kpi3 b.good{color:#14815f}
+.capacity-mini{display:flex;align-items:center;gap:8px;margin-top:8px}.capacity-mini .slotbar{flex:1;display:grid;grid-template-columns:repeat(4,1fr);gap:4px}.capacity-mini .slotbar i{height:6px;border-radius:6px;background:#ded9e8}.capacity-mini .slotbar i.used{background:#39304f}.capacity-mini strong{font-size:12px}
+.disc-score{display:flex;align-items:end;gap:8px;margin-top:6px}.disc-score .big{font-size:28px;color:#453596}.disc-score p{margin:0 0 3px;font-size:9px;line-height:1.4;color:var(--ink3)}
+.chipline{display:flex;gap:4px;flex-wrap:wrap;margin-top:7px}.microtag{font-size:8.5px;padding:3px 6px;border-radius:999px;background:#f4f0fa;color:#716680;font-weight:700}.microtag.green{background:var(--green-soft);color:#14815f}.microtag.orange{background:var(--orange-soft);color:#a56618}.microtag.red{background:var(--red-soft);color:#bb4658}
+.dash-positions{grid-column:span 7}.dash-focus{grid-column:span 5}.dash-opps{grid-column:span 8}.dash-intel{grid-column:span 4}.dash-calendar{grid-column:span 4}.dash-model{grid-column:span 4}.dash-health{grid-column:span 4}
+.section-head{display:flex;align-items:center;gap:8px;margin-bottom:5px}.section-head h3{margin:0}.section-head .more{margin-left:auto;font-size:9.5px;color:#6755bd;font-weight:700}
+.posrow{display:grid;grid-template-columns:1.2fr .72fr .75fr .9fr .72fr;gap:8px;align-items:center;padding:7px 0;border-bottom:1px solid #efedf3}.posrow:last-child{border-bottom:0}.posrow b{font-size:10.5px}.posrow small{display:block;font-size:8.5px;color:var(--ink3);margin-top:2px}.posrow .price.up{color:#d54e61}.posrow .price.down{color:#158967}
+.focus-list{display:grid;gap:6px}.focus-item{display:grid;grid-template-columns:24px 1fr auto;gap:8px;align-items:start;padding:7px 8px;border-radius:9px;background:#f8f5fb}.focus-item .n{width:24px;height:24px;border-radius:8px;display:grid;place-items:center;background:#ede8fb;color:#5f4bc4;font-size:9px;font-weight:800}.focus-item b{font-size:10.5px}.focus-item small{display:block;margin-top:2px;font-size:8.5px;color:var(--ink3);line-height:1.45}.focus-item .lv{font-size:8px;font-weight:800;color:#98631f;background:#fff1dd;padding:3px 5px;border-radius:6px}
+.opprow{display:grid;grid-template-columns:1.05fr .72fr .62fr 1fr .8fr .7fr;gap:7px;align-items:center;padding:7px 0;border-bottom:1px solid #efedf3}.opprow:last-child{border-bottom:0}.opprow b{font-size:10.5px}.opprow small{display:block;font-size:8.4px;color:var(--ink3);margin-top:1px}.opprow .score{font-size:13px;color:#43388f}.opprow .action{font-size:9.5px;font-weight:700;color:#5a4a91}
+.intel-item{padding:7px 0;border-bottom:1px solid #efedf3}.intel-item:last-child{border-bottom:0}.intel-item .top{display:flex;align-items:center;gap:6px}.intel-item b{font-size:10.5px}.intel-item p{font-size:8.8px;line-height:1.45;color:var(--ink3);margin:3px 0 0}.heat{width:6px;height:6px;border-radius:50%;background:#df5563;box-shadow:0 0 0 3px #fdecef}.heat.orange{background:#e49332;box-shadow:0 0 0 3px #fff2df}.heat.green{background:#1ca77b;box-shadow:0 0 0 3px #e6f7f1}
+.catalyst{display:grid;grid-template-columns:52px 1fr auto;gap:8px;align-items:center;padding:7px 0;border-bottom:1px solid #efedf3}.catalyst:last-child{border-bottom:0}.catalyst time{font:700 9px ui-monospace,monospace;color:#675c79}.catalyst b{font-size:10px}.catalyst small{display:block;font-size:8.5px;color:var(--ink3);margin-top:2px}.catalyst .days{font-size:8.5px;color:#6e58b6;background:#f0ebfa;padding:3px 5px;border-radius:6px}
+.modelrow{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid #efedf3}.modelrow:last-child{border-bottom:0}.modelrow .iconbox{width:26px;height:26px}.modelrow b{font-size:10px}.modelrow small{display:block;font-size:8.5px;color:var(--ink3);margin-top:2px}.modelrow .status{margin-left:auto;font-size:8.5px;font-weight:700;color:#14815f}
+.health-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:7px}.health-grid>div{padding:7px;border-radius:9px;background:#f7f4fb}.health-grid span{font-size:8.5px;color:var(--ink3)}.health-grid b{display:block;font-size:12px;margin-top:2px}.health-grid .warning{color:#b76c1b}
+.dashboard-footnote{grid-column:1/-1;font-size:8.5px;color:#9993a4;padding:0 2px 4px}
+
+/* Dashboard */
+.dash{grid-template-columns:1.35fr .92fr .82fr;align-items:start}.sentiment-hero{background:linear-gradient(145deg,#282039,#4c3972);color:white;border:0;padding:15px;min-height:172px;position:relative;overflow:hidden}.sentiment-hero:after{content:"";position:absolute;width:170px;height:170px;border:1px solid rgba(255,255,255,.14);border-radius:50%;right:-60px;top:-70px}.sentiment-hero .kicker{color:#bdb4d6}.sentiment-hero .state{display:inline-flex;gap:6px;align-items:center;margin-top:2px}.sentiment-hero .state i{width:8px;height:8px;border-radius:50%;background:#ffbf5d;box-shadow:0 0 0 5px rgba(255,191,93,.13)}.sentiment-hero p{font-size:10.5px;line-height:1.6;color:#d8d0e5;margin:10px 0 0;max-width:260px}.gate{background:linear-gradient(180deg,#fff,#fbf9ff)}.gate .big{color:#453596}.gate-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:9px}.mini{padding:7px 8px;border-radius:9px;background:#f6f3fb;font-size:9.5px;color:#6f687b}.mini strong{display:block;font-size:10.5px;color:#353044}.hold-mini .slotbar{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin:9px 0}.hold-mini .slotbar i{height:6px;border-radius:6px;background:#ded9e8}.hold-mini .slotbar i.used{background:#39304f}.alert{margin-top:8px;padding:8px 9px;border-radius:9px;background:var(--orange-soft);color:#9a611d;font-size:9.5px;line-height:1.5}.watchtable{grid-column:1/3}.newsmini{grid-column:3}.stockline{display:grid;grid-template-columns:1.1fr .7fr .9fr .8fr .75fr;gap:8px;align-items:center;padding:9px 0;border-bottom:1px solid #efedf3}.stockline:last-child{border:0}.stockline b{font-size:11px}.stockline small{font-size:9px;color:var(--ink3)}.score{font-weight:800;color:#43388f}.positive{color:#dc5363}.negative{color:#1e9b78}
+/* sentiment */
+.sent-grid{grid-template-columns:1.15fr 1fr 1fr 1.08fr;align-items:stretch}.sent-score{grid-row:span 2;background:linear-gradient(145deg,#251d36,#53397c);color:#fff;border:0;position:relative;overflow:hidden}.sent-score .kicker{color:#bcaed4}.sent-score h4{margin:7px 0 0;font-size:12px}.sent-score .xxbig{margin-top:8px}.sent-score p{font-size:10px;color:#d2c8df;line-height:1.6}.statcolor{position:relative;overflow:hidden}.statcolor:before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px}.statcolor.green{background:#f2fbf8}.statcolor.green:before{background:var(--green)}.statcolor.red{background:#fff5f6}.statcolor.red:before{background:var(--red)}.statcolor.orange{background:#fff9ef}.statcolor.orange:before{background:var(--orange)}.statcolor.blue{background:#f5f8ff}.statcolor.blue:before{background:var(--blue)}.statcolor.purple{background:#f8f5ff}.statcolor.purple:before{background:var(--purple)}.stat-head{display:flex;justify-content:space-between;align-items:center}.stat-head span{font-size:9px;font-weight:700}.delta{font-size:9px;margin-top:4px}.state-machine{grid-column:1/-1;display:grid;grid-template-columns:repeat(7,1fr);gap:5px;padding:7px}.phase{border:1px solid #e8e4ee;background:#faf9fc;border-radius:10px;padding:8px;text-align:center;cursor:pointer}.phase b{font-size:9.5px}.phase small{display:block;font-size:8px;color:#aaa4b4;margin-top:2px}.phase.on{background:#44355f;border-color:#44355f;color:#fff}.phase.on small{color:#d7cee4}.prompt-card{grid-column:1/4;background:#272137;color:#f2eff6;border:0}.prompt-card h3{color:#fff}.prompt-card pre{white-space:pre-wrap;font:500 9.5px/1.65 ui-monospace,SFMono-Regular,Menlo,monospace;color:#d9d2e2;margin:9px 0 0}.risk-gate{grid-column:4}.gauge{height:9px;border-radius:999px;background:linear-gradient(90deg,#27b28b 0 25%,#79d5cc 25% 45%,#f0b04c 62%,#dd5964 100%);position:relative;margin:12px 0}.gauge i{position:absolute;top:-5px;width:3px;height:19px;border-radius:2px;background:#302945;left:28%}
+/* watchlist */
+.tabs{display:flex;gap:7px;margin-bottom:10px}.tab{border:0;background:#ebe8f1;color:#777080;border-radius:999px;padding:6px 10px;font-size:10px;font-weight:650}.tab.on{background:#312a43;color:#fff}.stock-grid{grid-template-columns:repeat(3,1fr)}.stock-card{padding:13px}.stock-top{display:flex;align-items:flex-start}.stock-name b{display:block;font-size:13px}.stock-name span{font-size:9px;color:var(--ink3)}.stock-score{margin-left:auto;font-size:18px;font-weight:800;color:#4d409f}.thesis{margin-top:9px;font-size:10px;line-height:1.55;color:#625d6c}.stock-foot{display:flex;gap:5px;margin-top:10px}.stale{border-color:#f2d4a6!important}.stale .stock-score{color:#ba751f}.full-add{border:1px dashed #cfc8dc;background:#faf9fc;display:grid;place-items:center;text-align:center;min-height:146px;cursor:pointer}.full-add b{font-size:12px}.full-add span{font-size:9.5px;color:#8f8997;display:block;margin-top:4px}
+/* research */
+.research-head{display:grid;grid-template-columns:1.2fr .85fr .9fr;gap:10px}.company-hero{background:linear-gradient(145deg,#2c243e,#4e3b6f);color:#fff;border:0}.company-hero h2{font-size:18px;margin:8px 0 4px}.company-hero p{font-size:10px;color:#cec4dd;line-height:1.55}.class-bars{display:grid;gap:8px;margin-top:10px}.cb{display:grid;grid-template-columns:80px 1fr 35px;gap:7px;align-items:center;font-size:9.5px}.cb .bar{height:6px}.workflow{grid-template-columns:1.1fr .95fr}.steps{display:grid;grid-template-columns:repeat(6,1fr);gap:5px}.step{padding:8px 6px;border-radius:9px;background:#f6f3f9;text-align:center}.step i{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:#e5e0ef;color:#8c8399;margin:0 auto 5px;font-style:normal;font-size:9px}.step.done i{background:var(--green-soft);color:var(--green)}.step.run i{background:var(--purple-soft);color:var(--purple)}.step b{font-size:8.5px}.step small{font-size:7.5px;color:var(--ink3);display:block;margin-top:2px}.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.fact{padding:9px;background:#f8f7fa;border-radius:9px}.fact span{font-size:8.5px;color:var(--ink3)}.fact b{display:block;font-size:11px;margin-top:3px}
+/* stock detail */
+.stockhero{display:flex;align-items:center;gap:14px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin-bottom:10px}.ticker b{font-size:16px}.ticker small{font-size:9px;color:var(--ink3);display:block}.price{font-size:22px;font-weight:800;margin-left:8px}.price small{font-size:9px;color:var(--red);font-weight:700}.health{margin-left:auto;display:flex;gap:16px;text-align:center}.health b{display:block;font-size:14px}.health small{font-size:8.5px;color:var(--ink3)}.detail-grid{grid-template-columns:1.15fr 1fr .9fr}.thesis-list .row{padding:8px 0}.thesis-bullet{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px var(--green-soft)}.thesis-bullet.warn{background:var(--orange);box-shadow:0 0 0 4px var(--orange-soft)}.levels{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:9px}.level{padding:9px 8px;border-radius:9px;background:#f8f7fa}.level span{font-size:8px;color:var(--ink3)}.level b{display:block;margin-top:3px;font-size:11px}.planbox{padding:9px;border-radius:9px;background:#f8f7fb;margin-top:8px}.planbox strong{font-size:10.5px}.planbox p{font-size:9px;line-height:1.55;color:#716a7b;margin:4px 0 0}
+/* hot money */
+.hot-hero{background:linear-gradient(145deg,#4b2a2b,#7d4136);color:#fff;border:0}.hot-hero .kicker{color:#eac0af}.hot-grid{grid-template-columns:1.1fr 1fr 1fr;align-items:stretch}.hot-grid>.card{min-width:0;overflow:hidden}.hot-factors{width:auto;height:auto;border-radius:0;background:transparent;box-shadow:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin-top:10px}.hot-factors .h{min-width:0;min-height:64px;padding:10px 6px;background:#fff4ef;border-radius:9px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center}.hot-factors .h b{font-size:14px;line-height:1.1;color:#9c4c31}.hot-factors .h span{display:block;font-size:8.5px;line-height:1.35;color:#aa8172;margin-top:4px;white-space:nowrap}.hot-grid .reject{clear:both;position:relative;width:100%;box-sizing:border-box;margin-top:10px;padding:9px 10px;overflow-wrap:anywhere}.ladder{display:flex;align-items:flex-end;gap:7px;height:120px;padding-top:12px}.ladder .col{flex:1;text-align:center}.ladder i{display:block;width:100%;border-radius:6px 6px 2px 2px;background:linear-gradient(180deg,#de7457,#9b4733)}.ladder b{font-size:9px}.ladder small{font-size:7.5px;color:var(--ink3);display:block}.reject{padding:9px;border-left:3px solid var(--red);background:var(--red-soft);font-size:9.5px;color:#a94956;line-height:1.55;margin-top:8px}
+/* holdings */
+.hold-grid{grid-template-columns:1.28fr .8fr}.holding{display:grid;grid-template-columns:1.1fr .6fr .6fr .7fr 1fr;align-items:center;gap:7px;padding:9px 0;border-bottom:1px solid #efedf3}.holding:last-child{border-bottom:0}.holding b{font-size:11px}.holding small{font-size:9px;color:var(--ink3)}.cap-box{background:linear-gradient(180deg,#fff,#fbf9ff)}.slots{display:flex;gap:6px;margin:12px 0}.slots i{height:11px;flex:1;border-radius:6px;background:#e8e4ef}.slots i.used{background:#302945}.corr{display:grid;gap:7px}.corr-row{display:grid;grid-template-columns:82px 1fr 32px;gap:6px;align-items:center;font-size:9px}.pk{margin-top:10px;padding:10px;background:#fff8ea;border:1px solid #f3ddb5;border-radius:10px}.pk b{font-size:10.5px;color:#9d641c}.pk p{font-size:9px;color:#8c7554;line-height:1.55;margin:4px 0 0}
+/* news */
+.news-grid{grid-template-columns:1.2fr .88fr}.newsitem{display:grid;grid-template-columns:50px 1fr auto;gap:10px;padding:10px 0;border-bottom:1px solid #efedf3}.newsitem:last-child{border:0}.time{font-size:9px;color:var(--ink3)}.newsitem b{font-size:11px;display:block}.newsitem p{font-size:9.3px;line-height:1.55;color:#777080;margin:4px 0 0}.impact{font-size:9px;font-weight:700}.impact.high{color:var(--red)}.impact.mid{color:var(--orange)}.chain{display:grid;gap:5px}.chain div{padding:8px;border-radius:9px;background:#f6f4f9;font-size:9.5px}.chain strong{color:#4e4097}.arrowdown{text-align:center;color:#aaa3b6;font-size:10px}
+/* chat */
+.chat-wrap{height:565px;display:grid;grid-template-columns:250px 1fr 265px;gap:10px}.chat-side,.chat-main,.context-side{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden}.chat-side{padding:12px}.chat-side h3,.context-side h3{font-size:11px;margin:0 0 9px}.chat-history{display:grid;gap:6px}.chat-history div{padding:8px;border-radius:9px;background:#f8f7fa;font-size:9.5px;color:#716c79}.chat-history div.on{background:#eee9fb;color:#5848c5}.chat-main{display:flex;flex-direction:column}.chat-head{height:46px;border-bottom:1px solid var(--line);padding:0 13px;display:flex;align-items:center}.chat-head b{font-size:11px}.ctxchips{display:flex;gap:4px;margin-left:auto}.ctxchips span{font-size:8.5px;padding:3px 6px;border-radius:5px;background:#f2eff6;color:#817a8b}.messages{flex:1;overflow:auto;padding:14px;display:grid;align-content:start;gap:9px}.msg{max-width:78%;padding:9px 11px;border-radius:11px;font-size:10px;line-height:1.6}.msg.user{margin-left:auto;background:#312a43;color:#fff;border-radius:11px 11px 3px 11px}.msg.ai{background:#f4f2f7;color:#595362;border-radius:11px 11px 11px 3px}.msg.ai strong{color:#312a43}.composer{border-top:1px solid var(--line);padding:10px;display:flex;gap:7px}.composer input{flex:1;border:1px solid var(--line);border-radius:9px;padding:0 10px;font-size:10px;outline:none}.context-side{padding:12px}.ctx-item{padding:9px 0;border-bottom:1px solid #efedf3}.ctx-item:last-child{border:0}.ctx-item b{font-size:10px}.ctx-item span{display:block;font-size:8.5px;color:var(--ink3);margin-top:2px}
+/* discipline */
+.disc-grid{grid-template-columns:.75fr 1.2fr .95fr}.discscore{background:linear-gradient(145deg,#2c253d,#4c3b69);color:#fff;border:0}.discscore .xxbig{margin-top:8px}.discscore p{font-size:9.5px;line-height:1.55;color:#d5ccdf}.viol{padding:9px;border-radius:9px;background:#fff7ed;border-left:3px solid var(--orange);margin-top:7px}.viol b{font-size:10px}.viol p{font-size:9px;color:#866f55;line-height:1.5;margin:3px 0 0}.constitution{padding:10px;background:#272137;color:#e8e3ec;border-radius:11px;font:500 9px/1.65 ui-monospace,monospace;margin-top:8px}
+/* config */
+.config-grid{grid-template-columns:1fr 1.1fr}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.field label{display:block;font-size:8.5px;color:var(--ink3);margin-bottom:4px}.field input,.field select{width:100%;height:32px;border:1px solid var(--line);border-radius:8px;padding:0 8px;font-size:10px;color:#504a59;background:#fff}.router{display:grid;gap:7px}.route{display:grid;grid-template-columns:110px 1fr auto;gap:7px;align-items:center;padding:8px;border-radius:9px;background:#f8f7fa}.route b{font-size:9.5px}.route select{height:27px;border:1px solid var(--line);border-radius:7px;background:#fff;font-size:9px;padding:0 6px}.prompt{background:#272137;color:#e8e4ef;border-radius:10px;padding:10px;font:500 8.8px/1.65 ui-monospace,monospace;white-space:pre-wrap}.prompt-tabs{display:flex;gap:5px;margin:8px 0}.prompt-tabs button{border:1px solid var(--line);background:#fff;border-radius:7px;padding:5px 7px;font-size:8.5px}.prompt-tabs button.on{background:#332b46;color:#fff;border-color:#332b46}
+/* knowledge */
+.kb-grid{grid-template-columns:1.15fr .9fr}.version{display:grid;grid-template-columns:75px 1fr auto;gap:8px;align-items:start;padding:9px 0;border-bottom:1px solid #efedf3}.version:last-child{border:0}.version time{font-size:8.5px;color:var(--ink3)}.version b{font-size:10.5px}.version p{font-size:9px;line-height:1.5;color:#746e7d;margin:3px 0 0}.freshness{display:grid;gap:7px}.fresh{padding:9px;border-radius:9px;background:#f8f7fa}.fresh-head{display:flex}.fresh b{font-size:10px}.fresh span{margin-left:auto;font-size:8.5px}.fresh p{font-size:8.7px;color:#817a8a;margin:4px 0 0}.source-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px}
+/* board */
+.board{flex:1;overflow:auto;padding:24px 26px 80px}.board-section{margin-bottom:44px}.board-section h2{font-size:17px;margin:0 0 5px}.board-section>p{font-size:11px;color:#858896;line-height:1.65;margin:0 0 16px;max-width:850px}.board-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(500px,1fr));gap:24px}.board-cell .label{font-size:11px;color:#c9c9d4;margin-bottom:7px}.board-cell .note{font-size:10px;color:#777b8b;line-height:1.6;margin-top:7px}.frame{height:330px;border-radius:14px;overflow:hidden;background:white;box-shadow:0 18px 45px rgba(0,0,0,.35);position:relative}.frame-inner{width:1180px;height:720px;transform:scale(.46);transform-origin:top left;pointer-events:none}
+.toast{position:absolute;right:18px;bottom:18px;background:#2e283e;color:#fff;border-radius:10px;padding:10px 12px;font-size:10px;box-shadow:0 10px 25px rgba(0,0,0,.2);opacity:0;transform:translateY(6px);transition:.2s;pointer-events:none}.toast.show{opacity:1;transform:none}
+@media (max-width:1050px){.wb-body{grid-template-columns:1fr}.deck{display:none}.demo-area{grid-template-columns:180px 1fr}}
+</style>
+
+<style id="purple-light-walkthrough-theme">
+/* ================================================================
+   V3.1 · 浅色薰衣草紫主题
+   仅调整视觉主题，不改变“交互走查台 / 场景画板 / 状态控制”模式。
+   设计基线继承 V2.2：薰衣草画布 + 白色应用壳 + 深紫主操作 +
+   粉 / 橙 / 薄荷青状态色 + 紫调低对比阴影。
+   ================================================================ */
+:root{
+  --wb:#d7c8f9;
+  --wb2:#f5f1fd;
+  --wb3:#ffffff;
+  --wbline:#ded6ed;
+  --wbink:#2b2440;
+  --wbmuted:#7b748d;
+  --wbpurple:#6c55ae;
+  --wbpurple2:#201934;
+
+  --canvas:#fbf9ff;
+  --shell:#ffffff;
+  --ink:#2b2440;
+  --ink2:#625a72;
+  --ink3:#928aa0;
+  --line:#e8e5ef;
+  --soft:#f7f4fc;
+  --purple:#6c55ae;
+  --purple-dark:#201934;
+  --purple-soft:#eee8fb;
+  --green:#39a878;
+  --green-soft:#edf9f4;
+  --red:#e75b5b;
+  --red-soft:#fff0f0;
+  --orange:#fbb36a;
+  --orange-soft:#fff6e9;
+  --blue:#6689cf;
+  --blue-soft:#edf4ff;
+  --cyan:#55bfc2;
+  --cyan-soft:#eaf9f9;
+  --shadow:0 12px 34px rgba(86,61,143,.12);
+}
+html,body{background:var(--wb);color:var(--wbink)}
+body{background:
+  radial-gradient(720px 430px at -8% -12%,rgba(255,255,255,.55),transparent 65%),
+  radial-gradient(620px 420px at 108% 110%,rgba(255,255,255,.28),transparent 68%),
+  var(--wb)}
+.wb{
+  background:
+    radial-gradient(720px 420px at 72% -8%,rgba(255,255,255,.30),transparent 66%),
+    linear-gradient(180deg,#d7c8f9 0%,#d1c0f3 100%);
+}
+.wb-head{
+  background:rgba(255,255,255,.82);
+  border-bottom-color:rgba(99,76,151,.14);
+  box-shadow:0 4px 18px rgba(86,61,143,.08);
+  backdrop-filter:blur(16px);
+}
+.eyebrow{color:#7459bd}
+.wb-head h1{color:#201934}
+.wb-head p{color:#766e86}
+.wb-chip{
+  border-color:#e3dcef;background:rgba(255,255,255,.76);color:#6e667d;
+  box-shadow:0 2px 8px rgba(86,61,143,.05)
+}
+.wb-chip:hover{border-color:#c9b9e8;color:#332848;background:#fff}
+.wb-chip.on{background:#201934;color:#fff;border-color:#201934;box-shadow:0 6px 16px rgba(32,25,52,.16)}
+.wb-sep{background:#d9d0e8}
+.wb-body{background:transparent}
+.stage-col{border-right-color:rgba(99,76,151,.14)}
+.stage-title{
+  background:rgba(255,255,255,.72);
+  border-bottom-color:#ded6ed;
+  color:#51495f;
+}
+.stage-title i{background:#39a878;box-shadow:0 0 0 4px rgba(57,168,120,.10)}
+.stage-title .meta{color:#91899f}
+.demo-area{background:rgba(255,255,255,.16)}
+.scenarios{
+  background:rgba(255,255,255,.78);
+  border-right-color:#ded6ed;
+  box-shadow:6px 0 18px rgba(86,61,143,.05);
+}
+.scenarios h3{color:#857a96}
+.sc-group{color:#9b92aa}
+.sc-btn{color:#71697f}
+.sc-btn:hover{background:#f2ecfb;color:#3f3552}
+.sc-btn.on{background:#201934;color:#fff;box-shadow:0 6px 15px rgba(32,25,52,.14)}
+.sc-btn .no{color:#a39bac}
+.sc-btn.on .no{color:#c9b8f7}
+.stage-viewport{
+  background:
+    repeating-linear-gradient(0deg,rgba(68,49,109,.045) 0 1px,transparent 1px 30px),
+    repeating-linear-gradient(90deg,rgba(68,49,109,.045) 0 1px,transparent 1px 30px),
+    linear-gradient(180deg,rgba(255,255,255,.20),rgba(255,255,255,.06));
+}
+.desktop{
+  border:1px solid rgba(255,255,255,.78);
+  box-shadow:0 30px 76px rgba(65,42,113,.24);
+}
+.deck{background:rgba(247,244,252,.94);color:#2b2440}
+.blk{border-color:#e4dced;background:#fff;box-shadow:0 5px 15px rgba(86,61,143,.06)}
+.blk h2{color:#352c49}.blk h2 em{color:#9991a4}.blk p,.blk li{color:#746d80}
+.readout{gap:8px}.ro{background:#f5f1fb;border:1px solid #ebe5f2}.ro span{color:#968ea2}.ro b{color:#332b43}
+.directs button{border-color:#e4dced;background:#fff;color:#6f687b}
+.directs button:hover,.directs button.on{border-color:#baa9e1;color:#4d3a82;background:#f0e9fb}
+.state-row button{border-color:#e4dced;background:#fff;color:#716a7e}
+.state-row button.on{color:#fff;background:#201934;border-color:#201934;box-shadow:0 5px 12px rgba(32,25,52,.14)}
+.riskline .r{background:#fff0f0;color:#b74444}.riskline .g{background:#edf9f4;color:#27815f}
+.board{background:transparent;color:#2b2440}
+.board-section h2{color:#2b2440}
+.board-section>p{color:#756d84}
+.board-cell .label{color:#40364f;font-weight:700}
+.board-cell .note{color:#786f86}
+.frame{box-shadow:0 18px 45px rgba(65,42,113,.22);border:1px solid rgba(255,255,255,.75)}
+
+/* 产品本体恢复 V2 系列浅紫品牌感 */
+.app{background:#fbf9ff}
+.app-nav{background:#fff;border-right-color:#e8e5ef}
+.logo{background:linear-gradient(145deg,#201934,#6c55ae);box-shadow:0 7px 16px rgba(86,61,143,.20)}
+.navbtn{color:#81798f}
+.navbtn:hover{background:#f4f0fb;color:#3d315b}
+.navbtn.on{background:linear-gradient(145deg,#2b2143,#1f1833);color:#fff;box-shadow:0 9px 22px rgba(32,25,52,.18)}
+.navbtn.on:before{background:#8e72d6;box-shadow:0 0 0 4px rgba(142,114,214,.10)}
+.topbar{background:#fff;border-bottom-color:#e8e5ef}
+.search{border-color:#e8e5ef;box-shadow:0 1px 8px rgba(86,61,143,.05)}
+.agent-online{background:#faf8ff;color:#625b72;border:1px solid #eee9f7}
+.agent-btn{background:#201934;box-shadow:0 5px 14px rgba(32,25,52,.16)}
+.round{border-color:#e8e5ef;color:#504760}
+.workspace{background:linear-gradient(180deg,#fff 0,#fbf9ff 120px,#f7f3fc 100%)}
+.page-title h1{color:#201934}
+.btn.primary{background:#201934;border-color:#201934}
+.btn.purple{background:#eee8fb;border-color:#ded6f8;color:#58448a}
+.card{border-color:#e8e5ef;box-shadow:0 5px 18px rgba(86,61,143,.06)}
+.tag.purple{background:#eee8fb;color:#574485}
+.tag.gray{background:#f3f0f7;color:#777080}
+
+/* 画板总览滚动条也保持紫调 */
+.scenarios,.deck,.board{scrollbar-width:thin;scrollbar-color:#c8b9e6 transparent}
+.scenarios::-webkit-scrollbar,.deck::-webkit-scrollbar,.board::-webkit-scrollbar{width:8px}
+.scenarios::-webkit-scrollbar-thumb,.deck::-webkit-scrollbar-thumb,.board::-webkit-scrollbar-thumb{background:#c8b9e6;border-radius:10px}
+</style>
+
+
+<style id="dashboard-v33-alignment">
+/* ================================================================
+   V3.3 · 首页交易驾驶舱版式重构
+   目标：高信息密度，但所有卡片遵循固定行、固定列、固定内容基线。
+   ================================================================ */
+.dashboard-v33{display:flex;flex-direction:column;gap:12px}
+.dashboard-v33 .dash-row{display:grid;gap:12px;align-items:stretch}
+.dashboard-v33 .dash-summary{grid-template-columns:repeat(4,minmax(0,1fr))}
+.dashboard-v33 .dash-primary,.dashboard-v33 .dash-secondary{grid-template-columns:minmax(0,2fr) minmax(280px,1fr)}
+.dashboard-v33 .dash-footer{grid-template-columns:repeat(3,minmax(0,1fr))}
+.dashboard-v33 .card{padding:14px 15px;border-radius:15px;box-shadow:0 4px 16px rgba(70,50,112,.045)}
+.dashboard-v33 .summary-card{height:156px;min-width:0}
+.dashboard-v33 .primary-card{height:208px;min-width:0}
+.dashboard-v33 .secondary-card{height:218px;min-width:0}
+.dashboard-v33 .footer-card{height:158px;min-width:0}
+.dashboard-v33 .section-head{height:24px;margin:0 0 9px;display:flex;align-items:center;gap:8px}
+.dashboard-v33 .section-head h3{font-size:12.5px;line-height:1.2;font-weight:720;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dashboard-v33 .section-head .more{margin-left:auto;font-size:9.5px;white-space:nowrap;cursor:pointer}
+.dashboard-v33 .section-head>.tag{margin-left:auto!important;white-space:nowrap}
+.dashboard-v33 .card-subline{font-size:8.8px;color:var(--ink3);line-height:1.5;margin-top:5px}
+
+/* 顶部四张卡：统一“标题区 → 主指标区 → 底部辅助区”三段 */
+.v33-market{background:linear-gradient(145deg,#282039,#4d3972);color:#fff;border:0;position:relative;overflow:hidden}
+.v33-market:after{content:"";position:absolute;width:150px;height:150px;border:1px solid rgba(255,255,255,.12);border-radius:50%;right:-58px;top:-60px}
+.v33-market .kicker{color:#c1b7d5}.v33-market .risk-main{display:flex;align-items:flex-end;gap:10px;margin-top:8px}.v33-market .risk-score{font-size:38px;line-height:.95;font-weight:800;letter-spacing:-.04em}.v33-market .risk-score small{font-size:12px;font-weight:600;opacity:.55;margin-left:2px}.v33-market .risk-state{font-size:10px;font-weight:720;margin-bottom:3px}.v33-market .risk-state i{display:inline-block;width:7px;height:7px;border-radius:50%;background:#ffbd58;margin-right:5px;box-shadow:0 0 0 4px rgba(255,189,88,.12)}
+.v33-market .summary-foot{position:absolute;left:15px;right:15px;bottom:13px;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.v33-market .summary-foot span{font-size:8px;color:#c8bfd8}.v33-market .summary-foot b{display:block;margin-top:2px;font-size:10px;color:#fff}
+
+.v33-gate{background:linear-gradient(180deg,#fff,#fbf9ff)}
+.v33-gate .gate-main{display:flex;align-items:center;justify-content:space-between;margin-top:3px}.v33-gate .gate-main b{font-size:27px;letter-spacing:-.035em;color:#493a99}.v33-gate .gauge{margin:9px 0 10px}.v33-gate .quick-2x2{display:grid;grid-template-columns:1fr 1fr;gap:6px}.v33-gate .quick-2x2 div{padding:6px 8px;border-radius:8px;background:#f6f3fb}.v33-gate .quick-2x2 strong{display:block;font-size:9.5px}.v33-gate .quick-2x2 span{display:block;margin-top:1px;font-size:7.8px;color:var(--ink3)}
+
+.v33-account .risk-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.v33-account .risk-kpis div{background:#f7f4fb;border-radius:9px;padding:8px}.v33-account .risk-kpis span{display:block;font-size:8px;color:var(--ink3)}.v33-account .risk-kpis b{display:block;margin-top:3px;font-size:14px}.v33-account .risk-kpis .good{color:#14815f}.v33-account .risk-kpis .warn{color:#bd7520}.v33-account .capacity-line{display:grid;grid-template-columns:34px 1fr auto;gap:8px;align-items:center;margin-top:10px}.v33-account .capacity-line strong{font-size:11px}.v33-account .slotbar{display:grid;grid-template-columns:repeat(4,1fr);gap:4px}.v33-account .slotbar i{height:6px;border-radius:5px;background:#dfdae8}.v33-account .slotbar i.used{background:#39304f}
+
+.v33-discipline .discipline-main{display:grid;grid-template-columns:58px 1fr;gap:9px;align-items:center}.v33-discipline .discipline-main .score{font-size:31px;font-weight:800;color:#493a99;letter-spacing:-.04em}.v33-discipline .discipline-main b{font-size:10.5px}.v33-discipline .discipline-main span{display:block;font-size:8.5px;color:var(--ink3);margin-top:2px}.v33-discipline .discipline-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-top:10px}.v33-discipline .discipline-stats div{display:flex;align-items:center;justify-content:space-between;padding:6px 8px;border-radius:8px;background:#f7f4fb;font-size:8.2px;color:#736b7f}.v33-discipline .discipline-stats b{font-size:9px;color:#373143}.v33-discipline .discipline-stats .bad b{color:#bd4b5b}.v33-discipline .discipline-stats .warn b{color:#a86b1c}
+
+/* 统一数据表：持仓 / 机会池 */
+.dash-table{display:grid;width:100%}.dash-table .tr{display:grid;gap:8px;align-items:center;min-height:37px;border-bottom:1px solid #efedf3}.dash-table .tr:last-child{border-bottom:0}.dash-table .th{min-height:27px;border-bottom:1px solid #e9e6ef;color:#9a94a3}.dash-table .th span{font-size:8px;font-weight:650;letter-spacing:.02em}.dash-table b{font-size:10.3px}.dash-table small{display:block;margin-top:2px;font-size:8.2px;color:var(--ink3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.dash-table .value-up{color:#d54e61}.dash-table .value-down{color:#158967}.dash-table .action{font-size:9px;font-weight:720;color:#594a91;white-space:nowrap}.dash-table .score{font-size:12.5px;color:#43388f}
+.position-table .tr{grid-template-columns:1.25fr .72fr .65fr .92fr .82fr}
+.opportunity-table .tr{grid-template-columns:1.08fr .75fr .55fr 1.02fr .72fr .68fr}
+
+/* Agent 任务列 */
+.v33-focus-list{display:grid;gap:6px}.v33-focus{display:grid;grid-template-columns:24px 1fr 26px;gap:8px;align-items:center;min-height:35px;padding:6px 8px;border-radius:9px;background:#f8f5fb}.v33-focus .num{width:22px;height:22px;border-radius:7px;display:grid;place-items:center;background:#ede8fb;color:#5f4bc4;font-size:8.5px;font-weight:800}.v33-focus b{display:block;font-size:9.8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.v33-focus small{display:block;margin-top:2px;font-size:8px;color:var(--ink3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.v33-focus .lv{justify-self:end;font-size:7.8px;font-weight:800;color:#98631f;background:#fff1dd;padding:3px 5px;border-radius:6px}
+
+/* 新闻情报 */
+.v33-intel-list{display:grid}.v33-intel{padding:8px 0;border-bottom:1px solid #efedf3}.v33-intel:last-child{border-bottom:0}.v33-intel .headline{display:grid;grid-template-columns:7px 1fr auto;gap:7px;align-items:center}.v33-intel .headline i{width:6px;height:6px;border-radius:50%;background:#df5563;box-shadow:0 0 0 3px #fdecef}.v33-intel.orange .headline i{background:#e49332;box-shadow:0 0 0 3px #fff2df}.v33-intel.green .headline i{background:#1ca77b;box-shadow:0 0 0 3px #e6f7f1}.v33-intel b{font-size:9.8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.v33-intel p{font-size:8.2px;line-height:1.45;color:var(--ink3);margin:4px 0 0 14px}
+
+/* 底部三卡统一节奏 */
+.v33-catalyst{display:grid;grid-template-columns:48px 1fr auto;gap:8px;align-items:center;min-height:34px;border-bottom:1px solid #efedf3}.v33-catalyst:last-child{border-bottom:0}.v33-catalyst time{font:700 8.5px ui-monospace,monospace;color:#675c79}.v33-catalyst b{font-size:9.5px}.v33-catalyst small{display:block;font-size:7.8px;color:var(--ink3);margin-top:1px}.v33-catalyst .days{font-size:8px;color:#6e58b6;background:#f0ebfa;padding:3px 5px;border-radius:6px;white-space:nowrap}
+.v33-modelrow{display:grid;grid-template-columns:25px 1fr auto;gap:8px;align-items:center;min-height:35px;border-bottom:1px solid #efedf3}.v33-modelrow:last-child{border-bottom:0}.v33-modelrow .iconbox{width:24px;height:24px}.v33-modelrow b{font-size:9.5px}.v33-modelrow small{display:block;font-size:7.8px;color:var(--ink3);margin-top:1px}.v33-modelrow .status{font-size:8px;font-weight:700;color:#14815f;white-space:nowrap}
+.v33-health{display:grid;grid-template-columns:repeat(2,1fr);gap:7px}.v33-health div{padding:8px;border-radius:9px;background:#f7f4fb}.v33-health span{display:block;font-size:8px;color:var(--ink3)}.v33-health b{display:block;font-size:13px;margin-top:2px}.v33-health .warning{color:#b76c1b}
+.dashboard-v33 .dashboard-footnote{font-size:8.2px;color:#9993a4;padding:0 2px 3px}
+
+@media(max-width:900px){.dashboard-v33 .dash-summary{grid-template-columns:1fr 1fr}.dashboard-v33 .dash-primary,.dashboard-v33 .dash-secondary{grid-template-columns:1fr}.dashboard-v33 .dash-footer{grid-template-columns:1fr}.dashboard-v33 .summary-card,.dashboard-v33 .primary-card,.dashboard-v33 .secondary-card,.dashboard-v33 .footer-card{height:auto;min-height:150px}}
+</style>
+
+
+<style id="dashboard-v34-overflow-guard">
+/* ================================================================
+   V3.4 · 首页高密度对齐修正
+   原则：同层卡片自动等高；内容决定行高，不再用固定高度裁切内容。
+   修复：首页总览卡片底部溢出、最后一行被截断、说明文字贴底等问题。
+   ================================================================ */
+.dashboard-v33{gap:11px}
+.dashboard-v33 .dash-row{gap:11px;align-items:stretch}
+.dashboard-v33 .dash-row>.card{
+  height:auto!important;
+  min-width:0;
+  overflow:visible;
+}
+/* Grid stretch 会让同一行所有卡片自动跟随最高卡等高 */
+.dashboard-v33 .summary-card{min-height:188px}
+.dashboard-v33 .primary-card{min-height:228px}
+.dashboard-v33 .secondary-card{min-height:246px}
+.dashboard-v33 .footer-card{min-height:176px}
+
+/* 统一卡片内部安全区：正文永远不贴底 */
+.dashboard-v33 .card{padding:14px 15px 15px}
+.dashboard-v33 .section-head{flex:0 0 24px;margin-bottom:10px}
+.dashboard-v33 .card-subline{
+  margin-top:7px;
+  line-height:1.42;
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+  overflow:hidden;
+}
+
+/* 顶部仓位闸门：四个规则完整展示，不再压到下一行 */
+.v33-gate .gate-main{min-height:34px}
+.v33-gate .gauge{margin:8px 0 9px}
+.v33-gate .quick-2x2{gap:6px;margin-top:0}
+.v33-gate .quick-2x2 div{min-height:35px;padding:6px 8px;display:flex;flex-direction:column;justify-content:center}
+.v33-gate .quick-2x2 strong{line-height:1.25;white-space:nowrap}
+.v33-gate .quick-2x2 span{line-height:1.25;white-space:nowrap}
+
+/* 组合与纪律卡底部留白统一 */
+.v33-account .capacity-line{margin-top:9px}
+.v33-account .card-subline{padding-bottom:1px}
+.v33-discipline .discipline-stats{margin-top:11px}
+.v33-discipline .discipline-stats div{min-height:27px}
+
+/* 持仓表：三行填满主卡，但不靠固定卡高裁切 */
+.position-table .tr:not(.th){min-height:47px}
+.position-table .tr>*{min-width:0}
+.position-table b,.position-table span{min-width:0}
+
+/* Agent 优先级：四项完整落在卡内 */
+.v33-focus-list{gap:7px}
+.v33-focus{min-height:38px;padding:6px 8px}
+.v33-focus>div{min-width:0}
+.v33-focus b,.v33-focus small{max-width:100%}
+
+/* 机会池：四行全部完整展示 */
+.opportunity-table .tr:not(.th){min-height:40px}
+.opportunity-table .tr>*{min-width:0}
+.opportunity-table .tag{justify-self:start;max-width:100%;white-space:nowrap}
+.opportunity-table .action{overflow:hidden;text-overflow:ellipsis}
+
+/* 新闻卡跟随机会池等高，说明最多两行，避免单条无限增高 */
+.v33-intel{padding:9px 0}
+.v33-intel p{
+  line-height:1.45;
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+  overflow:hidden;
+}
+
+/* 底部三卡：每个模块保留完整的末行与说明 */
+.v33-catalyst{min-height:38px}
+.v33-catalyst>div{min-width:0}
+.v33-catalyst b,.v33-catalyst small{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.v33-modelrow{min-height:38px}
+.v33-modelrow>div{min-width:0}
+.v33-modelrow b,.v33-modelrow small{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.v33-health{gap:7px;margin-bottom:6px}
+.v33-health div{min-height:47px;display:flex;flex-direction:column;justify-content:center}
+.dashboard-v33 .footer-card .card-subline{padding-bottom:2px}
+
+/* 最后一段与滚动容器保持安全距离 */
+.dashboard-v33 .dashboard-footnote{padding:2px 2px 8px;line-height:1.45}
+
+/* 小窗口保持同样的“不裁切”原则 */
+@media(max-width:900px){
+  .dashboard-v33 .summary-card,
+  .dashboard-v33 .primary-card,
+  .dashboard-v33 .secondary-card,
+  .dashboard-v33 .footer-card{height:auto!important;min-height:0}
+}
+</style>
+
+
+<style id="thesisguard-v34-lifecycle">
+/* ================================================================
+   论衡 ThesisGuard · V3.4 Thesis Lifecycle
+   在 V3.3 视觉体系上增量升级，不新增一级菜单，不重构既有走查台。
+   ================================================================ */
+:root{
+  --tg-fact:#4774b8;--tg-fact-bg:#eef4ff;
+  --tg-est:#7458b9;--tg-est-bg:#f2edfb;
+  --tg-infer:#8a6830;--tg-infer-bg:#faf3e6;
+  --tg-user:#777180;--tg-user-bg:#f3f1f5;
+}
+/* 品牌只替换语义，不改变浅紫品牌体系 */
+.logo{font-size:17px;letter-spacing:.03em}.agent-btn{white-space:nowrap}
+.tg-brandline{display:flex;align-items:baseline;gap:8px}.tg-brandline strong{font-size:12px;color:#201934}.tg-brandline span{font-size:9px;color:var(--ink3)}
+
+/* 信息类型 / 证据可信度 */
+.tg-kind,.tg-cred{display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;font-weight:720}
+.tg-kind{height:20px;padding:0 7px;border-radius:6px;font-size:8.5px;border:1px solid transparent}
+.tg-kind.fact{color:var(--tg-fact);background:var(--tg-fact-bg);border-color:#d9e7fb}
+.tg-kind.est{color:var(--tg-est);background:var(--tg-est-bg);border-color:#e2d8f6}
+.tg-kind.infer{color:var(--tg-infer);background:var(--tg-infer-bg);border-color:#efe0c5}
+.tg-kind.user{color:var(--tg-user);background:var(--tg-user-bg);border-color:#e7e3ea}
+.tg-cred{width:22px;height:20px;border-radius:6px;font-size:9px;color:#fff;background:#5f5870}
+.tg-cred.s,.tg-cred.a{background:#2f8b6a}.tg-cred.b{background:#5580b8}.tg-cred.c{background:#7458b9}.tg-cred.d{background:#9b7336}.tg-cred.e{background:#9c7a78}.tg-cred.f{background:#ca5360}
+.tg-source-line{display:flex;gap:5px;align-items:center;flex-wrap:wrap;font-size:8.5px;color:var(--ink3)}
+
+/* 单股工作台 */
+.tg-stock-head{display:grid;grid-template-columns:minmax(260px,1.4fr) repeat(4,minmax(110px,.7fr));gap:8px;align-items:stretch;margin-bottom:10px}
+.tg-instrument{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px;display:flex;align-items:center;gap:12px;min-width:0}
+.tg-instrument .ticker{min-width:0}.tg-instrument .price{margin-left:0}.tg-instrument .meta{display:flex;gap:4px;flex-wrap:wrap;margin-top:5px}
+.tg-mini-kpi{background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px 11px;min-width:0}
+.tg-mini-kpi span{display:block;font-size:8px;color:var(--ink3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.tg-mini-kpi b{display:block;font-size:17px;line-height:1.2;margin-top:5px;color:#332b43}.tg-mini-kpi small{display:block;font-size:8px;color:var(--ink3);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tg-mini-kpi .up{color:#2a8c68}.tg-mini-kpi .warn{color:#b27221}.tg-mini-kpi .purple{color:#55429f}
+.tg-stock-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:10px;align-items:start}
+.tg-span-12{grid-column:span 12}.tg-span-8{grid-column:span 8}.tg-span-7{grid-column:span 7}.tg-span-6{grid-column:span 6}.tg-span-5{grid-column:span 5}.tg-span-4{grid-column:span 4}
+.tg-card{padding:13px 14px;min-width:0}.tg-card-head{display:flex;align-items:center;gap:7px;min-height:23px;margin-bottom:8px}.tg-card-head h3{font-size:12.5px;line-height:1.2;margin:0}.tg-card-head .grow{flex:1}.tg-card-head .link{border:0;background:none;color:#6551af;font-size:8.8px;font-weight:720;cursor:pointer;padding:4px}.tg-card-note{font-size:8.5px;color:var(--ink3);line-height:1.55}
+
+/* Thesis Validation */
+.tg-thesis-layout{display:grid;grid-template-columns:1.35fr .9fr;gap:10px;min-height:222px}
+.tg-thesis-list{border:1px solid #eeeaf3;border-radius:10px;overflow:hidden}.tg-thesis-row{width:100%;display:grid;grid-template-columns:1fr 82px;gap:8px;align-items:center;border:0;border-bottom:1px solid #efedf3;background:#fff;padding:8px 10px;text-align:left;cursor:pointer}.tg-thesis-row:last-child{border-bottom:0}.tg-thesis-row:hover,.tg-thesis-row.on{background:#faf8fd}.tg-thesis-row b{font-size:9.6px;color:#373143;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.tg-thesis-row small{display:block;font-size:7.8px;color:var(--ink3);margin-top:2px}.tg-status{justify-self:end;font-size:8px;font-weight:800;padding:3px 6px;border-radius:999px}.tg-status.supported{background:var(--green-soft);color:#177f60}.tg-status.neutral{background:#f1eff4;color:#777181}.tg-status.weakening{background:var(--orange-soft);color:#a76b1e}.tg-status.invalidated{background:var(--red-soft);color:#bb4658}.tg-status.pending{background:var(--purple-soft);color:#604cae}
+.tg-thesis-detail{background:#f8f6fb;border-radius:10px;padding:10px;min-width:0}.tg-thesis-detail h4{font-size:10px;margin:0 0 6px}.tg-detail-meta{display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:7px}.tg-detail-meta div{background:#fff;border-radius:7px;padding:6px}.tg-detail-meta span{display:block;font-size:7.5px;color:var(--ink3)}.tg-detail-meta b{display:block;font-size:9px;margin-top:2px}.tg-evidence-block{margin-top:6px}.tg-evidence-block>strong{font-size:8.3px}.tg-evidence-item{display:flex;gap:5px;align-items:flex-start;margin-top:5px;font-size:8px;line-height:1.45;color:#655e70}.tg-evidence-item .txt{flex:1;min-width:0}.tg-invalid{color:#af4654}
+
+/* Thesis Health */
+.tg-health-score{display:flex;align-items:baseline;gap:7px}.tg-health-score .from{font-size:20px;color:#9d96aa;font-weight:750}.tg-health-score .arrow{font-size:14px;color:#aaa3b6}.tg-health-score .to{font-size:30px;color:#463795;font-weight:820}.tg-health-score .delta{font-size:10px;color:#16815f;font-weight:800}
+.tg-health-reasons{display:grid;gap:5px;margin-top:9px}.tg-reason{display:grid;grid-template-columns:24px 1fr;gap:6px;align-items:start;padding:5px 7px;background:#f8f6fb;border-radius:8px}.tg-reason b{font-size:8.5px;color:#16815f}.tg-reason.neg b{color:#bd6c20}.tg-reason span{font-size:8.3px;color:#625b6f;line-height:1.4}
+.tg-health-actions{display:flex;gap:6px;margin-top:8px}
+
+/* 机构预期趋势 */
+.tg-est-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:10px}.tg-chart{height:128px;background:#faf8fd;border:1px solid #eeeaf3;border-radius:10px;padding:8px}.tg-chart svg{width:100%;height:88px;overflow:visible}.tg-chart-labels{display:grid;grid-template-columns:repeat(5,1fr);font-size:7px;color:var(--ink3);text-align:center}.tg-est-kpis{display:grid;grid-template-columns:1fr 1fr;gap:6px}.tg-est-kpis div{background:#f8f6fb;border-radius:8px;padding:7px}.tg-est-kpis span{font-size:7.7px;color:var(--ink3)}.tg-est-kpis b{display:block;font-size:11px;margin-top:2px}.tg-est-kpis .good{color:#16815f}.tg-est-state{margin-top:7px;padding:7px 8px;border-radius:8px;background:var(--green-soft);color:#177e5f;font-size:8.5px;font-weight:720}
+.tg-broker-list{display:grid;gap:6px}.tg-broker{display:grid;grid-template-columns:74px 52px 1fr;gap:7px;align-items:start;padding:7px 8px;border-radius:8px;background:#f8f6fb}.tg-broker b{font-size:8.5px}.tg-broker strong{font-size:9px;color:#42378a}.tg-broker p{font-size:7.8px;line-height:1.45;color:#6f6879;margin:0}.tg-diverge{margin-top:8px;padding:8px;border-left:3px solid #d9c9ef;background:#faf8fd;font-size:8.2px;line-height:1.55;color:#6c6577}
+
+/* Expectation Gap / Price In / Valuation */
+.tg-signal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}.tg-signal-grid>div{background:#f8f6fb;border-radius:8px;padding:7px}.tg-signal-grid span{display:block;font-size:7.5px;color:var(--ink3)}.tg-signal-grid b{display:block;font-size:12px;margin-top:2px}.tg-gap-score{display:flex;align-items:flex-end;gap:7px;margin-top:8px}.tg-gap-score b{font-size:26px;color:#493a99;line-height:1}.tg-gap-score span{font-size:8px;color:var(--ink3);padding-bottom:2px}.tg-gap-call{margin-top:8px;padding:7px;border-radius:8px;background:var(--orange-soft);color:#925e1c;font-size:8px;line-height:1.5}
+.tg-pricebar{height:8px;background:#eeeaf3;border-radius:999px;overflow:hidden;margin:9px 0 8px}.tg-pricebar i{display:block;height:100%;width:78%;background:linear-gradient(90deg,#6c57dc,#9c84dc);border-radius:inherit}.tg-checks{display:grid;grid-template-columns:1fr 1fr;gap:5px}.tg-check{font-size:7.8px;line-height:1.4;padding:5px 6px;border-radius:7px;background:#f8f6fb;color:#625b6f}.tg-check.done{background:var(--green-soft);color:#207c60}.tg-quad{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-top:7px}.tg-quad div{font-size:7.7px;padding:5px 6px;border-radius:7px;background:#f8f6fb;color:#756e80}.tg-quad b{color:#393143}
+.tg-case-tabs{display:flex;gap:5px;margin-bottom:8px}.tg-case-tabs button{flex:1;height:27px;border:1px solid var(--line);border-radius:7px;background:#fff;color:#7b7486;font-size:8px;font-weight:720;cursor:pointer}.tg-case-tabs button.on{background:#302945;border-color:#302945;color:#fff}.tg-case{display:grid;grid-template-columns:repeat(4,1fr);gap:5px}.tg-case div{background:#f8f6fb;border-radius:7px;padding:6px}.tg-case span{display:block;font-size:7.2px;color:var(--ink3)}.tg-case b{display:block;font-size:9.5px;margin-top:2px}.tg-rr{display:flex;align-items:center;justify-content:space-between;margin-top:8px;padding:7px 8px;background:#f2eef9;border-radius:8px;font-size:8px}.tg-rr strong{font-size:11px;color:#4b3c97}
+
+/* 冻结计划 */
+.tg-plan-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.tg-plan-item{background:#f8f6fb;border-radius:8px;padding:7px}.tg-plan-item span{font-size:7.5px;color:var(--ink3)}.tg-plan-item b{display:block;font-size:9px;line-height:1.4;margin-top:2px}.tg-plan-foot{display:flex;align-items:center;gap:6px;margin-top:9px}.tg-plan-foot .version{font-size:8px;color:#6b6278}.tg-plan-history{display:flex;gap:5px;margin-top:7px}.tg-plan-history span{font-size:7.5px;padding:3px 6px;border-radius:6px;background:#f1eef5;color:#777080}.tg-plan-history .current{background:var(--purple-soft);color:#5a47a7}
+.tg-lockline{display:inline-flex;align-items:center;gap:4px;color:#6c57dc;font-size:8px;font-weight:720}
+
+/* Catalyst Validation */
+.tg-cat-meta{display:flex;gap:6px;align-items:center;margin-bottom:7px}.tg-cat-meta b{font-size:10px}.tg-cat-meta span{font-size:8px;color:var(--ink3)}.tg-task-list{display:grid;gap:4px}.tg-task{display:grid;grid-template-columns:18px 1fr auto;gap:6px;align-items:center;padding:5px 6px;border-radius:7px;background:#f8f6fb;cursor:pointer}.tg-task i{width:14px;height:14px;border:1px solid #d7d1df;border-radius:4px;background:#fff;display:grid;place-items:center;font-style:normal;font-size:9px;color:white}.tg-task.done i{background:#2a9a74;border-color:#2a9a74}.tg-task.fail i{background:#d75a68;border-color:#d75a68}.tg-task span{font-size:8.2px}.tg-task small{font-size:7.4px;color:var(--ink3)}.tg-cat-result{margin-top:8px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px}.tg-cat-result div{background:#f4f1fa;border-radius:7px;padding:6px;text-align:center}.tg-cat-result span{display:block;font-size:7.3px;color:var(--ink3)}.tg-cat-result b{display:block;font-size:9px;margin-top:2px}.tg-cat-actions{display:flex;gap:6px;margin-top:8px}
+
+/* 反方 Agent */
+.tg-debate-closed{display:flex;align-items:center;gap:8px}.tg-debate-closed p{flex:1;font-size:8.5px;color:var(--ink3);margin:0}.tg-debate{display:grid;grid-template-columns:1fr 1fr .92fr;gap:8px}.tg-debate-col{border-radius:9px;padding:9px;background:#f8f6fb}.tg-debate-col h4{font-size:9.5px;margin:0 0 6px}.tg-debate-col ul{margin:0;padding-left:15px}.tg-debate-col li{font-size:8px;line-height:1.5;color:#625b6f;margin:3px 0}.tg-debate-col.bear{background:#fff7f2}.tg-verdict{background:#f1ecfa;border-radius:9px;padding:9px}.tg-verdict h4{font-size:9.5px;margin:0 0 6px;color:#4d3e97}.tg-verdict .count{display:grid;grid-template-columns:repeat(3,1fr);gap:4px}.tg-verdict .count div{background:#fff;border-radius:6px;padding:5px;text-align:center}.tg-verdict span{display:block;font-size:7px;color:var(--ink3)}.tg-verdict b{font-size:9px}.tg-verdict p{font-size:8px;line-height:1.5;color:#625b6f;margin:7px 0 0}
+
+/* Modal */
+.tg-modal{position:absolute;inset:0;z-index:60;display:flex;align-items:center;justify-content:center;background:rgba(32,25,52,.24);backdrop-filter:blur(2px)}
+.tg-dialog{width:420px;background:#fff;border-radius:15px;border:1px solid var(--line);box-shadow:0 24px 70px rgba(44,34,68,.24);padding:16px}.tg-dialog h3{font-size:14px;margin:0}.tg-dialog p{font-size:9.5px;line-height:1.6;color:#70697a}.tg-risk-change{display:flex;justify-content:center;align-items:center;gap:10px;background:var(--red-soft);color:#b54a58;border-radius:9px;padding:9px;font-weight:780}.tg-dialog textarea{width:100%;height:66px;border:1px solid var(--line);border-radius:9px;padding:8px;resize:none;font-size:10px;outline:none}.tg-dialog textarea:focus{border-color:#b9a8e0}.tg-dialog-actions{display:flex;justify-content:flex-end;gap:7px;margin-top:10px}
+
+/* Dashboard V3.4: 不加新卡，只升级既有内容 */
+.dashboard-v33 .opportunity-table .tr{grid-template-columns:1.05fr .72fr .52fr .58fr .56fr .62fr .68fr}.tg-exp{font-size:9px;font-weight:800}.tg-exp.strong{color:#20815f}.tg-exp.up{color:#5f4eb1}.tg-exp.flat{color:#8e8897}.tg-exp.down{color:#c34c5b}.tg-pricein{font-size:9px;color:#6b6278}.tg-thesis-num{font-size:10px;font-weight:800;color:#493a99}
+
+/* Chat 快捷动作 */
+.tg-chat-quick{display:flex;gap:5px;flex-wrap:wrap;padding:8px 10px 0;border-top:1px solid var(--line);background:#fff}.tg-chat-quick button{border:1px solid #e5e0ed;background:#faf8fd;color:#655b74;border-radius:7px;padding:5px 7px;font-size:8.2px;font-weight:650;cursor:pointer}.tg-chat-quick button:hover{background:#f1ecfa;color:#4b3c97;border-color:#d5c9eb}.tg-chat-quick button.strong{background:#302945;color:#fff;border-color:#302945}
+
+/* Knowledge V3.4 */
+.tg-kb-layout{display:grid;grid-template-columns:1.25fr .85fr;gap:10px}.tg-taxonomy{display:flex;gap:5px;flex-wrap:wrap}.tg-tax{font:700 8px ui-monospace,SFMono-Regular,monospace;padding:4px 6px;border-radius:6px;background:#f5f2f9;color:#655b74}.tg-thesis-versions{display:grid;gap:6px;margin-top:8px}.tg-tv{display:grid;grid-template-columns:38px 70px 1fr;gap:7px;padding:7px 8px;background:#f8f6fb;border-radius:8px;align-items:start}.tg-tv b{font-size:9px;color:#493a99}.tg-tv time{font-size:7.8px;color:var(--ink3)}.tg-tv p{font-size:8px;line-height:1.45;color:#6c6576;margin:0}.tg-cred-ladder{display:grid;grid-template-columns:repeat(2,1fr);gap:6px}.tg-cred-row{display:grid;grid-template-columns:24px 1fr;gap:6px;align-items:center;padding:6px;background:#f8f6fb;border-radius:8px}.tg-cred-row b{font-size:8.5px}.tg-cred-row span{font-size:7.4px;color:var(--ink3)}.tg-f-pool{margin-top:8px;padding:8px;border:1px dashed #e8b5ba;border-radius:9px;background:#fff8f8}.tg-f-pool b{font-size:8.5px;color:#b54a58}.tg-f-pool p{font-size:7.8px;line-height:1.5;color:#7c6b70;margin:4px 0 0}
+
+/* Research Package 增量补强 */
+.tg-research-types{display:flex;gap:4px;flex-wrap:wrap;margin-top:8px}.tg-source-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-top:8px}.tg-source-summary div{background:#f8f6fb;border-radius:7px;padding:6px}.tg-source-summary span{font-size:7.3px;color:var(--ink3)}.tg-source-summary b{display:block;font-size:10px;margin-top:2px}
+
+@media(max-width:900px){.tg-stock-head{grid-template-columns:1fr 1fr}.tg-instrument{grid-column:1/-1}.tg-stock-grid{grid-template-columns:1fr}.tg-stock-grid>[class*="tg-span-"]{grid-column:1}.tg-thesis-layout,.tg-est-grid,.tg-debate{grid-template-columns:1fr}}
+</style>
+
+
+<style id="v341-hot-money-layout-guard">
+/* V3.4.1 · 游资工作台布局防污染
+   .heat 曾同时承担“状态圆点”和“情绪因子网格”，通用 width/height:6px 导致内容挤压。
+   游资指标改用专属 hot-factors，并明确卡片/文本边界，避免全局类再次污染。 */
+.hot-grid{grid-auto-flow:row}
+.hot-grid .card{box-sizing:border-box}
+.hot-grid .hot-factors{max-width:100%}
+.hot-grid .hot-factors>*{min-width:0}
+.hot-grid .reject b{display:inline;font-size:9.5px}
+.hot-grid .reject{font-size:9.3px;line-height:1.55}
+@media(max-width:900px){
+  .hot-grid{grid-template-columns:1fr}
+  .hot-factors{grid-template-columns:repeat(4,minmax(64px,1fr))}
+}
+</style>
+
+</head>
+<body>
+<!-- icons -->
+<svg width="0" height="0" style="position:absolute"><defs>
+<symbol id="i-home" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></symbol>
+<symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-3-5.6 3 1.1-6.2L3 9.6l6.2-.9L12 3z"/></symbol>
+<symbol id="i-candle" viewBox="0 0 24 24"><path d="M6 3v5m0 8v5M3.5 8h5v8h-5zM17 3v8m0 6v4m-2.5-10h5v6h-5z"/></symbol>
+<symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H11v16H6.5A2.5 2.5 0 0 0 4 21.5zM20 5.5A2.5 2.5 0 0 0 17.5 3H13v16h4.5a2.5 2.5 0 0 1 2.5 2.5z"/></symbol>
+<symbol id="i-news" viewBox="0 0 24 24"><path d="M5 4h12v16H5zM17 7h3v11a2 2 0 0 1-2 2h-1M8 8h6M8 12h6M8 16h4"/></symbol>
+<symbol id="i-pulse" viewBox="0 0 24 24"><path d="M3 13h4l2-6 4 11 2-7 2 2h4"/></symbol>
+<symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></symbol>
+<symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 5 3.2 8.3 7 10 3.8-1.7 7-5 7-10V6z"/><path d="m9 12 2 2 4-4"/></symbol>
+<symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 6h7M15 6h5M4 12h3M11 12h9M4 18h10M18 18h2"/><circle cx="13" cy="6" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="16" cy="18" r="2"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+<symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M18 9a7 7 0 0 0-12-2M6 15a7 7 0 0 0 12 2"/></symbol>
+<symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3 2.8 20h18.4z"/><path d="M12 9v4m0 3h.01"/></symbol>
+<symbol id="i-trend" viewBox="0 0 24 24"><path d="m4 17 5-5 4 3 7-8"/><path d="M15 7h5v5"/></symbol>
+<symbol id="i-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 11v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/></symbol>
+<symbol id="i-brain" viewBox="0 0 24 24"><path d="M9 4a3 3 0 0 0-5 2.2A3 3 0 0 0 5 12a3 3 0 0 0 4 4.8V4zM15 4a3 3 0 0 1 5 2.2A3 3 0 0 1 19 12a3 3 0 0 1-4 4.8V4z"/><path d="M9 8H7m2 4H6m9-4h2m-2 4h3M9 17v3m6-3v3"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+<symbol id="i-file" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v5h5M9 12h6M9 16h6"/></symbol>
+<symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></symbol>
+</defs></svg>
+
+<div class="wb" id="wb">
+ <header class="wb-head">
+  <div class="wb-head-main"><div class="eyebrow">BUILD 0912-1815 · VISUAL INTERACTION REVIEW</div><h1>个人交易 Agent · V3.2 视觉交互走查台</h1><p>参考的是「视觉交互稿的交付模式」：可操作 Demo + 场景目录 + 画板总览 + 当前屏说明 + 状态切换 + 硬规则。不是复刻参考稿的配色或组件样式。</p></div>
+  <div class="wb-actions"><button class="wb-chip on" data-view="demo">交互演示</button><button class="wb-chip" data-view="board">画板总览</button><span class="wb-sep"></span><button class="wb-chip on" data-density="normal">桌面 1180</button><button class="wb-chip" data-density="compact">紧凑预览</button></div>
+ </header>
+ <div class="wb-body" id="demoView">
+  <section class="stage-col"><div class="stage-title"><i></i><span id="stageTitle">总览 · 风险优先</span><span class="meta">DESKTOP · 1180 × 720</span></div>
+   <div class="demo-area"><aside class="scenarios" id="scenarioList"></aside><div class="stage-viewport" id="stageViewport"><div class="scale-wrap" id="scaleWrap"><div class="desktop" id="desktop"></div></div></div></div>
+  </section>
+  <aside class="deck">
+   <section class="blk readout"><div class="ro"><span>Market state</span><b id="roMarket"><i class="dot"></i>修复反弹</b></div><div class="ro"><span>Position cap</span><b id="roPos">3 / 4</b></div><div class="ro"><span>Research</span><b id="roResearch">最新</b></div><div class="ro"><span>Stock model</span><b id="roModel">机构趋势</b></div></section>
+   <section class="blk"><h2>页面直达 <em>12 screens</em></h2><div class="directs" id="directs"></div></section>
+   <section class="blk"><h2>本屏说明 <em>design intent</em></h2><p id="screenNote"></p></section>
+   <section class="blk"><h2>市场状态 <em>risk state</em></h2><div class="state-row" id="marketControls"></div></section>
+   <section class="blk"><h2>业务状态开关 <em>demo controls</em></h2><div class="state-row" id="bizControls"></div></section>
+   <section class="blk"><h2>硬规则 <em>cannot override</em></h2><ul class="rules"><li>持仓默认最多 4 只；第 5 只必须先做「持仓替换 PK」。</li><li>游资情绪票与机构趋势票必须走不同模型，禁止共用一个总分。</li><li>研究报告首次全量生成，之后只做增量更新；旧事实保留版本。</li><li>情绪冰点不等于底部，亢奋也不等于立刻做空；市场状态只负责风险预算。</li><li>Agent 学习用户偏好，但不得学习成迎合用户观点。</li></ul></section>
+   <section class="blk"><h2>OPEN 清单 <em>next decisions</em></h2><div class="riskline"><span class="r">OPEN</span><p>市场情绪数据源的最终口径：同花顺 MCP / 自建聚合 / 第三方行情。</p></div><div class="riskline"><span class="r">OPEN</span><p>交易记录是否自动从券商同步，还是 V1 先人工确认成交。</p></div><div class="riskline"><span class="g">READY</span><p>公司研究 DB + 文档 RAG 双层存储结构可以直接进入产品设计。</p></div></section>
+  </aside>
+ </div>
+ <div class="board hidden" id="boardView"></div>
+</div>
+<script>
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const icon=n=>`<svg class="ico"><use href="#i-${n}"></use></svg>`;
+const marketDefs={
+ panic:{label:'恐慌杀跌',score:12,gate:'10%–25%',tone:'red',desc:'流动性与风险偏好同时收缩，优先保护现金，不做连续补仓。'},
+ ice:{label:'情绪冰点',score:18,gate:'15%–30%',tone:'blue',desc:'极弱不代表自动底部。只观察恐慌是否停止扩散，不抢第一根反弹。'},
+ repair:{label:'修复反弹',score:28,gate:'30%–45%',tone:'purple',desc:'冰点后的报复性修复，只允许试错仓；二次确认后才能增加风险暴露。'},
+ normal:{label:'正常活跃',score:52,gate:'45%–65%',tone:'green',desc:'市场宽度、指数结构、成交活跃度相对健康，可按个股模型执行。'},
+ active:{label:'加速活跃',score:71,gate:'55%–70%',tone:'orange',desc:'赚钱效应扩散，但新增仓位开始强调赔率，不再无条件追突破。'},
+ euphoric:{label:'亢奋极值',score:91,gate:'35%–55%',tone:'red',desc:'指数仍可能继续上涨，但新增风险预算主动下降，重点防止高位一致转退潮。'},
+ retreat:{label:'高位退潮',score:63,gate:'20%–40%',tone:'orange',desc:'赚钱效应下降且高位负反馈增加，优先减高相关性、保护现金。'}
+};
+const state={screen:'dashboard',market:'repair',positions:3,research:'fresh',stockModel:'institution',compact:false};
+const screens={
+ dashboard:{group:'核心工作台',name:'总览 · 风险优先',note:'首页不再堆很多同权信息。第一视线固定是「市场状态 + 仓位闸门」，第二层才是持仓、自选机会与新闻。Agent 的职责是先控制风险预算，再讨论个股。',render:renderDashboard},
+ watchlist:{group:'核心工作台',name:'自选池 · 标的分类',note:'加入自选并不是只存代码：先自动判定机构趋势 / 游资情绪 / 混合 / 事件驱动，再决定生成哪类研究档案。研究过期会显式标红，不默默复用旧结论。',render:renderWatchlist},
+ research:{group:'研究系统',name:'加入自选 · 自动建档',note:'首次入池触发一次完整 Company Research Package。后续新财报、订单、公告、政策只做增量更新，并将旧结论保留为历史版本。',render:renderResearch},
+ stock:{group:'研究系统',name:'单股工作台 · 机构趋势',note:'机构趋势股用「产业 → 订单 → 收入 → 利润 → 盈利预测 → 估值 → 技术结构」闭环；页面同时给出 Thesis 健康度、买入计划和失效条件。',render:renderStock},
+ hot:{group:'研究系统',name:'单股工作台 · 游资情绪',note:'游资票不强行做产业估值。核心是题材强度、梯队、辨识度、连板基因、换手、封板、情绪周期与市场记忆。',render:renderHot},
+ holdings:{group:'交易系统',name:'持仓 · 容量与相关性',note:'持仓不是越多越安全。默认最多 4 只；即使只有 4 只，也要检查是否事实上都暴露在同一个 AI 科技风险因子里。',render:renderHoldings},
+ sentiment:{group:'交易系统',name:'市场情绪 · 风险状态机',note:'情绪模块不是一个“冰点/亢奋”标签，而是一套仓位控制状态机。重要数值用语义色强化，并允许现场切换七个阶段验证 Agent 的仓位变化。',render:renderSentiment},
+ news:{group:'情报系统',name:'新闻 / 政策 · 影响链',note:'新闻不只是资讯流。每条都要求：事实来源 → 影响行业 → 传导路径 → 关联持仓 → 短期/长期 → 是否已 Price In。',render:renderNews},
+ chat:{group:'Agent',name:'Agent 对话 · 带上下文',note:'对话不是孤立聊天窗。默认携带市场状态、持仓、自选研究、最新新闻与纪律记录，并在回答前先校验风险和用户原始交易计划。',render:renderChat},
+ discipline:{group:'Agent',name:'纪律中心 · 行为反馈',note:'Agent 持续学习的是“偏好与纪律”，不是学习迎合。它应统计追高、止损延迟、亏损加仓、计划外交易，并逐步形成个人交易模型。',render:renderDiscipline},
+ models:{group:'系统',name:'模型 / Prompt · 路由配置',note:'大模型配置不只是一处 API Key。公司深研、新闻政策、游资情绪、复盘与最终判断可以路由到不同模型；System Prompt 与交易宪法版本化。',render:renderModels},
+ knowledge:{group:'系统',name:'研究知识库 · 增量更新',note:'结构化事实进入数据库，公告/研报/调研纪要进入文档知识库。每条关键结论都有来源日期、最近验证时间和 active / historical / stale 状态。',render:renderKnowledge}
+};
+function appShell(content,active){
+ const nav=[['dashboard','home'],['watchlist','star'],['holdings','candle'],['knowledge','book'],['news','news'],['sentiment','pulse'],['chat','chat'],['discipline','shield'],['models','sliders']];
+ return `<div class="app"><aside class="app-nav"><div class="logo" title="论衡 ThesisGuard">论</div><div class="navset">${nav.map(([s,i])=>`<button class="navbtn ${active===s?'on':''}" data-nav="${s}" title="${screens[s].name}">${icon(i)}</button>`).join('')}</div><div class="navbottom"><button class="navbtn" data-nav="models">${icon('sliders')}</button></div></aside><main class="app-main"><header class="topbar"><div class="search">${icon('search')}<span>搜索股票 / 研究结论 / 新闻 / 政策…</span></div><div class="agent-online"><i></i>ThesisGuard 在线 · 知识库已同步</div><button class="agent-btn" data-nav="chat">${icon('chat')}与论衡对话</button><button class="round" data-action="add">${icon('plus')}</button><button class="round">${icon('alert')}</button></header><section class="workspace">${content}</section></main></div><div class="toast" id="appToast"></div>`;
+}
+const title=(name,sub,actions='')=>`<div class="page-title"><div><h1>${name}</h1><p>${sub}</p></div><div class="page-actions">${actions}</div></div>`;
+function renderDashboard(){const m=marketDefs[state.market];return appShell(`${title('今日交易驾驶舱','风险预算、持仓 Thesis、机会池与 Agent 待办按固定层级排列；先看风险，再看组合，最后看机会。','<button class="btn" data-nav="sentiment">市场状态机</button><button class="btn primary" data-nav="chat">盘前 / 盘中对话</button>')}<div class="dashboard-v33">
+<section class="dash-row dash-summary">
+  <div class="card summary-card v33-market"><div class="kicker">MARKET RISK BUDGET</div><div class="risk-main"><div class="risk-score metric">${m.score}<small>/100</small></div><div class="risk-state"><i></i>${m.label}<br><span style="font-weight:500;opacity:.58">情绪斜率 +11</span></div></div><div class="summary-foot"><span>市场宽度<b>62%</b></span><span>成交活跃<b>0.83×</b></span><span>涨跌停<b>67 / 19</b></span></div></div>
+  <div class="card summary-card v33-gate"><div class="section-head"><h3>建议总仓位闸门</h3><span class="tag purple">${m.label}</span></div><div class="gate-main"><b class="metric">${m.gate}</b><span class="sub">风险预算</span></div><div class="gauge"><i style="left:${Math.min(90,m.score)}%"></i></div><div class="quick-2x2"><div><strong>首仓 3–5%</strong><span>只做试错</span></div><div><strong>单票 ≤12%</strong><span>默认上限</span></div><div><strong>最多 4 只</strong><span>硬性容量</span></div><div><strong>亏损补仓</strong><span>禁止</span></div></div></div>
+  <div class="card summary-card v33-account"><div class="section-head"><h3>组合风险</h3><span class="tag orange">科技暴露偏高</span></div><div class="risk-kpis"><div><span>总仓位</span><b>58%</b></div><div><span>可用现金</span><b class="good">42%</b></div><div><span>相关性</span><b class="warn">48%</b></div></div><div class="capacity-line"><strong>${state.positions}/4</strong><div class="slotbar">${[1,2,3,4].map(i=>`<i class="${i<=state.positions?'used':''}"></i>`).join('')}</div><span class="tag ${state.positions>=4?'red':'purple'}">${state.positions>=4?'已满':'剩 1 位'}</span></div><div class="card-subline">第 5 只必须先做持仓替换 PK，不允许“开超市”。</div></div>
+  <div class="card summary-card v33-discipline"><div class="section-head"><h3>纪律 / 行为风险</h3><span class="tag green">本周良好</span></div><div class="discipline-main"><div class="score metric">86</div><div><b>纪律分</b><span>止损执行仍需改善</span></div></div><div class="discipline-stats"><div><span>仓位规则</span><b>合规</b></div><div class="warn"><span>追高</span><b>×1</b></div><div><span>计划外交易</span><b>0</b></div><div class="bad"><span>止损延迟</span><b>×1</b></div></div></div>
+</section>
+
+<section class="dash-row dash-primary">
+  <div class="card primary-card"><div class="section-head"><h3>当前持仓 · 原始 Thesis 监控</h3><span class="more" data-nav="holdings">查看组合 →</span></div><div class="dash-table position-table"><div class="tr th"><span>标的</span><span>仓位策略</span><span>浮动</span><span>Thesis</span><span>今日动作</span></div><div class="tr"><b>新易盛<small>机构趋势 · 光模块</small></b><span><b>主仓</b><small>趋势持有</small></span><span><b class="value-up">+6.8%</b><small>浮动收益</small></span><span><b>88%</b><small>产业逻辑健康</small></span><span><b>守 60分结构</b><small>不追涨加仓</small></span></div><div class="tr"><b>兆易创新<small>机构趋势 · 存储</small></b><span><b>观察仓</b><small>等待突破</small></span><span><b class="value-up">+2.1%</b><small>浮动收益</small></span><span><b>79%</b><small>基本面稳定</small></span><span><b>等待确认</b><small>不左侧加仓</small></span></div><div class="tr"><b>强瑞技术<small>机构趋势 · 液冷/设备</small></b><span><b>研究仓</b><small>验证订单</small></span><span><b class="value-down">-1.4%</b><small>浮动收益</small></span><span><b>78%</b><small>现金流待验证</small></span><span><b>Q3 验证</b><small>利润≥0.8亿</small></span></div></div></div>
+  <div class="card primary-card"><div class="section-head"><h3>Agent 今日优先级</h3><span class="tag red">4 项</span></div><div class="v33-focus-list"><div class="v33-focus"><span class="num">01</span><div><b>市场修复尚未二次确认</b><small>成交活跃仅 0.83×，不提高仓位上限</small></div><span class="lv">P0</span></div><div class="v33-focus"><span class="num">02</span><div><b>强瑞研究包接近验证点</b><small>关注 Q3 利润、自然增长与现金流</small></div><span class="lv">P0</span></div><div class="v33-focus"><span class="num">03</span><div><b>AI 算力相关性 48%</b><small>新增科技仓位前先做替换 PK</small></div><span class="lv">P1</span></div><div class="v33-focus"><span class="num">04</span><div><b>本周发生 1 次追高</b><small>禁止突破第一根直接追入</small></div><span class="lv">P1</span></div></div></div>
+</section>
+
+<section class="dash-row dash-secondary">
+  <div class="card secondary-card"><div class="section-head"><h3>机会池 · 不同类型使用不同模型</h3><span class="more" data-nav="watchlist">打开自选池 →</span></div><div class="dash-table opportunity-table"><div class="tr th"><span>标的</span><span>模型</span><span>评分</span><span>核心逻辑</span><span>赔率 / 结构</span><span>动作</span></div><div class="tr"><b>强瑞技术<small>301128</small></b><span class="tag purple">机构趋势</span><span><b class="score">82</b><small>研究分</small></span><span><b>订单 → 利润</b><small>等待 Q3 验证</small></span><span><b>3.1</b><small>Base / Bear</small></span><span class="action">回踩关注</span></div><div class="tr"><b>申菱环境<small>301018</small></b><span class="tag blue">机构趋势</span><span><b class="score">74</b><small>研究分</small></span><span><b>订单强 / 利润弱</b><small>毛利待修复</small></span><span><b>1.8</b><small>暂不达标</small></span><span class="action">不抢跑</span></div><div class="tr"><b>湖南发展<small>000722</small></b><span class="tag orange">游资情绪</span><span><b class="score">68</b><small>情绪分</small></span><span><b>梯队 2 / 5</b><small>有连板记忆</small></span><span><b>换手健康</b><small>不看 PE</small></span><span class="action">等分歧</span></div><div class="tr"><b>新莱应材<small>300260</small></b><span class="tag purple">机构趋势</span><span><b class="score">67</b><small>研究分</small></span><span><b>国产替代</b><small>估值偏贵</small></span><span><b>1.5</b><small>不达标</small></span><span class="action">等待价格</span></div></div></div>
+  <div class="card secondary-card"><div class="section-head"><h3>热点 / 新闻 / 政策</h3><span class="tag red">实时</span></div><div class="v33-intel-list"><div class="v33-intel"><div class="headline"><i></i><b>液冷服务器规格继续提高</b><span class="tag red">高相关</span></div><p>GPU 功耗 ↑ → 液冷价值量 ↑ → 强瑞 / 申菱；仍需区分订单与利润率。</p></div><div class="v33-intel orange"><div class="headline"><i></i><b>半导体设备资本开支上调</b><span class="tag orange">中期</span></div><p>设备零部件偏利好，映射新莱等标的，但估值仍是约束。</p></div><div class="v33-intel green"><div class="headline"><i></i><b>数据中心能效政策</b><span class="tag green">政策</span></div><p>Agent 已拆解 PUE → 设备价值量 → 标的真实收入占比，不做概念映射。</p></div></div></div>
+</section>
+
+<section class="dash-row dash-footer">
+  <div class="card footer-card"><div class="section-head"><h3>未来验证点 / 催化日历</h3><span class="more">未来 30 天</span></div><div class="v33-catalyst"><time>09 / 17</time><div><b>FOMC 议息会议</b><small>影响科技风险偏好与成长估值</small></div><span class="days">5 天</span></div><div class="v33-catalyst"><time>09 / 30</time><div><b>强瑞 Q3 研究预检查</b><small>订单 / 现金流 / 盈利预测变化</small></div><span class="days">18 天</span></div><div class="v33-catalyst"><time>10 / Q3</time><div><b>三季报验证窗口</b><small>强瑞、申菱、新莱进入确认阶段</small></div><span class="days">关键</span></div></div>
+  <div class="card footer-card"><div class="section-head"><h3>模型与数据状态</h3><span class="tag green">ONLINE</span></div><div class="v33-modelrow"><span class="iconbox">${icon('brain')}</span><div><b>最终决策模型</b><small>GPT-5.6 Sol · Prompt v1.6</small></div><span class="status">正常</span></div><div class="v33-modelrow"><span class="iconbox">${icon('database')}</span><div><b>公司研究知识库</b><small>8 ACTIVE · 2 待更新</small></div><span class="status">已同步</span></div><div class="v33-modelrow"><span class="iconbox">${icon('pulse')}</span><div><b>市场情绪数据</b><small>宽度 / 成交 / 涨跌停 / 指数</small></div><span class="status">14:30</span></div></div>
+  <div class="card footer-card"><div class="section-head"><h3>研究库健康度</h3><span class="tag orange">2 项待更新</span></div><div class="v33-health"><div><span>ACTIVE 报告</span><b>8</b></div><div><span>Stale 模块</span><b class="warning">2</b></div><div><span>今日新公告</span><b>14</b></div><div><span>关联新闻</span><b>36</b></div></div><div class="card-subline">DB 提供最新事实；RAG 只补证据，不覆盖最新财务数据。</div></div>
+</section>
+<div class="dashboard-footnote">示意数据用于交互走查；真实产品需由行情、公告、研究数据库与交易记录实时驱动。</div>
+</div>`, 'dashboard')}
+
+function renderWatchlist(){return appShell(`${title('自选池','不是收藏夹，而是 Agent 的候选研究队列','<button class="btn primary" data-action="add">＋ 加入自选并建档</button>')}<div class="tabs"><button class="tab on">全部 8</button><button class="tab">机构趋势 5</button><button class="tab">游资情绪 2</button><button class="tab">事件驱动 1</button></div><div class="grid stock-grid">
+${stockCard('强瑞技术','301128','机构趋势','82','AI 液冷 + 半导体；订单→收入→利润已开始闭环','刚刚更新','fresh')}${stockCard('申菱环境','301018','机构趋势','74','18 亿液冷有效订单，等待毛利与利润兑现','2 天前','fresh')}${stockCard('新莱应材','300260','机构趋势','69','半导体零部件逻辑长，但当前远期估值偏高','5 天前','fresh')}${stockCard('湖南发展','000722','游资情绪','68','看梯队、辨识度、换手与连板基因，不套产业 PE','盘中更新','fresh')}${stockCard('兆易创新','603986','机构趋势','77','存储周期 + 国产替代，等待趋势突破确认','18 天前','stale')}${stockCard('FOMC 事件篮子','EVENT','事件驱动','—','议息会议前降低高 Beta 暴露，事件后再恢复','今日','fresh')}<div class="card full-add" data-action="add"><div>${icon('plus')}<b>加入新标的</b><span>自动识别类型 → 全量建档 → 写入知识库</span></div></div></div>`, 'watchlist')}
+function stockCard(name,code,type,score,thesis,updated,st){return `<div class="card stock-card ${st==='stale'?'stale':''}"><div class="stock-top"><div class="stock-name"><b>${name}</b><span>${code}</span></div><div class="stock-score">${score}</div></div><div style="margin-top:7px"><span class="tag ${type.includes('游资')?'orange':type.includes('事件')?'blue':'purple'}">${type}</span>${st==='stale'?'<span class="tag orange" style="margin-left:4px">研究过期</span>':''}</div><div class="thesis">${thesis}</div><div class="stock-foot"><span class="tag gray">${updated}</span><span class="tag ${st==='stale'?'orange':'green'}">${st==='stale'?'待增量更新':'知识库有效'}</span></div></div>`}
+function renderResearch(){const updating=state.research==='updating',stale=state.research==='stale';return appShell(`${title('强瑞技术 · 自动建档','301128 · 第一次加入自选时生成完整研究包，之后只增量维护','<button class="btn" data-nav="watchlist">返回自选池</button><button class="btn purple" data-action="refresh">刷新研究</button>')}<div class="research-head"><div class="card company-hero"><div class="kicker">AUTO CLASSIFICATION</div><h2>强瑞技术 301128</h2><p>北美 AI 服务器液冷 + 半导体精密零部件。当前分类置信：机构趋势为主，叠加少量事件驱动。</p><div style="margin-top:10px"><span class="tag purple">机构趋势 82%</span> <span class="tag blue">事件驱动 13%</span> <span class="tag gray">游资情绪 5%</span></div></div><div class="card"><h3>研究包状态</h3><div class="big" style="margin-top:11px;color:${stale?'#ba751f':updating?'#5c4cc4':'#187f60'}">${stale?'STALE':updating?'UPDATING':'ACTIVE'}</div><div class="sub">${stale?'关键财务事实超过更新阈值，需要增量刷新。':updating?'正在拉取公告、投资者交流与一致预期变化。':'最后验证：2026-09-12 15:42'}</div><div class="divider"></div><span class="tag ${stale?'orange':updating?'purple':'green'}">${stale?'需要刷新':updating?'更新中':'结构化事实已同步'}</span></div><div class="card"><h3>长期 Thesis</h3><div class="big metric" style="color:#493a99;margin-top:11px">78%</div><div class="sub">3 条核心假设 · 1 条待验证 · 0 条已失效</div><div class="bar" style="margin-top:12px"><i style="width:78%"></i></div></div></div>
+<div class="grid workflow" style="margin-top:10px"><div class="card"><h3>首次全量研究 Workflow</h3><div class="steps" style="margin-top:10px">${['公司/业务','产业链','订单证据','财务质量','估值情景','风险/催化'].map((x,i)=>`<div class="step ${updating&&i===5?'run':'done'}"><i>${updating&&i===5?'↻':'✓'}</i><b>${x}</b><small>${updating&&i===5?'正在更新':'已入库'}</small></div>`).join('')}</div><div class="divider"></div><div class="facts"><div class="fact"><span>2027E 归母</span><b>4.35 亿元</b></div><div class="fact"><span>2027E PE</span><b>35.6×</b></div><div class="fact"><span>研究来源</span><b>28 个</b></div><div class="fact"><span>有效事实</span><b>64 条</b></div><div class="fact"><span>待复核</span><b>7 条</b></div><div class="fact"><span>历史版本</span><b>5 个</b></div></div></div><div class="card"><h3>DB + RAG 双层存储</h3><div class="rows"><div class="row"><div class="iconbox">${icon('database')}</div><div class="grow"><b>结构化数据库</b><small>季度收入 / 利润 / 估值 / 合同负债 / 当前评级</small></div><span class="tag green">Latest Fact</span></div><div class="row"><div class="iconbox">${icon('book')}</div><div class="grow"><b>文档知识库 / RAG</b><small>年报、公告、调研纪要、政策、研报、新闻</small></div><span class="tag purple">Evidence</span></div><div class="row"><div class="iconbox">${icon('clock')}</div><div class="grow"><b>版本与有效期</b><small>active / historical / stale，不覆盖旧结论</small></div><span class="tag blue">Versioned</span></div></div></div></div>`, 'watchlist')}
+function renderStock(){return appShell(`${title('单股工作台','机构趋势模型 · 产业逻辑决定“买谁”，技术结构决定“什么时候买”','<button class="btn">查看完整研究</button><button class="btn primary" data-nav="chat">问 Agent</button>')}<div class="stockhero"><div class="ticker"><b>强瑞技术</b><small>301128 · 机构趋势 / AI 液冷 / 半导体</small></div><div class="price metric">106.85 <small>+2.31%</small></div><span class="tag purple">研究评分 82</span><div class="health"><div><b>78%</b><small>Thesis 健康</small></div><div><b>35.6×</b><small>2027E PE</small></div><div><b>3/5</b><small>买入条件</small></div></div></div><div class="grid detail-grid"><div class="card thesis-list"><div style="display:flex"><h3>核心 Thesis</h3><span class="tag green" style="margin-left:auto">逻辑健康</span></div><div class="rows"><div class="row"><i class="thesis-bullet"></i><div class="grow"><b>AI 服务器液冷进入订单放量期</b><small>北美客户组装线 / 分水器 / 波纹管模组持续验证</small></div><span class="tag green">支持</span></div><div class="row"><i class="thesis-bullet"></i><div class="grow"><b>2027 盈利可能高于当前一致预期</b><small>4.35 亿是基准；需要 5 亿以上才能明显打开翻倍空间</small></div><span class="tag purple">待验证</span></div><div class="row"><i class="thesis-bullet warn"></i><div class="grow"><b>利润率必须持续改善</b><small>并表增长不能替代自然增长，现金流仍是风险点</small></div><span class="tag orange">风险</span></div></div></div><div class="card"><h3>订单 → 利润验证链</h3><div class="levels"><div class="level"><span>订单</span><b>强</b></div><div class="level"><span>收入</span><b>已加速</b></div><div class="level"><span>净利润</span><b>Q2 加速</b></div><div class="level"><span>现金流</span><b style="color:#bd6c20">偏弱</b></div><div class="level"><span>预期上修</span><b>等待</b></div><div class="level"><span>估值</span><b>中等</b></div></div><div class="divider"></div><div class="sub">Agent 只会在“订单 → 收入 → 毛利 → 净利润 → 现金流”继续闭环时提高评分。</div></div><div class="card"><h3>交易计划</h3><div class="planbox"><strong>观察区：100–107</strong><p>当前位置只允许 3%–5% 研究仓，不因“翻倍概率”直接重仓。</p></div><div class="planbox"><strong>加仓条件</strong><p>Q3 单季利润 ≥0.8–0.9 亿，且研究预测向 5 亿以上上修。</p></div><div class="planbox"><strong>失效条件</strong><p>订单放缓 + 存货应收继续膨胀 + 现金流恶化，至少两项同时出现。</p></div><button class="btn primary" style="width:100%;margin-top:9px">生成买入前五问</button></div></div>`, 'watchlist')}
+function renderHot(){return appShell(`${title('游资情绪工作台','示例：湖南发展 · 只看情绪与市场地位，不强行套远期 PE','<button class="btn">切到机构模型对比</button><button class="btn primary" data-nav="chat">问 Agent</button>')}<div class="grid hot-grid"><div class="card hot-hero"><div class="kicker">HOT MONEY / SENTIMENT MODEL</div><div style="font-size:18px;font-weight:750;margin-top:8px">湖南发展 000722</div><div class="xxbig metric" style="margin-top:7px">68</div><div class="sub" style="color:#e5c8bf">情绪模型分 · 当前处于分歧修复阶段</div><div style="margin-top:10px"><span class="tag orange">电力题材</span> <span class="tag gray">历史连板基因</span></div></div><div class="card"><h3>板块梯队</h3><div class="ladder"><div class="col"><i style="height:92px"></i><b>龙头</b><small>5板</small></div><div class="col"><i style="height:68px"></i><b>湖南发展</b><small>3板记忆</small></div><div class="col"><i style="height:46px"></i><b>后排A</b><small>2板</small></div><div class="col"><i style="height:28px"></i><b>跟风</b><small>1板</small></div></div></div><div class="card"><h3>情绪因子</h3><div class="hot-factors"><div class="h"><b>82</b><span>辨识度</span></div><div class="h"><b>76</b><span>换手</span></div><div class="h"><b>71</b><span>连板基因</span></div><div class="h"><b>58</b><span>主动性</span></div></div><div class="reject"><b>禁止错误模型：</b> 不因为“公司业绩一般”否定游资票，也不因为“产业逻辑好”给游资票加分。它只遵守情绪周期和市场地位。</div></div><div class="card"><h3>今日行动</h3><div class="rows"><div class="row"><div class="grow"><b>早盘高开 >5%</b><small>弱市环境默认不追</small></div><span class="tag red">禁止</span></div><div class="row"><div class="grow"><b>分歧回封</b><small>换手充分 + 龙头未倒</small></div><span class="tag orange">观察</span></div></div></div><div class="card"><h3>历史市场记忆</h3><div class="sub">过去 3 年存在多次 2–3 板与高辨识度交易记忆。Agent 将它作为游资模型的独立因子，而不是基本面依据。</div></div><div class="card"><h3>止损 / 退出</h3><div class="sub">情绪票失效通常来自板块退潮、龙头断板、主动性丧失和分时承接崩溃，而不是“季度业绩不达预期”。</div></div></div>`, 'watchlist')}
+function renderHoldings(){const full=state.positions>=4;return appShell(`${title('持仓管理','默认最多 4 只；真正的分散还要看产业相关性','<button class="btn">相关性检查</button><button class="btn primary">执行持仓替换 PK</button>')}<div class="grid hold-grid"><div class="card"><h3>当前持仓</h3><div class="holding"><b>强瑞技术 <small>301128</small></b><span><b>8%</b><small>仓位</small></span><span><b class="positive">+3.2%</b><small>盈亏</small></span><span class="tag purple">机构趋势</span><span><b>逻辑健康</b><small>等待 Q3 验证</small></span></div><div class="holding"><b>新易盛 <small>300502</small></b><span><b>12%</b><small>仓位</small></span><span><b class="positive">+7.8%</b><small>盈亏</small></span><span class="tag purple">机构趋势</span><span><b>趋势健康</b><small>不追突破</small></span></div><div class="holding"><b>兆易创新 <small>603986</small></b><span><b>9%</b><small>仓位</small></span><span><b class="negative">-1.6%</b><small>盈亏</small></span><span class="tag blue">机构趋势</span><span><b>等待突破</b><small>未触发止损</small></span></div>${full?'<div class="holding"><b>生益科技 <small>600183</small></b><span><b>10%</b><small>仓位</small></span><span><b class="positive">+2.4%</b><small>盈亏</small></span><span class="tag purple">机构趋势</span><span><b>PCB 北美链</b><small>相关性偏高</small></span></div>':''}</div><div><div class="card cap-box"><h3>持仓容量</h3><div class="xxbig metric" style="margin-top:7px">${state.positions}<span style="font-size:17px;color:#aaa4b4"> /4</span></div><div class="slots">${[1,2,3,4].map(i=>`<i class="${i<=state.positions?'used':''}"></i>`).join('')}</div><span class="tag ${full?'red':'green'}">${full?'第 5 只锁定':'还剩 1 个位置'}</span><div class="pk"><b>${full?'必须先做持仓替换 PK':'新增持仓仍需看相关性'}</b><p>${full?'新标的必须明确“它比现有哪一只更值得持有”，否则不允许新增。':'持仓数量没有到 4，也不能因为有空位就强行找股票。'}</p></div></div><div class="card" style="margin-top:10px"><h3>产业暴露</h3><div class="corr"><div class="corr-row"><span>AI 算力</span><div class="bar"><i style="width:${full?55:48}%;background:#6c57dc"></i></div><b>${full?55:48}%</b></div><div class="corr-row"><span>PCB</span><div class="bar"><i style="width:${full?18:10}%;background:#4b78d5"></i></div><b>${full?18:10}%</b></div><div class="corr-row"><span>存储</span><div class="bar"><i style="width:14%;background:#1ca77b"></i></div><b>14%</b></div><div class="corr-row"><span>现金</span><div class="bar"><i style="width:${full?13:28}%;background:#aaa3b6"></i></div><b>${full?13:28}%</b></div></div></div></div></div>`, 'holdings')}
+function renderSentiment(){const m=marketDefs[state.market],defs=Object.entries(marketDefs);return appShell(`${title('市场情绪 / 风险状态机','绝对温度 + 变化斜率 + 指数结构 + 成交活跃，共同决定今天能承担多少风险','<button class="btn">回放极端周期</button><button class="btn primary" data-action="market-next">刷新情绪指标</button>')}<div class="grid sent-grid"><div class="card sent-score"><div class="kicker">COMPOSITE SENTIMENT</div><div class="xxbig metric">${m.score}<span style="font-size:16px;opacity:.55"> /100</span></div><h4>${m.label}</h4><p>${m.desc}</p><div style="position:absolute;bottom:14px;left:14px;font-size:9px;color:#aea3c0">更新时间 14:30 · 变化斜率 +11</div></div>${sentStat('市场宽度','62%','上涨家数 / 全市场','▲ 较昨日 +12%','green')}${sentStat('涨跌停生态','67 / 19','涨停 / 跌停','▲ 跌停仍偏高','red')}${sentStat('成交活跃度','0.83×','相对 20 日均额','▼ 仍低于活跃阈值','orange')}${sentStat('指数趋势','修复中','日线 / 60 分钟结构','→ 尚未转强','blue')}${sentStat('炸板率','24%','越高代表承接越弱','▲ 较昨日 +6%','red')}${sentStat('情绪斜率','↑ +11','变化速度比绝对温度更重要','▲ 已由负转正','purple')}<div class="card risk-gate"><div class="kicker">建议总仓位闸门</div><div class="big metric" style="color:#493a99;margin-top:7px">${m.gate}</div><div class="gauge"><i style="left:${Math.min(90,m.score)}%"></i></div><div class="sub">首仓 3–5% · 单票 ≤12% · 最多 4 只</div></div><div class="card state-machine">${defs.map(([k,v],i)=>`<button class="phase ${state.market===k?'on':''}" data-market="${k}"><b>${i+1}. ${v.label}</b><small>${v.gate}</small></button>`).join('')}</div><div class="card prompt-card"><h3>仓位控制 Prompt</h3><pre>你是交易风险控制 Agent。每次给出买入建议前，必须先判断市场阶段。
+
+1. 冰点 ≠ 底部，不允许因为跌幅大直接建议满仓。
+2. 冰点后第一段反弹，首仓 ≤5%，总仓建议 ≤45%。
+3. 只有市场宽度、指数结构、成交活跃二次确认后才提高风险预算。
+4. 亢奋极值即使指数仍上涨，也主动降低新增仓位。
+5. 最终输出：市场阶段 / 仓位上限 / 允许动作 / 禁止动作 / 失效条件。</pre></div><div class="card"><h3>历史周期回放</h3><div class="rows"><div class="row"><span class="tag red">疯狂上涨</span><div class="grow"><b>赚钱效应扩散</b><small>追涨焦虑显著</small></div></div><div class="row"><span class="tag orange">持续退潮</span><div class="grow"><b>一个月回撤</b><small>反弹弱、热点轮动失败</small></div></div><div class="row"><span class="tag blue">大冰点</span><div class="grow"><b>交易极不活跃</b><small>等待恐慌停止扩散</small></div></div><div class="row"><span class="tag purple">报复性修复</span><div class="grow"><b>只做确认仓</b><small>不把低情绪等同低风险</small></div></div></div></div></div>`, 'sentiment')}
+function sentStat(t,v,s,d,c){return `<div class="card statcolor ${c}"><div class="stat-head"><span>${t}</span><span class="tag ${c==='red'?'red':c==='orange'?'orange':c==='green'?'green':c==='blue'?'blue':'purple'}">LIVE</span></div><div class="big metric" style="margin-top:7px">${v}</div><div class="sub">${s}</div><div class="delta">${d}</div></div>`}
+function renderNews(){return appShell(`${title('新闻 / 政策情报','不是新闻列表，而是“事实 → 影响 → 传导 → 标的 → Price In”的分析流水线','<button class="btn">只看持仓相关</button><button class="btn primary">刷新情报</button>')}<div class="grid news-grid"><div class="card"><h3>实时重要事件</h3>${newsItem('14:21','液冷服务器规格继续提高','AI 服务器单位功耗提升，冷板 / 分水器 / 测试设备价值量可能继续上行。','高','high','强瑞 · 申菱 · 液冷链')}${newsItem('13:42','半导体设备资本开支预测上调','对设备与零部件是中期产业变量，需区分设备厂与耗材零部件收入占比。','中','mid','新莱 · 半导体设备')}${newsItem('11:05','政策：数据中心能效约束强化','政策本身不是“利好所有液冷”，需要继续拆 PUE 约束如何传导到具体设备价值量。','中','mid','液冷 / IDC')}${newsItem('09:17','某公司突发重大合同公告','事件驱动先确认合同金额 / 收入占比 / 交付周期，避免标题党。','高','high','事件篮子')}</div><div><div class="card"><h3>政策解析链</h3><div class="chain" style="margin-top:10px"><div><strong>政策原文</strong> · 提高数据中心能源效率要求</div><div class="arrowdown">↓</div><div><strong>一阶变量</strong> · PUE / 单柜功率 / 散热方式</div><div class="arrowdown">↓</div><div><strong>二阶产业</strong> · 液冷系统、CDU、冷板、检测</div><div class="arrowdown">↓</div><div><strong>上市公司映射</strong> · 真实收入占比 + 客户认证 + 毛利</div></div></div><div class="card" style="margin-top:10px"><h3>Price In 检查</h3><div class="rows"><div class="row"><div class="grow"><b>强瑞技术</b><small>新闻相关度高，但股价已交易部分 Rubin 预期</small></div><span class="tag orange">部分计价</span></div><div class="row"><div class="grow"><b>申菱环境</b><small>订单已强，核心仍是利润率</small></div><span class="tag red">预期较高</span></div></div></div></div></div>`, 'news')}
+function newsItem(t,h,p,impact,cl,rel){return `<div class="newsitem"><div class="time">${t}</div><div><b>${h}</b><p>${p}</p><div style="margin-top:5px"><span class="tag gray">${rel}</span></div></div><div class="impact ${cl}">${impact}影响</div></div>`}
+function renderChat(){return appShell(`${title('Agent 对话','聊天窗口始终挂载交易上下文，不需要每次重新解释自己的持仓与研究','<button class="btn">新会话</button><button class="btn primary">盘前模式</button>')}<div class="chat-wrap"><aside class="chat-side"><h3>最近会话</h3><div class="chat-history"><div class="on">强瑞技术 · 能否开仓？</div><div>今日市场情绪与仓位</div><div>申菱环境 Q3 验证点</div><div>本周交易纪律复盘</div><div>FOMC 前科技仓位</div></div><div class="divider"></div><h3>快捷入口</h3><div class="chat-history"><div data-q="盘前分析">生成盘前简报</div><div data-q="五句话">买入前五句话</div><div data-q="风险">当前最大风险是什么</div></div></aside><main class="chat-main"><div class="chat-head"><b>强瑞技术 · 交易决策会话</b><div class="ctxchips"><span>${marketDefs[state.market].label}</span><span>${state.positions}/4 持仓</span><span>研究包 ACTIVE</span></div></div><div class="messages" id="messages"><div class="msg user">强瑞技术现在 106.85，可以买吗？</div><div class="msg ai"><strong>先看风险预算：</strong>当前市场处于「${marketDefs[state.market].label}」，建议总仓位 ${marketDefs[state.market].gate}。强瑞研究逻辑仍健康，但当前位置不是“因为看好就重仓”的位置。<br><br><strong>我允许：</strong>3%–5% 研究仓；如果 Q3 利润与 2027E 预测继续上修，再增加确认仓。<br><strong>我不允许：</strong>因为“翻倍概率 30%”直接打满，或跌了以后无条件补仓。</div></div><div class="composer"><input id="chatInput" placeholder="问：这只票的买入前五问是什么？"/><button class="btn primary" id="sendBtn">发送</button></div></main><aside class="context-side"><h3>当前已加载上下文</h3><div class="ctx-item"><b>市场状态</b><span>${marketDefs[state.market].label} · 仓位闸门 ${marketDefs[state.market].gate}</span></div><div class="ctx-item"><b>持仓</b><span>强瑞 / 新易盛 / 兆易创新，共 ${state.positions} 只</span></div><div class="ctx-item"><b>标的研究</b><span>强瑞研究包 v5 · Thesis 78%</span></div><div class="ctx-item"><b>个人纪律</b><span>本周追高 ×1 · 止损执行需改善</span></div><div class="ctx-item"><b>个人偏好</b><span>科技成长 / 产业逻辑 / 右侧确认</span></div><div class="divider"></div><div class="sub">偏好只用于适配，不用于迎合。用户观点会被标记为“用户假设”，不能直接成为事实。</div></aside></div>`, 'chat')}
+function renderDiscipline(){return appShell(`${title('纪律中心','真正需要学习的是你的行为模式，而不是让 Agent 越来越顺着你','<button class="btn">导出复盘</button><button class="btn primary">本周复盘</button>')}<div class="grid disc-grid"><div class="card discscore"><div class="kicker">DISCIPLINE SCORE</div><div class="xxbig">86</div><b>本周纪律良好</b><p>仍需改善止损执行。过去 20 笔交易中，止损延迟是当前最大的可修正问题。</p><div style="margin-top:9px"><span class="tag green">仓位合规</span> <span class="tag orange">追高 ×1</span></div></div><div class="card"><h3>本周违纪记录</h3><div class="viol"><b>09-11 · 生益科技 · 计划外追高</b><p>计划要求回踩确认，但盘中因担心踏空提前买入。结果未造成大亏，但属于流程违规。</p></div><div class="viol"><b>09-09 · 止损执行延迟</b><p>结构止损已触发，实际卖出晚 37 分钟。Agent 记录为“幻想反弹”类型。</p></div><div class="divider"></div><div class="sub">Agent 不用“这次最后涨回去了”来奖励违规行为。流程正确与盈亏结果分开评价。</div></div><div class="card"><h3>个人交易宪法 · 当前版本</h3><div class="constitution">01. 单笔风险默认 ≤ 总账户 0.5%\n02. 单只高波动科技股常规上限 10%–15%\n03. 加仓只能因为“更对了”，不能因为“更便宜了”\n04. 持仓默认最多 4 只\n05. 日线决定能否买，60 分钟决定何时买\n06. 游资票与机构票分模型\n07. 没有明确止损位，不允许开仓</div></div><div class="card"><h3>Agent 学到的行为模式</h3><div class="rows"><div class="row"><div class="grow"><b>产业研究强</b><small>科技链理解明显高于平均</small></div><span class="tag green">优势</span></div><div class="row"><div class="grow"><b>技术图形依赖 AI</b><small>适合把图形判断标准化</small></div><span class="tag purple">可工具化</span></div><div class="row"><div class="grow"><b>止损容易迟疑</b><small>需要更强提醒与硬规则</small></div><span class="tag red">首要修复</span></div></div></div><div class="card"><h3>长期统计方向</h3><div class="sub">积累 50–100 笔后，统计：最适合你的标的类型、行业胜率、平均持有周期、买点结构、止损方式、追高频率与市场状态相关性。</div></div><div class="card"><h3>最近 20 笔</h3><div class="big metric" style="margin-top:8px">65%</div><div class="sub">计划内交易占比</div><div class="bar" style="margin-top:9px"><i style="width:65%"></i></div></div></div>`, 'discipline')}
+function renderModels(){return appShell(`${title('模型 / Prompt 配置','模型可以替换，交易规则与数据上下文保持稳定','<button class="btn">测试连接</button><button class="btn primary" data-action="save">保存配置</button>')}<div class="grid config-grid"><div><div class="card"><h3>主模型连接</h3><div class="formgrid" style="margin-top:10px"><div class="field"><label>Provider</label><select><option>OpenAI Compatible</option></select></div><div class="field"><label>Main Model</label><select><option>GPT-5.6 Sol</option></select></div><div class="field"><label>Base URL</label><input value="https://api.example.com/v1"/></div><div class="field"><label>API Key</label><input type="password" value="sk-demo-hidden"/></div><div class="field"><label>Temperature</label><input value="0.20"/></div><div class="field"><label>Context Window</label><input value="200k"/></div></div><div style="margin-top:9px"><span class="tag green">连接正常</span> <span class="tag gray">Last test 14:22</span></div></div><div class="card" style="margin-top:10px"><h3>子模型路由</h3><div class="router" style="margin-top:8px">${route('公司深研','GPT-5.6 Sol','深度')}${route('新闻 / 政策','Fast Model','实时')}${route('游资情绪','Fast Model','盘中')}${route('交易复盘','GPT-5.6 Sol','推理')}${route('最终决策','GPT-5.6 Sol','主模型')}</div></div></div><div><div class="card"><h3>System Prompt / 交易宪法</h3><div class="prompt-tabs"><button class="on">系统规则</button><button>机构趋势</button><button>游资情绪</button><button>市场情绪</button><button>新闻政策</button></div><div class="prompt">你是用户的个人交易 Agent。\n\n最高优先级：\n1. 事实、推断、用户假设、Agent 判断必须分开。\n2. 不因用户看多而提高评分。\n3. 先判断标的类型，再加载对应交易模型。\n4. 买入建议前必须先读取市场情绪和仓位闸门。\n5. 当前持仓达到 4 只时，第 5 只必须执行持仓替换 PK。\n6. 机构趋势票按产业/订单/利润/估值/趋势验证。\n7. 游资票按情绪/梯队/连板基因/换手/市场记忆验证。\n8. 所有研究结论必须带数据时间戳与失效条件。</div></div><div class="card" style="margin-top:10px"><h3>Agent 记忆策略</h3><div class="rows"><div class="row"><div class="grow"><b>Preference Memory</b><small>科技成长 / 产业逻辑 / 右侧确认</small></div><span class="tag green">允许学习</span></div><div class="row"><div class="grow"><b>Discipline Memory</b><small>止损延迟 / 追高 / 亏损补仓等行为</small></div><span class="tag green">允许学习</span></div><div class="row"><div class="grow"><b>Opinion Mirroring</b><small>“用户说看多 → Agent 也看多”</small></div><span class="tag red">禁止</span></div></div></div></div></div>`, 'models')}
+function route(n,m,t){return `<div class="route"><b>${n}</b><select><option>${m}</option></select><span class="tag gray">${t}</span></div>`}
+function renderKnowledge(){const stale=state.research==='stale';return appShell(`${title('研究知识库','一只股票只做一次完整建档，后续通过事件触发增量更新','<button class="btn">查看数据模型</button><button class="btn primary" data-action="refresh">运行增量更新</button>')}<div class="grid kb-grid"><div class="card"><div style="display:flex"><h3>强瑞技术 · Research Package</h3><span class="tag ${stale?'orange':'green'}" style="margin-left:auto">${stale?'存在过期模块':'ACTIVE'}</span></div><div class="version"><time>09-12 15:42</time><div><b>v5 · 估值与订单更新</b><p>2027E 净利润 4.35 亿；AI 液冷订单证据增强；现金流仍作为风险项。</p></div><span class="tag green">active</span></div><div class="version"><time>09-10 09:18</time><div><b>v4 · 半年报口径修正</b><p>Q1 更正后归母 1469 万，重新计算 Q2 单季利润。</p></div><span class="tag gray">historical</span></div><div class="version"><time>08-29 18:11</time><div><b>v3 · 定增扩产材料</b><p>新增液冷与半导体产能计划，记录潜在摊薄。</p></div><span class="tag gray">historical</span></div><div class="version"><time>06-18 20:04</time><div><b>v2 · 投资者交流</b><p>北美 AI 服务器组装测试线与液冷部件订单进入档案。</p></div><span class="tag gray">historical</span></div></div><div><div class="card"><h3>模块新鲜度</h3><div class="freshness" style="margin-top:8px">${fresh('季度财务','09-12','最新','green',92)}${fresh('订单 / 客户','09-12','最新','green',88)}${fresh('一致预期','09-10','2 天','green',80)}${fresh('行业景气','08-17','26 天','orange',56)}${fresh('技术结构','盘中','实时','purple',100)}</div></div><div class="card" style="margin-top:10px"><h3>数据分层</h3><div class="source-tags"><span class="tag purple">MySQL / PostgreSQL</span><span class="tag blue">财报结构化</span><span class="tag gray">公告 PDF</span><span class="tag gray">调研纪要</span><span class="tag gray">政策原文</span><span class="tag gray">券商研报</span><span class="tag orange">新闻事件</span></div><div class="divider"></div><div class="sub">结构化事实以数据库最新值为准；RAG 负责补充证据上下文，不能让旧文档覆盖最新财务数字。</div></div></div></div>`, 'knowledge')}
+function fresh(n,d,s,c,w){return `<div class="fresh"><div class="fresh-head"><b>${n}</b><span class="tag ${c}">${s}</span></div><p>最近验证 ${d}</p><div class="bar" style="margin-top:6px"><i style="width:${w}%;background:${c==='green'?'#1ca77b':c==='orange'?'#e49332':'#6c57dc'}"></i></div></div>`}
+function renderApp(screen){const html=screens[screen].render();$('#desktop').innerHTML=html;bindApp();const ws=$('#desktop .workspace');if(ws)ws.scrollTop=0;fitStage();}
+function bindApp(){ $$('#desktop [data-nav]').forEach(b=>b.onclick=()=>selectScreen(b.dataset.nav)); $$('#desktop [data-market]').forEach(b=>b.onclick=()=>{state.market=b.dataset.market;syncControls();renderApp(state.screen)}); const send=$('#sendBtn'); if(send) send.onclick=sendChat; const add=$('#desktop [data-action="add"]'); if(add) add.onclick=()=>{showToast('已进入「加入自选 → 自动分类 → 全量建档」流程');selectScreen('research')}; const refresh=$('#desktop [data-action="refresh"]');if(refresh)refresh.onclick=()=>{state.research='updating';syncControls();renderApp(state.screen);setTimeout(()=>{state.research='fresh';syncControls();renderApp(state.screen)},1200)}; const mn=$('#desktop [data-action="market-next"]');if(mn)mn.onclick=()=>showToast('已刷新：市场宽度 / 成交 / 指数结构 / 涨跌停生态');}
+function sendChat(){const input=$('#chatInput');if(!input||!input.value.trim())return;const box=$('#messages');const q=input.value.trim();box.insertAdjacentHTML('beforeend',`<div class="msg user">${escapeHtml(q)}</div>`);const reply=q.includes('五')?'① 为什么买？产业/订单/业绩。<br>② 市场低估什么？预期差。<br>③ 为什么今天买？技术结构。<br>④ 错了在哪里认输？结构止损。<br>⑤ 对了准备赚多少？赔率至少 2:1。':`当前市场是「${marketDefs[state.market].label}」，总仓位闸门 ${marketDefs[state.market].gate}。我会先检查你的持仓与原始 Thesis，再回答这笔交易是否允许。`;setTimeout(()=>{box.insertAdjacentHTML('beforeend',`<div class="msg ai">${reply}</div>`);box.scrollTop=box.scrollHeight},160);input.value='';}
+function escapeHtml(s){return s.replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function showToast(t){const el=$('#appToast');if(!el)return;el.textContent=t;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),1700)}
+function selectScreen(s){state.screen=s;renderApp(s);renderScenarios();syncDeck();}
+function renderScenarios(){const root=$('#scenarioList');const groups={};Object.entries(screens).forEach(([k,v])=>(groups[v.group]??=[]).push([k,v]));let i=1;root.innerHTML=Object.entries(groups).map(([g,arr])=>`<div class="sc-group">${g}</div>${arr.map(([k,v])=>`<button class="sc-btn ${state.screen===k?'on':''}" data-sc="${k}"><span class="no">${String(i++).padStart(2,'0')}</span><span>${v.name}</span></button>`).join('')}`).join('');$$('[data-sc]').forEach(b=>b.onclick=()=>selectScreen(b.dataset.sc));}
+function syncDeck(){const s=screens[state.screen];$('#stageTitle').textContent=s.name;$('#screenNote').textContent=s.note;$('#roMarket').innerHTML=`<i class="dot"></i>${marketDefs[state.market].label}`;$('#roPos').textContent=`${state.positions} / 4`;$('#roResearch').textContent=state.research==='fresh'?'最新':state.research==='stale'?'过期':'更新中';$('#roModel').textContent=state.stockModel==='institution'?'机构趋势':'游资情绪';renderDirects();}
+function renderDirects(){$('#directs').innerHTML=Object.entries(screens).map(([k,v])=>`<button class="${state.screen===k?'on':''}" data-direct="${k}">${v.name.split(' · ')[0]}</button>`).join('');$$('[data-direct]').forEach(b=>b.onclick=()=>selectScreen(b.dataset.direct));}
+function renderMarketControls(){$('#marketControls').innerHTML=Object.entries(marketDefs).map(([k,v])=>`<button class="${state.market===k?'on':''}" data-mc="${k}">${v.label}</button>`).join('');$$('[data-mc]').forEach(b=>b.onclick=()=>{state.market=b.dataset.mc;syncControls();renderApp(state.screen)});}
+function renderBizControls(){$('#bizControls').innerHTML=`<button class="${state.positions===3?'on':''}" data-pos="3">持仓 3/4</button><button class="${state.positions===4?'on':''}" data-pos="4">持仓 4/4</button><button class="${state.research==='fresh'?'on':''}" data-res="fresh">研究最新</button><button class="${state.research==='stale'?'on':''}" data-res="stale">研究过期</button><button class="${state.stockModel==='institution'?'on':''}" data-sm="institution">机构模型</button><button class="${state.stockModel==='hot'?'on':''}" data-sm="hot">游资模型</button>`;$$('[data-pos]').forEach(b=>b.onclick=()=>{state.positions=+b.dataset.pos;syncControls();renderApp(state.screen)});$$('[data-res]').forEach(b=>b.onclick=()=>{state.research=b.dataset.res;syncControls();renderApp(state.screen)});$$('[data-sm]').forEach(b=>b.onclick=()=>{state.stockModel=b.dataset.sm;syncControls();if(state.stockModel==='hot')selectScreen('hot');else selectScreen('stock')});}
+function syncControls(){renderMarketControls();renderBizControls();syncDeck();}
+function fitStage(){const vp=$('#stageViewport'),sw=$('#scaleWrap');if(!vp||!sw)return;const vw=vp.clientWidth-26,vh=vp.clientHeight-26;let s=Math.min(vw/1180,vh/720);if(state.compact)s*=.88;s=Math.min(1,s);sw.style.width=(1180*s)+'px';sw.style.height=(720*s)+'px';$('#desktop').style.transform=`scale(${s})`;}
+function renderBoard(){const groups={};Object.entries(screens).forEach(([k,v])=>(groups[v.group]??=[]).push([k,v]));$('#boardView').innerHTML=Object.entries(groups).map(([g,arr])=>`<section class="board-section"><h2>${g}</h2><p>${g==='研究系统'?'同一个“单股工作台”根据标的类型切换模型，不让产业逻辑和游资情绪互相污染。':'关键页面按场景成组走查，开发与 Agent 都能看到状态差异。'}</p><div class="board-grid">${arr.map(([k,v])=>`<div class="board-cell"><div class="label">${v.name}</div><div class="frame"><div class="frame-inner">${v.render()}</div></div><div class="note">${v.note}</div></div>`).join('')}</div></section>`).join('');}
+$$('[data-view]').forEach(b=>b.onclick=()=>{$$('[data-view]').forEach(x=>x.classList.remove('on'));b.classList.add('on');const board=b.dataset.view==='board';$('#demoView').classList.toggle('hidden',board);$('#boardView').classList.toggle('hidden',!board);if(board)renderBoard();});
+$$('[data-density]').forEach(b=>b.onclick=()=>{$$('[data-density]').forEach(x=>x.classList.remove('on'));b.classList.add('on');state.compact=b.dataset.density==='compact';fitStage();});
+window.addEventListener('resize',fitStage);
+renderScenarios();renderDirects();renderMarketControls();renderBizControls();renderApp(state.screen);syncDeck();
+</script>
+
+<script id="thesisguard-v34-js">
+/* ================================================================
+   V3.4 增量脚本：复用 state / screens / renderApp / bindApp。
+   ================================================================ */
+state.v34={
+  thesisSelected:0,
+  thesisBoost:true,
+  estExpanded:false,
+  valuationCase:'base',
+  planFrozen:false,
+  planVersion:1,
+  stopLoss:96,
+  planModal:false,
+  catalystReleased:false,
+  catalyst:[false,false,false,false,false],
+  debateOpen:false
+};
+// JS 中不能使用 Python bool，立即纠正为 JS 布尔值
+state.v34.catalyst=[false,false,false,false,false];
+
+const TG_THESIS=[
+ {title:'AI服务器液冷订单持续增长',date:'2026-06-18',status:'supported',label:'SUPPORTED',support:[['S','2026半年报：AI服务器相关收入继续增长'],['B','2026-08-15 投资者交流：液冷检测与部件订单增加'],['C','国盛证券 2026-09-10：上调2027E盈利预测']],against:['客户集中度仍高，海外终端节奏影响订单确认'],pending:['Q3收入增速','新增订单','液冷业务毛利率'],invalid:['订单连续两个季度下降','收入增速明显掉档']},
+ {title:'订单开始向收入兑现',date:'2026-07-01',status:'supported',label:'SUPPORTED',support:[['S','Q2收入同比明显加速'],['A','公告披露产能扩张与交付需求']],against:['并表因素会放大表面收入增速'],pending:['自然增长拆分','Q3交付确认'],invalid:['库存继续上升但收入停滞','交付周期显著拉长']},
+ {title:'收入开始向利润兑现',date:'2026-07-30',status:'supported',label:'SUPPORTED',support:[['S','Q2单季利润加速'],['C','机构预测开始上修']],against:['当前归母净利率仍低于Bull情景要求'],pending:['毛利率','费用率','少数股东影响'],invalid:['收入增长但利润连续两个季度不增长']},
+ {title:'利润增长可以转化为现金流',date:'2026-08-29',status:'pending',label:'PENDING',support:[['S','暂无充分正面证据']],against:['H1经营现金流偏弱','应收与存货占用仍高'],pending:['经营现金流转正','应收增速低于收入增速'],invalid:['现金流持续恶化且应收高增']},
+ {title:'2027E盈利存在进一步上修空间',date:'2026-09-01',status:'pending',label:'PENDING',support:[['C','近90天一致预期4.2→6.1亿'],['C','新增覆盖机构+4']],against:['股价上涨速度快于盈利预期上修'],pending:['Q3利润兑现','新产能释放','海外订单持续性'],invalid:['一致预期开始连续下修','股价估值扩张但盈利不跟']}
+];
+
+const TG_CASES={
+ bear:{name:'BEAR',profit:'3.6亿',pe:'25×',cap:'90亿',space:'-31%',tone:'red'},
+ base:{name:'BASE',profit:'4.8亿',pe:'32×',cap:'154亿',space:'+18%',tone:'purple'},
+ bull:{name:'BULL',profit:'6.2亿',pe:'38×',cap:'236亿',space:'+81%',tone:'green'}
+};
+function tgKind(type){const map={fact:['fact','事实'],est:['est','机构预测'],infer:['infer','论衡推断'],user:['user','用户假设']};const x=map[type];return `<span class="tg-kind ${x[0]}">【${x[1]}】</span>`}
+function tgCred(c){return `<span class="tg-cred ${c.toLowerCase()}">${c}</span>`}
+function tgThesisScore(){let v=78;if(state.v34.thesisBoost)v+=6;if(state.v34.catalystReleased)v+=5;return Math.min(v,92)}
+function tgEvidenceDetail(){const t=TG_THESIS[state.v34.thesisSelected];return `<div class="tg-thesis-detail"><h4>${t.title}</h4><div class="tg-detail-meta"><div><span>建立日期</span><b>${t.date}</b></div><div><span>当前状态</span><b>${t.label}</b></div></div><div class="tg-evidence-block"><strong>支持证据</strong>${t.support.map(x=>`<div class="tg-evidence-item">${tgCred(x[0])}<div class="txt">${x[1]}</div></div>`).join('')}</div><div class="tg-evidence-block"><strong>反对证据</strong>${t.against.map(x=>`<div class="tg-evidence-item"><span class="tag orange">!</span><div class="txt">${x}</div></div>`).join('')}</div><div class="tg-evidence-block"><strong>待验证</strong>${t.pending.map(x=>`<div class="tg-evidence-item"><span class="tag purple">○</span><div class="txt">${x}</div></div>`).join('')}</div><div class="tg-evidence-block tg-invalid"><strong>失效条件</strong>${t.invalid.map(x=>`<div class="tg-evidence-item"><span class="tag red">×</span><div class="txt">${x}</div></div>`).join('')}</div></div>`}
+function tgValuationCard(){const c=TG_CASES[state.v34.valuationCase];return `<div class="tg-case-tabs">${Object.entries(TG_CASES).map(([k,v])=>`<button class="${state.v34.valuationCase===k?'on':''}" data-v34-case="${k}">${v.name}</button>`).join('')}</div><div class="tg-case"><div><span>2027利润</span><b>${c.profit}</b></div><div><span>合理PE</span><b>${c.pe}</b></div><div><span>目标市值</span><b>${c.cap}</b></div><div><span>潜在空间</span><b style="color:${c.tone==='red'?'#bd4b5b':c.tone==='green'?'#16815f':'#493a99'}">${c.space}</b></div></div><div class="tg-rr"><span>Downside -31% · Base +18% · Bull +81%</span><strong>2.6 : 1</strong></div><div class="tg-card-note" style="margin-top:6px">当前市场更接近：<b>BASE 偏乐观</b>。情景是条件推演，不是目标价承诺。</div>`}
+function tgPlan(){const frozen=state.v34.planFrozen;return `<div class="tg-plan-grid"><div class="tg-plan-item"><span>买入区</span><b>102–105</b></div><div class="tg-plan-item"><span>初始仓位</span><b>5%</b></div><div class="tg-plan-item"><span>加仓条件</span><b>突破110 + 回踩确认</b></div><div class="tg-plan-item"><span>止损</span><b>${state.v34.stopLoss}</b></div><div class="tg-plan-item"><span>失效条件</span><b>60分钟趋势破坏</b></div><div class="tg-plan-item"><span>Base</span><b>+18%</b></div><div class="tg-plan-item"><span>Bull</span><b>+81%</b></div><div class="tg-plan-item"><span>计划状态</span><b>${frozen?'FROZEN':'DRAFT'}</b></div></div><div class="tg-plan-foot"><span class="${frozen?'tg-lockline':'tag gray'}">${frozen?icon('lock')+' PLAN-v'+state.v34.planVersion+' 已冻结':'PLAN-v1 草稿'}</span><span class="sub">建立时间 2026-09-12 14:31</span><span style="margin-left:auto;display:flex;gap:5px"><button class="btn ${frozen?'':'primary'}" data-v34-action="freeze-plan">${frozen?'已冻结':'冻结计划'}</button>${frozen?'<button class="btn red" data-v34-action="edit-stop">修改止损</button>':''}</span></div><div class="tg-plan-history"><span class="${state.v34.planVersion===1?'current':''}">PLAN-v1 · 止损96</span>${state.v34.planVersion>=2?'<span class="current">PLAN-v2 · 止损90 · 风险扩大已留痕</span>':''}</div>`}
+function tgCatalyst(){const released=state.v34.catalystReleased;const defs=[['单季度收入 ≥ 8.5亿','收入'],['净利润 ≥ 0.8亿','净利润'],['毛利率 ≥ 目标值','毛利率'],['经营现金流改善','现金流'],['应收增速 < 收入增速','应收']];const arr=state.v34.catalyst;const done=arr.filter(Boolean).length;return `<div class="tg-cat-meta"><b>强瑞技术 Q3</b><span>发布日期：2026-10-XX</span><span class="tag ${released?'green':'purple'}">${released?'已发布':'待验证'}</span></div><div class="tg-task-list">${defs.map((x,i)=>`<div class="tg-task ${released?(arr[i]?'done':i===3?'fail':''):''}" data-v34-task="${i}"><i>${released?(arr[i]?'✓':i===3?'×':''):''}</i><span>${x[0]}</span><small>${released?(arr[i]?'PASS':i===3?'FAIL':'PENDING'):'WAIT'}</small></div>`).join('')}</div><div class="tg-cat-result"><div><span>完成</span><b>${released?done+'/ 5':'0 / 5'}</b></div><div><span>Thesis 影响</span><b>${released?'78 → 83':'等待'}</b></div><div><span>动作</span><b>${released?'持有 / 不加仓':'观察'}</b></div></div><div class="tg-cat-actions"><button class="btn ${released?'':'primary'}" data-v34-action="run-catalyst">${released?'重置任务':'模拟财报发布'}</button><button class="btn" data-nav="knowledge">查看证据入库</button></div>`}
+function tgDebate(){if(!state.v34.debateOpen)return `<div class="tg-debate-closed"><p>让反方 Agent 主动寻找能够推翻当前 Thesis 的证据，避免“研究越深越确信”。</p><button class="btn primary" data-v34-action="toggle-debate">反驳我的逻辑</button></div>`;return `<div class="tg-debate"><div class="tg-debate-col"><h4>多方观点</h4><ul><li>订单进入放量期</li><li>收入利润开始加速</li><li>2027盈利可能继续上修</li><li>液冷仍处高景气</li></ul></div><div class="tg-debate-col bear"><h4>空方观点</h4><ul><li>当前估值已经不低</li><li>股价上涨快于盈利预期</li><li>现金流尚未完成验证</li><li>订单持续性仍有不确定性</li></ul></div><div class="tg-verdict"><h4>论衡裁决</h4><div class="count"><div><span>确定事实</span><b>6</b></div><div><span>合理推断</span><b>4</b></div><div><span>缺乏证据</span><b>3</b></div></div><p><b>主要争议：</b>盈利上修能否超过当前股价已经计入的预期。</p><button class="btn" style="width:100%;margin-top:7px" data-v34-action="toggle-debate">收起反方 Agent</button></div></div>`}
+
+function renderStockV34(){const score=tgThesisScore();return appShell(`${title('强瑞技术 · Thesis Lifecycle','机构趋势模型 · 建立逻辑 → 持续验证 → 预期变化 → 情景估值 → Price-In → 冻结计划','<button class="btn" data-nav="knowledge">研究知识库</button><button class="btn" data-v34-action="toggle-debate">反驳我的逻辑</button><button class="btn primary" data-nav="chat">问论衡</button>')}<div class="tg-stock-head"><div class="tg-instrument"><div class="ticker"><b>强瑞技术</b><small>301128 · 机构趋势 / AI液冷 / 半导体</small><div class="meta">${tgKind('fact')}<span class="tag purple">研究评分 82</span><span class="tag green">ACTIVE</span><span class="tag gray">更新时间 2026-09-12 15:42</span></div></div><div class="price metric">106.85 <small>+2.31%</small></div></div><div class="tg-mini-kpi"><span>Thesis Health</span><b class="purple">78 → ${score} ↑</b><small>${state.v34.thesisBoost?'本次变化 +6':'新证据未计入'}</small></div><div class="tg-mini-kpi"><span>机构预期趋势</span><b class="up">↑ 强</b><small>2027E 90天 +45%</small></div><div class="tg-mini-kpi"><span>Expectation Gap</span><b>63 /100</b><small>正预期差正在收敛</small></div><div class="tg-mini-kpi"><span>Price-In</span><b class="warn">78%</b><small>短期赔率下降</small></div></div>
+<div class="tg-stock-grid">
+ <div class="card tg-card tg-span-7"><div class="tg-card-head"><h3>Thesis 验证面板</h3><span class="tag green">3 支持</span><span class="tag purple">2 待验证</span><span class="grow"></span><span class="tg-card-note">点击 Thesis 查看证据 / 反证 / 失效条件</span></div><div class="tg-thesis-layout"><div class="tg-thesis-list">${TG_THESIS.map((t,i)=>`<button class="tg-thesis-row ${state.v34.thesisSelected===i?'on':''}" data-v34-thesis="${i}"><div><b>${t.title}</b><small>建立 ${t.date}</small></div><span class="tg-status ${t.status}">${t.label}</span></button>`).join('')}</div>${tgEvidenceDetail()}</div></div>
+ <div class="card tg-card tg-span-5"><div class="tg-card-head"><h3>Thesis Health · 可解释变化</h3><span class="grow"></span><button class="link" data-v34-action="toggle-thesis-boost">${state.v34.thesisBoost?'撤回本次证据':'模拟新证据 +6'}</button></div><div class="tg-health-score"><span class="from">78</span><span class="arrow">→</span><span class="to">${score}</span><span class="delta">${score>78?'↑ +'+(score-78):'—'}</span></div><div class="tg-card-note">禁止 AI 黑盒评分：每一分变化都要能回溯到事件与证据。</div><div class="tg-health-reasons"><div class="tg-reason"><b>+3</b><span>Q3 订单证据增强 ${tgCred('B')}</span></div><div class="tg-reason"><b>+2</b><span>两家券商上调盈利预测 ${tgCred('C')}</span></div><div class="tg-reason"><b>+2</b><span>收入继续加速 ${tgCred('S')}</span></div><div class="tg-reason neg"><b>-1</b><span>现金流尚未明显改善 ${tgCred('S')}</span></div></div><div class="tg-source-line" style="margin-top:8px">${tgKind('fact')} 公司财报 ${tgKind('est')} 券商一致预期 ${tgKind('infer')} 分数变化解释</div></div>
+ <div class="card tg-card tg-span-7"><div class="tg-card-head"><h3>机构预期趋势 ↑</h3><span class="tag green">盈利预期持续上修</span><span class="grow"></span><button class="link" data-v34-action="toggle-est">${state.v34.estExpanded?'收起机构拆分':'查看机构拆分'}</button></div><div class="tg-est-grid"><div class="tg-chart"><div class="tg-source-line">${tgKind('est')} 2027E 净利润一致预期 · 亿元</div><svg viewBox="0 0 300 88" preserveAspectRatio="none" aria-label="2027E一致预期趋势"><line x1="18" y1="70" x2="285" y2="70" stroke="#e9e4ef" stroke-width="1"/><polyline points="24,65 86,56 148,43 210,28 276,15" fill="none" stroke="#6c57dc" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><circle cx="24" cy="65" r="3" fill="#fff" stroke="#6c57dc" stroke-width="2"/><circle cx="86" cy="56" r="3" fill="#fff" stroke="#6c57dc" stroke-width="2"/><circle cx="148" cy="43" r="3" fill="#fff" stroke="#6c57dc" stroke-width="2"/><circle cx="210" cy="28" r="3" fill="#fff" stroke="#6c57dc" stroke-width="2"/><circle cx="276" cy="15" r="3" fill="#fff" stroke="#6c57dc" stroke-width="2"/></svg><div class="tg-chart-labels"><span>5月<br>4.2</span><span>6月<br>4.5</span><span>7月<br>5.0</span><span>8月<br>5.6</span><span>9月<br>6.1</span></div></div><div><div class="tg-est-kpis"><div><span>90天变化</span><b class="good">+45%</b></div><div><span>30天变化</span><b class="good">+8.9%</b></div><div><span>新增覆盖</span><b>+4</b></div><div><span>上/维/下</span><b>7 /3 /1</b></div></div><div class="tg-est-state">盈利预期正在上修，但必须检查股价是否已经更快地提前交易。</div></div></div>${state.v34.estExpanded?'<div class="tg-source-line" style="margin-top:8px">'+tgCred('C')+' 国盛 6.2亿 · '+tgCred('C')+' 国信 5.7亿 · '+tgCred('C')+' 某券商 4.8亿 · 预测口径 2027E</div>':''}</div>
+ <div class="card tg-card tg-span-5"><div class="tg-card-head"><h3>机构分歧</h3><span class="grow"></span><span class="tg-card-note">不要只看“买入评级”</span></div><div class="tg-broker-list"><div class="tg-broker"><b>国盛证券</b><strong>6.2亿</strong><p>液冷订单继续超预期</p></div><div class="tg-broker"><b>国信证券</b><strong>5.7亿</strong><p>订单强，但利润率仍需验证</p></div><div class="tg-broker"><b>某券商</b><strong>4.8亿</strong><p>新产能释放慢于预期</p></div></div><div class="tg-diverge"><b>主要分歧：</b>① 毛利率假设 ② 新产能释放时间 ③ 海外客户订单持续性。</div></div>
+ <div class="card tg-card tg-span-4"><div class="tg-card-head"><h3>Expectation Gap</h3><span class="tag orange">正在收敛</span></div><div class="tg-signal-grid"><div><span>盈利预期</span><b style="color:#16815f">+13%</b></div><div><span>股价</span><b style="color:#bd4b5b">+27%</b></div><div><span>估值</span><b>+11%</b></div></div><div class="tg-gap-score"><b>63</b><span>/100 · 正预期差</span></div><div class="tg-gap-call">股价上涨 &gt; 盈利预期上修 → 预期差正在收敛。评分依据全部展示，不把 63 当“买入信号”。</div></div>
+ <div class="card tg-card tg-span-4"><div class="tg-card-head"><h3>市场计价程度 · Price-In</h3><span class="tag orange">78%</span></div><div class="tg-pricebar"><i></i></div><div class="tg-checks"><div class="tg-check done">✓ Rubin 液冷需求</div><div class="tg-check done">✓ AI服务器资本开支</div><div class="tg-check done">✓ Q3订单增长</div><div class="tg-check">○ 毛利率持续改善</div><div class="tg-check">○ 2027利润继续上修</div></div><div class="tg-quad"><div>产业逻辑 <b>强</b></div><div>基本面 <b>改善</b></div><div>市场预期 <b>高</b></div><div>短期赔率 <b>下降</b></div></div></div>
+ <div class="card tg-card tg-span-4"><div class="tg-card-head"><h3>Bull / Base / Bear 情景估值</h3><span class="grow"></span><span class="tg-card-note">条件推演</span></div>${tgValuationCard()}</div>
+ <div class="card tg-card tg-span-7"><div class="tg-card-head"><h3>冻结交易计划</h3><span class="${state.v34.planFrozen?'tag purple':'tag gray'}">${state.v34.planFrozen?'不可无痕修改':'开仓前草稿'}</span><span class="grow"></span><span class="tg-card-note">标的 · 强瑞技术</span></div>${tgPlan()}</div>
+ <div class="card tg-card tg-span-5"><div class="tg-card-head"><h3>Catalyst Validation · 催化剂验证任务</h3><span class="grow"></span><span class="tg-card-note">财报不是日历装饰</span></div>${tgCatalyst()}</div>
+ <div class="card tg-card tg-span-12"><div class="tg-card-head"><h3>Bull vs Bear · 反方 Agent</h3><span class="tag purple">ThesisGuard</span></div>${tgDebate()}</div>
+</div>${state.v34.planModal?`<div class="tg-modal"><div class="tg-dialog"><h3>⚠ 风险扩大</h3><p>你正在把止损从 <b>96</b> 下移到 <b>90</b>。这不是普通编辑，而是在交易发生后扩大原始风险。历史 PLAN-v1 不会被覆盖。</p><div class="tg-risk-change"><span>96</span><span>→</span><span>90</span></div><p><b>修改原因</b></p><textarea id="tgStopReason" placeholder="必须说明：为什么原来的失效条件不再有效？"></textarea><div class="tg-dialog-actions"><button class="btn" data-v34-action="cancel-stop">取消</button><button class="btn red" data-v34-action="confirm-stop">确认修改并生成 PLAN-v2</button></div></div></div>`:''}`, 'watchlist')}
+
+function renderDashboardV34(){const m=marketDefs[state.market];return appShell(`${title('今日交易驾驶舱','风险预算、持仓 Thesis、预期变化与 Agent 待办保持固定层级；首页只展示“发生了什么变化”。','<button class="btn" data-nav="sentiment">市场状态机</button><button class="btn primary" data-nav="chat">盘前 / 盘中对话</button>')}<div class="dashboard-v33">
+<section class="dash-row dash-summary"><div class="card summary-card v33-market"><div class="kicker">MARKET RISK BUDGET</div><div class="risk-main"><div class="risk-score metric">${m.score}<small>/100</small></div><div class="risk-state"><i></i>${m.label}<br><span style="font-weight:500;opacity:.58">情绪斜率 +11</span></div></div><div class="summary-foot"><span>市场宽度<b>62%</b></span><span>成交活跃<b>0.83×</b></span><span>涨跌停<b>67 / 19</b></span></div></div><div class="card summary-card v33-gate"><div class="section-head"><h3>建议总仓位闸门</h3><span class="tag purple">${m.label}</span></div><div class="gate-main"><b class="metric">${m.gate}</b><span class="sub">风险预算</span></div><div class="gauge"><i style="left:${Math.min(90,m.score)}%"></i></div><div class="quick-2x2"><div><strong>首仓 3–5%</strong><span>只做试错</span></div><div><strong>单票 ≤12%</strong><span>默认上限</span></div><div><strong>最多 4 只</strong><span>硬性容量</span></div><div><strong>亏损补仓</strong><span>禁止</span></div></div></div><div class="card summary-card v33-account"><div class="section-head"><h3>组合风险</h3><span class="tag orange">科技暴露偏高</span></div><div class="risk-kpis"><div><span>总仓位</span><b>58%</b></div><div><span>可用现金</span><b class="good">42%</b></div><div><span>相关性</span><b class="warn">48%</b></div></div><div class="capacity-line"><strong>${state.positions}/4</strong><div class="slotbar">${[1,2,3,4].map(i=>`<i class="${i<=state.positions?'used':''}"></i>`).join('')}</div><span class="tag ${state.positions>=4?'red':'purple'}">${state.positions>=4?'已满':'剩 1 位'}</span></div><div class="card-subline">第 5 只必须先做持仓替换 PK，不允许“开超市”。</div></div><div class="card summary-card v33-discipline"><div class="section-head"><h3>纪律 / 行为风险</h3><span class="tag green">本周良好</span></div><div class="discipline-main"><div class="score metric">86</div><div><b>纪律分</b><span>止损执行仍需改善</span></div></div><div class="discipline-stats"><div><span>仓位规则</span><b>合规</b></div><div class="warn"><span>追高</span><b>×1</b></div><div><span>计划外交易</span><b>0</b></div><div class="bad"><span>止损延迟</span><b>×1</b></div></div></div></section>
+<section class="dash-row dash-primary"><div class="card primary-card"><div class="section-head"><h3>当前持仓 · 原始 Thesis 监控</h3><span class="more" data-nav="holdings">查看组合 →</span></div><div class="dash-table position-table"><div class="tr th"><span>标的</span><span>仓位策略</span><span>浮动</span><span>Thesis</span><span>今日动作</span></div><div class="tr"><b>新易盛<small>机构趋势 · 光模块</small></b><span><b>主仓</b><small>趋势持有</small></span><span><b class="value-up">+6.8%</b><small>浮动收益</small></span><span><b>88%</b><small>产业逻辑健康</small></span><span><b>计划有效</b><small>未触发加仓条件</small></span></div><div class="tr"><b>兆易创新<small>机构趋势 · 存储</small></b><span><b>观察仓</b><small>等待突破</small></span><span><b class="value-up">+2.1%</b><small>浮动收益</small></span><span><b>79%</b><small>机构预期下修</small></span><span><b>重点验证</b><small>不左侧加仓</small></span></div><div class="tr"><b>强瑞技术<small>机构趋势 · 液冷/设备</small></b><span><b>研究仓</b><small>验证订单</small></span><span><b class="value-down">-1.4%</b><small>浮动收益</small></span><span><b>${tgThesisScore()}%</b><small>本次 +6</small></span><span><b>等待回踩</b><small>Price-In 78%</small></span></div></div></div><div class="card primary-card"><div class="section-head"><h3>Agent 今日优先级</h3><span class="tag red">4 项</span></div><div class="v33-focus-list"><div class="v33-focus"><span class="num">01</span><div><b>强瑞 Thesis +6</b><small>机构预期上修 + Q3订单证据增加</small></div><span class="lv">P0</span></div><div class="v33-focus"><span class="num">02</span><div><b>强瑞 Price-In 达 78%</b><small>短期赔率开始下降，不追第一根突破</small></div><span class="lv">P0</span></div><div class="v33-focus"><span class="num">03</span><div><b>新易盛交易计划仍有效</b><small>尚未触发加仓条件</small></div><span class="lv">P1</span></div><div class="v33-focus"><span class="num">04</span><div><b>兆易创新机构预期下修</b><small>进入重点验证，不因“便宜了”加仓</small></div><span class="lv">P1</span></div></div></div></section>
+<section class="dash-row dash-secondary"><div class="card secondary-card"><div class="section-head"><h3>机会池 · 哪些股票正在发生重要变化</h3><span class="more" data-nav="watchlist">打开自选池 →</span></div><div class="dash-table opportunity-table"><div class="tr th"><span>标的</span><span>模型</span><span>研究分</span><span>预期趋势</span><span>Thesis</span><span>Price-In</span><span>动作</span></div><div class="tr"><b>强瑞技术<small>301128</small></b><span class="tag purple">机构趋势</span><span class="score">82</span><span class="tg-exp strong">↑ 强</span><span class="tg-thesis-num">84</span><span class="tg-pricein">78%</span><span class="action">等待回踩</span></div><div class="tr"><b>申菱环境<small>301018</small></b><span class="tag blue">机构趋势</span><span class="score">74</span><span class="tg-exp up">↑</span><span class="tg-thesis-num">72</span><span class="tg-pricein">71%</span><span class="action">不抢跑</span></div><div class="tr"><b>湖南发展<small>000722</small></b><span class="tag orange">游资情绪</span><span class="score">68</span><span class="tg-exp flat">—</span><span class="tg-thesis-num">情绪</span><span class="tg-pricein">不适用</span><span class="action">等分歧</span></div><div class="tr"><b>新莱应材<small>300260</small></b><span class="tag purple">机构趋势</span><span class="score">67</span><span class="tg-exp flat">→</span><span class="tg-thesis-num">69</span><span class="tg-pricein">83%</span><span class="action">等待价格</span></div></div></div><div class="card secondary-card"><div class="section-head"><h3>热点 / 新闻 / 政策</h3><span class="tag red">实时</span></div><div class="v33-intel-list"><div class="v33-intel"><div class="headline"><i></i><b>液冷服务器规格继续提高</b><span class="tag red">高相关</span></div><p>事实与 Price-In 分开：产业利好不等于当前价格仍有赔率。</p></div><div class="v33-intel orange"><div class="headline"><i></i><b>半导体设备资本开支上调</b><span class="tag orange">中期</span></div><p>设备零部件偏利好，但估值与机构预期变化要一起看。</p></div><div class="v33-intel green"><div class="headline"><i></i><b>数据中心能效政策</b><span class="tag green">政策</span></div><p>继续拆 PUE → 设备价值量 → 标的真实收入占比。</p></div></div></div></section>
+<section class="dash-row dash-footer"><div class="card footer-card"><div class="section-head"><h3>未来验证点 / Catalyst Validation</h3><span class="more" data-nav="watchlist">未来 30 天</span></div><div class="v33-catalyst"><time>09 / 17</time><div><b>FOMC 议息会议</b><small>验证风险偏好，不直接判断个股 Thesis</small></div><span class="days">5 天</span></div><div class="v33-catalyst"><time>09 / 30</time><div><b>强瑞 Q3 预检查</b><small>订单 / 利润 / 现金流 / 应收</small></div><span class="days">任务</span></div><div class="v33-catalyst"><time>10 / Q3</time><div><b>三季报验证窗口</b><small>发布后自动更新 Thesis 与交易动作</small></div><span class="days">关键</span></div></div><div class="card footer-card"><div class="section-head"><h3>模型与数据状态</h3><span class="tag green">ONLINE</span></div><div class="v33-modelrow"><span class="iconbox">${icon('brain')}</span><div><b>最终决策模型</b><small>GPT-5.6 Sol · Prompt v1.7</small></div><span class="status">正常</span></div><div class="v33-modelrow"><span class="iconbox">${icon('database')}</span><div><b>公司研究知识库</b><small>8 ACTIVE · 2 待更新</small></div><span class="status">已同步</span></div><div class="v33-modelrow"><span class="iconbox">${icon('pulse')}</span><div><b>市场情绪数据</b><small>宽度 / 成交 / 涨跌停 / 指数</small></div><span class="status">14:30</span></div></div><div class="card footer-card"><div class="section-head"><h3>研究库健康度</h3><span class="tag orange">2 项待更新</span></div><div class="v33-health"><div><span>ACTIVE 报告</span><b>8</b></div><div><span>Stale 模块</span><b class="warning">2</b></div><div><span>今日新公告</span><b>14</b></div><div><span>关联新闻</span><b>36</b></div></div><div class="card-subline">DB 提供最新事实；RAG 只补证据。新数据生成新版本，不覆盖历史。</div></div></section><div class="dashboard-footnote">论衡只负责提升决策质量，不承诺预测涨跌；所有结论均需时间戳、来源与失效条件。</div></div>`, 'dashboard')}
+
+function renderChatV34(){return appShell(`${title('论衡对话','对话始终携带市场、持仓、Thesis、预期变化、交易计划与纪律上下文','<button class="btn">新会话</button><button class="btn primary">盘前模式</button>')}<div class="chat-wrap"><aside class="chat-side"><h3>最近会话</h3><div class="chat-history"><div class="on">强瑞技术 · Thesis 生命周期</div><div>今日市场情绪与仓位</div><div>申菱环境 Q3 验证点</div><div>本周交易纪律复盘</div><div>FOMC 前科技仓位</div></div><div class="divider"></div><h3>快捷入口</h3><div class="chat-history"><div data-v34-q="解释 Thesis">解释 Thesis</div><div data-v34-q="反驳我的逻辑">反驳我的逻辑</div><div data-v34-q="买入前五问">执行买入前五问</div></div></aside><main class="chat-main"><div class="chat-head"><b>强瑞技术 · ThesisGuard 决策会话</b><div class="ctxchips"><span>${marketDefs[state.market].label}</span><span>${state.positions}/4 持仓</span><span>Thesis ${tgThesisScore()}</span><span>Price-In 78%</span></div></div><div class="messages" id="messages"><div class="msg user">强瑞技术现在 106.85，可以买吗？</div><div class="msg ai"><strong>先分解问题：</strong>${tgKind('fact')} 当前研究包有效，${tgKind('est')} 2027E 一致预期持续上修，${tgKind('infer')} 但 Price-In 已到 78%，短期赔率下降。<br><br><strong>结论：</strong>允许 3%–5% 研究仓，等待回踩或 Q3 验证后再增加风险。利好 ≠ 买入，必须先问“市场已经交易了多少预期”。</div></div><div class="tg-chat-quick"><button data-v34-q="解释 Thesis">解释 Thesis</button><button class="strong" data-v34-q="反驳我的逻辑">反驳我的逻辑</button><button data-v34-q="最近发生了什么变化？">最近发生了什么变化？</button><button data-v34-q="机构为什么上调？">机构为什么上调？</button><button data-v34-q="现在 Price-In 多少？">现在 Price-In 多少？</button><button data-v34-q="重新计算 Bull/Base/Bear">重新计算 Bull/Base/Bear</button><button data-v34-q="检查交易计划">检查交易计划</button><button data-v34-q="执行买入前五问">执行买入前五问</button></div><div class="composer"><input id="chatInput" placeholder="问：哪些新事实让原判断发生变化？"/><button class="btn primary" id="sendBtn">发送</button></div></main><aside class="context-side"><h3>当前已加载上下文</h3><div class="ctx-item"><b>市场状态</b><span>${marketDefs[state.market].label} · 仓位闸门 ${marketDefs[state.market].gate}</span></div><div class="ctx-item"><b>Thesis</b><span>强瑞 v3 · Health ${tgThesisScore()} · 3支持 / 2待验证</span></div><div class="ctx-item"><b>机构预期</b><span>2027E 90天 +45% · 上调7 / 下调1</span></div><div class="ctx-item"><b>交易计划</b><span>${state.v34.planFrozen?'PLAN-v'+state.v34.planVersion+' 已冻结':'尚未冻结'}</span></div><div class="ctx-item"><b>个人纪律</b><span>本周追高 ×1 · 止损执行需改善</span></div><div class="divider"></div><div class="sub">用户观点只会被标成【用户假设】。论衡必须主动寻找反证，不因用户看多而看多。</div></aside></div>`, 'chat')}
+
+function renderKnowledgeV34(){const stale=state.research==='stale';return appShell(`${title('研究知识库','Research Package + 数据分类 + 证据可信度 + Thesis / 交易计划版本；新数据只生成新版本','<button class="btn">查看数据模型</button><button class="btn primary" data-action="refresh">运行增量更新</button>')}<div class="tg-kb-layout"><div><div class="card"><div class="tg-card-head"><h3>强瑞技术 · Research Package</h3><span class="tag ${stale?'orange':'green'}">${stale?'存在过期模块':'ACTIVE'}</span><span class="grow"></span><span class="tg-card-note">最后验证 2026-09-12 15:42</span></div><div class="version"><time>09-12 15:42</time><div><b>v5 · Thesis / 估值 / 预期变化</b><p>Thesis 78→84；机构预期上修；Price-In 78%；现金流仍是待验证项。</p></div><span class="tag green">active</span></div><div class="version"><time>09-10 09:18</time><div><b>v4 · 半年报口径修正</b><p>Q1更正后归母1469万，重新计算Q2单季利润。</p></div><span class="tag gray">historical</span></div><div class="version"><time>08-29 18:11</time><div><b>v3 · 定增扩产材料</b><p>新增液冷与半导体产能计划，记录潜在摊薄。</p></div><span class="tag gray">historical</span></div></div><div class="card" style="margin-top:10px"><div class="tg-card-head"><h3>Thesis Versions</h3><span class="grow"></span><span class="tg-card-note">历史不可覆盖</span></div><div class="tg-thesis-versions"><div class="tg-tv"><b>v1</b><time>06-18</time><p>液冷订单进入放量观察期。</p></div><div class="tg-tv"><b>v2</b><time>08-29</time><p>新增扩产与订单证据，加入现金流反证。</p></div><div class="tg-tv"><b>v3</b><time>09-12</time><p>机构预期上修 + Price-In 提升，短期赔率下降。</p></div></div></div></div><div><div class="card"><div class="tg-card-head"><h3>数据分类</h3></div><div class="tg-taxonomy"><span class="tg-tax">FACT</span><span class="tg-tax">ESTIMATE</span><span class="tg-tax">THESIS</span><span class="tg-tax">EVENT</span><span class="tg-tax">REPORT</span><span class="tg-tax">PRICE_SIGNAL</span><span class="tg-tax">TRADE_PLAN</span></div><div class="divider"></div><div class="sub">DB 存结构化事实和版本元数据；RAG 保存公告、研报、调研纪要与证据上下文。</div></div><div class="card" style="margin-top:10px"><div class="tg-card-head"><h3>证据可信度</h3><span class="grow"></span><span class="tag green">规则已启用</span></div><div class="tg-cred-ladder"><div class="tg-cred-row">${tgCred('S')}<div><b>公司公告 / 财报</b><span>一手正式披露</span></div></div><div class="tg-cred-row">${tgCred('A')}<div><b>监管 / 官方数据</b><span>交易所、监管、官方</span></div></div><div class="tg-cred-row">${tgCred('B')}<div><b>投资者交流</b><span>机构调研 / 公司口径</span></div></div><div class="tg-cred-row">${tgCred('C')}<div><b>券商研报</b><span>预测与假设</span></div></div><div class="tg-cred-row">${tgCred('D')}<div><b>权威财经媒体</b><span>二手报道</span></div></div><div class="tg-cred-row">${tgCred('E')}<div><b>社交媒体</b><span>只作线索</span></div></div></div><div class="tg-f-pool">${tgCred('F')} <b>传闻 / 未验证消息</b><p>不得直接进入核心 Thesis，只能进入待验证情报池，等待 S/A/B 级证据确认。</p></div></div></div></div>`, 'knowledge')}
+
+function renderResearchV34(){const updating=state.research==='updating',stale=state.research==='stale';return appShell(`${title('强瑞技术 · 自动建档','第一次全量 Research Package；后续由公告、财报、研报、事件触发增量版本','<button class="btn" data-nav="watchlist">返回自选池</button><button class="btn purple" data-action="refresh">刷新研究</button>')}<div class="research-head"><div class="card company-hero"><div class="kicker">THESISGUARD AUTO CLASSIFICATION</div><h2>强瑞技术 301128</h2><p>机构趋势为主。Research Package 不只保存“公司介绍”，还保存 Thesis、Estimate、Evidence、Price-In 与 Trade Plan 版本。</p><div class="tg-research-types"><span class="tag purple">机构趋势 82%</span><span class="tag blue">事件驱动 13%</span><span class="tag gray">游资情绪 5%</span></div></div><div class="card"><h3>研究包状态</h3><div class="big" style="margin-top:11px;color:${stale?'#ba751f':updating?'#5c4cc4':'#187f60'}">${stale?'STALE':updating?'UPDATING':'ACTIVE'}</div><div class="sub">${stale?'关键模块超过更新阈值，需要增量刷新。':updating?'正在拉取公告、投资者交流、研报与一致预期变化。':'最后验证：2026-09-12 15:42'}</div><div class="divider"></div><span class="tag ${stale?'orange':updating?'purple':'green'}">${stale?'需要刷新':updating?'更新中':'结构化事实已同步'}</span></div><div class="card"><h3>证据质量概览</h3><div class="tg-source-summary"><div><span>S/A</span><b>18</b></div><div><span>B</span><b>11</b></div><div><span>C</span><b>9</b></div><div><span>待验证F</span><b style="color:#bd4b5b">3</b></div></div><div class="divider"></div><div class="sub">F级线索不会进入核心 Thesis，直到被更高等级证据确认。</div></div></div><div class="grid workflow" style="margin-top:10px"><div class="card"><h3>首次全量研究 Workflow</h3><div class="steps" style="margin-top:10px">${['公司/业务','产业链','订单证据','财务质量','机构预期','Thesis/估值'].map((x,i)=>`<div class="step ${updating&&i===5?'run':'done'}"><i>${updating&&i===5?'↻':'✓'}</i><b>${x}</b><small>${updating&&i===5?'正在更新':'已入库'}</small></div>`).join('')}</div><div class="divider"></div><div class="facts"><div class="fact"><span>FACT</span><b>64 条</b></div><div class="fact"><span>ESTIMATE</span><b>11 条</b></div><div class="fact"><span>THESIS</span><b>5 条</b></div><div class="fact"><span>REPORT</span><b>28 份</b></div><div class="fact"><span>EVENT</span><b>17 条</b></div><div class="fact"><span>TRADE_PLAN</span><b>1 版</b></div></div></div><div class="card"><h3>DB + RAG 双层存储</h3><div class="rows"><div class="row"><div class="iconbox">${icon('database')}</div><div class="grow"><b>结构化数据库</b><small>季度财务 / 一致预期 / Thesis状态 / Price-In / 交易计划版本</small></div><span class="tag green">Latest Fact</span></div><div class="row"><div class="iconbox">${icon('book')}</div><div class="grow"><b>文档知识库 / RAG</b><small>年报、公告、调研纪要、政策、研报、新闻</small></div><span class="tag purple">Evidence</span></div><div class="row"><div class="iconbox">${icon('clock')}</div><div class="grow"><b>版本与有效期</b><small>新数据生成新版本，不修改过去历史</small></div><span class="tag blue">Versioned</span></div></div></div></div>`, 'watchlist')}
+
+function TG_chatReply(q){
+ if(q.includes('反驳'))return `<strong>反方 Agent：</strong><br>1. 当前股价上涨快于盈利预期上修；<br>2. 现金流尚未验证；<br>3. 订单持续性存在客户集中与交付节奏风险；<br>4. Price-In 78%，短期赔率已经下降。<br><br><strong>论衡裁决：</strong>核心争议不是“液冷好不好”，而是盈利上修能否继续超过市场已经计入的预期。`;
+ if(q.includes('Price')||q.includes('计价'))return `<strong>Price-In：78%</strong><br>已主要计价：Rubin液冷需求、AI服务器资本开支、Q3订单增长。<br>尚未充分计价：毛利率持续改善、2027利润预测进一步上修。<br><br>因此：产业逻辑强 ≠ 当前位置赔率仍高。`;
+ if(q.includes('Bull')||q.includes('估值'))return `<strong>情景估值：</strong><br>BEAR：3.6亿 ×25x = 90亿（-31%）<br>BASE：4.8亿 ×32x = 154亿（+18%）<br>BULL：6.2亿 ×38x = 236亿（+81%）<br>当前市场更接近 BASE 偏乐观；Bull/Bear 约 2.6:1。`;
+ if(q.includes('机构')||q.includes('上调'))return `${tgKind('est')} 2027E一致预期近90天从4.2亿升至6.1亿，主要来自订单持续、产能释放与液冷业务占比提升假设。<br><br><strong>分歧：</strong>毛利率、新产能释放时间、海外订单持续性。`;
+ if(q.includes('Thesis')||q.includes('逻辑'))return `<strong>当前核心 Thesis：</strong><br>① 液冷订单持续增长【支持】<br>② 订单→收入【支持】<br>③ 收入→利润【支持】<br>④ 利润→现金流【待验证】<br>⑤ 2027E继续上修【待验证】<br><br>Health 78→${tgThesisScore()}，变化原因可逐条追溯。`;
+ if(q.includes('计划'))return `<strong>交易计划：</strong>${state.v34.planFrozen?'PLAN-v'+state.v34.planVersion+' 已冻结':'尚未冻结'}。买入区102–105，首仓5%，止损${state.v34.stopLoss}。冻结后任何下移止损都必须说明原因并生成新版本，不能覆盖历史。`;
+ if(q.includes('五问'))return `① 为什么买？—— Thesis 是什么？<br>② 哪些事实支持？—— 证据等级是什么？<br>③ 为什么今天买？—— 市场风险预算与技术结构是否允许？<br>④ 错了在哪里认输？—— 冻结止损与失效条件。<br>⑤ 对了能赚多少？—— Bull/Base/Bear 与 Price-In 后的赔率。`;
+ return `我会先区分【事实 / 机构预测 / 论衡推断 / 用户假设】，再检查 Thesis、Price-In、市场风险预算与冻结交易计划，最后给出允许动作 / 禁止动作 / 失效条件。`;
+}
+function TG_appendChat(q){const box=$('#messages');if(!box)return;box.insertAdjacentHTML('beforeend',`<div class="msg user">${escapeHtml(q)}</div>`);setTimeout(()=>{box.insertAdjacentHTML('beforeend',`<div class="msg ai">${TG_chatReply(q)}</div>`);box.scrollTop=box.scrollHeight},100)}
+
+// 覆盖主要页面，但保留原有一级菜单与走查台
+screens.dashboard.render=renderDashboardV34;screens.dashboard.name='总览 · Thesis 变化优先';screens.dashboard.note='首页不新增大卡，继续保留风险/组合/机会/情报结构；但 Agent 待办和机会池改为展示 Thesis、预期趋势与 Price-In 的“变化”，而不是静态评分。';
+screens.stock.render=renderStockV34;screens.stock.name='单股工作台 · Thesis Lifecycle';screens.stock.note='V3.4 核心页：为什么看好、哪些事实改变判断、机构预期是否上修、Price-In、Bull/Base/Bear、证据等级、冻结交易计划与催化剂验证全部串成一条 Thesis 生命周期。';
+screens.chat.render=renderChatV34;screens.chat.name='Agent 对话 · 论衡反驳';screens.chat.note='对话不再只是问答：快捷调用解释 Thesis、反方 Agent、机构预期、Price-In、情景估值和冻结计划检查；用户假设不会被自动当成事实。';
+screens.knowledge.render=renderKnowledgeV34;screens.knowledge.name='研究知识库 · 版本与证据';screens.knowledge.note='知识库新增 FACT / ESTIMATE / THESIS / EVENT / REPORT / PRICE_SIGNAL / TRADE_PLAN 分类，并维护证据可信度与 Thesis Versions；新数据永远生成新版本。';
+screens.research.render=renderResearchV34;screens.research.name='加入自选 · Research Package';screens.research.note='首次全量、后续增量的原则不变；V3.4 将机构预期、Thesis、Price-In、交易计划也纳入 Research Package，并记录来源等级。';
+
+const TG_bindAppBase=bindApp;
+bindApp=function(){
+  TG_bindAppBase();
+  const logo=$('#desktop .logo');if(logo){logo.textContent='论';logo.title='论衡 ThesisGuard';}
+  const online=$('#desktop .agent-online');if(online)online.innerHTML='<i></i>ThesisGuard 在线 · 知识库已同步';
+  const ab=$('#desktop .agent-btn');if(ab)ab.innerHTML=icon('chat')+'与论衡对话';
+  $$('#desktop [data-v34-thesis]').forEach(b=>b.onclick=()=>{state.v34.thesisSelected=+b.dataset.v34Thesis;renderApp('stock')});
+  $$('#desktop [data-v34-case]').forEach(b=>b.onclick=()=>{state.v34.valuationCase=b.dataset.v34Case;renderApp('stock')});
+  $$('#desktop [data-v34-task]').forEach(b=>b.onclick=()=>{if(!state.v34.catalystReleased)return;const i=+b.dataset.v34Task;state.v34.catalyst[i]=!state.v34.catalyst[i];renderApp('stock')});
+  $$('#desktop [data-v34-q]').forEach(b=>b.onclick=()=>TG_appendChat(b.dataset.v34Q));
+  $$('#desktop [data-v34-action]').forEach(b=>b.onclick=()=>{
+    const a=b.dataset.v34Action;
+    if(a==='toggle-thesis-boost'){state.v34.thesisBoost=!state.v34.thesisBoost;renderApp('stock')}
+    else if(a==='toggle-est'){state.v34.estExpanded=!state.v34.estExpanded;renderApp('stock')}
+    else if(a==='toggle-debate'){state.v34.debateOpen=!state.v34.debateOpen;renderApp('stock')}
+    else if(a==='freeze-plan'){if(!state.v34.planFrozen){state.v34.planFrozen=true;showToast('PLAN-v1 已冻结；后续修改将生成新版本');}renderApp('stock')}
+    else if(a==='edit-stop'){state.v34.planModal=true;renderApp('stock')}
+    else if(a==='cancel-stop'){state.v34.planModal=false;renderApp('stock')}
+    else if(a==='confirm-stop'){const r=$('#tgStopReason');if(!r||!r.value.trim()){showToast('必须填写扩大风险的原因');return;}state.v34.stopLoss=90;state.v34.planVersion=2;state.v34.planModal=false;showToast('已生成 PLAN-v2；PLAN-v1 保留为历史版本');renderApp('stock')}
+    else if(a==='run-catalyst'){state.v34.catalystReleased=!state.v34.catalystReleased;state.v34.catalyst=state.v34.catalystReleased?[true,true,true,false,true]:[false,false,false,false,false];renderApp('stock')}
+  });
+  const send=$('#sendBtn');if(send)send.onclick=()=>{const input=$('#chatInput');if(!input||!input.value.trim())return;const q=input.value.trim();TG_appendChat(q);input.value='';};
+};
+
+// 走查台业务状态开关补充 V3.4 Demo；仍保留原有开关
+renderBizControls=function(){
+  $('#bizControls').innerHTML=`<button class="${state.positions===3?'on':''}" data-pos="3">持仓 3/4</button><button class="${state.positions===4?'on':''}" data-pos="4">持仓 4/4</button><button class="${state.research==='fresh'?'on':''}" data-res="fresh">研究 ACTIVE</button><button class="${state.research==='stale'?'on':''}" data-res="stale">研究 STALE</button><button class="${state.stockModel==='institution'?'on':''}" data-sm="institution">机构模型</button><button class="${state.stockModel==='hot'?'on':''}" data-sm="hot">游资模型</button><button class="${state.v34.thesisBoost?'on':''}" data-tg="thesis">Thesis 78→84</button><button class="${state.v34.planFrozen?'on':''}" data-tg="plan">计划${state.v34.planFrozen?'已冻结':'草稿'}</button><button class="${state.v34.catalystReleased?'on':''}" data-tg="cat">催化${state.v34.catalystReleased?'已发布':'待验证'}</button>`;
+  $$('[data-pos]').forEach(b=>b.onclick=()=>{state.positions=+b.dataset.pos;syncControls();renderApp(state.screen)});$$('[data-res]').forEach(b=>b.onclick=()=>{state.research=b.dataset.res;syncControls();renderApp(state.screen)});$$('[data-sm]').forEach(b=>b.onclick=()=>{state.stockModel=b.dataset.sm;syncControls();if(state.stockModel==='hot')selectScreen('hot');else selectScreen('stock')});
+  $$('[data-tg]').forEach(b=>b.onclick=()=>{if(b.dataset.tg==='thesis')state.v34.thesisBoost=!state.v34.thesisBoost;if(b.dataset.tg==='plan')state.v34.planFrozen=!state.v34.planFrozen;if(b.dataset.tg==='cat'){state.v34.catalystReleased=!state.v34.catalystReleased;state.v34.catalyst=state.v34.catalystReleased?[true,true,true,false,true]:[false,false,false,false,false]}syncControls();renderApp(state.screen)});
+};
+
+// 品牌与走查说明
+const TG_head=document.querySelector('.wb-head-main h1');if(TG_head)TG_head.textContent='论衡 ThesisGuard · V3.4 视觉交互走查台';
+const TG_p=document.querySelector('.wb-head-main p');if(TG_p)TG_p.textContent='个人交易研究与决策系统 · Build the thesis. Test the thesis. Guard the downside. 本版在 V3.3 上增量强化 Thesis Lifecycle，不新增一级菜单。';
+const TG_eye=document.querySelector('.eyebrow');if(TG_eye)TG_eye.textContent='THESISGUARD V3.4 · VISUAL INTERACTION REVIEW';
+
+// 重新渲染当前屏并同步画板/目录
+renderScenarios();renderDirects();renderMarketControls();renderBizControls();renderApp(state.screen);syncDeck();
+</script>
+
+</body>
+</html>

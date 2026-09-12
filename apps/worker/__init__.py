@@ -1,0 +1,1 @@
+"""ThesisGuard Worker package."""

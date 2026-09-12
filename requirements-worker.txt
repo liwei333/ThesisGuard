@@ -1,0 +1,7 @@
+# ThesisGuard Worker Dependencies
+
+# Inherits from API requirements
+-r requirements-api.txt
+
+# Task Queue
+dramatiq[rabbitmq, redis, watch]==1.17.0
