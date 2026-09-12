@@ -3,8 +3,7 @@
 import hashlib
 import hmac
 import secrets
-from datetime import datetime, timedelta, timezone
-from typing import Optional
+from datetime import UTC, datetime, timedelta
 
 import jwt
 from backend.common.config import settings
@@ -15,7 +14,7 @@ def generate_token(length: int = 32) -> str:
     return secrets.token_hex(length)
 
 
-def hash_value(value: str, salt: Optional[str] = None) -> str:
+def hash_value(value: str, salt: str | None = None) -> str:
     """Hash a value with optional salt."""
     if salt is None:
         salt = generate_token(16)
@@ -29,22 +28,22 @@ def verify_hash(value: str, salt: str, expected_hash: str) -> bool:
 
 def create_access_token(
     subject: str,
-    expires_delta: Optional[timedelta] = None,
+    expires_delta: timedelta | None = None,
 ) -> str:
     """Create a JWT access token."""
     if expires_delta is None:
         expires_delta = timedelta(hours=24)
 
-    expire = datetime.now(timezone.utc) + expires_delta
+    expire = datetime.now(UTC) + expires_delta
     payload = {
         "sub": subject,
         "exp": expire,
-        "iat": datetime.now(timezone.utc),
+        "iat": datetime.now(UTC),
     }
     return jwt.encode(payload, settings.SECRET_KEY, algorithm="HS256")
 
 
-def decode_access_token(token: str) -> Optional[dict]:
+def decode_access_token(token: str) -> dict | None:
     """Decode and verify a JWT access token."""
     try:
         return jwt.decode(token, settings.SECRET_KEY, algorithms=["HS256"])

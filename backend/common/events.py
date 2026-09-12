@@ -7,12 +7,9 @@ In V1, events are internal to the modular monolith.
 Future WPs will use these for cross-module communication.
 """
 
-from typing import Any, Dict, Optional
-from datetime import datetime, timezone
 import json
-
-from backend.common.redis_client import redis_client
-
+from datetime import UTC, datetime
+from typing import Any
 
 # Event names - grouped by domain
 EVENTS = {
@@ -42,21 +39,21 @@ EVENTS = {
 
 def make_event(
     event_type: str,
-    data: Dict[str, Any],
-    event_id: Optional[str] = None,
-) -> Dict[str, Any]:
+    data: dict[str, Any],
+    event_id: str | None = None,
+) -> dict[str, Any]:
     """Create a standardized event envelope."""
     return {
         "event_type": event_type,
         "event_id": event_id,
-        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "timestamp": datetime.now(UTC).isoformat(),
         "payload": json.dumps(data),
     }
 
 
 async def publish_event(
     event_type: str,
-    data: Dict[str, Any],
+    data: dict[str, Any],
     stream: str = "thesisguard:events",
 ) -> str:
     """Publish an event to Redis Streams.
@@ -73,6 +70,6 @@ async def publish_event(
     try:
         event = make_event(event_type, data)
         entry_id = await r.xadd(stream, event)
-        return entry_id
+        return str(entry_id)
     finally:
         await r.close()

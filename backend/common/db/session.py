@@ -1,15 +1,14 @@
 """SQLAlchemy async session and engine configuration."""
 
-from typing import AsyncGenerator
+from collections.abc import AsyncGenerator
 
+from backend.common.config import settings
 from sqlalchemy.ext.asyncio import (
     AsyncSession,
     async_sessionmaker,
     create_async_engine,
 )
 from sqlalchemy.orm import DeclarativeBase
-
-from backend.common.config import settings
 
 
 class Base(DeclarativeBase):

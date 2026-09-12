@@ -1,24 +1,22 @@
 """MinIO (S3-compatible) object storage client."""
 
-import io
-from typing import Optional
+from typing import Any
 
 import boto3
+from backend.common.config import settings
 from botocore.client import Config
 from botocore.exceptions import ClientError
-
-from backend.common.config import settings
 
 
 class StorageClient:
     """MinIO/S3 object storage client."""
 
     def __init__(self) -> None:
-        self._client = None
+        self._client: Any = None
         self._bucket = settings.MINIO_BUCKET
 
     @property
-    def client(self):
+    def client(self) -> Any:
         """Lazy-initialize S3 client."""
         if self._client is None:
             protocol = "https" if settings.MINIO_SECURE else "http"
@@ -54,11 +52,12 @@ class StorageClient:
         )
         return key
 
-    def get_object(self, key: str) -> Optional[bytes]:
+    def get_object(self, key: str) -> bytes | None:
         """Download an object. Returns None if not found."""
         try:
             response = self.client.get_object(Bucket=self._bucket, Key=key)
-            return response["Body"].read()
+            body = response["Body"]
+            return bytes(body.read())
         except ClientError:
             return None
 

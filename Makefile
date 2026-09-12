@@ -41,17 +41,17 @@ worker: ## Run worker locally
 # Database
 # ===========================================
 migrate: ## Run database migrations
-	alembic upgrade head
+	DATABASE_URL=postgresql+asyncpg://$${POSTGRES_USER:-thesisguard}:$${POSTGRES_PASSWORD:-thesisguard_dev_password}@127.0.0.1:$${POSTGRES_HOST_PORT:-15432}/$${POSTGRES_DB:-thesisguard} alembic -c migrations/alembic.ini upgrade head
 
 migrate-gen: ## Generate new migration (use: make migrate-gen MESSAGE="description")
-	alembic revision --autogenerate -m "$(MESSAGE)"
+	DATABASE_URL=postgresql+asyncpg://$${POSTGRES_USER:-thesisguard}:$${POSTGRES_PASSWORD:-thesisguard_dev_password}@127.0.0.1:$${POSTGRES_HOST_PORT:-15432}/$${POSTGRES_DB:-thesisguard} alembic -c migrations/alembic.ini revision --autogenerate -m "$(MESSAGE)"
 
 migrate-down: ## Rollback one migration
-	alembic downgrade -1
+	DATABASE_URL=postgresql+asyncpg://$${POSTGRES_USER:-thesisguard}:$${POSTGRES_PASSWORD:-thesisguard_dev_password}@127.0.0.1:$${POSTGRES_HOST_PORT:-15432}/$${POSTGRES_DB:-thesisguard} alembic -c migrations/alembic.ini downgrade -1
 
 db-reset: ## Reset database (drop all tables and re-migrate)
-	alembic downgrade base
-	alembic upgrade head
+	DATABASE_URL=postgresql+asyncpg://$${POSTGRES_USER:-thesisguard}:$${POSTGRES_PASSWORD:-thesisguard_dev_password}@127.0.0.1:$${POSTGRES_HOST_PORT:-15432}/$${POSTGRES_DB:-thesisguard} alembic -c migrations/alembic.ini downgrade base
+	DATABASE_URL=postgresql+asyncpg://$${POSTGRES_USER:-thesisguard}:$${POSTGRES_PASSWORD:-thesisguard_dev_password}@127.0.0.1:$${POSTGRES_HOST_PORT:-15432}/$${POSTGRES_DB:-thesisguard} alembic -c migrations/alembic.ini upgrade head
 
 # ===========================================
 # Testing
@@ -75,7 +75,7 @@ format: ## Format code with ruff
 	ruff format backend/ apps/
 
 typecheck: ## Run mypy type checking
-	mypy backend/ apps/ --ignore-missing-imports
+	MYPYPATH=. mypy --explicit-package-bases backend apps --ignore-missing-imports
 
 # ===========================================
 # Frontend

@@ -5,14 +5,18 @@
  * Never hand-write URLs in components.
  */
 
-import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
+import axios, { AxiosInstance } from 'axios'
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api'
 const API_VERSION = import.meta.env.VITE_API_VERSION || 'v1'
+const normalizedBaseUrl = API_BASE_URL.replace(/\/$/, '')
+const versionedBaseUrl = normalizedBaseUrl.endsWith('/api')
+  ? `${normalizedBaseUrl}/${API_VERSION}`
+  : `${normalizedBaseUrl}/api/${API_VERSION}`
 
 // Create axios instance with defaults
 const client: AxiosInstance = axios.create({
-  baseURL: `${API_BASE_URL}/${API_VERSION}`,
+  baseURL: versionedBaseUrl,
   timeout: 30000,
   headers: {
     'Content-Type': 'application/json',
@@ -92,6 +96,65 @@ export async function dispatchEchoTask(
     message,
   })
   return data
+}
+
+// ============================================================
+// Instrument + Watchlist endpoints
+// ============================================================
+
+export interface Instrument {
+  id: string
+  symbol: string
+  name: string
+  instrument_type: string
+  exchange: string
+  market: string
+  currency: string
+  sector?: string | null
+  industry?: string | null
+  description?: string | null
+  status: string
+  created_at: string
+  updated_at: string
+}
+
+export interface WatchlistItem {
+  id: string
+  instrument_id: string
+  instrument: Instrument
+  classification: string
+  classification_confidence: number
+  classification_reason: string
+  research_status: string
+  research_score?: number | null
+  thesis_summary?: string | null
+  agent_action?: string | null
+  notes?: string | null
+  created_at: string
+  updated_at: string
+}
+
+export async function searchInstruments(query: string): Promise<Instrument[]> {
+  const { data } = await client.get<Instrument[]>('/instruments/search', {
+    params: { query },
+  })
+  return data
+}
+
+export async function listWatchlist(): Promise<WatchlistItem[]> {
+  const { data } = await client.get<WatchlistItem[]>('/watchlist')
+  return data
+}
+
+export async function addWatchlistItem(
+  query: string,
+): Promise<WatchlistItem> {
+  const { data } = await client.post<WatchlistItem>('/watchlist', { query })
+  return data
+}
+
+export async function deleteWatchlistItem(itemId: string): Promise<void> {
+  await client.delete(`/watchlist/${itemId}`)
 }
 
 // Export the raw client for advanced use cases

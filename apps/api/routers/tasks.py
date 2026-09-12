@@ -5,10 +5,9 @@ Allows the API to enqueue tasks for the worker.
 
 import logging
 
+from apps.worker.main import echo_task, system_health_task
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
-
-from apps.worker.main import system_health_task, echo_task
 
 router = APIRouter(prefix="/tasks", tags=["tasks"])
 logger = logging.getLogger(__name__)
@@ -26,7 +25,7 @@ class EchoRequest(BaseModel):
 
 
 @router.post("/health-check", response_model=TaskDispatchResponse)
-async def dispatch_health_check():
+async def dispatch_health_check() -> TaskDispatchResponse:
     """Dispatch a system health check task to the worker."""
     try:
         message = system_health_task.send()
@@ -41,11 +40,11 @@ async def dispatch_health_check():
         raise HTTPException(
             status_code=503,
             detail=f"Task queue unavailable: {str(e)[:100]}",
-        )
+        ) from e
 
 
 @router.post("/echo", response_model=TaskDispatchResponse)
-async def dispatch_echo(payload: EchoRequest):
+async def dispatch_echo(payload: EchoRequest) -> TaskDispatchResponse:
     """Dispatch an echo task to the worker (for testing)."""
     try:
         message = echo_task.send(payload.message)
@@ -60,4 +59,4 @@ async def dispatch_echo(payload: EchoRequest):
         raise HTTPException(
             status_code=503,
             detail=f"Task queue unavailable: {str(e)[:100]}",
-        )
+        ) from e

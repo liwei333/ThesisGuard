@@ -1,18 +1,20 @@
 """ThesisGuard FastAPI application entry point."""
 
+from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
 
+from apps.api.routers import health, system, tasks
+from backend.common.config import settings
+from backend.common.db.session import close_db
+from backend.common.storage import storage
+from backend.instrument.api import router as instrument_router
+from backend.watchlist.api import router as watchlist_router
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from backend.common.config import settings
-from backend.common.db.session import close_db, init_db
-from backend.common.storage import storage
-from apps.api.routers import health, system, tasks
-
 
 @asynccontextmanager
-async def lifespan(app: FastAPI):
+async def lifespan(app: FastAPI) -> AsyncIterator[None]:
     """Application startup and shutdown events."""
     # Startup
     storage.ensure_bucket()
@@ -46,9 +48,11 @@ def create_app() -> FastAPI:
     app.include_router(health.router, prefix="/api/v1")
     app.include_router(system.router, prefix="/api/v1")
     app.include_router(tasks.router, prefix="/api/v1")
+    app.include_router(instrument_router, prefix="/api/v1")
+    app.include_router(watchlist_router, prefix="/api/v1")
 
     @app.get("/")
-    async def root():
+    async def root() -> dict[str, str]:
         return {
             "name": settings.APP_NAME,
             "version": settings.APP_VERSION,

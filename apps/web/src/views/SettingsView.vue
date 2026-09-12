@@ -21,29 +21,43 @@ checkApi()
   <div class="settings">
     <div class="page-header">
       <h2>设置</h2>
-      <p class="text-muted">系统配置与 WP-01 验收工具</p>
+      <p class="text-muted">
+        系统配置与 WP-01 验收工具
+      </p>
     </div>
 
     <div class="card">
-      <div class="card-title">API 连接</div>
+      <div class="card-title">
+        API 连接
+      </div>
       <p>API 版本: <strong>{{ apiVersion }}</strong></p>
     </div>
 
     <div class="card">
-      <div class="card-title">Worker 测试</div>
+      <div class="card-title">
+        Worker 测试
+      </div>
       <p class="text-muted">
         点击下方按钮投递一个测试任务到 Worker。如果 Worker 正常运行，任务将被消费。
       </p>
-      <button class="btn btn-primary" @click="runWorkerTask">
+      <button
+        class="btn btn-primary"
+        @click="runWorkerTask"
+      >
         投递 Health Check 任务
       </button>
-      <div v-if="taskResult" class="task-result">
+      <div
+        v-if="taskResult"
+        class="task-result"
+      >
         <pre>{{ JSON.stringify(taskResult, null, 2) }}</pre>
       </div>
     </div>
 
     <div class="card">
-      <div class="card-title">WP-01 验收清单</div>
+      <div class="card-title">
+        WP-01 验收清单
+      </div>
       <ul class="checklist">
         <li>Docker Compose 全部服务启动</li>
         <li>Web 可以访问 (http://localhost:5173)</li>

@@ -19,6 +19,9 @@ alembic==1.13.0
 # Redis
 redis==5.1.0
 
+# Task Queue (API dispatches Dramatiq actors)
+dramatiq[redis]==1.17.0
+
 # Object Storage (MinIO/S3)
 boto3==1.35.0
 botocore==1.35.0

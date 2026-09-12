@@ -1,35 +1,161 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
+import {
+  addWatchlistItem,
+  deleteWatchlistItem,
+  listWatchlist,
+  searchInstruments,
+  type Instrument,
+  type WatchlistItem,
+} from '@/api/client'
 
-// Mock data for WP-01 — will be replaced with real API calls in WP-02
-const watchlistItems = ref([
-  {
-    symbol: '301128',
-    name: '强瑞技术',
-    classification: '机构趋势',
-    score: 82,
-    thesis: 'AI服务器液冷业务进入快速放量周期',
-  },
-  {
-    symbol: '002594',
-    name: '比亚迪',
-    classification: '机构趋势',
-    score: 76,
-    thesis: '海外扩张+高端化驱动盈利增长',
-  },
-])
-
-const classifications = ['全部', '机构趋势', '游资情绪', '混合驱动', '事件驱动']
+const watchlistItems = ref<WatchlistItem[]>([])
+const searchResults = ref<Instrument[]>([])
 const activeTab = ref('全部')
+const query = ref('301128')
+const loading = ref(true)
+const adding = ref(false)
+const error = ref<string | null>(null)
+
+const classifications = computed(() => {
+  const existing = watchlistItems.value.map((item) => item.classification)
+  return ['全部', ...Array.from(new Set(existing))]
+})
+
+const filteredItems = computed(() => {
+  if (activeTab.value === '全部') {
+    return watchlistItems.value
+  }
+  return watchlistItems.value.filter(
+    (item) => item.classification === activeTab.value,
+  )
+})
+
+function displayClassification(classification: string): string {
+  const labels: Record<string, string> = {
+    INSTITUTIONAL_TREND: '机构趋势',
+    HOT_MONEY: '游资情绪',
+    HYBRID: '混合驱动',
+    EVENT_DRIVEN: '事件驱动',
+  }
+  return labels[classification] ?? classification
+}
+
+function errorMessage(e: unknown): string {
+  return e instanceof Error ? e.message : '请求失败'
+}
+
+async function fetchWatchlist(): Promise<void> {
+  try {
+    loading.value = true
+    watchlistItems.value = await listWatchlist()
+    error.value = null
+  } catch (e: unknown) {
+    error.value = errorMessage(e)
+  } finally {
+    loading.value = false
+  }
+}
+
+async function runSearch(): Promise<void> {
+  if (!query.value.trim()) {
+    searchResults.value = []
+    return
+  }
+  try {
+    searchResults.value = await searchInstruments(query.value.trim())
+    error.value = null
+  } catch (e: unknown) {
+    error.value = errorMessage(e)
+  }
+}
+
+async function addToWatchlist(searchQuery = query.value): Promise<void> {
+  if (!searchQuery.trim()) {
+    return
+  }
+  try {
+    adding.value = true
+    const item = await addWatchlistItem(searchQuery.trim())
+    const existingIndex = watchlistItems.value.findIndex(
+      (entry) => entry.id === item.id,
+    )
+    if (existingIndex >= 0) {
+      watchlistItems.value[existingIndex] = item
+    } else {
+      watchlistItems.value.unshift(item)
+    }
+    query.value = item.instrument.symbol
+    await runSearch()
+    error.value = null
+  } catch (e: unknown) {
+    error.value = errorMessage(e)
+  } finally {
+    adding.value = false
+  }
+}
+
+async function removeItem(item: WatchlistItem): Promise<void> {
+  await deleteWatchlistItem(item.id)
+  watchlistItems.value = watchlistItems.value.filter(
+    (entry) => entry.id !== item.id,
+  )
+}
+
+onMounted(async () => {
+  await Promise.all([fetchWatchlist(), runSearch()])
+})
 </script>
 
 <template>
   <div class="watchlist">
     <div class="page-header">
-      <h2>自选池</h2>
-      <p class="text-muted">
-        标的加入自选后将自动建档、分类并生成 Thesis。WP-01 使用 Mock 数据展示。
-      </p>
+      <div>
+        <h2>自选池</h2>
+        <p class="text-muted">
+          输入代码或名称，系统识别标的、自动分类，并写入可持续维护的研究队列。
+        </p>
+      </div>
+      <form
+        class="add-form"
+        @submit.prevent="addToWatchlist()"
+      >
+        <input
+          v-model="query"
+          type="search"
+          placeholder="301128 / 强瑞技术"
+          @input="runSearch"
+        >
+        <button
+          class="btn primary"
+          type="submit"
+          :disabled="adding"
+        >
+          {{ adding ? '加入中' : '加入自选' }}
+        </button>
+      </form>
+    </div>
+
+    <div
+      v-if="searchResults.length"
+      class="search-strip"
+    >
+      <button
+        v-for="instrument in searchResults"
+        :key="instrument.id"
+        class="search-result"
+        @click="addToWatchlist(instrument.symbol)"
+      >
+        <strong>{{ instrument.name }}</strong>
+        <span>{{ instrument.symbol }} · {{ instrument.exchange }}</span>
+      </button>
+    </div>
+
+    <div
+      v-if="error"
+      class="error-card"
+    >
+      {{ error }}
     </div>
 
     <div class="tabs">
@@ -40,31 +166,64 @@ const activeTab = ref('全部')
         :class="{ active: activeTab === tab }"
         @click="activeTab = tab"
       >
-        {{ tab }}
+        {{ displayClassification(tab) }}
       </button>
     </div>
 
-    <div class="stock-grid">
-      <div v-for="item in watchlistItems" :key="item.symbol" class="card stock-card">
+    <div
+      v-if="loading"
+      class="loading"
+    >
+      加载中...
+    </div>
+
+    <div
+      v-else
+      class="stock-grid"
+    >
+      <div
+        v-for="item in filteredItems"
+        :key="item.id"
+        class="card stock-card"
+      >
         <div class="stock-header">
           <div class="stock-name">
-            <strong>{{ item.name }}</strong>
-            <span>{{ item.symbol }}</span>
+            <strong>{{ item.instrument.name }}</strong>
+            <span>{{ item.instrument.symbol }} · {{ item.instrument.exchange }}</span>
           </div>
-          <div class="stock-score">{{ item.score }}</div>
+          <div class="stock-score">
+            {{ item.research_score ?? item.classification_confidence }}
+          </div>
         </div>
-        <div class="thesis">{{ item.thesis }}</div>
+        <div class="thesis">
+          {{ item.thesis_summary }}
+        </div>
+        <div class="classification-reason">
+          {{ item.classification_reason }}
+        </div>
         <div class="stock-footer">
-          <span class="tag purple">{{ item.classification }}</span>
-          <span class="tag green">Thesis Active</span>
+          <span class="tag purple">{{ displayClassification(item.classification) }}</span>
+          <span class="tag green">Research {{ item.research_status }}</span>
+        </div>
+        <div class="stock-actions">
+          <span>{{ item.agent_action }}</span>
+          <button
+            class="text-btn"
+            @click="removeItem(item)"
+          >
+            移除
+          </button>
         </div>
       </div>
 
-      <div class="card add-card">
+      <div
+        v-if="!filteredItems.length"
+        class="card add-card"
+      >
         <div class="add-placeholder">
           <span class="add-icon">+</span>
-          <p>加入自选</p>
-          <span class="text-muted">输入股票代码开始研究</span>
+          <p>加入 301128</p>
+          <span class="text-muted">验证证券识别、分类和 Research ACTIVE 状态</span>
         </div>
       </div>
     </div>
@@ -73,12 +232,15 @@ const activeTab = ref('全部')
 
 <style scoped>
 .watchlist {
-  max-width: 900px;
+  max-width: 1000px;
   margin: 0 auto;
 }
 
 .page-header {
-  margin-bottom: 24px;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
 }
 
 .page-header h2 {
@@ -93,17 +255,78 @@ const activeTab = ref('全部')
   margin: 0;
 }
 
+.add-form {
+  display: flex;
+  gap: 8px;
+  min-width: 320px;
+}
+
+.add-form input {
+  min-width: 0;
+  flex: 1;
+  border: 1px solid #ded9e8;
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 12px;
+  color: #302a3f;
+  background: #fff;
+}
+
+.search-strip {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 14px;
+  overflow-x: auto;
+}
+
+.search-result {
+  border: 1px solid #e3deec;
+  background: #fff;
+  border-radius: 8px;
+  padding: 8px 10px;
+  text-align: left;
+  cursor: pointer;
+  min-width: 160px;
+}
+
+.search-result strong,
+.search-result span {
+  display: block;
+}
+
+.search-result strong {
+  color: #241f31;
+  font-size: 12px;
+}
+
+.search-result span {
+  margin-top: 2px;
+  color: #8c849a;
+  font-size: 11px;
+}
+
+.error-card {
+  border: 1px solid #f2c6ce;
+  background: #fff6f8;
+  color: #bd4056;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 12px;
+  margin-bottom: 12px;
+}
+
 .tabs {
   display: flex;
   gap: 8px;
   margin-bottom: 16px;
+  flex-wrap: wrap;
 }
 
 .tab {
   border: none;
   background: #ebe8f1;
   color: #777080;
-  border-radius: 999px;
+  border-radius: 8px;
   padding: 6px 12px;
   font-size: 11px;
   font-weight: 600;
@@ -116,9 +339,15 @@ const activeTab = ref('全部')
   color: #fff;
 }
 
+.loading {
+  padding: 40px;
+  text-align: center;
+  color: #9994a6;
+}
+
 .stock-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 12px;
 }
 
@@ -150,25 +379,37 @@ const activeTab = ref('全部')
   color: #4d409f;
 }
 
-.thesis {
+.thesis,
+.classification-reason {
   margin-top: 10px;
   font-size: 12px;
   line-height: 1.5;
   color: #625d6c;
-  flex: 1;
 }
 
-.stock-footer {
+.classification-reason {
+  color: #827b90;
+}
+
+.stock-footer,
+.stock-actions {
   display: flex;
   gap: 6px;
   margin-top: 12px;
+  align-items: center;
+}
+
+.stock-actions {
+  justify-content: space-between;
+  font-size: 11px;
+  color: #6c6478;
 }
 
 .tag {
   display: inline-flex;
   align-items: center;
   padding: 3px 8px;
-  border-radius: 999px;
+  border-radius: 8px;
   font-size: 10px;
   font-weight: 700;
 }
@@ -183,18 +424,21 @@ const activeTab = ref('全部')
   color: #16805e;
 }
 
+.text-btn {
+  border: none;
+  background: transparent;
+  color: #6c57dc;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 700;
+}
+
 .add-card {
   display: grid;
   place-items: center;
-  min-height: 146px;
+  min-height: 178px;
   border: 1px dashed #cfc8dc;
   background: #faf9fc;
-  cursor: pointer;
-  transition: border-color 0.15s;
-}
-
-.add-card:hover {
-  border-color: #6c57dc;
 }
 
 .add-placeholder {
@@ -210,5 +454,16 @@ const activeTab = ref('全部')
   font-size: 13px;
   color: #5e586a;
   margin: 8px 0 4px;
+}
+
+@media (max-width: 720px) {
+  .page-header,
+  .add-form {
+    flex-direction: column;
+  }
+
+  .add-form {
+    min-width: 0;
+  }
 }
 </style>

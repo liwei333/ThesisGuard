@@ -1,9 +1,7 @@
 """Redis client wrapper for cache and queue operations."""
 
-from typing import Optional
 
 import redis
-
 from backend.common.config import settings
 
 
@@ -11,7 +9,7 @@ class RedisClient:
     """Redis client for caching and basic queue operations."""
 
     def __init__(self) -> None:
-        self._cache_client: Optional[redis.Redis] = None
+        self._cache_client: redis.Redis | None = None
 
     @property
     def cache(self) -> redis.Redis:
@@ -26,17 +24,18 @@ class RedisClient:
     def health_check(self) -> bool:
         """Check if Redis is reachable."""
         try:
-            return self.cache.ping()
+            return bool(self.cache.ping())
         except Exception:
             return False
 
     def set_cache(self, key: str, value: str, ttl: int = 3600) -> bool:
         """Set a cache value with TTL."""
-        return self.cache.set(key, value, ex=ttl)
+        return bool(self.cache.set(key, value, ex=ttl))
 
-    def get_cache(self, key: str) -> Optional[str]:
+    def get_cache(self, key: str) -> str | None:
         """Get a cache value."""
-        return self.cache.get(key)
+        value = self.cache.get(key)
+        return str(value) if value is not None else None
 
     def delete_cache(self, key: str) -> bool:
         """Delete a cache key."""

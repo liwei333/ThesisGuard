@@ -18,7 +18,9 @@ const isActive = (path: string) => computed(() => route.path === path)
   <div class="app-shell">
     <aside class="sidebar">
       <div class="brand">
-        <div class="brand-logo">论</div>
+        <div class="brand-logo">
+          论
+        </div>
         <div class="brand-text">
           <span class="brand-name">ThesisGuard</span>
           <span class="brand-tag">论衡</span>
@@ -37,7 +39,7 @@ const isActive = (path: string) => computed(() => route.path === path)
         </RouterLink>
       </nav>
       <div class="sidebar-footer">
-        <span class="status-dot ok"></span>
+        <span class="status-dot ok" />
         <span class="status-text">系统运行中</span>
       </div>
     </aside>
@@ -47,7 +49,10 @@ const isActive = (path: string) => computed(() => route.path === path)
           <h1>{{ (route.meta?.title as string) || 'ThesisGuard' }}</h1>
         </div>
         <div class="topbar-actions">
-          <span class="api-status" title="API Status">● API Online</span>
+          <span
+            class="api-status"
+            title="API Status"
+          >● API Online</span>
         </div>
       </header>
       <div class="workspace">

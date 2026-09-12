@@ -6,13 +6,17 @@ const systemStatus = ref<SystemStatusResponse | null>(null)
 const loading = ref(true)
 const error = ref<string | null>(null)
 
+function errorMessage(e: unknown): string {
+  return e instanceof Error ? e.message : 'Failed to fetch system status'
+}
+
 async function fetchStatus() {
   try {
     loading.value = true
     systemStatus.value = await getSystemStatus()
     error.value = null
-  } catch (e: any) {
-    error.value = e.message || 'Failed to fetch system status'
+  } catch (e: unknown) {
+    error.value = errorMessage(e)
   } finally {
     loading.value = false
   }
@@ -31,23 +35,50 @@ function statusColor(status: string): string {
   <div class="dashboard">
     <div class="page-header">
       <h2>系统仪表盘</h2>
-      <p class="text-muted">ThesisGuard 工程骨架 WP-01 验收</p>
+      <p class="text-muted">
+        ThesisGuard 工程骨架 WP-01 验收
+      </p>
     </div>
 
-    <div v-if="loading" class="loading">加载中...</div>
-
-    <div v-else-if="error" class="error-card">
-      <p class="text-danger">{{ error }}</p>
-      <button class="btn" @click="fetchStatus">重试</button>
+    <div
+      v-if="loading"
+      class="loading"
+    >
+      加载中...
     </div>
 
-    <div v-else-if="systemStatus" class="status-grid">
+    <div
+      v-else-if="error"
+      class="error-card"
+    >
+      <p class="text-danger">
+        {{ error }}
+      </p>
+      <button
+        class="btn"
+        @click="fetchStatus"
+      >
+        重试
+      </button>
+    </div>
+
+    <div
+      v-else-if="systemStatus"
+      class="status-grid"
+    >
       <div class="card status-card overall">
-        <div class="card-title">系统状态</div>
-        <div class="status-value" :class="statusColor(systemStatus.status)">
+        <div class="card-title">
+          系统状态
+        </div>
+        <div
+          class="status-value"
+          :class="statusColor(systemStatus.status)"
+        >
           {{ systemStatus.status === 'healthy' ? '运行正常' : '降级' }}
         </div>
-        <div class="status-version">API v{{ systemStatus.api.version }}</div>
+        <div class="status-version">
+          API v{{ systemStatus.api.version }}
+        </div>
       </div>
 
       <div
@@ -66,15 +97,22 @@ function statusColor(status: string): string {
                   : 'Worker'
           }}
         </div>
-        <div class="status-value" :class="statusColor(service.status)">
+        <div
+          class="status-value"
+          :class="statusColor(service.status)"
+        >
           {{ service.status === 'ok' ? '正常' : '异常' }}
         </div>
-        <div class="status-message text-muted">{{ service.message }}</div>
+        <div class="status-message text-muted">
+          {{ service.message }}
+        </div>
       </div>
     </div>
 
     <div class="card info-card">
-      <div class="card-title">WP-01 工程骨架</div>
+      <div class="card-title">
+        WP-01 工程骨架
+      </div>
       <p class="text-muted">
         本页面通过 API 实时获取系统健康状态。所有服务正常即表示 WP-01 验收通过。
       </p>

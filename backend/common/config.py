@@ -4,9 +4,7 @@ Loads settings from environment variables with sensible defaults for development
 """
 
 from functools import lru_cache
-from typing import List
 
-from pydantic import Field, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -33,7 +31,7 @@ class Settings(BaseSettings):
     API_CORS_ORIGINS: str = "http://localhost:5173,http://localhost:3000"
 
     @property
-    def cors_origins_list(self) -> List[str]:
+    def cors_origins_list(self) -> list[str]:
         """Parse CORS origins from comma-separated string."""
         return [o.strip() for o in self.API_CORS_ORIGINS.split(",") if o.strip()]
 

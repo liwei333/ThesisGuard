@@ -36,7 +36,9 @@ const stock = computed(() => ({
     </div>
 
     <div class="card">
-      <div class="card-title">标的详情</div>
+      <div class="card-title">
+        标的详情
+      </div>
       <p class="text-muted">
         标的详情页将在 WP-02 (Instrument + Watchlist) 和 WP-03 (Research Package) 中实现。
         WP-01 仅建立路由骨架。

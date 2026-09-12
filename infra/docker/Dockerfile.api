@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Install Python dependencies
 COPY requirements-api.txt .
-RUN pip install --no-cache-dir -r requirements-api.txt
+RUN pip install --retries 10 --timeout 60 --no-cache-dir -r requirements-api.txt
 
 # Copy application code
 COPY backend/ ./backend/

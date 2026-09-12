@@ -9,8 +9,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Python dependencies
+COPY requirements-api.txt .
 COPY requirements-worker.txt .
-RUN pip install --no-cache-dir -r requirements-worker.txt
+RUN pip install --retries 10 --timeout 60 --no-cache-dir -r requirements-worker.txt
 
 # Copy application code
 COPY backend/ ./backend/
@@ -22,4 +23,4 @@ ENV PYTHONPATH=/app
 ENV PYTHONUNBUFFERED=1
 
 # Run the Dramatiq worker
-CMD ["python", "-m", "apps.worker.main"]
+CMD ["dramatiq", "apps.worker.main"]
