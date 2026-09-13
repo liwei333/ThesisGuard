@@ -1,4 +1,4 @@
-.PHONY: help dev dev-api dev-web worker down up logs rebuild test lint typecheck migrate migrate-gen db-reset frontend-install frontend-check
+.PHONY: help dev dev-api dev-web worker down up logs rebuild test lint typecheck migrate migrate-gen db-reset frontend-install frontend-api-generate frontend-api-check frontend-check
 
 # Default target
 help: ## Show this help
@@ -83,7 +83,14 @@ typecheck: ## Run mypy type checking
 frontend-install: ## Install frontend dependencies
 	cd apps/web && npm install
 
+frontend-api-generate: ## Generate frontend OpenAPI client
+	cd apps/web && npm run api:generate
+
+frontend-api-check: ## Check frontend OpenAPI client drift
+	cd apps/web && npm run api:check
+
 frontend-check: ## Type check and lint frontend
+	cd apps/web && npm run api:check
 	cd apps/web && npm run typecheck
 	cd apps/web && npm run lint
 

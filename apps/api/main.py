@@ -8,6 +8,7 @@ from backend.common.config import settings
 from backend.common.db.session import close_db
 from backend.common.storage import storage
 from backend.instrument.api import router as instrument_router
+from backend.research.api import router as research_router
 from backend.watchlist.api import router as watchlist_router
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -49,6 +50,7 @@ def create_app() -> FastAPI:
     app.include_router(system.router, prefix="/api/v1")
     app.include_router(tasks.router, prefix="/api/v1")
     app.include_router(instrument_router, prefix="/api/v1")
+    app.include_router(research_router, prefix="/api/v1")
     app.include_router(watchlist_router, prefix="/api/v1")
 
     @app.get("/")

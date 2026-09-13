@@ -12,8 +12,8 @@ from backend.instrument.models import (  # noqa: F401
     InstrumentRelation,
     InstrumentTag,
 )
+from backend.research.models import ResearchModule, ResearchPackage  # noqa: F401
 from backend.watchlist.models import WatchlistItem  # noqa: F401
 
 # Future models will be imported here as they are added:
-# from backend.research.models import ResearchPackage, ResearchModule
 # ... etc.
