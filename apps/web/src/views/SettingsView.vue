@@ -1,4 +1,8 @@
 <script setup lang="ts">
+/**
+ * 设置页面。
+ * WP-01 验收工具：测试 API 连接、投递 Worker 任务、展示验收清单。
+ */
 import { ref } from 'vue'
 import { getHealth, dispatchHealthCheckTask, TaskDispatchResponse } from '@/api/client'
 

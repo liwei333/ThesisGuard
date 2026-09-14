@@ -1,6 +1,8 @@
 """Task dispatch endpoints.
 
 Allows the API to enqueue tasks for the worker.
+任务调度端点：API 通过 Dramatiq 的 .send() 方法将任务投递到 Redis 队列。
+Worker 独立进程消费队列中的任务。broker 不可用时返回 503。
 """
 
 import logging

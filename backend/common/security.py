@@ -1,4 +1,9 @@
-"""Security utilities for ThesisGuard."""
+"""Security utilities for ThesisGuard.
+
+提供密码学安全的 token 生成、SHA-256 哈希（带盐）和 JWT 编解码。
+当前 V1 阶段仅作基础设施预留，前端暂不强制鉴权。
+注意：verify_hash 使用 hmac.compare_digest 防止时序攻击。
+"""
 
 import hashlib
 import hmac
@@ -23,6 +28,7 @@ def hash_value(value: str, salt: str | None = None) -> str:
 
 def verify_hash(value: str, salt: str, expected_hash: str) -> bool:
     """Verify a hash value."""
+    # compare_digest 恒定时间比较，防止时序侧信道攻击
     return hmac.compare_digest(hash_value(value, salt), expected_hash)
 
 

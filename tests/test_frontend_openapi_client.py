@@ -1,4 +1,16 @@
-"""Frontend OpenAPI client generation and drift gate contract tests."""
+"""Frontend OpenAPI client generation and drift gate contract tests.
+
+验证前端 OpenAPI 生成的类型安全和契约一致性：
+1. 规范文件（openapi.json）与当前 FastAPI 应用同步
+2. 生成的客户端包含完整的 Research 模型和操作
+3. 类型系统拒绝无效的错误体（编译期 + 运行时双重验证）
+4. API 外观层（client.ts）不重复 OpenAPI URL 或 schema 接口
+5. base URL 不重复 /api/v1 前缀
+6. 错误守卫函数正确识别合法/非法的错误响应体
+
+部分测试通过临时 TypeScript 探针 + esbuild 编译 + node 执行来
+在真实运行时验证类型守卫行为。
+"""
 
 from __future__ import annotations
 

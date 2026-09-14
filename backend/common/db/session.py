@@ -1,4 +1,9 @@
-"""SQLAlchemy async session and engine configuration."""
+"""SQLAlchemy async session and engine configuration.
+
+提供全局异步引擎与 Session 工厂，FastAPI 通过 get_db 依赖注入获取 Session。
+注意：get_db 在 yield 后自动 commit，异常时自动 rollback，确保事务边界清晰。
+生产环境使用 Alembic 管理迁移，init_db 仅作为开发期建表兜底。
+"""
 
 from collections.abc import AsyncGenerator
 
@@ -16,7 +21,7 @@ class Base(DeclarativeBase):
     pass
 
 
-# Create async engine
+# 全局异步引擎，pool_pre_ping 防止连接池拿到断开的连接
 async_engine = create_async_engine(
     settings.async_database_url,
     echo=settings.DEBUG,
@@ -25,7 +30,7 @@ async_engine = create_async_engine(
     max_overflow=20,
 )
 
-# Create async session factory
+# Session 工厂：expire_on_commit=False 避免 commit 后再访问属性触发额外查询
 AsyncSessionLocal = async_sessionmaker(
     bind=async_engine,
     class_=AsyncSession,
@@ -35,7 +40,13 @@ AsyncSessionLocal = async_sessionmaker(
 
 
 async def get_db() -> AsyncGenerator[AsyncSession, None]:
-    """FastAPI dependency that yields a database session."""
+    """FastAPI dependency that yields a database session.
+
+    使用 try/except/finally 保证：
+    - 正常路径 yield 后 commit
+    - 异常路径 rollback 后重新抛出
+    - 无论成功与否都关闭 session，避免连接泄漏
+    """
     async with AsyncSessionLocal() as session:
         try:
             yield session

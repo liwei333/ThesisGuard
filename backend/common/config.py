@@ -1,6 +1,8 @@
 """ThesisGuard application configuration.
 
 Loads settings from environment variables with sensible defaults for development.
+配置层是整个系统的单一配置来源，所有模块通过此处读取环境变量。
+Redis 使用三个逻辑 DB：/0 通用、/1 缓存、/2 队列，避免 key 冲突。
 """
 
 from functools import lru_cache
@@ -23,6 +25,7 @@ class Settings(BaseSettings):
     APP_VERSION: str = "0.1.0"
     DEBUG: bool = False
     LOG_LEVEL: str = "INFO"
+    # SECRET_KEY 仅用于 JWT 签名，生产环境必须通过环境变量覆盖
     SECRET_KEY: str = "dev-secret-key-change-in-production"
 
     # API
@@ -46,6 +49,7 @@ class Settings(BaseSettings):
     @property
     def async_database_url(self) -> str:
         """Return the async PostgreSQL URL."""
+        # 显式 DATABASE_URL 优先，便于 Docker 等环境统一注入连接串
         if self.DATABASE_URL:
             return self.DATABASE_URL
         return (
@@ -56,6 +60,7 @@ class Settings(BaseSettings):
     @property
     def sync_database_url(self) -> str:
         """Return the sync PostgreSQL URL (for Alembic)."""
+        # Alembic 离线/在线模式都需要同步驱动，这里把 asyncpg 替换为 psycopg2 协议头
         async_url = self.async_database_url
         return async_url.replace("postgresql+asyncpg://", "postgresql://")
 
@@ -103,4 +108,5 @@ def get_settings() -> Settings:
     return Settings()
 
 
+# 全局单例，所有模块通过 from backend.common.config import settings 引用
 settings = get_settings()

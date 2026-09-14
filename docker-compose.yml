@@ -1,6 +1,8 @@
 services:
   # ===========================================
   # PostgreSQL + pgvector
+  # 使用 pgvector/pgvector:pg17 镜像，支持向量相似度搜索
+  # 主机端口默认映射到 15432，避免与本地 PostgreSQL 冲突
   # ===========================================
   postgres:
     image: pgvector/pgvector:pg17
@@ -64,6 +66,8 @@ services:
 
   # ===========================================
   # FastAPI
+  # 依赖 postgres/redis/minio 全部健康后才启动
+  # 挂载 backend/apps/migrations 代码卷，支持热重载
   # ===========================================
   api:
     build:
@@ -113,6 +117,8 @@ services:
 
   # ===========================================
   # Dramatiq Worker
+  # 消费 Redis 队列中的任务（如 system_health_task）
+  # 不暴露端口，纯后台进程
   # ===========================================
   worker:
     build:
@@ -152,6 +158,8 @@ services:
 
   # ===========================================
   # Vue Web (Vite dev server)
+  # 前端开发服务器，监听 5173 端口
+  # 通过 VITE_API_BASE_URL 环境变量连接后端 API
   # ===========================================
   web:
     build:

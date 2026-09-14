@@ -1,4 +1,9 @@
-"""System health check services."""
+"""System health check services.
+
+健康检查采用并发探测 + 超时保护策略：每个子检查独立超时（3秒），
+避免单个服务阻塞拖慢整体响应。get_system_status 汇总所有服务状态，
+返回 healthy/degraded 总态。
+"""
 
 import asyncio
 import functools
@@ -85,7 +90,7 @@ async def check_worker() -> HealthResult:
 
 async def get_system_status() -> dict[str, Any]:
     """Get complete system status."""
-    # Run all checks concurrently
+    # 并发执行所有子检查，任一失败只影响自身 status，不阻塞其他检查
     results = await asyncio.gather(
         check_postgres(),
         check_redis(),
@@ -102,6 +107,7 @@ async def get_system_status() -> dict[str, Any]:
         if result["status"] != "ok":
             all_ok = False
 
+    # 仅当全部服务正常时为 healthy，任一异常即为 degraded
     return {
         "status": "healthy" if all_ok else "degraded",
         "api": {"status": "ok", "version": settings.APP_VERSION},

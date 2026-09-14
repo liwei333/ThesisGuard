@@ -1,4 +1,9 @@
-"""MinIO (S3-compatible) object storage client."""
+"""MinIO (S3-compatible) object storage client.
+
+对象存储用于保存原始文件（PDF、研报等），结构化事实存数据库，
+证据检索走 RAG。三层存储边界遵循 AGENTS.md 中的设计原则。
+客户端采用懒加载：首次访问 .client 时建立 S3 连接。
+"""
 
 from typing import Any
 
@@ -32,6 +37,7 @@ class StorageClient:
 
     def ensure_bucket(self) -> None:
         """Create the bucket if it doesn't exist."""
+        # head_bucket 失败说明 bucket 不存在，此时创建；其他 ClientError 向上抛出
         try:
             self.client.head_bucket(Bucket=self._bucket)
         except ClientError:

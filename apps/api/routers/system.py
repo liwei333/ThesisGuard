@@ -1,4 +1,9 @@
-"""System status endpoints."""
+"""System status endpoints.
+
+系统状态端点，提供全面的服务健康检查。
+/api/v1/system/status 并发探测 PostgreSQL、Redis、MinIO、Worker，
+返回整体 healthy/degraded 状态和各服务详情。
+"""
 
 from typing import Any
 

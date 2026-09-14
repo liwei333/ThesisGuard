@@ -1,4 +1,8 @@
-"""Instrument API endpoints."""
+"""Instrument API endpoints.
+
+标的搜索与查询 API。搜索端点优先查数据库，无结果时回退到内置目录
+并自动持久化匹配项（见 search_instruments 服务）。
+"""
 
 from backend.common.db.session import get_db
 from backend.instrument.schemas import InstrumentRead

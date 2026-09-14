@@ -1,3 +1,7 @@
+# ThesisGuard 开发命令入口
+# 数据库迁移命令使用 127.0.0.1:15432（Docker 暴露端口），便于本地执行
+# Redis 使用三个逻辑 DB：/0 通用、/1 缓存、//2 队列
+
 .PHONY: help dev dev-api dev-web worker down up logs rebuild test lint typecheck migrate migrate-gen db-reset frontend-install frontend-api-generate frontend-api-check frontend-check
 
 # Default target

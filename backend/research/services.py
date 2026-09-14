@@ -1,4 +1,16 @@
-"""Research Package domain services."""
+"""Research Package domain services.
+
+研究包领域服务，实现追加式版本管理的核心逻辑。
+关键设计：
+1. 幂等性：通过 idempotency_key + request_hash 保证同一请求多次
+   提交只创建一个版本。request_hash 基于规范化请求体计算，
+   module_types 排序后哈希使得不同顺序的相同集合等价。
+2. 乐观并发：增量刷新使用 expected_version + SELECT FOR UPDATE
+   防止并发创建重复版本。
+3. 事务安全：_persist_new_package 使用 begin_nested（savepoint），
+   IntegrityError 后回滚到保存点，不影响外层事务。
+4. 不可变历史：所有写操作都是 INSERT，不 UPDATE 已有版本。
+"""
 
 from collections.abc import Sequence
 from datetime import UTC, datetime, timedelta
@@ -27,7 +39,11 @@ DEFAULT_MODULE_FRESHNESS_DAYS = 30
 
 
 class ResearchDomainError(Exception):
-    """Base class for stable Research domain errors."""
+    """Base class for stable Research domain errors.
+
+    每个子类携带一个稳定的 code 字符串，API 层据此映射到
+    HTTP 状态码和错误响应。code 值与 ResearchErrorCode 枚举保持一致。
+    """
 
     code = "RESEARCH_DOMAIN_ERROR"
 
@@ -51,7 +67,11 @@ class ResearchPackageAlreadyExists(ResearchDomainError):
 
 
 class ResearchVersionConflict(ResearchDomainError):
-    """Raised when expected_version does not match the current package version."""
+    """Raised when expected_version does not match the current package version.
+
+    携带 expected_version 和 current_version，API 层将其放入错误详情，
+    便于客户端据此决定下一步操作（如刷新 expected_version 后重试）。
+    """
 
     code = "RESEARCH_VERSION_CONFLICT"
 
@@ -64,7 +84,11 @@ class ResearchVersionConflict(ResearchDomainError):
 
 
 class IdempotencyConflict(ResearchDomainError):
-    """Raised when an idempotency key is reused for a different request."""
+    """Raised when an idempotency key is reused for a different request.
+
+    幂等键可安全重放相同请求（返回同一版本），但若用同一 key
+    提交不同语义内容则报错，防止幂等机制被误用。
+    """
 
     code = "IDEMPOTENCY_CONFLICT"
 
@@ -87,7 +111,16 @@ def utc_now() -> datetime:
 
 
 def calculate_module_freshness(module: ResearchModule, now: datetime | None = None) -> str:
-    """Derive module freshness deterministically from status and timestamps."""
+    """Derive module freshness deterministically from status and timestamps.
+
+    推导规则（优先级从高到低）：
+    - FAILED → 模块刷新失败
+    - last_verified_at 为 None → UNVERIFIED（从未被验证过，无事实依据）
+    - 当前时间超过 stale_after → STALE（已过期，不应作为当前研究依据）
+    - 其他 → FRESH
+
+    此函数为纯计算，不含 LLM 判断，保证结果可复现。
+    """
     if module.status == "FAILED":
         return "FAILED"
     if module.last_verified_at is None:
@@ -106,7 +139,14 @@ async def create_initial_package(
     request_hash: str,
     as_of: datetime | None = None,
 ) -> ResearchPackage:
-    """Create the first append-only Research Package version for an instrument."""
+    """Create the first append-only Research Package version for an instrument.
+
+    流程：
+    1. 校验标的存
+    2. 幂等键查重（同一 key + 同一 hash → 返回已有版本）
+    3. 检查是否已有初始版本（有 → ResearchPackageAlreadyExists）
+    4. 创建 v1，包含全部 11 个 UNVERIFIED 状态的模块
+    """
     await _ensure_instrument_exists(db, instrument_id)
     existing = await _get_package_by_idempotency_key(db, instrument_id, idempotency_key)
     if existing is not None:
@@ -195,7 +235,16 @@ async def create_incremental_refresh(
     refresh_module_types: Sequence[str] | None = None,
     as_of: datetime | None = None,
 ) -> ResearchPackage:
-    """Create version N+1 without modifying version N or its module snapshots."""
+    """Create version N+1 without modifying version N or its module snapshots.
+
+    流程：
+    1. 校验标的存
+    2. 幂等键查重
+    3. 校验要刷新的模块类型合
+    4. SELECT FOR UPDATE 锁定当前版本（防并发）
+    5. 校验 expected_version == 当前版本（防过期请求）
+    6. 创建新版本：刷新模块 → 新建空模块；未刷新模块 → 复制上一版本快照
+    """
     await _ensure_instrument_exists(db, instrument_id)
     existing = await _get_package_by_idempotency_key(db, instrument_id, idempotency_key)
     if existing is not None:
@@ -203,6 +252,7 @@ async def create_incremental_refresh(
         return existing
 
     refresh_set = _validate_module_types(refresh_module_types or ())
+    # SELECT FOR UPDATE 保证并发场景下只有一个请求能成功创建下一版本
     current = await _get_current_package_for_update(db, instrument_id)
     if current is None:
         raise ResearchPackageNotFound(f"No Research package exists for instrument {instrument_id}")
@@ -319,6 +369,12 @@ def _copy_or_refresh_module(
     as_of: datetime,
     should_refresh: bool,
 ) -> ResearchModule:
+    """Copy-on-write 模块复制逻辑。
+
+    - should_refresh=True：新建 UNVERIFIED 空模块，丢弃旧快照
+    - should_refresh=False：完整复制上一版本的状态和时间戳，
+      仅更新 module_version 和 created_at
+    """
     if should_refresh:
         return _new_unverified_module(
             package_version=package_version,
@@ -326,6 +382,7 @@ def _copy_or_refresh_module(
             as_of=as_of,
         )
 
+    # 复制模式：保留来源引用以便追溯模块演变历史
     module = ResearchModule(
         origin_module_id=previous_module.id,
         module_type=previous_module.module_type,
@@ -347,11 +404,20 @@ async def _persist_new_package(
     expected_version: int | None = None,
     instrument_id: str | None = None,
 ) -> ResearchPackage:
+    """持久化新包版本，处理并发冲突和完整性错误。
+
+    使用 begin_nested（savepoint）保证失败时只回滚当前包写入，
+    不影响外层事务。IntegrityError 后的处理逻辑：
+    1. 若是 idempotency_key 冲突 → 校验 request_hash 后返回已有版本
+    2. 若是版本唯一约束冲突 → 抛出 ResearchVersionConflict
+    3. 其他约束冲突 → ResearchPersistenceConflict
+    """
     try:
         async with db.begin_nested():
             db.add(package)
             await db.flush()
     except IntegrityError as exc:
+        # 并发场景：另一个请求可能已写入相同 idempotency_key 的包
         existing = await _get_package_by_idempotency_key(
             db,
             package.instrument_id,
@@ -360,6 +426,7 @@ async def _persist_new_package(
         if existing is not None:
             _ensure_same_request(existing, package.request_hash)
             return existing
+        # 版本号唯一约束冲突，说明并发创建了同一版本
         if expected_version is not None and instrument_id is not None:
             current = await get_current_package(db, instrument_id)
             raise ResearchVersionConflict(

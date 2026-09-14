@@ -3,6 +3,13 @@
  *
  * Manual code in this file is limited to generated-client configuration,
  * compatibility exports, and stable application-level function names.
+ *
+ * 前端 API 客户端外观层。封装自动生成的 OpenAPI 客户端，提供：
+ * 1. 稳定的应用级函数命名（如 searchInstruments 而非生成的长名）
+ * 2. Research 错误类型守卫（isResearchApiError / isResearchApiErrorForStatus）
+ * 3. 统一的错误日志和重抛（reportApiErrorAndRethrow）
+ *
+ * 注意：不要在此文件中手写业务端点 URL，所有路径由 generated 目录提供。
  */
 
 import axios from 'axios'
@@ -47,6 +54,8 @@ export const apiClient: AxiosInstance = axios.create({
 })
 OpenAPI.AXIOS = apiClient
 
+// Research 操作的错误契约：定义每个操作在各状态码下的错误响应类型
+// 用于运行时类型守卫，确保错误处理分支覆盖所有已声明的状态码
 type ResearchErrorContract = {
   listHistory: {
     422: HTTPValidationError
@@ -62,6 +71,7 @@ type ResearchErrorContract = {
   createInitial: {
     404: ResearchErrorResponse
     409: ResearchErrorResponse
+    // 422 可能是领域验证错误或 FastAPI 请求验证错误
     422: ResearchErrorResponse | HTTPValidationError
   }
   refresh: {

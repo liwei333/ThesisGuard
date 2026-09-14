@@ -1,4 +1,9 @@
-"""Redis client wrapper for cache and queue operations."""
+"""Redis client wrapper for cache and queue operations.
+
+封装 Redis 缓存操作，使用 redis_cache_url_resolved（DB/1）作为逻辑缓存实例。
+连接采用懒加载 + 单例模式，避免模块导入时建立连接。
+注意：此客户端仅用于缓存，队列操作由 Dramatiq 直接管理。
+"""
 
 
 import redis

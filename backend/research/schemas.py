@@ -1,4 +1,10 @@
-"""Research Package Pydantic schemas."""
+"""Research Package Pydantic schemas.
+
+研究包 API 的请求/响应 schema。错误码（ResearchErrorCode）与领域服务
+异常类（ResearchDomainError）一一对应，API 层通过 research_http_exception
+完成错误到 HTTP 响应的映射。新鲜度（ResearchFreshness）不是数据库字段，
+而是由 calculate_module_freshness 在序列化时动态推导。
+"""
 
 from datetime import datetime
 from enum import StrEnum
@@ -7,7 +13,7 @@ from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 
 class ResearchModuleType(StrEnum):
-    """Supported Research module types."""
+    """Supported Research module types. 与 RESEARCH_MODULE_TYPES 一一对应。"""
 
     COMPANY = "COMPANY"
     BUSINESS = "BUSINESS"
@@ -23,7 +29,11 @@ class ResearchModuleType(StrEnum):
 
 
 class ResearchFreshness(StrEnum):
-    """Deterministic Research module freshness values."""
+    """Deterministic Research module freshness values.
+
+    由 calculate_module_freshness 基于状态和时间戳推导，
+    不依赖 LLM 判断，保证结果可复现。
+    """
 
     UNVERIFIED = "UNVERIFIED"
     FRESH = "FRESH"
@@ -32,7 +42,11 @@ class ResearchFreshness(StrEnum):
 
 
 class ResearchErrorCode(StrEnum):
-    """Stable public Research API error codes."""
+    """Stable public Research API error codes.
+
+    错误码值与领域服务异常的 .code 属性保持一致，
+    API 层据此构造 ResearchErrorResponse 返回给客户端。
+    """
 
     INSTRUMENT_NOT_FOUND = "INSTRUMENT_NOT_FOUND"
     RESEARCH_PACKAGE_NOT_FOUND = "RESEARCH_PACKAGE_NOT_FOUND"

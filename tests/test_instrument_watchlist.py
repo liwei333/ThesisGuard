@@ -1,4 +1,10 @@
-"""WP-02 Instrument and Watchlist behavior tests."""
+"""WP-02 Instrument and Watchlist behavior tests.
+
+验证标的搜索和自选池分类的核心业务逻辑：
+1. 内置目录搜索支持代码和中文名
+2. 301128（强瑞技术）分类为 INSTITUTIONAL_TREND，关注订单和利润验证
+3. 000722（湖南发展）分类为 HOT_MONEY，关注梯队和情绪周期
+"""
 
 from backend.instrument.services import search_catalog
 from backend.watchlist.services import classify_instrument

@@ -1,4 +1,9 @@
 <script setup lang="ts">
+/**
+ * 系统仪表盘页面。
+ * 通过 /api/v1/system/status 实时获取 PostgreSQL、Redis、MinIO、Worker
+ * 的健康状态。所有服务正常即表示 WP-01 验收通过。
+ */
 import { ref, onMounted } from 'vue'
 import { getSystemStatus, SystemStatusResponse } from '@/api/client'
 

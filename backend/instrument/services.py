@@ -1,4 +1,10 @@
-"""Instrument domain services."""
+"""Instrument domain services.
+
+提供标的搜索与内置目录管理。内置目录（CATALOG）是 V1 阶段的
+种子数据：在尚未接入行情数据源前，用户可通过目录快速添加观察标的。
+ensure_instrument 实现了幂等写入：先查 symbol 是否已存在，不存在则新建。
+搜索策略：先查数据库，无结果时回退到内置目录并自动持久化匹配项。
+"""
 
 from dataclasses import dataclass
 from datetime import UTC, datetime
@@ -137,7 +143,12 @@ async def search_instruments(
     query: str,
     limit: int = 10,
 ) -> list[Instrument]:
-    """Search persisted instruments, falling back to the built-in catalog."""
+    """Search persisted instruments, falling back to the built-in catalog.
+
+    搜索优先级：
+    1. 数据库精确/模糊匹配（symbol、name、alias）
+    2. 内置目录匹配 + 自动持久化（首次搜索到的新标的写入 DB）
+    """
     normalized = query.strip()
     if not normalized:
         return []
@@ -147,6 +158,7 @@ async def search_instruments(
     if instruments:
         return instruments
 
+    # 数据库无匹配时回退到内置目录，并通过 ensure_instrument 幂等写入
     catalog_matches = search_catalog(normalized, limit)
     created: list[Instrument] = []
     for item in catalog_matches:
@@ -177,7 +189,11 @@ async def ensure_instrument(
     db: AsyncSession,
     catalog_item: CatalogInstrument,
 ) -> Instrument:
-    """Persist a catalog instrument if it does not already exist."""
+    """Persist a catalog instrument if it does not already exist.
+
+    幂等写入：symbol 已存在则直接返回，否则新建并级联写入
+    aliases 和 tags。flush 后立即 refresh 以获取关联对象。
+    """
     existing = await get_instrument_by_symbol(db, catalog_item.symbol)
     if existing is not None:
         return existing
@@ -197,6 +213,7 @@ async def ensure_instrument(
         created_at=now,
         updated_at=now,
     )
+    # 级联写入别名和标签，Instrument 模型配置了 cascade="all, delete-orphan"
     instrument.aliases = [
         InstrumentAlias(alias=alias, alias_type="NAME")
         for alias in catalog_item.aliases

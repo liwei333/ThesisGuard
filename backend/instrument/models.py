@@ -1,4 +1,9 @@
-"""Instrument SQLAlchemy models."""
+"""Instrument SQLAlchemy models.
+
+标的主数据模型。symbol + exchange 唯一约束保证同一交易所内代码不重复。
+支持股票、ETF、指数、事件篮子等多种 instrument_type。
+别名（Alias）和标签（Tag）独立成表，便于搜索和分类扩展。
+"""
 
 from datetime import UTC, datetime
 from uuid import uuid4
@@ -17,6 +22,7 @@ class Instrument(Base):
     """Tradable or trackable instrument."""
 
     __tablename__ = "instrument"
+    # 同一交易所内 symbol 唯一；跨交易所允许重复（如 A 股与港股同名）
     __table_args__ = (
         UniqueConstraint("symbol", "exchange", name="uq_instrument_symbol_exchange"),
     )
@@ -55,9 +61,14 @@ class Instrument(Base):
 
 
 class InstrumentAlias(Base):
-    """Search alias for an instrument."""
+    """Search alias for an instrument.
+
+    支持中英文名、缩写、拼音等多种别名类型，用于搜索匹配。
+    alias_type 区分 NAME（名称别名）与其他类型（如代码别名）。
+    """
 
     __tablename__ = "instrument_alias"
+    # 同一标的下不允许重复别名
     __table_args__ = (
         UniqueConstraint("instrument_id", "alias", name="uq_instrument_alias"),
     )
@@ -96,7 +107,11 @@ class InstrumentTag(Base):
 
 
 class InstrumentRelation(Base):
-    """Directed relation between two instruments."""
+    """Directed relation between two instruments.
+
+    记录标的间的有向关系（如：供应商→客户、母公司→子公司）。
+    source + target + relation_type 三元组唯一，允许同一对标的存在多种关系。
+    """
 
     __tablename__ = "instrument_relation"
     __table_args__ = (

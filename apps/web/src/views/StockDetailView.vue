@@ -1,4 +1,9 @@
 <script setup lang="ts">
+/**
+ * 标的详情页骨架。
+ * 当前为 WP-01 路由占位，使用 Mock 数据。
+ * WP-02/03 将接入真实 API 展示 Research Package、Thesis 等内容。
+ */
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 

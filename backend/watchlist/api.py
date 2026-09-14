@@ -1,4 +1,8 @@
-"""Watchlist API endpoints."""
+"""Watchlist API endpoints.
+
+自选池管理 API。添加标的时自动分类并生成论点摘要，
+同一标的重复添加返回已有记录（幂等）。
+"""
 
 from backend.common.db.session import get_db
 from backend.watchlist.schemas import (

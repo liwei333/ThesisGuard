@@ -1,4 +1,15 @@
-"""WP-03 Research Package HTTP API contract tests."""
+"""WP-03 Research Package HTTP API contract tests.
+
+研究包 HTTP API 契约测试，验证：
+1. 端到端请求/响应格式（包括模块新鲜度、错误码）
+2. 幂等性在 HTTP 层面的表现（重放返回同一版本）
+3. 版本冲突、幂等冲突、验证错误的稳定 HTTP 状态码和错误结构
+4. 并发 HTTP 刷新只有一个能成功创建 v2
+5. OpenAPI schema 包含完整的 Research 契约（模型、操作、错误码）
+6. 读操作在新建客户端/会话后仍能读到持久化数据（非内存状态）
+
+使用真实 PostgreSQL 临时数据库 + ASGI AsyncClient 进行集成测试。
+"""
 
 from __future__ import annotations
 

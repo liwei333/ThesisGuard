@@ -1,4 +1,12 @@
-"""Regression tests for Docker Compose topology."""
+"""Regression tests for Docker Compose topology.
+
+验证基础设施配置的正确性，防止构建或部署时出现常见错误：
+1. 不依赖已废弃的 minio/mc 镜像
+2. Worker Dockerfile 复制了继承的 requirements-api.txt
+3. pip 安装配置了重试和超时
+4. Makefile 迁移命令使用项目 Alembic 配置和正确的端口
+5. Mypy 使用 explicit-package-bases 避免命名空间冲突
+"""
 
 from pathlib import Path
 

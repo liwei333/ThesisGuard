@@ -1,4 +1,9 @@
-"""Alembic environment configuration."""
+"""Alembic environment configuration.
+
+使用异步引擎运行迁移（async_engine_from_config），与项目的 asyncpg
+驱动保持一致。每次迁移前自动启用 pgvector 扩展。
+连接串来自 settings.async_database_url，离线模式使用同步协议头。
+"""
 
 import asyncio
 from logging.config import fileConfig
@@ -41,7 +46,7 @@ def run_migrations_offline() -> None:
 
 def do_run_migrations(connection: Connection) -> None:
     """Run migrations against an active sync connection."""
-    # Enable pgvector extension
+    # 每次迁移前确保 pgvector 扩展已启用（IF NOT EXISTS 幂等）
     connection.execute(text("CREATE EXTENSION IF NOT EXISTS vector"))
     connection.commit()
 

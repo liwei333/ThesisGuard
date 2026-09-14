@@ -1,4 +1,16 @@
-"""Watchlist domain services."""
+"""Watchlist domain services.
+
+自选池领域服务。核心职责：
+1. classify_instrument：根据标的特征自动分类并生成可解释的分类理由、
+   研究评分和 Agent 建议动作。分类规则基于标签、symbol 和类型组合。
+2. add_to_watchlist：解析标的 → 幂等去重 → 分类 → 写入。
+3. 增删改查封装，上层 API 层通过本服务访问自选数据。
+
+分类设计原则：不同类别的标的适用不同的研究框架。例如：
+- 事件驱动：关注政策/会议窗口，不依赖 PE 估值
+- 游资情绪：关注梯队、连板、换手，而非远期 PE
+- 机构趋势：沿订单、收入、利润、现金流、一致预期验证
+"""
 
 from dataclasses import dataclass
 from datetime import UTC, datetime
@@ -94,7 +106,11 @@ async def add_to_watchlist(
     query: str,
     notes: str | None = None,
 ) -> WatchlistItem:
-    """Resolve an instrument, classify it, and add it to watchlist."""
+    """Resolve an instrument, classify it, and add it to watchlist.
+
+    幂等性保证：同一 instrument_id 已存在时直接返回已有记录，
+    不重复写入。新标的自动分类并生成 thesis_summary 与 agent_action。
+    """
     instrument = await resolve_instrument(db, query)
     if instrument is None:
         raise ValueError("Instrument not found")

@@ -1,4 +1,13 @@
-"""Research Package API endpoints."""
+"""Research Package API endpoints.
+
+研究包 HTTP API 层，负责：
+1. 请求验证（路径参数、请求体、幂等键头）
+2. 领域错误到 HTTP 响应的映射（research_http_exception）
+3. 领域模型到响应 schema 的序列化（package_to_read / module_to_read）
+4. request_hash 的规范化计算（排序后 JSON 序列化，保证幂等键的语义一致性）
+
+API 层不包含业务逻辑，所有写入通过领域服务完成。
+"""
 
 from __future__ import annotations
 
@@ -96,7 +105,11 @@ def require_idempotency_key(idempotency_key: IdempotencyKey) -> str:
 
 
 def build_request_hash(operation: str, instrument_id: str, body: dict[str, Any]) -> str:
-    """Hash the canonical semantic request body, excluding Idempotency-Key."""
+    """Hash the canonical semantic request body, excluding Idempotency-Key.
+
+    规范化规则：sort_keys=True 保证字段顺序一致，separators 去除多余空格，
+    使得语义相同的请求产生相同 hash，无论 JSON 字段排列顺序如何。
+    """
     payload = {
         "operation": operation,
         "instrument_id": instrument_id,
@@ -112,7 +125,11 @@ def build_initial_request_hash(instrument_id: str) -> str:
 
 
 def build_refresh_request_hash(instrument_id: str, payload: ResearchRefreshRequest) -> str:
-    """Build the deterministic request hash for refresh creation."""
+    """Build the deterministic request hash for refresh creation.
+
+    module_types 排序后哈希，使得 [FINANCIAL, RISK] 和 [RISK, FINANCIAL]
+    产生相同 hash（同一语义请求）。
+    """
     module_types = sorted(module_type.value for module_type in payload.module_types)
     return build_request_hash(
         "research_package.refresh",
@@ -125,7 +142,17 @@ def build_refresh_request_hash(instrument_id: str, payload: ResearchRefreshReque
 
 
 def research_http_exception(error: ResearchDomainError) -> HTTPException:
-    """Map Research domain errors to stable HTTP responses."""
+    """Map Research domain errors to stable HTTP responses.
+
+    映射规则：
+    - NotFound 类 → 404
+    - AlreadyExists / IdempotencyConflict / VersionConflict / PersistenceConflict → 409
+    - ValidationError → 422
+    - 其他 → 500
+
+    错误响应使用统一的 ResearchErrorResponse 结构，包含 code 和 message，
+    VersionConflict 额外包含 expected_version 和 current_version。
+    """
     try:
         error_code = ResearchErrorCode(error.code)
     except ValueError:

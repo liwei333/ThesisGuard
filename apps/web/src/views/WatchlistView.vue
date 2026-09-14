@@ -1,4 +1,14 @@
 <script setup lang="ts">
+/**
+ * 自选池页面。
+ * 核心交互：
+ * 1. 输入代码/名称搜索标的，点击搜索结果加入自选
+ * 2. 加入时后端自动分类（机构趋势/游资情绪/事件驱动）并生成论点摘要
+ * 3. 按分类标签页筛选，展示研究评分、论点、分类理由和 Agent 建议
+ * 4. 支持移除自选条目
+ *
+ * 注意：同一标的重复加入时，后端返回已有记录（幂等），前端据此更新而非追加。
+ */
 import { computed, onMounted, ref } from 'vue'
 import {
   addWatchlistItem,
@@ -77,6 +87,7 @@ async function addToWatchlist(searchQuery = query.value): Promise<void> {
   try {
     adding.value = true
     const item = await addWatchlistItem(searchQuery.trim())
+    // 幂等处理：后端对重复标的返回已有记录，前端据此更新而非追加
     const existingIndex = watchlistItems.value.findIndex(
       (entry) => entry.id === item.id,
     )

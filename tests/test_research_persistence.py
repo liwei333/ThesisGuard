@@ -1,4 +1,15 @@
-"""WP-03 Research Package persistence and service contract tests."""
+"""WP-03 Research Package persistence and service contract tests.
+
+研究包持久化测试，验证核心领域规则：
+1. 追加式版本管理：v1 创建后不可变，刷新创建 v2 不修改 v1
+2. 幂等性：同一 idempotency_key + request_hash 只创建一个版本
+3. 乐观并发：SELECT FOR UPDATE + expected_version 防止重复版本
+4. 事务安全：失败时 package 和 module 一起回滚，不留半写数据
+5. 数据库约束：唯一约束作为最后防线阻止重复写入
+6. 新鲜度推导：基于状态和时间戳的确定性计算
+
+每个测试用例使用独立的临时 PostgreSQL 数据库，测试后自动清理。
+"""
 
 from __future__ import annotations
 
@@ -40,7 +51,12 @@ DEFAULT_ADMIN_DATABASE_URL = (
 
 @pytest_asyncio.fixture
 async def pg_sessionmaker() -> AsyncIterator[async_sessionmaker[AsyncSession]]:
-    """Create a disposable PostgreSQL database and run Alembic migrations."""
+    """Create a disposable PostgreSQL database and run Alembic migrations.
+
+    每个测试函数获得独立的临时数据库，通过 Alembic 迁移建表，
+    测试结束后终止连接并删除数据库，保证用例间完全隔离。
+    若 PostgreSQL 不可用则跳过整个测试模块。
+    """
     admin_url = make_url(os.getenv("TG_TEST_ADMIN_DATABASE_URL", DEFAULT_ADMIN_DATABASE_URL))
     test_db_name = f"tg_wp03_test_{uuid4().hex}"
     admin_db = admin_url.database or "postgres"
