@@ -1,2563 +1,518 @@
 # 论衡 ThesisGuard V1 产品需求文档（PRD）
 
-> 文档版本：V1.0 Draft  
-> 日期：2026-09-12  
-> 产品名称：论衡 ThesisGuard  
-> 产品定位：个人交易研究与决策系统  
-> 对应原型：ThesisGuard V3.4 Visual Interaction Review Prototype  
-> 对应技术文档：ThesisGuard V1 Technical Architecture Design  
-> 状态：Ready for Product Review
-
----
-
-# 1. 文档目的
-
-本文档用于统一 ThesisGuard V1 的产品目标、范围、交互边界、业务规则、核心对象、功能需求、验收标准与开发优先级。
-
-ThesisGuard V1 不是：
-
-- 股票资讯 App
-- K 线软件
-- 券商研报阅读器
-- 股票评分器
-- 财经新闻聚合器
-- 聊天机器人套壳
-- 自动交易机器人
-- “预测明天涨跌”的 AI
-
-ThesisGuard V1 要解决的是：
-
-> 用户为什么买入一只股票？
+> Version: 2.0-draft
 >
-> 这个理由现在是否仍然成立？
+> Updated: 2026-09-14
 >
-> 哪些新事实正在支持或破坏原来的判断？
+> Status: **PRD_DRAFT**
 >
-> 市场已经提前交易了多少预期？
+> Product Direction: **APPROVED**
 >
-> 当前赔率是否仍然值得下注？
+> Strategy Validation: **UNPROVEN**
 >
-> 如果判断错误，应该在哪里认输？
+> Whole Product: **NOT_READY_FOR_FULL_AGENT_BUILD**
 >
-> 交易结束以后，原判断究竟错在哪里？
+> Canonical decision: [PRODUCT_GOAL_REALIGNMENT_2026-09-14.md](PRODUCT_GOAL_REALIGNMENT_2026-09-14.md)
 
-ThesisGuard 的核心产品对象不是“股票”，而是：
+## 1. 文档目的与权威边界
 
-# Thesis
+本文定义 ThesisGuard V1 的产品定位、目标用户、能力优先级、MVP、成功指标、假设和验收边界。它不代表功能已经实现，也不是个人交易模型的启用登记。
 
-也就是：
+权威顺序：
 
-> 用户对一只标的建立的、可被证据持续验证或证伪的投资逻辑。
+1. 个人交易模型 v1.3 / 系统 v1.1 对已冻结策略参数和动作语义具有最高权威；
+2. 产品目标调整决策定义目标、优先级、MVP 和工作包依赖；
+3. 本 PRD 定义 V1 产品需求；
+4. canonical TAD 定义技术边界；
+5. 领域合同定义其工作包实现合同；
+6. proposal、历史审计和验收报告不自动成为当前实现事实。
 
----
+如本 PRD 与冻结策略在阈值、Setup、退出、暂停恢复或 `ActionDecision` 上冲突，必须标为 `CONFLICT` 并提交 Open Decision；不得静默覆盖。
 
-# 2. 产品愿景
+## 2. 产品定位
 
-## 2.1 产品愿景
+### 2.1 North Star
 
-帮助个人投资者建立一套：
+> **ThesisGuard 是一套面向个人 A 股现金账户的、证据驱动的风险与决策操作系统。它通过不可覆盖的研究证据、投资逻辑、市场状态、账户风险、交易计划与纪律记录，帮助用户避免无法承受的错误，并以可审计的前瞻数据验证个人交易方法是否存在扣除成本后的优势。**
 
-```text
-研究有证据
-判断有版本
-买入有计划
-持仓有验证
-错误有退出
-交易有复盘
-```
+产品口号：
 
-的个人交易决策体系。
+> **先活下来，再用可验证的数据判断自己是否具有优势；Agent 服务于纪律与证据，而不是替代纪律与证据。**
 
----
+### 2.2 产品承诺
 
-## 2.2 核心品牌表达
+产品直接承诺提供的能力是：
 
-中文：
+- 将关键决策建立在带来源、时点、freshness 和版本的证据上；
+- 在关键数据缺失、过期、冲突或无法核验时，对新增风险 fail-closed；
+- 让账户、持仓、订单、计划、退出、纪律和规则历史可追溯；
+- 让用户能区分模型问题、执行问题和客观限制；
+- 用前瞻、扣成本记录评估交易方法，而不是用事后故事证明方法。
 
-> 建立逻辑。  
-> 持续验证。  
-> 发现变化。  
-> 管理风险。
+产品不承诺收益、胜率、回本、年度盈利、稳定跑赢指数、准确预测危机日期或任何单笔交易结果。
 
-英文：
+### 2.3 品牌表达
 
-> Build the thesis.  
-> Test the thesis.  
-> Guard the downside.
+“论”代表 Thesis、事实、来源、产业逻辑与可证伪判断；“衡”代表账户承受力、市场环境、机会成本、仓位与纪律。`Guard` 守卫的是决策边界和投资逻辑，不是守住某只股票或拒绝止损。
 
----
+## 3. 目标用户与非目标用户
 
-## 2.3 产品长期方向
+### 3.1 Primary user
 
-长期 ThesisGuard 应从：
+- 个人 A 股现金账户用户，使用自有资金、不使用杠杆；
+- 主动股票持仓有限，研究和执行能力受个人时间约束；
+- 愿意在交易前明确 Thesis、证据、失效条件、风险预算和计划亏损；
+- 愿意每日维护或导入账户、持仓、订单与成交数据；
+- 希望用真实费用和前瞻数据判断方法是否值得继续；
+- 能接受系统拒绝交易、要求补数据或反驳自己的观点。
 
-```text
-个人交易研究工具
-```
+### 3.2 Non-target user
 
-发展为：
+- 要求系统自动下单、控制券商、代替确认交易意愿或承诺收益的人；
+- 追求高频、分钟级、杠杆、多市场多资产或社交跟单的人；
+- 不愿提供账户/订单/证据，却要求确定性 `ALLOW` 的人；
+- 希望 AI 根据自然语言临时改变风险阈值、保护价或暂停状态的人。
 
-```text
-个人投资决策操作系统
-```
+## 4. 产品方法论
 
-系统持续积累：
+### 4.1 Thesis First
 
-- 公司研究
-- Thesis 历史
-- Evidence 历史
-- 机构预期历史
-- 市场状态历史
-- Trade Plan 历史
-- 实际交易历史
-- 纪律违约历史
-- 用户行为模式
+每个新主动交易必须有版本化 Thesis、支持与反驳证据、下一验证日期和明确证伪条件。没有 Thesis 的标的只能观察，不能进入交易许可。
 
-最终形成真正符合用户自身能力圈、风险偏好和交易习惯的个人交易模型。
+### 4.2 Fact > Narrative
 
----
+系统必须区分：客观事实、来源、推断、市场预期、用户假设、Agent 提案。LLM 输出不能直接成为 Evidence 或系统事实。
 
-# 3. 用户画像
+### 4.3 Risk Before Opportunity
 
-## 3.1 核心用户
+决策顺序是：账户硬限制与退出事件 → 未结订单与持仓真相 → 市场过滤 → 研究与 Evidence → Setup → 价格数量与空间 → 用户确认。不能从“公司不错”跳到“可以买”。
 
-V1 核心用户：
+### 4.4 Immutable History
 
-> 有一定投资经验、会主动研究公司和行业，但缺乏稳定交易系统的个人投资者。
+Research、Evidence、Thesis、Trade Plan、订单、成交、退出、告警、纪律、暂停恢复和规则版本不得原地覆盖。修正通过新版本、关联和审计记录完成。
 
-典型特征：
+### 4.5 Deterministic core, LLM only proposes
 
-- 自己会研究产业逻辑
-- 会看财报、订单、行业趋势
-- 会使用 AI 辅助研究
-- 同时做中短线 / 波段
-- 容易被盘中波动干扰
-- 买入后容易忘记原始逻辑
-- 不容易持续维护公司研究
-- 研究资料分散
-- 交易计划经常只存在脑子里
-- 容易出现止损不坚决、追高、亏损加仓等行为
+账户状态、回撤、风险预算、订单预占、Evidence freshness、市场过滤、交易准入、退出状态、纪律事件和暂停恢复由确定性领域服务计算和提交。Agent 读取结果、解释缺口并生成提案。
 
----
+## 5. Product Outcome Hierarchy
 
-## 3.2 非目标用户
+| Outcome | Meaning | Ownership |
+|---|---|---|
+| Survival | 避免无法承受的错误继续扩大 | Product-owned |
+| Decision integrity | 输入有效、动作可复现、结果可追溯 | Product-owned |
+| Discipline | 计划、执行、违规和暂停不被盈亏改写 | Product-owned |
+| Method validation | 前瞻判断是否存在扣成本优势 | Product observes and supports |
+| Financial result | 盈亏、回撤、超额收益 | Observed; never promised |
 
-V1 不重点服务：
+## 6. V1 Capability Priorities
 
-- 高频量化交易者
-- 纯指数定投用户
-- 完全不研究基本面的被动投资者
-- 需要专业机构投研终端的大型机构
-- 完全依赖技术指标做超短线的人
-- 希望 AI 自动下单的人
+### 6.1 P0 — Personal Risk OS
 
----
+P0 是 V1 生存内核，必须在 Agent 之前形成可靠、可读取、可测试的边界。
 
-# 4. 用户核心痛点
+#### 账户与净值
 
-## 4.1 研究重复
+- 账户单位净值；
+- 外部出入金中性化；
+- 当前回撤与历史高点回撤；
+- `AccountState`；
+- `PauseStatus`；
+- `RecoveryEligibility`；
+- `NewRiskPermission`。
 
-每次重新问 AI：
+#### 持仓、订单与券商事实
 
-> “强瑞技术怎么样？”
+- 当前持仓、可卖数量；
+- `NEW_ACTIVE / LEGACY_PRE_MODEL / LONG_TERM_ETF` 分类；
+- 未结订单、部分成交、拒单、撤单待确认和迟到成交；
+- 订单对现金、市值、主动风险和产业风险的预占；
+- T+1、停牌、跌停、跳空、流动性和券商能力限制。
 
-都会重新查一遍。
+#### 风险与组合
 
-问题：
+- 单笔风险预算；
+- 主动持仓风险 H；
+- 单股市值、权益总市值；
+- 同产业与共同风险因子；
+- 个人股票最多 4 只；第五只执行 Position Replacement PK。
 
-- 浪费时间
-- 数据口径容易变化
-- 上一次结论丢失
-- 无法看到“观点变化过程”
+#### 退出与纪律
 
----
+- 价格退出、逻辑退出、时间复核；
+- 退出触发后锁定 `EXIT_PENDING`；
+- 计划外新增、超数量、摊低成本、扩大止损/预算和拖延退出等违规；
+- 账户暂停、有限恢复与恢复周期耗尽；
+- 盈利不抹掉违规，亏损不自动证明模型错误。
 
-## 4.2 研究无法持续
+#### 市场与数据门
 
-很多投资者会在买入前认真研究。
+- 拟入场日前一完整交易日的沪深300和中证1000过滤；
+- 行情、账户、Research、Evidence、券商能力和事件 freshness；
+- 数据 `MISSING / STALE / CONFLICTING` 或不可核验时禁止新增风险；
+- 每日盘前、盘中、盘后核对。
 
-但买入后：
+### 6.2 P1 — Research, Evidence and Thesis
 
-> 不再持续验证。
+P1 负责决策的可引用事实基础：
 
-最终变成：
+- `SourceDocument / SourceDocumentVersion`；
+- `EvidenceSeries / EvidenceVersion`；
+- `SourceLocator / SourceGrade / VerificationStatus`；
+- Evidence freshness；
+- `ResearchPackage / ResearchModule`；
+- `ThesisVersion / ThesisValidation`；
+- Bull/Base/Bear、预期差、证伪条件、Catalyst；
+- 增量更新与不可覆盖历史。
 
-> “我记得它以前逻辑挺好的。”
+### 6.3 P2 — Read-only Agent
 
----
-
-## 4.3 事实与观点混在一起
-
-用户经常无法区分：
-
-```text
-公司事实
-券商预测
-市场传闻
-自己的主观判断
-AI 推断
-```
-
-导致：
-
-> 把预测当事实。
-
----
-
-## 4.4 市场已经 Price In
-
-很多利好本身是真的。
-
-但股票仍然会跌。
-
-因为：
-
-> 利好可能已经提前交易。
-
-普通资讯工具通常只回答：
-
-> “这个消息是利好。”
-
-而不回答：
-
-> “市场已经交易了多少？”
-
----
-
-## 4.5 交易计划容易被事后修改
-
-典型：
-
-```text
-原止损 96
-
-跌到 96：
-
-再等等。
-
-改成 93。
-
-跌到 93：
-
-再等等。
-
-改成 90。
-```
-
-最终：
-
-> 原来的风险控制失效。
-
----
-
-## 4.6 持仓过多
-
-投资者容易：
-
-> 这个不错买一点，那个也不错买一点。
-
-最后变成：
-
-> 持仓开超市。
-
-无法真正跟踪。
-
----
-
-## 4.7 市场情绪影响个股操作
-
-即使选股逻辑正确：
-
-> 市场处于高位退潮 / 恐慌杀跌
-
-也可能导致短期巨大回撤。
-
-所以：
-
-> 公司逻辑 ≠ 当前允许的风险预算。
-
----
-
-## 4.8 AI 容易迎合用户
-
-如果用户说：
-
-> “我觉得这只股票明天会涨。”
-
-普通 AI 很容易顺着解释。
-
-ThesisGuard 必须做到：
-
-> 用户观点只是“用户假设”，不能自动成为事实。
-
----
-
-# 5. 产品核心方法论
-
-ThesisGuard V1 采用以下闭环：
-
-```text
-发现标的
-↓
-加入自选
-↓
-标的分类
-↓
-首次研究建档
-↓
-建立 Thesis
-↓
-Evidence 持续进入
-↓
-Thesis Validation
-↓
-机构预期变化
-↓
-Expectation Gap
-↓
-Price-In
-↓
-Bull / Base / Bear
-↓
-Market Regime
-↓
-技术买点
-↓
-冻结 Trade Plan
-↓
-执行
-↓
-Catalyst Validation
-↓
-持有 / 加仓 / 减仓 / 退出
-↓
-复盘
-↓
-Discipline
-↓
-个人模型更新
-```
-
----
-
-# 6. V1 产品范围
-
-## 6.1 P0
-
-V1 必须完成：
-
-1. 自选池
-2. 标的自动分类
-3. Research Package
-4. Evidence
-5. Thesis
-6. Thesis Validation
-7. Thesis Health Ledger
-8. Research 版本管理
-9. Agent Read-Only 查询 / 解释 / 反驳
-10. 增量研究更新
-
----
-
-## 6.2 P1
-
-V1 增强：
-
-1. 机构研报 / 盈利预期
-2. 一致预期历史
-3. Bull / Base / Bear
-4. Expectation Gap
-5. Price-In
-6. Trade Plan Freeze
-7. Catalyst Validation
-8. Bull vs Bear Agent
-
----
-
-## 6.3 P2
-
-后续增强：
-
-1. Market Regime
-2. 实时市场情绪
-3. Portfolio
-4. Discipline
-5. 实时提醒
-6. 同花顺 MCP
-7. 券商账户同步
-
----
-
-# 7. 核心业务对象
-
-## 7.1 Instrument
-
-表示：
-
-- 股票
-- ETF
-- 指数
-- 行业
-- 事件篮子
-
----
-
-## 7.2 Research Package
-
-一个标的的完整研究档案。
-
-首次加入自选：
-
-> 全量生成。
-
-后续：
-
-> 增量维护。
-
----
-
-## 7.3 Evidence
-
-任何进入研究系统的信息都必须先成为 Evidence。
-
-Evidence 必须包含：
-
-- 内容
-- 来源
-- 日期
-- 来源等级
-- 信息类型
-- 关联标的
-- 验证状态
-
----
-
-## 7.4 Thesis
-
-一条可以被持续验证的投资判断。
-
-例如：
-
-> AI服务器液冷订单正在进入持续放量阶段。
-
-Thesis 不是：
-
-> “强瑞技术很好。”
-
----
-
-## 7.5 Expectation
-
-市场机构对公司未来经营数据的预测。
-
-例如：
-
-```text
-2027E 净利润 6.1 亿
-```
-
----
-
-## 7.6 Valuation Scenario
-
-```text
-BEAR
-BASE
-BULL
-```
-
-每个场景包含：
-
-- 盈利假设
-- 估值假设
-- 市值
-- 股价空间
-- 前提条件
-
----
-
-## 7.7 Trade Plan
-
-交易发生前建立的计划。
-
-必须支持 Freeze。
-
----
-
-## 7.8 Catalyst
-
-未来需要验证 Thesis 的事件。
-
-例如：
-
-- Q3
-- 年报
-- 重大合同
-- Rubin 发布
-- FOMC
-- 政策
-
----
-
-# 8. 标的分类系统
-
-加入自选以后，第一步不是生成长报告。
-
-而是：
-
-> 判断这只股票应该用什么模型研究。
-
-分类：
-
-## 8.1 INSTITUTIONAL_TREND
-
-核心：
-
-```text
-产业
-订单
-收入
-利润
-现金流
-一致预期
-估值
-机构资金
-趋势
-```
-
----
-
-## 8.2 HOT_MONEY
-
-核心：
-
-```text
-题材强度
-板块梯队
-龙头地位
-换手
-封板质量
-连板基因
-市场记忆
-情绪周期
-```
-
-禁止强行套：
-
-```text
-2027 PE
-```
-
----
-
-## 8.3 HYBRID
-
-同时存在：
-
-- 真实产业逻辑
-- 热点情绪资金
-
-需要分别分析。
-
----
-
-## 8.4 EVENT_DRIVEN
-
-例如：
-
-- 重组
-- 涨价
-- 大合同
-- 政策
-- 大客户认证
-- 突发事件
-
----
-
-# 9. 自选池
-
-## 9.1 加入自选
-
-入口：
-
-```text
-输入股票代码 / 名称
-```
-
-系统执行：
-
-```text
-证券识别
-↓
-分类
-↓
-判断是否已有 Research Package
-↓
-无 → 首次全量建档
-有 → 读取当前 Research State
-```
-
----
-
-## 9.2 自选列表字段
-
-机构趋势型：
-
-```text
-标的
-分类
-研究分
-Expectation Trend
-Thesis Health
-Price-In
-Risk / Reward
-最后更新时间
-Agent Action
-```
-
-游资型：
-
-```text
-标的
-题材
-梯队
-情绪分
-市场记忆
-换手
-主动性
-Agent Action
-```
-
----
-
-## 9.3 ACTIVE / STALE
-
-Research 必须有状态：
-
-```text
-ACTIVE
-STALE
-UPDATING
-FAILED
-```
-
-STALE 不允许静默显示旧结论为最新结论。
-
----
-
-# 10. Research Package
-
-建议包含：
-
-```text
-公司基本信息
-主营业务
-收入结构
-客户结构
-竞争格局
-产业链
-行业景气
-订单
-合同负债
-存货
-应收
-现金流
-扩产
-重大项目
-管理层
-机构预期
-估值
-风险
-催化
-Thesis
-```
-
----
-
-# 11. Evidence 体系
-
-## 11.1 信息类型
-
-所有重要内容必须明确属于：
-
-```text
-【事实】
-
-【机构预测】
-
-【论衡推断】
-
-【用户假设】
-```
-
----
-
-## 11.2 来源等级
-
-```text
-S
-公司公告 / 财报
-
-A
-交易所 / 监管 / 官方数据
-
-B
-公司投资者交流 / 机构调研
-
-C
-券商研报
-
-D
-权威财经媒体
-
-E
-雪球 / 微博 / 公众号 / 社交媒体
-
-F
-传闻 / 未验证消息
-```
-
----
-
-## 11.3 F 级限制
-
-F 级：
-
-> 不得直接支持核心 Thesis。
-
-只能进入：
-
-```text
-待验证情报池
-```
-
----
-
-## 11.4 Evidence UI
-
-示例：
-
-```text
-【事实】【S】
-
-2026H1 AI服务器业务收入同比增长160%
-
-来源：
-2026半年报
-
-日期：
-2026-08-XX
-```
-
----
-
-# 12. Thesis 系统
-
-## 12.1 Thesis 创建
-
-Thesis 可以来源于：
-
-- 用户创建
-- Agent 建议
-- Research Package 自动生成候选
-
-Agent 生成必须由用户确认后进入正式 Thesis。
-
----
-
-## 12.2 Thesis 示例
-
-```text
-AI服务器液冷订单持续增长
-
-订单开始向收入兑现
-
-收入开始向利润兑现
-
-利润增长可以转化为现金流
-
-2027E盈利存在进一步上修空间
-```
-
----
-
-## 12.3 Thesis 状态
-
-```text
-SUPPORTED
-NEUTRAL
-WEAKENING
-INVALIDATED
-PENDING
-```
-
----
-
-## 12.4 Thesis Detail
-
-点击后必须看到：
-
-```text
-Thesis
-
-建立日期
-
-当前状态
-
-支持证据
-
-反对证据
-
-待验证
-
-失效条件
-
-最近一次变化
-
-历史版本
-```
-
----
-
-# 13. Thesis Health
-
-## 13.1 禁止黑盒
-
-禁止：
-
-```text
-AI：我觉得 84 分。
-```
-
----
-
-## 13.2 Score Ledger
-
-UI：
-
-```text
-Thesis Health
-
-78 → 84 ↑
-
-本次变化 +6
-
-+3 Q3订单证据增强
-+2 两家券商上调盈利预测
-+2 收入增长加速
--1 经营现金流仍偏弱
-```
-
----
-
-## 13.3 Health 作用
-
-Health 不是：
-
-> 买卖信号。
-
-而是：
-
-> 当前 Thesis 相对建立时发生了什么变化。
-
----
-
-# 14. 机构预期系统
-
-## 14.1 一致预期
-
-至少展示：
-
-```text
-2026E Revenue
-2026E Profit
-
-2027E Revenue
-2027E Profit
-
-2028E Profit
-```
-
----
-
-## 14.2 预期历史
-
-例如：
-
-```text
-5月 4.2
-6月 4.5
-7月 5.0
-8月 5.6
-9月 6.1
-```
-
-必须可以看到趋势。
-
----
-
-## 14.3 机构变化
-
-```text
-90天变化
-30天变化
-
-新增覆盖机构
-
-上调
-维持
-下调
-```
-
----
-
-## 14.4 机构分歧
-
-不要只展示：
-
-```text
-买入评级
-```
-
-而应该展示：
-
-```text
-机构
-利润预测
-核心假设
-主要风险
-```
-
-最终 Agent 总结：
-
-> 主要分歧来自哪里？
-
----
-
-# 15. Expectation Gap
-
-## 15.1 定义
-
-比较：
-
-```text
-盈利预期变化
-股价变化
-估值变化
-```
-
----
-
-## 15.2 状态
-
-```text
-巨大正预期差
-正预期差
-基本匹配
-预期已充分
-负预期差
-```
-
----
-
-## 15.3 必须解释
-
-例如：
-
-```text
-过去 30 天
-
-盈利预期 +13%
-股价 +27%
-估值 +11%
-
-结论：
-
-股价上涨速度高于盈利预期上修，
-短期正预期差正在收敛。
-```
-
----
-
-# 16. Price-In
-
-## 16.1 核心问题
-
-不是：
-
-> 这是利好吗？
-
-而是：
-
-> 市场已经交易了多少？
-
----
-
-## 16.2 UI
-
-```text
-Price-In
-
-78%
-
-已计价
-
-Rubin需求
-AI服务器资本开支
-Q3订单增长
-
-尚未充分计价
-
-毛利率持续改善
-2027利润进一步上修
-```
-
----
-
-## 16.3 输出
-
-```text
-产业逻辑：强
-
-基本面：改善
-
-市场预期：高
-
-短期赔率：下降
-```
-
----
-
-# 17. Bull / Base / Bear
-
-机构趋势型必须支持。
-
----
-
-## 17.1 BEAR
-
-包含：
-
-- 利润
-- PE
-- 市值
-- 空间
-- 前提
-
----
-
-## 17.2 BASE
-
-同上。
-
----
-
-## 17.3 BULL
-
-同上。
-
----
-
-## 17.4 Risk / Reward
-
-必须展示：
-
-```text
-Downside
-Base
-Bull
-
-Bull / Bear
-```
-
----
-
-## 17.5 禁止表达
-
-禁止：
-
-> “目标价一定到 213。”
-
-正确：
-
-> “在 Bull 假设成立、盈利达到 X、市场给予 Y PE 的情况下，对应市值 Z。”
-
----
-
-# 18. Market Regime
-
-## 18.1 状态
-
-```text
-恐慌杀跌
-情绪冰点
-修复反弹
-正常活跃
-加速活跃
-亢奋极值
-高位退潮
-```
-
----
-
-## 18.2 Market Regime 的作用
-
-Market Regime：
-
-> 决定风险预算。
-
-不决定：
-
-> 买哪只股票。
-
----
-
-## 18.3 核心原则
-
-```text
-情绪冰点 ≠ 自动底部
-```
-
-以及：
-
-```text
-亢奋 ≠ 立刻卖空
-```
-
----
-
-# 19. 技术买点
-
-V1 不做复杂技术分析系统。
-
-机构趋势型默认：
-
-```text
-日线 = 判断能否参与
-
-60分钟 = 判断买入时机
-
-30分钟 = 辅助确认
-
-分时 = 执行
-```
-
----
-
-## 19.1 V1 支持两类买点
-
-```text
-趋势回踩
-
-突破回踩
-```
-
----
-
-# 20. Trade Plan
-
-## 20.1 必填字段
-
-开仓前：
-
-```text
-标的
-
-买入理由
-
-买入区
-
-初始仓位
-
-加仓条件
-
-止损
-
-失效条件
-
-Base Target
-
-Bull Target
-```
-
----
-
-## 20.2 Freeze
-
-按钮：
-
-```text
-冻结计划
-```
-
-Freeze 后：
-
-```text
-PLAN-v1
-```
-
-不可直接覆盖。
-
----
-
-## 20.3 修改止损
-
-例如：
-
-```text
-96 → 90
-```
-
-系统必须提示：
-
-```text
-风险扩大
-
-你正在扩大原始交易风险。
-```
-
-要求：
-
-```text
-填写修改原因
-```
-
-然后生成：
-
-```text
-PLAN-v2
-```
-
----
-
-# 21. Catalyst Validation
-
-## 21.1 Catalyst 不是日历
-
-每个 Catalyst 必须回答：
-
-> 这次事件要验证什么？
-
----
-
-## 21.2 示例
-
-```text
-强瑞 Q3
-
-需要验证：
-
-□ 单季度收入 ≥ X
-□ 净利润 ≥0.8亿
-□ 毛利率 ≥ X
-□ 经营现金流改善
-□ 应收增速 < 收入增速
-```
-
----
-
-## 21.3 财报发布
-
-系统自动：
-
-```text
-完成 4 / 5
-```
-
-然后重新评估：
-
-```text
-Thesis Health
-```
-
-并输出：
-
-```text
-动作：
-继续持有
-暂不加仓
-```
-
----
-
-# 22. Bull vs Bear
-
-## 22.1 快捷入口
-
-```text
-反驳我的逻辑
-```
-
----
-
-## 22.2 输出结构
-
-左：
-
-```text
-Bull
-```
-
-右：
-
-```text
-Bear
-```
-
-底部：
-
-```text
-论衡裁决
-```
-
----
-
-## 22.3 论衡裁决
-
-必须区分：
-
-```text
-确定事实
-
-合理推断
-
-证据不足
-
-主要争议
-```
-
----
-
-# 23. Portfolio
-
-## 23.1 最大持仓
-
-默认：
-
-```text
-4
-```
-
----
-
-## 23.2 第 5 只
-
-必须：
-
-```text
-Position Replacement PK
-```
-
-问题：
-
-> 新股票比当前哪一只更值得占据仓位？
-
----
-
-## 23.3 相关性
-
-不能只看：
-
-```text
-4只股票
-```
-
-需要看：
-
-```text
-共同风险因子
-```
-
-例如：
-
-```text
-AI算力 55%
-PCB 18%
-存储 14%
-现金 13%
-```
-
----
-
-# 24. Discipline
-
-记录：
-
-```text
-追高
-止损延迟
-亏损补仓
-计划外交易
-仓位违规
-```
-
----
-
-## 24.1 结果与纪律分离
-
-即使：
-
-> 一次违规交易最后赚钱。
-
-依然：
-
-```text
-纪律违规
-```
-
-不能因为结果好就奖励错误流程。
-
----
-
-# 25. Agent
-
-## 25.1 Agent 定位
-
-Agent 不是股票预测器。
-
-Agent 是：
-
-> ThesisGuard 的自然语言操作层和推理层。
-
----
-
-## 25.2 Agent 默认上下文
-
-自动加载：
-
-```text
-Market Regime
-
-Portfolio
-
-Instrument Research
-
-Current Thesis
-
-Trade Plan
-
-Catalyst
-
-Discipline
-```
-
----
-
-## 25.3 快捷操作
-
-```text
-解释 Thesis
-
-反驳我的逻辑
-
-最近发生了什么变化？
-
-机构为什么上调？
-
-现在 Price-In 多少？
-
-重新计算 Bull/Base/Bear
-
-检查交易计划
-
-执行买入前五问
-```
-
----
-
-## 25.4 Agent 独立性
-
-用户说：
-
-> 我觉得强瑞一定会涨。
-
-系统记录：
-
-```text
-【用户假设】
-```
-
-Agent 不得：
-
-> 自动提高 Thesis Health。
-
----
-
-# 26. 买入前五问
-
-每笔交易必须能够回答：
-
-```text
-1. 我为什么买？
-
-2. 市场现在低估什么？
-
-3. 为什么是今天买？
-
-4. 错了在哪里认输？
-
-5. 对了准备赚多少？
-```
-
-任何一项答不上：
-
-> 建议不交易。
-
----
-
-# 27. 首页驾驶舱
-
-首页目标：
-
-> 用户打开 ThesisGuard 后 30 秒内知道今天该做什么、不该做什么。
-
----
-
-## 27.1 第一层
-
-```text
-市场风险
-仓位闸门
-组合风险
-纪律风险
-```
-
----
-
-## 27.2 第二层
-
-```text
-当前持仓 Thesis
-Agent 今日优先级
-```
-
----
-
-## 27.3 第三层
-
-```text
-机会池
-热点 / 新闻 / 政策
-```
-
----
-
-## 27.4 第四层
-
-```text
-Catalyst
-模型状态
-知识库状态
-```
-
----
-
-## 27.5 Agent Priority
-
-优先显示：
-
-```text
-Thesis 发生变化
-
-Price-In 明显变化
-
-Frozen Plan 状态
-
-机构预期变化
-
-Catalyst 临近
-
-纪律风险
-```
-
-而不是普通资讯。
-
----
-
-# 28. Research Knowledge Base
-
-## 28.1 数据类型
-
-```text
-FACT
-ESTIMATE
-THESIS
-EVENT
-REPORT
-PRICE_SIGNAL
-TRADE_PLAN
-```
-
----
-
-## 28.2 版本
-
-必须可以查看：
-
-```text
-v1
-v2
-v3
-```
-
----
-
-## 28.3 原则
-
-```text
-新数据不会修改过去历史
-```
-
-而是：
-
-```text
-生成新版本
-```
-
----
-
-# 29. 页面结构
-
-V1 一级导航继续保持克制：
-
-```text
-总览
-
-自选池
-
-持仓
-
-研究库
-
-新闻 / 政策
-
-市场情绪
-
-Agent
-
-纪律
-
-设置
-```
-
-不因为新增功能继续增加一级菜单。
-
----
-
-# 30. 主要页面
-
-## 30.1 Dashboard
-
-目标：
-
-> 决策驾驶舱。
-
----
-
-## 30.2 Watchlist
-
-目标：
-
-> 发现哪些标的正在发生变化。
-
----
-
-## 30.3 Stock Workspace
-
-这是产品最核心页面。
-
-必须集中展示：
-
-```text
-价格 / 基本状态
-
-Thesis Health
-
-Thesis Validation
-
-Evidence
-
-Expectation
-
-Expectation Gap
-
-Price-In
-
-Valuation
-
-Trade Plan
-
-Catalyst
-
-Bull vs Bear
-```
-
----
-
-## 30.4 Portfolio
-
-目标：
-
-> 风险与容量管理。
-
----
-
-## 30.5 Research Knowledge
-
-目标：
-
-> 研究资产管理。
-
----
-
-## 30.6 Market Regime
-
-目标：
-
-> 风险预算。
-
----
-
-## 30.7 Agent
-
-目标：
-
-> 查询、解释、反驳、复盘。
-
----
-
-# 31. 关键状态机
-
-## 31.1 Research
-
-```text
-CREATED
-↓
-BUILDING
-↓
-ACTIVE
-↓
-STALE
-↓
-UPDATING
-↓
-ACTIVE
-```
-
-失败：
-
-```text
-FAILED
-```
-
----
-
-## 31.2 Thesis
-
-```text
-PENDING
-SUPPORTED
-NEUTRAL
-WEAKENING
-INVALIDATED
-```
-
----
-
-## 31.3 Trade Plan
-
-```text
-DRAFT
-FROZEN
-REVISED
-CLOSED
-```
-
----
-
-## 31.4 Catalyst
-
-```text
-PENDING
-ACTIVE
-VALIDATING
-COMPLETED
-FAILED
-```
-
----
-
-# 32. 通知
-
-## P0
-
-```text
-Thesis INVALIDATED
-
-止损触发
-
-持仓超限
-
-重大公司风险
-```
-
----
-
-## P1
-
-```text
-一致预期明显下修
-
-Price-In 快速上升
-
-Catalyst Fail
-
-Frozen Plan 即将失效
-```
-
----
-
-## P2
-
-```text
-新研报
-
-新闻
-
-研究模块 stale
-```
-
----
-
-# 33. 数据时间戳
-
-所有结论必须显示：
-
-```text
-Source Date
-
-Last Verified
-
-Generated At
-```
-
----
-
-# 34. 搜索
-
-统一搜索：
-
-```text
-股票
-Research
-Thesis
-Evidence
-新闻
-政策
-```
-
----
-
-# 35. V1 产品成功指标
-
-V1 不以：
-
-> 赚钱多少
-
-作为产品研发期 KPI。
-
-优先指标：
-
-## 35.1 Research Reuse Rate
-
-用户查询一个已研究股票时：
-
-> 多少次无需重新全量 Research。
-
----
-
-## 35.2 Thesis Traceability
-
-核心 Thesis：
-
-> 100% 能追到证据。
-
----
-
-## 35.3 Plan Freeze Rate
-
-真实交易：
-
-> 有多少笔在成交前 Freeze Plan。
-
----
-
-## 35.4 Plan Violation Detection
-
-系统能识别：
-
-> 止损下移、计划外加仓等。
-
----
-
-## 35.5 Catalyst Closure
-
-创建的 Catalyst：
-
-> 是否最终有验证结果。
-
----
-
-## 35.6 Research Freshness
-
-Research：
-
-> 是否及时发现 stale。
-
----
-
-# 36. 非功能要求
-
-## 性能
-
-普通页面：
-
-```text
-< 2 秒
-```
-
-普通 API：
-
-```text
-P95 < 500ms
-```
-
-复杂 Agent / Research：
-
-> 异步 + 进度反馈。
-
----
-
-## 可追溯
-
-任何：
-
-```text
-Thesis
-Estimate
-Trade Plan
-```
-
-必须可追溯：
-
-```text
-来源
-版本
-时间
-修改原因
-```
-
----
-
-## 安全
-
-API Key：
-
-> 加密。
-
----
-
-## 可用性
-
-V1：
-
-> 桌面优先。
-
-移动端：
-
-> 可以后续独立适配。
-
----
-
-# 37. 风险
-
-## 37.1 数据授权
-
-最大风险之一：
-
-> 研报与行情的数据授权。
-
----
-
-## 37.2 LLM 幻觉
-
-解决：
-
-> Evidence First。
-
----
-
-## 37.3 黑盒评分
-
-解决：
-
-> Score Ledger。
-
----
-
-## 37.4 过度产品化
-
-风险：
-
-> 一开始做太多功能。
-
-解决：
-
-> P0 只跑 Thesis 黄金链。
-
----
-
-# 38. V1 明确不做
-
-```text
-自动下单
-
-自动卖出
-
-自动资金划转
-
-高频策略
-
-全市场选股 AI
-
-收益承诺
-
-自动跟单
-
-复杂量化回测平台
-
-社区
-```
-
----
-
-# 39. P0 黄金链
-
-P0 开发只验证：
-
-```text
-加入自选
-↓
-自动分类
-↓
-首次建档
-↓
-Evidence
-↓
-Thesis
-↓
-Thesis Validation
-↓
-新 Evidence
-↓
-Score Ledger
-↓
-为什么发生变化
-```
-
----
-
-# 40. P0 用户故事
-
-## US-001 加入标的
-
-作为用户，
-
-我希望：
-
-> 输入强瑞技术并加入自选，
-
-系统：
-
-> 自动完成分类和建档。
-
----
-
-## US-002 查看 Thesis
-
-作为用户，
-
-我希望：
-
-> 查看为什么系统认为它值得研究。
-
----
-
-## US-003 查看 Evidence
-
-作为用户，
-
-我希望：
-
-> 知道每个判断来自什么来源。
-
----
-
-## US-004 增量更新
-
-作为用户，
-
-我不希望：
-
-> 每次重新研究。
-
-系统应该：
-
-> 基于新信息更新旧 Research。
-
----
-
-## US-005 Thesis 变化
-
-作为用户，
-
-我希望：
-
-> 系统告诉我“哪些新事实改变了判断”。
-
----
-
-## US-006 查看历史
-
-作为用户，
-
-我希望：
-
-> 查看 Thesis 的历史版本。
-
----
-
-# 41. P1 用户故事
-
-## US-101 机构预期
-
-我希望知道：
-
-> 机构最近是否在持续上调盈利预测。
-
----
-
-## US-102 Price-In
-
-我希望知道：
-
-> 利好是不是已经被股价提前交易。
-
----
-
-## US-103 Valuation
-
-我希望：
-
-> 同时看到 Bear/Base/Bull，而不是一个目标价。
-
----
-
-## US-104 Trade Plan
-
-我希望：
-
-> 买入前冻结交易计划。
-
----
-
-## US-105 风险修改
-
-如果我事后下调止损，
-
-系统：
-
-> 必须警告我正在扩大风险。
-
----
-
-## US-106 Catalyst
-
-我希望：
-
-> 财报发布以后自动验证之前设定的条件。
-
----
-
-# 42. 验收标准
-
-## AC-01
-
-可以：
-
-```text
-加入 301128
-```
-
----
-
-## AC-02
-
-可以看到：
-
-```text
-Research ACTIVE
-```
-
----
-
-## AC-03
-
-至少生成：
-
-```text
-3–5 条 Thesis
-```
-
----
-
-## AC-04
-
-每条 Thesis 至少有：
-
-```text
-支持证据
-待验证
-失效条件
-```
-
----
-
-## AC-05
-
-每条 Evidence：
-
-> 有来源等级。
-
----
-
-## AC-06
-
-模拟新 Evidence 后：
-
-```text
-Thesis 78 → 81
-```
-
-并显示原因。
-
----
-
-## AC-07
-
-旧版本仍然存在。
-
----
-
-## AC-08
-
-Agent 可以回答：
-
-> 为什么看好？
-
----
-
-## AC-09
-
-Agent 可以回答：
-
-> 哪些事实改变了判断？
-
----
-
-## AC-10
+Agent 是推理、解释和提案层，不是风险或金融事实的 System of Record。
 
 Agent 可以：
 
-> 反驳用户观点。
+- 读取结构化事实，解释研究、市场、账户、持仓和纪律状态；
+- 找出缺失、过期、冲突资料并要求核验；
+- 提出支持或反驳 Thesis 的证据；
+- 生成研究、交易计划、复盘和长期记忆提案；
+- 比较候选股票和当前持仓；
+- 提醒风险、纪律、下一验证日期和必要用户确认。
 
----
+Agent 不可以：
 
-# 43. P1 验收
+- 直接提交订单、控制券商或自主调仓；
+- 自行修改风险阈值、Trade Plan 或策略版本；
+- 自行解除暂停或把恢复资格映射成 `ALLOW`；
+- 将自然语言或 LLM 输出直接写成 Evidence、账户状态、成交事实；
+- 在关键输入未知时给出无条件 `ALLOW`；
+- 自动形成长期风险偏好；
+- 通过聊天覆盖冻结保护价或历史。
 
-必须看到：
+### 6.4 P3 — Macro Risk Sentinel
 
-- 机构盈利预测趋势
-- Broker Difference
-- Expectation Gap
-- Price-In
-- Bull/Base/Bear
-- Frozen Plan
-- Plan Version
-- Catalyst Validation
-- Bull vs Bear
+#### Stage 1: Basic Policy & Market Alert
 
----
+- 监控权威官方政策来源；
+- 识别融资保证金、担保物折算、融资融券、流动性、准备金、资本约束、跨境融资、房地产、地方债和程序化交易变化；
+- 保存原文、来源、发布日期、生效日期、适用对象和影响路径；
+- 结合市场价格、市场宽度和流动性确认；
+- 只映射是否允许新增风险、是否需要账户风险复核；
+- 不输出未经校准的危机概率。
 
-# 44. 设计原则
+#### Stage 2: Systemic Risk Sentinel
 
-ThesisGuard 的 UI 固定遵守：
+- 信贷/GDP 缺口、债务偿付率；
+- 企业、居民和政府杠杆；
+- 房地产信用周期；
+- 银行与非银金融风险；
+- 跨境债权、外币债务和美元流动性；
+- 信用利差、估值、波动率、融资和流动性；
+- 多资产相关性与去杠杆压力；
+- 历史回放、误报、漏报和提前量评估。
 
-```text
-高信息密度
+宏观输出表达脆弱性、风险累积和压力升级，不把单一指标解释为确定性股灾。初期优先限制新增风险，不凭一个宏观分数自动清空已有持仓。
 
-高效率
+## 7. V1 MVP Core Scenarios
 
-强扫描性
+V1 MVP 只以以下三个核心场景形成闭环。Research/Evidence/Thesis 是场景依赖，不再把“与 Agent 讨论一只股票”单独当作 MVP 完成。
 
-不杂乱
+### SC-001 — 盘前风险检查
 
-不参差
-```
+#### User goal
 
----
+每天盘前知道账户是否安全、风险门是否可进入、有哪些必须先处理的事实。
 
-## 44.1 栅格
+#### Required output
 
-使用稳定栅格。
+- 当前 `AccountState / PauseStatus / RecoveryEligibility / NewRiskPermission`；
+- 是否允许进入新交易全量检查，而非直接 `ALLOW`；
+- 未处理的 `EXIT_PENDING`；
+- 未结订单、撤单待确认、迟到成交和部分成交；
+- 每只持仓可卖数量和当日有效保护价；
+- Research、Evidence、行情、账户、订单或券商能力的 freshness；
+- 今日 Must Do / Must Not Do。
 
-禁止：
+#### Acceptance boundary
 
-> 自由拼贴。
+关键账户、持仓或订单输入无法核验时，必须为 `AccountState=UNKNOWN` 或有效暂停态，且 `NewRiskPermission=PROHIBITED`。Agent 不得补造缺失事实。
 
----
+### SC-002 — 新交易准入
 
-## 44.2 卡片
+#### User goal
 
-同层：
+在新增主动股票风险前获得可复现、扣成本、考虑账户全局状态的检查。
 
-> 尽量等高。
+#### Required gates
 
----
+1. Research 与 Evidence 对当前决策可用；
+2. 前一完整交易日沪深300和中证1000市场过滤通过；
+3. Setup B 为 `TRIGGERED`；
+4. `Pmax / S0 / T / q_plan`、费用和申报约束齐全；
+5. 当前计划数量的扣成本 RR 通过；
+6. 当前账户风险、现金、权益市值和订单预占允许；
+7. 股票数量上限允许，或第五只已完成 Position Replacement PK 且名额真实释放；
+8. 用户明确接受计划亏损并最终确认。
 
-## 44.3 表格
-
-重复数据：
-
-> 表格优先。
-
----
-
-## 44.4 颜色
-
-```text
-紫色：
-品牌 / 系统
-
-绿色：
-健康 / 支持
-
-橙色：
-风险 / 待验证
-
-红色：
-失效 / 警告
-```
-
----
-
-## 44.5 禁止
-
-- 霓虹
-- 大量渐变
-- 游戏化
-- 巨大数据卡
-- Emoji 泛滥
-- 深色 Bloomberg 风
-
----
-
-# 45. 开发阶段
-
-## Phase 1
+#### Decision contract
 
 ```text
-WP-01 工程骨架
+AssessmentStatus = COMPLETE / UNKNOWN
+ActionDecision = ALLOW / NO TRADE / MANAGE_ONLY / EXIT_PENDING / NOT_APPLICABLE
 ```
 
----
+不得增加新枚举。准入失败、判断未知或用户不接受计划亏损时，新增风险必须 `NO TRADE`。
 
-## Phase 2
+### SC-003 — 持仓退出与复盘
+
+#### User goal
+
+退出发生或交易结束时，知道什么触发、什么受客观限制、模型与执行分别如何表现。
+
+#### Required output
+
+- `EXIT_PENDING` 与剩余可卖数量；
+- T+1、停牌、跌停、跳空、拒单、迟到成交、部分成交和流动性限制；
+- `EntryClass = MODEL_IN / MODEL_OUT / UNCLEAR`；
+- `Execution = COMPLIANT / EXECUTION_ERROR / UNKNOWN`；
+- 实际净盈亏；R0 完整可核验时才有 `R_net`；
+- MFE/MAE 及其数据口径；
+- 纪律违规、Pause Event 或整改项；
+- 模型问题、执行问题和客观限制分列。
+
+#### Acceptance boundary
+
+盈利不能抹掉违规；亏损不能自动修改模型；事后资料不能补造成事前证据；历史 Trade Plan 和成交记录不能覆盖。
+
+## 8. Personal Trading Model Frozen Boundary
+
+当前个人交易模型 v1.3 / 系统 v1.1 保持冻结且 **UNPROVEN**：
+
+- 新主动交易只验证 Setup B；Setup A、Setup C、60 分钟确认、做 T 和其他分支不进入生产准入；
+- 市场过滤使用拟入场日前一完整交易日的沪深300与中证1000；
+- 研究、市场、价格数量、空间、退出事件、账户执行意愿六项全部通过；
+- 关键输入不可判定时 `AssessmentStatus=UNKNOWN`；用户请求新增风险时 `ActionDecision=NO TRADE`；
+- 股票持仓最多 4 只，第 5 只必须 Position Replacement PK；
+- 不用杠杆、不摊低成本、不下移保护价；第一轮不主动加仓、不做 T；
+- 订单预占现金、市值和风险；撤单未终结、迟到成交未核清前不释放；
+- 退出触发后使用 `EXIT_PENDING`；
+- D 对应 `WARNING / CONTRACTED / PAUSED_DD / RECOVERY` 的阈值和恢复规则不变；
+- 旧仓与长期 ETF 单列；历史不可覆盖。
+
+本 PRD 不复制或重定义冻结数值。任何参数、买点、退出路径、恢复或账户额度变化必须另立策略版本、回放、前瞻验证并获得用户批准。
+
+## 9. Domain and State Boundaries
+
+### 9.1 Sources and Evidence
+
+来源文档与 Evidence 分开。一个来源可以有多个不可变版本；同一事实系列可以有多个 Evidence 版本；locator 必须能定位到原文。Source grade 不等于真实性，verification state 不等于 freshness。
+
+WP-04 的详细合同以 [WP04_EVIDENCE_DOMAIN_CONTRACT.md](WP04_EVIDENCE_DOMAIN_CONTRACT.md) 为准。该合同是 `CONTRACT_ONLY`，不得被解读为 Evidence 实现已存在。
+
+### 9.2 Research and Thesis
+
+Research Package 聚合可复用 Research Modules。Thesis 必须引用 Evidence 版本并保存自身版本、验证记录、支持/反驳关系、下一验证日期和证伪条件。Bull/Base/Bear 是情景表达，不是目标必达或自动交易信号。
+
+### 9.3 Account and Portfolio
+
+账户单位净值用于表现和回撤，账户金额用于当下预算。外部出入金只改变份额，不重置策略启用点、高点、暂停或恢复周期。旧仓与长期 ETF 进入全账户风险，但不被伪装成新模型交易。
+
+### 9.4 Orders and Trades
+
+信号、计划、订单、成交、持仓和退出状态分开。未结订单持续预占；撤单请求不等于撤单完成；迟到成交必须回到账户与持仓真相。一个完整交易生命周期使用一个 TradeID，不能通过拆 ID 绕过限制。
+
+### 9.5 Market
+
+V1 新主动交易的生产过滤遵守冻结的双指数规则。旧的七阶段情绪状态机和示例仓位区间是历史设计素材，除非产生独立策略版本并获批，不得覆盖冻结账户/市场门。
+
+### 9.6 Discipline and Notification
+
+纪律事件、暂停、恢复、整改、告警投递、确认和失败重试均可审计。通知只是传递机制，不是金融事实或风险状态的唯一真相；通知失败不能改变领域状态。
+
+## 10. Daily Operating Loop
 
 ```text
-WP-02 Instrument + Watchlist
+盘前：账户/持仓/订单/退出/保护价/freshness → Must Do / Must Not Do
+盘中：按冻结计划执行 → 记录委托、成交、拒单、客观限制与退出
+盘后：对账 → 更新单位净值、回撤、风险、保护价、Evidence 与次日计划
+周期复盘：纪律、模型、成本、资金占用、市场状态与规则版本
 ```
 
----
+盘前/盘中/盘后任何时点发现账户、未结订单、主动风险或退出状态未知，都必须阻止新增风险，直到事实核清。
 
-## Phase 3
+## 11. Product-Owned Success Metrics
+
+| Metric | Target direction | Baseline / current measurability |
+|---|---:|---|
+| 交易前计划覆盖率 | 100% | PLANNED；UNKNOWN baseline |
+| 账户日终对账完整率 | 100% | PLANNED；UNKNOWN baseline |
+| 关键 `MISSING / STALE / CONFLICTING` 错误放行次数 | 0 | PLANNED；UNKNOWN baseline |
+| 计划外超数量次数 | 0 | PLANNED；UNKNOWN baseline |
+| 人为扩大止损次数 | 0 | PLANNED；UNKNOWN baseline |
+| 人为扩大风险预算次数 | 0 | PLANNED；UNKNOWN baseline |
+| 人为拖延退出次数 | 0 | PLANNED；UNKNOWN baseline |
+| 未知持仓或未结订单时新增风险次数 | 0 | PLANNED；UNKNOWN baseline |
+| 历史交易计划覆盖或删除次数 | 0 | PLANNED；UNKNOWN baseline |
+| 规则变更版本覆盖率 | 100% | PLANNED；UNKNOWN baseline |
+| ActionDecision 到规则版本和输入快照可追溯率 | 100% | PLANNED；UNKNOWN baseline |
+| 决策关键 Evidence 来源与时间戳完整率 | 100% | CONTRACT_ONLY；UNKNOWN baseline |
+| 告警去重、送达、确认和失败重试 | 每事件可审计 | PLANNED |
+| 数据源中断时 fail-closed 正确率 | 100% for new-risk gates | PLANNED |
+
+## 12. Trading Outcome Metrics
+
+以下仅用于观察和决定策略是否值得继续：
+
+- 扣费 Expectancy、Profit Factor、胜率、平均盈利 R、平均亏损 R；
+- 最大回撤、当前回撤、回撤恢复时间；
+- 相对沪深300全收益表现与匹配账户权益比例的现金/权益基准；
+- 分 Market Regime、产业、持有期、退出类型表现；
+- 资金占用、滑点、真实费用；
+- 信号频率、未成交和失效信号；
+- 宏观告警命中率、误报率、漏报率和提前量；
+- 对用户时间、情绪和主业的影响。
+
+10 笔只做行为检查，30 笔做阶段评价，50 笔以上才开始更系统的参数研究。样本节点不证明盈利，不自动提高风险预算。单笔盈亏不能触发策略修改。
+
+## 13. Assumption Register
+
+| ID | Content | Type | Impact | Uncertainty | Current evidence | Validation | Success | Failure / stop | Status |
+|---|---|---|---|---|---|---|---|---|---|
+| A-001 | 严格风险门改善真实交易行为 | Value | P0 核心价值 | High | 无前瞻行为数据 | 比较计划覆盖、违规和错误放行 | 计划覆盖 100%，关键违规趋近 0 | 持续绕过或维护成本过高 | UNVALIDATED |
+| A-002 | 用户愿意每日维护/导入账户、持仓、订单、成交 | Usability | 账户可信度 | High | 无连续使用证据 | 30 个交易日试用 | 日终对账 100% | 持续缺失导致错误或大量 UNKNOWN | UNKNOWN |
+| A-003 | 数据源及时、合法、稳定且可负担 | Feasibility | 所有事实门 | High | 无正式 provider/SLA/许可 | 数据源选型和故障演练 | 满足时效、许可、成本并能 fail-closed | 长期不可得或成本/法律不可接受 | UNKNOWN |
+| A-004 | 只读 Agent 足以形成长期价值 | Value | P2 投资 | Medium | 仅 proposal | P0/P1 后做任务完成率和留存试验 | 提高缺口发现与复盘完成率 | 增加负担或诱发绕过 | UNVALIDATED |
+| A-005 | Setup B 在费用、滑点和不同市场状态下正期望 | Value / Feasibility | 策略继续与否 | High | 定义冻结，无足够前瞻样本 | 回放→模拟→小预算登记 | 净 Expectancy/风险支持继续 | 成本后为负或风险不可接受 | UNPROVEN |
+| A-006 | 宏观预警比简单市场过滤有额外保护 | Value | Stage 2 必要性 | High | 无对照数据 | 影子告警对照 | 降低错误新增风险且误报可接受 | 无增量价值 | UNPROVEN |
+| A-007 | 宏观误报不会导致长期错误空仓或频繁改计划 | Value / Usability | 机会成本和纪律 | High | 无行为证据 | 回放+影子告警 | 干扰与误报在阈值内 | 高频误报或用户失去信任 | UNKNOWN |
+| A-008 | 用户在亏损、踏空或连损时不会绕过系统 | Usability | 纪律闭环 | High | 无前瞻证据 | 违规与暂停日志 | 重复违规下降且可整改 | 持续绕过关键规则 | UNKNOWN |
+| A-009 | 手工、文件或只读同步足以保证券商对账 | Feasibility | 风险状态准确性 | High | 无路径验收 | 多渠道对账和迟到成交演练 | 日终 100% 对账 | 差异无法及时解释 | UNKNOWN |
+
+## 14. Current vs Target State
+
+Evidence cutoff：2026-09-14，`main@bd4b1d7`；开始修改前 worktree clean。
+
+| Capability | Current | Target |
+|---|---|---|
+| Engineering skeleton | IMPLEMENTED locally | maintainable foundation |
+| Instrument/Watchlist | PARTIALLY_IMPLEMENTED | validated data/user boundary |
+| Research Package | Capability `IMPLEMENTED`; verification evidence: targeted backend L3 `VERIFIED`; overall quality-gate result `UNKNOWN` | reliable P1 container；修复既有 OpenAPI artifact drift |
+| Evidence | CONTRACT_ONLY on main | versioned source/evidence implementation |
+| Thesis | DESIGN_ONLY / NOT_STARTED | evidence-linked immutable Thesis |
+| Personal Risk OS | DESIGN_ONLY / NEEDS_DOMAIN_DESIGN | deterministic P0 MVP kernel |
+| Research UI | PLANNED | three-scenario decision workspace |
+| Agent | DESIGN_ONLY / PLANNED | read-only explanation/proposal layer |
+| Incremental Update | PLANNED | source-to-revalidation flow |
+| Macro Alert/Sentinel | PLANNED | staged, calibrated risk signal |
+| Forward Validation | PLANNED | versioned production governance |
+
+`codex/wp04-evidence-persistence` 分支存在未合并的 WP-04 persistence foundation；它不改变 `main` 的 CONTRACT_ONLY 状态，也不能在合并与重新验证前写成 canonical 当前能力。
+
+## 15. Work Packages and Dependencies
+
+既有 WP-01 至 WP-08 不重命名、不覆盖、不重新编号：
+
+| WP | Historical identity | Current observed state |
+|---|---|---|
+| WP-01 | Engineering Skeleton | IMPLEMENTED local skeleton |
+| WP-02 | Instrument + Watchlist | PARTIALLY_IMPLEMENTED |
+| WP-03 | Research Package | Capability `IMPLEMENTED`；verification evidence：targeted backend L3 `VERIFIED`；overall quality-gate result `UNKNOWN` |
+| WP-04 | Evidence | CONTRACT_ONLY on main; implementation next |
+| WP-05 | Thesis Engine | DESIGN_ONLY / NOT_STARTED |
+| WP-06 | Research UI | PLANNED |
+| WP-07 | Read-only Agent | DESIGN_ONLY / PLANNED |
+| WP-08 | Incremental Update | PLANNED |
+
+新增：
+
+| WP | Purpose | Dependency |
+|---|---|---|
+| WP-RISK-01 | Personal Risk OS | WP-05；产品/领域设计可提前并行 |
+| WP-ALERT-01 | Basic Policy & Market Alert | WP-08 + WP-RISK-01 |
+| WP-MACRO-01 | Systemic Risk Sentinel | WP-ALERT-01 + validation data |
+| WP-VALIDATION-01 | Forward Validation & Model Governance | cross-cutting; full evaluation follows prior WPs |
 
 ```text
-WP-03 Research Package
+WP-01 → WP-02 → WP-03 → WP-04 → WP-05 → WP-RISK-01
+      → WP-06 → WP-07 → WP-08 → WP-ALERT-01
+      → WP-MACRO-01 → WP-VALIDATION-01
 ```
 
----
+Agent UI 可提前原型化，但不得当作风险闭环完成。Macro 不阻塞最小交易风险闭环。前瞻验证口径必须随生产规则设计，而非最后补写。
 
-## Phase 4
+## 16. V1 Out of Scope
 
-```text
-WP-04 Evidence
-```
+- 自动下单、自主调仓、券商客户端控制；
+- 高频、分钟级、做 T、第一轮主动加仓；
+- Setup A、Setup C、60 分钟确认和未经验证的多买点；
+- 杠杆、借款、亏损摊低成本；
+- 多市场、多资产全面覆盖；
+- 复杂多 Agent、社交投资、收益排行榜；
+- 自动在线学习和自动修改生产策略；
+- 精确预测股灾概率或危机日期；
+- 为所有 A 股同时生成完整深度研究；
+- 任何稳定盈利、回本、胜率或超额收益承诺。
 
----
+## 17. Validation Plan
 
-## Phase 5
+### 17.1 Product validation
 
-```text
-WP-05 Thesis Engine
-```
+- 用真实日常流程验证 SC-001/002/003 是否减少遗漏和绕过；
+- 记录完成时间、缺口、用户手工负担和错误恢复路径；
+- 失败场景必须比成功演示优先，包括缺数据、在途订单和不可卖退出。
 
----
+### 17.2 Deterministic validation
 
-## Phase 6
+- 同一输入/规则版本产生相同账户状态和动作；
+- `MISSING / STALE / CONFLICTING` 的关键输入不能错误放行；
+- 订单、成交、撤单和迟到回报不双计、不漏计；
+- 历史版本不可覆盖。
 
-```text
-WP-06 Thesis Validation UI
-```
+### 17.3 Strategy validation
 
----
+1. 用当时可知数据重演；
+2. 前瞻模拟并保存未成交/失效信号；
+3. 在用户批准的启用登记和预算内做小预算记录；
+4. 按 10/30/50 节点检查行为、阶段表现和参数研究资格；
+5. 任何参数变化建立新版本，不污染旧样本。
 
-## Phase 7
+### 17.4 Macro validation
 
-```text
-WP-07 Read-Only Agent
-```
+Stage 1/2 先影子运行，记录来源延迟、去重、误报、漏报、提前量和对用户行为的影响。只有独立策略版本、历史重演、前瞻模拟和用户批准后，宏观信号才可能改变已有持仓动作。
 
----
+## 18. Product Readiness
 
-## Phase 8
+| Scope | State | Meaning |
+|---|---|---|
+| Product direction | APPROVED | 北极星、P0-P3 与非承诺边界已确定 |
+| PRD | PRD_DRAFT | 可继续细化；未达到 `PRD_VALIDATED` |
+| WP-04 foundation | READY_TO_CONTINUE_IMPLEMENTATION | 合同已冻结；WP04-01 persistence 仅存在于未合并分支，main 尚未集成，后续 service/API/typed links 未实现 |
+| WP-05 foundation | NEEDS_DOMAIN_DESIGN | 依赖 WP-04 落地 |
+| WP-RISK-01 | READY_FOR_PRODUCT_AND_DOMAIN_DESIGN | 不等于 ready for coding |
+| Whole product | NOT_READY_FOR_FULL_AGENT_BUILD | Agent 事实与风险依赖不完整 |
+| Strategy profitability | UNPROVEN | 没有足够扣成本前瞻证据 |
 
-```text
-WP-08 Incremental Update
-```
+## 19. MVP Acceptance Summary
 
-P0 完成。
+V1 MVP 只有在以下条件均有 L3+ 证据、关键真实对账链有 L4 证据时才可声明闭环：
 
----
+1. SC-001 在账户/订单未知时稳定禁止新增风险；
+2. SC-002 六项准入、双指数、Setup B、数量/费用/RR/预占/PK/确认全部可复现；
+3. SC-003 能锁定退出、处理客观限制、完成净结果与纪律复盘；
+4. 所有 ActionDecision 可追溯到规则版本和输入快照；
+5. 历史 Evidence、Thesis、计划、订单、成交、纪律和规则不可覆盖；
+6. Agent 离线时确定性风险门仍工作；
+7. 任何收益或宏观观察不被写成产品保证。
 
-# 46. P1 开发阶段
+## 20. Open Decisions
 
-```text
-WP-09 Expectation Engine
+- WP-RISK-01 的领域合同、子任务和验收分解；
+- 账户/持仓/订单的数据接入路径和对账 SLA；
+- 各类决策数据的 freshness 阈值；
+- 长期 ETF 与 4 只个股容量规则的精确交互；
+- 政策数据源清单、许可、去重和告警 SLA；
+- 宏观告警可接受误报/漏报阈值；
+- 真实前瞻验证的启用条件和小预算上限。
 
-WP-10 Valuation
+## 21. 一句话产品定义
 
-WP-11 Expectation Gap / Price-In
-
-WP-12 Trade Plan
-
-WP-13 Catalyst
-
-WP-14 Bull vs Bear
-```
-
----
-
-# 47. P2
-
-```text
-Market Regime
-
-Portfolio
-
-Discipline
-
-Realtime
-
-Tonghuashun MCP
-
-Broker Sync
-```
-
----
-
-# 48. 开放问题
-
-当前需要后续确认：
-
-1. 首版证券基础数据源
-2. 财报数据源
-3. 研报授权与抓取方式
-4. 一致预期来源
-5. 实时市场情绪来源
-6. 是否接同花顺 MCP
-7. 券商账户同步方案
-8. 用户是否需要多账户
-9. 国内 / 海外资产支持边界
-10. 是否支持桌面客户端
-
----
-
-# 49. 产品最终验收问题
-
-系统必须可以回答以下问题：
-
-## Q1
-
-> 我为什么买？
-
----
-
-## Q2
-
-> 这个理由现在还成立吗？
-
----
-
-## Q3
-
-> 哪些新事实让判断发生变化？
-
----
-
-## Q4
-
-> 机构预期是在上调还是下调？
-
----
-
-## Q5
-
-> 股价已经 Price In 多少？
-
----
-
-## Q6
-
-> Bear/Base/Bull 分别是什么？
-
----
-
-## Q7
-
-> 如果我错了，在哪里认输？
-
----
-
-## Q8
-
-> 我的交易计划有没有被我偷偷修改？
-
----
-
-## Q9
-
-> 这次 Catalyst 验证了什么？
-
----
-
-## Q10
-
-> 这笔交易最终错在哪里？
-
----
-
-# 50. 一句话产品定义
-
-> 论衡 ThesisGuard 是一个以投资 Thesis 为核心，通过结构化事实、可追溯 Evidence、机构预期变化、情景估值、不可变交易计划与持续事件验证，帮助个人投资者形成可解释、可复盘、可迭代交易决策体系的个人投资操作系统。
-
+> **ThesisGuard 是一个以确定性风险内核为底座、以 Evidence 与 Thesis 为事实基础、以只读 Agent 为解释与提案层的个人 A 股现金账户决策操作系统；它帮助用户少犯不可承受的错误并验证方法，而不承诺盈利或预测危机日期。**

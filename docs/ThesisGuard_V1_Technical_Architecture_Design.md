@@ -1,2352 +1,457 @@
 # 论衡 ThesisGuard V1 技术架构设计（TAD）
 
-> 版本：V1.0 Draft  
-> 日期：2026-09-12  
-> 产品：论衡 ThesisGuard  
-> 定位：个人交易研究与决策系统  
-> 核心：Build the thesis. Test the thesis. Guard the downside.
+> Version: 2.0-draft
+>
+> Updated: 2026-09-14
+>
+> Status: **TECH_DESIGN_DRAFT**
+>
+> Product Direction: **APPROVED**
+>
+> PRD: **PRD_DRAFT**
+>
+> Strategy Validation: **UNPROVEN**
+>
+> Canonical product decision: [PRODUCT_GOAL_REALIGNMENT_2026-09-14.md](PRODUCT_GOAL_REALIGNMENT_2026-09-14.md)
 
----
+## 1. 文档目标与边界
 
-# 1. 文档目标
+本文定义 ThesisGuard V1 的架构目标、模块优先级、依赖、权威数据边界和故障降级原则。它不在本次目标调整中批准新的数据库表、API、OpenAPI、前端页面、Agent Runtime 细节、数据接入或宏观算法。
 
-本文用于指导 ThesisGuard V1 的工程实现。
+架构服务于以下产品北极星：
 
-本阶段不追求：
+> **ThesisGuard 是一套面向个人 A 股现金账户的、证据驱动的风险与决策操作系统。它帮助用户避免无法承受的错误，并用可审计的前瞻数据验证个人交易方法是否存在扣除成本后的优势。**
 
-- 全自动交易
-- 高频量化
-- 多券商直接下单
-- 复杂多 Agent 自治
-- 大规模微服务
-- 全市场毫秒级行情
-- 替用户“预测涨跌”
+架构口号：
 
-本阶段核心目标是将产品原型中的 **Thesis Lifecycle** 真正落地为可运行系统：
+> **Agent 可以不可用，风险门必须继续工作；LLM 只提案，确定性领域服务才提交事实与状态。**
 
-```text
-发现标的
-↓
-建立 Thesis
-↓
-收集事实与机构预期
-↓
-持续验证 Thesis
-↓
-发现预期差
-↓
-Bull / Base / Bear 估值
-↓
-判断 Price-In
-↓
-市场风险过滤
-↓
-制定并冻结交易计划
-↓
-催化剂持续验证
-↓
-交易执行记录
-↓
-复盘
-↓
-更新个人交易模型
+## 2. Architecture Decision Summary
+
+1. `Personal Risk OS` 是确定性生存内核，不依赖 LLM、RAG、通知或 Agent 在线。
+2. Evidence 和 Thesis 是 Agent 的事实依赖；Agent 不能在它们之前成为核心可交付能力。
+3. Account、Portfolio、Market、Trade Plan、Order/Execution、Discipline 必须在 Agent 之前形成可靠读取边界。
+4. PostgreSQL 是结构化业务状态与不可变版本元数据的 durable truth；MinIO 保存原始对象；pgvector/RAG 是可重建索引；Redis 是缓存、队列或分发基础设施。
+5. LLM、Redis、pgvector 和通知系统都不能成为金融事实、风险状态、交易状态或 Evidence 的唯一真相。
+6. 缺少、过期、冲突或无法核验的关键输入时，对新增风险 fail-closed。
+7. 历史 Evidence、Thesis、Trade Plan、订单、成交、纪律、暂停、告警和规则版本不可覆盖。
+8. Macro Risk Sentinel 分为基础政策/市场告警与系统性风险哨兵，不等同于确定性危机预测。
+9. 策略参数和动作路径必须版本化；个人交易模型 v1.3 / 系统 v1.1 本次不变。
+10. 系统不自动下单、不控制券商、不代替用户确认交易意愿。
+
+## 3. Current Architecture Reality
+
+Evidence cutoff：2026-09-14，`main@bd4b1d7`。状态不得由目录、文档或提交标题单独推断。
+
+| Area | Observed state | Evidence | Boundary |
+|---|---|---|---|
+| Engineering skeleton | IMPLEMENTED locally | FastAPI/Vue/PostgreSQL/Redis/MinIO/Dramatiq/Compose files | 不证明生产部署 |
+| Instrument / Watchlist | PARTIALLY_IMPLEMENTED | models/services/API/migration/tests | 正式数据源和完整用户边界未证明 |
+| Research Package | Capability `IMPLEMENTED`; verification evidence: targeted backend L3 `VERIFIED`; overall quality-gate result `UNKNOWN` | code + migration + 16 current backend tests；OpenAPI artifact drift recorded | 不证明真实研究内容生成、生产使用或全部质量门禁绿色 |
+| Evidence | CONTRACT_ONLY on main | frozen WP-04 contract + historical acceptance | 无 main models/migration/service/API |
+| Thesis / Market / Portfolio / Trade Plan / Discipline / Agent | DESIGN_ONLY or PLANNED | placeholder packages + design docs | 无领域实现 |
+| WP-04 persistence branch | PARTIALLY_IMPLEMENTED on unmerged branch (L1 static evidence; historical L4 acceptance claim) | `codex/wp04-evidence-persistence@4201ae7` | 未合并到 main；不能当 canonical current capability 或整个 WP-04 完成 |
+
+两份 TAD 在本次修改前内容与 SHA-256 完全相同。当前文件是 canonical TAD；`ThesisGuard_V1_Technical_Architecture_Design (1).md` 保留为非 canonical 历史副本，不随本次重写更新。
+
+## 4. Target Architecture
+
+```mermaid
+flowchart TB
+    U[User]
+    UI[Research and Risk UI]
+    A[Read-only Agent]
+
+    subgraph Deterministic Core
+      RG[Risk Gate]
+      AC[Account and NAV]
+      PF[Portfolio and Positions]
+      OR[Orders and Execution]
+      TP[Trade Plan and Exit]
+      DS[Discipline and Pause/Recovery]
+      MK[Market Gate]
+    end
+
+    subgraph Research Facts
+      RP[Research Package]
+      EV[Evidence]
+      TH[Thesis]
+      VA[Valuation and Catalyst]
+    end
+
+    subgraph Staged Risk Intelligence
+      PA[Basic Policy and Market Alert]
+      MS[Systemic Risk Sentinel]
+    end
+
+    PG[(PostgreSQL Durable Truth)]
+    OBJ[(MinIO Raw Objects)]
+    IDX[(pgvector / RAG Index)]
+    REDIS[(Redis Cache / Queue / Fan-out)]
+    N[Notification Delivery]
+
+    U --> UI
+    UI --> RG
+    UI --> A
+    A --> RP
+    A --> EV
+    A --> TH
+    A --> RG
+    A -. proposal .-> UI
+
+    RP --> PG
+    EV --> PG
+    TH --> PG
+    AC --> PG
+    PF --> PG
+    OR --> PG
+    TP --> PG
+    DS --> PG
+    MK --> PG
+    EV --> OBJ
+    EV --> IDX
+
+    RG --> AC
+    RG --> PF
+    RG --> OR
+    RG --> TP
+    RG --> DS
+    RG --> MK
+    RG --> EV
+    RG --> TH
+
+    PA --> PG
+    MS --> PG
+    PA --> RG
+    MS -. versioned proposal/input .-> RG
+    PG --> N
+    REDIS --> N
 ```
 
----
+虚线表示提案或可选输入，不表示直接领域写入。所有产生风险状态、准入、暂停恢复或历史版本的写入必须进入相应 Domain Service。
 
-# 2. 核心设计原则
+## 5. Module Priority and Boundaries
 
-## 2.1 Thesis 是第一领域对象
+### 5.1 Foundation
 
-系统核心不是 Stock，也不是 Chat Session。
+`common` 提供配置、数据库、事件、安全和存储基础设施。它不能包含绕过领域服务的“通用写入”入口，也不能把 Redis Stream 当 durable audit truth。
 
-系统核心对象是：
+### 5.2 Instrument and Watchlist
 
-```text
-Instrument
-  └── Thesis
-        ├── ThesisVersion
-        ├── Evidence
-        ├── CounterEvidence
-        ├── ValidationRule
-        ├── InvalidationRule
-        └── ThesisScoreLedger
-```
+负责标的主数据、别名/关系和观察列表。分类或标签不能伪装成 Evidence 结论；正式数据来源与用户范围需要独立验证。
 
-股票只是 Thesis 的载体。
+### 5.3 Research Package
 
----
+负责 Research Package 和 Research Module 的版本化容器、freshness 和 source references。WP-03 的增量刷新表示包级 copy-on-write/version refresh；WP-08 表示新 Evidence 触发的端到端重新验证、账本和通知，两者不得混同。
 
-## 2.2 LLM 不是系统事实源
-
-LLM 可以负责：
-
-- 理解
-- 摘要
-- 分类建议
-- 证据关联建议
-- 多空辩论
-- 解释
-- 反驳
-- 生成研究初稿
-
-LLM 不直接负责：
-
-- 写最终财务事实
-- 计算仓位
-- 计算估值
-- 修改冻结交易计划
-- 修改历史 Thesis
-- 决定市场情绪分数
-- 直接改数据库
-
-所有最终业务状态必须由确定性 Domain Service 写入。
-
----
-
-## 2.3 结构化事实优先于 RAG
-
-数据分层：
-
-```text
-PostgreSQL
-= 最新事实 / 当前状态 / 业务对象 / 评分账本
-
-pgvector
-= 语义检索索引
-
-MinIO / S3
-= PDF / 公告 / 研报 / 调研纪要 / 原始文件
-
-Redis
-= Cache / Queue / Event Stream
-```
-
-原则：
-
-> DB 回答“现在是什么”。  
-> RAG 回答“为什么”。  
-> 原始文件回答“证据原文在哪里”。
-
----
-
-## 2.4 不可覆盖历史
-
-以下对象全部版本化：
-
-- Thesis
-- Trade Plan
-- Research Package
-- 盈利预测快照
-- Bull/Base/Bear 场景
-- 用户交易规则
-- Agent Prompt
-
-禁止用最新值覆盖历史值。
-
----
-
-## 2.5 模块化单体优先
-
-V1 使用：
-
-```text
-Modular Monolith
-```
-
-不拆微服务。
-
-理由：
-
-- 个人项目
-- 业务边界仍在演进
-- 运维成本需要保持低
-- 事件驱动可以先在单体内部完成
-- 后续可按热点模块拆分
-
----
-
-# 3. 推荐技术栈
-
-## 3.1 Web
-
-```text
-Vue 3
-TypeScript
-Vite
-Pinia
-Vue Router
-Axios / Fetch
-ECharts（正式产品允许使用）
-TradingView Lightweight Charts（K线）
-```
-
-原型仍保持纯 HTML。
-
-正式产品建议使用 ECharts，不继续手搓所有 SVG。
-
----
-
-## 3.2 API
-
-```text
-Python 3.12+
-FastAPI
-Pydantic v2
-SQLAlchemy 2
-Alembic
-```
-
----
-
-## 3.3 Worker
-
-```text
-Python
-Dramatiq 或 ARQ
-Redis
-```
-
-V1 推荐：
-
-```text
-Dramatiq + Redis
-```
-
----
-
-## 3.4 Database
-
-```text
-PostgreSQL 17
-pgvector
-```
-
-可选：
-
-```text
-TimescaleDB
-```
-
-用于：
-
-- 分钟 K 线
-- 市场宽度
-- 涨跌停数量
-- 情绪指标序列
-
-V1 也可以先不启用。
-
----
-
-## 3.5 Object Storage
-
-```text
-MinIO
-```
-
-兼容 S3 API。
-
----
-
-## 3.6 Infrastructure
-
-```text
-Docker Compose
-Nginx / Caddy
-```
-
-开发与个人服务器统一：
-
-```bash
-docker compose up -d
-```
-
----
-
-# 4. 总体架构
-
-```text
-┌──────────────────────────────────────────────────────┐
-│                  ThesisGuard Web                     │
-│              Vue3 + TypeScript + Pinia               │
-└──────────────────────┬───────────────────────────────┘
-                       │
-                REST / SSE / WS
-                       │
-┌──────────────────────▼───────────────────────────────┐
-│                ThesisGuard Core API                  │
-│                     FastAPI                          │
-│                                                     │
-│ Instrument     Watchlist       Research             │
-│ Thesis         Evidence        Expectation          │
-│ Valuation      Price-In        Catalyst             │
-│ Portfolio      Trade Plan      Discipline           │
-│ Market Regime  Intelligence   Notification         │
-│ Agent Runtime / Tool Registry / Policy Layer        │
-└───────┬──────────────┬──────────────┬───────────────┘
-        │              │              │
-        ▼              ▼              ▼
- PostgreSQL        Redis          MinIO / S3
- pgvector          Cache          PDF / Report
-                  Queue
-                  Streams
-        ▲
-        │
-┌───────┴──────────────────────────────────────────────┐
-│                  Async Workers                      │
-│                                                     │
-│ 行情 │ 公告 │ 财报 │ 研报 │ 新闻 │ 政策 │ MCP     │
-│                                                     │
-│ Normalize → Dedup → Extract → Store → Event         │
-└─────────────────────────────────────────────────────┘
-```
-
----
-
-# 5. 核心模块边界
-
-## 5.1 Instrument
+### 5.4 Evidence
 
 负责：
 
-- 股票
-- ETF
-- 行业
-- 指数
-- 事件篮子
+- `SourceDocument / SourceDocumentVersion`；
+- `EvidenceSeries / EvidenceVersion`；
+- source locator、grade、verification、freshness；
+- 去重、幂等、并发、纠错、争议、撤回和来源关系；
+- PostgreSQL 元数据、MinIO 原始对象和可重建向量索引之间的边界。
 
-核心表：
+详细合同以 [WP04_EVIDENCE_DOMAIN_CONTRACT.md](WP04_EVIDENCE_DOMAIN_CONTRACT.md) 为准。它是 `CONTRACT_ONLY`，不是实现证据。
 
-```text
-instrument
-instrument_alias
-instrument_tag
-instrument_relation
-```
-
----
-
-## 5.2 Watchlist
-
-负责：
-
-- 加入自选
-- 删除自选
-- 标的自动分类
-- 研究建档触发
-- 自选状态
-
-分类：
-
-```text
-INSTITUTIONAL_TREND
-HOT_MONEY
-HYBRID
-EVENT_DRIVEN
-```
-
-注意：
-
-分类结果必须可解释。
-
----
-
-## 5.3 Research
-
-负责：
-
-- Research Package
-- 首次全量研究
-- 增量更新
-- 模块新鲜度
-- 版本管理
-
-研究模块建议：
-
-```text
-COMPANY
-BUSINESS
-INDUSTRY
-ORDER
-FINANCIAL
-EXPECTATION
-VALUATION
-RISK
-CATALYST
-COMPETITOR
-MANAGEMENT
-```
-
----
-
-## 5.4 Evidence
-
-负责：
-
-- 信息类型
-- 来源等级
-- 原始来源
-- 证据有效期
-- Thesis 关联
-
-信息类型：
-
-```text
-FACT
-ESTIMATE
-THESIS_INFERENCE
-USER_HYPOTHESIS
-```
-
-来源等级：
-
-```text
-S = 公司公告 / 财报
-A = 交易所 / 监管 / 官方数据
-B = 公司投资者交流 / 机构调研
-C = 券商研报
-D = 权威财经媒体
-E = 社交媒体
-F = 传闻 / 未验证
-```
-
-硬规则：
-
-```text
-F 级信息不得直接进入核心 Thesis。
-```
-
----
-
-## 5.5 Thesis Engine
-
-负责：
-
-- 建立 Thesis
-- Thesis Version
-- Evidence 关联
-- 反方证据
-- Validation
-- Invalidation
-- Health Score
-- Score Ledger
-
-状态：
-
-```text
-SUPPORTED
-NEUTRAL
-WEAKENING
-INVALIDATED
-PENDING
-```
-
----
-
-## 5.6 Expectation Engine
-
-负责：
-
-- 机构预测
-- 盈利预期历史
-- 券商差异
-- Consensus Snapshot
-- 上调 / 下调检测
-
----
-
-## 5.7 Valuation Engine
-
-负责：
-
-- Bull / Base / Bear
-- PE / PS / EV/EBITDA 等参数
-- 目标市值计算
-- 风险收益比
-
-V1 先支持：
-
-```text
-利润 × PE
-```
-
----
-
-## 5.8 Expectation Gap
-
-负责：
-
-```text
-盈利预测变化
-股价变化
-估值变化
-```
-
-输出：
-
-```text
-HUGE_POSITIVE
-POSITIVE
-MATCHED
-FULLY_PRICED
-NEGATIVE
-```
-
----
-
-## 5.9 Price-In Engine
-
-负责：
-
-- 市场已交易哪些预期
-- 尚未充分交易哪些预期
-- 计价程度
-
-采用：
-
-```text
-Quant Layer
-+
-Reasoning Layer
-```
-
----
-
-## 5.10 Market Regime
-
-负责：
-
-```text
-PANIC
-ICE
-REPAIR
-NORMAL
-ACTIVE
-EUPHORIC
-RETREAT
-```
-
-输入：
-
-- 上涨家数
-- 下跌家数
-- 涨停
-- 跌停
-- 炸板率
-- 连板高度
-- 成交额
-- 成交额相对 20 日均额
-- 指数趋势
-- 情绪斜率
-
-输出：
-
-- regime
-- score
-- risk budget
-- position cap
-
-禁止 LLM 决定分数。
-
----
-
-## 5.11 Portfolio
-
-负责：
-
-- 持仓
-- 仓位
-- 现金
-- 行业暴露
-- 相关性
-- 最大持仓数
-
-硬规则：
-
-```text
-默认最多 4 只
-第 5 只必须做 Position Replacement PK
-```
-
----
-
-## 5.12 Trade Plan
-
-负责：
-
-- 买入区
-- 初始仓位
-- 加仓条件
-- 止损
-- 失效条件
-- 目标情景
-- 冻结
-- 版本变更
-
-核心原则：
-
-> Freeze 后不可 UPDATE 原版本。
-
----
-
-## 5.13 Catalyst
-
-负责：
-
-- 财报
-- FOMC
-- 订单公告
-- 产业事件
-- 政策
-- 产品发布
-
-Catalyst 不是日历装饰。
-
-每个 Catalyst 包含 Validation Rules。
-
----
-
-## 5.14 Discipline
-
-负责：
-
-- 追高
-- 止损延迟
-- 计划外交易
-- 亏损补仓
-- 仓位超限
-- 纪律评分
-- 行为统计
-
----
-
-## 5.15 Agent Runtime
-
-负责：
-
-- Context Builder
-- Tool Registry
-- Prompt Router
-- Model Router
-- Policy Layer
-- Streaming Response
-
-Agent 不直接写数据库。
-
----
-
-# 6. 关键数据模型
-
-下面为 V1 建议核心表。
-
----
-
-## 6.1 instrument
-
-```sql
-id
-symbol
-name
-exchange
-asset_type
-industry
-status
-created_at
-updated_at
-```
-
----
-
-## 6.2 watchlist_item
-
-```sql
-id
-instrument_id
-classification
-classification_reason
-classification_confidence
-status
-added_at
-```
-
----
-
-## 6.3 research_package
-
-```sql
-id
-instrument_id
-version
-status
-started_at
-completed_at
-last_verified_at
-```
-
-status：
-
-```text
-ACTIVE
-STALE
-UPDATING
-FAILED
-```
-
----
-
-## 6.4 research_module
-
-```sql
-id
-research_package_id
-module_type
-version
-status
-summary
-last_verified_at
-stale_after
-```
-
----
-
-## 6.5 evidence
-
-```sql
-id
-instrument_id
-
-information_type
-source_grade
-source_type
-
-title
-content
-
-source_url
-source_file_id
-source_date
-
-effective_from
-effective_to
-
-verification_status
-created_at
-```
-
----
-
-## 6.6 thesis
-
-```sql
-id
-instrument_id
-title
-current_version_id
-status
-health_score
-created_at
-last_verified_at
-```
-
----
-
-## 6.7 thesis_version
-
-```sql
-id
-thesis_id
-version_no
-
-statement
-status
-
-health_before
-health_after
-
-change_summary
-
-created_at
-```
-
----
-
-## 6.8 thesis_evidence
-
-```sql
-id
-thesis_version_id
-evidence_id
-
-direction
-impact_weight
-reason
-
-created_at
-```
-
-direction：
-
-```text
-SUPPORT
-CONTRADICT
-NEUTRAL
-```
-
----
-
-## 6.9 thesis_validation_rule
-
-```sql
-id
-thesis_id
-
-rule_type
-metric
-operator
-threshold
-description
-
-is_invalidation_rule
-```
-
----
-
-## 6.10 thesis_score_ledger
-
-```sql
-id
-thesis_id
-thesis_version_id
-evidence_id
-
-delta
-reason
-
-created_at
-```
-
----
-
-## 6.11 broker_report
-
-```sql
-id
-instrument_id
-broker
-analyst
-report_date
-rating
-target_price
-source_file_id
-```
-
----
-
-## 6.12 broker_estimate
-
-```sql
-id
-broker_report_id
-fiscal_year
-
-revenue
-net_profit
-eps
-
-created_at
-```
-
----
-
-## 6.13 expectation_snapshot
-
-```sql
-id
-instrument_id
-snapshot_date
-
-consensus_revenue
-consensus_profit
-consensus_eps
-
-broker_count
-
-upgrade_count
-maintain_count
-downgrade_count
-```
-
----
-
-## 6.14 valuation_scenario
-
-```sql
-id
-instrument_id
-version
-
-scenario
-fiscal_year
-
-profit_assumption
-pe_assumption
-
-target_market_cap
-upside_downside
-
-assumption_note
-created_at
-```
-
-scenario：
-
-```text
-BEAR
-BASE
-BULL
-```
-
----
-
-## 6.15 price_in_snapshot
-
-```sql
-id
-instrument_id
-snapshot_date
-
-quant_score
-reasoning_score
-final_score
-
-priced_factors_json
-unpriced_factors_json
-```
-
----
-
-## 6.16 expectation_gap_snapshot
-
-```sql
-id
-instrument_id
-snapshot_date
-
-profit_revision_30d
-stock_return_30d
-valuation_change_30d
-
-score
-status
-reason
-```
-
----
-
-## 6.17 trade_plan
-
-```sql
-id
-instrument_id
-current_version_id
-status
-created_at
-```
-
----
-
-## 6.18 trade_plan_version
-
-```sql
-id
-trade_plan_id
-
-version_no
-parent_version_id
-
-buy_zone_low
-buy_zone_high
-
-initial_position_pct
-
-add_condition
-stop_loss
-
-invalidation_condition
-
-base_target
-bull_target
-
-status
-change_reason
-
-created_at
-frozen_at
-```
-
----
-
-## 6.19 catalyst
-
-```sql
-id
-instrument_id
-
-title
-event_type
-expected_at
-actual_at
-
-status
-
-created_at
-```
-
----
-
-## 6.20 catalyst_check
-
-```sql
-id
-catalyst_id
-
-metric
-operator
-target_value
-
-actual_value
-result
-
-weight
-```
-
-result：
-
-```text
-PASS
-FAIL
-PENDING
-```
-
----
-
-## 6.21 portfolio_position
-
-```sql
-id
-instrument_id
-
-quantity
-avg_cost
-position_pct
-
-opened_at
-closed_at
-
-linked_trade_plan_version_id
-```
-
----
-
-## 6.22 discipline_event
-
-```sql
-id
-instrument_id
-
-event_type
-severity
-
-planned_value
-actual_value
-
-reason
-occurred_at
-```
-
----
-
-# 7. Thesis Score Ledger
-
-禁止黑盒评分。
-
-例：
-
-```text
-THESIS-001
-
-基础分                       78
-
-Q3订单证据增强               +3
-两家券商上调盈利预测          +2
-收入增长继续加速             +2
-经营现金流尚未改善           -1
-
-────────────────────────────
-当前                        84
-```
-
-计算由规则引擎完成。
-
-LLM 只提供：
-
-```text
-Evidence Classification Proposal
-```
-
----
-
-# 8. 关键事件定义
-
-V1 不引入 Kafka。
-
-使用：
-
-```text
-Redis Streams
-```
-
-核心事件：
-
-```text
-instrument.added_to_watchlist
-
-research.full_requested
-research.completed
-research.module_updated
-
-evidence.created
-
-thesis.created
-thesis.updated
-thesis.invalidated
-
-broker_report.ingested
-estimate.revised
-consensus.updated
-
-price_in.updated
-expectation_gap.updated
-
-valuation.updated
-
-market.regime_changed
-
-trade_plan.created
-trade_plan.frozen
-trade_plan.revised
-
-catalyst.created
-catalyst.completed
-
-position.opened
-position.updated
-position.closed
-
-discipline.violation_created
-```
-
----
-
-# 9. 关键事件链路
-
-## 9.1 加入自选
-
-```text
-POST /watchlist
-↓
-instrument.added_to_watchlist
-↓
-Classification Service
-↓
-research.full_requested
-↓
-Research Worker
-↓
-Evidence Extraction
-↓
-Research Package
-↓
-Initial Thesis
-↓
-research.completed
-```
-
----
-
-## 9.2 新研报进入
-
-```text
-broker_report.ingested
-↓
-Estimate Extractor
-↓
-broker_estimate
-↓
-Consensus Calculator
-↓
-estimate.revised
-↓
-Expectation Gap
-↓
-Price-In
-↓
-Thesis Re-evaluation
-↓
-Notification
-```
-
----
-
-## 9.3 Q3 财报进入
-
-```text
-financial_report.ingested
-↓
-Fact Extraction
-↓
-Catalyst Validation
-↓
-4 / 5 checks
-↓
-catalyst.completed
-↓
-Thesis Score Ledger
-↓
-78 → 83
-↓
-Agent Notification
-```
-
----
-
-## 9.4 修改冻结止损
-
-```text
-User:
-96 → 90
-
-↓
-Risk Service
-
-risk_delta > 0
-
-↓
-BLOCK normal edit
-
-↓
-Require reason
-
-↓
-Create PLAN-v2
-
-↓
-trade_plan.revised
-```
-
----
-
-# 10. Agent Runtime
-
-## 10.1 Agent 架构
-
-```text
-User
- ↓
-Agent Orchestrator
- ↓
-Context Builder
- ↓
-Policy Layer
- ↓
-Tool Registry
- ↓
-LLM
- ↓
-Structured Proposal
- ↓
-Domain Service
-```
-
----
-
-## 10.2 Tool Registry
-
-V1 工具：
-
-```text
-get_instrument
-
-get_research_package
-
-get_current_thesis
-get_thesis_versions
-get_thesis_evidence
-
-get_broker_estimates
-get_consensus_history
-
-get_expectation_gap
-get_price_in
-
-get_valuation_scenarios
-
-get_market_regime
-
-get_portfolio
-get_position
-
-get_trade_plan
-get_trade_plan_versions
-
-get_catalyst_tasks
-
-get_discipline_summary
-
-calculate_valuation
-calculate_position_size
-
-propose_thesis_update
-propose_trade_plan
-```
-
----
-
-## 10.3 禁止 Agent 直接调用
-
-```text
-UPDATE DATABASE
-
-delete historical version
-
-modify frozen plan
-
-change market regime score
-
-change portfolio limit
-
-execute trade
-```
-
----
-
-# 11. Bull / Bear / Judge
-
-V1 不需要复杂 Multi-Agent Runtime。
-
-流程：
-
-```text
-Evidence Package
-      │
-      ├── Bull Prompt
-      │
-      ├── Bear Prompt
-      │
-      └── Judge Prompt
-```
-
-输出：
-
-```text
-确定事实
-合理推断
-证据不足
-核心争议
-```
-
-三个角色必须读取相同 Evidence Snapshot。
-
----
-
-# 12. Market Regime Engine
-
-## 12.1 输入
-
-```text
-advancers
-decliners
-
-limit_up
-limit_down
-
-failed_limit_up_rate
-
-max_limit_streak
-
-turnover
-turnover_20d_ratio
-
-index_trend_daily
-index_trend_60m
-
-breadth
-
-sentiment_slope
-```
-
----
-
-## 12.2 输出
-
-```json
-{
-  "regime": "REPAIR",
-  "score": 28,
-  "position_budget": {
-    "min": 0.30,
-    "max": 0.45
-  },
-  "single_position_max": 0.12,
-  "initial_position_max": 0.05
-}
-```
-
----
-
-# 13. API 设计
-
-统一：
-
-```text
-/api/v1
-```
-
----
-
-## 13.1 Instrument
-
-```http
-GET    /instruments/{id}
-GET    /instruments/search
-```
-
----
-
-## 13.2 Watchlist
-
-```http
-GET    /watchlist
-POST   /watchlist
-DELETE /watchlist/{id}
-```
-
----
-
-## 13.3 Research
-
-```http
-GET  /instruments/{id}/research
-POST /instruments/{id}/research/full
-POST /instruments/{id}/research/refresh
-```
-
----
-
-## 13.4 Thesis
-
-```http
-GET  /instruments/{id}/theses
-
-POST /instruments/{id}/theses
-
-GET  /theses/{id}
-GET  /theses/{id}/versions
-GET  /theses/{id}/evidence
-
-POST /theses/{id}/revalidate
-```
-
----
-
-## 13.5 Expectation
-
-```http
-GET /instruments/{id}/expectations
-GET /instruments/{id}/expectations/history
-GET /instruments/{id}/broker-estimates
-```
-
----
-
-## 13.6 Valuation
-
-```http
-GET  /instruments/{id}/valuation
-POST /instruments/{id}/valuation/recalculate
-```
-
----
-
-## 13.7 Price-In
-
-```http
-GET /instruments/{id}/price-in
-GET /instruments/{id}/expectation-gap
-```
-
----
-
-## 13.8 Trade Plan
-
-```http
-GET  /instruments/{id}/trade-plan
-
-POST /trade-plans
-POST /trade-plans/{id}/freeze
-POST /trade-plans/{id}/revise
-
-GET /trade-plans/{id}/versions
-```
-
----
-
-## 13.9 Catalyst
-
-```http
-GET  /instruments/{id}/catalysts
-POST /catalysts
-POST /catalysts/{id}/validate
-```
-
----
-
-## 13.10 Portfolio
-
-```http
-GET /portfolio
-GET /portfolio/risk
-GET /portfolio/correlation
-POST /portfolio/replacement-pk
-```
-
----
-
-## 13.11 Market
-
-```http
-GET /market/regime
-GET /market/sentiment
-```
-
----
-
-## 13.12 Agent
-
-```http
-POST /agent/chat
-POST /agent/rebut
-POST /agent/explain-thesis
-POST /agent/pretrade-check
-```
-
-Agent 流式：
-
-```text
-SSE
-```
-
----
-
-# 14. 实时通信
-
-## SSE
-
-适合：
-
-```text
-Agent streaming
-Research progress
-Report extraction progress
-```
-
----
-
-## WebSocket
-
-适合：
-
-```text
-price_tick
-market_regime
-breadth_update
-alert
-```
-
----
-
-# 15. 项目目录结构
-
-建议：
-
-```text
-thesisguard/
-├── apps/
-│   ├── web/
-│   ├── api/
-│   └── worker/
-│
-├── backend/
-│   ├── common/
-│   │   ├── db/
-│   │   ├── events/
-│   │   ├── security/
-│   │   └── storage/
-│   │
-│   ├── instrument/
-│   ├── watchlist/
-│   ├── research/
-│   ├── evidence/
-│   ├── thesis/
-│   ├── expectation/
-│   ├── valuation/
-│   ├── price_in/
-│   ├── market/
-│   ├── portfolio/
-│   ├── trade_plan/
-│   ├── catalyst/
-│   ├── discipline/
-│   ├── intelligence/
-│   ├── notification/
-│   └── agent/
-│
-├── migrations/
-├── infra/
-│   ├── docker/
-│   └── nginx/
-│
-├── docs/
-│   ├── PRD.md
-│   ├── TAD.md
-│   ├── DATA_MODEL.md
-│   ├── EVENTS.md
-│   └── API.md
-│
-├── docker-compose.yml
-└── README.md
-```
-
----
-
-# 16. Docker Compose 拓扑
-
-```text
-web
-api
-worker
-
-postgres
-redis
-minio
-
-nginx
-```
-
-后期可增加：
-
-```text
-scheduler
-```
-
-V1 可让 worker 自己完成定时任务。
-
----
-
-# 17. 数据接入策略
-
-## 17.1 P0 必接
-
-```text
-A股基础证券信息
-日线行情
-财报
-公告
-投资者关系活动记录
-新闻
-用户手工交易记录
-```
-
----
-
-## 17.2 P1
-
-```text
-券商研报
-一致预期
-盈利预测历史
-行业数据
-政策数据
-市场宽度
-涨跌停
-连板数据
-```
-
----
-
-## 17.3 P2
-
-```text
-同花顺 MCP
-券商账户
-实时成交
-分钟行情
-龙虎榜
-北向 / 机构资金
-```
-
----
-
-# 18. 数据抓取层
-
-统一抽象：
-
-```python
-class DataProvider:
-    async def fetch(...)
-    async def normalize(...)
-```
-
-Provider 示例：
-
-```text
-AkshareProvider
-ExchangeProvider
-CninfoProvider
-NewsProvider
-BrokerReportProvider
-TonghuashunMcpProvider
-```
-
-所有 provider 的输出必须先 Normalize。
-
-禁止业务层直接依赖某个供应商 schema。
-
----
-
-# 19. Research Pipeline
-
-```text
-Source
-↓
-Fetch
-↓
-Raw Document
-↓
-Dedup
-↓
-Parse
-↓
-Fact Extraction
-↓
-Evidence
-↓
-Entity Link
-↓
-Research Module Update
-↓
-Thesis Revalidate
-↓
-Notify
-```
-
----
-
-# 20. 文档 RAG Pipeline
-
-```text
-PDF
-↓
-Parser
-↓
-Chunk
-↓
-Metadata
-↓
-Embedding
-↓
-pgvector
-```
-
-Metadata 至少包含：
-
-```text
-instrument_id
-source_grade
-source_type
-source_date
-document_id
-page
-section
-```
-
----
-
-# 21. 交易计划风险控制
-
-修改冻结计划时计算：
-
-```text
-Original Risk
-
-(entry - stop) × position
-```
-
-用户将：
-
-```text
-stop 96 → 90
-```
-
-必须输出：
-
-```text
-Risk increased by X%
-```
-
-如风险扩大：
-
-```text
-require reason
-```
-
----
-
-# 22. 个人交易模型
-
-不要用大 Prompt 保存。
-
-结构化为：
-
-```text
-trading_profile
-```
-
-以及：
-
-```text
-behavior_metric
-```
-
-推荐指标：
-
-```text
-win_rate_by_model
-
-win_rate_by_regime
-
-avg_holding_period
-
-chase_rate
-
-late_stop_rate
-
-loss_averaging_rate
-
-plan_violation_rate
-
-risk_reward_distribution
-```
-
-50–100 笔后再生成个性化规则。
-
----
-
-# 23. 通知系统
-
-通知等级：
+### 5.5 Thesis
 
-```text
-P0
-P1
-P2
-```
-
-P0 示例：
-
-```text
-Thesis INVALIDATED
-Frozen stop breached
-Position limit exceeded
-Major negative announcement
-```
-
-P1：
-
-```text
-Expectation revised
-Price-In exceeds threshold
-Catalyst failed
-```
-
-P2：
-
-```text
-news related
-research module stale
-```
-
----
-
-# 24. Audit Log
-
-必须记录：
-
-```text
-谁
-什么时候
-修改什么
-旧值
-新值
-原因
-```
-
-尤其：
-
-```text
-Thesis
-Trade Plan
-Discipline
-Prompt
-```
-
----
-
-# 25. P0 黄金链
-
-第一阶段只做一条真正闭环。
-
-```text
-Add to Watchlist
-↓
-Classify
-↓
-Create Research Package
-↓
-Extract Evidence
-↓
-Create Thesis
-↓
-Show Thesis Validation
-↓
-Add New Evidence
-↓
-Revalidate Thesis
-↓
-Score Ledger
-↓
-Show Why Score Changed
-```
-
----
-
-# 26. P0 工作包
-
-## WP-01 工程骨架
-
-目标：
-
-```text
-Vue3
-FastAPI
-Postgres
-Redis
-MinIO
-Docker Compose
-```
-
-验收：
-
-```bash
-docker compose up -d
-```
-
-全部启动。
-
----
-
-## WP-02 Instrument + Watchlist
-
-实现：
-
-- 搜索证券
-- 加入自选
-- 分类
-- Watchlist API
-
----
-
-## WP-03 Research Package
-
-实现：
-
-- Research Package
-- Research Module
-- 首次建档任务
-- 增量刷新
-
----
-
-## WP-04 Evidence
-
-实现：
-
-- Evidence Model
-- Source Grade
-- Information Type
-- Evidence API
-
----
-
-## WP-05 Thesis
-
-实现：
-
-- Thesis
-- Version
-- Validation
-- Evidence association
-- Score Ledger
-
-这是 P0 最核心工作包。
-
----
-
-## WP-06 Research UI
-
-实现：
-
-- 自选池
-- 自动建档
-- 单股 Thesis Validation
-- Evidence Drawer
-- Thesis Health 变化原因
-
----
-
-## WP-07 Agent Read-Only
+负责不可变 Thesis Version、Evidence 引用、验证、支持/反驳、Score Ledger、下一验证日期和证伪条件。Thesis 只能引用可定位的 Evidence 版本；LLM 可以提出 Thesis candidate 或 revalidation proposal，不能直接提交最终状态。
 
-Agent 只允许：
+### 5.6 Personal Risk OS
 
-```text
-查询
-解释
-反驳
-```
-
-禁止写操作。
-
----
-
-## WP-08 Incremental Update
-
-模拟：
-
-```text
-新公告
-→ Evidence
-→ Thesis
-→ 78 → 84
-```
-
----
-
-# 27. P0 验收标准
-
-必须可以完整演示：
+Risk OS 是 P0 确定性内核，由以下清晰边界组成。
 
-## Case 1
+#### Account and NAV
 
-加入：
+计算账户单位净值、外部出入金中性化、历史高点、当前回撤、`AccountState`、`PauseStatus`、`RecoveryEligibility` 和 `NewRiskPermission`。自然语言不能直接解除暂停。
 
-```text
-301128 强瑞技术
-```
+#### Portfolio and Position
 
-系统：
-
-```text
-分类
-↓
-建档
-↓
-Research ACTIVE
-↓
-生成 5 条 Thesis
-```
+保存当前持仓、可卖数量、对象分类、单股/权益市值、主动风险 H、产业和共同风险因子。`LEGACY_PRE_MODEL` 与 `LONG_TERM_ETF` 单列但进入全账户风险。
 
----
+#### Order and Execution
 
-## Case 2
+订单、成交、撤单、拒单、部分成交和迟到回报是独立事实。未终结订单持续预占现金、市值和风险；撤单请求不等于撤单完成。
 
-查看 Thesis：
+#### Trade Plan and Exit
 
-```text
-AI服务器液冷订单持续增长
-```
+冻结 `Pmax / S0 / T / q_plan` 及费用版本，维护价格退出、逻辑退出、时间复核和 `EXIT_PENDING`。历史计划通过新版本修订，不覆盖。
 
-必须看到：
+#### Discipline and Recovery
 
-- 状态
-- 建立日期
-- 支持证据
-- 反对证据
-- 待验证
-- 失效条件
+记录计划外新增、超数量、扩大预算/止损、摊低成本、拖延退出、暂停事件、整改、Recovery ID 和恢复耗尽。盈亏结果不改变违规事实。
 
----
+#### Market Gate
 
-## Case 3
+V1 生产门只实现冻结策略要求的双指数检查及其来源、as_of 和 freshness。旧七阶段情绪模型属于历史设计，不得静默覆盖个人交易模型 v1.3 / 系统 v1.1。
 
-模拟新证据：
+#### Risk Gate
 
-```text
-Q3订单增强
-```
+聚合 Research/Evidence、Thesis、Market、Account、Portfolio、Order、Trade Plan、Discipline 与用户确认，输出既有 `AssessmentStatus` 和 `ActionDecision`。任何关键输入未知时禁止新增风险。
 
-系统：
+### 5.7 Research and Risk UI
 
-```text
-78 → 81
-```
+UI 是确定性状态的展示与用户确认面，不是风险计算器。UI 可以提前原型化，但没有领域服务和真实数据时必须显示 `DESIGN_ONLY / MOCK`，不能呈现为已完成闭环。
 
-并显示：
+历史 ID `WP-06 Research UI` 保持不变；风险视图是与 WP-RISK-01 的集成范围，不通过重命名破坏历史验收引用。
 
-```text
-+3 Q3订单证据增强
-```
+### 5.8 Read-only Agent
 
----
+“只读”按权限而不是按是否能生成文本定义：
 
-## Case 4
+1. Agent 可以读取授权的领域查询模型；
+2. Agent 可以生成无副作用、带来源和版本上下文的 Proposal；
+3. Proposal 只有经用户确认和确定性 Domain Service 校验后，才可能产生新的领域版本；
+4. 数据摄取流水线的确定性提交不是 Agent 写权限。
 
-历史仍可查看：
+Agent 永久禁止：raw SQL、直接 ORM session、任意内部写 API、券商订单、风险阈值修改、暂停解除、关键输入未知时 `ALLOW`。Agent Runtime 不得把 prompt、对话摘要或长期 Memory 当金融事实。
 
-```text
-Thesis v1
-Thesis v2
-```
+### 5.9 Incremental Update
 
-不得被覆盖。
+WP-08 负责从新 Source/Evidence 到 Research/Thesis revalidation、风险影响、通知和审计的端到端链。每步保留输入版本、as_of、freshness、幂等键和结果；失败不能覆盖最后一个已验证版本。
 
----
+### 5.10 Macro Risk Sentinel
 
-# 28. P1 工作包
+`WP-ALERT-01` 先实现权威政策来源、原文、发布日期、生效日期、适用对象、影响链、市场价格/宽度/流动性确认，并将结果映射到新增风险许可或账户复核。
 
-```text
-Expectation Engine
-Broker Reports
-Consensus History
+`WP-MACRO-01` 后续增加信用、杠杆、房地产、银行/非银、跨境、美元流动性、利差、估值、波动、融资、相关性和去杠杆压力，以及历史回放和误报/漏报/提前量评估。
 
-Bull / Base / Bear
+两阶段都不输出确定性危机日期。初期宏观结果不直接清空已有持仓；未来强制降仓必须使用独立策略版本并通过用户批准。
 
-Expectation Gap
+### 5.11 Notification
 
-Price-In
+Notification 读取已提交的领域事件，负责去重、送达、确认和失败重试。通知失败不能改变风险或交易事实；Redis/推送供应商不是告警真相源。
 
-Trade Plan Freeze
+## 6. System-of-Record Matrix
 
-Catalyst Validation
-```
+| Information | Durable truth | Secondary / derived | Forbidden authority |
+|---|---|---|---|
+| Instrument/Research/Evidence/Thesis metadata | PostgreSQL domain records | API read models | LLM response |
+| Raw documents and files | MinIO object + PostgreSQL identity/version | local cache | vector chunk alone |
+| Semantic retrieval | Rebuildable pgvector/RAG index | embeddings/cache | pgvector as sole Evidence truth |
+| Account/position/order/trade facts | PostgreSQL append-only/versioned ledgers | UI/cache/import staging | chat memory |
+| Risk/market/discipline state | Deterministic service result + input/rule snapshot in PostgreSQL | Redis/cache/UI | Agent judgment |
+| Policy/macro observations | versioned source and observation records | calculated signals | untraceable narrative |
+| Runtime state | PostgreSQL for durable state | Redis queue/fan-out | Redis alone |
+| Notification delivery | PostgreSQL delivery/audit record | provider receipt/cache | provider UI alone |
 
----
+## 7. Data Provenance, Freshness and Fail-Closed
 
-# 29. P2 工作包
+决策关键数据统一保存：
 
 ```text
-Market Regime
-实时市场情绪
-
-Portfolio
-
-Discipline
-
-Realtime Alerts
-
-同花顺 MCP
-
-券商账户同步
+source identity
+source document/version or account import identity
+published/effective date when applicable
+observed_at / acquired_at / as_of
+verification status
+freshness status and evaluated_at
+normalization or calculation version
 ```
-
----
-
-# 30. 非功能要求
 
-## 性能
+WP-04 持久化 `VerificationStatus` 使用已冻结 Evidence Domain Contract 的生命周期枚举：`UNREVIEWED / PENDING_REVIEW / VERIFIED / REJECTED / DISPUTED / INVALIDATED / RETRACTED`。
 
-普通 API：
+交易准入另行派生 decision-use freshness/eligibility 轴：综合上述生命周期状态、来源时点、时效窗口与未解决冲突，计算 `VERIFIED / UNVERIFIED / STALE / CONFLICTING / MISSING`。其中 `STALE / CONFLICTING / MISSING` 是准入判断，不得静默写入或替代 WP-04 的 `verification_status` 字段。`UNKNOWN` 用于计算或最终状态无法判定；对新增风险必须按 `NO TRADE` 处理。
 
-```text
-P95 < 500ms
-```
+对新增风险，以下任一情况必须 fail-closed：
 
-Research / Agent：
+- 账户、持仓、未结订单或可卖数量无法核验；
+- Research/Evidence、双指数、Setup、价格/数量、费用或券商能力关键数据缺失；
+- 来源过期、存在未解决冲突或时间口径不一致；
+- 退出、暂停、恢复或 replacement PK 状态不完整；
+- 用户未确认接受计划亏损。
 
-异步。
+Fail-closed 的动作是阻止新增风险并列出缺口，不是伪造事实、自动卖出所有持仓或让 Agent 猜测。
 
----
+## 8. Frozen Strategy Boundary
 
-## 可追溯
+本架构承载但不修改个人交易模型 v1.3 / 系统 v1.1：Setup B 唯一路径、双指数过滤、六项准入、最多 4 只股票、第五只 replacement PK、无杠杆、无摊低成本、不下移保护价、第一轮不加仓/不做 T、订单预占、`EXIT_PENDING`、账户暂停/有限恢复、旧仓/ETF 单列和历史不可覆盖。
 
-任何：
+策略规则必须由 versioned policy evaluator 加载。架构重构不能改变数值或边界语义。任何参数或路径变化必须建立独立策略版本、迁移协议、历史重演、前瞻模拟和用户批准。
 
-```text
-Thesis
-Estimate
-Trade Plan
-```
+## 9. Deterministic Decision Flow
 
-必须能追到：
+### 9.1 SC-001 Pre-market
 
 ```text
-source
-version
-timestamp
+account snapshot
+  → positions and sellable quantity
+  → open/cancel-pending/late orders
+  → exit and pause locks
+  → protection prices
+  → data freshness
+  → NewRiskPermission + Must Do / Must Not Do
 ```
 
----
+### 9.2 SC-002 New-risk admission
 
-## 数据安全
-
-API Key：
-
 ```text
-encrypted
+SC-001 eligibility
+  → Research/Evidence
+  → market dual-index gate
+  → Setup B
+  → Pmax/S0/T/q_plan/fees
+  → net-cost RR
+  → cash/value/H/order reservations
+  → 4-stock capacity/replacement PK
+  → user confirmation
+  → ActionDecision
 ```
-
-禁止明文入库。
-
----
 
-## Agent 安全
+### 9.3 SC-003 Exit and review
 
-Tool 白名单。
-
-不允许 Agent：
-
 ```text
-raw SQL
-shell
-arbitrary HTTP
+price/logical/account exit trigger
+  → EXIT_PENDING
+  → sellable quantity + objective constraints
+  → order/fill reconciliation
+  → realized net P&L and optional R_net
+  → MFE/MAE
+  → EntryClass vs Execution
+  → discipline/pause/remediation
 ```
 
----
+## 10. History, Versioning and Audit
 
-# 31. V1 明确不做
-
-```text
-自动买入
-自动卖出
+以下记录必须 append-only 或通过新版本表达：
 
-券商直连下单
+- source/evidence identity and version；
+- Research Package/Module；
+- Thesis and validation；
+- policy/risk rule version；
+- account snapshot, cash flow and NAV；
+- Trade Plan and revisions；
+- orders, fills, cancels and late reports；
+- exit triggers and objective constraints；
+- discipline, pause, recovery and remediation；
+- policy/macro alert and delivery attempts；
+- ActionDecision input snapshot and evaluator version。
 
-高频量化
+修正错误时保存 supersedes/corrects/invalidates 关系，不删除原始记录。缓存、索引或 UI 的“当前视图”可以重建，但不能替代历史源。
 
-全市场 tick
+## 11. Failure and Degradation Semantics
 
-复杂多 Agent 协作网络
+| Failure | Required behavior |
+|---|---|
+| LLM/Agent unavailable | deterministic risk/UI remains available; no lost truth |
+| pgvector unavailable | semantic search degrades; source/evidence identity remains queryable |
+| Redis/worker unavailable | queue/notification delayed; durable state remains; no invented completion |
+| MinIO unavailable | raw artifact access degraded; affected Evidence cannot be upgraded without verification |
+| account/broker import incomplete | state UNKNOWN or pause lock; new risk prohibited |
+| market/policy data stale | affected gate fails/unknown per policy; no unconditional ALLOW |
+| notification provider fails | retry and audit; domain state unchanged |
+| concurrent version write | optimistic concurrency conflict; no silent overwrite |
 
-AutoML 预测涨跌
+## 12. Security and Authority
 
-大规模组合优化
-```
+- 单用户 V1 仍应显式限定账户和数据范围；不能依赖“只有我使用”绕过授权边界。
+- 原始文件、账户数据和交易日志不得默认发送给未批准的外部模型。
+- Tool Registry 采用 allowlist；Agent 只获得领域查询与 proposal surface。
+- 高影响变更绑定具体 proposal、输入版本、用户确认和 Domain Service 校验。
+- 日志不得泄露凭据、券商 token 或完整敏感账户信息。
+- 本系统不提供券商交易 Tool。
 
----
+## 13. Work Packages and Dependency Map
 
-# 32. 产品架构核心
+历史 WP-01 至 WP-08 的 ID 和名称保持：
 
-ThesisGuard 的技术护城河最终不是：
+| WP | Name | Current state | Dependency |
+|---|---|---|---|
+| WP-01 | Engineering Skeleton | IMPLEMENTED local skeleton | — |
+| WP-02 | Instrument + Watchlist | PARTIALLY_IMPLEMENTED | WP-01 |
+| WP-03 | Research Package | Capability `IMPLEMENTED`；verification evidence：targeted backend L3 `VERIFIED`；overall quality-gate result `UNKNOWN` | WP-02 |
+| WP-04 | Evidence | CONTRACT_ONLY on main | WP-03 |
+| WP-05 | Thesis Engine | DESIGN_ONLY / NOT_STARTED | WP-04 |
+| WP-06 | Research UI | PLANNED | WP-03/04/05 + WP-RISK-01 read models |
+| WP-07 | Read-only Agent | DESIGN_ONLY / PLANNED | Evidence, Thesis, Risk OS, UI/query boundaries |
+| WP-08 | Incremental Update | PLANNED | WP-04/05/07 |
 
-```text
-LLM
-```
+新增非冲突 ID：
 
-而是：
+| WP | Name | Purpose | Dependency |
+|---|---|---|---|
+| WP-RISK-01 | Personal Risk OS | deterministic account/portfolio/order/plan/exit/discipline/market gates | WP-05; design may start earlier |
+| WP-ALERT-01 | Basic Policy & Market Alert | source-grounded policy and price-confirmed alert | WP-08 + WP-RISK-01 |
+| WP-MACRO-01 | Systemic Risk Sentinel | staged systemic vulnerability/pressure evaluation | WP-ALERT-01 |
+| WP-VALIDATION-01 | Forward Validation & Model Governance | forward, cost-adjusted, versioned validation | cross-cutting; evaluation after prior capabilities |
 
 ```text
-Structured Facts
-      +
-Evidence Graph
-      +
-Thesis Versioning
-      +
-Expectation History
-      +
-Trade Plan History
-      +
-Behavior History
+WP-01 → WP-02 → WP-03 → WP-04 → WP-05 → WP-RISK-01
+      → WP-06 → WP-07 → WP-08 → WP-ALERT-01
+      → WP-MACRO-01 → WP-VALIDATION-01
 ```
-
-LLM 只是这些结构化资产之上的 Reasoning Layer。
-
----
-
-# 33. 最终架构原则
-
-```text
-事实 → DB
 
-证据 → Evidence
+Agent Runtime proposal 文档中复用 WP-06～WP-08 的编号不是 canonical work package identity。若未来采纳其拆分，必须使用非冲突 ID 或通过单独决策原子性更新所有权威文档和任务引用。
 
-逻辑 → Thesis
+## 14. Validation Architecture (Future Design Required)
 
-预期 → Expectation
+后续领域设计必须为以下验证留下接口和不可变数据：
 
-赔率 → Valuation
+- deterministic replay：同一输入和规则版本产生同一结果；
+- historical replay：只能使用当时可知信息；
+- forward simulation：保留未成交、跳过和失效信号；
+- account reconciliation：现金、持仓、订单、成交、费用和公司行动闭合；
+- strategy cohorts：按模型版本、Market Regime、产业、持有期、退出、EntryClass 和 Execution 分层；
+- macro shadow mode：评估增量价值、误报、漏报和提前量；
+- rule governance：参数变化新建版本，不覆盖旧样本。
 
-市场风险 → Regime
+压力测试、历史回放和前瞻验证需要未来单独技术设计。本 TAD 不预先批准表结构或算法。
 
-动作 → Trade Plan
+## 15. Non-Functional Requirements
 
-验证 → Catalyst
+### Traceability
 
-结果 → Trade
+每个关键 `ActionDecision` 可追溯到输入快照、来源/时点、freshness、策略版本、领域服务版本和用户确认。
 
-复盘 → Discipline
+### Reliability
 
-解释 → Agent
-```
-
-这应该成为 ThesisGuard V1 的工程边界。
-
----
-
-# 34. 推荐下一步
+风险门的读取和计算不依赖 Agent；订单/成交对账、暂停和退出状态优先于推荐体验。任何恢复过程都不得通过丢弃历史或重置高点来“修复”。
 
-下一步不建议继续扩产品功能。
+### Testability
 
-建议直接进入：
+领域服务提供纯计算或明确 I/O 边界，覆盖正常、缺失、过期、冲突、并发、部分成交、迟到回报、不可卖和恢复耗尽案例。
 
-```text
-WP-01
-ThesisGuard 工程基础骨架
-```
+### Observability
 
-然后按顺序执行：
+区分领域事件、运行事件、告警投递和审计事件。运行成功不能替代业务正确；告警送达不能替代状态提交。
 
-```text
-WP-01 工程骨架
+### Performance
 
-WP-02 Instrument / Watchlist
+性能优化不得把不可变历史、来源验证或 fail-closed 改成最终一致的猜测。缓存 miss 应回源 durable truth 或明确降级。
 
-WP-03 Research Package
+## 16. Explicit Non-Goals
 
-WP-04 Evidence
+- 自动下单、自主调仓、券商客户端控制；
+- 高频、分钟级、做 T、杠杆和多市场全覆盖；
+- 自动在线学习或自动修改生产策略；
+- 将 LLM、Memory、Redis、pgvector 或通知作为金融事实源；
+- 用未校准宏观分数预测危机日期或自动清空持仓；
+- 在本次文档调整中设计未批准 API、数据库表或算法；
+- 宣称稳定盈利、回本、胜率或超额收益。
 
-WP-05 Thesis Engine
+## 17. Architecture Readiness
 
-WP-06 Thesis Validation UI
+| Scope | State | Meaning |
+|---|---|---|
+| TAD | TECH_DESIGN_DRAFT | 目标边界已对齐，详细领域合同仍按工作包设计 |
+| WP-04 | READY_TO_CONTINUE_IMPLEMENTATION | Evidence contract 已冻结；main 实现缺失 |
+| WP-05 | NEEDS_DOMAIN_DESIGN | 依赖 WP-04 |
+| WP-RISK-01 | READY_FOR_PRODUCT_AND_DOMAIN_DESIGN | 不等于批准 migration/API |
+| WP-07 | NOT_READY_TO_IMPLEMENT_AS_CORE | 事实和风险依赖未完成 |
+| Macro | PLANNED | 数据与校准路径未知 |
+| Production strategy | UNPROVEN / NOT_READY | 无足够扣成本前瞻证据 |
 
-WP-07 Read-only Agent
-
-WP-08 Incremental Update
-```
+## 18. Recommended Next Architecture Action
 
-当 WP-08 验收通过时，ThesisGuard 才第一次真正形成产品闭环。
+下一项最小、明确、可验证的工作是：
 
----
+> **在不扩展 Agent、Macro 或 WP04-02+ 范围的前提下，对未合并的 WP04-01 Evidence persistence 切片执行独立集成审查与当前 HEAD 重验；仅在另行获得 Git 集成授权后，才把该切片纳入 main。**
 
-# 35. 一句话架构定义
+该动作的完成证据必须来自实现、迁移、测试和真实数据库链，而不是提交标题或验收文档名称。
 
-> ThesisGuard 是一个以 Thesis 为核心对象、以结构化事实和可追溯证据为基础、以事件驱动持续验证投资逻辑、并通过不可变交易计划和纪律记录控制个人交易行为的研究与决策系统。
+## 19. 一句话架构定义
 
+> **ThesisGuard 是以 PostgreSQL 不可变领域记录为 durable truth、以 Evidence 与 Thesis 为事实基础、以确定性 Personal Risk OS 为决策内核、以只读 Agent 为解释与提案层的模块化单体；任何关键数据未知时禁止新增风险。**

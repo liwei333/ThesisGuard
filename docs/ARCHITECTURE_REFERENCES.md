@@ -1,15 +1,71 @@
-# ThesisGuard Agent Runtime 开源架构对标
+# ThesisGuard 架构与文档权威索引
 
-> 文档状态：Architecture Review 基线（非实现说明）  
-> 证据快照：2026-09-12  
-> 对标对象：OpenAI Codex、xAI Grok Build、DeepSeek Harness 公开主干文档与源码  
-> 结论适用范围：ThesisGuard V1 只读研究 Agent；不包含自动交易
+> Authority map updated: 2026-09-14
+>
+> 本文前半部分定义项目内文档权威关系；后半部分保留 2026-09-12 Agent Runtime 开源架构对标快照。
+> 文档存在、验收报告或 proposal 均不是实现证据；实现状态以明确分支的当前源码、迁移和新验证为准。
 
-## 1. 研究方法与证据边界
+## 0. 项目内权威关系
+
+### 0.1 分类语义
+
+| Class | Meaning | May prove implementation? |
+|---|---|---|
+| Canonical decision | 当前产品/架构方向的生效决策 | No；只证明决策 |
+| Canonical requirement/design | 当前 PRD/TAD 边界 | No；只证明要求/设计 |
+| Implementation contract | 某工作包必须遵守的冻结合同 | No；必须另查代码和验证 |
+| Current implementation evidence | 明确分支上的源码、迁移、配置 | L1 only；不自动证明测试或运行 |
+| Historical acceptance | 当时命令、结果和 verdict 的记录 | 只对记录时点、分支和 scope 有效 |
+| Historical audit | evidence cutoff 时点的状态快照 | 不是真实时间状态源 |
+| Proposal / review baseline | 尚未提升为 canonical 的架构建议 | 不授权实现，不覆盖 canonical WP |
+| Rebuildable derivative | OpenAPI artifact、RAG/index、cache、UI projection 等 | 不能成为唯一业务真相 |
+
+### 0.2 Canonical sources
+
+| Source | Classification | Authority and boundary |
+|---|---|---|
+| `docs/PRODUCT_GOAL_REALIGNMENT_2026-09-14.md` | Canonical product decision | 2026-09-14 起的北极星、P0-P3、MVP、指标和工作包依赖 |
+| `docs/ThesisGuard_V1_PRD.md` | Canonical requirement, `PRD_DRAFT` | 当前 V1 产品需求；不证明实现 |
+| `docs/ThesisGuard_V1_Technical_Architecture_Design.md` | Canonical architecture, `TECH_DESIGN_DRAFT` | 当前架构边界和依赖；不批准未定义 API/表 |
+| `AGENTS.md` | Engineering entry guide | 后续 Agent 的简明规则和当前里程碑；细节以上述文件为准 |
+| `docs/WP04_EVIDENCE_DOMAIN_CONTRACT.md` | Canonical WP-04 implementation contract | Evidence identity/version/provenance/storage/任务边界；不证明 main 已实现 |
+| `docs/WP03_RESEARCH_PACKAGE_*.md` | Accepted WP-03 implementation contracts | bounded Research behavior；当前代码冲突时重新核验代码 |
+| 个人交易模型 v1.3 / 系统 v1.1 current policy | Frozen strategy authority | Setup B、双指数、阈值、准入、退出、暂停恢复和枚举；本次未修改 |
+
+### 0.3 Historical records
+
+| Source | Classification | Handling rule |
+|---|---|---|
+| `docs/PROJECT_STATUS_AUDIT_2026-09-12.md` | Historical audit | evidence cutoff 2026-09-12；`HANDOFF_READY` 只代表报告完整，不能代表当前产品 ready |
+| `docs/acceptance/TASK-WP03-*` | Historical acceptance | 保留原文；按当时 commit/branch/scope 解释 |
+| `docs/acceptance/TASK-WP04-*` | Historical acceptance / repair contracts | 保留失败、修复和 PASS 链；PASS 不等于已合并 main 或整个 WP 完成 |
+| `docs/ThesisGuard_V1_Technical_Architecture_Design (1).md` | Non-canonical historical duplicate | 本次调整前与 canonical TAD 字节相同；无项目引用；保留但不得参与当前仲裁 |
+
+### 0.4 Proposals and review baselines
+
+| Source | Status | Non-authority boundary |
+|---|---|---|
+| `docs/AGENT_RUNTIME_ARCHITECTURE.md` | Proposal / stale current-state section | Agent Runtime 设计参考；内部 WP-06～WP-08 重编号不属于 canonical WP identity |
+| `docs/MEMORY_ARCHITECTURE.md` | Proposal | Memory 设计参考；Memory 不替代领域事实 |
+| `docs/STRUCTURED_OUTPUT_CONTRACTS.md` | Proposal / contract design baseline | 结构化输出建议；自动提交 actor 边界须由后续 canonical 决策确认 |
+| `docs/AGENT_INTERRUPT_AND_RESUME.md`、`docs/AGENT_RUNTIME_AND_INTERRUPT_DESIGN.md`、`docs/TOOL_RUNTIME_AND_APPROVAL.md` | Proposal | 不证明 Runtime/Tool/Approval 已实现 |
+
+### 0.5 Current implementation qualifiers
+
+- `main@bd4b1d7`：WP-03 bounded Research Package 在 main；WP-04 为 `CONTRACT_ONLY`。
+- `codex/wp04-evidence-persistence@4201ae7`：存在未合并的 WP04-01 persistence foundation；不能写成 main 当前能力，也不能扩大为 WP04 service/API/typed links 已完成。
+- 任何“IMPLEMENTED / VERIFIED”必须带分支、scope、证据级别和观察日期。
+- 当前源码与历史文档冲突时，重新运行验证并记录新 evidence；不要改写历史报告。
+
+## 1. Agent Runtime 开源架构对标：研究方法与证据边界
+
+> 以下内容是 2026-09-12 的 Architecture Review 基线（非实现说明）。对标对象为 OpenAI Codex、xAI Grok Build、DeepSeek Harness 当时公开主干文档与源码；适用范围仅为 ThesisGuard V1 只读 Agent，不包含自动交易。
+
+### 1.1 证据边界
 
 本对标只把项目官方仓库、官方协议文档和官方源码作为架构事实来源。博客、营销文章和二手解读不作为协议证据。链接指向公开 `main`/`master`，因此这是 2026-09-12 的快照，不是对未来版本的承诺。
 
-本地 ThesisGuard 证据来自当前工作树 `main`、HEAD `4226b11157e7d7edd68feec31ffbae8cd2a781d7`、三条本地提交历史、代码、迁移、测试及真实运行中的 Compose 服务。由于本机访问 GitHub DNS 失败，无法刷新远端；本地缓存的 `origin/main` 与 HEAD 一致，但“远端当下仍一致”记为 UNKNOWN，而不是臆测为已验证。
+本节所称本地 ThesisGuard 证据来自当时工作树 `main@4226b11157e7d7edd68feec31ffbae8cd2a781d7`、当时的三条本地提交历史、代码、迁移、测试及 Compose 观察。该描述是历史快照，已被 2026-09-14 authority map 的当前分支说明取代；不得把它当作当前实现状态。
 
 ## 2. 一页结论
 
@@ -106,7 +162,7 @@ Harness 的 Cordis 插件树、profile/bundle 与 capability seam 适合通用�
 | 分支 | fork | fork | 可由事件历史构造 | P1 hypothesis fork |
 | 回退 | fork 到历史边界 | destructive rewind | 追加事件/投影 | 新 revision，不删除历史 |
 
-## 8. 对 ThesisGuard 的约束性结论
+## 8. 2026-09-12 对标提案的约束性结论（非 canonical）
 
 1. **Session 不是业务数据库。** Agent event 能恢复交互，Evidence/Thesis/Trade Plan 的事实与版本仍由领域服务负责。
 2. **只有一个并发控制数：Run Revision。** Turn/Step/ToolCall 都记录它；V1 不再引入 Intent Epoch 或 Plan Epoch。
