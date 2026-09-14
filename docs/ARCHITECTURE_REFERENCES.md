@@ -27,8 +27,9 @@
 | `docs/PRODUCT_GOAL_REALIGNMENT_2026-09-14.md` | Canonical product decision | 2026-09-14 起的北极星、P0-P3、MVP、指标和工作包依赖 |
 | `docs/ThesisGuard_V1_PRD.md` | Canonical requirement, `PRD_DRAFT` | 当前 V1 产品需求；不证明实现 |
 | `docs/ThesisGuard_V1_Technical_Architecture_Design.md` | Canonical architecture, `TECH_DESIGN_DRAFT` | 当前架构边界和依赖；不批准未定义 API/表 |
+| `docs/CAPABILITY_RUNTIME_DECISION_2026-09-14.md` | Canonical architecture timing decision, `APPROVED — DEFERRED` | Capability Runtime 审计延后到 WP-04/WP-05 合同稳定后；不批准 `WP-CAP-00` 或 Runtime 实现 |
 | `AGENTS.md` | Engineering entry guide | 后续 Agent 的简明规则和当前里程碑；细节以上述文件为准 |
-| `docs/WP04_EVIDENCE_DOMAIN_CONTRACT.md` | Canonical WP-04 implementation contract | Evidence identity/version/provenance/storage/任务边界；不证明 main 已实现 |
+| `docs/WP04_EVIDENCE_DOMAIN_CONTRACT.md` | Canonical WP-04 implementation contract | Evidence identity/version/provenance/storage/任务边界；不证明整个 WP-04 已实现 |
 | `docs/WP03_RESEARCH_PACKAGE_*.md` | Accepted WP-03 implementation contracts | bounded Research behavior；当前代码冲突时重新核验代码 |
 | 个人交易模型 v1.3 / 系统 v1.1 current policy | Frozen strategy authority | Setup B、双指数、阈值、准入、退出、暂停恢复和枚举；本次未修改 |
 
@@ -38,7 +39,7 @@
 |---|---|---|
 | `docs/PROJECT_STATUS_AUDIT_2026-09-12.md` | Historical audit | evidence cutoff 2026-09-12；`HANDOFF_READY` 只代表报告完整，不能代表当前产品 ready |
 | `docs/acceptance/TASK-WP03-*` | Historical acceptance | 保留原文；按当时 commit/branch/scope 解释 |
-| `docs/acceptance/TASK-WP04-*` | Historical acceptance / repair contracts | 保留失败、修复和 PASS 链；PASS 不等于已合并 main 或整个 WP 完成 |
+| `docs/acceptance/TASK-WP04-*` | Historical acceptance / repair contracts | 保留失败、修复和 PASS 链；按记录时点、分支和 scope 解读；`TASK-WP04-01-GIT-INTEGRATION-R1` 证明本地 main 集成，不等于远端已发布或整个 WP-04 完成 |
 | `docs/ThesisGuard_V1_Technical_Architecture_Design (1).md` | Non-canonical historical duplicate | 本次调整前与 canonical TAD 字节相同；无项目引用；保留但不得参与当前仲裁 |
 
 ### 0.4 Proposals and review baselines
@@ -52,8 +53,10 @@
 
 ### 0.5 Current implementation qualifiers
 
-- `main@bd4b1d7`：WP-03 bounded Research Package 在 main；WP-04 为 `CONTRACT_ONLY`。
-- `codex/wp04-evidence-persistence@4201ae7`：存在未合并的 WP04-01 persistence foundation；不能写成 main 当前能力，也不能扩大为 WP04 service/API/typed links 已完成。
+- local `main@d8f38dd`：已包含 WP-04-01 persistence foundation。业务提交 `cb36e84515fddc8183630757a01078c655a1b8c2`，集成治理提交 `d8f38dd443f95da848338ebda901c288c4bc153a`，独立验收 `TASK-WP04-01-GIT-INTEGRATION-R1` 为 `PASS`；真实 PostgreSQL Evidence focused suite 为 `18 passed`，Alembic head 为 `000000000004`。
+- `origin/main@c38c96f`：尚未包含上述两个本地提交；不得把本地集成事实写成远端已发布。
+- WP-04 当前整体状态为 `PARTIALLY_IMPLEMENTED`：仅 Evidence ORM models、repositories、Alembic migration 0004、model registry、persistence/migration tests 已进入 local main。WP-04-02 Evidence Domain Service、WP-04-03 Evidence API/OpenAPI、WP-04-04 Research exact Evidence references、worker、MinIO writes、parser/extractor pipeline、embedding、pgvector/RAG 和 Thesis integration 尚未实现。
+- 当前下一项业务开发任务为 `TASK-WP04-02 Evidence Domain Service`；Capability Runtime 保持 `APPROVED — DEFERRED`，不得作为下一主线任务。
 - 任何“IMPLEMENTED / VERIFIED”必须带分支、scope、证据级别和观察日期。
 - 当前源码与历史文档冲突时，重新运行验证并记录新 evidence；不要改写历史报告。
 

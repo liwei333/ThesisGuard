@@ -306,7 +306,7 @@ ActionDecision = ALLOW / NO TRADE / MANAGE_ONLY / EXIT_PENDING / NOT_APPLICABLE
 
 来源文档与 Evidence 分开。一个来源可以有多个不可变版本；同一事实系列可以有多个 Evidence 版本；locator 必须能定位到原文。Source grade 不等于真实性，verification state 不等于 freshness。
 
-WP-04 的详细合同以 [WP04_EVIDENCE_DOMAIN_CONTRACT.md](WP04_EVIDENCE_DOMAIN_CONTRACT.md) 为准。该合同是 `CONTRACT_ONLY`，不得被解读为 Evidence 实现已存在。
+WP-04 的详细合同以 [WP04_EVIDENCE_DOMAIN_CONTRACT.md](WP04_EVIDENCE_DOMAIN_CONTRACT.md) 为准。local `main@d8f38dd` 已集成 WP-04-01 persistence foundation，但该合同和本地集成事实不得被解读为整个 Evidence 能力已完成。
 
 ### 9.2 Research and Thesis
 
@@ -354,7 +354,7 @@ V1 新主动交易的生产过滤遵守冻结的双指数规则。旧的七阶�
 | 历史交易计划覆盖或删除次数 | 0 | PLANNED；UNKNOWN baseline |
 | 规则变更版本覆盖率 | 100% | PLANNED；UNKNOWN baseline |
 | ActionDecision 到规则版本和输入快照可追溯率 | 100% | PLANNED；UNKNOWN baseline |
-| 决策关键 Evidence 来源与时间戳完整率 | 100% | CONTRACT_ONLY；UNKNOWN baseline |
+| 决策关键 Evidence 来源与时间戳完整率 | 100% | PARTIALLY_IMPLEMENTED persistence foundation；UNKNOWN product baseline |
 | 告警去重、送达、确认和失败重试 | 每事件可审计 | PLANNED |
 | 数据源中断时 fail-closed 正确率 | 100% for new-risk gates | PLANNED |
 
@@ -389,14 +389,14 @@ V1 新主动交易的生产过滤遵守冻结的双指数规则。旧的七阶�
 
 ## 14. Current vs Target State
 
-Evidence cutoff：2026-09-14，`main@bd4b1d7`；开始修改前 worktree clean。
+Evidence cutoff：2026-09-14，local `main@d8f38dd`；`origin/main@c38c96f` 尚未包含本地 WP-04-01 集成提交。
 
 | Capability | Current | Target |
 |---|---|---|
 | Engineering skeleton | IMPLEMENTED locally | maintainable foundation |
 | Instrument/Watchlist | PARTIALLY_IMPLEMENTED | validated data/user boundary |
 | Research Package | Capability `IMPLEMENTED`; verification evidence: targeted backend L3 `VERIFIED`; overall quality-gate result `UNKNOWN` | reliable P1 container；修复既有 OpenAPI artifact drift |
-| Evidence | CONTRACT_ONLY on main | versioned source/evidence implementation |
+| Evidence | PARTIALLY_IMPLEMENTED on local main; WP-04-01 persistence foundation integrated | versioned source/evidence implementation with service/API/typed references |
 | Thesis | DESIGN_ONLY / NOT_STARTED | evidence-linked immutable Thesis |
 | Personal Risk OS | DESIGN_ONLY / NEEDS_DOMAIN_DESIGN | deterministic P0 MVP kernel |
 | Research UI | PLANNED | three-scenario decision workspace |
@@ -405,7 +405,9 @@ Evidence cutoff：2026-09-14，`main@bd4b1d7`；开始修改前 worktree clean�
 | Macro Alert/Sentinel | PLANNED | staged, calibrated risk signal |
 | Forward Validation | PLANNED | versioned production governance |
 
-`codex/wp04-evidence-persistence` 分支存在未合并的 WP-04 persistence foundation；它不改变 `main` 的 CONTRACT_ONLY 状态，也不能在合并与重新验证前写成 canonical 当前能力。
+WP-04-01 persistence foundation 已进入 local `main@d8f38dd`：业务提交 `cb36e84515fddc8183630757a01078c655a1b8c2`，集成治理提交 `d8f38dd443f95da848338ebda901c288c4bc153a`。独立验收 `TASK-WP04-01-GIT-INTEGRATION-R1` 为 `PASS`；真实 PostgreSQL Evidence focused suite 为 `18 passed`，当前 Alembic head 为 `000000000004`。这只覆盖 Evidence ORM models、repositories、Alembic migration 0004、model registry、persistence/migration tests；WP-04-02 Evidence Domain Service、WP-04-03 Evidence API/OpenAPI、WP-04-04 Research exact Evidence references、worker、MinIO writes、parser/extractor pipeline、embedding、pgvector/RAG 和 Thesis integration 尚未实现。
+
+`origin/main@c38c96f` 尚未包含上述两个本地提交，因此不得把 local main 状态表述为远端已发布。
 
 ## 15. Work Packages and Dependencies
 
@@ -416,7 +418,7 @@ Evidence cutoff：2026-09-14，`main@bd4b1d7`；开始修改前 worktree clean�
 | WP-01 | Engineering Skeleton | IMPLEMENTED local skeleton |
 | WP-02 | Instrument + Watchlist | PARTIALLY_IMPLEMENTED |
 | WP-03 | Research Package | Capability `IMPLEMENTED`；verification evidence：targeted backend L3 `VERIFIED`；overall quality-gate result `UNKNOWN` |
-| WP-04 | Evidence | CONTRACT_ONLY on main; implementation next |
+| WP-04 | Evidence | PARTIALLY_IMPLEMENTED; WP-04-01 persistence foundation integrated on local main; WP-04-02 Evidence Domain Service next |
 | WP-05 | Thesis Engine | DESIGN_ONLY / NOT_STARTED |
 | WP-06 | Research UI | PLANNED |
 | WP-07 | Read-only Agent | DESIGN_ONLY / PLANNED |
@@ -485,9 +487,10 @@ Stage 1/2 先影子运行，记录来源延迟、去重、误报、漏报、提�
 |---|---|---|
 | Product direction | APPROVED | 北极星、P0-P3 与非承诺边界已确定 |
 | PRD | PRD_DRAFT | 可继续细化；未达到 `PRD_VALIDATED` |
-| WP-04 foundation | READY_TO_CONTINUE_IMPLEMENTATION | 合同已冻结；WP04-01 persistence 仅存在于未合并分支，main 尚未集成，后续 service/API/typed links 未实现 |
+| WP-04 foundation | READY_FOR_WP04_02_SERVICE | 合同已冻结；WP-04-01 persistence foundation 已集成本地 main 并通过 `TASK-WP04-01-GIT-INTEGRATION-R1` 独立验收；后续 service/API/typed links、worker、MinIO、parser、embedding、RAG、Thesis integration 未实现 |
 | WP-05 foundation | NEEDS_DOMAIN_DESIGN | 依赖 WP-04 落地 |
 | WP-RISK-01 | READY_FOR_PRODUCT_AND_DOMAIN_DESIGN | 不等于 ready for coding |
+| Capability Runtime | APPROVED — DEFERRED | `ADR-2026-09-14-CAP-01` 已批准延后；当前不授权 `WP-CAP-00`、Provider/Router/Adapter 或 Runtime 实现 |
 | Whole product | NOT_READY_FOR_FULL_AGENT_BUILD | Agent 事实与风险依赖不完整 |
 | Strategy profitability | UNPROVEN | 没有足够扣成本前瞻证据 |
 

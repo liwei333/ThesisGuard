@@ -41,16 +41,16 @@
 
 ## 3. Current Architecture Reality
 
-Evidence cutoff：2026-09-14，`main@bd4b1d7`。状态不得由目录、文档或提交标题单独推断。
+Evidence cutoff：2026-09-14，local `main@d8f38dd`；`origin/main@c38c96f` 尚未包含本地 WP-04-01 集成提交。状态不得由目录、文档或提交标题单独推断。
 
 | Area | Observed state | Evidence | Boundary |
 |---|---|---|---|
 | Engineering skeleton | IMPLEMENTED locally | FastAPI/Vue/PostgreSQL/Redis/MinIO/Dramatiq/Compose files | 不证明生产部署 |
 | Instrument / Watchlist | PARTIALLY_IMPLEMENTED | models/services/API/migration/tests | 正式数据源和完整用户边界未证明 |
 | Research Package | Capability `IMPLEMENTED`; verification evidence: targeted backend L3 `VERIFIED`; overall quality-gate result `UNKNOWN` | code + migration + 16 current backend tests；OpenAPI artifact drift recorded | 不证明真实研究内容生成、生产使用或全部质量门禁绿色 |
-| Evidence | CONTRACT_ONLY on main | frozen WP-04 contract + historical acceptance | 无 main models/migration/service/API |
+| Evidence | PARTIALLY_IMPLEMENTED on local main | WP-04-01 business commit `cb36e84515fddc8183630757a01078c655a1b8c2` + governance commit `d8f38dd443f95da848338ebda901c288c4bc153a`; `TASK-WP04-01-GIT-INTEGRATION-R1` independent PASS; PostgreSQL Evidence focused suite `18 passed`; Alembic head `000000000004` | Only ORM models、repositories、migration 0004、model registry、persistence/migration tests；service/API/worker/MinIO/parser/embedding/RAG/Thesis integration 未实现 |
 | Thesis / Market / Portfolio / Trade Plan / Discipline / Agent | DESIGN_ONLY or PLANNED | placeholder packages + design docs | 无领域实现 |
-| WP-04 persistence branch | PARTIALLY_IMPLEMENTED on unmerged branch (L1 static evidence; historical L4 acceptance claim) | `codex/wp04-evidence-persistence@4201ae7` | 未合并到 main；不能当 canonical current capability 或整个 WP-04 完成 |
+| Remote publication boundary | LOCAL_ONLY integration | local `main@d8f38dd` ahead of `origin/main@c38c96f` | 不得把本地集成写成远端已发布；不得扩大为整个 WP-04 完成 |
 
 两份 TAD 在本次修改前内容与 SHA-256 完全相同。当前文件是 canonical TAD；`ThesisGuard_V1_Technical_Architecture_Design (1).md` 保留为非 canonical 历史副本，不随本次重写更新。
 
@@ -154,7 +154,7 @@ flowchart TB
 - 去重、幂等、并发、纠错、争议、撤回和来源关系；
 - PostgreSQL 元数据、MinIO 原始对象和可重建向量索引之间的边界。
 
-详细合同以 [WP04_EVIDENCE_DOMAIN_CONTRACT.md](WP04_EVIDENCE_DOMAIN_CONTRACT.md) 为准。它是 `CONTRACT_ONLY`，不是实现证据。
+详细合同以 [WP04_EVIDENCE_DOMAIN_CONTRACT.md](WP04_EVIDENCE_DOMAIN_CONTRACT.md) 为准。local `main@d8f38dd` 已实现 WP-04-01 persistence foundation；该合同和该切片实现都不是 Evidence service/API 或整个 WP-04 完成的证据。
 
 ### 5.5 Thesis
 
@@ -363,7 +363,7 @@ price/logical/account exit trigger
 | WP-01 | Engineering Skeleton | IMPLEMENTED local skeleton | — |
 | WP-02 | Instrument + Watchlist | PARTIALLY_IMPLEMENTED | WP-01 |
 | WP-03 | Research Package | Capability `IMPLEMENTED`；verification evidence：targeted backend L3 `VERIFIED`；overall quality-gate result `UNKNOWN` | WP-02 |
-| WP-04 | Evidence | CONTRACT_ONLY on main | WP-03 |
+| WP-04 | Evidence | PARTIALLY_IMPLEMENTED; WP-04-01 persistence foundation integrated on local main; WP-04-02 service next | WP-03 |
 | WP-05 | Thesis Engine | DESIGN_ONLY / NOT_STARTED | WP-04 |
 | WP-06 | Research UI | PLANNED | WP-03/04/05 + WP-RISK-01 read models |
 | WP-07 | Read-only Agent | DESIGN_ONLY / PLANNED | Evidence, Thesis, Risk OS, UI/query boundaries |
@@ -437,10 +437,11 @@ Agent Runtime proposal 文档中复用 WP-06～WP-08 的编号不是 canonical w
 | Scope | State | Meaning |
 |---|---|---|
 | TAD | TECH_DESIGN_DRAFT | 目标边界已对齐，详细领域合同仍按工作包设计 |
-| WP-04 | READY_TO_CONTINUE_IMPLEMENTATION | Evidence contract 已冻结；main 实现缺失 |
+| WP-04 | READY_FOR_WP04_02_SERVICE | Evidence contract 已冻结；WP-04-01 persistence foundation 已集成本地 main 并通过独立验收；service/API/typed references、worker、MinIO、parser、embedding、RAG、Thesis integration 未实现 |
 | WP-05 | NEEDS_DOMAIN_DESIGN | 依赖 WP-04 |
 | WP-RISK-01 | READY_FOR_PRODUCT_AND_DOMAIN_DESIGN | 不等于批准 migration/API |
 | WP-07 | NOT_READY_TO_IMPLEMENT_AS_CORE | 事实和风险依赖未完成 |
+| Capability Runtime | APPROVED — DEFERRED | `ADR-2026-09-14-CAP-01` 已批准延后；当前不授权 `WP-CAP-00`、Provider/Router/Adapter 或 Runtime 实现 |
 | Macro | PLANNED | 数据与校准路径未知 |
 | Production strategy | UNPROVEN / NOT_READY | 无足够扣成本前瞻证据 |
 
@@ -448,9 +449,9 @@ Agent Runtime proposal 文档中复用 WP-06～WP-08 的编号不是 canonical w
 
 下一项最小、明确、可验证的工作是：
 
-> **在不扩展 Agent、Macro 或 WP04-02+ 范围的前提下，对未合并的 WP04-01 Evidence persistence 切片执行独立集成审查与当前 HEAD 重验；仅在另行获得 Git 集成授权后，才把该切片纳入 main。**
+> **执行 `TASK-WP04-02 Evidence Domain Service`：在不扩展 API/OpenAPI、worker、MinIO、parser、embedding、RAG、Thesis integration、Agent 或 Macro 范围的前提下，为已集成的 WP-04-01 persistence foundation 增加 deterministic Evidence Domain Service。**
 
-该动作的完成证据必须来自实现、迁移、测试和真实数据库链，而不是提交标题或验收文档名称。
+该动作的完成证据必须来自实现、迁移、测试和真实数据库链，而不是提交标题或验收文档名称。WP-04-03 Evidence API/OpenAPI 和 WP-04-04 Research exact Evidence references 仍是后续任务。
 
 ## 19. 一句话架构定义
 

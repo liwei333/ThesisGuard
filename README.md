@@ -109,7 +109,7 @@ ActionDecision = ALLOW / NO TRADE / MANAGE_ONLY / EXIT_PENDING / NOT_APPLICABLE
 | WP-01 Engineering Skeleton | IMPLEMENTED（本地工程骨架） | 不代表生产就绪 |
 | WP-02 Instrument + Watchlist | PARTIALLY_IMPLEMENTED | 有代码/迁移/测试；正式数据源与完整用户边界未证明 |
 | WP-03 Research Package | Capability `IMPLEMENTED`；verification evidence：targeted backend L3 `VERIFIED`；overall quality-gate result `UNKNOWN` | 16 项当前 Research 测试通过；committed OpenAPI artifact 存在既有漂移，因此不能声称全部门禁绿色 |
-| WP-04 Evidence | CONTRACT_ONLY | 冻结领域合同和历史验收存在；`main@bd4b1d7` 尚无业务模型、迁移、服务和 API |
+| WP-04 Evidence | PARTIALLY_IMPLEMENTED | local `main@d8f38dd` 已集成 WP-04-01 persistence foundation：Evidence ORM models、repositories、Alembic migration 0004、model registry、persistence/migration tests；业务提交 `cb36e84515fddc8183630757a01078c655a1b8c2`，集成治理提交 `d8f38dd443f95da848338ebda901c288c4bc153a`；`origin/main@c38c96f` 尚未包含这两个本地提交；service/API/worker/MinIO/parser/embedding/RAG/Thesis integration 未实现 |
 | WP-05 Thesis Engine | DESIGN_ONLY / NOT_STARTED | 仅设计材料和占位包 |
 | WP-RISK-01 Personal Risk OS | DESIGN_ONLY / NEEDS_DOMAIN_DESIGN | 产品边界和冻结策略存在；账户/订单/风险内核未实现 |
 | WP-06 Research UI | PLANNED | 不把原型当成风险闭环 |
@@ -117,9 +117,13 @@ ActionDecision = ALLOW / NO TRADE / MANAGE_ONLY / EXIT_PENDING / NOT_APPLICABLE
 | WP-08 Incremental Update | PLANNED | 尚无完整端到端实现 |
 | WP-ALERT-01 / WP-MACRO-01 / WP-VALIDATION-01 | PLANNED | 无实现或价值验证 |
 
-当前里程碑：**post-WP-03 / WP-04 Evidence implementation next**，同时可以准备 `WP-RISK-01` 的产品与领域设计。Whole Product 状态为 **NOT_READY_FOR_FULL_AGENT_BUILD**。
+当前里程碑：**post-WP-04-01 / WP-04-02 Evidence Domain Service next**，同时可以准备 `WP-RISK-01` 的产品与领域设计。Whole Product 状态为 **NOT_READY_FOR_FULL_AGENT_BUILD**。
 
-2026-09-12 的项目状态审计是历史时点快照，不是实时状态；WP-03/WP-04 acceptance 与 repair contract 是历史验收记录，不是当前所有能力已实现的证明。
+`TASK-WP04-01-GIT-INTEGRATION-R1` 已独立验收本地 main 集成：真实 PostgreSQL Evidence focused suite 为 `18 passed`，当前 Alembic head 为 `000000000004`。这只证明 WP-04-01 persistence foundation，不代表整个 WP-04 或产品闭环完成。
+
+Capability Runtime 当前为 **APPROVED — DEFERRED**：`ADR-2026-09-14-CAP-01` 只记录延后时机，不授权 `WP-CAP-00`、Provider/Router/Adapter 或 Runtime 实现。
+
+2026-09-12 的项目状态审计是历史时点快照，不是实时状态；历史 WP-03/WP-04 acceptance 与 repair contract 只按记录时点、分支和 scope 解读，不是当前所有能力已实现的证明。
 
 ## 工作包与依赖
 
@@ -213,7 +217,9 @@ make rebuild
 - [V1 PRD](docs/ThesisGuard_V1_PRD.md)：当前产品需求与验收边界。
 - [V1 TAD](docs/ThesisGuard_V1_Technical_Architecture_Design.md)：当前 canonical 技术架构边界。
 - [架构与文档权威索引](docs/ARCHITECTURE_REFERENCES.md)：canonical、historical、proposal、implementation contract 分类。
-- [WP-04 Evidence Domain Contract](docs/WP04_EVIDENCE_DOMAIN_CONTRACT.md)：Evidence 的冻结 implementation contract；不代表已实现。
+- [Capability Runtime 延后决策](docs/CAPABILITY_RUNTIME_DECISION_2026-09-14.md)：`ADR-2026-09-14-CAP-01`；Capability Runtime 当前 `APPROVED — DEFERRED`，不授权 `WP-CAP-00` 或 Runtime 实现。
+- [WP-04 Evidence Domain Contract](docs/WP04_EVIDENCE_DOMAIN_CONTRACT.md)：Evidence 的冻结 implementation contract；不代表 WP-04 整体已实现。当前本地 main 只集成 WP-04-01 persistence foundation。
+- [WP-04-01 Git 集成验收](docs/acceptance/TASK-WP04-01-GIT-INTEGRATION-R1-acceptance.md)：本地 `main@d8f38dd` 集成验收记录；不表示远端已发布。
 - [2026-09-12 项目状态审计](docs/PROJECT_STATUS_AUDIT_2026-09-12.md)：历史时点审计，不是当前状态源。
 
 ## Disclaimer
