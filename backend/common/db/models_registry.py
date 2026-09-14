@@ -10,6 +10,18 @@ As new domain modules are added, import their models here.
 无法自动发现新表。
 """
 
+from backend.evidence.models import (  # noqa: F401
+    EvidenceAuditEvent,
+    EvidenceCorroborationLink,
+    EvidenceDerivationLink,
+    EvidenceIdempotencyRecord,
+    EvidenceInstrumentLink,
+    EvidenceSeries,
+    EvidenceSourceLocator,
+    EvidenceVersion,
+    SourceDocument,
+    SourceDocumentVersion,
+)
 from backend.instrument.models import (  # noqa: F401
     Instrument,
     InstrumentAlias,
