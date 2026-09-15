@@ -13,6 +13,7 @@ import subprocess
 from collections.abc import AsyncIterator
 from datetime import UTC, datetime
 from decimal import Decimal
+from typing import Any
 from uuid import uuid4
 
 import asyncpg
@@ -22,7 +23,9 @@ from backend.evidence import services
 from backend.evidence.errors import EvidenceDomainError
 from backend.evidence.models import (
     EvidenceAuditEvent,
+    EvidenceDerivationLink,
     EvidenceIdempotencyRecord,
+    EvidenceInstrumentLink,
     EvidenceSeries,
     EvidenceSourceLocator,
     EvidenceVersion,
@@ -306,11 +309,27 @@ async def evidence_table_counts(db: AsyncSession) -> dict[str, int]:
         ("series", EvidenceSeries),
         ("version", EvidenceVersion),
         ("locator", EvidenceSourceLocator),
+        ("instrument_link", EvidenceInstrumentLink),
+        ("derivation_link", EvidenceDerivationLink),
         ("idempotency", EvidenceIdempotencyRecord),
         ("audit", EvidenceAuditEvent),
     ):
         counts[key] = int(await db.scalar(select(func.count()).select_from(model)) or 0)
     return counts
+
+
+def expected_manual_origin(actor: str, claim_key: str) -> str:
+    return f"manual:{actor}:{claim_key.strip()}"
+
+
+def expected_derived_origin(*support_ids: str) -> str:
+    support_set = sorted(set(support_ids))
+    return f"derived:{services.stable_hash(support_set)}"
+
+
+def expected_cross_scope(*instrument_ids: str) -> str:
+    member_set = sorted(set(instrument_ids))
+    return f"cross_instrument:{services.stable_hash(member_set)}"
 
 
 async def create_source_backed_fact_with_locators(
@@ -866,6 +885,1089 @@ async def test_create_evidence_rejects_bad_locator_provenance_and_links(
             created_by_actor="IMPORTER",
         )
     assert_error(bad_corroboration, "EVIDENCE_INVALID_CORROBORATION_LINK")
+
+
+async def test_r1b_manual_identity_and_source_less_validation(db: AsyncSession) -> None:
+    """Manual identities are service-derived and source-less provenance is fail-closed."""
+    estimate = await services.create_evidence_series_version(
+        db,
+        scope_type="INSTRUMENT",
+        scope_key=QIANGRUI_INSTRUMENT_ID,
+        information_type="ESTIMATE",
+        claim_key=" margin-estimate ",
+        provenance_kind="MANUAL",
+        display_title="User margin estimate",
+        display_text="User estimates margin at 34%",
+        raw_value="34%",
+        raw_unit="percent",
+        normalized_value=Decimal("34"),
+        normalized_unit="percent",
+        as_of=dt(),
+        manual_entry_reason="user observed management guidance",
+        manual_observed_at=dt(),
+        created_by_actor="USER",
+        instrument_links=[
+            services.InstrumentLinkInput(
+                instrument_id=QIANGRUI_INSTRUMENT_ID,
+                role="PRIMARY_SCOPE",
+                link_order=1,
+            )
+        ],
+        idempotency_key="r1b-manual-estimate",
+    )
+    hypothesis = await services.create_evidence_series_version(
+        db,
+        scope_type="INSTRUMENT",
+        scope_key=QIANGRUI_INSTRUMENT_ID,
+        information_type="USER_HYPOTHESIS",
+        claim_key="margin-estimate",
+        provenance_kind="MANUAL",
+        display_title="User hypothesis",
+        display_text="Margin expansion hypothesis",
+        as_of=dt(),
+        manual_entry_reason="user hypothesis",
+        manual_observed_at=dt(),
+        created_by_actor="USER",
+        instrument_links=[
+            services.InstrumentLinkInput(
+                instrument_id=QIANGRUI_INSTRUMENT_ID,
+                role="PRIMARY_SCOPE",
+                link_order=1,
+            )
+        ],
+        idempotency_key="r1b-user-hypothesis",
+    )
+    await db.commit()
+
+    estimate_series = await db.get(EvidenceSeries, estimate.evidence_series_id)
+    hypothesis_series = await db.get(EvidenceSeries, hypothesis.evidence_series_id)
+    assert estimate_series is not None
+    assert hypothesis_series is not None
+    assert estimate_series.origin_key == expected_manual_origin("USER", " margin-estimate ")
+    assert hypothesis_series.origin_key == expected_manual_origin("USER", "margin-estimate")
+    assert estimate_series.origin_key == hypothesis_series.origin_key
+    assert estimate.source_document_version_id is None
+    assert estimate.source_grade_snapshot is None
+    assert estimate.source_locators == []
+
+    before = await evidence_table_counts(db)
+    with pytest.raises(EvidenceDomainError) as wrong_origin:
+        await services.create_evidence_series_version(
+            db,
+            scope_type="INSTRUMENT",
+            scope_key=QIANGRUI_INSTRUMENT_ID,
+            information_type="ESTIMATE",
+            claim_key="margin-estimate",
+            provenance_kind="MANUAL",
+            origin_key="manual:USER:caller-controlled",
+            display_title="Wrong origin",
+            display_text="Wrong origin",
+            as_of=dt(),
+            manual_entry_reason="manual",
+            manual_observed_at=dt(),
+            created_by_actor="USER",
+            instrument_links=[
+                services.InstrumentLinkInput(
+                    instrument_id=QIANGRUI_INSTRUMENT_ID,
+                    role="PRIMARY_SCOPE",
+                    link_order=1,
+                )
+            ],
+            idempotency_key="r1b-wrong-manual-origin",
+        )
+    assert_error(wrong_origin, "EVIDENCE_INVALID_PROVENANCE")
+    assert await evidence_table_counts(db) == before
+
+    source, source_version = await source_with_version(db, key_suffix="manual-source-forbidden")
+    invalid_commands: list[dict[str, Any]] = [
+        {
+            "information_type": "FACT",
+            "provenance_kind": "MANUAL",
+            "claim_key": "manual-fact",
+            "manual_entry_reason": "manual",
+            "manual_observed_at": dt(),
+            "created_by_actor": "USER",
+            "idempotency_key": "r1b-manual-fact",
+        },
+        {
+            "information_type": "ESTIMATE",
+            "provenance_kind": "MANUAL",
+            "claim_key": "manual-no-reason",
+            "manual_entry_reason": None,
+            "manual_observed_at": dt(),
+            "created_by_actor": "USER",
+            "idempotency_key": "r1b-manual-no-reason",
+        },
+        {
+            "information_type": "ESTIMATE",
+            "provenance_kind": "MANUAL",
+            "claim_key": "manual-with-source",
+            "primary_source_document_id": source.id,
+            "source_document_version_id": source_version.id,
+            "manual_entry_reason": "manual",
+            "manual_observed_at": dt(),
+            "created_by_actor": "USER",
+            "idempotency_key": "r1b-manual-with-source",
+        },
+        {
+            "information_type": "THESIS_INFERENCE",
+            "provenance_kind": "DERIVED",
+            "claim_key": "derived-with-source",
+            "primary_source_document_id": source.id,
+            "source_document_version_id": source_version.id,
+            "locators": [
+                services.SourceLocatorInput(
+                    locator_type="PAGE",
+                    raw_locator="p.1",
+                    short_citation="p.1",
+                    locator_payload={"page_number": 1},
+                )
+            ],
+            "idempotency_key": "r1b-derived-with-source",
+        },
+    ]
+    for command in invalid_commands:
+        before = await evidence_table_counts(db)
+        with pytest.raises(EvidenceDomainError) as invalid:
+            await services.create_evidence_series_version(
+                db,
+                scope_type="INSTRUMENT",
+                scope_key=QIANGRUI_INSTRUMENT_ID,
+                display_title="Invalid source-less provenance",
+                display_text="Invalid source-less provenance",
+                as_of=dt(),
+                instrument_links=[
+                    services.InstrumentLinkInput(
+                        instrument_id=QIANGRUI_INSTRUMENT_ID,
+                        role="PRIMARY_SCOPE",
+                        link_order=1,
+                    )
+                ],
+                **command,
+            )
+        assert_error(invalid, "EVIDENCE_INVALID_PROVENANCE")
+        assert await evidence_table_counts(db) == before
+
+
+async def test_r1b_derived_identity_links_validation_and_cycle_defense(
+    db: AsyncSession,
+) -> None:
+    """Derived identity is computed from exact supports and invalid graphs leave no residue."""
+    support_a = await evidence_fact(db, key_suffix="r1b-support-a")
+    support_b = await evidence_fact(db, key_suffix="r1b-support-b")
+    derived = await services.create_evidence_series_version(
+        db,
+        scope_type="INSTRUMENT",
+        scope_key=QIANGRUI_INSTRUMENT_ID,
+        information_type="THESIS_INFERENCE",
+        claim_key="derived-margin-quality",
+        provenance_kind="DERIVED",
+        display_title="Derived margin quality",
+        display_text="Margin quality is supported by two facts",
+        as_of=dt(),
+        derivation_links=[
+            services.DerivationLinkInput(
+                supporting_evidence_version_id=support_b.id,
+                role="INPUT_FACT",
+                support_order=2,
+                support_weight=Decimal("0.4"),
+            ),
+            services.DerivationLinkInput(
+                supporting_evidence_version_id=support_a.id,
+                role="INPUT_FACT",
+                support_order=1,
+                support_weight=Decimal("0.6"),
+            ),
+        ],
+        instrument_links=[
+            services.InstrumentLinkInput(
+                instrument_id=QIANGRUI_INSTRUMENT_ID,
+                role="PRIMARY_SCOPE",
+                link_order=1,
+            )
+        ],
+        idempotency_key="r1b-derived",
+    )
+    same_origin = await services.create_evidence_series_version(
+        db,
+        scope_type="INSTRUMENT",
+        scope_key=QIANGRUI_INSTRUMENT_ID,
+        information_type="THESIS_INFERENCE",
+        claim_key="derived-margin-quality-copy",
+        provenance_kind="DERIVED",
+        display_title="Derived copy",
+        display_text="Same supports in another order",
+        as_of=dt(),
+        derivation_links=[
+            services.DerivationLinkInput(
+                supporting_evidence_version_id=support_a.id,
+                role="INPUT_FACT",
+            ),
+            services.DerivationLinkInput(
+                supporting_evidence_version_id=support_b.id,
+                role="INPUT_FACT",
+            ),
+        ],
+        instrument_links=[
+            services.InstrumentLinkInput(
+                instrument_id=QIANGRUI_INSTRUMENT_ID,
+                role="PRIMARY_SCOPE",
+                link_order=1,
+            )
+        ],
+        idempotency_key="r1b-derived-same-origin",
+    )
+    await db.commit()
+
+    series = await db.get(EvidenceSeries, derived.evidence_series_id)
+    same_series = await db.get(EvidenceSeries, same_origin.evidence_series_id)
+    assert series is not None
+    assert same_series is not None
+    assert series.origin_key == expected_derived_origin(support_a.id, support_b.id)
+    assert same_series.origin_key == series.origin_key
+    assert derived.source_document_version_id is None
+    assert derived.source_grade_snapshot is None
+    assert [(link.supporting_evidence_version_id, link.role) for link in derived.derived_links] == [
+        (support_b.id, "INPUT_FACT"),
+        (support_a.id, "INPUT_FACT"),
+    ]
+
+    invalid_cases = [
+        ("r1b-derived-no-support", []),
+        (
+            "r1b-derived-invalid-role",
+            [
+                services.DerivationLinkInput(
+                    supporting_evidence_version_id=support_a.id,
+                    role="NOT_A_ROLE",
+                )
+            ],
+        ),
+        (
+            "r1b-derived-missing-support",
+            [
+                services.DerivationLinkInput(
+                    supporting_evidence_version_id="99999999-9999-4999-8999-999999999999",
+                    role="INPUT_FACT",
+                )
+            ],
+        ),
+        (
+            "r1b-derived-duplicate-edge",
+            [
+                services.DerivationLinkInput(
+                    supporting_evidence_version_id=support_a.id,
+                    role="INPUT_FACT",
+                ),
+                services.DerivationLinkInput(
+                    supporting_evidence_version_id=support_a.id,
+                    role="INPUT_FACT",
+                ),
+            ],
+        ),
+    ]
+    for key, derivation_links in invalid_cases:
+        before = await evidence_table_counts(db)
+        with pytest.raises(EvidenceDomainError) as invalid:
+            await services.create_evidence_series_version(
+                db,
+                scope_type="INSTRUMENT",
+                scope_key=QIANGRUI_INSTRUMENT_ID,
+                information_type="THESIS_INFERENCE",
+                claim_key=key,
+                provenance_kind="DERIVED",
+                display_title=key,
+                display_text=key,
+                as_of=dt(),
+                derivation_links=derivation_links,
+                instrument_links=[
+                    services.InstrumentLinkInput(
+                        instrument_id=QIANGRUI_INSTRUMENT_ID,
+                        role="PRIMARY_SCOPE",
+                        link_order=1,
+                    )
+                ],
+                idempotency_key=key,
+            )
+        assert_error(invalid, "EVIDENCE_INVALID_DERIVATION_LINK")
+        assert await evidence_table_counts(db) == before
+
+    before = await evidence_table_counts(db)
+    with pytest.raises(EvidenceDomainError) as wrong_origin:
+        await services.create_evidence_series_version(
+            db,
+            scope_type="INSTRUMENT",
+            scope_key=QIANGRUI_INSTRUMENT_ID,
+            information_type="THESIS_INFERENCE",
+            claim_key="derived-wrong-origin",
+            provenance_kind="DERIVED",
+            origin_key="derived:caller-controlled",
+            display_title="Derived wrong origin",
+            display_text="Derived wrong origin",
+            as_of=dt(),
+            derivation_links=[
+                services.DerivationLinkInput(
+                    supporting_evidence_version_id=support_a.id,
+                    role="INPUT_FACT",
+                )
+            ],
+            instrument_links=[
+                services.InstrumentLinkInput(
+                    instrument_id=QIANGRUI_INSTRUMENT_ID,
+                    role="PRIMARY_SCOPE",
+                    link_order=1,
+                )
+            ],
+            idempotency_key="r1b-derived-wrong-origin",
+        )
+    assert_error(wrong_origin, "EVIDENCE_INVALID_PROVENANCE")
+    assert await evidence_table_counts(db) == before
+
+    old_links = [(link.supporting_evidence_version_id, link.role) for link in derived.derived_links]
+    prior_exact_replacement = await services.revise_correct_evidence(
+        db,
+        evidence_series_id=derived.evidence_series_id,
+        expected_version=1,
+        status_changed_at=dt(day=13),
+        status_changed_by_actor="IMPORTER",
+        status_reason="prior exact version support is acyclic",
+        idempotency_key="r1b-derived-prior-exact-support",
+        derivation_links=[
+            services.DerivationLinkInput(
+                supporting_evidence_version_id=derived.id,
+                role="SUPPORTS_INFERENCE",
+            ),
+            services.DerivationLinkInput(
+                supporting_evidence_version_id=support_a.id,
+                role="INPUT_FACT",
+            ),
+        ],
+    )
+    assert prior_exact_replacement.version == 1
+    assert prior_exact_replacement.evidence_series_id != derived.evidence_series_id
+    assert prior_exact_replacement.supersedes_evidence_version_id == derived.id
+    assert prior_exact_replacement.status_change_kind == "CORRECTION"
+    assert prior_exact_replacement.status_changed_at is not None
+    assert prior_exact_replacement.status_changed_by_actor == "IMPORTER"
+    assert prior_exact_replacement.status_reason == "prior exact version support is acyclic"
+    assert [
+        (link.supporting_evidence_version_id, link.role)
+        for link in prior_exact_replacement.derived_links
+    ] == [
+        (derived.id, "SUPPORTS_INFERENCE"),
+        (support_a.id, "INPUT_FACT"),
+    ]
+    assert [(link.supporting_evidence_version_id, link.role) for link in derived.derived_links] == (
+        old_links
+    )
+
+    derived_b = await services.create_evidence_series_version(
+        db,
+        scope_type="INSTRUMENT",
+        scope_key=QIANGRUI_INSTRUMENT_ID,
+        information_type="THESIS_INFERENCE",
+        claim_key="derived-b",
+        provenance_kind="DERIVED",
+        display_title="Derived B",
+        display_text="Derived B",
+        as_of=dt(),
+        derivation_links=[
+            services.DerivationLinkInput(
+                supporting_evidence_version_id=support_a.id,
+                role="INPUT_FACT",
+            )
+        ],
+        instrument_links=[
+            services.InstrumentLinkInput(
+                instrument_id=QIANGRUI_INSTRUMENT_ID,
+                role="PRIMARY_SCOPE",
+                link_order=1,
+            )
+        ],
+        idempotency_key="r1b-derived-b",
+    )
+    derived_a = await services.create_evidence_series_version(
+        db,
+        scope_type="INSTRUMENT",
+        scope_key=QIANGRUI_INSTRUMENT_ID,
+        information_type="THESIS_INFERENCE",
+        claim_key="derived-a",
+        provenance_kind="DERIVED",
+        display_title="Derived A",
+        display_text="Derived A",
+        as_of=dt(),
+        derivation_links=[
+            services.DerivationLinkInput(
+                supporting_evidence_version_id=derived_b.id,
+                role="SUPPORTS_INFERENCE",
+            )
+        ],
+        instrument_links=[
+            services.InstrumentLinkInput(
+                instrument_id=QIANGRUI_INSTRUMENT_ID,
+                role="PRIMARY_SCOPE",
+                link_order=1,
+            )
+        ],
+        idempotency_key="r1b-derived-a",
+    )
+    await db.commit()
+    derived_b_old_links = [
+        (link.supporting_evidence_version_id, link.role) for link in derived_b.derived_links
+    ]
+    derived_b_replacement = await services.revise_correct_evidence(
+        db,
+        evidence_series_id=derived_b.evidence_series_id,
+        expected_version=1,
+        status_changed_at=dt(day=13),
+        status_changed_by_actor="IMPORTER",
+        status_reason="old exact path does not reach new exact version",
+        idempotency_key="r1b-derived-acyclic-prior-chain",
+        derivation_links=[
+            services.DerivationLinkInput(
+                supporting_evidence_version_id=derived_a.id,
+                role="SUPPORTS_INFERENCE",
+            )
+        ],
+    )
+    assert derived_b_replacement.version == 1
+    assert derived_b_replacement.evidence_series_id != derived_b.evidence_series_id
+    assert derived_b_replacement.supersedes_evidence_version_id == derived_b.id
+    assert [
+        (link.supporting_evidence_version_id, link.role)
+        for link in derived_b_replacement.derived_links
+    ] == [(derived_a.id, "SUPPORTS_INFERENCE")]
+    assert [
+        (link.supporting_evidence_version_id, link.role) for link in derived_b.derived_links
+    ] == derived_b_old_links
+
+
+async def test_r1b_exact_target_derivation_cycle_validator(db: AsyncSession) -> None:
+    """Production validation rejects only paths returning to the exact target version."""
+    support = await evidence_fact(db, key_suffix="r1b-exact-target-support")
+    other_target = await evidence_fact(db, key_suffix="r1b-exact-target-other")
+    derived_b = await services.create_evidence_series_version(
+        db,
+        scope_type="INSTRUMENT",
+        scope_key=QIANGRUI_INSTRUMENT_ID,
+        information_type="THESIS_INFERENCE",
+        claim_key="r1b-exact-target-b",
+        provenance_kind="DERIVED",
+        display_title="Exact target B",
+        display_text="Exact target B",
+        as_of=dt(),
+        derivation_links=[
+            services.DerivationLinkInput(
+                supporting_evidence_version_id=support.id,
+                role="INPUT_FACT",
+            )
+        ],
+        instrument_links=[
+            services.InstrumentLinkInput(
+                instrument_id=QIANGRUI_INSTRUMENT_ID,
+                role="PRIMARY_SCOPE",
+                link_order=1,
+            )
+        ],
+        idempotency_key="r1b-exact-target-b",
+    )
+    derived_a = await services.create_evidence_series_version(
+        db,
+        scope_type="INSTRUMENT",
+        scope_key=QIANGRUI_INSTRUMENT_ID,
+        information_type="THESIS_INFERENCE",
+        claim_key="r1b-exact-target-a",
+        provenance_kind="DERIVED",
+        display_title="Exact target A",
+        display_text="Exact target A",
+        as_of=dt(),
+        derivation_links=[
+            services.DerivationLinkInput(
+                supporting_evidence_version_id=derived_b.id,
+                role="SUPPORTS_INFERENCE",
+            )
+        ],
+        instrument_links=[
+            services.InstrumentLinkInput(
+                instrument_id=QIANGRUI_INSTRUMENT_ID,
+                role="PRIMARY_SCOPE",
+                link_order=1,
+            )
+        ],
+        idempotency_key="r1b-exact-target-a",
+    )
+    await db.commit()
+
+    before = await evidence_table_counts(db)
+    await services._validate_derivation_links(
+        db,
+        provenance_kind="DERIVED",
+        derivation_links=[
+            services.DerivationLinkInput(
+                supporting_evidence_version_id=derived_a.id,
+                role="SUPPORTS_INFERENCE",
+            )
+        ],
+        proposed_derived_evidence_version_id=other_target.id,
+    )
+    assert await evidence_table_counts(db) == before
+
+    with pytest.raises(EvidenceDomainError) as exact_self:
+        await services._validate_derivation_links(
+            db,
+            provenance_kind="DERIVED",
+            derivation_links=[
+                services.DerivationLinkInput(
+                    supporting_evidence_version_id=derived_b.id,
+                    role="SUPPORTS_INFERENCE",
+                )
+            ],
+            proposed_derived_evidence_version_id=derived_b.id,
+        )
+    assert_error(exact_self, "EVIDENCE_INVALID_DERIVATION_LINK")
+    assert await evidence_table_counts(db) == before
+
+    with pytest.raises(EvidenceDomainError) as exact_cycle:
+        await services._validate_derivation_links(
+            db,
+            provenance_kind="DERIVED",
+            derivation_links=[
+                services.DerivationLinkInput(
+                    supporting_evidence_version_id=derived_a.id,
+                    role="SUPPORTS_INFERENCE",
+                )
+            ],
+            proposed_derived_evidence_version_id=derived_b.id,
+        )
+    assert_error(exact_cycle, "EVIDENCE_INVALID_DERIVATION_LINK")
+    assert await evidence_table_counts(db) == before
+
+
+@pytest.mark.parametrize(
+    "operation",
+    ["create", "same_series_revision", "replacement", "status_append"],
+)
+async def test_r1b_public_derived_writes_validate_new_exact_target_before_flush(
+    db: AsyncSession,
+    monkeypatch: pytest.MonkeyPatch,
+    operation: str,
+) -> None:
+    """Public DERIVED writes validate the actual new immutable ID before persistence."""
+    support_a = await evidence_fact(db, key_suffix=f"r1b-target-{operation}-a")
+    support_b = await evidence_fact(db, key_suffix=f"r1b-target-{operation}-b")
+    derived: EvidenceVersion | None = None
+    if operation != "create":
+        derived = await services.create_evidence_series_version(
+            db,
+            scope_type="INSTRUMENT",
+            scope_key=QIANGRUI_INSTRUMENT_ID,
+            information_type="THESIS_INFERENCE",
+            claim_key=f"r1b-target-{operation}",
+            provenance_kind="DERIVED",
+            display_title="Target timing derived",
+            display_text="Target timing derived",
+            as_of=dt(),
+            derivation_links=[
+                services.DerivationLinkInput(
+                    supporting_evidence_version_id=support_a.id,
+                    role="INPUT_FACT",
+                )
+            ],
+            instrument_links=[
+                services.InstrumentLinkInput(
+                    instrument_id=QIANGRUI_INSTRUMENT_ID,
+                    role="PRIMARY_SCOPE",
+                )
+            ],
+            idempotency_key=f"r1b-target-{operation}-setup",
+        )
+
+    flush_started = False
+    validation_targets: list[tuple[str | None, bool]] = []
+    traversal_targets: list[tuple[str, bool]] = []
+    real_flush = AsyncSession.flush
+    real_validate = services._validate_derivation_links
+    real_reach = services._support_graph_reaches_exact_version
+
+    async def observe_flush(self: AsyncSession, *args: Any, **kwargs: Any) -> None:
+        nonlocal flush_started
+        flush_started = True
+        await real_flush(self, *args, **kwargs)
+
+    async def observe_validation(*args: Any, **kwargs: Any) -> None:
+        if kwargs.get("provenance_kind") == "DERIVED":
+            validation_targets.append(
+                (kwargs.get("proposed_derived_evidence_version_id"), flush_started)
+            )
+        await real_validate(*args, **kwargs)
+
+    async def observe_reachability(*args: Any, **kwargs: Any) -> bool:
+        traversal_targets.append((kwargs["target_evidence_version_id"], flush_started))
+        return await real_reach(*args, **kwargs)
+
+    monkeypatch.setattr(AsyncSession, "flush", observe_flush)
+    monkeypatch.setattr(services, "_validate_derivation_links", observe_validation)
+    monkeypatch.setattr(services, "_support_graph_reaches_exact_version", observe_reachability)
+
+    if operation == "create":
+        result = await services.create_evidence_series_version(
+            db,
+            scope_type="INSTRUMENT",
+            scope_key=QIANGRUI_INSTRUMENT_ID,
+            information_type="THESIS_INFERENCE",
+            claim_key="r1b-target-create",
+            provenance_kind="DERIVED",
+            display_title="Target timing create",
+            display_text="Target timing create",
+            as_of=dt(),
+            derivation_links=[
+                services.DerivationLinkInput(
+                    supporting_evidence_version_id=support_a.id,
+                    role="INPUT_FACT",
+                )
+            ],
+            instrument_links=[
+                services.InstrumentLinkInput(
+                    instrument_id=QIANGRUI_INSTRUMENT_ID,
+                    role="PRIMARY_SCOPE",
+                )
+            ],
+            idempotency_key="r1b-target-create",
+        )
+    elif operation == "same_series_revision":
+        assert derived is not None
+        result = await services.revise_correct_evidence(
+            db,
+            evidence_series_id=derived.evidence_series_id,
+            expected_version=1,
+            display_text="Target timing same support set",
+            status_changed_at=dt(day=13),
+            status_changed_by_actor="IMPORTER",
+            status_reason="same support set timing",
+            idempotency_key="r1b-target-same-series",
+            derivation_links=[
+                services.DerivationLinkInput(
+                    supporting_evidence_version_id=support_a.id,
+                    role="INPUT_FACT",
+                    support_order=2,
+                )
+            ],
+        )
+    elif operation == "replacement":
+        assert derived is not None
+        result = await services.revise_correct_evidence(
+            db,
+            evidence_series_id=derived.evidence_series_id,
+            expected_version=1,
+            status_changed_at=dt(day=13),
+            status_changed_by_actor="IMPORTER",
+            status_reason="changed support set timing",
+            idempotency_key="r1b-target-replacement",
+            derivation_links=[
+                services.DerivationLinkInput(
+                    supporting_evidence_version_id=support_a.id,
+                    role="INPUT_FACT",
+                ),
+                services.DerivationLinkInput(
+                    supporting_evidence_version_id=support_b.id,
+                    role="INPUT_FACT",
+                ),
+            ],
+        )
+    else:
+        assert derived is not None
+        result = await services.request_review(
+            db,
+            evidence_series_id=derived.evidence_series_id,
+            expected_version=1,
+            reason="status append timing",
+            actor="IMPORTER",
+            idempotency_key="r1b-target-status-append",
+            as_of=dt(day=13),
+        )
+
+    assert (result.id, False) in validation_targets
+    assert (result.id, False) in traversal_targets
+    persisted = await db.get(EvidenceVersion, result.id)
+    assert persisted is not None
+    assert persisted.id == result.id
+
+
+async def test_r1b_replacement_routing_child_snapshots_and_nullable_clear(
+    db: AsyncSession,
+) -> None:
+    """Identity changes route to replacements; same-set changes append child snapshots."""
+    support_a = await evidence_fact(db, key_suffix="r1b-route-a")
+    support_b = await evidence_fact(db, key_suffix="r1b-route-b")
+    support_c = await evidence_fact(db, key_suffix="r1b-route-c")
+    derived = await services.create_evidence_series_version(
+        db,
+        scope_type="INSTRUMENT",
+        scope_key=QIANGRUI_INSTRUMENT_ID,
+        information_type="THESIS_INFERENCE",
+        claim_key="r1b-route-derived",
+        provenance_kind="DERIVED",
+        display_title="Route derived",
+        display_text="Route derived",
+        raw_value="initial",
+        raw_unit="score",
+        normalized_text_value="initial",
+        normalized_unit="score",
+        currency="CNY",
+        effective_from=dt(),
+        effective_to=dt(day=20),
+        as_of=dt(),
+        derivation_links=[
+            services.DerivationLinkInput(
+                supporting_evidence_version_id=support_a.id,
+                role="INPUT_FACT",
+                support_order=1,
+            ),
+            services.DerivationLinkInput(
+                supporting_evidence_version_id=support_b.id,
+                role="INPUT_FACT",
+                support_order=2,
+            ),
+        ],
+        instrument_links=[
+            services.InstrumentLinkInput(
+                instrument_id=QIANGRUI_INSTRUMENT_ID,
+                role="PRIMARY_SCOPE",
+                link_order=1,
+            )
+        ],
+        idempotency_key="r1b-route-derived",
+    )
+    same_set = await services.revise_correct_evidence(
+        db,
+        evidence_series_id=derived.evidence_series_id,
+        expected_version=1,
+        display_text="same support set new weights",
+        status_changed_at=dt(day=13),
+        status_changed_by_actor="IMPORTER",
+        status_reason="same set metadata",
+        idempotency_key="r1b-route-derived-same-set",
+        derivation_links=[
+            services.DerivationLinkInput(
+                supporting_evidence_version_id=support_b.id,
+                role="INPUT_FACT",
+                support_order=1,
+                support_weight=Decimal("0.7"),
+            ),
+            services.DerivationLinkInput(
+                supporting_evidence_version_id=support_a.id,
+                role="INPUT_FACT",
+                support_order=2,
+                support_weight=Decimal("0.3"),
+            ),
+        ],
+    )
+    assert same_set.evidence_series_id == derived.evidence_series_id
+    assert same_set.version == 2
+    assert [
+        (link.supporting_evidence_version_id, link.support_weight)
+        for link in same_set.derived_links
+    ] == [
+        (support_b.id, Decimal("0.7")),
+        (support_a.id, Decimal("0.3")),
+    ]
+    assert [
+        (link.supporting_evidence_version_id, link.support_weight) for link in derived.derived_links
+    ] == [
+        (support_a.id, None),
+        (support_b.id, None),
+    ]
+
+    replacement = await services.revise_correct_evidence(
+        db,
+        evidence_series_id=derived.evidence_series_id,
+        expected_version=2,
+        status_changed_at=dt(day=14),
+        status_changed_by_actor="IMPORTER",
+        status_reason="support set changed",
+        idempotency_key="r1b-route-derived-replacement",
+        derivation_links=[
+            services.DerivationLinkInput(
+                supporting_evidence_version_id=support_a.id,
+                role="INPUT_FACT",
+            ),
+            services.DerivationLinkInput(
+                supporting_evidence_version_id=support_c.id,
+                role="INPUT_FACT",
+            ),
+        ],
+    )
+    assert replacement.version == 1
+    assert replacement.evidence_series_id != derived.evidence_series_id
+    assert replacement.supersedes_evidence_version_id == same_set.id
+    assert replacement.status_change_kind == "CORRECTION"
+
+    cross_scope = expected_cross_scope(QIANGRUI_INSTRUMENT_ID, SHENLING_INSTRUMENT_ID)
+    cross = await services.create_evidence_series_version(
+        db,
+        scope_type="CROSS_INSTRUMENT",
+        scope_key=cross_scope,
+        information_type="ESTIMATE",
+        claim_key="cross-margin-spread",
+        provenance_kind="MANUAL",
+        display_title="Cross estimate",
+        display_text="Cross estimate",
+        as_of=dt(),
+        manual_entry_reason="manual cross estimate",
+        manual_observed_at=dt(),
+        created_by_actor="USER",
+        instrument_links=[
+            services.InstrumentLinkInput(
+                instrument_id=SHENLING_INSTRUMENT_ID,
+                role="PEER",
+                link_order=2,
+                link_metadata={"note": "second"},
+            ),
+            services.InstrumentLinkInput(
+                instrument_id=QIANGRUI_INSTRUMENT_ID,
+                role="PRIMARY_SCOPE",
+                link_order=1,
+                link_metadata={"note": "first"},
+            ),
+            services.InstrumentLinkInput(
+                instrument_id=QIANGRUI_INSTRUMENT_ID,
+                role="RELATED_COMPANY",
+                link_order=3,
+                link_metadata={"duplicate_id": True},
+            ),
+        ],
+        idempotency_key="r1b-cross",
+    )
+    cross_series = await db.get(EvidenceSeries, cross.evidence_series_id)
+    assert cross_series is not None
+    assert cross_series.scope_key == cross_scope
+
+    before = await evidence_table_counts(db)
+    with pytest.raises(EvidenceDomainError) as wrong_scope:
+        await services.create_evidence_series_version(
+            db,
+            scope_type="CROSS_INSTRUMENT",
+            scope_key="caller-controlled",
+            information_type="ESTIMATE",
+            claim_key="cross-wrong-scope",
+            provenance_kind="MANUAL",
+            display_title="Wrong cross scope",
+            display_text="Wrong cross scope",
+            as_of=dt(),
+            manual_entry_reason="manual",
+            manual_observed_at=dt(),
+            created_by_actor="USER",
+            instrument_links=[
+                services.InstrumentLinkInput(
+                    instrument_id=QIANGRUI_INSTRUMENT_ID,
+                    role="PRIMARY_SCOPE",
+                ),
+                services.InstrumentLinkInput(
+                    instrument_id=SHENLING_INSTRUMENT_ID,
+                    role="PEER",
+                ),
+            ],
+            idempotency_key="r1b-cross-wrong-scope",
+        )
+    assert_error(wrong_scope, "EVIDENCE_INVALID_PROVENANCE")
+    assert await evidence_table_counts(db) == before
+
+    cross_same_set = await services.revise_correct_evidence(
+        db,
+        evidence_series_id=cross.evidence_series_id,
+        expected_version=1,
+        status_changed_at=dt(day=13),
+        status_changed_by_actor="USER",
+        status_reason="cross metadata",
+        idempotency_key="r1b-cross-same-set",
+        instrument_links=[
+            services.InstrumentLinkInput(
+                instrument_id=QIANGRUI_INSTRUMENT_ID,
+                role="PRIMARY_SCOPE",
+                link_order=10,
+                link_metadata={"updated": True},
+            ),
+            services.InstrumentLinkInput(
+                instrument_id=SHENLING_INSTRUMENT_ID,
+                role="PEER",
+                link_order=20,
+            ),
+        ],
+    )
+    assert cross_same_set.evidence_series_id == cross.evidence_series_id
+    assert cross_same_set.version == 2
+
+    cross_replacement = await services.revise_correct_evidence(
+        db,
+        evidence_series_id=cross.evidence_series_id,
+        expected_version=2,
+        status_changed_at=dt(day=14),
+        status_changed_by_actor="USER",
+        status_reason="cross member set changed",
+        idempotency_key="r1b-cross-replacement",
+        instrument_links=[
+            services.InstrumentLinkInput(
+                instrument_id=QIANGRUI_INSTRUMENT_ID,
+                role="PRIMARY_SCOPE",
+            )
+        ],
+    )
+    assert cross_replacement.version == 1
+    assert cross_replacement.evidence_series_id != cross.evidence_series_id
+    assert cross_replacement.supersedes_evidence_version_id == cross_same_set.id
+
+    derived_tombstone = await services.retract_or_invalidate(
+        db,
+        evidence_series_id=replacement.evidence_series_id,
+        expected_version=1,
+        target_status="INVALIDATED",
+        reason="derived invalidated",
+        actor="IMPORTER",
+        idempotency_key="r1b-derived-tombstone",
+        as_of=dt(day=15),
+    )
+    cross_tombstone = await services.retract_or_invalidate(
+        db,
+        evidence_series_id=cross_replacement.evidence_series_id,
+        expected_version=1,
+        target_status="RETRACTED",
+        reason="cross retracted",
+        actor="USER",
+        idempotency_key="r1b-cross-tombstone",
+        as_of=dt(day=15),
+    )
+    assert len(derived_tombstone.derived_links) == len(replacement.derived_links)
+    assert len(cross_tombstone.instrument_links) == len(cross_replacement.instrument_links)
+
+    retained = await services.revise_correct_evidence(
+        db,
+        evidence_series_id=derived.evidence_series_id,
+        expected_version=2,
+        display_text="omitted nullable values are retained",
+        status_changed_at=dt(day=16),
+        status_changed_by_actor="IMPORTER",
+        status_reason="retain nullable",
+        idempotency_key="r1b-nullable-retain",
+    )
+    assert retained.raw_unit == "score"
+    assert retained.normalized_text_value == "initial"
+    assert retained.normalized_unit == "score"
+    assert retained.currency == "CNY"
+    assert retained.effective_to == dt(day=20)
+
+    cleared = await services.revise_correct_evidence(
+        db,
+        evidence_series_id=derived.evidence_series_id,
+        expected_version=3,
+        display_text="explicit nullable values are cleared",
+        raw_unit=None,
+        normalized_text_value=None,
+        normalized_unit=None,
+        currency=None,
+        effective_to=None,
+        status_changed_at=dt(day=17),
+        status_changed_by_actor="IMPORTER",
+        status_reason="clear nullable",
+        idempotency_key="r1b-nullable-clear",
+    )
+    assert cleared.raw_unit is None
+    assert cleared.normalized_text_value is None
+    assert cleared.normalized_unit is None
+    assert cleared.currency is None
+    assert cleared.effective_to is None
+
+    before = await evidence_table_counts(db)
+    with pytest.raises(EvidenceDomainError) as non_nullable_clear:
+        await services.revise_correct_evidence(
+            db,
+            evidence_series_id=derived.evidence_series_id,
+            expected_version=4,
+            display_text=None,
+            status_changed_at=dt(day=18),
+            status_changed_by_actor="IMPORTER",
+            status_reason="clear display text",
+            idempotency_key="r1b-non-null-clear",
+        )
+    assert_error(non_nullable_clear, "EVIDENCE_INVALID_PROVENANCE")
+    assert await evidence_table_counts(db) == before
+
+
+async def test_r1b_llm_proposal_extractor_provenance(db: AsyncSession) -> None:
+    """Automatic extraction provenance is fail-closed and persisted exactly."""
+    source, source_version = await source_with_version(db, key_suffix="r1b-llm")
+    base_command: dict[str, Any] = {
+        "db": db,
+        "scope_type": "INSTRUMENT",
+        "scope_key": QIANGRUI_INSTRUMENT_ID,
+        "information_type": "FACT",
+        "provenance_kind": "SOURCE_BACKED",
+        "primary_source_document_id": source.id,
+        "source_document_version_id": source_version.id,
+        "display_title": "LLM extracted fact",
+        "display_text": "LLM extracted fact",
+        "as_of": dt(),
+        "locators": [
+            services.SourceLocatorInput(
+                locator_type="PAGE",
+                raw_locator="p.1",
+                short_citation="p.1",
+                locator_payload={"page_number": 1},
+            )
+        ],
+        "instrument_links": [
+            services.InstrumentLinkInput(
+                instrument_id=QIANGRUI_INSTRUMENT_ID,
+                role="PRIMARY_SCOPE",
+                link_order=1,
+            )
+        ],
+    }
+
+    invalid_extractor_cases: list[tuple[str, dict[str, Any]]] = [
+        ("missing-all", {}),
+        ("missing-prompt", {"extractor_name": "tg-llm", "extractor_version": "1.0"}),
+        (
+            "blank-name",
+            {"extractor_name": " ", "extractor_version": "1.0", "prompt_template_version": "p1"},
+        ),
+    ]
+    for suffix, extra in invalid_extractor_cases:
+        before = await evidence_table_counts(db)
+        with pytest.raises(EvidenceDomainError) as invalid:
+            await services.create_evidence_series_version(
+                **base_command,
+                claim_key=f"r1b-llm-{suffix}",
+                created_by_actor="LLM_PROPOSAL",
+                idempotency_key=f"r1b-llm-{suffix}",
+                **extra,
+            )
+        assert_error(invalid, "EVIDENCE_INVALID_PROVENANCE")
+        assert await evidence_table_counts(db) == before
+
+    before = await evidence_table_counts(db)
+    with pytest.raises(EvidenceDomainError) as partial_importer:
+        await services.create_evidence_series_version(
+            **base_command,
+            claim_key="r1b-importer-partial-extractor",
+            created_by_actor="IMPORTER",
+            extractor_name="tg-parser",
+            idempotency_key="r1b-importer-partial-extractor",
+        )
+    assert_error(partial_importer, "EVIDENCE_INVALID_PROVENANCE")
+    assert await evidence_table_counts(db) == before
+
+    complete = await services.create_evidence_series_version(
+        **base_command,
+        claim_key="r1b-llm-complete",
+        created_by_actor="LLM_PROPOSAL",
+        extractor_name="tg-llm",
+        extractor_version="1.0",
+        prompt_template_version="evidence-extract-v1",
+        idempotency_key="r1b-llm-complete",
+    )
+    assert complete.extractor_name == "tg-llm"
+    assert complete.extractor_version == "1.0"
+    assert complete.prompt_template_version == "evidence-extract-v1"
 
 
 @pytest.mark.parametrize(

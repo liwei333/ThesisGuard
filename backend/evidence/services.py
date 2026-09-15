@@ -148,6 +148,13 @@ class DerivationLinkInput:
     support_weight: Decimal | None = None
 
 
+class _UnsetType:
+    """Private marker distinguishing omitted correction fields from explicit nulls."""
+
+
+_UNSET = _UnsetType()
+
+
 def utc_now() -> datetime:
     """Return a timezone-aware UTC timestamp."""
     return datetime.now(UTC)
@@ -599,6 +606,28 @@ async def create_evidence_series_version(
     """Create an EvidenceSeries if needed and insert immutable version 1."""
     _validate_identity_enums(scope_type, information_type, provenance_kind)
     _ensure_actor(created_by_actor)
+    locators = locators or ()
+    instrument_links = instrument_links or ()
+    derivation_links = derivation_links or ()
+    scope_key = _derive_scope_key(
+        scope_type=scope_type,
+        supplied_scope_key=scope_key,
+        instrument_links=instrument_links,
+    )
+    origin_key = _derive_origin_key(
+        provenance_kind=provenance_kind,
+        supplied_origin_key=origin_key,
+        claim_key=claim_key,
+        created_by_actor=created_by_actor,
+        derivation_links=derivation_links,
+    )
+    _validate_extraction_provenance(
+        provenance_kind=provenance_kind,
+        created_by_actor=created_by_actor,
+        extractor_name=extractor_name,
+        extractor_version=extractor_version,
+        prompt_template_version=prompt_template_version,
+    )
     source_version = await _validate_provenance(
         db,
         information_type=information_type,
@@ -608,11 +637,15 @@ async def create_evidence_series_version(
         source_document_version_id=source_document_version_id,
         manual_entry_reason=manual_entry_reason,
         manual_observed_at=manual_observed_at,
-        locators=locators or (),
+        locators=locators,
+        created_by_actor=created_by_actor,
     )
-    await _validate_instrument_links(db, scope_type, scope_key, instrument_links or ())
-    if derivation_links:
-        await _validate_derivation_links(db, derivation_links)
+    await _validate_instrument_links(db, scope_type, scope_key, instrument_links)
+    await _validate_derivation_links(
+        db,
+        provenance_kind=provenance_kind,
+        derivation_links=derivation_links,
+    )
     series_hash = _series_identity_hash(
         scope_type=scope_type,
         scope_key=scope_key,
@@ -633,9 +666,9 @@ async def create_evidence_series_version(
         "raw_value": raw_value,
         "normalized_value": normalized_value,
         "as_of": as_of,
-        "locators": [locator.__dict__ for locator in (locators or ())],
-        "instrument_links": [link.__dict__ for link in (instrument_links or ())],
-        "derivation_links": [link.__dict__ for link in (derivation_links or ())],
+        "locators": [locator.__dict__ for locator in locators],
+        "instrument_links": [link.__dict__ for link in instrument_links],
+        "derivation_links": [link.__dict__ for link in derivation_links],
         "verification_status": verification_status,
     }
     request_hash = stable_hash(payload)
@@ -678,6 +711,7 @@ async def create_evidence_series_version(
 
     source_grade_snapshot = source_version.source_grade if source_version is not None else None
     version = EvidenceVersion(
+        id=uuid_str(),
         evidence_series_id=series.id,
         version=1,
         source_document_version_id=source_document_version_id
@@ -719,9 +753,15 @@ async def create_evidence_series_version(
     _attach_children(
         version,
         source_document_version_id,
-        locators or (),
-        instrument_links or (),
-        derivation_links or (),
+        locators,
+        instrument_links,
+        derivation_links,
+    )
+    await _validate_derivation_links(
+        db,
+        provenance_kind=provenance_kind,
+        derivation_links=derivation_links,
+        proposed_derived_evidence_version_id=version.id,
     )
     try:
         async with db.begin_nested():
@@ -779,60 +819,125 @@ async def revise_correct_evidence(
     status_changed_by_actor: str,
     status_reason: str,
     idempotency_key: str,
-    display_title: str | None = None,
-    display_text: str | None = None,
-    raw_value: str | None = None,
-    raw_unit: str | None = None,
-    normalized_value: Decimal | None = None,
-    normalized_text_value: str | None = None,
-    normalized_unit: str | None = None,
-    currency: str | None = None,
-    as_of: datetime | None = None,
-    effective_from: datetime | None = None,
-    effective_to: datetime | None = None,
-    trusted_correction_rule: str | None = None,
+    display_title: str | None | _UnsetType = _UNSET,
+    display_text: str | None | _UnsetType = _UNSET,
+    raw_value: str | None | _UnsetType = _UNSET,
+    raw_unit: str | None | _UnsetType = _UNSET,
+    normalized_value: Decimal | None | _UnsetType = _UNSET,
+    normalized_text_value: str | None | _UnsetType = _UNSET,
+    normalized_unit: str | None | _UnsetType = _UNSET,
+    currency: str | None | _UnsetType = _UNSET,
+    as_of: datetime | None | _UnsetType = _UNSET,
+    effective_from: datetime | None | _UnsetType = _UNSET,
+    effective_to: datetime | None | _UnsetType = _UNSET,
+    trusted_correction_rule: str | None | _UnsetType = _UNSET,
+    instrument_links: Sequence[InstrumentLinkInput] | _UnsetType = _UNSET,
+    derivation_links: Sequence[DerivationLinkInput] | _UnsetType = _UNSET,
 ) -> EvidenceVersion:
     """Append a same-identity correction as EvidenceVersion N+1."""
     current = await _get_current_evidence_for_update(db, evidence_series_id)
     if current is None:
         raise EvidenceVersionNotFound(f"No EvidenceVersion exists for series {evidence_series_id}")
     _ensure_expected_version(current, expected_version)
-    payload = {
-        "evidence_series_id": evidence_series_id,
-        "expected_version": expected_version,
+    current_series = await db.get(EvidenceSeries, current.evidence_series_id)
+    if current_series is None:
+        raise EvidencePersistenceConflict("EvidenceVersion points to missing series")
+    overrides = {
         "display_title": display_title,
         "display_text": display_text,
         "raw_value": raw_value,
+        "raw_unit": raw_unit,
         "normalized_value": normalized_value,
+        "normalized_text_value": normalized_text_value,
+        "normalized_unit": normalized_unit,
+        "currency": currency,
+        "as_of": as_of,
+        "effective_from": effective_from,
+        "effective_to": effective_to,
+        "trusted_correction_rule": trusted_correction_rule,
+    }
+    _validate_revision_overrides(overrides)
+    replacement_children = await _resolve_revision_children(
+        db,
+        current=current,
+        current_series=current_series,
+        instrument_links=instrument_links,
+        derivation_links=derivation_links,
+    )
+    effective_trusted_correction_rule = _override(
+        overrides,
+        "trusted_correction_rule",
+        current.trusted_correction_rule,
+    )
+    payload = {
+        "evidence_series_id": evidence_series_id,
+        "expected_version": expected_version,
+        "overrides": _provided_overrides(overrides),
         "status_changed_at": status_changed_at,
         "status_changed_by_actor": status_changed_by_actor,
         "status_reason": status_reason,
+        "instrument_links": [link.__dict__ for link in replacement_children["instrument_links"]],
+        "derivation_links": [link.__dict__ for link in replacement_children["derivation_links"]],
     }
+    if _revision_identity_changed(current, current_series, replacement_children):
+        return await create_replacement_evidence_series(
+            db,
+            prior_evidence_version_id=current.id,
+            scope_type=current_series.scope_type,
+            scope_key=_replacement_scope_key(
+                current_series, replacement_children["instrument_links"]
+            ),
+            information_type=current.information_type,
+            claim_key=current.claim_key,
+            metric_key=current.metric_key,
+            period_start=current.period_start,
+            period_end=current.period_end,
+            provenance_kind=current.provenance_kind,
+            primary_source_document_id=current_series.primary_source_document_id,
+            origin_key=None if current.provenance_kind == "DERIVED" else current_series.origin_key,
+            source_document_version_id=current.source_document_version_id,
+            display_title=_override(overrides, "display_title", current.display_title),
+            display_text=_override(overrides, "display_text", current.display_text),
+            raw_value=_override(overrides, "raw_value", current.raw_value),
+            raw_unit=_override(overrides, "raw_unit", current.raw_unit),
+            normalized_value=_override(overrides, "normalized_value", current.normalized_value),
+            normalized_text_value=_override(
+                overrides, "normalized_text_value", current.normalized_text_value
+            ),
+            normalized_unit=_override(overrides, "normalized_unit", current.normalized_unit),
+            currency=_override(overrides, "currency", current.currency),
+            as_of=_override(overrides, "as_of", current.as_of),
+            effective_from=_override(overrides, "effective_from", current.effective_from),
+            effective_to=_override(overrides, "effective_to", current.effective_to),
+            locators=_current_locator_inputs(current),
+            instrument_links=replacement_children["instrument_links"],
+            derivation_links=replacement_children["derivation_links"],
+            extractor_name=current.extractor_name,
+            extractor_version=current.extractor_version,
+            prompt_template_version=current.prompt_template_version,
+            manual_entry_reason=current.manual_entry_reason,
+            manual_observed_at=current.manual_observed_at,
+            status_changed_at=status_changed_at,
+            status_changed_by_actor=status_changed_by_actor,
+            status_reason=status_reason,
+            idempotency_key=idempotency_key,
+            trusted_correction_rule=effective_trusted_correction_rule,
+            created_by_actor=current.created_by_actor,
+        )
     return await _append_status_or_revision(
         db,
         current=current,
         payload=payload,
         idempotency_scope="revise_correct_evidence",
         idempotency_key=idempotency_key,
-        verification_status="VERIFIED" if trusted_correction_rule else "UNREVIEWED",
+        verification_status="VERIFIED" if effective_trusted_correction_rule else "UNREVIEWED",
         status_change_kind="CORRECTION",
         status_changed_at=status_changed_at,
         status_changed_by_actor=status_changed_by_actor,
         status_reason=status_reason,
-        overrides={
-            "display_title": display_title,
-            "display_text": display_text,
-            "raw_value": raw_value,
-            "raw_unit": raw_unit,
-            "normalized_value": normalized_value,
-            "normalized_text_value": normalized_text_value,
-            "normalized_unit": normalized_unit,
-            "currency": currency,
-            "as_of": as_of,
-            "effective_from": effective_from,
-            "effective_to": effective_to,
-            "trusted_correction_rule": trusted_correction_rule,
-        },
+        overrides=overrides,
+        instrument_links=replacement_children["instrument_links"],
+        derivation_links=replacement_children["derivation_links"],
     )
 
 
@@ -978,6 +1083,12 @@ async def create_replacement_evidence_series(
     effective_to: datetime | None = None,
     locators: Sequence[SourceLocatorInput] | None = None,
     instrument_links: Sequence[InstrumentLinkInput] | None = None,
+    derivation_links: Sequence[DerivationLinkInput] | None = None,
+    extractor_name: str | None = None,
+    extractor_version: str | None = None,
+    prompt_template_version: str | None = None,
+    manual_entry_reason: str | None = None,
+    manual_observed_at: datetime | None = None,
     trusted_correction_rule: str | None = None,
     created_by_actor: str = "IMPORTER",
 ) -> EvidenceVersion:
@@ -991,6 +1102,21 @@ async def create_replacement_evidence_series(
     prior_series = await db.get(EvidenceSeries, prior.evidence_series_id)
     if prior_series is None:
         raise EvidencePersistenceConflict("Prior EvidenceVersion points to missing series")
+    locators = locators or ()
+    instrument_links = instrument_links or ()
+    derivation_links = derivation_links or ()
+    scope_key = _derive_scope_key(
+        scope_type=scope_type,
+        supplied_scope_key=scope_key,
+        instrument_links=instrument_links,
+    )
+    origin_key = _derive_origin_key(
+        provenance_kind=provenance_kind,
+        supplied_origin_key=origin_key,
+        claim_key=claim_key,
+        created_by_actor=created_by_actor,
+        derivation_links=derivation_links,
+    )
     new_identity = _series_identity_hash(
         scope_type=scope_type,
         scope_key=scope_key,
@@ -1056,6 +1182,12 @@ async def create_replacement_evidence_series(
         effective_to=effective_to,
         locators=locators,
         instrument_links=instrument_links,
+        derivation_links=derivation_links,
+        extractor_name=extractor_name,
+        extractor_version=extractor_version,
+        prompt_template_version=prompt_template_version,
+        manual_entry_reason=manual_entry_reason,
+        manual_observed_at=manual_observed_at,
         verification_status="VERIFIED" if trusted_correction_rule else "UNREVIEWED",
         status_changed_at=status_changed_at,
         status_changed_by_actor=status_changed_by_actor,
@@ -1235,6 +1367,8 @@ async def _append_status_or_revision(
     status_changed_by_actor: str,
     status_reason: str,
     overrides: dict[str, Any],
+    instrument_links: Sequence[InstrumentLinkInput] | None = None,
+    derivation_links: Sequence[DerivationLinkInput] | None = None,
 ) -> EvidenceVersion:
     request_hash = stable_hash(payload)
     replay = await _idempotent_replay(
@@ -1248,26 +1382,19 @@ async def _append_status_or_revision(
         if existing is None:
             raise EvidencePersistenceConflict("Evidence idempotency record points to missing row")
         return existing
-    child_locators = [
-        SourceLocatorInput(
-            locator_type=locator.locator_type,
-            raw_locator=locator.raw_locator,
-            short_citation=locator.short_citation,
-            locator_payload=dict(locator.locator_payload),
-            quote_hash=locator.quote_hash,
-        )
-        for locator in current.source_locators
-    ]
-    child_links = [
-        InstrumentLinkInput(
-            instrument_id=link.instrument_id,
-            role=link.role,
-            link_order=link.link_order,
-            link_metadata=dict(link.link_metadata or {}),
-        )
-        for link in current.instrument_links
-    ]
+    child_locators = _current_locator_inputs(current)
+    child_links = (
+        list(instrument_links)
+        if instrument_links is not None
+        else _current_instrument_inputs(current)
+    )
+    child_derivation_links = (
+        list(derivation_links)
+        if derivation_links is not None
+        else _current_derivation_inputs(current)
+    )
     version = EvidenceVersion(
+        id=uuid_str(),
         evidence_series_id=current.evidence_series_id,
         version=current.version + 1,
         source_document_version_id=current.source_document_version_id,
@@ -1308,7 +1435,19 @@ async def _append_status_or_revision(
             overrides, "trusted_correction_rule", current.trusted_correction_rule
         ),
     )
-    _attach_children(version, current.source_document_version_id, child_locators, child_links, ())
+    _attach_children(
+        version,
+        current.source_document_version_id,
+        child_locators,
+        child_links,
+        child_derivation_links,
+    )
+    await _validate_derivation_links(
+        db,
+        provenance_kind=current.provenance_kind,
+        derivation_links=child_derivation_links,
+        proposed_derived_evidence_version_id=version.id,
+    )
     try:
         async with db.begin_nested():
             db.add(version)
@@ -1345,7 +1484,130 @@ async def _append_status_or_revision(
 
 
 def _override(overrides: dict[str, Any], key: str, fallback: Any) -> Any:
-    return fallback if key not in overrides or overrides[key] is None else overrides[key]
+    return (
+        fallback
+        if key not in overrides or isinstance(overrides[key], _UnsetType)
+        else overrides[key]
+    )
+
+
+def _provided_overrides(overrides: dict[str, Any]) -> dict[str, Any]:
+    return {key: value for key, value in overrides.items() if not isinstance(value, _UnsetType)}
+
+
+def _validate_revision_overrides(overrides: dict[str, Any]) -> None:
+    for key in ("display_title", "display_text", "as_of"):
+        if key in overrides and overrides[key] is None:
+            raise EvidenceInvalidProvenance(f"{key} cannot be cleared")
+
+
+def _current_locator_inputs(current: EvidenceVersion) -> list[SourceLocatorInput]:
+    return [
+        SourceLocatorInput(
+            locator_type=locator.locator_type,
+            raw_locator=locator.raw_locator,
+            short_citation=locator.short_citation,
+            locator_payload=dict(locator.locator_payload),
+            quote_hash=locator.quote_hash,
+        )
+        for locator in current.source_locators
+    ]
+
+
+def _current_instrument_inputs(current: EvidenceVersion) -> list[InstrumentLinkInput]:
+    return [
+        InstrumentLinkInput(
+            instrument_id=link.instrument_id,
+            role=link.role,
+            link_order=link.link_order,
+            link_metadata=dict(link.link_metadata or {}),
+        )
+        for link in current.instrument_links
+    ]
+
+
+def _current_derivation_inputs(current: EvidenceVersion) -> list[DerivationLinkInput]:
+    return [
+        DerivationLinkInput(
+            supporting_evidence_version_id=link.supporting_evidence_version_id,
+            role=link.role,
+            support_order=link.support_order,
+            support_weight=link.support_weight,
+        )
+        for link in current.derived_links
+    ]
+
+
+async def _resolve_revision_children(
+    db: AsyncSession,
+    *,
+    current: EvidenceVersion,
+    current_series: EvidenceSeries,
+    instrument_links: Sequence[InstrumentLinkInput] | _UnsetType,
+    derivation_links: Sequence[DerivationLinkInput] | _UnsetType,
+) -> dict[str, list[Any]]:
+    child_instrument_links = (
+        _current_instrument_inputs(current)
+        if isinstance(instrument_links, _UnsetType)
+        else list(instrument_links)
+    )
+    child_derivation_links = (
+        _current_derivation_inputs(current)
+        if isinstance(derivation_links, _UnsetType)
+        else list(derivation_links)
+    )
+    await _validate_instrument_links(
+        db,
+        current_series.scope_type,
+        _replacement_scope_key(current_series, child_instrument_links),
+        child_instrument_links,
+    )
+    await _validate_derivation_links(
+        db,
+        provenance_kind=current.provenance_kind,
+        derivation_links=child_derivation_links,
+    )
+    return {
+        "instrument_links": child_instrument_links,
+        "derivation_links": child_derivation_links,
+    }
+
+
+def _identity_set(values: Sequence[str]) -> set[str]:
+    return set(values)
+
+
+def _revision_identity_changed(
+    current: EvidenceVersion,
+    current_series: EvidenceSeries,
+    children: dict[str, list[Any]],
+) -> bool:
+    if current.provenance_kind == "DERIVED":
+        old_supports = _identity_set(
+            [link.supporting_evidence_version_id for link in current.derived_links]
+        )
+        new_supports = _identity_set(
+            [link.supporting_evidence_version_id for link in children["derivation_links"]]
+        )
+        if old_supports != new_supports:
+            return True
+    if current_series.scope_type == "CROSS_INSTRUMENT":
+        old_members = _identity_set([link.instrument_id for link in current.instrument_links])
+        new_members = _identity_set([link.instrument_id for link in children["instrument_links"]])
+        if old_members != new_members:
+            return True
+    return False
+
+
+def _replacement_scope_key(
+    current_series: EvidenceSeries,
+    instrument_links: Sequence[InstrumentLinkInput],
+) -> str:
+    if current_series.scope_type != "CROSS_INSTRUMENT":
+        return current_series.scope_key
+    return (
+        f"cross_instrument:{stable_hash(sorted({link.instrument_id for link in instrument_links}))}"
+    )
 
 
 async def _find_source_document(
@@ -1555,6 +1817,95 @@ def _ensure_source_grade_allowed(source_type: str, source_grade: str) -> None:
         )
 
 
+def _nonblank(value: str | None) -> bool:
+    return isinstance(value, str) and bool(value.strip())
+
+
+def _derive_origin_key(
+    *,
+    provenance_kind: str,
+    supplied_origin_key: str | None,
+    claim_key: str,
+    created_by_actor: str,
+    derivation_links: Sequence[DerivationLinkInput],
+) -> str | None:
+    if provenance_kind == "SOURCE_BACKED":
+        if supplied_origin_key is not None:
+            raise EvidenceInvalidProvenance("SOURCE_BACKED Evidence must not supply origin_key")
+        return None
+    if provenance_kind == "MANUAL":
+        manual_subject = claim_key.strip()
+        if not manual_subject:
+            raise EvidenceInvalidProvenance("MANUAL Evidence requires nonblank claim_key")
+        canonical = f"manual:{created_by_actor}:{manual_subject}"
+    elif provenance_kind == "DERIVED":
+        support_ids = sorted({link.supporting_evidence_version_id for link in derivation_links})
+        canonical = f"derived:{stable_hash(support_ids)}"
+    else:
+        raise EvidenceInvalidProvenance(f"Invalid provenance_kind: {provenance_kind}")
+    if supplied_origin_key is not None and supplied_origin_key != canonical:
+        raise EvidenceInvalidProvenance(
+            "origin_key conflicts with service-derived canonical lineage",
+            supplied_origin_key=supplied_origin_key,
+            canonical_origin_key=canonical,
+        )
+    return canonical
+
+
+def _derive_scope_key(
+    *,
+    scope_type: str,
+    supplied_scope_key: str,
+    instrument_links: Sequence[InstrumentLinkInput],
+) -> str:
+    if scope_type != "CROSS_INSTRUMENT":
+        return supplied_scope_key
+    member_ids = sorted({link.instrument_id for link in instrument_links})
+    if not member_ids:
+        raise EvidenceInvalidProvenance("CROSS_INSTRUMENT Evidence requires instrument members")
+    canonical = f"cross_instrument:{stable_hash(member_ids)}"
+    if supplied_scope_key != canonical:
+        raise EvidenceInvalidProvenance(
+            "scope_key conflicts with service-derived CROSS_INSTRUMENT membership",
+            supplied_scope_key=supplied_scope_key,
+            canonical_scope_key=canonical,
+        )
+    return canonical
+
+
+def _validate_extraction_provenance(
+    *,
+    provenance_kind: str,
+    created_by_actor: str,
+    extractor_name: str | None,
+    extractor_version: str | None,
+    prompt_template_version: str | None,
+) -> None:
+    has_any_extractor = any(
+        value is not None for value in (extractor_name, extractor_version, prompt_template_version)
+    )
+    if has_any_extractor and provenance_kind != "SOURCE_BACKED":
+        raise EvidenceInvalidProvenance(
+            "Extractor provenance is only valid for SOURCE_BACKED Evidence"
+        )
+    if created_by_actor == "LLM_PROPOSAL":
+        if provenance_kind != "SOURCE_BACKED":
+            raise EvidenceInvalidProvenance("LLM_PROPOSAL Evidence must be SOURCE_BACKED")
+        if not (
+            _nonblank(extractor_name)
+            and _nonblank(extractor_version)
+            and _nonblank(prompt_template_version)
+        ):
+            raise EvidenceInvalidProvenance(
+                "LLM_PROPOSAL Evidence requires extractor and prompt provenance"
+            )
+        return
+    if has_any_extractor and not (_nonblank(extractor_name) and _nonblank(extractor_version)):
+        raise EvidenceInvalidProvenance(
+            "Extractor provenance requires nonblank extractor_name and extractor_version"
+        )
+
+
 async def _validate_provenance(
     db: AsyncSession,
     *,
@@ -1566,11 +1917,29 @@ async def _validate_provenance(
     manual_entry_reason: str | None,
     manual_observed_at: datetime | None,
     locators: Sequence[SourceLocatorInput],
+    created_by_actor: str,
 ) -> SourceDocumentVersion | None:
     if information_type == "FACT" and provenance_kind != "SOURCE_BACKED":
         raise EvidenceInvalidProvenance("FACT Evidence must be SOURCE_BACKED")
     if information_type == "THESIS_INFERENCE" and provenance_kind != "DERIVED":
         raise EvidenceInvalidProvenance("THESIS_INFERENCE must be DERIVED")
+    if information_type == "USER_HYPOTHESIS" and (
+        provenance_kind != "MANUAL"
+        or created_by_actor != "USER"
+        or not _nonblank(manual_entry_reason)
+        or manual_observed_at is None
+    ):
+        raise EvidenceInvalidProvenance("USER_HYPOTHESIS requires user-authored MANUAL provenance")
+    if (
+        information_type == "ESTIMATE"
+        and provenance_kind == "MANUAL"
+        and (
+            created_by_actor != "USER"
+            or not _nonblank(manual_entry_reason)
+            or manual_observed_at is None
+        )
+    ):
+        raise EvidenceInvalidProvenance("MANUAL ESTIMATE requires user-authored manual metadata")
     if provenance_kind == "SOURCE_BACKED":
         if (
             primary_source_document_id is None
@@ -1610,11 +1979,14 @@ async def _validate_provenance(
         primary_source_document_id is not None
         or source_document_version_id is not None
         or origin_key is None
+        or locators
     ):
         raise EvidenceInvalidProvenance(
-            "MANUAL/DERIVED Evidence requires origin_key and no source document"
+            "MANUAL/DERIVED Evidence requires service-derived origin_key and no source document"
         )
-    if provenance_kind == "MANUAL" and (manual_entry_reason is None or manual_observed_at is None):
+    if provenance_kind == "MANUAL" and (
+        not _nonblank(manual_entry_reason) or manual_observed_at is None
+    ):
         raise EvidenceInvalidProvenance(
             "MANUAL Evidence requires manual_entry_reason and manual_observed_at"
         )
@@ -1965,18 +2337,76 @@ async def _validate_instrument_links(
 
 async def _validate_derivation_links(
     db: AsyncSession,
+    *,
+    provenance_kind: str,
     derivation_links: Sequence[DerivationLinkInput],
+    proposed_derived_evidence_version_id: str | None = None,
 ) -> None:
+    if provenance_kind != "DERIVED":
+        if derivation_links:
+            raise EvidenceInvalidDerivationLink("Only DERIVED Evidence may have derivation links")
+        return
+    if not derivation_links:
+        raise EvidenceInvalidDerivationLink("DERIVED Evidence requires at least one support")
     seen: set[tuple[str, str]] = set()
     for link in derivation_links:
         if link.role not in DERIVATION_LINK_ROLES:
-            raise EvidenceInvalidDerivationLink("Invalid derivation role")
-        if await get_exact_evidence_version(db, link.supporting_evidence_version_id) is None:
-            raise EvidenceInvalidDerivationLink("Supporting EvidenceVersion does not exist")
+            raise EvidenceInvalidDerivationLink(
+                "Invalid derivation role",
+                supporting_evidence_version_id=link.supporting_evidence_version_id,
+            )
+        support = await get_exact_evidence_version(db, link.supporting_evidence_version_id)
+        if support is None:
+            raise EvidenceInvalidDerivationLink(
+                "Supporting EvidenceVersion does not exist",
+                supporting_evidence_version_id=link.supporting_evidence_version_id,
+            )
         key = (link.supporting_evidence_version_id, link.role)
         if key in seen:
-            raise EvidenceInvalidDerivationLink("Duplicate derivation support link")
+            raise EvidenceInvalidDerivationLink(
+                "Duplicate derivation support link",
+                supporting_evidence_version_id=link.supporting_evidence_version_id,
+            )
         seen.add(key)
+        if proposed_derived_evidence_version_id is not None:
+            if link.supporting_evidence_version_id == proposed_derived_evidence_version_id:
+                raise EvidenceInvalidDerivationLink(
+                    "Evidence cannot derive from itself",
+                    supporting_evidence_version_id=link.supporting_evidence_version_id,
+                    derived_evidence_version_id=proposed_derived_evidence_version_id,
+                )
+            if await _support_graph_reaches_exact_version(
+                db,
+                start_evidence_version_id=link.supporting_evidence_version_id,
+                target_evidence_version_id=proposed_derived_evidence_version_id,
+            ):
+                raise EvidenceInvalidDerivationLink(
+                    "Derivation link would create a cycle",
+                    supporting_evidence_version_id=link.supporting_evidence_version_id,
+                    derived_evidence_version_id=proposed_derived_evidence_version_id,
+                )
+
+
+async def _support_graph_reaches_exact_version(
+    db: AsyncSession,
+    *,
+    start_evidence_version_id: str,
+    target_evidence_version_id: str,
+) -> bool:
+    stack = [start_evidence_version_id]
+    seen: set[str] = set()
+    while stack:
+        evidence_version_id = stack.pop()
+        if evidence_version_id in seen:
+            continue
+        if evidence_version_id == target_evidence_version_id:
+            return True
+        seen.add(evidence_version_id)
+        evidence = await get_exact_evidence_version(db, evidence_version_id)
+        if evidence is None:
+            continue
+        stack.extend(link.supporting_evidence_version_id for link in evidence.derived_links)
+    return False
 
 
 def _series_identity_hash(
