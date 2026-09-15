@@ -23,6 +23,7 @@ Evidence cutoff：2026-09-14，local `main@d8f38dd`；`origin/main@c38c96f` 尚�
 - 可以并行准备 `WP-RISK-01` 的产品/领域设计，但本状态不授权实现。
 - Whole Product：`NOT_READY_FOR_FULL_AGENT_BUILD`。
 - Capability Runtime 专项审计和 `WP-CAP-00` 已通过 `ADR-2026-09-14-CAP-01` 明确延后：正常情况下等 WP-04/WP-05 核心合同稳定后、首个真实 Model/Agent 接入前再派发；当前不得把它作为下一主线任务。
+- Sector Crowding 已登记为后续需求 `BACKLOG-SECTOR-CROWDING-01`，`ADR-2026-09-15-SECTOR-01` 状态为 `APPROVED — DEFERRED`。先完成 WP-04/WP-05 核心和 WP-RISK-01 最小闭环的 Market 基础，再核验 Sector 时点成分/历史数据并重审影子 MVP；当前不得实现评分、预留空表/API 或打断 Evidence 修复。详见 `docs/SECTOR_CROWDING_DECISION_2026-09-15.md`。
 
 不要把目录存在、文档存在、commit 标题、任务名或历史 PASS 直接当成当前业务能力。状态表述使用 `IMPLEMENTED / PARTIALLY_IMPLEMENTED / CONTRACT_ONLY / DESIGN_ONLY / PLANNED / UNPROVEN / UNKNOWN`，并明确分支和证据时点。
 
@@ -168,6 +169,7 @@ make rebuild
 - `docs/ThesisGuard_V1_PRD.md`: current product requirements (`PRD_DRAFT`).
 - `docs/ThesisGuard_V1_Technical_Architecture_Design.md`: canonical architecture boundary (`TECH_DESIGN_DRAFT`).
 - `docs/CAPABILITY_RUNTIME_DECISION_2026-09-14.md`: canonical timing/dispatch decision；Capability Runtime 当前 `APPROVED — DEFERRED`，不授权 `WP-CAP-00`、Provider/Router/Adapter 或 Runtime 实现。
+- `docs/SECTOR_CROWDING_DECISION_2026-09-15.md`: approved Sector Crowding backlog/timing decision，`APPROVED — DEFERRED`；不授权现在实现或修改冻结交易规则。
 - `docs/WP04_EVIDENCE_DOMAIN_CONTRACT.md`: frozen WP-04 implementation contract; not implementation evidence.
 - `docs/PROJECT_STATUS_AUDIT_2026-09-12.md`: historical snapshot with 2026-09-12 cutoff; not live status.
 - `docs/acceptance/`: historical acceptance and repair records; preserve them and qualify branch/time/scope.

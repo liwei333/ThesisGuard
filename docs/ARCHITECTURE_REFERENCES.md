@@ -1,6 +1,6 @@
 # ThesisGuard 架构与文档权威索引
 
-> Authority map updated: 2026-09-14
+> Authority map updated: 2026-09-15（新增 Sector Crowding 延后需求；下方历史快照时点不变）
 >
 > 本文前半部分定义项目内文档权威关系；后半部分保留 2026-09-12 Agent Runtime 开源架构对标快照。
 > 文档存在、验收报告或 proposal 均不是实现证据；实现状态以明确分支的当前源码、迁移和新验证为准。
@@ -28,6 +28,7 @@
 | `docs/ThesisGuard_V1_PRD.md` | Canonical requirement, `PRD_DRAFT` | 当前 V1 产品需求；不证明实现 |
 | `docs/ThesisGuard_V1_Technical_Architecture_Design.md` | Canonical architecture, `TECH_DESIGN_DRAFT` | 当前架构边界和依赖；不批准未定义 API/表 |
 | `docs/CAPABILITY_RUNTIME_DECISION_2026-09-14.md` | Canonical architecture timing decision, `APPROVED — DEFERRED` | Capability Runtime 审计延后到 WP-04/WP-05 合同稳定后；不批准 `WP-CAP-00` 或 Runtime 实现 |
+| `docs/SECTOR_CROWDING_DECISION_2026-09-15.md` | Approved backlog/timing decision, `APPROVED — DEFERRED` | 登记 `BACKLOG-SECTOR-CROWDING-01`；Evidence/Thesis、最小风险闭环与 Market/Sector 时点历史数据成熟后重审影子 MVP；不授权当前开发或冻结策略变更 |
 | `AGENTS.md` | Engineering entry guide | 后续 Agent 的简明规则和当前里程碑；细节以上述文件为准 |
 | `docs/WP04_EVIDENCE_DOMAIN_CONTRACT.md` | Canonical WP-04 implementation contract | Evidence identity/version/provenance/storage/任务边界；不证明整个 WP-04 已实现 |
 | `docs/WP03_RESEARCH_PACKAGE_*.md` | Accepted WP-03 implementation contracts | bounded Research behavior；当前代码冲突时重新核验代码 |
