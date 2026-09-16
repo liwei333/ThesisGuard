@@ -80,7 +80,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 TRACKING_QUERY_PREFIXES = ("utm_",)
 TRACKING_QUERY_KEYS = {"fbclid", "gclid", "msclkid", "yclid"}
-ELIGIBLE_CURRENT_STATUSES = {"UNREVIEWED", "PENDING_REVIEW", "VERIFIED", "DISPUTED"}
+ELIGIBLE_CURRENT_STATUSES = {"VERIFIED"}
 SOURCE_TYPE_ALLOWED_GRADES: dict[str, set[str]] = {
     "COMPANY_ANNOUNCEMENT": {"S"},
     "FINANCIAL_REPORT": {"S"},
@@ -153,6 +153,10 @@ class _UnsetType:
 
 
 _UNSET = _UnsetType()
+
+# R1C-03A enables no production trusted correction rule. Positive rules and
+# their semantic validators require a separate approved contract.
+_APPROVED_TRUSTED_CORRECTION_RULES: frozenset[str] = frozenset()
 
 
 def utc_now() -> datetime:
@@ -684,8 +688,14 @@ async def create_evidence_series_version(
             raise EvidencePersistenceConflict(
                 "EvidenceVersion idempotency record points to missing row"
             )
+        _validate_trusted_correction_rule(trusted_correction_rule, replayed_version=existing)
         return existing
 
+    _validate_trusted_correction_rule(trusted_correction_rule)
+    if supersedes_evidence_version_id is not None and trusted_correction_rule is None:
+        # A predecessor makes this a correction, even for version 1. Preserve
+        # initial import and historical replay; new ordinary rows await review.
+        verification_status = "UNREVIEWED"
     series = await get_evidence_series_by_identity_hash(db, series_hash)
     if series is None:
         series = EvidenceSeries(
@@ -867,7 +877,7 @@ async def revise_correct_evidence(
     effective_trusted_correction_rule = _override(
         overrides,
         "trusted_correction_rule",
-        current.trusted_correction_rule,
+        None,
     )
     payload = {
         "evidence_series_id": evidence_series_id,
@@ -930,7 +940,9 @@ async def revise_correct_evidence(
         payload=payload,
         idempotency_scope="revise_correct_evidence",
         idempotency_key=idempotency_key,
-        verification_status="VERIFIED" if effective_trusted_correction_rule else "UNREVIEWED",
+        verification_status="VERIFIED"
+        if effective_trusted_correction_rule is not None
+        else "UNREVIEWED",
         status_change_kind="CORRECTION",
         status_changed_at=status_changed_at,
         status_changed_by_actor=status_changed_by_actor,
@@ -981,18 +993,26 @@ async def verify_or_reject(
     """Append a VERIFIED or REJECTED review decision."""
     if decision not in {"VERIFIED", "REJECTED"}:
         raise EvidenceValidationError("decision must be VERIFIED or REJECTED")
+    status_change_kind_by_from = {
+        "UNREVIEWED": "REVIEW_DECISION",
+        "PENDING_REVIEW": "REVIEW_DECISION",
+        "DISPUTED": "DISPUTE",
+    }
     return await _status_command(
         db,
         evidence_series_id=evidence_series_id,
         expected_version=expected_version,
         target_status=decision,
         status_change_kind="REVIEW_DECISION",
-        allowed_from={"PENDING_REVIEW", "DISPUTED"},
+        allowed_from={"PENDING_REVIEW", "DISPUTED"}
+        if decision == "VERIFIED"
+        else {"UNREVIEWED", "PENDING_REVIEW", "DISPUTED"},
         reason=reason,
         actor=actor,
         idempotency_scope="verify_or_reject",
         idempotency_key=idempotency_key,
         as_of=as_of,
+        status_change_kind_by_from=status_change_kind_by_from,
     )
 
 
@@ -1013,7 +1033,7 @@ async def mark_disputed(
         expected_version=expected_version,
         target_status="DISPUTED",
         status_change_kind="DISPUTE",
-        allowed_from={"VERIFIED", "REJECTED", "PENDING_REVIEW"},
+        allowed_from={"VERIFIED"},
         reason=reason,
         actor=actor,
         idempotency_scope="mark_disputed",
@@ -1036,13 +1056,14 @@ async def retract_or_invalidate(
     """Append a RETRACTED or INVALIDATED tombstone snapshot."""
     if target_status not in {"RETRACTED", "INVALIDATED"}:
         raise EvidenceValidationError("target_status must be RETRACTED or INVALIDATED")
+    allowed_from = {"VERIFIED"} if target_status == "INVALIDATED" else {"VERIFIED", "DISPUTED"}
     return await _status_command(
         db,
         evidence_series_id=evidence_series_id,
         expected_version=expected_version,
         target_status=target_status,
         status_change_kind="RETRACTION" if target_status == "RETRACTED" else "INVALIDATION",
-        allowed_from={"UNREVIEWED", "PENDING_REVIEW", "VERIFIED", "REJECTED", "DISPUTED"},
+        allowed_from=allowed_from,
         reason=reason,
         actor=actor,
         idempotency_scope="retract_or_invalidate",
@@ -1154,8 +1175,10 @@ async def create_replacement_evidence_series(
             raise EvidencePersistenceConflict(
                 "Replacement idempotency record points to missing row"
             )
+        _validate_trusted_correction_rule(trusted_correction_rule, replayed_version=existing)
         return existing
 
+    _validate_trusted_correction_rule(trusted_correction_rule)
     created = await create_evidence_series_version(
         db,
         scope_type=scope_type,
@@ -1188,7 +1211,7 @@ async def create_replacement_evidence_series(
         prompt_template_version=prompt_template_version,
         manual_entry_reason=manual_entry_reason,
         manual_observed_at=manual_observed_at,
-        verification_status="VERIFIED" if trusted_correction_rule else "UNREVIEWED",
+        verification_status="VERIFIED" if trusted_correction_rule is not None else "UNREVIEWED",
         status_changed_at=status_changed_at,
         status_changed_by_actor=status_changed_by_actor,
         status_change_kind="CORRECTION",
@@ -1309,6 +1332,7 @@ async def _status_command(
     idempotency_scope: str,
     idempotency_key: str,
     as_of: datetime | None,
+    status_change_kind_by_from: dict[str, str] | None = None,
 ) -> EvidenceVersion:
     _ensure_actor(actor)
     current = await _get_current_evidence_for_update(db, evidence_series_id)
@@ -1339,6 +1363,11 @@ async def _status_command(
             from_status=current.verification_status,
             requested_status=target_status,
         )
+    effective_status_change_kind = (
+        status_change_kind_by_from.get(current.verification_status, status_change_kind)
+        if status_change_kind_by_from is not None
+        else status_change_kind
+    )
     return await _append_status_or_revision(
         db,
         current=current,
@@ -1346,7 +1375,7 @@ async def _status_command(
         idempotency_scope=idempotency_scope,
         idempotency_key=idempotency_key,
         verification_status=target_status,
-        status_change_kind=status_change_kind,
+        status_change_kind=effective_status_change_kind,
         status_changed_at=as_of or utc_now(),
         status_changed_by_actor=actor,
         status_reason=reason,
@@ -1370,6 +1399,15 @@ async def _append_status_or_revision(
     instrument_links: Sequence[InstrumentLinkInput] | None = None,
     derivation_links: Sequence[DerivationLinkInput] | None = None,
 ) -> EvidenceVersion:
+    correction_rule = _override(overrides, "trusted_correction_rule", None)
+    if (
+        status_change_kind == "CORRECTION"
+        and correction_rule is not None
+        and not isinstance(correction_rule, str)
+    ):
+        # Invalid runtime types must fail with the domain error before hashing;
+        # they cannot be exact replays of a persisted string rule.
+        _validate_trusted_correction_rule(correction_rule)
     request_hash = stable_hash(payload)
     replay = await _idempotent_replay(
         db,
@@ -1381,7 +1419,13 @@ async def _append_status_or_revision(
         existing = await get_exact_evidence_version(db, replay.response_ref_id or "")
         if existing is None:
             raise EvidencePersistenceConflict("Evidence idempotency record points to missing row")
+        if status_change_kind == "CORRECTION":
+            _validate_trusted_correction_rule(correction_rule, replayed_version=existing)
         return existing
+    if status_change_kind == "CORRECTION":
+        _validate_trusted_correction_rule(correction_rule)
+        if correction_rule is None:
+            verification_status = "UNREVIEWED"
     child_locators = _current_locator_inputs(current)
     child_links = (
         list(instrument_links)
@@ -1431,9 +1475,9 @@ async def _append_status_or_revision(
         prompt_template_version=current.prompt_template_version,
         manual_entry_reason=current.manual_entry_reason,
         manual_observed_at=current.manual_observed_at,
-        trusted_correction_rule=_override(
-            overrides, "trusted_correction_rule", current.trusted_correction_rule
-        ),
+        trusted_correction_rule=correction_rule
+        if status_change_kind == "CORRECTION"
+        else _override(overrides, "trusted_correction_rule", current.trusted_correction_rule),
     )
     _attach_children(
         version,
@@ -1481,6 +1525,29 @@ async def _append_status_or_revision(
     if loaded is None:
         raise EvidencePersistenceConflict("EvidenceVersion was not persisted")
     return loaded
+
+
+def _validate_trusted_correction_rule(
+    rule: object, *, replayed_version: EvidenceVersion | None = None
+) -> None:
+    """Reject new unapproved trusted requests; exact historical replay is read-only."""
+    if rule is None:
+        return
+    if isinstance(rule, str):
+        # Existing hash semantics/order are retained. A supplied rule must match
+        # the persisted response, so a new trusted request cannot borrow an
+        # ordinary request's key where the old hash omitted the rule.
+        if replayed_version is not None and rule == replayed_version.trusted_correction_rule:
+            return
+        if rule in _APPROVED_TRUSTED_CORRECTION_RULES:
+            return
+    raise EvidenceValidationError(
+        "Trusted correction rule is not approved",
+        validation_path="trusted_correction_rule",
+        trusted_correction_rule=rule,
+        rule_type=type(rule).__name__,
+        reason="unapproved_rule" if isinstance(rule, str) else "invalid_rule_type",
+    )
 
 
 def _override(overrides: dict[str, Any], key: str, fallback: Any) -> Any:

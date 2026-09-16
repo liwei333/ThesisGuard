@@ -20,7 +20,7 @@ import asyncpg
 import pytest
 import pytest_asyncio
 from backend.evidence import services
-from backend.evidence.errors import EvidenceDomainError
+from backend.evidence.errors import EvidenceDomainError, EvidenceValidationError
 from backend.evidence.models import (
     EvidenceAuditEvent,
     EvidenceDerivationLink,
@@ -294,6 +294,81 @@ async def evidence_fact(
         created_by_actor="IMPORTER",
         idempotency_key=f"evidence-{key_suffix}",
         created_at=dt(),
+    )
+
+
+async def verified_evidence_fact(
+    db: AsyncSession,
+    *,
+    key_suffix: str,
+    source_status: str = "ACTIVE",
+) -> EvidenceVersion:
+    """Create a source-backed FACT whose latest version is eligible VERIFIED."""
+    source, source_version = await source_with_version(db, key_suffix=f"{key_suffix}-source")
+    if source_status == "RETRACTED":
+        source_version = await append_source_version(
+            db,
+            source,
+            key_suffix=f"{key_suffix}-source-retracted",
+            expected_version=1,
+            version_reason="RETRACTION_NOTICE",
+            source_grade="S",
+            content_hash=f"{key_suffix}-source-content".ljust(64, "0")[:64],
+            object_key=f"sources/{key_suffix}-source.pdf",
+            text_object_hash=f"{key_suffix}-source-text".ljust(64, "0")[:64],
+            source_status="RETRACTED",
+            source_status_changed_at=dt(day=13),
+            source_status_actor="IMPORTER",
+            source_status_reason="issuer retracted document",
+            idempotency_key=f"source-version-{key_suffix}-retracted",
+        )
+    return await services.create_evidence_series_version(
+        db,
+        scope_type="INSTRUMENT",
+        scope_key=QIANGRUI_INSTRUMENT_ID,
+        information_type="FACT",
+        claim_key=f"{QIANGRUI_INSTRUMENT_ID}:verified:{key_suffix}",
+        metric_key=f"verified_{key_suffix}",
+        period_start=datetime(2026, 1, 1, tzinfo=UTC),
+        period_end=datetime(2026, 6, 30, tzinfo=UTC),
+        provenance_kind="SOURCE_BACKED",
+        primary_source_document_id=source.id,
+        source_document_version_id=source_version.id,
+        display_title=f"Verified fact {key_suffix}",
+        display_text=f"Verified fact {key_suffix}",
+        raw_value="32.5%",
+        raw_unit="percent",
+        normalized_value=Decimal("32.5"),
+        normalized_unit="percent",
+        as_of=datetime(2026, 8, 31, tzinfo=UTC),
+        effective_from=datetime(2026, 8, 31, tzinfo=UTC),
+        locators=[
+            services.SourceLocatorInput(
+                locator_type="PAGE",
+                raw_locator="p.12",
+                short_citation="2026H1 p.12",
+                locator_payload={"page_number": 12},
+                quote_hash=f"{key_suffix}-quote".ljust(64, "0")[:64],
+            )
+        ],
+        instrument_links=[
+            services.InstrumentLinkInput(
+                instrument_id=QIANGRUI_INSTRUMENT_ID,
+                role="PRIMARY_SCOPE",
+                link_order=1,
+                link_metadata={"scope": "primary"},
+            )
+        ],
+        extractor_name="tg-parser",
+        extractor_version="1.0",
+        verification_status="VERIFIED",
+        status_changed_at=dt(day=13),
+        status_changed_by_actor="IMPORTER",
+        status_change_kind="INITIAL_VERIFICATION",
+        status_reason="deterministic import accepted",
+        created_by_actor="IMPORTER",
+        idempotency_key=f"evidence-verified-{key_suffix}",
+        created_at=dt(day=13),
     )
 
 
@@ -810,12 +885,208 @@ async def test_create_source_backed_evidence_persists_children_queries_and_audit
     assert exact.source_locators[0].raw_locator == "p.12"
     assert len(exact.instrument_links) == 1
     assert current is not None and current.id == created.id
-    assert valid is not None and valid.id == created.id
+    assert valid is None
     assert [item.id for item in by_source] == [created.id]
     assert [item.id for item in by_instrument] == [created.id]
 
     audit_count = await db.scalar(select(func.count()).select_from(EvidenceAuditEvent))
     assert audit_count and audit_count >= 3
+
+
+async def test_r1c_current_valid_accepts_latest_verified_and_missing_series_is_none(
+    db: AsyncSession,
+) -> None:
+    """R1C: current-valid returns only latest VERIFIED rows and misses safely."""
+    verified = await verified_evidence_fact(db, key_suffix="r1c-valid")
+    await db.commit()
+
+    valid = await services.get_current_valid_evidence(db, verified.evidence_series_id)
+    missing = await services.get_current_valid_evidence(db, str(uuid4()))
+
+    assert valid is not None and valid.id == verified.id
+    assert missing is None
+
+
+@pytest.mark.parametrize(
+    ("status", "expected_version"),
+    [
+        ("UNREVIEWED", 2),
+        ("PENDING_REVIEW", 2),
+        ("DISPUTED", 2),
+        ("REJECTED", 3),
+        ("INVALIDATED", 2),
+        ("RETRACTED", 2),
+    ],
+)
+async def test_r1c_current_valid_rejects_latest_ineligible_status_without_fallback(
+    db: AsyncSession,
+    status: str,
+    expected_version: int,
+) -> None:
+    """R1C: latest ineligible lifecycle statuses do not fall back to prior VERIFIED."""
+    if status in {"PENDING_REVIEW", "REJECTED"}:
+        base = await evidence_fact(db, key_suffix=f"r1c-{status.lower()}")
+        await db.commit()
+        latest = await services.request_review(
+            db,
+            evidence_series_id=base.evidence_series_id,
+            expected_version=1,
+            reason="review requested",
+            actor="USER",
+            idempotency_key=f"r1c-{status.lower()}-review",
+            as_of=dt(day=14),
+        )
+        if status == "REJECTED":
+            latest = await services.verify_or_reject(
+                db,
+                evidence_series_id=base.evidence_series_id,
+                expected_version=2,
+                decision="REJECTED",
+                reason="review rejected",
+                actor="USER",
+                idempotency_key=f"r1c-{status.lower()}-reject",
+                as_of=dt(day=15),
+            )
+    else:
+        base = await verified_evidence_fact(db, key_suffix=f"r1c-{status.lower()}")
+        await db.commit()
+        if status == "UNREVIEWED":
+            latest = await services.revise_correct_evidence(
+                db,
+                evidence_series_id=base.evidence_series_id,
+                expected_version=1,
+                display_text="Verified fact corrected and awaiting review",
+                raw_value="33.0%",
+                normalized_value=Decimal("33.0"),
+                status_changed_at=dt(day=14),
+                status_changed_by_actor="IMPORTER",
+                status_reason="ordinary correction awaits review",
+                idempotency_key=f"r1c-{status.lower()}-correction",
+            )
+        elif status == "DISPUTED":
+            latest = await services.mark_disputed(
+                db,
+                evidence_series_id=base.evidence_series_id,
+                expected_version=1,
+                reason="issuer later challenged",
+                actor="USER",
+                idempotency_key=f"r1c-{status.lower()}-dispute",
+                as_of=dt(day=14),
+            )
+        else:
+            latest = await services.retract_or_invalidate(
+                db,
+                evidence_series_id=base.evidence_series_id,
+                expected_version=1,
+                target_status=status,
+                reason=f"{status.lower()} latest",
+                actor="IMPORTER",
+                idempotency_key=f"r1c-{status.lower()}-tombstone",
+                as_of=dt(day=14),
+            )
+    await db.commit()
+
+    current = await services.get_current_evidence(db, latest.evidence_series_id)
+    valid = await services.get_current_valid_evidence(db, latest.evidence_series_id)
+    exact_base = await services.get_exact_evidence_version(db, base.id)
+    history = await services.list_evidence_history(db, latest.evidence_series_id)
+
+    assert latest.verification_status == status
+    assert latest.version == expected_version
+    assert current is not None and current.id == latest.id
+    assert valid is None
+    assert exact_base is not None and exact_base.id == base.id
+    assert history[0].id == base.id
+    assert history[-1].id == latest.id
+
+
+async def test_r1c_current_valid_rejects_unreviewed_replacement_series(
+    db: AsyncSession,
+) -> None:
+    """R1C: ordinary replacement v1 starts ineligible even when prior exact was VERIFIED."""
+    prior = await verified_evidence_fact(db, key_suffix="r1c-replacement-prior")
+    assert prior.source_document_version is not None
+    await db.commit()
+
+    replacement = await services.create_replacement_evidence_series(
+        db,
+        prior_evidence_version_id=prior.id,
+        scope_type="INSTRUMENT",
+        scope_key=QIANGRUI_INSTRUMENT_ID,
+        information_type="FACT",
+        claim_key=f"{QIANGRUI_INSTRUMENT_ID}:r1c_replacement_metric",
+        metric_key="r1c_replacement_metric",
+        period_start=prior.period_start,
+        period_end=prior.period_end,
+        provenance_kind="SOURCE_BACKED",
+        primary_source_document_id=prior.source_document_version.source_document_id,
+        source_document_version_id=prior.source_document_version_id,
+        display_title="R1C replacement",
+        display_text="R1C replacement awaits review",
+        raw_value="11.2%",
+        raw_unit="percent",
+        normalized_value=Decimal("11.2"),
+        normalized_unit="percent",
+        as_of=prior.as_of,
+        effective_from=prior.effective_from,
+        locators=[
+            services.SourceLocatorInput(
+                locator_type="PAGE",
+                raw_locator="p.13",
+                short_citation="2026H1 p.13",
+                locator_payload={"page_number": 13},
+            )
+        ],
+        instrument_links=[
+            services.InstrumentLinkInput(
+                instrument_id=QIANGRUI_INSTRUMENT_ID,
+                role="PRIMARY_SCOPE",
+                link_order=1,
+            )
+        ],
+        status_changed_at=dt(day=14),
+        status_changed_by_actor="IMPORTER",
+        status_reason="identity correction awaits review",
+        idempotency_key="r1c-replacement",
+    )
+    await db.commit()
+
+    replacement_valid = await services.get_current_valid_evidence(
+        db,
+        replacement.evidence_series_id,
+    )
+    prior_valid = await services.get_current_valid_evidence(db, prior.evidence_series_id)
+    prior_exact = await services.get_exact_evidence_version(db, prior.id)
+    replacement_history = await services.list_evidence_history(db, replacement.evidence_series_id)
+
+    assert replacement.verification_status == "UNREVIEWED"
+    assert replacement.supersedes_evidence_version_id == prior.id
+    assert replacement_valid is None
+    assert prior_valid is not None and prior_valid.id == prior.id
+    assert prior_exact is not None and prior_exact.id == prior.id
+    assert [item.id for item in replacement_history] == [replacement.id]
+
+
+async def test_r1c_current_valid_rejects_latest_verified_with_retracted_exact_source(
+    db: AsyncSession,
+) -> None:
+    """R1C: latest VERIFIED remains ineligible when its exact source version is retracted."""
+    verified = await verified_evidence_fact(
+        db,
+        key_suffix="r1c-retracted-source",
+        source_status="RETRACTED",
+    )
+    await db.commit()
+
+    current = await services.get_current_evidence(db, verified.evidence_series_id)
+    valid = await services.get_current_valid_evidence(db, verified.evidence_series_id)
+    exact = await services.get_exact_evidence_version(db, verified.id)
+
+    assert current is not None and current.id == verified.id
+    assert exact is not None and exact.id == verified.id
+    assert exact.source_document_version is not None
+    assert exact.source_document_version.source_status == "RETRACTED"
+    assert valid is None
 
 
 async def test_create_evidence_rejects_bad_locator_provenance_and_links(
@@ -1701,6 +1972,27 @@ async def test_r1b_replacement_routing_child_snapshots_and_nullable_clear(
     assert replacement.evidence_series_id != derived.evidence_series_id
     assert replacement.supersedes_evidence_version_id == same_set.id
     assert replacement.status_change_kind == "CORRECTION"
+    replacement_review = await services.request_review(
+        db,
+        evidence_series_id=replacement.evidence_series_id,
+        expected_version=1,
+        reason="replacement review",
+        actor="USER",
+        idempotency_key="r1b-derived-replacement-review",
+        as_of=dt(day=15),
+    )
+    replacement_verified = await services.verify_or_reject(
+        db,
+        evidence_series_id=replacement.evidence_series_id,
+        expected_version=2,
+        decision="VERIFIED",
+        reason="replacement verified",
+        actor="USER",
+        idempotency_key="r1b-derived-replacement-verify",
+        as_of=dt(day=16),
+    )
+    assert replacement_review.verification_status == "PENDING_REVIEW"
+    assert replacement_verified.verification_status == "VERIFIED"
 
     cross_scope = expected_cross_scope(QIANGRUI_INSTRUMENT_ID, SHENLING_INSTRUMENT_ID)
     cross = await services.create_evidence_series_version(
@@ -1815,11 +2107,32 @@ async def test_r1b_replacement_routing_child_snapshots_and_nullable_clear(
     assert cross_replacement.version == 1
     assert cross_replacement.evidence_series_id != cross.evidence_series_id
     assert cross_replacement.supersedes_evidence_version_id == cross_same_set.id
+    cross_review = await services.request_review(
+        db,
+        evidence_series_id=cross_replacement.evidence_series_id,
+        expected_version=1,
+        reason="cross replacement review",
+        actor="USER",
+        idempotency_key="r1b-cross-replacement-review",
+        as_of=dt(day=15),
+    )
+    cross_verified = await services.verify_or_reject(
+        db,
+        evidence_series_id=cross_replacement.evidence_series_id,
+        expected_version=2,
+        decision="VERIFIED",
+        reason="cross replacement verified",
+        actor="USER",
+        idempotency_key="r1b-cross-replacement-verify",
+        as_of=dt(day=16),
+    )
+    assert cross_review.verification_status == "PENDING_REVIEW"
+    assert cross_verified.verification_status == "VERIFIED"
 
     derived_tombstone = await services.retract_or_invalidate(
         db,
-        evidence_series_id=replacement.evidence_series_id,
-        expected_version=1,
+        evidence_series_id=replacement_verified.evidence_series_id,
+        expected_version=3,
         target_status="INVALIDATED",
         reason="derived invalidated",
         actor="IMPORTER",
@@ -1828,16 +2141,16 @@ async def test_r1b_replacement_routing_child_snapshots_and_nullable_clear(
     )
     cross_tombstone = await services.retract_or_invalidate(
         db,
-        evidence_series_id=cross_replacement.evidence_series_id,
-        expected_version=1,
+        evidence_series_id=cross_verified.evidence_series_id,
+        expected_version=3,
         target_status="RETRACTED",
         reason="cross retracted",
         actor="USER",
         idempotency_key="r1b-cross-tombstone",
         as_of=dt(day=15),
     )
-    assert len(derived_tombstone.derived_links) == len(replacement.derived_links)
-    assert len(cross_tombstone.instrument_links) == len(cross_replacement.instrument_links)
+    assert len(derived_tombstone.derived_links) == len(replacement_verified.derived_links)
+    assert len(cross_tombstone.instrument_links) == len(cross_verified.instrument_links)
 
     retained = await services.revise_correct_evidence(
         db,
@@ -2543,6 +2856,302 @@ async def test_locator_raw_locator_and_short_citation_report_exact_missing_path(
     assert await evidence_table_counts(db) == before
 
 
+async def evidence_with_lifecycle_status(
+    db: AsyncSession,
+    *,
+    status: str,
+    key_suffix: str,
+) -> EvidenceVersion:
+    """Create a series whose current version has the requested lifecycle status."""
+    if status == "UNREVIEWED":
+        current = await evidence_fact(db, key_suffix=key_suffix)
+    elif status == "VERIFIED":
+        current = await verified_evidence_fact(db, key_suffix=key_suffix)
+    elif status == "PENDING_REVIEW":
+        base = await evidence_fact(db, key_suffix=key_suffix)
+        await db.commit()
+        current = await services.request_review(
+            db,
+            evidence_series_id=base.evidence_series_id,
+            expected_version=1,
+            reason="matrix review requested",
+            actor="USER",
+            idempotency_key=f"{key_suffix}-to-pending",
+            as_of=dt(day=14),
+        )
+    elif status == "REJECTED":
+        base = await evidence_fact(db, key_suffix=key_suffix)
+        await db.commit()
+        pending = await services.request_review(
+            db,
+            evidence_series_id=base.evidence_series_id,
+            expected_version=1,
+            reason="matrix review requested",
+            actor="USER",
+            idempotency_key=f"{key_suffix}-to-pending",
+            as_of=dt(day=14),
+        )
+        current = await services.verify_or_reject(
+            db,
+            evidence_series_id=pending.evidence_series_id,
+            expected_version=2,
+            decision="REJECTED",
+            reason="matrix rejected",
+            actor="USER",
+            idempotency_key=f"{key_suffix}-to-rejected",
+            as_of=dt(day=15),
+        )
+    elif status == "DISPUTED":
+        base = await verified_evidence_fact(db, key_suffix=key_suffix)
+        await db.commit()
+        current = await services.mark_disputed(
+            db,
+            evidence_series_id=base.evidence_series_id,
+            expected_version=1,
+            reason="matrix disputed",
+            actor="USER",
+            idempotency_key=f"{key_suffix}-to-disputed",
+            as_of=dt(day=14),
+        )
+    elif status == "INVALIDATED":
+        base = await verified_evidence_fact(db, key_suffix=key_suffix)
+        await db.commit()
+        current = await services.retract_or_invalidate(
+            db,
+            evidence_series_id=base.evidence_series_id,
+            expected_version=1,
+            target_status="INVALIDATED",
+            reason="matrix invalidated",
+            actor="IMPORTER",
+            idempotency_key=f"{key_suffix}-to-invalidated",
+            as_of=dt(day=14),
+        )
+    elif status == "RETRACTED":
+        base = await verified_evidence_fact(db, key_suffix=key_suffix)
+        await db.commit()
+        current = await services.retract_or_invalidate(
+            db,
+            evidence_series_id=base.evidence_series_id,
+            expected_version=1,
+            target_status="RETRACTED",
+            reason="matrix retracted",
+            actor="IMPORTER",
+            idempotency_key=f"{key_suffix}-to-retracted",
+            as_of=dt(day=14),
+        )
+    else:
+        raise AssertionError(f"Unhandled lifecycle status {status}")
+    await db.commit()
+    return current
+
+
+LIFECYCLE_COMMAND_MATRIX = [
+    ("UNREVIEWED", "request_review", None, True, "PENDING_REVIEW", "REVIEW_REQUEST"),
+    ("UNREVIEWED", "verify_or_reject", "VERIFIED", False, None, None),
+    ("UNREVIEWED", "verify_or_reject", "REJECTED", True, "REJECTED", "REVIEW_DECISION"),
+    ("UNREVIEWED", "mark_disputed", None, False, None, None),
+    ("UNREVIEWED", "retract_or_invalidate", "INVALIDATED", False, None, None),
+    ("UNREVIEWED", "retract_or_invalidate", "RETRACTED", False, None, None),
+    ("PENDING_REVIEW", "request_review", None, False, None, None),
+    ("PENDING_REVIEW", "verify_or_reject", "VERIFIED", True, "VERIFIED", "REVIEW_DECISION"),
+    ("PENDING_REVIEW", "verify_or_reject", "REJECTED", True, "REJECTED", "REVIEW_DECISION"),
+    ("PENDING_REVIEW", "mark_disputed", None, False, None, None),
+    ("PENDING_REVIEW", "retract_or_invalidate", "INVALIDATED", False, None, None),
+    ("PENDING_REVIEW", "retract_or_invalidate", "RETRACTED", False, None, None),
+    ("VERIFIED", "request_review", None, False, None, None),
+    ("VERIFIED", "verify_or_reject", "VERIFIED", False, None, None),
+    ("VERIFIED", "verify_or_reject", "REJECTED", False, None, None),
+    ("VERIFIED", "mark_disputed", None, True, "DISPUTED", "DISPUTE"),
+    ("VERIFIED", "retract_or_invalidate", "INVALIDATED", True, "INVALIDATED", "INVALIDATION"),
+    ("VERIFIED", "retract_or_invalidate", "RETRACTED", True, "RETRACTED", "RETRACTION"),
+    ("DISPUTED", "request_review", None, False, None, None),
+    ("DISPUTED", "verify_or_reject", "VERIFIED", True, "VERIFIED", "DISPUTE"),
+    ("DISPUTED", "verify_or_reject", "REJECTED", True, "REJECTED", "DISPUTE"),
+    ("DISPUTED", "mark_disputed", None, False, None, None),
+    ("DISPUTED", "retract_or_invalidate", "INVALIDATED", False, None, None),
+    ("DISPUTED", "retract_or_invalidate", "RETRACTED", True, "RETRACTED", "RETRACTION"),
+    ("REJECTED", "request_review", None, False, None, None),
+    ("REJECTED", "verify_or_reject", "VERIFIED", False, None, None),
+    ("REJECTED", "verify_or_reject", "REJECTED", False, None, None),
+    ("REJECTED", "mark_disputed", None, False, None, None),
+    ("REJECTED", "retract_or_invalidate", "INVALIDATED", False, None, None),
+    ("REJECTED", "retract_or_invalidate", "RETRACTED", False, None, None),
+    ("INVALIDATED", "request_review", None, False, None, None),
+    ("INVALIDATED", "verify_or_reject", "VERIFIED", False, None, None),
+    ("INVALIDATED", "verify_or_reject", "REJECTED", False, None, None),
+    ("INVALIDATED", "mark_disputed", None, False, None, None),
+    ("INVALIDATED", "retract_or_invalidate", "INVALIDATED", False, None, None),
+    ("INVALIDATED", "retract_or_invalidate", "RETRACTED", False, None, None),
+    ("RETRACTED", "request_review", None, False, None, None),
+    ("RETRACTED", "verify_or_reject", "VERIFIED", False, None, None),
+    ("RETRACTED", "verify_or_reject", "REJECTED", False, None, None),
+    ("RETRACTED", "mark_disputed", None, False, None, None),
+    ("RETRACTED", "retract_or_invalidate", "INVALIDATED", False, None, None),
+    ("RETRACTED", "retract_or_invalidate", "RETRACTED", False, None, None),
+]
+
+
+@pytest.mark.parametrize(
+    (
+        "from_status",
+        "command",
+        "decision_or_target",
+        "allowed",
+        "to_status",
+        "audit_kind",
+    ),
+    LIFECYCLE_COMMAND_MATRIX,
+)
+async def test_r1c_state_transition_command_matrix_and_audit_mapping(
+    db: AsyncSession,
+    from_status: str,
+    command: str,
+    decision_or_target: str | None,
+    allowed: bool,
+    to_status: str | None,
+    audit_kind: str | None,
+) -> None:
+    """R1C: status commands exactly match the frozen lifecycle transition table."""
+    current = await evidence_with_lifecycle_status(
+        db,
+        status=from_status,
+        key_suffix=f"r1c-matrix-{from_status.lower()}-{command}-{decision_or_target or 'none'}",
+    )
+    before_counts = await evidence_table_counts(db)
+    expected_version = current.version
+    idempotency_key = (
+        f"r1c-matrix-{from_status.lower()}-{command}-{decision_or_target or 'none'}-cmd"
+    )
+
+    async def run_command() -> EvidenceVersion:
+        if command == "request_review":
+            return await services.request_review(
+                db,
+                evidence_series_id=current.evidence_series_id,
+                expected_version=expected_version,
+                reason="matrix review",
+                actor="USER",
+                idempotency_key=idempotency_key,
+                as_of=dt(day=20),
+            )
+        if command == "verify_or_reject":
+            assert decision_or_target is not None
+            return await services.verify_or_reject(
+                db,
+                evidence_series_id=current.evidence_series_id,
+                expected_version=expected_version,
+                decision=decision_or_target,
+                reason="matrix decision",
+                actor="USER",
+                idempotency_key=idempotency_key,
+                as_of=dt(day=20),
+            )
+        if command == "mark_disputed":
+            return await services.mark_disputed(
+                db,
+                evidence_series_id=current.evidence_series_id,
+                expected_version=expected_version,
+                reason="matrix dispute",
+                actor="USER",
+                idempotency_key=idempotency_key,
+                as_of=dt(day=20),
+            )
+        if command == "retract_or_invalidate":
+            assert decision_or_target is not None
+            return await services.retract_or_invalidate(
+                db,
+                evidence_series_id=current.evidence_series_id,
+                expected_version=expected_version,
+                target_status=decision_or_target,
+                reason="matrix tombstone",
+                actor="IMPORTER",
+                idempotency_key=idempotency_key,
+                as_of=dt(day=20),
+            )
+        raise AssertionError(f"Unhandled lifecycle command {command}")
+
+    if not allowed:
+        with pytest.raises(EvidenceDomainError) as invalid:
+            await run_command()
+        assert_error(invalid, "EVIDENCE_INVALID_STATE_TRANSITION")
+        assert invalid.value.details["from_status"] == from_status
+        assert await evidence_table_counts(db) == before_counts
+        history = await services.list_evidence_history(db, current.evidence_series_id)
+        assert history[-1].id == current.id
+        return
+
+    result = await run_command()
+    await db.flush()
+    after_counts = await evidence_table_counts(db)
+    replay = await run_command()
+    history = await services.list_evidence_history(db, current.evidence_series_id)
+
+    assert result.id == replay.id
+    assert result.version == current.version + 1
+    assert result.verification_status == to_status
+    assert result.status_change_kind == audit_kind
+    assert result.status_changed_at == dt(day=20)
+    assert result.status_changed_by_actor in {"USER", "IMPORTER"}
+    assert result.status_reason in {
+        "matrix review",
+        "matrix decision",
+        "matrix dispute",
+        "matrix tombstone",
+    }
+    assert result.supersedes_evidence_version_id == current.id
+    assert len(result.source_locators) == len(current.source_locators)
+    assert len(result.instrument_links) == len(current.instrument_links)
+    assert history[-2].id == current.id
+    assert history[-1].id == result.id
+    assert after_counts["version"] == before_counts["version"] + 1
+    assert after_counts["locator"] == before_counts["locator"] + len(current.source_locators)
+    assert after_counts["instrument_link"] == before_counts["instrument_link"] + len(
+        current.instrument_links
+    )
+    assert after_counts["idempotency"] == before_counts["idempotency"] + 1
+    assert after_counts["audit"] == before_counts["audit"] + 1
+    assert await evidence_table_counts(db) == after_counts
+
+
+async def test_r1c_state_transition_invalid_decision_and_version_conflict_leave_no_residue(
+    db: AsyncSession,
+) -> None:
+    """R1C: invalid decision and stale expected_version fail before status writes."""
+    created = await evidence_fact(db, key_suffix="r1c-invalid-decision")
+    await db.commit()
+    before_invalid_decision = await evidence_table_counts(db)
+
+    with pytest.raises(EvidenceDomainError) as invalid_decision:
+        await services.verify_or_reject(
+            db,
+            evidence_series_id=created.evidence_series_id,
+            expected_version=1,
+            decision="MAYBE",
+            reason="bad decision",
+            actor="USER",
+            idempotency_key="r1c-invalid-decision",
+            as_of=dt(day=20),
+        )
+    assert_error(invalid_decision, "EVIDENCE_VALIDATION_ERROR")
+    assert await evidence_table_counts(db) == before_invalid_decision
+
+    before_conflict = await evidence_table_counts(db)
+    with pytest.raises(EvidenceDomainError) as stale:
+        await services.request_review(
+            db,
+            evidence_series_id=created.evidence_series_id,
+            expected_version=0,
+            reason="stale review",
+            actor="USER",
+            idempotency_key="r1c-stale-review",
+            as_of=dt(day=20),
+        )
+    assert_error(stale, "EVIDENCE_VERSION_CONFLICT")
+    assert stale.value.expected_version == 0
+    assert stale.value.current_version == 1
+    assert await evidence_table_counts(db) == before_conflict
+
+
 async def test_revision_lifecycle_and_tombstone_are_append_only(db: AsyncSession) -> None:
     """Correction, review, verification, dispute, and invalidation append immutable versions."""
     created = await evidence_fact(db, key_suffix="life")
@@ -2560,7 +3169,6 @@ async def test_revision_lifecycle_and_tombstone_are_append_only(db: AsyncSession
         status_changed_by_actor="IMPORTER",
         status_reason="parser correction",
         idempotency_key="life-correct",
-        trusted_correction_rule="same-source-parser-v1",
     )
     review = await services.request_review(
         db,
@@ -2590,12 +3198,23 @@ async def test_revision_lifecycle_and_tombstone_are_append_only(db: AsyncSession
         idempotency_key="life-dispute",
         as_of=dt(day=16),
     )
-    invalidated = await services.retract_or_invalidate(
+    retracted = await services.retract_or_invalidate(
         db,
         evidence_series_id=created.evidence_series_id,
         expected_version=4,
+        target_status="RETRACTED",
+        reason="disputed fact withdrawn",
+        actor="IMPORTER",
+        idempotency_key="life-retract",
+        as_of=dt(day=17),
+    )
+    invalidation_base = await verified_evidence_fact(db, key_suffix="life-invalidate")
+    invalidated = await services.retract_or_invalidate(
+        db,
+        evidence_series_id=invalidation_base.evidence_series_id,
+        expected_version=1,
         target_status="INVALIDATED",
-        reason="restatement invalidates old fact",
+        reason="verified fact invalidated",
         actor="IMPORTER",
         idempotency_key="life-invalidate",
         as_of=dt(day=17),
@@ -2603,13 +3222,19 @@ async def test_revision_lifecycle_and_tombstone_are_append_only(db: AsyncSession
     await db.commit()
 
     assert corrected.version == 2
+    assert corrected.verification_status == "UNREVIEWED"
+    assert corrected.trusted_correction_rule is None
     assert corrected.supersedes_evidence_version_id == corrected_base.id
     assert review.verification_status == "PENDING_REVIEW"
     assert verified.verification_status == "VERIFIED"
     assert disputed.verification_status == "DISPUTED"
+    assert retracted.verification_status == "RETRACTED"
+    assert retracted.status_change_kind == "RETRACTION"
+    assert retracted.display_title == disputed.display_title
+    assert len(retracted.source_locators) == len(disputed.source_locators)
     assert invalidated.verification_status == "INVALIDATED"
-    assert invalidated.display_title == disputed.display_title
-    assert len(invalidated.source_locators) == len(disputed.source_locators)
+    assert invalidated.status_change_kind == "INVALIDATION"
+    assert invalidated.supersedes_evidence_version_id == invalidation_base.id
 
     history = await services.list_evidence_history(db, created.evidence_series_id)
     assert [item.version for item in history] == [1, 2, 3, 4, 5]
@@ -2753,7 +3378,6 @@ async def test_concurrent_revision_allows_only_one_next_version(
                     status_changed_by_actor="IMPORTER",
                     status_reason=key,
                     idempotency_key=key,
-                    trusted_correction_rule="concurrent-test",
                 )
                 await session.commit()
                 return "created"
@@ -2771,3 +3395,423 @@ async def test_concurrent_revision_allows_only_one_next_version(
     async with pg_sessionmaker() as verify:
         history = await services.list_evidence_history(verify, series_id)
         assert [item.version for item in history] == [1, 2]
+        assert history[0].id == created.id
+        assert history[0].raw_value == "32.5%"
+        assert history[1].verification_status == "UNREVIEWED"
+        assert history[1].trusted_correction_rule is None
+
+
+# R1C-03A: no production trusted correction rule is approved. Historical test
+# snapshots below model existing data, never authorization for a new command.
+R1C03A_INVALID_RULES = [
+    pytest.param("", id="empty"),
+    pytest.param(" \t\n", id="whitespace"),
+    pytest.param("unknown-rule", id="unknown"),
+    pytest.param("same-source-parser-v1", id="old-parser-fixture"),
+    pytest.param("concurrent-test", id="old-concurrency-fixture"),
+    pytest.param("SAME-SOURCE-PARSER-V1", id="case-variant"),
+    pytest.param(0, id="integer-zero"),
+    pytest.param(1, id="integer-one"),
+    pytest.param(False, id="boolean-false"),
+    pytest.param(True, id="boolean-true"),
+    pytest.param([], id="list"),
+    pytest.param({"rule": "unknown-rule"}, id="mapping"),
+    pytest.param(b"unknown-rule", id="bytes"),
+    pytest.param({"unknown-rule"}, id="set"),
+    pytest.param(object(), id="object"),
+]
+
+
+def r1c03a_columns(row: Any) -> dict[str, Any]:
+    return {column.name: getattr(row, column.name) for column in row.__table__.columns}
+
+
+def r1c03a_exact_snapshot(row: EvidenceVersion) -> dict[str, Any]:
+    return {
+        "version": r1c03a_columns(row),
+        "locators": [r1c03a_columns(child) for child in row.source_locators],
+        "instrument_links": [r1c03a_columns(child) for child in row.instrument_links],
+        "derivation_links": [r1c03a_columns(child) for child in row.derived_links],
+    }
+
+
+async def r1c03a_legacy_prior(db: AsyncSession, *, derived: bool) -> EvidenceVersion:
+    """Legally append a complete legacy snapshot; never update old rows."""
+    base = await verified_evidence_fact(db, key_suffix="r1c03a-base")
+    if derived:
+        base = await services.create_evidence_series_version(
+            db,
+            scope_type="INSTRUMENT",
+            scope_key=QIANGRUI_INSTRUMENT_ID,
+            information_type="THESIS_INFERENCE",
+            claim_key="r1c03a-derived",
+            provenance_kind="DERIVED",
+            display_title="Historical inference",
+            display_text="Historical inference",
+            as_of=dt(),
+            derivation_links=[
+                services.DerivationLinkInput(
+                    supporting_evidence_version_id=base.id,
+                    role="INPUT_FACT",
+                    support_order=1,
+                )
+            ],
+            instrument_links=[
+                services.InstrumentLinkInput(
+                    instrument_id=QIANGRUI_INSTRUMENT_ID,
+                    role="PRIMARY_SCOPE",
+                    link_order=1,
+                )
+            ],
+            idempotency_key="r1c03a-derived-base",
+        )
+        pending = await services.request_review(
+            db,
+            evidence_series_id=base.evidence_series_id,
+            expected_version=base.version,
+            reason="Historical review",
+            actor="USER",
+            idempotency_key="r1c03a-derived-review",
+            as_of=dt(day=13),
+        )
+        base = await services.verify_or_reject(
+            db,
+            evidence_series_id=base.evidence_series_id,
+            expected_version=pending.version,
+            decision="VERIFIED",
+            reason="Historical review accepted",
+            actor="USER",
+            idempotency_key="r1c03a-derived-verify",
+            as_of=dt(day=14),
+        )
+    values = r1c03a_columns(base)
+    values.update(
+        id=str(uuid4()),
+        version=base.version + 1,
+        supersedes_evidence_version_id=base.id,
+        verification_status="VERIFIED",
+        trusted_correction_rule="legacy-historical-rule",
+        status_changed_at=dt(day=15),
+        status_changed_by_actor="IMPORTER",
+        status_change_kind="CORRECTION",
+        status_reason="Existing legacy snapshot",
+        created_at=dt(day=15),
+        created_by_actor="IMPORTER",
+    )
+    legacy = EvidenceVersion(**values)
+    for relationship, model, foreign_key in (
+        ("source_locators", EvidenceSourceLocator, "evidence_version_id"),
+        ("instrument_links", EvidenceInstrumentLink, "evidence_version_id"),
+        ("derived_links", EvidenceDerivationLink, "derived_evidence_version_id"),
+    ):
+        children = []
+        for child in getattr(base, relationship):
+            child_values = r1c03a_columns(child)
+            child_values.update(id=str(uuid4()), **{foreign_key: legacy.id})
+            children.append(model(**child_values))
+        setattr(legacy, relationship, children)
+    db.add(legacy)
+    await db.flush()
+    loaded = await services.get_exact_evidence_version(db, legacy.id)
+    assert loaded is not None
+    await db.commit()
+    return loaded
+
+
+def r1c03a_create_fields(prior: EvidenceVersion, series: EvidenceSeries) -> dict[str, Any]:
+    """Explicit public-command fields, including complete child content."""
+    return {
+        "scope_type": series.scope_type,
+        "scope_key": series.scope_key,
+        "information_type": prior.information_type,
+        "claim_key": prior.claim_key,
+        "metric_key": "r1c03a-new-metric",
+        "period_start": prior.period_start,
+        "period_end": prior.period_end,
+        "provenance_kind": prior.provenance_kind,
+        "primary_source_document_id": series.primary_source_document_id,
+        "source_document_version_id": prior.source_document_version_id,
+        "display_title": prior.display_title,
+        "display_text": "Corrected content",
+        "raw_value": prior.raw_value,
+        "raw_unit": prior.raw_unit,
+        "normalized_value": prior.normalized_value,
+        "normalized_unit": prior.normalized_unit,
+        "as_of": prior.as_of,
+        "extractor_name": prior.extractor_name,
+        "extractor_version": prior.extractor_version,
+        "locators": [
+            services.SourceLocatorInput(
+                locator_type=x.locator_type,
+                raw_locator=x.raw_locator,
+                short_citation=x.short_citation,
+                locator_payload=dict(x.locator_payload),
+                quote_hash=x.quote_hash,
+            )
+            for x in prior.source_locators
+        ],
+        "instrument_links": [
+            services.InstrumentLinkInput(
+                instrument_id=x.instrument_id,
+                role=x.role,
+                link_order=x.link_order,
+                link_metadata=dict(x.link_metadata or {}),
+            )
+            for x in prior.instrument_links
+        ],
+    }
+
+
+async def r1c03a_command(
+    db: AsyncSession,
+    *,
+    prior: EvidenceVersion,
+    entry: str,
+    rule_kwargs: dict[str, Any],
+    key: str,
+) -> EvidenceVersion:
+    audit: dict[str, Any] = {
+        "status_changed_at": dt(day=16),
+        "status_changed_by_actor": "IMPORTER",
+        "status_reason": "R1C03A correction",
+        "idempotency_key": key,
+    }
+    if entry in {"same-series", "automatic-replacement"}:
+        children: dict[str, Any] = {}
+        if entry == "automatic-replacement":
+            support = await services.get_exact_evidence_version(
+                db,
+                prior.derived_links[0].supporting_evidence_version_id,
+            )
+            assert support is not None
+            children["derivation_links"] = [
+                services.DerivationLinkInput(
+                    supporting_evidence_version_id=support.supersedes_evidence_version_id
+                    or support.id,
+                    role="INPUT_FACT",
+                    support_order=1,
+                )
+            ]
+            # A different exact support ID changes the DERIVED series identity.
+            if children["derivation_links"][0].supporting_evidence_version_id == support.id:
+                history = await services.list_evidence_history(db, prior.evidence_series_id)
+                children["derivation_links"][0] = services.DerivationLinkInput(
+                    supporting_evidence_version_id=history[0].id,
+                    role="INPUT_FACT",
+                    support_order=1,
+                )
+        return await services.revise_correct_evidence(
+            db,
+            evidence_series_id=prior.evidence_series_id,
+            expected_version=prior.version,
+            display_text="Corrected content",
+            **audit,
+            **children,
+            **rule_kwargs,
+        )
+    series = await db.get(EvidenceSeries, prior.evidence_series_id)
+    assert series is not None
+    fields = r1c03a_create_fields(prior, series)
+    if entry == "direct-replacement":
+        return await services.create_replacement_evidence_series(
+            db,
+            prior_evidence_version_id=prior.id,
+            **fields,
+            **audit,
+            **rule_kwargs,
+        )
+    if entry == "create-initial":
+        return await services.create_evidence_series_version(
+            db,
+            **fields,
+            idempotency_key=key,
+            **rule_kwargs,
+        )
+    assert entry == "create-replacement"
+    return await services.create_evidence_series_version(
+        db,
+        **fields,
+        supersedes_evidence_version_id=prior.id,
+        verification_status="VERIFIED",
+        status_change_kind="CORRECTION",
+        **audit,
+        **rule_kwargs,
+    )
+
+
+@pytest.mark.parametrize(
+    "entry",
+    [
+        "same-series",
+        "automatic-replacement",
+        "direct-replacement",
+        "create-initial",
+        "create-replacement",
+    ],
+)
+@pytest.mark.parametrize("rule", R1C03A_INVALID_RULES)
+async def test_r1c03a_trusted_rule_rejected_before_writes_fresh_session(
+    db: AsyncSession,
+    pg_sessionmaker: async_sessionmaker[AsyncSession],
+    entry: str,
+    rule: Any,
+) -> None:
+    prior = await r1c03a_legacy_prior(db, derived=entry == "automatic-replacement")
+    before = await evidence_table_counts(db)
+    snapshot = r1c03a_exact_snapshot(prior)
+    series = await db.get(EvidenceSeries, prior.evidence_series_id)
+    assert series is not None
+    series_snapshot = r1c03a_columns(series)
+    with pytest.raises(EvidenceValidationError) as error:
+        await r1c03a_command(
+            db,
+            prior=prior,
+            entry=entry,
+            rule_kwargs={"trusted_correction_rule": rule},
+            key="r1c03a-denied",
+        )
+    assert error.value.code == "EVIDENCE_VALIDATION_ERROR"
+    assert error.value.details["validation_path"] == "trusted_correction_rule"
+    assert error.value.details["trusted_correction_rule"] == rule
+    assert error.value.details["rule_type"] == type(rule).__name__
+    assert not db.new
+    assert not db.dirty
+    await (
+        db.commit()
+    )  # Deliberately commit after domain rejection, never hide writes with rollback.
+    async with pg_sessionmaker() as reader:
+        assert await evidence_table_counts(reader) == before
+        exact = await services.get_exact_evidence_version(reader, prior.id)
+        assert exact is not None
+        assert r1c03a_exact_snapshot(exact) == snapshot
+        persisted_series = await reader.get(EvidenceSeries, prior.evidence_series_id)
+        assert persisted_series is not None
+        assert r1c03a_columns(persisted_series) == series_snapshot
+        current = await services.get_current_evidence(reader, prior.evidence_series_id)
+        assert current is not None and current.id == prior.id
+        assert (
+            await reader.get(
+                EvidenceIdempotencyRecord, ("revise_correct_evidence", "r1c03a-denied")
+            )
+            is None
+        )
+
+
+@pytest.mark.parametrize(
+    "entry", ["same-series", "automatic-replacement", "direct-replacement", "create-replacement"]
+)
+@pytest.mark.parametrize(
+    "rule_kwargs", [{}, {"trusted_correction_rule": None}], ids=["omitted", "none"]
+)
+async def test_r1c03a_ordinary_correction_does_not_inherit_legacy_rule(
+    db: AsyncSession,
+    pg_sessionmaker: async_sessionmaker[AsyncSession],
+    entry: str,
+    rule_kwargs: dict[str, Any],
+) -> None:
+    prior = await r1c03a_legacy_prior(db, derived=entry == "automatic-replacement")
+    prior_snapshot = r1c03a_exact_snapshot(prior)
+    before = await evidence_table_counts(db)
+    corrected = await r1c03a_command(
+        db, prior=prior, entry=entry, rule_kwargs=rule_kwargs, key="r1c03a-ordinary"
+    )
+    corrected_id = corrected.id
+    await db.commit()
+    async with pg_sessionmaker() as reader:
+        exact = await services.get_exact_evidence_version(reader, prior.id)
+        result = await services.get_exact_evidence_version(reader, corrected_id)
+        assert exact is not None and result is not None
+        assert r1c03a_exact_snapshot(exact) == prior_snapshot
+        assert result.verification_status == "UNREVIEWED"
+        assert result.trusted_correction_rule is None
+        assert result.supersedes_evidence_version_id == prior.id
+        assert result.status_changed_at == dt(day=16)
+        assert result.status_changed_by_actor == "IMPORTER"
+        assert result.status_change_kind == "CORRECTION"
+        assert result.status_reason == "R1C03A correction"
+        assert result.display_text == "Corrected content"
+        assert await services.get_current_valid_evidence(reader, result.evidence_series_id) is None
+        if entry == "same-series":
+            assert result.evidence_series_id == prior.evidence_series_id
+            assert result.version == prior.version + 1
+            assert (await evidence_table_counts(reader))["series"] == before["series"]
+        else:
+            assert result.evidence_series_id != prior.evidence_series_id
+            assert result.version == 1
+            assert (await evidence_table_counts(reader))["series"] == before["series"] + 1
+            current = await services.get_current_evidence(reader, prior.evidence_series_id)
+            assert current is not None and current.id == prior.id
+        for relationship in ("source_locators", "instrument_links", "derived_links"):
+            old_children = getattr(exact, relationship)
+            new_children = getattr(result, relationship)
+            assert len(new_children) == len(old_children)
+            assert {x.id for x in old_children}.isdisjoint(x.id for x in new_children)
+        pending = await services.request_review(
+            reader,
+            evidence_series_id=result.evidence_series_id,
+            expected_version=result.version,
+            reason="Ordinary correction review",
+            actor="USER",
+            idempotency_key="r1c03a-review",
+            as_of=dt(day=17),
+        )
+        verified = await services.verify_or_reject(
+            reader,
+            evidence_series_id=result.evidence_series_id,
+            expected_version=pending.version,
+            decision="VERIFIED",
+            reason="Review accepted",
+            actor="USER",
+            idempotency_key="r1c03a-verify",
+            as_of=dt(day=18),
+        )
+        assert verified.verification_status == "VERIFIED"
+        assert verified.trusted_correction_rule is None
+        eligible = await services.get_current_valid_evidence(reader, result.evidence_series_id)
+        assert eligible is not None and eligible.id == verified.id
+        await reader.commit()
+
+
+@pytest.mark.parametrize("entry", ["direct-replacement", "create-initial"])
+@pytest.mark.parametrize(
+    "trusted_request", [False, True], ids=["ordinary-replay", "new-trusted-request"]
+)
+async def test_r1c03a_replay_does_not_swallow_new_trusted_request(
+    db: AsyncSession,
+    pg_sessionmaker: async_sessionmaker[AsyncSession],
+    entry: str,
+    trusted_request: bool,
+) -> None:
+    prior = await r1c03a_legacy_prior(db, derived=False)
+    created = await r1c03a_command(
+        db, prior=prior, entry=entry, rule_kwargs={}, key="r1c03a-replay"
+    )
+    created_id = created.id
+    await db.commit()
+    before = await evidence_table_counts(db)
+    async with pg_sessionmaker() as caller:
+        exact_prior = await services.get_exact_evidence_version(caller, prior.id)
+        assert exact_prior is not None
+        if trusted_request:
+            with pytest.raises(EvidenceValidationError) as error:
+                await r1c03a_command(
+                    caller,
+                    prior=exact_prior,
+                    entry=entry,
+                    rule_kwargs={"trusted_correction_rule": "unknown-rule"},
+                    key="r1c03a-replay",
+                )
+            assert error.value.code == "EVIDENCE_VALIDATION_ERROR"
+            assert error.value.details["validation_path"] == "trusted_correction_rule"
+        else:
+            replay = await r1c03a_command(
+                caller, prior=exact_prior, entry=entry, rule_kwargs={}, key="r1c03a-replay"
+            )
+            assert replay.id == created_id
+        await caller.commit()
+    async with pg_sessionmaker() as reader:
+        assert await evidence_table_counts(reader) == before
+        persisted = await services.get_exact_evidence_version(reader, created_id)
+        assert persisted is not None
+        assert persisted.verification_status == "UNREVIEWED"
+        assert persisted.trusted_correction_rule is None
