@@ -1,0 +1,42 @@
+{
+  "label": "regression",
+  "argv": [
+    "/opt/miniconda3/bin/pytest",
+    "-p",
+    "no:cacheprovider",
+    "-q",
+    "tests/test_evidence_persistence.py",
+    "tests/test_migrations.py",
+    "tests/test_evidence_migrations.py",
+    "tests/test_research_api.py",
+    "tests/test_research_persistence.py",
+    "-rs"
+  ],
+  "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+  "environment": {
+    "PATH": "/opt/miniconda3/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONPATH": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service:/opt/miniconda3/lib/python3.12/site-packages:/opt/homebrew/lib/python3.12/site-packages"
+  },
+  "forbidden_variables_absent": [
+    "TG_TEST_ADMIN_DATABASE_URL",
+    "TG_R1C_REPLAY_BASELINE",
+    "TG_R1C02_REPLAY_PRIOR"
+  ],
+  "start": "2026-09-16T03:27:47.692082+00:00",
+  "end": "2026-09-16T03:28:14.712101+00:00",
+  "seconds": 27.02028133299973,
+  "exit_code": 0,
+  "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/TASK-WP04-02-R1C-04A-evidence/regression.log",
+  "log_sha256": "a77267d4b475883bff49e498e47521f9b8ed1fcef53789cbe7a78c4761985147",
+  "candidate_before": {
+    "backend/evidence/errors.py": "3cf37eb3efbf4c7bf7ab3d4213e4ce9865f2b9209fdbeb3d6c267fe84b06d1ec",
+    "backend/evidence/services.py": "94bb12823690a07ef323323cffacbd756081f23b2edd7de04fc25884e5e612a6",
+    "tests/test_evidence_services.py": "3c7da5f9405990ca047957b46a25ff0d8cde736152ec7d472c5535b2ed0d67d0"
+  },
+  "candidate_after": {
+    "backend/evidence/errors.py": "3cf37eb3efbf4c7bf7ab3d4213e4ce9865f2b9209fdbeb3d6c267fe84b06d1ec",
+    "backend/evidence/services.py": "94bb12823690a07ef323323cffacbd756081f23b2edd7de04fc25884e5e612a6",
+    "tests/test_evidence_services.py": "3c7da5f9405990ca047957b46a25ff0d8cde736152ec7d472c5535b2ed0d67d0"
+  }
+}

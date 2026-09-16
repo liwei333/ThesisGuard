@@ -1,0 +1,15 @@
+{
+  "services_reconstructed_baseline_sha256": "6e5c1c1c8cd83603a73c71c77993f76883f780fa773910fe3d026797e611aa69",
+  "old_test_prefix_sha256": "dce8c3644441399ef443d54073c3121e8f59ebcd330c6955458c5db703056308",
+  "current_hashes": {
+    "backend/evidence/errors.py": "3cf37eb3efbf4c7bf7ab3d4213e4ce9865f2b9209fdbeb3d6c267fe84b06d1ec",
+    "backend/evidence/services.py": "7ce76b02928019347625048e7d0acb523d74168cd6bbbdf03184163ac277f959",
+    "tests/test_evidence_services.py": "b5bfcdeb2db6753c71fd146b935dd26229daae0d73da5bda68af437db137b950"
+  },
+  "guard_sites": 3,
+  "helper": 1,
+  "old_test_nodes_and_bytes": "preserved",
+  "appended_test_lines": 557,
+  "final_edit": "Three new helper dictionary type annotations only; no command/assertion change",
+  "original_prefix_bytes": 191662
+}

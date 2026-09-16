@@ -1,0 +1,2299 @@
+{
+  "focused_log_sha256": "80e73507e975ee1c32212a1cff712f789ce5c7eddf21e809c1ea99f60e2935a6",
+  "focused_counts": {
+    "committed fixture=": 87,
+    "baseline committed; production call": 67,
+    "fresh-session all-nine-table equality": 67,
+    "automatic setup exact support IDs:": 17,
+    "fresh-session exact text/history/children/audit checked": 12,
+    "committed exact replay:": 4
+  },
+  "focused_proof_lines": [
+    "tests/test_evidence_services.py r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_6e6ffed752984f63ab52b97151f1cf40; server_version=(17, 11); prior=c02f1e5e-4b4a-417e-84b2-3891a402f195",
+    "r1c04a baseline committed; production call route=same, body=''",
+    "r1c04a fresh-session all-nine-table equality; route=same; prior=c02f1e5e-4b4a-417e-84b2-3891a402f195; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 1, 'evidence_version': 2, 'evidence_source_locator': 2, 'evidence_instrument_link': 2, 'evidence_derivation_link': 0, 'evidence_idempotency_record': 3, 'evidence_audit_event': 4}",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_1dda3f20d9b3455788782b8e2cb62949; server_version=(17, 11); prior=03ae857c-200d-41f3-84ec-a0572f07acdd",
+    "r1c04a baseline committed; production call route=initial, body=''",
+    "r1c04a fresh-session all-nine-table equality; route=initial; prior=03ae857c-200d-41f3-84ec-a0572f07acdd; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 1, 'evidence_version': 2, 'evidence_source_locator': 2, 'evidence_instrument_link': 2, 'evidence_derivation_link': 0, 'evidence_idempotency_record': 3, 'evidence_audit_event': 4}",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_f4e745aa5c80441288c0965493a05078; server_version=(17, 11); prior=be491890-27c0-47b9-b7ac-d053dd84a0ed",
+    "r1c04a baseline committed; production call route=same, body=''",
+    "r1c04a fresh-session all-nine-table equality; route=same; prior=be491890-27c0-47b9-b7ac-d053dd84a0ed; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 1, 'evidence_version': 2, 'evidence_source_locator': 2, 'evidence_instrument_link': 2, 'evidence_derivation_link': 0, 'evidence_idempotency_record': 3, 'evidence_audit_event': 4}",
+    "r1c04a automatic setup exact support IDs: ['5d4f1b7d-2c7a-41d9-9203-b7d32e105dd9', 'e312793a-45e2-4b24-899c-a98ef75776c8', 'dfbcc8dd-4ae7-401e-885c-801f45887694', '3f40e375-348a-442e-bbf5-7ed41ad17b95']; prior=2478e53a-1f6b-4647-9d27-6b72a95ecd12",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_32a83bc1acd54579944c70d133433caf; server_version=(17, 11); prior=2478e53a-1f6b-4647-9d27-6b72a95ecd12",
+    "r1c04a baseline committed; production call route=automatic, body=''",
+    "r1c04a fresh-session all-nine-table equality; route=automatic; prior=2478e53a-1f6b-4647-9d27-6b72a95ecd12; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 2, 'evidence_version': 8, 'evidence_source_locator': 4, 'evidence_instrument_link': 8, 'evidence_derivation_link': 4, 'evidence_idempotency_record': 9, 'evidence_audit_event': 11}",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_fcf9bfa086614e64bf0531ebe3d92003; server_version=(17, 11); prior=826e6ab9-96ba-48d0-ae28-a521409fcb87",
+    "r1c04a baseline committed; production call route=direct, body=''",
+    "r1c04a fresh-session all-nine-table equality; route=direct; prior=826e6ab9-96ba-48d0-ae28-a521409fcb87; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 1, 'evidence_version': 2, 'evidence_source_locator': 2, 'evidence_instrument_link': 2, 'evidence_derivation_link': 0, 'evidence_idempotency_record': 3, 'evidence_audit_event': 4}",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_cc2b4412778e4a5a9f83d03190764804; server_version=(17, 11); prior=e6d677f0-f3ba-409c-945a-37c1ac639a21",
+    "r1c04a baseline committed; production call route=initial, body=''",
+    "r1c04a fresh-session all-nine-table equality; route=initial; prior=e6d677f0-f3ba-409c-945a-37c1ac639a21; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 1, 'evidence_version': 2, 'evidence_source_locator': 2, 'evidence_instrument_link': 2, 'evidence_derivation_link': 0, 'evidence_idempotency_record': 3, 'evidence_audit_event': 4}",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_ce9356faf09a4609b09776475892091d; server_version=(17, 11); prior=97e92065-d065-4997-b8dc-32f5bfe8d31a",
+    "r1c04a baseline committed; production call route=underlying, body=''",
+    "r1c04a fresh-session all-nine-table equality; route=underlying; prior=97e92065-d065-4997-b8dc-32f5bfe8d31a; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 1, 'evidence_version': 2, 'evidence_source_locator': 2, 'evidence_instrument_link': 2, 'evidence_derivation_link': 0, 'evidence_idempotency_record': 3, 'evidence_audit_event': 4}",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_3329e504123241ed839147921565a844; server_version=(17, 11); prior=bd5dffca-ed83-4368-811b-a75189e7049f",
+    "r1c04a baseline committed; production call route=same, body='   '",
+    "r1c04a fresh-session all-nine-table equality; route=same; prior=bd5dffca-ed83-4368-811b-a75189e7049f; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 1, 'evidence_version': 2, 'evidence_source_locator': 2, 'evidence_instrument_link': 2, 'evidence_derivation_link': 0, 'evidence_idempotency_record': 3, 'evidence_audit_event': 4}",
+    "r1c04a automatic setup exact support IDs: ['ae413224-00ae-4e8f-9276-b43116ec8180', 'c96b2be1-b453-4590-875b-b7cc89ea2458', '56820cf8-68ff-4504-9a96-711364aed713', 'f68e4bf7-c261-458e-899f-c82a7646fa65']; prior=42490bda-7835-4de8-a022-ee7c2c33aae7",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_c426beafc5414290ad7ca7b101c206ab; server_version=(17, 11); prior=42490bda-7835-4de8-a022-ee7c2c33aae7",
+    "r1c04a baseline committed; production call route=automatic, body='   '",
+    "r1c04a fresh-session all-nine-table equality; route=automatic; prior=42490bda-7835-4de8-a022-ee7c2c33aae7; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 2, 'evidence_version': 8, 'evidence_source_locator': 4, 'evidence_instrument_link': 8, 'evidence_derivation_link': 4, 'evidence_idempotency_record': 9, 'evidence_audit_event': 11}",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_7e398675d97c47e49e4fa7d7e74495b6; server_version=(17, 11); prior=a5c5c398-8e2a-4c9c-8227-8e04e0bb53e0",
+    "r1c04a baseline committed; production call route=direct, body='   '",
+    "r1c04a fresh-session all-nine-table equality; route=direct; prior=a5c5c398-8e2a-4c9c-8227-8e04e0bb53e0; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 1, 'evidence_version': 2, 'evidence_source_locator': 2, 'evidence_instrument_link': 2, 'evidence_derivation_link': 0, 'evidence_idempotency_record': 3, 'evidence_audit_event': 4}",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_604e71b7209d4cefa596e870786ab532; server_version=(17, 11); prior=25406ef1-8562-430c-bea5-50de01935914",
+    "r1c04a baseline committed; production call route=initial, body='   '",
+    "r1c04a fresh-session all-nine-table equality; route=initial; prior=25406ef1-8562-430c-bea5-50de01935914; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 1, 'evidence_version': 2, 'evidence_source_locator': 2, 'evidence_instrument_link': 2, 'evidence_derivation_link': 0, 'evidence_idempotency_record': 3, 'evidence_audit_event': 4}",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_b5a80aa77045490b8b129a56858f0155; server_version=(17, 11); prior=97e54ead-39e4-4fc1-b455-818820a0277a",
+    "r1c04a baseline committed; production call route=underlying, body='   '",
+    "r1c04a fresh-session all-nine-table equality; route=underlying; prior=97e54ead-39e4-4fc1-b455-818820a0277a; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 1, 'evidence_version': 2, 'evidence_source_locator': 2, 'evidence_instrument_link': 2, 'evidence_derivation_link': 0, 'evidence_idempotency_record': 3, 'evidence_audit_event': 4}",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_b54086d517414008bb3d9cea35de57a8; server_version=(17, 11); prior=f3e1a943-008f-47be-9cda-3ced4b8643c7",
+    "r1c04a baseline committed; production call route=same, body='\\t\\r\\n'",
+    "r1c04a fresh-session all-nine-table equality; route=same; prior=f3e1a943-008f-47be-9cda-3ced4b8643c7; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 1, 'evidence_version': 2, 'evidence_source_locator': 2, 'evidence_instrument_link': 2, 'evidence_derivation_link': 0, 'evidence_idempotency_record': 3, 'evidence_audit_event': 4}",
+    "r1c04a automatic setup exact support IDs: ['7238438e-6242-41d7-80b4-51d9717d44e5', '0154cae9-2813-4d0c-825c-dc5101bf6be9', '9fbe39ce-9d3a-4a72-bbf4-d227d24322c5', '024f6144-a0cc-492a-93f1-33366b4a255c']; prior=f0c894ff-c834-4dd5-85d2-9721a0ac402e",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_906262f4749f4c8c84aed11cc16b0528; server_version=(17, 11); prior=f0c894ff-c834-4dd5-85d2-9721a0ac402e",
+    "r1c04a baseline committed; production call route=automatic, body='\\t\\r\\n'",
+    "r1c04a fresh-session all-nine-table equality; route=automatic; prior=f0c894ff-c834-4dd5-85d2-9721a0ac402e; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 2, 'evidence_version': 8, 'evidence_source_locator': 4, 'evidence_instrument_link': 8, 'evidence_derivation_link': 4, 'evidence_idempotency_record': 9, 'evidence_audit_event': 11}",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_1c6d4de66cd74aeb8689a64ea2e139d7; server_version=(17, 11); prior=a4c095f3-d946-4681-ad42-2b75b935e48f",
+    "r1c04a baseline committed; production call route=direct, body='\\t\\r\\n'",
+    "r1c04a fresh-session all-nine-table equality; route=direct; prior=a4c095f3-d946-4681-ad42-2b75b935e48f; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 1, 'evidence_version': 2, 'evidence_source_locator': 2, 'evidence_instrument_link': 2, 'evidence_derivation_link': 0, 'evidence_idempotency_record': 3, 'evidence_audit_event': 4}",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_ad6a55ab07bd41c9afcf0affa5a1c557; server_version=(17, 11); prior=7087b493-dd29-43d6-ae17-26ae2fe5fafe",
+    "r1c04a baseline committed; production call route=initial, body='\\t\\r\\n'",
+    "r1c04a fresh-session all-nine-table equality; route=initial; prior=7087b493-dd29-43d6-ae17-26ae2fe5fafe; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 1, 'evidence_version': 2, 'evidence_source_locator': 2, 'evidence_instrument_link': 2, 'evidence_derivation_link': 0, 'evidence_idempotency_record': 3, 'evidence_audit_event': 4}",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_d075dbe09a62460d8a786413b3177a51; server_version=(17, 11); prior=dd8124fe-cea6-4782-a94d-edaa341e8781",
+    "r1c04a baseline committed; production call route=underlying, body='\\t\\r\\n'",
+    "r1c04a fresh-session all-nine-table equality; route=underlying; prior=dd8124fe-cea6-4782-a94d-edaa341e8781; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 1, 'evidence_version': 2, 'evidence_source_locator': 2, 'evidence_instrument_link': 2, 'evidence_derivation_link': 0, 'evidence_idempotency_record': 3, 'evidence_audit_event': 4}",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_caa4c9872b7d4291b91dd208cef27b0c; server_version=(17, 11); prior=fd5db3fd-86b8-4267-8728-e4f73de068b0",
+    "r1c04a baseline committed; production call route=same, body='\\xa0\\u2003\\u3000'",
+    "r1c04a fresh-session all-nine-table equality; route=same; prior=fd5db3fd-86b8-4267-8728-e4f73de068b0; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 1, 'evidence_version': 2, 'evidence_source_locator': 2, 'evidence_instrument_link': 2, 'evidence_derivation_link': 0, 'evidence_idempotency_record': 3, 'evidence_audit_event': 4}",
+    "r1c04a automatic setup exact support IDs: ['76f4a6a8-caae-42c2-a272-65c397bfead5', 'abcf1409-f548-4bff-9e5b-8e8232947b00', 'f9f7c2b1-2f3a-4fc6-ad7c-55f55e78d8f3', '22efcead-787a-4063-99ca-61392982f6d9']; prior=98fd9b86-a343-4483-81f5-c3ff35fdacbe",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_323d3598baf04832a2919ee47260130a; server_version=(17, 11); prior=98fd9b86-a343-4483-81f5-c3ff35fdacbe",
+    "r1c04a baseline committed; production call route=automatic, body='\\xa0\\u2003\\u3000'",
+    "r1c04a fresh-session all-nine-table equality; route=automatic; prior=98fd9b86-a343-4483-81f5-c3ff35fdacbe; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 2, 'evidence_version': 8, 'evidence_source_locator': 4, 'evidence_instrument_link': 8, 'evidence_derivation_link': 4, 'evidence_idempotency_record': 9, 'evidence_audit_event': 11}",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_49a09078fced4658b643d7398f80b976; server_version=(17, 11); prior=4bdcd717-aacf-46c2-bbb7-9ded36671e8b",
+    "r1c04a baseline committed; production call route=direct, body='\\xa0\\u2003\\u3000'",
+    "r1c04a fresh-session all-nine-table equality; route=direct; prior=4bdcd717-aacf-46c2-bbb7-9ded36671e8b; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 1, 'evidence_version': 2, 'evidence_source_locator': 2, 'evidence_instrument_link': 2, 'evidence_derivation_link': 0, 'evidence_idempotency_record': 3, 'evidence_audit_event': 4}",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_a57f2d10080a471a988061f07293881c; server_version=(17, 11); prior=26bc1c29-592a-40ab-944f-d159ae4379fb",
+    "r1c04a baseline committed; production call route=initial, body='\\xa0\\u2003\\u3000'",
+    "r1c04a fresh-session all-nine-table equality; route=initial; prior=26bc1c29-592a-40ab-944f-d159ae4379fb; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 1, 'evidence_version': 2, 'evidence_source_locator': 2, 'evidence_instrument_link': 2, 'evidence_derivation_link': 0, 'evidence_idempotency_record': 3, 'evidence_audit_event': 4}",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_eaf0f2f3b44d42d8b39067f56c444bdb; server_version=(17, 11); prior=2826275d-e630-470d-a745-21c82d3e647f",
+    "r1c04a baseline committed; production call route=underlying, body='\\xa0\\u2003\\u3000'",
+    "r1c04a fresh-session all-nine-table equality; route=underlying; prior=2826275d-e630-470d-a745-21c82d3e647f; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 1, 'evidence_version': 2, 'evidence_source_locator': 2, 'evidence_instrument_link': 2, 'evidence_derivation_link': 0, 'evidence_idempotency_record': 3, 'evidence_audit_event': 4}",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_cead6afa31b14c8583c5d80aa1c14c94; server_version=(17, 11); prior=536a499e-c60f-4844-9045-fa1615dd4dd5",
+    "r1c04a baseline committed; production call route=same, body=False",
+    "r1c04a fresh-session all-nine-table equality; route=same; prior=536a499e-c60f-4844-9045-fa1615dd4dd5; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 1, 'evidence_version': 2, 'evidence_source_locator': 2, 'evidence_instrument_link': 2, 'evidence_derivation_link': 0, 'evidence_idempotency_record': 3, 'evidence_audit_event': 4}",
+    "r1c04a automatic setup exact support IDs: ['f26e62fb-a1c4-4dfd-be01-4ec39ce82674', '708f74b4-5afa-434d-aa84-590f14251715', 'ab6bc97f-14d1-4b4b-9354-9aecfef67ec2', '85e37c4a-5889-4893-a954-2dc024dfe463']; prior=73c718f1-2314-43a1-beca-1c9a7de61709",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_d266fc1124a44616ae424c8b016a6c02; server_version=(17, 11); prior=73c718f1-2314-43a1-beca-1c9a7de61709",
+    "r1c04a baseline committed; production call route=automatic, body=False",
+    "r1c04a fresh-session all-nine-table equality; route=automatic; prior=73c718f1-2314-43a1-beca-1c9a7de61709; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 2, 'evidence_version': 8, 'evidence_source_locator': 4, 'evidence_instrument_link': 8, 'evidence_derivation_link': 4, 'evidence_idempotency_record': 9, 'evidence_audit_event': 11}",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_bd68666909094e63b78f717ac54d3f3d; server_version=(17, 11); prior=44e47bd5-8728-49ef-aea9-df3e01ac7585",
+    "r1c04a baseline committed; production call route=direct, body=False",
+    "r1c04a fresh-session all-nine-table equality; route=direct; prior=44e47bd5-8728-49ef-aea9-df3e01ac7585; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 1, 'evidence_version': 2, 'evidence_source_locator': 2, 'evidence_instrument_link': 2, 'evidence_derivation_link': 0, 'evidence_idempotency_record': 3, 'evidence_audit_event': 4}",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_f223a0c0bf04454db4e78be650483d6d; server_version=(17, 11); prior=0c3dd2db-c734-4b72-b80a-1cac521fc34f",
+    "r1c04a baseline committed; production call route=initial, body=False",
+    "r1c04a fresh-session all-nine-table equality; route=initial; prior=0c3dd2db-c734-4b72-b80a-1cac521fc34f; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 1, 'evidence_version': 2, 'evidence_source_locator': 2, 'evidence_instrument_link': 2, 'evidence_derivation_link': 0, 'evidence_idempotency_record': 3, 'evidence_audit_event': 4}",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_2f7ae1b90d9c4feea27aa54884b963b3; server_version=(17, 11); prior=60475fea-a23f-4a1d-ad6e-02441b3e6f90",
+    "r1c04a baseline committed; production call route=underlying, body=False",
+    "r1c04a fresh-session all-nine-table equality; route=underlying; prior=60475fea-a23f-4a1d-ad6e-02441b3e6f90; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 1, 'evidence_version': 2, 'evidence_source_locator': 2, 'evidence_instrument_link': 2, 'evidence_derivation_link': 0, 'evidence_idempotency_record': 3, 'evidence_audit_event': 4}",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_3c2a8092609b48b49469a7f310f19be0; server_version=(17, 11); prior=2154fb73-cccf-4a3f-a191-b28043b6d886",
+    "r1c04a baseline committed; production call route=same, body=0",
+    "r1c04a fresh-session all-nine-table equality; route=same; prior=2154fb73-cccf-4a3f-a191-b28043b6d886; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 1, 'evidence_version': 2, 'evidence_source_locator': 2, 'evidence_instrument_link': 2, 'evidence_derivation_link': 0, 'evidence_idempotency_record': 3, 'evidence_audit_event': 4}",
+    "r1c04a automatic setup exact support IDs: ['a1253a17-95be-48a7-90d5-fcbf46091d81', 'ba4fc663-1561-4c47-a0a0-c4b8300a4433', '0cb65412-b1d8-4031-87ae-6219853bce27', 'f75bf4ec-6c72-4a06-a1d3-fff1fa53fde3']; prior=acce2d5a-0b6e-4c26-9158-7235bb71ef7f",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_d14f888a813247ce9df250df39015597; server_version=(17, 11); prior=acce2d5a-0b6e-4c26-9158-7235bb71ef7f",
+    "r1c04a baseline committed; production call route=automatic, body=0",
+    "r1c04a fresh-session all-nine-table equality; route=automatic; prior=acce2d5a-0b6e-4c26-9158-7235bb71ef7f; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 2, 'evidence_version': 8, 'evidence_source_locator': 4, 'evidence_instrument_link': 8, 'evidence_derivation_link': 4, 'evidence_idempotency_record': 9, 'evidence_audit_event': 11}",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_98206793f8b14a9f825199ffaa5a7852; server_version=(17, 11); prior=38f940ba-aee1-4341-9f16-87f7ce31cd30",
+    "r1c04a baseline committed; production call route=direct, body=0",
+    "r1c04a fresh-session all-nine-table equality; route=direct; prior=38f940ba-aee1-4341-9f16-87f7ce31cd30; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 1, 'evidence_version': 2, 'evidence_source_locator': 2, 'evidence_instrument_link': 2, 'evidence_derivation_link': 0, 'evidence_idempotency_record': 3, 'evidence_audit_event': 4}",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_4fc930cf0a834f7eb604a1056a0fd228; server_version=(17, 11); prior=f96929ce-4d52-4989-b6ad-178078977525",
+    "r1c04a baseline committed; production call route=initial, body=0",
+    "r1c04a fresh-session all-nine-table equality; route=initial; prior=f96929ce-4d52-4989-b6ad-178078977525; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 1, 'evidence_version': 2, 'evidence_source_locator': 2, 'evidence_instrument_link': 2, 'evidence_derivation_link': 0, 'evidence_idempotency_record': 3, 'evidence_audit_event': 4}",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_86f121e37dd546dab43f9927add03597; server_version=(17, 11); prior=6977b03f-38b4-4de5-9686-2b6ac366f4ce",
+    "r1c04a baseline committed; production call route=underlying, body=0",
+    "r1c04a fresh-session all-nine-table equality; route=underlying; prior=6977b03f-38b4-4de5-9686-2b6ac366f4ce; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 1, 'evidence_version': 2, 'evidence_source_locator': 2, 'evidence_instrument_link': 2, 'evidence_derivation_link': 0, 'evidence_idempotency_record': 3, 'evidence_audit_event': 4}",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_02e2f43f773f47b797e1285c967f953e; server_version=(17, 11); prior=9a66e280-3b23-4057-b7ca-ef7814e46b05",
+    "r1c04a baseline committed; production call route=same, body=[]",
+    "r1c04a fresh-session all-nine-table equality; route=same; prior=9a66e280-3b23-4057-b7ca-ef7814e46b05; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 1, 'evidence_version': 2, 'evidence_source_locator': 2, 'evidence_instrument_link': 2, 'evidence_derivation_link': 0, 'evidence_idempotency_record': 3, 'evidence_audit_event': 4}",
+    "r1c04a automatic setup exact support IDs: ['a49597fe-af49-40a8-9362-85334c3c224a', '8777af66-f021-4004-913e-a7def69b6a8b', 'fd421fdc-cd4b-462a-8c09-664bbef60cf4', '082fce7a-6c6a-473e-9230-5d02ff0391e7']; prior=84506c94-2414-4783-93c8-813d30b96adc",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_d85f858cbd6d46bda26054bd1f10b691; server_version=(17, 11); prior=84506c94-2414-4783-93c8-813d30b96adc",
+    "r1c04a baseline committed; production call route=automatic, body=[]",
+    "r1c04a fresh-session all-nine-table equality; route=automatic; prior=84506c94-2414-4783-93c8-813d30b96adc; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 2, 'evidence_version': 8, 'evidence_source_locator': 4, 'evidence_instrument_link': 8, 'evidence_derivation_link': 4, 'evidence_idempotency_record': 9, 'evidence_audit_event': 11}",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_77a4893f214d4e188c5c3902288de137; server_version=(17, 11); prior=5b6d958b-05e7-4adf-8eb4-8bbcb8ea6963",
+    "r1c04a baseline committed; production call route=direct, body=[]",
+    "r1c04a fresh-session all-nine-table equality; route=direct; prior=5b6d958b-05e7-4adf-8eb4-8bbcb8ea6963; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 1, 'evidence_version': 2, 'evidence_source_locator': 2, 'evidence_instrument_link': 2, 'evidence_derivation_link': 0, 'evidence_idempotency_record': 3, 'evidence_audit_event': 4}",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_1df3016398244e8bb97fb59f72ee37eb; server_version=(17, 11); prior=cf28ee7b-8937-4443-b4f0-0d04e2785dfd",
+    "r1c04a baseline committed; production call route=initial, body=[]",
+    "r1c04a fresh-session all-nine-table equality; route=initial; prior=cf28ee7b-8937-4443-b4f0-0d04e2785dfd; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 1, 'evidence_version': 2, 'evidence_source_locator': 2, 'evidence_instrument_link': 2, 'evidence_derivation_link': 0, 'evidence_idempotency_record': 3, 'evidence_audit_event': 4}",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_48693026a9644357b5ad3bc504cc30a6; server_version=(17, 11); prior=81be601f-2953-4070-aae0-61ac9ce57abb",
+    "r1c04a baseline committed; production call route=underlying, body=[]",
+    "r1c04a fresh-session all-nine-table equality; route=underlying; prior=81be601f-2953-4070-aae0-61ac9ce57abb; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 1, 'evidence_version': 2, 'evidence_source_locator': 2, 'evidence_instrument_link': 2, 'evidence_derivation_link': 0, 'evidence_idempotency_record': 3, 'evidence_audit_event': 4}",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_8043d3676d40434fadac399ed97705e0; server_version=(17, 11); prior=80474e68-09b1-4fbd-bebb-9c9e7545984d",
+    "r1c04a baseline committed; production call route=same, body=['正文']",
+    "r1c04a fresh-session all-nine-table equality; route=same; prior=80474e68-09b1-4fbd-bebb-9c9e7545984d; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 1, 'evidence_version': 2, 'evidence_source_locator': 2, 'evidence_instrument_link': 2, 'evidence_derivation_link': 0, 'evidence_idempotency_record': 3, 'evidence_audit_event': 4}",
+    "r1c04a automatic setup exact support IDs: ['b95645b7-732a-490f-b5ea-ca377b9b567d', '6a369bec-3393-4cbd-a809-2bb641231e2a', '886b3c81-cf43-4c5f-8d1c-1cd8e173217e', '6e31a58b-7f07-4261-a008-a33986af7537']; prior=c394cccf-f8f7-4cb0-87f4-85c1acf37845",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_5d08bfd38c6a4ceba6e5fc95bb44c4e2; server_version=(17, 11); prior=c394cccf-f8f7-4cb0-87f4-85c1acf37845",
+    "r1c04a baseline committed; production call route=automatic, body=['正文']",
+    "r1c04a fresh-session all-nine-table equality; route=automatic; prior=c394cccf-f8f7-4cb0-87f4-85c1acf37845; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 2, 'evidence_version': 8, 'evidence_source_locator': 4, 'evidence_instrument_link': 8, 'evidence_derivation_link': 4, 'evidence_idempotency_record': 9, 'evidence_audit_event': 11}",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_fd97854f7cb34b03b1e500f337b361da; server_version=(17, 11); prior=31f7e346-4438-4c59-a31a-5f61002653e9",
+    "r1c04a baseline committed; production call route=direct, body=['正文']",
+    "r1c04a fresh-session all-nine-table equality; route=direct; prior=31f7e346-4438-4c59-a31a-5f61002653e9; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 1, 'evidence_version': 2, 'evidence_source_locator': 2, 'evidence_instrument_link': 2, 'evidence_derivation_link': 0, 'evidence_idempotency_record': 3, 'evidence_audit_event': 4}",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_dc1ecb64c8ab4504a5165dbe0d459130; server_version=(17, 11); prior=a31e55e1-3b00-4a23-8bae-ef9ad8dfe4a1",
+    "r1c04a baseline committed; production call route=initial, body=['正文']",
+    "r1c04a fresh-session all-nine-table equality; route=initial; prior=a31e55e1-3b00-4a23-8bae-ef9ad8dfe4a1; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 1, 'evidence_version': 2, 'evidence_source_locator': 2, 'evidence_instrument_link': 2, 'evidence_derivation_link': 0, 'evidence_idempotency_record': 3, 'evidence_audit_event': 4}",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_f2cd93230ec24882b2d589a277879d58; server_version=(17, 11); prior=7914b583-3776-4983-9cee-4b959403f1e7",
+    "r1c04a baseline committed; production call route=underlying, body=['正文']",
+    "r1c04a fresh-session all-nine-table equality; route=underlying; prior=7914b583-3776-4983-9cee-4b959403f1e7; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 1, 'evidence_version': 2, 'evidence_source_locator': 2, 'evidence_instrument_link': 2, 'evidence_derivation_link': 0, 'evidence_idempotency_record': 3, 'evidence_audit_event': 4}",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_078fcd2ed7a343b7b08d86e4b0918c1e; server_version=(17, 11); prior=bd5088c2-fd54-4a8a-86a3-3e73dadf8a06",
+    "r1c04a baseline committed; production call route=same, body={}",
+    "r1c04a fresh-session all-nine-table equality; route=same; prior=bd5088c2-fd54-4a8a-86a3-3e73dadf8a06; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 1, 'evidence_version': 2, 'evidence_source_locator': 2, 'evidence_instrument_link': 2, 'evidence_derivation_link': 0, 'evidence_idempotency_record': 3, 'evidence_audit_event': 4}",
+    "r1c04a automatic setup exact support IDs: ['d7658734-5e64-476f-b547-ce0999893052', '9a40f059-05c0-4867-9a12-ca7758469fbc', 'a9c2b7d3-9c97-4307-b05c-24bc07fed856', 'a93192ec-d3dc-4d20-81d2-751413f9b5d2']; prior=d4123ff6-38aa-4a87-986d-eafe22a1271f",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_4ad63aba39f7405da157843696495ceb; server_version=(17, 11); prior=d4123ff6-38aa-4a87-986d-eafe22a1271f",
+    "r1c04a baseline committed; production call route=automatic, body={}",
+    "r1c04a fresh-session all-nine-table equality; route=automatic; prior=d4123ff6-38aa-4a87-986d-eafe22a1271f; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 2, 'evidence_version': 8, 'evidence_source_locator': 4, 'evidence_instrument_link': 8, 'evidence_derivation_link': 4, 'evidence_idempotency_record': 9, 'evidence_audit_event': 11}",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_894d9e1be40940348ee76562e436e1e4; server_version=(17, 11); prior=ee45baa1-82ad-4ac1-b06c-ade6b49e032c",
+    "r1c04a baseline committed; production call route=direct, body={}",
+    "r1c04a fresh-session all-nine-table equality; route=direct; prior=ee45baa1-82ad-4ac1-b06c-ade6b49e032c; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 1, 'evidence_version': 2, 'evidence_source_locator': 2, 'evidence_instrument_link': 2, 'evidence_derivation_link': 0, 'evidence_idempotency_record': 3, 'evidence_audit_event': 4}",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_a8ad2ef6438a4d90b35acb422c67e355; server_version=(17, 11); prior=aa5cdcbc-8f03-4f28-8269-f99f64e5e582",
+    "r1c04a baseline committed; production call route=initial, body={}",
+    "r1c04a fresh-session all-nine-table equality; route=initial; prior=aa5cdcbc-8f03-4f28-8269-f99f64e5e582; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 1, 'evidence_version': 2, 'evidence_source_locator': 2, 'evidence_instrument_link': 2, 'evidence_derivation_link': 0, 'evidence_idempotency_record': 3, 'evidence_audit_event': 4}",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_6dc415710ef44c38a5c8dca7558d2d77; server_version=(17, 11); prior=775ddcb3-ed4f-4d28-a68b-dc4b8473bc22",
+    "r1c04a baseline committed; production call route=underlying, body={}",
+    "r1c04a fresh-session all-nine-table equality; route=underlying; prior=775ddcb3-ed4f-4d28-a68b-dc4b8473bc22; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 1, 'evidence_version': 2, 'evidence_source_locator': 2, 'evidence_instrument_link': 2, 'evidence_derivation_link': 0, 'evidence_idempotency_record': 3, 'evidence_audit_event': 4}",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_ef9dfbbed5be4b0db744fe2aec60e7ba; server_version=(17, 11); prior=d0982436-7bdb-403d-abdc-0b8f563e2367",
+    "r1c04a baseline committed; production call route=same, body={'正文': '内容'}",
+    "r1c04a fresh-session all-nine-table equality; route=same; prior=d0982436-7bdb-403d-abdc-0b8f563e2367; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 1, 'evidence_version': 2, 'evidence_source_locator': 2, 'evidence_instrument_link': 2, 'evidence_derivation_link': 0, 'evidence_idempotency_record': 3, 'evidence_audit_event': 4}",
+    "r1c04a automatic setup exact support IDs: ['373a0827-838f-404f-aa46-1df550731626', 'ee1ac5b7-9880-4d4e-a412-6cff447d69f0', '29c71baa-9d81-4b3b-ae99-ac15c7b7044e', 'e506debd-a22d-44c8-8a26-a65fd9f7541d']; prior=7bea3bf4-ac05-4680-8bac-918fc23539ca",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_0cde68406adb421293d9d4c35232edac; server_version=(17, 11); prior=7bea3bf4-ac05-4680-8bac-918fc23539ca",
+    "r1c04a baseline committed; production call route=automatic, body={'正文': '内容'}",
+    "r1c04a fresh-session all-nine-table equality; route=automatic; prior=7bea3bf4-ac05-4680-8bac-918fc23539ca; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 2, 'evidence_version': 8, 'evidence_source_locator': 4, 'evidence_instrument_link': 8, 'evidence_derivation_link': 4, 'evidence_idempotency_record': 9, 'evidence_audit_event': 11}",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_c5dc6b3316b1479f80250153441f384b; server_version=(17, 11); prior=db5a63ce-de74-4c73-9c24-2ce58a6244a7",
+    "r1c04a baseline committed; production call route=direct, body={'正文': '内容'}",
+    "r1c04a fresh-session all-nine-table equality; route=direct; prior=db5a63ce-de74-4c73-9c24-2ce58a6244a7; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 1, 'evidence_version': 2, 'evidence_source_locator': 2, 'evidence_instrument_link': 2, 'evidence_derivation_link': 0, 'evidence_idempotency_record': 3, 'evidence_audit_event': 4}",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_640c37aedf974045822ec34abf2e4ee4; server_version=(17, 11); prior=37b39089-60fa-4037-bfe3-143e090398a6",
+    "r1c04a baseline committed; production call route=initial, body={'正文': '内容'}",
+    "r1c04a fresh-session all-nine-table equality; route=initial; prior=37b39089-60fa-4037-bfe3-143e090398a6; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 1, 'evidence_version': 2, 'evidence_source_locator': 2, 'evidence_instrument_link': 2, 'evidence_derivation_link': 0, 'evidence_idempotency_record': 3, 'evidence_audit_event': 4}",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_9083e595321745e897efb2e7d2efdf66; server_version=(17, 11); prior=ed5019d2-d5f7-4cd8-b11b-dd47efa6d1d6",
+    "r1c04a baseline committed; production call route=underlying, body={'正文': '内容'}",
+    "r1c04a fresh-session all-nine-table equality; route=underlying; prior=ed5019d2-d5f7-4cd8-b11b-dd47efa6d1d6; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 1, 'evidence_version': 2, 'evidence_source_locator': 2, 'evidence_instrument_link': 2, 'evidence_derivation_link': 0, 'evidence_idempotency_record': 3, 'evidence_audit_event': 4}",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_be61ec5626c44ef19e8da05f15b86a1d; server_version=(17, 11); prior=24313853-dab4-4bc7-b783-4d46a78cc1e3",
+    "r1c04a baseline committed; production call route=same, body=None",
+    "r1c04a fresh-session all-nine-table equality; route=same; prior=24313853-dab4-4bc7-b783-4d46a78cc1e3; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 1, 'evidence_version': 2, 'evidence_source_locator': 2, 'evidence_instrument_link': 2, 'evidence_derivation_link': 0, 'evidence_idempotency_record': 3, 'evidence_audit_event': 4}",
+    "r1c04a automatic setup exact support IDs: ['eaa540dd-4f43-461b-aad8-6f81a9d28d72', '35be2c79-4564-4a9a-863e-a4dd3f6aaa1f', '93b9f791-fdb2-4f64-bf23-d4fb984fa4c2', '75ae1af1-85bc-4772-94fc-b83b0dc42456']; prior=204a444e-340d-4898-a8bc-19ef11efb0b3",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_ea7e37f2cb4e4bf69a6d68a77e2abb4b; server_version=(17, 11); prior=204a444e-340d-4898-a8bc-19ef11efb0b3",
+    "r1c04a baseline committed; production call route=automatic, body=None",
+    "r1c04a fresh-session all-nine-table equality; route=automatic; prior=204a444e-340d-4898-a8bc-19ef11efb0b3; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 2, 'evidence_version': 8, 'evidence_source_locator': 4, 'evidence_instrument_link': 8, 'evidence_derivation_link': 4, 'evidence_idempotency_record': 9, 'evidence_audit_event': 11}",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_69779ab0a68d4c0d8b1c0b13e01407c4; server_version=(17, 11); prior=6cd11021-1420-46c9-9803-c9200aa7e31d",
+    "r1c04a baseline committed; production call route=direct, body=None",
+    "r1c04a fresh-session all-nine-table equality; route=direct; prior=6cd11021-1420-46c9-9803-c9200aa7e31d; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 1, 'evidence_version': 2, 'evidence_source_locator': 2, 'evidence_instrument_link': 2, 'evidence_derivation_link': 0, 'evidence_idempotency_record': 3, 'evidence_audit_event': 4}",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_0ccc77a7326849978723f7df7c0c6e4f; server_version=(17, 11); prior=98b8a8e2-5651-4d94-959f-f72cbd53406f",
+    "r1c04a baseline committed; production call route=initial, body=None",
+    "r1c04a fresh-session all-nine-table equality; route=initial; prior=98b8a8e2-5651-4d94-959f-f72cbd53406f; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 1, 'evidence_version': 2, 'evidence_source_locator': 2, 'evidence_instrument_link': 2, 'evidence_derivation_link': 0, 'evidence_idempotency_record': 3, 'evidence_audit_event': 4}",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_7c97217726844a8cbdb49fd6c43f99b2; server_version=(17, 11); prior=64da6501-b34a-49b5-854c-bf49d4f8696b",
+    "r1c04a baseline committed; production call route=underlying, body=None",
+    "r1c04a fresh-session all-nine-table equality; route=underlying; prior=64da6501-b34a-49b5-854c-bf49d4f8696b; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 1, 'evidence_version': 2, 'evidence_source_locator': 2, 'evidence_instrument_link': 2, 'evidence_derivation_link': 0, 'evidence_idempotency_record': 3, 'evidence_audit_event': 4}",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_b2606465bee44065b2dd6460e5c214fa; server_version=(17, 11); prior=fffea0e2-a267-4c93-8674-2a607116f5b9",
+    "r1c04a baseline committed; production call route=same, body=b'body'",
+    "r1c04a fresh-session all-nine-table equality; route=same; prior=fffea0e2-a267-4c93-8674-2a607116f5b9; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 1, 'evidence_version': 2, 'evidence_source_locator': 2, 'evidence_instrument_link': 2, 'evidence_derivation_link': 0, 'evidence_idempotency_record': 3, 'evidence_audit_event': 4}",
+    "r1c04a automatic setup exact support IDs: ['f894ddaf-0080-40e9-9ba8-e577a439a17d', '20d172cf-c578-4b40-8ffb-79a8ef6c395b', 'e816a968-84c0-4f8e-a499-6657e4bb71a4', '133a3029-06d4-40d3-9ba5-17e416495118']; prior=d3f77421-7573-4d1e-ba95-0eea5c058986",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_3f8f01c3ec814b1e8cb8f61322fbff52; server_version=(17, 11); prior=d3f77421-7573-4d1e-ba95-0eea5c058986",
+    "r1c04a baseline committed; production call route=automatic, body=b'body'",
+    "r1c04a fresh-session all-nine-table equality; route=automatic; prior=d3f77421-7573-4d1e-ba95-0eea5c058986; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 2, 'evidence_version': 8, 'evidence_source_locator': 4, 'evidence_instrument_link': 8, 'evidence_derivation_link': 4, 'evidence_idempotency_record': 9, 'evidence_audit_event': 11}",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_29c0b1b060ee493ab599df203a3180b5; server_version=(17, 11); prior=a28af09d-ff49-46cd-9cf5-234acf174532",
+    "r1c04a baseline committed; production call route=direct, body=b'body'",
+    "r1c04a fresh-session all-nine-table equality; route=direct; prior=a28af09d-ff49-46cd-9cf5-234acf174532; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 1, 'evidence_version': 2, 'evidence_source_locator': 2, 'evidence_instrument_link': 2, 'evidence_derivation_link': 0, 'evidence_idempotency_record': 3, 'evidence_audit_event': 4}",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_b55183a6e5a94aa4a5981c5aa2e376d9; server_version=(17, 11); prior=8f808c57-f59a-49fd-af14-8193211dbf45",
+    "r1c04a baseline committed; production call route=initial, body=b'body'",
+    "r1c04a fresh-session all-nine-table equality; route=initial; prior=8f808c57-f59a-49fd-af14-8193211dbf45; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 1, 'evidence_version': 2, 'evidence_source_locator': 2, 'evidence_instrument_link': 2, 'evidence_derivation_link': 0, 'evidence_idempotency_record': 3, 'evidence_audit_event': 4}",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_9554756d3d2143c5bef9f083e4d3f6c5; server_version=(17, 11); prior=604765e1-e35c-48b9-9be2-d7959826f3bd",
+    "r1c04a baseline committed; production call route=underlying, body=b'body'",
+    "r1c04a fresh-session all-nine-table equality; route=underlying; prior=604765e1-e35c-48b9-9be2-d7959826f3bd; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 1, 'evidence_version': 2, 'evidence_source_locator': 2, 'evidence_instrument_link': 2, 'evidence_derivation_link': 0, 'evidence_idempotency_record': 3, 'evidence_audit_event': 4}",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_cb2c94be5eaf4de0ada8b06d7975b09a; server_version=(17, 11); prior=0a24ae05-ae7f-4a09-8d71-095858ec7c5a",
+    "r1c04a baseline committed; production call route=same, body={'body'}",
+    "r1c04a fresh-session all-nine-table equality; route=same; prior=0a24ae05-ae7f-4a09-8d71-095858ec7c5a; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 1, 'evidence_version': 2, 'evidence_source_locator': 2, 'evidence_instrument_link': 2, 'evidence_derivation_link': 0, 'evidence_idempotency_record': 3, 'evidence_audit_event': 4}",
+    "r1c04a automatic setup exact support IDs: ['7ba852e9-3921-42c6-86aa-12d9b63099be', 'f3ec4072-3c09-46e8-bbac-dd086d6169d4', '98617ebb-cc8b-42cf-9a96-68279d171cfb', '21001244-b5a1-4d38-81d7-202227b1e350']; prior=75494e2e-ee04-4ecb-acec-0753f7c80053",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_c12167521eed46e4b5c23765110e7e7c; server_version=(17, 11); prior=75494e2e-ee04-4ecb-acec-0753f7c80053",
+    "r1c04a baseline committed; production call route=automatic, body={'body'}",
+    "r1c04a fresh-session all-nine-table equality; route=automatic; prior=75494e2e-ee04-4ecb-acec-0753f7c80053; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 2, 'evidence_version': 8, 'evidence_source_locator': 4, 'evidence_instrument_link': 8, 'evidence_derivation_link': 4, 'evidence_idempotency_record': 9, 'evidence_audit_event': 11}",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_df8096e63d854759a2f6098a7d9db82b; server_version=(17, 11); prior=a820ff3e-9189-4f91-b865-b788b45b05fc",
+    "r1c04a baseline committed; production call route=direct, body={'body'}",
+    "r1c04a fresh-session all-nine-table equality; route=direct; prior=a820ff3e-9189-4f91-b865-b788b45b05fc; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 1, 'evidence_version': 2, 'evidence_source_locator': 2, 'evidence_instrument_link': 2, 'evidence_derivation_link': 0, 'evidence_idempotency_record': 3, 'evidence_audit_event': 4}",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_8086f3e9690349148a4b2265ab5b1866; server_version=(17, 11); prior=5fd5a70a-e0ac-4300-8731-a8f09a9698d4",
+    "r1c04a baseline committed; production call route=initial, body={'body'}",
+    "r1c04a fresh-session all-nine-table equality; route=initial; prior=5fd5a70a-e0ac-4300-8731-a8f09a9698d4; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 1, 'evidence_version': 2, 'evidence_source_locator': 2, 'evidence_instrument_link': 2, 'evidence_derivation_link': 0, 'evidence_idempotency_record': 3, 'evidence_audit_event': 4}",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_3ba0ea2ceddc4eb79b083646a699e413; server_version=(17, 11); prior=04069633-59ac-4816-8298-01dc89904594",
+    "r1c04a baseline committed; production call route=underlying, body={'body'}",
+    "r1c04a fresh-session all-nine-table equality; route=underlying; prior=04069633-59ac-4816-8298-01dc89904594; caller commit succeeded; rows={'source_document': 1, 'source_document_version': 1, 'evidence_series': 1, 'evidence_version': 2, 'evidence_source_locator': 2, 'evidence_instrument_link': 2, 'evidence_derivation_link': 0, 'evidence_idempotency_record': 3, 'evidence_audit_event': 4}",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_32d5ef46c55742c6aaa7667bcf5e7245; server_version=(17, 11); prior=df2c1672-2e52-4c3a-936e-ace4edcd778c",
+    "r1c04a fresh-session exact text/history/children/audit checked; route=same",
+    "r1c04a automatic setup exact support IDs: ['aaa5026d-0240-4c6e-9f1f-7994d5fced8a', '8c13a6de-3af1-47c4-9520-6f2ad142b6ba', '07c9896c-e04f-4c17-afa4-a82085638d17', '0365dae1-c8a6-4bd6-99c2-6bf9f448d333']; prior=25ea283f-1ed2-4d54-92a9-f9576215a053",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_7a57e0d25e954cec87fc86617d935609; server_version=(17, 11); prior=25ea283f-1ed2-4d54-92a9-f9576215a053",
+    "r1c04a fresh-session exact text/history/children/audit checked; route=automatic",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_ab97a77da64c4ba5b5fb7d3430dd3eff; server_version=(17, 11); prior=172b44bb-f3d0-4fc0-884d-816776662b96",
+    "r1c04a fresh-session exact text/history/children/audit checked; route=direct",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_d5c56b8844934daf99ec6f695797e7a8; server_version=(17, 11); prior=5c529af2-be5a-4fc6-974c-f0343ba6436e",
+    "r1c04a fresh-session exact text/history/children/audit checked; route=initial",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_077f6b5007be47859387b8bfa7902895; server_version=(17, 11); prior=23b6cca4-78cf-4e23-9f96-7f803a74860a",
+    "r1c04a fresh-session exact text/history/children/audit checked; route=underlying",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_052c6f28482141bc887ede2bf3aa14f8; server_version=(17, 11); prior=dad575ab-2915-4908-ac0e-bab6c6bcfd7e",
+    "r1c04a fresh-session exact text/history/children/audit checked; route=same",
+    "r1c04a automatic setup exact support IDs: ['94f91230-779f-4a71-b42e-e4e861f9be58', 'e5cce0e9-0b7c-4f20-87df-225c1f7d0dc9', '58bd98be-528c-4373-820a-5c03055e32c5', '98f2135c-f0fe-4351-a721-1571981aa35f']; prior=d9761bf5-6b06-406d-8d94-b1264c3df8b7",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_cf68ceed086241eca61b76d3f93766ff; server_version=(17, 11); prior=d9761bf5-6b06-406d-8d94-b1264c3df8b7",
+    "r1c04a fresh-session exact text/history/children/audit checked; route=automatic",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_6124f08924bd4ff5bc7bd6a49c9996c2; server_version=(17, 11); prior=3cf85149-f405-43ca-8673-53b670d53d40",
+    "r1c04a fresh-session exact text/history/children/audit checked; route=direct",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_2dcfba3f31b3432c9e94b3473c23f8fd; server_version=(17, 11); prior=1c9382c2-95a4-4bc2-a798-071e77d7d80f",
+    "r1c04a fresh-session exact text/history/children/audit checked; route=initial",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_2bc93a5971ce48c1acf3050bd1d07d6b; server_version=(17, 11); prior=594672eb-fc38-4197-82ba-cd715f7cc0fc",
+    "r1c04a fresh-session exact text/history/children/audit checked; route=underlying",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_490105f20877449daac17178d44788cf; server_version=(17, 11); prior=34d27190-49ca-4115-8723-310c34e3336b",
+    "r1c04a fresh-session exact text/history/children/audit checked; route=same",
+    "r1c04a automatic setup exact support IDs: ['46abe1f5-beaa-4469-90f9-efe914c2ae5d', 'd4c64197-4da4-4d7a-bcab-f55412bf563d', '77012965-f0fe-47ea-98d8-b00f75d63ec0', '475b8da3-7396-4e4f-963b-43c4d96899b1']; prior=9748e911-e4ce-4e44-b5fc-5489e9343bc2",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_1e20e6a815e5471e906069e4a52a6952; server_version=(17, 11); prior=9748e911-e4ce-4e44-b5fc-5489e9343bc2",
+    "r1c04a fresh-session exact text/history/children/audit checked; route=automatic",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_0c0dbf8da38d4b5cbc0c94bd67397b1a; server_version=(17, 11); prior=a5105f2c-a0c8-4afb-8a31-fa12a658a699",
+    "r1c04a committed exact replay: route=initial; exact=9928e927-9caa-4306-a3d8-94ef8d3d2168; all nine tables unchanged",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_24a7780e77fe498e9dd89e5987ed20a2; server_version=(17, 11); prior=a9dd54c7-db80-4dad-960f-39bc3e65e9e4",
+    "r1c04a committed exact replay: route=direct; exact=2e685a81-4ca6-4a17-8671-5fe8d2147bfd; all nine tables unchanged",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_e61eafeb34f64b908fce1df9d2a0171a; server_version=(17, 11); prior=91d35f65-034c-4617-9c2a-c7bcbad12c35",
+    "r1c04a committed exact replay: route=underlying; exact=482d6878-a5d3-479a-8f34-652b936b498f; all nine tables unchanged",
+    "r1c04a automatic setup exact support IDs: ['3bc5ba28-3405-49ca-83ea-55e9605b6e66', '6cd7f6cd-080d-4411-af16-ba3f286ae550', 'fbf02b8f-ba20-4a9e-bcc5-74d2ebcf2c4b', '8b0cabca-f208-4ce1-9899-c93f36d8907b']; prior=87fad416-669b-473e-aa0e-4f4425d7643d",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_22e46fd5446d4fb28c03270c3ff9bcd7; server_version=(17, 11); prior=87fad416-669b-473e-aa0e-4f4425d7643d",
+    "r1c04a committed exact replay: route=automatic; exact=000080c1-6719-45be-acc7-a42a348b0679; all nine tables unchanged",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_fd97e8a0e57e4a439bb6430825f4be90; server_version=(17, 11); prior=1690fcd2-7de2-4d71-bf15-9a880f98ef28",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_b1670776ce5c49f4b6cbfa882f11e08c; server_version=(17, 11); prior=c6b7f6c3-fd0d-404a-b5a7-32afc7169921",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_bd4502325c874a5a94d1441b03653479; server_version=(17, 11); prior=8d6934e5-20ea-473c-b623-18e61ee8fb48",
+    "r1c04a committed fixture=postgresql+asyncpg://thesisguard:***@127.0.0.1:15432/tg_wp04_service_7417536568014e12947625d3b79fe873; server_version=(17, 11); prior=8fa8de7f-af86-4142-ac10-4b881564892c"
+  ],
+  "full_row_equality_is_asserted_in_tests_not_inferred_from_counts": true,
+  "legacy_controls": [
+    "omitted-correction rejects",
+    "lawful UNREVIEWED request-review rejects",
+    "valid repair appends without changing old blank history",
+    "COMMITTED historical blank create replays read-only"
+  ],
+  "corroboration_rows_used_by_new_setups": false,
+  "r1_oracle_log_sha256": "1f5f851dc19e4cbb6ff823b0daed2e6e2286aa758d7f876308b513c1e8aa5daa",
+  "r1_oracle_stage_counts": {
+    "setup_committed": 57,
+    "no_residue_baseline": 45,
+    "production_call": 61,
+    "domain_rejected_commit_fresh_no_residue": 45,
+    "exact_audit_checked": 12,
+    "ordinary_commit_fresh_history_preserved": 8,
+    "replay_commit_fresh_no_residue": 4
+  },
+  "r1_oracle_records": [
+    {
+      "prior_exact_id": "08e942e9-d26c-4795-8709-61ebf5b10b7c",
+      "route": "same",
+      "stage": "setup_committed",
+      "support_exact_ids": []
+    },
+    {
+      "route": "same",
+      "rule_type": "str",
+      "snapshot_sha256": "b206d2015a771a00aaf847f049fc9872bd92dae8a55c934f1621d4dab0bc9017",
+      "stage": "no_residue_baseline"
+    },
+    {
+      "prior_exact_id": "08e942e9-d26c-4795-8709-61ebf5b10b7c",
+      "route": "same",
+      "rule_type": "str",
+      "stage": "production_call"
+    },
+    {
+      "before_sha256": "b206d2015a771a00aaf847f049fc9872bd92dae8a55c934f1621d4dab0bc9017",
+      "code": "EVIDENCE_VALIDATION_ERROR",
+      "fresh_sha256": "b206d2015a771a00aaf847f049fc9872bd92dae8a55c934f1621d4dab0bc9017",
+      "prior_exact_id": "08e942e9-d26c-4795-8709-61ebf5b10b7c",
+      "route": "same",
+      "rule_type": "str",
+      "stage": "domain_rejected_commit_fresh_no_residue"
+    },
+    {
+      "prior_exact_id": "fd065d19-d2c3-4192-89cc-56d728682ab0",
+      "route": "automatic",
+      "stage": "setup_committed",
+      "support_exact_ids": [
+        "d0c32dbd-d56c-4b10-8cba-48a834e25569",
+        "e1d6d601-ec2e-4e79-81bb-2a59c2d22096",
+        "efb28015-87c8-4d37-9f9e-2015b3f75a5c",
+        "551b3f6a-896e-4144-871e-2db6bd3c2520"
+      ]
+    },
+    {
+      "route": "automatic",
+      "rule_type": "str",
+      "snapshot_sha256": "3b583e2773cf14e4b85cd51422343a70a07adb24e445b394cae20548d0ac01b3",
+      "stage": "no_residue_baseline"
+    },
+    {
+      "prior_exact_id": "fd065d19-d2c3-4192-89cc-56d728682ab0",
+      "route": "automatic",
+      "rule_type": "str",
+      "stage": "production_call"
+    },
+    {
+      "before_sha256": "3b583e2773cf14e4b85cd51422343a70a07adb24e445b394cae20548d0ac01b3",
+      "code": "EVIDENCE_VALIDATION_ERROR",
+      "fresh_sha256": "3b583e2773cf14e4b85cd51422343a70a07adb24e445b394cae20548d0ac01b3",
+      "prior_exact_id": "fd065d19-d2c3-4192-89cc-56d728682ab0",
+      "route": "automatic",
+      "rule_type": "str",
+      "stage": "domain_rejected_commit_fresh_no_residue"
+    },
+    {
+      "prior_exact_id": "c454ac33-5564-400f-8231-54a1dfd0c59b",
+      "route": "direct",
+      "stage": "setup_committed",
+      "support_exact_ids": []
+    },
+    {
+      "route": "direct",
+      "rule_type": "str",
+      "snapshot_sha256": "e8791e8947abca5d4d9d230241ac8fa5d13a5ce53d2476497a2f67fbd287cd97",
+      "stage": "no_residue_baseline"
+    },
+    {
+      "prior_exact_id": "c454ac33-5564-400f-8231-54a1dfd0c59b",
+      "route": "direct",
+      "rule_type": "str",
+      "stage": "production_call"
+    },
+    {
+      "before_sha256": "e8791e8947abca5d4d9d230241ac8fa5d13a5ce53d2476497a2f67fbd287cd97",
+      "code": "EVIDENCE_VALIDATION_ERROR",
+      "fresh_sha256": "e8791e8947abca5d4d9d230241ac8fa5d13a5ce53d2476497a2f67fbd287cd97",
+      "prior_exact_id": "c454ac33-5564-400f-8231-54a1dfd0c59b",
+      "route": "direct",
+      "rule_type": "str",
+      "stage": "domain_rejected_commit_fresh_no_residue"
+    },
+    {
+      "prior_exact_id": "e8e92056-e690-43f1-b335-3c25d1a85dda",
+      "route": "initial",
+      "stage": "setup_committed",
+      "support_exact_ids": []
+    },
+    {
+      "route": "initial",
+      "rule_type": "str",
+      "snapshot_sha256": "c8f763f34ec44d720ea564db69c96a30fe7e17bf1a55a383dd5909bce471dcab",
+      "stage": "no_residue_baseline"
+    },
+    {
+      "prior_exact_id": "e8e92056-e690-43f1-b335-3c25d1a85dda",
+      "route": "initial",
+      "rule_type": "str",
+      "stage": "production_call"
+    },
+    {
+      "before_sha256": "c8f763f34ec44d720ea564db69c96a30fe7e17bf1a55a383dd5909bce471dcab",
+      "code": "EVIDENCE_VALIDATION_ERROR",
+      "fresh_sha256": "c8f763f34ec44d720ea564db69c96a30fe7e17bf1a55a383dd5909bce471dcab",
+      "prior_exact_id": "e8e92056-e690-43f1-b335-3c25d1a85dda",
+      "route": "initial",
+      "rule_type": "str",
+      "stage": "domain_rejected_commit_fresh_no_residue"
+    },
+    {
+      "prior_exact_id": "c01f294b-41e1-4acd-bb50-3b853134b271",
+      "route": "underlying-replacement",
+      "stage": "setup_committed",
+      "support_exact_ids": []
+    },
+    {
+      "route": "underlying-replacement",
+      "rule_type": "str",
+      "snapshot_sha256": "895e775202010730495bb2c7c33444a90b558bafd5a585725a182f4009c70dfa",
+      "stage": "no_residue_baseline"
+    },
+    {
+      "prior_exact_id": "c01f294b-41e1-4acd-bb50-3b853134b271",
+      "route": "underlying-replacement",
+      "rule_type": "str",
+      "stage": "production_call"
+    },
+    {
+      "before_sha256": "895e775202010730495bb2c7c33444a90b558bafd5a585725a182f4009c70dfa",
+      "code": "EVIDENCE_VALIDATION_ERROR",
+      "fresh_sha256": "895e775202010730495bb2c7c33444a90b558bafd5a585725a182f4009c70dfa",
+      "prior_exact_id": "c01f294b-41e1-4acd-bb50-3b853134b271",
+      "route": "underlying-replacement",
+      "rule_type": "str",
+      "stage": "domain_rejected_commit_fresh_no_residue"
+    },
+    {
+      "prior_exact_id": "a625976e-1641-4ac5-8490-11e253ced5a3",
+      "route": "same",
+      "stage": "setup_committed",
+      "support_exact_ids": []
+    },
+    {
+      "route": "same",
+      "rule_type": "str",
+      "snapshot_sha256": "f1fb919fbca871a0027872f6a9f50124bfdb4c990eab1b966a3fca380a44763c",
+      "stage": "no_residue_baseline"
+    },
+    {
+      "prior_exact_id": "a625976e-1641-4ac5-8490-11e253ced5a3",
+      "route": "same",
+      "rule_type": "str",
+      "stage": "production_call"
+    },
+    {
+      "before_sha256": "f1fb919fbca871a0027872f6a9f50124bfdb4c990eab1b966a3fca380a44763c",
+      "code": "EVIDENCE_VALIDATION_ERROR",
+      "fresh_sha256": "f1fb919fbca871a0027872f6a9f50124bfdb4c990eab1b966a3fca380a44763c",
+      "prior_exact_id": "a625976e-1641-4ac5-8490-11e253ced5a3",
+      "route": "same",
+      "rule_type": "str",
+      "stage": "domain_rejected_commit_fresh_no_residue"
+    },
+    {
+      "prior_exact_id": "8a89763a-a959-4a70-bfb4-89040f2178cd",
+      "route": "automatic",
+      "stage": "setup_committed",
+      "support_exact_ids": [
+        "b2117647-ffab-4682-ac1e-5d1ed70e599c",
+        "b26a8c0c-17e5-499b-8f29-e746fb34459b",
+        "90aa26e7-8f68-4ee8-95ce-531e5b0707d8",
+        "bbf1ae60-6840-4c10-8e90-74bfd96e3602"
+      ]
+    },
+    {
+      "route": "automatic",
+      "rule_type": "str",
+      "snapshot_sha256": "156dfed9adbcdb6da29fe40b5266d8c537bc1eec0907cf5c79c9ad0e86c2ee62",
+      "stage": "no_residue_baseline"
+    },
+    {
+      "prior_exact_id": "8a89763a-a959-4a70-bfb4-89040f2178cd",
+      "route": "automatic",
+      "rule_type": "str",
+      "stage": "production_call"
+    },
+    {
+      "before_sha256": "156dfed9adbcdb6da29fe40b5266d8c537bc1eec0907cf5c79c9ad0e86c2ee62",
+      "code": "EVIDENCE_VALIDATION_ERROR",
+      "fresh_sha256": "156dfed9adbcdb6da29fe40b5266d8c537bc1eec0907cf5c79c9ad0e86c2ee62",
+      "prior_exact_id": "8a89763a-a959-4a70-bfb4-89040f2178cd",
+      "route": "automatic",
+      "rule_type": "str",
+      "stage": "domain_rejected_commit_fresh_no_residue"
+    },
+    {
+      "prior_exact_id": "01753bc5-a10c-46a2-850f-78a7825b5b9a",
+      "route": "direct",
+      "stage": "setup_committed",
+      "support_exact_ids": []
+    },
+    {
+      "route": "direct",
+      "rule_type": "str",
+      "snapshot_sha256": "1f25a47c12311ef4e46ff557585f55dee6505c64b84b2e86f5ab358c8f23d1a2",
+      "stage": "no_residue_baseline"
+    },
+    {
+      "prior_exact_id": "01753bc5-a10c-46a2-850f-78a7825b5b9a",
+      "route": "direct",
+      "rule_type": "str",
+      "stage": "production_call"
+    },
+    {
+      "before_sha256": "1f25a47c12311ef4e46ff557585f55dee6505c64b84b2e86f5ab358c8f23d1a2",
+      "code": "EVIDENCE_VALIDATION_ERROR",
+      "fresh_sha256": "1f25a47c12311ef4e46ff557585f55dee6505c64b84b2e86f5ab358c8f23d1a2",
+      "prior_exact_id": "01753bc5-a10c-46a2-850f-78a7825b5b9a",
+      "route": "direct",
+      "rule_type": "str",
+      "stage": "domain_rejected_commit_fresh_no_residue"
+    },
+    {
+      "prior_exact_id": "183e5c0f-c927-4fab-a8ed-ab6da259f693",
+      "route": "initial",
+      "stage": "setup_committed",
+      "support_exact_ids": []
+    },
+    {
+      "route": "initial",
+      "rule_type": "str",
+      "snapshot_sha256": "11987b60319b96248e1af3a32613e1368a79f5c159665d511a99410567e435b8",
+      "stage": "no_residue_baseline"
+    },
+    {
+      "prior_exact_id": "183e5c0f-c927-4fab-a8ed-ab6da259f693",
+      "route": "initial",
+      "rule_type": "str",
+      "stage": "production_call"
+    },
+    {
+      "before_sha256": "11987b60319b96248e1af3a32613e1368a79f5c159665d511a99410567e435b8",
+      "code": "EVIDENCE_VALIDATION_ERROR",
+      "fresh_sha256": "11987b60319b96248e1af3a32613e1368a79f5c159665d511a99410567e435b8",
+      "prior_exact_id": "183e5c0f-c927-4fab-a8ed-ab6da259f693",
+      "route": "initial",
+      "rule_type": "str",
+      "stage": "domain_rejected_commit_fresh_no_residue"
+    },
+    {
+      "prior_exact_id": "abf2a163-a94e-4ae0-a6c5-8786c5d3a054",
+      "route": "underlying-replacement",
+      "stage": "setup_committed",
+      "support_exact_ids": []
+    },
+    {
+      "route": "underlying-replacement",
+      "rule_type": "str",
+      "snapshot_sha256": "57c27f8da86572253c9001c7bfde5df17712026a436ea86b6954fb3877a2fe59",
+      "stage": "no_residue_baseline"
+    },
+    {
+      "prior_exact_id": "abf2a163-a94e-4ae0-a6c5-8786c5d3a054",
+      "route": "underlying-replacement",
+      "rule_type": "str",
+      "stage": "production_call"
+    },
+    {
+      "before_sha256": "57c27f8da86572253c9001c7bfde5df17712026a436ea86b6954fb3877a2fe59",
+      "code": "EVIDENCE_VALIDATION_ERROR",
+      "fresh_sha256": "57c27f8da86572253c9001c7bfde5df17712026a436ea86b6954fb3877a2fe59",
+      "prior_exact_id": "abf2a163-a94e-4ae0-a6c5-8786c5d3a054",
+      "route": "underlying-replacement",
+      "rule_type": "str",
+      "stage": "domain_rejected_commit_fresh_no_residue"
+    },
+    {
+      "prior_exact_id": "c91c4775-f8a8-447e-b948-3f791a9a3aa2",
+      "route": "same",
+      "stage": "setup_committed",
+      "support_exact_ids": []
+    },
+    {
+      "route": "same",
+      "rule_type": "str",
+      "snapshot_sha256": "a97262528b959610aa834b368c24d9d43d573ccd0ee21a3ddd017a9d51bfa9ff",
+      "stage": "no_residue_baseline"
+    },
+    {
+      "prior_exact_id": "c91c4775-f8a8-447e-b948-3f791a9a3aa2",
+      "route": "same",
+      "rule_type": "str",
+      "stage": "production_call"
+    },
+    {
+      "before_sha256": "a97262528b959610aa834b368c24d9d43d573ccd0ee21a3ddd017a9d51bfa9ff",
+      "code": "EVIDENCE_VALIDATION_ERROR",
+      "fresh_sha256": "a97262528b959610aa834b368c24d9d43d573ccd0ee21a3ddd017a9d51bfa9ff",
+      "prior_exact_id": "c91c4775-f8a8-447e-b948-3f791a9a3aa2",
+      "route": "same",
+      "rule_type": "str",
+      "stage": "domain_rejected_commit_fresh_no_residue"
+    },
+    {
+      "prior_exact_id": "54a958d8-a110-4eb0-a976-4720b3f7424c",
+      "route": "automatic",
+      "stage": "setup_committed",
+      "support_exact_ids": [
+        "7cc734ee-f624-4d96-9697-57f14d872e18",
+        "a7fece93-7413-4d36-87ea-021d6c34e034",
+        "6a36836d-9a6e-44ab-95da-dcf2bb184ccc",
+        "fea655d7-b48d-4ab6-b483-3650a02633c5"
+      ]
+    },
+    {
+      "route": "automatic",
+      "rule_type": "str",
+      "snapshot_sha256": "36722ae93a2a6da590e8d751570e97993c4d7e50fc27fa5de3d8a5ed76d9bd72",
+      "stage": "no_residue_baseline"
+    },
+    {
+      "prior_exact_id": "54a958d8-a110-4eb0-a976-4720b3f7424c",
+      "route": "automatic",
+      "rule_type": "str",
+      "stage": "production_call"
+    },
+    {
+      "before_sha256": "36722ae93a2a6da590e8d751570e97993c4d7e50fc27fa5de3d8a5ed76d9bd72",
+      "code": "EVIDENCE_VALIDATION_ERROR",
+      "fresh_sha256": "36722ae93a2a6da590e8d751570e97993c4d7e50fc27fa5de3d8a5ed76d9bd72",
+      "prior_exact_id": "54a958d8-a110-4eb0-a976-4720b3f7424c",
+      "route": "automatic",
+      "rule_type": "str",
+      "stage": "domain_rejected_commit_fresh_no_residue"
+    },
+    {
+      "prior_exact_id": "afb808d1-cbc4-4858-999c-bc50b6e8320e",
+      "route": "direct",
+      "stage": "setup_committed",
+      "support_exact_ids": []
+    },
+    {
+      "route": "direct",
+      "rule_type": "str",
+      "snapshot_sha256": "f5860e6f92a39d0ac17176ddaf7f3432f523a060e4fd19a3f2973865fa3d491a",
+      "stage": "no_residue_baseline"
+    },
+    {
+      "prior_exact_id": "afb808d1-cbc4-4858-999c-bc50b6e8320e",
+      "route": "direct",
+      "rule_type": "str",
+      "stage": "production_call"
+    },
+    {
+      "before_sha256": "f5860e6f92a39d0ac17176ddaf7f3432f523a060e4fd19a3f2973865fa3d491a",
+      "code": "EVIDENCE_VALIDATION_ERROR",
+      "fresh_sha256": "f5860e6f92a39d0ac17176ddaf7f3432f523a060e4fd19a3f2973865fa3d491a",
+      "prior_exact_id": "afb808d1-cbc4-4858-999c-bc50b6e8320e",
+      "route": "direct",
+      "rule_type": "str",
+      "stage": "domain_rejected_commit_fresh_no_residue"
+    },
+    {
+      "prior_exact_id": "aaac3674-d346-4251-b868-a69293d3bfb1",
+      "route": "initial",
+      "stage": "setup_committed",
+      "support_exact_ids": []
+    },
+    {
+      "route": "initial",
+      "rule_type": "str",
+      "snapshot_sha256": "1532071d24ca6c9ba363063930eb014f404a013154c1ec03eef43a7ddd92cbb0",
+      "stage": "no_residue_baseline"
+    },
+    {
+      "prior_exact_id": "aaac3674-d346-4251-b868-a69293d3bfb1",
+      "route": "initial",
+      "rule_type": "str",
+      "stage": "production_call"
+    },
+    {
+      "before_sha256": "1532071d24ca6c9ba363063930eb014f404a013154c1ec03eef43a7ddd92cbb0",
+      "code": "EVIDENCE_VALIDATION_ERROR",
+      "fresh_sha256": "1532071d24ca6c9ba363063930eb014f404a013154c1ec03eef43a7ddd92cbb0",
+      "prior_exact_id": "aaac3674-d346-4251-b868-a69293d3bfb1",
+      "route": "initial",
+      "rule_type": "str",
+      "stage": "domain_rejected_commit_fresh_no_residue"
+    },
+    {
+      "prior_exact_id": "d339e75c-5198-4e2f-9249-da7110d6062a",
+      "route": "underlying-replacement",
+      "stage": "setup_committed",
+      "support_exact_ids": []
+    },
+    {
+      "route": "underlying-replacement",
+      "rule_type": "str",
+      "snapshot_sha256": "2d225f390102d4bd68cf5ff7191841ff3d33cfbac3dec667b8f0f6609dc1ad3f",
+      "stage": "no_residue_baseline"
+    },
+    {
+      "prior_exact_id": "d339e75c-5198-4e2f-9249-da7110d6062a",
+      "route": "underlying-replacement",
+      "rule_type": "str",
+      "stage": "production_call"
+    },
+    {
+      "before_sha256": "2d225f390102d4bd68cf5ff7191841ff3d33cfbac3dec667b8f0f6609dc1ad3f",
+      "code": "EVIDENCE_VALIDATION_ERROR",
+      "fresh_sha256": "2d225f390102d4bd68cf5ff7191841ff3d33cfbac3dec667b8f0f6609dc1ad3f",
+      "prior_exact_id": "d339e75c-5198-4e2f-9249-da7110d6062a",
+      "route": "underlying-replacement",
+      "rule_type": "str",
+      "stage": "domain_rejected_commit_fresh_no_residue"
+    },
+    {
+      "prior_exact_id": "c68c2a6d-f310-4a51-b5ec-e5e971d35e41",
+      "route": "same",
+      "stage": "setup_committed",
+      "support_exact_ids": []
+    },
+    {
+      "route": "same",
+      "rule_type": "str",
+      "snapshot_sha256": "8e31ba1ed973b59497cdf4769abab730cfb0cea37d32f7cba20e15414a8f185b",
+      "stage": "no_residue_baseline"
+    },
+    {
+      "prior_exact_id": "c68c2a6d-f310-4a51-b5ec-e5e971d35e41",
+      "route": "same",
+      "rule_type": "str",
+      "stage": "production_call"
+    },
+    {
+      "before_sha256": "8e31ba1ed973b59497cdf4769abab730cfb0cea37d32f7cba20e15414a8f185b",
+      "code": "EVIDENCE_VALIDATION_ERROR",
+      "fresh_sha256": "8e31ba1ed973b59497cdf4769abab730cfb0cea37d32f7cba20e15414a8f185b",
+      "prior_exact_id": "c68c2a6d-f310-4a51-b5ec-e5e971d35e41",
+      "route": "same",
+      "rule_type": "str",
+      "stage": "domain_rejected_commit_fresh_no_residue"
+    },
+    {
+      "prior_exact_id": "90d2eaf6-e1d7-48e2-bb55-89957456d3df",
+      "route": "automatic",
+      "stage": "setup_committed",
+      "support_exact_ids": [
+        "3cec5e34-3847-4205-b60d-538e2ce183a6",
+        "88f50a1b-eb65-4ee0-89a6-e3bc49a3d67c",
+        "55dc8222-127b-4f46-8e6e-26529e6c4239",
+        "cbfb20a2-4cb3-43c1-a6d8-5e8a38a518da"
+      ]
+    },
+    {
+      "route": "automatic",
+      "rule_type": "str",
+      "snapshot_sha256": "72b5405a67520ea66748911fbaa2fd481ee1c2842ac51d8ad4abc9e692bceeee",
+      "stage": "no_residue_baseline"
+    },
+    {
+      "prior_exact_id": "90d2eaf6-e1d7-48e2-bb55-89957456d3df",
+      "route": "automatic",
+      "rule_type": "str",
+      "stage": "production_call"
+    },
+    {
+      "before_sha256": "72b5405a67520ea66748911fbaa2fd481ee1c2842ac51d8ad4abc9e692bceeee",
+      "code": "EVIDENCE_VALIDATION_ERROR",
+      "fresh_sha256": "72b5405a67520ea66748911fbaa2fd481ee1c2842ac51d8ad4abc9e692bceeee",
+      "prior_exact_id": "90d2eaf6-e1d7-48e2-bb55-89957456d3df",
+      "route": "automatic",
+      "rule_type": "str",
+      "stage": "domain_rejected_commit_fresh_no_residue"
+    },
+    {
+      "prior_exact_id": "1bbfefb2-f376-48e6-b86b-02fbe24e5f40",
+      "route": "direct",
+      "stage": "setup_committed",
+      "support_exact_ids": []
+    },
+    {
+      "route": "direct",
+      "rule_type": "str",
+      "snapshot_sha256": "bc2350600d26ad6fcc5c2fcd26092989f1e2f3808d16f517f74dcbd21b899149",
+      "stage": "no_residue_baseline"
+    },
+    {
+      "prior_exact_id": "1bbfefb2-f376-48e6-b86b-02fbe24e5f40",
+      "route": "direct",
+      "rule_type": "str",
+      "stage": "production_call"
+    },
+    {
+      "before_sha256": "bc2350600d26ad6fcc5c2fcd26092989f1e2f3808d16f517f74dcbd21b899149",
+      "code": "EVIDENCE_VALIDATION_ERROR",
+      "fresh_sha256": "bc2350600d26ad6fcc5c2fcd26092989f1e2f3808d16f517f74dcbd21b899149",
+      "prior_exact_id": "1bbfefb2-f376-48e6-b86b-02fbe24e5f40",
+      "route": "direct",
+      "rule_type": "str",
+      "stage": "domain_rejected_commit_fresh_no_residue"
+    },
+    {
+      "prior_exact_id": "129c2728-181a-41c2-bf65-4b51b23d0c06",
+      "route": "initial",
+      "stage": "setup_committed",
+      "support_exact_ids": []
+    },
+    {
+      "route": "initial",
+      "rule_type": "str",
+      "snapshot_sha256": "705c49980a9781f4a3997fdd4018ddb48088f162ce320a0da9d2080cd7e41c62",
+      "stage": "no_residue_baseline"
+    },
+    {
+      "prior_exact_id": "129c2728-181a-41c2-bf65-4b51b23d0c06",
+      "route": "initial",
+      "rule_type": "str",
+      "stage": "production_call"
+    },
+    {
+      "before_sha256": "705c49980a9781f4a3997fdd4018ddb48088f162ce320a0da9d2080cd7e41c62",
+      "code": "EVIDENCE_VALIDATION_ERROR",
+      "fresh_sha256": "705c49980a9781f4a3997fdd4018ddb48088f162ce320a0da9d2080cd7e41c62",
+      "prior_exact_id": "129c2728-181a-41c2-bf65-4b51b23d0c06",
+      "route": "initial",
+      "rule_type": "str",
+      "stage": "domain_rejected_commit_fresh_no_residue"
+    },
+    {
+      "prior_exact_id": "9d1a2b46-ea11-4a2f-8658-0b865117f60c",
+      "route": "underlying-replacement",
+      "stage": "setup_committed",
+      "support_exact_ids": []
+    },
+    {
+      "route": "underlying-replacement",
+      "rule_type": "str",
+      "snapshot_sha256": "9723979b36c209976c57beef5f3b38026f22e9f34774fc8a71e5b4dae157e50b",
+      "stage": "no_residue_baseline"
+    },
+    {
+      "prior_exact_id": "9d1a2b46-ea11-4a2f-8658-0b865117f60c",
+      "route": "underlying-replacement",
+      "rule_type": "str",
+      "stage": "production_call"
+    },
+    {
+      "before_sha256": "9723979b36c209976c57beef5f3b38026f22e9f34774fc8a71e5b4dae157e50b",
+      "code": "EVIDENCE_VALIDATION_ERROR",
+      "fresh_sha256": "9723979b36c209976c57beef5f3b38026f22e9f34774fc8a71e5b4dae157e50b",
+      "prior_exact_id": "9d1a2b46-ea11-4a2f-8658-0b865117f60c",
+      "route": "underlying-replacement",
+      "rule_type": "str",
+      "stage": "domain_rejected_commit_fresh_no_residue"
+    },
+    {
+      "prior_exact_id": "0b2e948a-d675-448e-9ff1-bc40bd00cdcc",
+      "route": "same",
+      "stage": "setup_committed",
+      "support_exact_ids": []
+    },
+    {
+      "route": "same",
+      "rule_type": "str",
+      "snapshot_sha256": "c7b1d5bf3615b175032dc5dc6e2012c849e428b098566573031a603696bc393a",
+      "stage": "no_residue_baseline"
+    },
+    {
+      "prior_exact_id": "0b2e948a-d675-448e-9ff1-bc40bd00cdcc",
+      "route": "same",
+      "rule_type": "str",
+      "stage": "production_call"
+    },
+    {
+      "before_sha256": "c7b1d5bf3615b175032dc5dc6e2012c849e428b098566573031a603696bc393a",
+      "code": "EVIDENCE_VALIDATION_ERROR",
+      "fresh_sha256": "c7b1d5bf3615b175032dc5dc6e2012c849e428b098566573031a603696bc393a",
+      "prior_exact_id": "0b2e948a-d675-448e-9ff1-bc40bd00cdcc",
+      "route": "same",
+      "rule_type": "str",
+      "stage": "domain_rejected_commit_fresh_no_residue"
+    },
+    {
+      "prior_exact_id": "aea56255-3cbf-4546-88f1-73acfdcdf960",
+      "route": "automatic",
+      "stage": "setup_committed",
+      "support_exact_ids": [
+        "0ed20268-fa82-4bdb-ac31-b51bce5156fe",
+        "4eed1483-89f6-4258-8e75-de7074dd927d",
+        "6ca04cf2-9a3a-4dba-a8f9-95266bd16e61",
+        "e689ccdf-a317-4393-8bcd-8e46cdfd37f3"
+      ]
+    },
+    {
+      "route": "automatic",
+      "rule_type": "str",
+      "snapshot_sha256": "0dbfea8bc520920da38b97a65d8f28f7da5fcc43ff4a747c6857b65cfa0954ab",
+      "stage": "no_residue_baseline"
+    },
+    {
+      "prior_exact_id": "aea56255-3cbf-4546-88f1-73acfdcdf960",
+      "route": "automatic",
+      "rule_type": "str",
+      "stage": "production_call"
+    },
+    {
+      "before_sha256": "0dbfea8bc520920da38b97a65d8f28f7da5fcc43ff4a747c6857b65cfa0954ab",
+      "code": "EVIDENCE_VALIDATION_ERROR",
+      "fresh_sha256": "0dbfea8bc520920da38b97a65d8f28f7da5fcc43ff4a747c6857b65cfa0954ab",
+      "prior_exact_id": "aea56255-3cbf-4546-88f1-73acfdcdf960",
+      "route": "automatic",
+      "rule_type": "str",
+      "stage": "domain_rejected_commit_fresh_no_residue"
+    },
+    {
+      "prior_exact_id": "d8b2ad37-842e-4332-9ba9-9f6fe5c7f9a9",
+      "route": "direct",
+      "stage": "setup_committed",
+      "support_exact_ids": []
+    },
+    {
+      "route": "direct",
+      "rule_type": "str",
+      "snapshot_sha256": "47c877a5640657c3ea5002b096731765eb3830a7ee4595bd6cdb5df2b2d76b67",
+      "stage": "no_residue_baseline"
+    },
+    {
+      "prior_exact_id": "d8b2ad37-842e-4332-9ba9-9f6fe5c7f9a9",
+      "route": "direct",
+      "rule_type": "str",
+      "stage": "production_call"
+    },
+    {
+      "before_sha256": "47c877a5640657c3ea5002b096731765eb3830a7ee4595bd6cdb5df2b2d76b67",
+      "code": "EVIDENCE_VALIDATION_ERROR",
+      "fresh_sha256": "47c877a5640657c3ea5002b096731765eb3830a7ee4595bd6cdb5df2b2d76b67",
+      "prior_exact_id": "d8b2ad37-842e-4332-9ba9-9f6fe5c7f9a9",
+      "route": "direct",
+      "rule_type": "str",
+      "stage": "domain_rejected_commit_fresh_no_residue"
+    },
+    {
+      "prior_exact_id": "fbe3f224-9b35-43fc-965a-57ac9591aa8d",
+      "route": "initial",
+      "stage": "setup_committed",
+      "support_exact_ids": []
+    },
+    {
+      "route": "initial",
+      "rule_type": "str",
+      "snapshot_sha256": "98fed96407e54d88440a45d085591c464b8a12f6266477a339189537b3bedba8",
+      "stage": "no_residue_baseline"
+    },
+    {
+      "prior_exact_id": "fbe3f224-9b35-43fc-965a-57ac9591aa8d",
+      "route": "initial",
+      "rule_type": "str",
+      "stage": "production_call"
+    },
+    {
+      "before_sha256": "98fed96407e54d88440a45d085591c464b8a12f6266477a339189537b3bedba8",
+      "code": "EVIDENCE_VALIDATION_ERROR",
+      "fresh_sha256": "98fed96407e54d88440a45d085591c464b8a12f6266477a339189537b3bedba8",
+      "prior_exact_id": "fbe3f224-9b35-43fc-965a-57ac9591aa8d",
+      "route": "initial",
+      "rule_type": "str",
+      "stage": "domain_rejected_commit_fresh_no_residue"
+    },
+    {
+      "prior_exact_id": "b23ea2db-2665-4272-aba5-f851fb951822",
+      "route": "underlying-replacement",
+      "stage": "setup_committed",
+      "support_exact_ids": []
+    },
+    {
+      "route": "underlying-replacement",
+      "rule_type": "str",
+      "snapshot_sha256": "28daa82a197b9d0951f32307dc3edeef33f24f0e146664f6898c7768ffe00915",
+      "stage": "no_residue_baseline"
+    },
+    {
+      "prior_exact_id": "b23ea2db-2665-4272-aba5-f851fb951822",
+      "route": "underlying-replacement",
+      "rule_type": "str",
+      "stage": "production_call"
+    },
+    {
+      "before_sha256": "28daa82a197b9d0951f32307dc3edeef33f24f0e146664f6898c7768ffe00915",
+      "code": "EVIDENCE_VALIDATION_ERROR",
+      "fresh_sha256": "28daa82a197b9d0951f32307dc3edeef33f24f0e146664f6898c7768ffe00915",
+      "prior_exact_id": "b23ea2db-2665-4272-aba5-f851fb951822",
+      "route": "underlying-replacement",
+      "rule_type": "str",
+      "stage": "domain_rejected_commit_fresh_no_residue"
+    },
+    {
+      "prior_exact_id": "14afa894-7bde-46f5-ac01-8070125ec5a9",
+      "route": "same",
+      "stage": "setup_committed",
+      "support_exact_ids": []
+    },
+    {
+      "route": "same",
+      "rule_type": "bool",
+      "snapshot_sha256": "63b27f52754a4869203ed6f1fe034ca3144247d60510b83a17af9012b7f88971",
+      "stage": "no_residue_baseline"
+    },
+    {
+      "prior_exact_id": "14afa894-7bde-46f5-ac01-8070125ec5a9",
+      "route": "same",
+      "rule_type": "bool",
+      "stage": "production_call"
+    },
+    {
+      "before_sha256": "63b27f52754a4869203ed6f1fe034ca3144247d60510b83a17af9012b7f88971",
+      "code": "EVIDENCE_VALIDATION_ERROR",
+      "fresh_sha256": "63b27f52754a4869203ed6f1fe034ca3144247d60510b83a17af9012b7f88971",
+      "prior_exact_id": "14afa894-7bde-46f5-ac01-8070125ec5a9",
+      "route": "same",
+      "rule_type": "bool",
+      "stage": "domain_rejected_commit_fresh_no_residue"
+    },
+    {
+      "prior_exact_id": "22b28af3-23eb-4593-bd2a-eaa437b708e0",
+      "route": "automatic",
+      "stage": "setup_committed",
+      "support_exact_ids": [
+        "ef588f21-db16-4b2a-a104-411070971919",
+        "0b1676a6-95eb-49f4-b6f1-fb2b0f268e7a",
+        "d2f01e25-dedd-4636-a6a3-1a22054a8e01",
+        "c15c4da7-22da-45bf-a4a9-6ce9a127a41c"
+      ]
+    },
+    {
+      "route": "automatic",
+      "rule_type": "bool",
+      "snapshot_sha256": "f8d6eec3bd6d6df06b73020c1c83064ac28dbc00fbe8b8cf00899864f25f7755",
+      "stage": "no_residue_baseline"
+    },
+    {
+      "prior_exact_id": "22b28af3-23eb-4593-bd2a-eaa437b708e0",
+      "route": "automatic",
+      "rule_type": "bool",
+      "stage": "production_call"
+    },
+    {
+      "before_sha256": "f8d6eec3bd6d6df06b73020c1c83064ac28dbc00fbe8b8cf00899864f25f7755",
+      "code": "EVIDENCE_VALIDATION_ERROR",
+      "fresh_sha256": "f8d6eec3bd6d6df06b73020c1c83064ac28dbc00fbe8b8cf00899864f25f7755",
+      "prior_exact_id": "22b28af3-23eb-4593-bd2a-eaa437b708e0",
+      "route": "automatic",
+      "rule_type": "bool",
+      "stage": "domain_rejected_commit_fresh_no_residue"
+    },
+    {
+      "prior_exact_id": "bb869a2d-4444-4cad-9e03-cfb97c40ad42",
+      "route": "direct",
+      "stage": "setup_committed",
+      "support_exact_ids": []
+    },
+    {
+      "route": "direct",
+      "rule_type": "bool",
+      "snapshot_sha256": "e2a3f97f6836713bb364889b46b1a222cfb76c9e2244205e21a17d5cbb7c400b",
+      "stage": "no_residue_baseline"
+    },
+    {
+      "prior_exact_id": "bb869a2d-4444-4cad-9e03-cfb97c40ad42",
+      "route": "direct",
+      "rule_type": "bool",
+      "stage": "production_call"
+    },
+    {
+      "before_sha256": "e2a3f97f6836713bb364889b46b1a222cfb76c9e2244205e21a17d5cbb7c400b",
+      "code": "EVIDENCE_VALIDATION_ERROR",
+      "fresh_sha256": "e2a3f97f6836713bb364889b46b1a222cfb76c9e2244205e21a17d5cbb7c400b",
+      "prior_exact_id": "bb869a2d-4444-4cad-9e03-cfb97c40ad42",
+      "route": "direct",
+      "rule_type": "bool",
+      "stage": "domain_rejected_commit_fresh_no_residue"
+    },
+    {
+      "prior_exact_id": "5cccebb1-2817-42b1-8a51-c9538c27ea25",
+      "route": "initial",
+      "stage": "setup_committed",
+      "support_exact_ids": []
+    },
+    {
+      "route": "initial",
+      "rule_type": "bool",
+      "snapshot_sha256": "bff1a598852086ee160c54c293a5fdff4995933ea0ecc9031c523bef5ac90d23",
+      "stage": "no_residue_baseline"
+    },
+    {
+      "prior_exact_id": "5cccebb1-2817-42b1-8a51-c9538c27ea25",
+      "route": "initial",
+      "rule_type": "bool",
+      "stage": "production_call"
+    },
+    {
+      "before_sha256": "bff1a598852086ee160c54c293a5fdff4995933ea0ecc9031c523bef5ac90d23",
+      "code": "EVIDENCE_VALIDATION_ERROR",
+      "fresh_sha256": "bff1a598852086ee160c54c293a5fdff4995933ea0ecc9031c523bef5ac90d23",
+      "prior_exact_id": "5cccebb1-2817-42b1-8a51-c9538c27ea25",
+      "route": "initial",
+      "rule_type": "bool",
+      "stage": "domain_rejected_commit_fresh_no_residue"
+    },
+    {
+      "prior_exact_id": "5ba30973-a9a4-49e8-89c0-00413807f513",
+      "route": "underlying-replacement",
+      "stage": "setup_committed",
+      "support_exact_ids": []
+    },
+    {
+      "route": "underlying-replacement",
+      "rule_type": "bool",
+      "snapshot_sha256": "d60051098fd4e9b5adf70a672d1fe8f6507bdf177a62a3501b383225da4d4c54",
+      "stage": "no_residue_baseline"
+    },
+    {
+      "prior_exact_id": "5ba30973-a9a4-49e8-89c0-00413807f513",
+      "route": "underlying-replacement",
+      "rule_type": "bool",
+      "stage": "production_call"
+    },
+    {
+      "before_sha256": "d60051098fd4e9b5adf70a672d1fe8f6507bdf177a62a3501b383225da4d4c54",
+      "code": "EVIDENCE_VALIDATION_ERROR",
+      "fresh_sha256": "d60051098fd4e9b5adf70a672d1fe8f6507bdf177a62a3501b383225da4d4c54",
+      "prior_exact_id": "5ba30973-a9a4-49e8-89c0-00413807f513",
+      "route": "underlying-replacement",
+      "rule_type": "bool",
+      "stage": "domain_rejected_commit_fresh_no_residue"
+    },
+    {
+      "prior_exact_id": "04594ea8-f1a2-4bf7-8722-fbde30bf64a8",
+      "route": "same",
+      "stage": "setup_committed",
+      "support_exact_ids": []
+    },
+    {
+      "route": "same",
+      "rule_type": "int",
+      "snapshot_sha256": "e7cf8032c172c2fefd630b03126047ae499fe0fe72728de4a0872d27948bf5f8",
+      "stage": "no_residue_baseline"
+    },
+    {
+      "prior_exact_id": "04594ea8-f1a2-4bf7-8722-fbde30bf64a8",
+      "route": "same",
+      "rule_type": "int",
+      "stage": "production_call"
+    },
+    {
+      "before_sha256": "e7cf8032c172c2fefd630b03126047ae499fe0fe72728de4a0872d27948bf5f8",
+      "code": "EVIDENCE_VALIDATION_ERROR",
+      "fresh_sha256": "e7cf8032c172c2fefd630b03126047ae499fe0fe72728de4a0872d27948bf5f8",
+      "prior_exact_id": "04594ea8-f1a2-4bf7-8722-fbde30bf64a8",
+      "route": "same",
+      "rule_type": "int",
+      "stage": "domain_rejected_commit_fresh_no_residue"
+    },
+    {
+      "prior_exact_id": "5cc1dbd5-aa67-4b83-b2cd-1d99550b7fef",
+      "route": "automatic",
+      "stage": "setup_committed",
+      "support_exact_ids": [
+        "0891e846-4b51-4a04-bcb5-8c6e56a10000",
+        "b5429da4-6ec5-4924-8916-ccf61a2088a7",
+        "abb4acff-cd39-4d96-8d0c-8d1555cad1ff",
+        "fe53b5fb-3082-4706-a6fa-bb18114c644a"
+      ]
+    },
+    {
+      "route": "automatic",
+      "rule_type": "int",
+      "snapshot_sha256": "caee35f2481a0cf5adc4722cd068c3617386c8c4d7fc4d242f31672e629f94a9",
+      "stage": "no_residue_baseline"
+    },
+    {
+      "prior_exact_id": "5cc1dbd5-aa67-4b83-b2cd-1d99550b7fef",
+      "route": "automatic",
+      "rule_type": "int",
+      "stage": "production_call"
+    },
+    {
+      "before_sha256": "caee35f2481a0cf5adc4722cd068c3617386c8c4d7fc4d242f31672e629f94a9",
+      "code": "EVIDENCE_VALIDATION_ERROR",
+      "fresh_sha256": "caee35f2481a0cf5adc4722cd068c3617386c8c4d7fc4d242f31672e629f94a9",
+      "prior_exact_id": "5cc1dbd5-aa67-4b83-b2cd-1d99550b7fef",
+      "route": "automatic",
+      "rule_type": "int",
+      "stage": "domain_rejected_commit_fresh_no_residue"
+    },
+    {
+      "prior_exact_id": "f4f808a4-99bf-4abd-927a-8af5588995d4",
+      "route": "direct",
+      "stage": "setup_committed",
+      "support_exact_ids": []
+    },
+    {
+      "route": "direct",
+      "rule_type": "int",
+      "snapshot_sha256": "944ef3c72379317ec659c584daf6a830c4267a3683f3645f4f00fb43912d7672",
+      "stage": "no_residue_baseline"
+    },
+    {
+      "prior_exact_id": "f4f808a4-99bf-4abd-927a-8af5588995d4",
+      "route": "direct",
+      "rule_type": "int",
+      "stage": "production_call"
+    },
+    {
+      "before_sha256": "944ef3c72379317ec659c584daf6a830c4267a3683f3645f4f00fb43912d7672",
+      "code": "EVIDENCE_VALIDATION_ERROR",
+      "fresh_sha256": "944ef3c72379317ec659c584daf6a830c4267a3683f3645f4f00fb43912d7672",
+      "prior_exact_id": "f4f808a4-99bf-4abd-927a-8af5588995d4",
+      "route": "direct",
+      "rule_type": "int",
+      "stage": "domain_rejected_commit_fresh_no_residue"
+    },
+    {
+      "prior_exact_id": "f64d9c3d-3910-4554-918c-99d616c34269",
+      "route": "initial",
+      "stage": "setup_committed",
+      "support_exact_ids": []
+    },
+    {
+      "route": "initial",
+      "rule_type": "int",
+      "snapshot_sha256": "9a954f9171f441b18fbc3c2fc741df91d35693ff5f8a96cbcae243c17eaa882f",
+      "stage": "no_residue_baseline"
+    },
+    {
+      "prior_exact_id": "f64d9c3d-3910-4554-918c-99d616c34269",
+      "route": "initial",
+      "rule_type": "int",
+      "stage": "production_call"
+    },
+    {
+      "before_sha256": "9a954f9171f441b18fbc3c2fc741df91d35693ff5f8a96cbcae243c17eaa882f",
+      "code": "EVIDENCE_VALIDATION_ERROR",
+      "fresh_sha256": "9a954f9171f441b18fbc3c2fc741df91d35693ff5f8a96cbcae243c17eaa882f",
+      "prior_exact_id": "f64d9c3d-3910-4554-918c-99d616c34269",
+      "route": "initial",
+      "rule_type": "int",
+      "stage": "domain_rejected_commit_fresh_no_residue"
+    },
+    {
+      "prior_exact_id": "3b2703ef-2e9c-47ca-a5e0-f765ea34bc45",
+      "route": "underlying-replacement",
+      "stage": "setup_committed",
+      "support_exact_ids": []
+    },
+    {
+      "route": "underlying-replacement",
+      "rule_type": "int",
+      "snapshot_sha256": "204407231291e7d3c39db16c5be23718320f19af1adde5d6837a3ecdb3720d02",
+      "stage": "no_residue_baseline"
+    },
+    {
+      "prior_exact_id": "3b2703ef-2e9c-47ca-a5e0-f765ea34bc45",
+      "route": "underlying-replacement",
+      "rule_type": "int",
+      "stage": "production_call"
+    },
+    {
+      "before_sha256": "204407231291e7d3c39db16c5be23718320f19af1adde5d6837a3ecdb3720d02",
+      "code": "EVIDENCE_VALIDATION_ERROR",
+      "fresh_sha256": "204407231291e7d3c39db16c5be23718320f19af1adde5d6837a3ecdb3720d02",
+      "prior_exact_id": "3b2703ef-2e9c-47ca-a5e0-f765ea34bc45",
+      "route": "underlying-replacement",
+      "rule_type": "int",
+      "stage": "domain_rejected_commit_fresh_no_residue"
+    },
+    {
+      "prior_exact_id": "2ed02dcd-c352-4ac1-8f8d-e8434ea6033a",
+      "route": "same",
+      "stage": "setup_committed",
+      "support_exact_ids": []
+    },
+    {
+      "route": "same",
+      "rule_type": "dict",
+      "snapshot_sha256": "5f2e7532aedf808dbd12d6f484e4e2d78d5a04393af09d53c911659449aac57e",
+      "stage": "no_residue_baseline"
+    },
+    {
+      "prior_exact_id": "2ed02dcd-c352-4ac1-8f8d-e8434ea6033a",
+      "route": "same",
+      "rule_type": "dict",
+      "stage": "production_call"
+    },
+    {
+      "before_sha256": "5f2e7532aedf808dbd12d6f484e4e2d78d5a04393af09d53c911659449aac57e",
+      "code": "EVIDENCE_VALIDATION_ERROR",
+      "fresh_sha256": "5f2e7532aedf808dbd12d6f484e4e2d78d5a04393af09d53c911659449aac57e",
+      "prior_exact_id": "2ed02dcd-c352-4ac1-8f8d-e8434ea6033a",
+      "route": "same",
+      "rule_type": "dict",
+      "stage": "domain_rejected_commit_fresh_no_residue"
+    },
+    {
+      "prior_exact_id": "eee1d511-57ad-423e-8c60-93b8f7aee598",
+      "route": "automatic",
+      "stage": "setup_committed",
+      "support_exact_ids": [
+        "8b49f375-a99d-4c18-ac30-c4f63aa82fee",
+        "80c574ae-898e-4f6e-8f21-b6462ab47227",
+        "a5cc3c52-7fe6-4886-926c-f61891f99297",
+        "32c0864b-1636-46d2-ace7-1a84e58981b5"
+      ]
+    },
+    {
+      "route": "automatic",
+      "rule_type": "dict",
+      "snapshot_sha256": "69fb6ab58773ae17ab920adb6a06bf0410ec6a9b096941bcbf435f066442d58b",
+      "stage": "no_residue_baseline"
+    },
+    {
+      "prior_exact_id": "eee1d511-57ad-423e-8c60-93b8f7aee598",
+      "route": "automatic",
+      "rule_type": "dict",
+      "stage": "production_call"
+    },
+    {
+      "before_sha256": "69fb6ab58773ae17ab920adb6a06bf0410ec6a9b096941bcbf435f066442d58b",
+      "code": "EVIDENCE_VALIDATION_ERROR",
+      "fresh_sha256": "69fb6ab58773ae17ab920adb6a06bf0410ec6a9b096941bcbf435f066442d58b",
+      "prior_exact_id": "eee1d511-57ad-423e-8c60-93b8f7aee598",
+      "route": "automatic",
+      "rule_type": "dict",
+      "stage": "domain_rejected_commit_fresh_no_residue"
+    },
+    {
+      "prior_exact_id": "599d1a62-2373-44a0-9564-62d13f310416",
+      "route": "direct",
+      "stage": "setup_committed",
+      "support_exact_ids": []
+    },
+    {
+      "route": "direct",
+      "rule_type": "dict",
+      "snapshot_sha256": "2440736f347a0958eac995586bbb4c366eb3f28e107d5d37b522afe42cba8823",
+      "stage": "no_residue_baseline"
+    },
+    {
+      "prior_exact_id": "599d1a62-2373-44a0-9564-62d13f310416",
+      "route": "direct",
+      "rule_type": "dict",
+      "stage": "production_call"
+    },
+    {
+      "before_sha256": "2440736f347a0958eac995586bbb4c366eb3f28e107d5d37b522afe42cba8823",
+      "code": "EVIDENCE_VALIDATION_ERROR",
+      "fresh_sha256": "2440736f347a0958eac995586bbb4c366eb3f28e107d5d37b522afe42cba8823",
+      "prior_exact_id": "599d1a62-2373-44a0-9564-62d13f310416",
+      "route": "direct",
+      "rule_type": "dict",
+      "stage": "domain_rejected_commit_fresh_no_residue"
+    },
+    {
+      "prior_exact_id": "09e7e143-847a-41d8-b678-30c262c0a8e9",
+      "route": "initial",
+      "stage": "setup_committed",
+      "support_exact_ids": []
+    },
+    {
+      "route": "initial",
+      "rule_type": "dict",
+      "snapshot_sha256": "b4ea7c3d0c5f9d1c470e463bd61f4d51be4a8aee3e55eb778c4ea83d7e05e4b7",
+      "stage": "no_residue_baseline"
+    },
+    {
+      "prior_exact_id": "09e7e143-847a-41d8-b678-30c262c0a8e9",
+      "route": "initial",
+      "rule_type": "dict",
+      "stage": "production_call"
+    },
+    {
+      "before_sha256": "b4ea7c3d0c5f9d1c470e463bd61f4d51be4a8aee3e55eb778c4ea83d7e05e4b7",
+      "code": "EVIDENCE_VALIDATION_ERROR",
+      "fresh_sha256": "b4ea7c3d0c5f9d1c470e463bd61f4d51be4a8aee3e55eb778c4ea83d7e05e4b7",
+      "prior_exact_id": "09e7e143-847a-41d8-b678-30c262c0a8e9",
+      "route": "initial",
+      "rule_type": "dict",
+      "stage": "domain_rejected_commit_fresh_no_residue"
+    },
+    {
+      "prior_exact_id": "5528748e-5af4-4985-a015-9db60b3d6bc9",
+      "route": "underlying-replacement",
+      "stage": "setup_committed",
+      "support_exact_ids": []
+    },
+    {
+      "route": "underlying-replacement",
+      "rule_type": "dict",
+      "snapshot_sha256": "b126ab518ba10e3f737eb5af27c8392ac9294412b13354e06916521ef4b05759",
+      "stage": "no_residue_baseline"
+    },
+    {
+      "prior_exact_id": "5528748e-5af4-4985-a015-9db60b3d6bc9",
+      "route": "underlying-replacement",
+      "rule_type": "dict",
+      "stage": "production_call"
+    },
+    {
+      "before_sha256": "b126ab518ba10e3f737eb5af27c8392ac9294412b13354e06916521ef4b05759",
+      "code": "EVIDENCE_VALIDATION_ERROR",
+      "fresh_sha256": "b126ab518ba10e3f737eb5af27c8392ac9294412b13354e06916521ef4b05759",
+      "prior_exact_id": "5528748e-5af4-4985-a015-9db60b3d6bc9",
+      "route": "underlying-replacement",
+      "rule_type": "dict",
+      "stage": "domain_rejected_commit_fresh_no_residue"
+    },
+    {
+      "prior_exact_id": "bff57daa-ad59-4bb5-aef4-4632d5638012",
+      "route": "same",
+      "stage": "setup_committed",
+      "support_exact_ids": []
+    },
+    {
+      "route": "same",
+      "rule_type": "list",
+      "snapshot_sha256": "99973d63c4df3955542fc5fb091f8ac946747c916395af3edfa904dc6bf5a502",
+      "stage": "no_residue_baseline"
+    },
+    {
+      "prior_exact_id": "bff57daa-ad59-4bb5-aef4-4632d5638012",
+      "route": "same",
+      "rule_type": "list",
+      "stage": "production_call"
+    },
+    {
+      "before_sha256": "99973d63c4df3955542fc5fb091f8ac946747c916395af3edfa904dc6bf5a502",
+      "code": "EVIDENCE_VALIDATION_ERROR",
+      "fresh_sha256": "99973d63c4df3955542fc5fb091f8ac946747c916395af3edfa904dc6bf5a502",
+      "prior_exact_id": "bff57daa-ad59-4bb5-aef4-4632d5638012",
+      "route": "same",
+      "rule_type": "list",
+      "stage": "domain_rejected_commit_fresh_no_residue"
+    },
+    {
+      "prior_exact_id": "b3a8e251-7b1e-4d78-a2c9-49b44ea7bb12",
+      "route": "automatic",
+      "stage": "setup_committed",
+      "support_exact_ids": [
+        "90726d62-70b6-48cb-85de-0dad27da66cb",
+        "00f09c79-012e-42e0-bfdd-13c36e1d74f0",
+        "9757e7ab-c85a-4b46-b77f-0e8a6134e95c",
+        "8856e8f3-a35b-4ee4-96b4-495c0cb7244b"
+      ]
+    },
+    {
+      "route": "automatic",
+      "rule_type": "list",
+      "snapshot_sha256": "0b0ee679d2430be17f79e36aa6c4bc7cb45dffe797e4cbcf444120f0e7e1a79a",
+      "stage": "no_residue_baseline"
+    },
+    {
+      "prior_exact_id": "b3a8e251-7b1e-4d78-a2c9-49b44ea7bb12",
+      "route": "automatic",
+      "rule_type": "list",
+      "stage": "production_call"
+    },
+    {
+      "before_sha256": "0b0ee679d2430be17f79e36aa6c4bc7cb45dffe797e4cbcf444120f0e7e1a79a",
+      "code": "EVIDENCE_VALIDATION_ERROR",
+      "fresh_sha256": "0b0ee679d2430be17f79e36aa6c4bc7cb45dffe797e4cbcf444120f0e7e1a79a",
+      "prior_exact_id": "b3a8e251-7b1e-4d78-a2c9-49b44ea7bb12",
+      "route": "automatic",
+      "rule_type": "list",
+      "stage": "domain_rejected_commit_fresh_no_residue"
+    },
+    {
+      "prior_exact_id": "3cf1534a-1598-4978-865e-e742f2fa34ea",
+      "route": "direct",
+      "stage": "setup_committed",
+      "support_exact_ids": []
+    },
+    {
+      "route": "direct",
+      "rule_type": "list",
+      "snapshot_sha256": "baca0dfb5580667975820ad67c9e2ed085cd1b6263b4f0e812a81d0fcb2a2911",
+      "stage": "no_residue_baseline"
+    },
+    {
+      "prior_exact_id": "3cf1534a-1598-4978-865e-e742f2fa34ea",
+      "route": "direct",
+      "rule_type": "list",
+      "stage": "production_call"
+    },
+    {
+      "before_sha256": "baca0dfb5580667975820ad67c9e2ed085cd1b6263b4f0e812a81d0fcb2a2911",
+      "code": "EVIDENCE_VALIDATION_ERROR",
+      "fresh_sha256": "baca0dfb5580667975820ad67c9e2ed085cd1b6263b4f0e812a81d0fcb2a2911",
+      "prior_exact_id": "3cf1534a-1598-4978-865e-e742f2fa34ea",
+      "route": "direct",
+      "rule_type": "list",
+      "stage": "domain_rejected_commit_fresh_no_residue"
+    },
+    {
+      "prior_exact_id": "b923ba10-ad43-4ae9-aff0-5240e81084bf",
+      "route": "initial",
+      "stage": "setup_committed",
+      "support_exact_ids": []
+    },
+    {
+      "route": "initial",
+      "rule_type": "list",
+      "snapshot_sha256": "a8bae6b3627c605421afb19f4dc2dcfa344060aa69736301ab1a0166ca01ec6a",
+      "stage": "no_residue_baseline"
+    },
+    {
+      "prior_exact_id": "b923ba10-ad43-4ae9-aff0-5240e81084bf",
+      "route": "initial",
+      "rule_type": "list",
+      "stage": "production_call"
+    },
+    {
+      "before_sha256": "a8bae6b3627c605421afb19f4dc2dcfa344060aa69736301ab1a0166ca01ec6a",
+      "code": "EVIDENCE_VALIDATION_ERROR",
+      "fresh_sha256": "a8bae6b3627c605421afb19f4dc2dcfa344060aa69736301ab1a0166ca01ec6a",
+      "prior_exact_id": "b923ba10-ad43-4ae9-aff0-5240e81084bf",
+      "route": "initial",
+      "rule_type": "list",
+      "stage": "domain_rejected_commit_fresh_no_residue"
+    },
+    {
+      "prior_exact_id": "93610003-1093-4dc9-a134-1326740546dd",
+      "route": "underlying-replacement",
+      "stage": "setup_committed",
+      "support_exact_ids": []
+    },
+    {
+      "route": "underlying-replacement",
+      "rule_type": "list",
+      "snapshot_sha256": "6959c77dc93aa1d7108398424678a4e7447f1a427e1b75d2ebc2d3837de79260",
+      "stage": "no_residue_baseline"
+    },
+    {
+      "prior_exact_id": "93610003-1093-4dc9-a134-1326740546dd",
+      "route": "underlying-replacement",
+      "rule_type": "list",
+      "stage": "production_call"
+    },
+    {
+      "before_sha256": "6959c77dc93aa1d7108398424678a4e7447f1a427e1b75d2ebc2d3837de79260",
+      "code": "EVIDENCE_VALIDATION_ERROR",
+      "fresh_sha256": "6959c77dc93aa1d7108398424678a4e7447f1a427e1b75d2ebc2d3837de79260",
+      "prior_exact_id": "93610003-1093-4dc9-a134-1326740546dd",
+      "route": "underlying-replacement",
+      "rule_type": "list",
+      "stage": "domain_rejected_commit_fresh_no_residue"
+    },
+    {
+      "prior_exact_id": "691e69ea-ccc1-42a5-b2b5-43dd59f95f53",
+      "route": "same",
+      "stage": "setup_committed",
+      "support_exact_ids": []
+    },
+    {
+      "prior_exact_id": "691e69ea-ccc1-42a5-b2b5-43dd59f95f53",
+      "route": "same",
+      "rule_type": "NoneType",
+      "stage": "production_call"
+    },
+    {
+      "actor": "USER",
+      "event_id": "a2e731d3-5455-4f81-813c-e4a16647776b",
+      "event_type": "EVIDENCE_CORRECTION",
+      "exact_id": "913b1a3e-63c5-4c2d-b744-8d0bed8ca680",
+      "occurred_at": "2026-09-16 00:00:00+00:00",
+      "payload": {
+        "derivation_links": [],
+        "evidence_series_id": "4bb5edb0-9a77-4bea-b918-392bd8204248",
+        "expected_version": 2,
+        "instrument_links": [
+          {
+            "instrument_id": "11111111-1111-4111-8111-111111111111",
+            "link_metadata": {
+              "scope": "primary"
+            },
+            "link_order": 1,
+            "role": "PRIMARY_SCOPE"
+          }
+        ],
+        "overrides": {
+          "display_text": "Verifier-owned corrected text"
+        },
+        "status_changed_at": "2026-09-16T00:00:00Z",
+        "status_changed_by_actor": "USER",
+        "status_reason": "Verifier-owned boundary correction"
+      },
+      "route": "same",
+      "stage": "exact_audit_checked"
+    },
+    {
+      "prior_exact_id": "691e69ea-ccc1-42a5-b2b5-43dd59f95f53",
+      "result_exact_id": "913b1a3e-63c5-4c2d-b744-8d0bed8ca680",
+      "result_series_id": "4bb5edb0-9a77-4bea-b918-392bd8204248",
+      "route": "same",
+      "rule_input": "omitted",
+      "stage": "ordinary_commit_fresh_history_preserved",
+      "trusted_correction_rule": null,
+      "verification_status": "UNREVIEWED"
+    },
+    {
+      "prior_exact_id": "d36e416a-1c3f-4bd0-bff5-48f068b8ef7d",
+      "route": "automatic",
+      "stage": "setup_committed",
+      "support_exact_ids": [
+        "2def3d48-16e7-450c-9dcf-9535441bb42a",
+        "890fc035-880d-4f5e-a92f-c55118a6ff43",
+        "4d5ff06f-9c8f-4006-8858-78f505c195ad",
+        "6e5915c2-a8f5-4816-aeeb-cf40688e2f5a"
+      ]
+    },
+    {
+      "prior_exact_id": "d36e416a-1c3f-4bd0-bff5-48f068b8ef7d",
+      "route": "automatic",
+      "rule_type": "NoneType",
+      "stage": "production_call"
+    },
+    {
+      "actor": "IMPORTER",
+      "event_id": "d88d980c-3711-4db2-973e-94ae125f4c57",
+      "event_type": "EVIDENCE_VERSION_CREATED",
+      "exact_id": "9d3ff58e-7b20-469c-9b8f-117d4f40bb54",
+      "occurred_at": "2026-09-16 00:00:00+00:00",
+      "payload": {
+        "as_of": "2026-09-12T00:00:00Z",
+        "derivation_links": [
+          {
+            "role": "INPUT_FACT",
+            "support_order": 1,
+            "support_weight": null,
+            "supporting_evidence_version_id": "6e5915c2-a8f5-4816-aeeb-cf40688e2f5a"
+          }
+        ],
+        "display_text": "Verifier-owned corrected text",
+        "display_title": "Historical inference",
+        "instrument_links": [
+          {
+            "instrument_id": "11111111-1111-4111-8111-111111111111",
+            "link_metadata": {},
+            "link_order": 1,
+            "role": "PRIMARY_SCOPE"
+          }
+        ],
+        "locators": [],
+        "normalized_value": null,
+        "raw_value": null,
+        "series_hash": "158c0de003ff83fcfb4e20a746ba2db4236c338d8e5824b1fdd7b3fd9bab0c9e",
+        "source_document_version_id": null,
+        "verification_status": "UNREVIEWED"
+      },
+      "route": "automatic",
+      "stage": "exact_audit_checked"
+    },
+    {
+      "prior_exact_id": "d36e416a-1c3f-4bd0-bff5-48f068b8ef7d",
+      "result_exact_id": "9d3ff58e-7b20-469c-9b8f-117d4f40bb54",
+      "result_series_id": "f49da891-8173-4b9a-9950-c98114b8f243",
+      "route": "automatic",
+      "rule_input": "omitted",
+      "stage": "ordinary_commit_fresh_history_preserved",
+      "trusted_correction_rule": null,
+      "verification_status": "UNREVIEWED"
+    },
+    {
+      "prior_exact_id": "4a3c3a50-c276-4a7b-9393-2f74b4c14de4",
+      "route": "direct",
+      "stage": "setup_committed",
+      "support_exact_ids": []
+    },
+    {
+      "prior_exact_id": "4a3c3a50-c276-4a7b-9393-2f74b4c14de4",
+      "route": "direct",
+      "rule_type": "NoneType",
+      "stage": "production_call"
+    },
+    {
+      "actor": "SYSTEM",
+      "event_id": "8ad658c6-1674-4188-a5f5-746932fb0f95",
+      "event_type": "EVIDENCE_VERSION_CREATED",
+      "exact_id": "125b0239-f0e7-4eeb-8489-b30b1ad3619c",
+      "occurred_at": "2026-09-16 00:00:00+00:00",
+      "payload": {
+        "as_of": "2026-08-31T00:00:00Z",
+        "derivation_links": [],
+        "display_text": "Verifier-owned corrected text",
+        "display_title": "Verified fact r1c03a-base",
+        "instrument_links": [
+          {
+            "instrument_id": "11111111-1111-4111-8111-111111111111",
+            "link_metadata": {
+              "scope": "primary"
+            },
+            "link_order": 1,
+            "role": "PRIMARY_SCOPE"
+          }
+        ],
+        "locators": [
+          {
+            "locator_payload": {
+              "page_number": 12
+            },
+            "locator_type": "PAGE",
+            "quote_hash": "r1c03a-base-quote00000000000000000000000000000000000000000000000",
+            "raw_locator": "p.12",
+            "short_citation": "2026H1 p.12"
+          }
+        ],
+        "normalized_value": "32.5",
+        "raw_value": "32.5%",
+        "series_hash": "e176294c1b40f03c84c8875a25dba82eb8bc25058b7a977cd5f680b11d21abcd",
+        "source_document_version_id": "b102ca0f-743a-4d0f-9764-40497d4b817f",
+        "verification_status": "UNREVIEWED"
+      },
+      "route": "direct",
+      "stage": "exact_audit_checked"
+    },
+    {
+      "prior_exact_id": "4a3c3a50-c276-4a7b-9393-2f74b4c14de4",
+      "result_exact_id": "125b0239-f0e7-4eeb-8489-b30b1ad3619c",
+      "result_series_id": "72d06d23-33f8-4886-b856-88a5e8aa5348",
+      "route": "direct",
+      "rule_input": "omitted",
+      "stage": "ordinary_commit_fresh_history_preserved",
+      "trusted_correction_rule": null,
+      "verification_status": "UNREVIEWED"
+    },
+    {
+      "prior_exact_id": "ac9ce5b4-025b-42f9-917f-d1499c523b85",
+      "route": "underlying-replacement",
+      "stage": "setup_committed",
+      "support_exact_ids": []
+    },
+    {
+      "prior_exact_id": "ac9ce5b4-025b-42f9-917f-d1499c523b85",
+      "route": "underlying-replacement",
+      "rule_type": "NoneType",
+      "stage": "production_call"
+    },
+    {
+      "actor": "ADMIN_SCRIPT",
+      "event_id": "8d3bc5e7-5ef9-4dbb-a968-d6f3e49f85a8",
+      "event_type": "EVIDENCE_VERSION_CREATED",
+      "exact_id": "4bb9b619-0464-4a6d-8a61-819ab30921dd",
+      "occurred_at": "2026-09-17 00:00:00+00:00",
+      "payload": {
+        "as_of": "2026-08-31T00:00:00Z",
+        "derivation_links": [],
+        "display_text": "Verifier-owned corrected text",
+        "display_title": "Verified fact r1c03a-base",
+        "instrument_links": [
+          {
+            "instrument_id": "11111111-1111-4111-8111-111111111111",
+            "link_metadata": {
+              "scope": "primary"
+            },
+            "link_order": 1,
+            "role": "PRIMARY_SCOPE"
+          }
+        ],
+        "locators": [
+          {
+            "locator_payload": {
+              "page_number": 12
+            },
+            "locator_type": "PAGE",
+            "quote_hash": "r1c03a-base-quote00000000000000000000000000000000000000000000000",
+            "raw_locator": "p.12",
+            "short_citation": "2026H1 p.12"
+          }
+        ],
+        "normalized_value": "32.5",
+        "raw_value": "32.5%",
+        "series_hash": "47f3504a4a0c9edbc61fe735759afffd1a2749cd01b1571319b386e4b04d8635",
+        "source_document_version_id": "16bee495-b061-40a6-9be0-8c48dd53e3dd",
+        "verification_status": "VERIFIED"
+      },
+      "route": "underlying-replacement",
+      "stage": "exact_audit_checked"
+    },
+    {
+      "prior_exact_id": "ac9ce5b4-025b-42f9-917f-d1499c523b85",
+      "result_exact_id": "4bb9b619-0464-4a6d-8a61-819ab30921dd",
+      "result_series_id": "93a5bc2f-2bf3-4ab9-b4c9-10f129dcb638",
+      "route": "underlying-replacement",
+      "rule_input": "omitted",
+      "stage": "ordinary_commit_fresh_history_preserved",
+      "trusted_correction_rule": null,
+      "verification_status": "UNREVIEWED"
+    },
+    {
+      "prior_exact_id": "96f400fa-e61c-4dbf-a6eb-eb706077e139",
+      "route": "same",
+      "stage": "setup_committed",
+      "support_exact_ids": []
+    },
+    {
+      "prior_exact_id": "96f400fa-e61c-4dbf-a6eb-eb706077e139",
+      "route": "same",
+      "rule_type": "NoneType",
+      "stage": "production_call"
+    },
+    {
+      "actor": "USER",
+      "event_id": "36d30c8f-05df-429a-9328-21e28f732115",
+      "event_type": "EVIDENCE_CORRECTION",
+      "exact_id": "373feaa8-b920-43f1-8731-ce40b0b56d2b",
+      "occurred_at": "2026-09-16 00:00:00+00:00",
+      "payload": {
+        "derivation_links": [],
+        "evidence_series_id": "1d3e4b5f-6276-4e13-b054-1784cca693b4",
+        "expected_version": 2,
+        "instrument_links": [
+          {
+            "instrument_id": "11111111-1111-4111-8111-111111111111",
+            "link_metadata": {
+              "scope": "primary"
+            },
+            "link_order": 1,
+            "role": "PRIMARY_SCOPE"
+          }
+        ],
+        "overrides": {
+          "display_text": "Verifier-owned corrected text",
+          "trusted_correction_rule": null
+        },
+        "status_changed_at": "2026-09-16T00:00:00Z",
+        "status_changed_by_actor": "USER",
+        "status_reason": "Verifier-owned boundary correction"
+      },
+      "route": "same",
+      "stage": "exact_audit_checked"
+    },
+    {
+      "prior_exact_id": "96f400fa-e61c-4dbf-a6eb-eb706077e139",
+      "result_exact_id": "373feaa8-b920-43f1-8731-ce40b0b56d2b",
+      "result_series_id": "1d3e4b5f-6276-4e13-b054-1784cca693b4",
+      "route": "same",
+      "rule_input": "none",
+      "stage": "ordinary_commit_fresh_history_preserved",
+      "trusted_correction_rule": null,
+      "verification_status": "UNREVIEWED"
+    },
+    {
+      "prior_exact_id": "60a68211-2dde-434f-8a10-44a213d9c65e",
+      "route": "automatic",
+      "stage": "setup_committed",
+      "support_exact_ids": [
+        "9ec8bf74-f791-496e-a1ee-e187de1b3362",
+        "cd2ad20b-016b-4876-9f39-b0356a7fef52",
+        "ca805152-4ada-4652-9c68-86c24a3059a1",
+        "eac0b99a-4250-4775-b599-afb14e96a084"
+      ]
+    },
+    {
+      "prior_exact_id": "60a68211-2dde-434f-8a10-44a213d9c65e",
+      "route": "automatic",
+      "rule_type": "NoneType",
+      "stage": "production_call"
+    },
+    {
+      "actor": "IMPORTER",
+      "event_id": "dbf88228-ff10-49e4-9491-9004b1555114",
+      "event_type": "EVIDENCE_VERSION_CREATED",
+      "exact_id": "ef41e3f6-07c7-4f69-a953-e8b9a1ce7ffd",
+      "occurred_at": "2026-09-16 00:00:00+00:00",
+      "payload": {
+        "as_of": "2026-09-12T00:00:00Z",
+        "derivation_links": [
+          {
+            "role": "INPUT_FACT",
+            "support_order": 1,
+            "support_weight": null,
+            "supporting_evidence_version_id": "eac0b99a-4250-4775-b599-afb14e96a084"
+          }
+        ],
+        "display_text": "Verifier-owned corrected text",
+        "display_title": "Historical inference",
+        "instrument_links": [
+          {
+            "instrument_id": "11111111-1111-4111-8111-111111111111",
+            "link_metadata": {},
+            "link_order": 1,
+            "role": "PRIMARY_SCOPE"
+          }
+        ],
+        "locators": [],
+        "normalized_value": null,
+        "raw_value": null,
+        "series_hash": "68462a0d038b31ad2f30c5986489e0a143838599aca8ca138e4e14d89fa965d8",
+        "source_document_version_id": null,
+        "verification_status": "UNREVIEWED"
+      },
+      "route": "automatic",
+      "stage": "exact_audit_checked"
+    },
+    {
+      "prior_exact_id": "60a68211-2dde-434f-8a10-44a213d9c65e",
+      "result_exact_id": "ef41e3f6-07c7-4f69-a953-e8b9a1ce7ffd",
+      "result_series_id": "3adf7ba2-8969-4064-99d5-eec0f37134e8",
+      "route": "automatic",
+      "rule_input": "none",
+      "stage": "ordinary_commit_fresh_history_preserved",
+      "trusted_correction_rule": null,
+      "verification_status": "UNREVIEWED"
+    },
+    {
+      "prior_exact_id": "f02bff6b-cd6a-42b0-8331-0e8b130a75bd",
+      "route": "direct",
+      "stage": "setup_committed",
+      "support_exact_ids": []
+    },
+    {
+      "prior_exact_id": "f02bff6b-cd6a-42b0-8331-0e8b130a75bd",
+      "route": "direct",
+      "rule_type": "NoneType",
+      "stage": "production_call"
+    },
+    {
+      "actor": "SYSTEM",
+      "event_id": "b9504543-a910-4a80-9e6f-ea7095f060dd",
+      "event_type": "EVIDENCE_VERSION_CREATED",
+      "exact_id": "62f3a589-db8c-4db6-a7f2-650a766a95db",
+      "occurred_at": "2026-09-16 00:00:00+00:00",
+      "payload": {
+        "as_of": "2026-08-31T00:00:00Z",
+        "derivation_links": [],
+        "display_text": "Verifier-owned corrected text",
+        "display_title": "Verified fact r1c03a-base",
+        "instrument_links": [
+          {
+            "instrument_id": "11111111-1111-4111-8111-111111111111",
+            "link_metadata": {
+              "scope": "primary"
+            },
+            "link_order": 1,
+            "role": "PRIMARY_SCOPE"
+          }
+        ],
+        "locators": [
+          {
+            "locator_payload": {
+              "page_number": 12
+            },
+            "locator_type": "PAGE",
+            "quote_hash": "r1c03a-base-quote00000000000000000000000000000000000000000000000",
+            "raw_locator": "p.12",
+            "short_citation": "2026H1 p.12"
+          }
+        ],
+        "normalized_value": "32.5",
+        "raw_value": "32.5%",
+        "series_hash": "19cd8605093374e7c05a362a7165befc837bfa5fb3be0a174847791d5b57b2f2",
+        "source_document_version_id": "266219fe-593c-4aaf-80a5-f2f0ab2abbab",
+        "verification_status": "UNREVIEWED"
+      },
+      "route": "direct",
+      "stage": "exact_audit_checked"
+    },
+    {
+      "prior_exact_id": "f02bff6b-cd6a-42b0-8331-0e8b130a75bd",
+      "result_exact_id": "62f3a589-db8c-4db6-a7f2-650a766a95db",
+      "result_series_id": "c33bba36-64aa-4825-a36f-91b1403d8112",
+      "route": "direct",
+      "rule_input": "none",
+      "stage": "ordinary_commit_fresh_history_preserved",
+      "trusted_correction_rule": null,
+      "verification_status": "UNREVIEWED"
+    },
+    {
+      "prior_exact_id": "f7f2fd7d-6087-43aa-bf7c-5ac92ab9b06a",
+      "route": "underlying-replacement",
+      "stage": "setup_committed",
+      "support_exact_ids": []
+    },
+    {
+      "prior_exact_id": "f7f2fd7d-6087-43aa-bf7c-5ac92ab9b06a",
+      "route": "underlying-replacement",
+      "rule_type": "NoneType",
+      "stage": "production_call"
+    },
+    {
+      "actor": "ADMIN_SCRIPT",
+      "event_id": "b48c7567-9c17-48b3-bf71-84b5fac2daf6",
+      "event_type": "EVIDENCE_VERSION_CREATED",
+      "exact_id": "58978b5d-1df4-4a87-abb8-3f7157eac79b",
+      "occurred_at": "2026-09-17 00:00:00+00:00",
+      "payload": {
+        "as_of": "2026-08-31T00:00:00Z",
+        "derivation_links": [],
+        "display_text": "Verifier-owned corrected text",
+        "display_title": "Verified fact r1c03a-base",
+        "instrument_links": [
+          {
+            "instrument_id": "11111111-1111-4111-8111-111111111111",
+            "link_metadata": {
+              "scope": "primary"
+            },
+            "link_order": 1,
+            "role": "PRIMARY_SCOPE"
+          }
+        ],
+        "locators": [
+          {
+            "locator_payload": {
+              "page_number": 12
+            },
+            "locator_type": "PAGE",
+            "quote_hash": "r1c03a-base-quote00000000000000000000000000000000000000000000000",
+            "raw_locator": "p.12",
+            "short_citation": "2026H1 p.12"
+          }
+        ],
+        "normalized_value": "32.5",
+        "raw_value": "32.5%",
+        "series_hash": "c55f1c68e2a097829a0b2b6e8cd73fdc727345aacec4c3010c89f9305cea56b4",
+        "source_document_version_id": "20b10bef-14fe-4160-965c-e48bc92ee4b9",
+        "verification_status": "VERIFIED"
+      },
+      "route": "underlying-replacement",
+      "stage": "exact_audit_checked"
+    },
+    {
+      "prior_exact_id": "f7f2fd7d-6087-43aa-bf7c-5ac92ab9b06a",
+      "result_exact_id": "58978b5d-1df4-4a87-abb8-3f7157eac79b",
+      "result_series_id": "d0f50dbd-3634-4319-9b18-cd0b11a2dc9f",
+      "route": "underlying-replacement",
+      "rule_input": "none",
+      "stage": "ordinary_commit_fresh_history_preserved",
+      "trusted_correction_rule": null,
+      "verification_status": "UNREVIEWED"
+    },
+    {
+      "prior_exact_id": "67c099b4-9a53-4062-ad3f-1444430f90f8",
+      "route": "direct",
+      "stage": "setup_committed",
+      "support_exact_ids": []
+    },
+    {
+      "prior_exact_id": "67c099b4-9a53-4062-ad3f-1444430f90f8",
+      "route": "direct",
+      "rule_type": "NoneType",
+      "stage": "production_call"
+    },
+    {
+      "prior_exact_id": "67c099b4-9a53-4062-ad3f-1444430f90f8",
+      "route": "direct",
+      "rule_type": "NoneType",
+      "stage": "production_call"
+    },
+    {
+      "actor": "SYSTEM",
+      "event_id": "fbe07a3b-11e5-4483-a289-7e3585789912",
+      "event_type": "EVIDENCE_VERSION_CREATED",
+      "exact_id": "0f8b3375-2b5a-448e-a322-7d63d8dac703",
+      "occurred_at": "2026-09-16 00:00:00+00:00",
+      "payload": {
+        "as_of": "2026-08-31T00:00:00Z",
+        "derivation_links": [],
+        "display_text": "Verifier-owned corrected text",
+        "display_title": "Verified fact r1c03a-base",
+        "instrument_links": [
+          {
+            "instrument_id": "11111111-1111-4111-8111-111111111111",
+            "link_metadata": {
+              "scope": "primary"
+            },
+            "link_order": 1,
+            "role": "PRIMARY_SCOPE"
+          }
+        ],
+        "locators": [
+          {
+            "locator_payload": {
+              "page_number": 12
+            },
+            "locator_type": "PAGE",
+            "quote_hash": "r1c03a-base-quote00000000000000000000000000000000000000000000000",
+            "raw_locator": "p.12",
+            "short_citation": "2026H1 p.12"
+          }
+        ],
+        "normalized_value": "32.5",
+        "raw_value": "32.5%",
+        "series_hash": "b29c31c0fe6853a7bd5f96da4630374006cf4d635a61f0148b14757172518be1",
+        "source_document_version_id": "348ce2d2-b994-44c9-b18d-932f297041b3",
+        "verification_status": "UNREVIEWED"
+      },
+      "route": "direct",
+      "stage": "exact_audit_checked"
+    },
+    {
+      "before_sha256": "0b39f2555eec837604524daa7a3c0affa635560af089fc8906b2a57881c1ddc7",
+      "exact_id": "0f8b3375-2b5a-448e-a322-7d63d8dac703",
+      "fresh_sha256": "0b39f2555eec837604524daa7a3c0affa635560af089fc8906b2a57881c1ddc7",
+      "route": "direct",
+      "stage": "replay_commit_fresh_no_residue",
+      "trusted_request": false
+    },
+    {
+      "prior_exact_id": "5f5b0ead-b819-4c57-85fd-365934d751ec",
+      "route": "initial",
+      "stage": "setup_committed",
+      "support_exact_ids": []
+    },
+    {
+      "prior_exact_id": "5f5b0ead-b819-4c57-85fd-365934d751ec",
+      "route": "initial",
+      "rule_type": "NoneType",
+      "stage": "production_call"
+    },
+    {
+      "prior_exact_id": "5f5b0ead-b819-4c57-85fd-365934d751ec",
+      "route": "initial",
+      "rule_type": "NoneType",
+      "stage": "production_call"
+    },
+    {
+      "actor": "ADMIN_SCRIPT",
+      "event_id": "ee4d9e9d-9814-4c3e-b124-4455b8014f29",
+      "event_type": "EVIDENCE_VERSION_CREATED",
+      "exact_id": "0330e1e7-5077-4e67-b657-57396a079533",
+      "occurred_at": "2026-09-17 00:00:00+00:00",
+      "payload": {
+        "as_of": "2026-08-31T00:00:00Z",
+        "derivation_links": [],
+        "display_text": "Verifier-owned corrected text",
+        "display_title": "Verified fact r1c03a-base",
+        "instrument_links": [
+          {
+            "instrument_id": "11111111-1111-4111-8111-111111111111",
+            "link_metadata": {
+              "scope": "primary"
+            },
+            "link_order": 1,
+            "role": "PRIMARY_SCOPE"
+          }
+        ],
+        "locators": [
+          {
+            "locator_payload": {
+              "page_number": 12
+            },
+            "locator_type": "PAGE",
+            "quote_hash": "r1c03a-base-quote00000000000000000000000000000000000000000000000",
+            "raw_locator": "p.12",
+            "short_citation": "2026H1 p.12"
+          }
+        ],
+        "normalized_value": "32.5",
+        "raw_value": "32.5%",
+        "series_hash": "0fc2e5391505e64df2622b37bac842ebe8d7017276c3c7edffa332ed8c49e01d",
+        "source_document_version_id": "73084a79-4baf-4a6f-b60a-34fa5054f9fe",
+        "verification_status": "UNREVIEWED"
+      },
+      "route": "initial",
+      "stage": "exact_audit_checked"
+    },
+    {
+      "before_sha256": "e8a2f9fc6533334613f18eb1d07a813b51ba959453e825ecd2829289d023c276",
+      "exact_id": "0330e1e7-5077-4e67-b657-57396a079533",
+      "fresh_sha256": "e8a2f9fc6533334613f18eb1d07a813b51ba959453e825ecd2829289d023c276",
+      "route": "initial",
+      "stage": "replay_commit_fresh_no_residue",
+      "trusted_request": false
+    },
+    {
+      "prior_exact_id": "c8f95bcc-0b81-4491-9c11-eb38d4c31548",
+      "route": "direct",
+      "stage": "setup_committed",
+      "support_exact_ids": []
+    },
+    {
+      "prior_exact_id": "c8f95bcc-0b81-4491-9c11-eb38d4c31548",
+      "route": "direct",
+      "rule_type": "NoneType",
+      "stage": "production_call"
+    },
+    {
+      "prior_exact_id": "c8f95bcc-0b81-4491-9c11-eb38d4c31548",
+      "route": "direct",
+      "rule_type": "str",
+      "stage": "production_call"
+    },
+    {
+      "actor": "SYSTEM",
+      "event_id": "e41063fe-affe-43a3-8423-ee901e340b9b",
+      "event_type": "EVIDENCE_VERSION_CREATED",
+      "exact_id": "60bc5f06-d1da-411b-8de9-6945fd3146b5",
+      "occurred_at": "2026-09-16 00:00:00+00:00",
+      "payload": {
+        "as_of": "2026-08-31T00:00:00Z",
+        "derivation_links": [],
+        "display_text": "Verifier-owned corrected text",
+        "display_title": "Verified fact r1c03a-base",
+        "instrument_links": [
+          {
+            "instrument_id": "11111111-1111-4111-8111-111111111111",
+            "link_metadata": {
+              "scope": "primary"
+            },
+            "link_order": 1,
+            "role": "PRIMARY_SCOPE"
+          }
+        ],
+        "locators": [
+          {
+            "locator_payload": {
+              "page_number": 12
+            },
+            "locator_type": "PAGE",
+            "quote_hash": "r1c03a-base-quote00000000000000000000000000000000000000000000000",
+            "raw_locator": "p.12",
+            "short_citation": "2026H1 p.12"
+          }
+        ],
+        "normalized_value": "32.5",
+        "raw_value": "32.5%",
+        "series_hash": "f71022667e186a293b712361444e0e8bf399d32e7d51264d88a6075de4cfd40b",
+        "source_document_version_id": "c5dd199b-318b-4db3-90a8-1494454f9a1e",
+        "verification_status": "UNREVIEWED"
+      },
+      "route": "direct",
+      "stage": "exact_audit_checked"
+    },
+    {
+      "before_sha256": "08fe9a5356e2565672a191bc3b38aae9e4f26a151e703a09cab1e3e49e168848",
+      "exact_id": "60bc5f06-d1da-411b-8de9-6945fd3146b5",
+      "fresh_sha256": "08fe9a5356e2565672a191bc3b38aae9e4f26a151e703a09cab1e3e49e168848",
+      "route": "direct",
+      "stage": "replay_commit_fresh_no_residue",
+      "trusted_request": true
+    },
+    {
+      "prior_exact_id": "0db4cbbe-c673-47c2-b2c8-9b1837cbb733",
+      "route": "initial",
+      "stage": "setup_committed",
+      "support_exact_ids": []
+    },
+    {
+      "prior_exact_id": "0db4cbbe-c673-47c2-b2c8-9b1837cbb733",
+      "route": "initial",
+      "rule_type": "NoneType",
+      "stage": "production_call"
+    },
+    {
+      "prior_exact_id": "0db4cbbe-c673-47c2-b2c8-9b1837cbb733",
+      "route": "initial",
+      "rule_type": "str",
+      "stage": "production_call"
+    },
+    {
+      "actor": "ADMIN_SCRIPT",
+      "event_id": "17743a08-64e0-49dd-a035-184aa3b405fa",
+      "event_type": "EVIDENCE_VERSION_CREATED",
+      "exact_id": "e65076cf-27b1-46da-9bc5-06e4ebed2b6b",
+      "occurred_at": "2026-09-17 00:00:00+00:00",
+      "payload": {
+        "as_of": "2026-08-31T00:00:00Z",
+        "derivation_links": [],
+        "display_text": "Verifier-owned corrected text",
+        "display_title": "Verified fact r1c03a-base",
+        "instrument_links": [
+          {
+            "instrument_id": "11111111-1111-4111-8111-111111111111",
+            "link_metadata": {
+              "scope": "primary"
+            },
+            "link_order": 1,
+            "role": "PRIMARY_SCOPE"
+          }
+        ],
+        "locators": [
+          {
+            "locator_payload": {
+              "page_number": 12
+            },
+            "locator_type": "PAGE",
+            "quote_hash": "r1c03a-base-quote00000000000000000000000000000000000000000000000",
+            "raw_locator": "p.12",
+            "short_citation": "2026H1 p.12"
+          }
+        ],
+        "normalized_value": "32.5",
+        "raw_value": "32.5%",
+        "series_hash": "e6934dbf192f4eb308ec13025229c912e9809c700e954974b630e8cac88b9c21",
+        "source_document_version_id": "06bfb62e-ec83-4258-a48d-2cf06e09a808",
+        "verification_status": "UNREVIEWED"
+      },
+      "route": "initial",
+      "stage": "exact_audit_checked"
+    },
+    {
+      "before_sha256": "e51fb331d984921c0f7772b4a4e9e7e2ff54d1308f469d579c11a94ec0e0a458",
+      "exact_id": "e65076cf-27b1-46da-9bc5-06e4ebed2b6b",
+      "fresh_sha256": "e51fb331d984921c0f7772b4a4e9e7e2ff54d1308f469d579c11a94ec0e0a458",
+      "route": "initial",
+      "stage": "replay_commit_fresh_no_residue",
+      "trusted_request": true
+    }
+  ],
+  "cleanup_basis": "Each pytest fixture finalizer completed without setup/teardown ERROR. Existing fixtures dispose the engine, terminate only own random disposable database connections and drop that same database. No separate cluster-wide/manual SQL inspection or cleanup was performed."
+}

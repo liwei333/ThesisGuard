@@ -1,0 +1,99 @@
+{
+  "test_results": [
+    {
+      "name": "old-oracle-red",
+      "result": "15 failed, 43 passed in 44.95s",
+      "exit_code": 1,
+      "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/old-oracle-red.log"
+    },
+    {
+      "name": "new-oracle-green",
+      "result": "58 passed in 48.89s",
+      "exit_code": 0,
+      "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/new-oracle-green.log"
+    },
+    {
+      "name": "focused",
+      "result": "142 passed, 97 deselected in 113.61s (0:01:53)",
+      "exit_code": 0,
+      "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/focused.log"
+    },
+    {
+      "name": "r1c02",
+      "result": "43 passed in 32.97s",
+      "exit_code": 0,
+      "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/r1c02.log"
+    },
+    {
+      "name": "r1c01",
+      "result": "8 passed in 6.41s",
+      "exit_code": 0,
+      "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/r1c01.log"
+    },
+    {
+      "name": "r1b-wiring",
+      "result": "3 passed in 2.66s",
+      "exit_code": 0,
+      "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/r1b-wiring.log"
+    },
+    {
+      "name": "r1b-reverify",
+      "result": "4 passed in 3.18s",
+      "exit_code": 0,
+      "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/r1b-reverify.log"
+    },
+    {
+      "name": "r1a",
+      "result": "12 passed in 5.96s",
+      "exit_code": 0,
+      "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/r1a.log"
+    },
+    {
+      "name": "full-services",
+      "result": "239 passed in 173.61s (0:02:53)",
+      "exit_code": 0,
+      "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/full-services.log"
+    },
+    {
+      "name": "regression",
+      "result": "35 passed, 2 warnings in 21.28s",
+      "exit_code": 0,
+      "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/regression.log"
+    }
+  ],
+  "static_results": [
+    {
+      "name": "ruff",
+      "exit_code": 0
+    },
+    {
+      "name": "format",
+      "exit_code": 0
+    },
+    {
+      "name": "mypy",
+      "exit_code": 0
+    },
+    {
+      "name": "compileall",
+      "exit_code": 0
+    },
+    {
+      "name": "alembic-heads",
+      "exit_code": 0
+    },
+    {
+      "name": "new-oracle-ruff",
+      "exit_code": 0
+    },
+    {
+      "name": "new-oracle-format",
+      "exit_code": 0
+    },
+    {
+      "name": "new-oracle-compile",
+      "exit_code": 0
+    }
+  ],
+  "cleanup": "All pytest calls returned after fixture finalizers; no setup/teardown/cleanup errors in fresh required matrix or new oracle. Old RED has verifier assertion failures only. No cluster-wide cleanup/extra SQL performed."
+}

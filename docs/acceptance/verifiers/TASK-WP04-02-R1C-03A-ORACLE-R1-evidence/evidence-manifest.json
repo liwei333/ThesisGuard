@@ -1,0 +1,245 @@
+{
+  "note": "New project artifacts only; excludes this index itself.",
+  "files": [
+    {
+      "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/after-manifest.json",
+      "bytes": 19731,
+      "sha256": "653fe3aad20a47d28ffda19700590bfe57c23d7d0fa0d69bb816953105fe9882"
+    },
+    {
+      "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/alembic-heads.log",
+      "bytes": 20,
+      "sha256": "31d4749ed58dbcf9931529c93a38536a7b00c8842fd6090fdb1f0d549ed6a3c7"
+    },
+    {
+      "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/alembic-version.log",
+      "bytes": 15,
+      "sha256": "4d93344eacb0ce003bc14ca2fac9da1060d7f6482fff1f5e4a9f7efcc5c7611c"
+    },
+    {
+      "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/before-manifest.json",
+      "bytes": 18504,
+      "sha256": "a843c3c988ee05a6dba01d98a2056b5300b3f9b15c2af2434b455989fd270881"
+    },
+    {
+      "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/candidate-commit-scope.log",
+      "bytes": 65,
+      "sha256": "0661ebce1fbc87c1445c8e3e161a03c2a7437b41dd21106b65bbfa746d230eb5"
+    },
+    {
+      "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/commands-manifest.json",
+      "bytes": 109937,
+      "sha256": "3c586fb0e3157092a2bd4d6716a467526e27c83319df6394ae74ddd8134f7aae"
+    },
+    {
+      "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/compileall.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/execution-source-manifest.json",
+      "bytes": 24760,
+      "sha256": "7312c3d35ba2851b06d8b6da8347c3146653b76a3f87da9eb00bc155c4587b6f"
+    },
+    {
+      "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/final-candidate-diff-check.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/final-candidate-head-parent.log",
+      "bytes": 82,
+      "sha256": "82f470588aab330a028247faca00ca5e58961f9a78f90646fa5bab8bba8b93ea"
+    },
+    {
+      "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/final-candidate-status.log",
+      "bytes": 88,
+      "sha256": "e59a01e3973786a0bcbe70d370d2a34ba8fbee60b557fd9a6fd56a4aaf6c0c59"
+    },
+    {
+      "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/final-hashes.log",
+      "bytes": 3013,
+      "sha256": "196442384f2ead0088ee660efbb6c3eb241ca7224fcab1111190a7386fbe5ee7"
+    },
+    {
+      "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/final-main-diff-check.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/final-main-head-parent.log",
+      "bytes": 82,
+      "sha256": "77b4e5f246b0e889a46e192e70dbbc99f91560c3f9d0029e1d782001a0758f4a"
+    },
+    {
+      "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/final-main-status.log",
+      "bytes": 737,
+      "sha256": "1fcd20865c644ebe43a25e186678e7a2075d1ab13b3ce3c52756d5b15b2711ed"
+    },
+    {
+      "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/focused.log",
+      "bytes": 860,
+      "sha256": "2a47b56f2f34a0a96d67dabfbc142aaccad73691f2ae08c4f60b7c1da2700299"
+    },
+    {
+      "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/format.log",
+      "bytes": 26,
+      "sha256": "eee76f865de5a9f2456950f710ae5d5f9b5bd0ea02aa54f614c5eed6642a0bfd"
+    },
+    {
+      "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/full-services.log",
+      "bytes": 909,
+      "sha256": "a74f6e020c94bcdf855f4111be8c8ef7b53d15bdcef603ac6a96eeac9d4e66d9"
+    },
+    {
+      "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/mypy-version.log",
+      "bytes": 27,
+      "sha256": "4324ecc2e3ffc44c620254f1a5c0cec85b7268d79bccf66e01c1527bf2c5aa20"
+    },
+    {
+      "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/mypy.log",
+      "bytes": 133,
+      "sha256": "32eae7784a0dcce589a0e44a9d9cc2e082825d9572c97c4ae535c10c66b53498"
+    },
+    {
+      "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/new-oracle-collection.log",
+      "bytes": 6371,
+      "sha256": "b7c3fed952e32bbcf9d22bfd23bdfe634f17c8933915390906e23db4639dcb72"
+    },
+    {
+      "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/new-oracle-compile.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/new-oracle-format.log",
+      "bytes": 25,
+      "sha256": "fd2299c9f1c6dc869070883e281051bfe93aacf66c1a3b0069f45b4aa410ca50"
+    },
+    {
+      "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/new-oracle-green.log",
+      "bytes": 57439,
+      "sha256": "0239ccbf4ec53cb03b9d9de3bdda3b1c79a3d8c1cb04e98cc87fd578c18019f5"
+    },
+    {
+      "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/new-oracle-ruff.log",
+      "bytes": 19,
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/old-oracle-collection.log",
+      "bytes": 6375,
+      "sha256": "a1948b9ffbf60eb832b63661874b92689b1828b3b6c751fb4c772d2746f6a70e"
+    },
+    {
+      "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/old-oracle-red.log",
+      "bytes": 10661,
+      "sha256": "3dc91a01f7ec83602655363b6dfe4980bb3a2f2687050f1dbc530647055394b2"
+    },
+    {
+      "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/oracle-reasoning-manifest.json",
+      "bytes": 2755,
+      "sha256": "9b0e26f73b1bf4ecd7d2eeb1fece8d8a90bab97311b68241ce888452b0d01ae3"
+    },
+    {
+      "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/persistence-proof-manifest.json",
+      "bytes": 70452,
+      "sha256": "df5046ae2d82466c4968054adfcd53ea93a3ebb73254832200bb7e9a2fbc2700"
+    },
+    {
+      "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/postgres-identity.log",
+      "bytes": 426,
+      "sha256": "5ecd76f47a06243d0e837c8f6483d4932b2f7cf7adb72aef546c5c93fc36ece8"
+    },
+    {
+      "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/postgres-readiness.log",
+      "bytes": 49,
+      "sha256": "6e168fc3b5a0662104b5e5da92e87b870e8b7c65fec827d267115b5123d18614"
+    },
+    {
+      "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/postgres-version.log",
+      "bytes": 54,
+      "sha256": "3329f2aad4b9b6e02694f9baf1335677cd17e3920678f3723085590373b94764"
+    },
+    {
+      "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/pytest-version.log",
+      "bytes": 13,
+      "sha256": "ef5a4d39b097310ed885c4a4dc78e963c7ef42c92ed56ab09571200962f53779"
+    },
+    {
+      "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/python-version.log",
+      "bytes": 14,
+      "sha256": "e190b5caf3d07d7e36240e7e05303180c43034e5e9b601f33a2b89df456c2aa0"
+    },
+    {
+      "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/r1a.log",
+      "bytes": 99,
+      "sha256": "237c2f2b11559bcb1940aa9e5903d1fe31bd4b31606c6a4e777a3a037b12691b"
+    },
+    {
+      "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/r1b-reverify.log",
+      "bytes": 98,
+      "sha256": "672eac4a333b80f0ed8589caa7414df88aee2d6e27d73980ffcfa7e362c3996c"
+    },
+    {
+      "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/r1b-wiring.log",
+      "bytes": 98,
+      "sha256": "31bd7c7db0a86beec7c76d35babbc6bfb646800ceac47227c0148f52ff21f75f"
+    },
+    {
+      "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/r1c01.log",
+      "bytes": 98,
+      "sha256": "acc80a37c410adc165d7db405f626c0d8062142886e23b044c3e1c4ccdddb1cf"
+    },
+    {
+      "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/r1c02.log",
+      "bytes": 100,
+      "sha256": "49d7d0a13c5fb9bbec32aef68ee5a9efbad014889306dde0769bef03b353a1b4"
+    },
+    {
+      "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/regression.log",
+      "bytes": 1509,
+      "sha256": "ad0418bbf0b304885f028078a1dbe7684f47f0ff5cec19e6c60f9967c3650c56"
+    },
+    {
+      "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/results-manifest.json",
+      "bytes": 3263,
+      "sha256": "8fb90bff425a6e0d7a3938655cd214259dd42d5e9b91205980dc9081b769fe19"
+    },
+    {
+      "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/ruff-version.log",
+      "bytes": 12,
+      "sha256": "d546fb1e5b6e5233b246ad986854eac8286a6064eeacaae4784ddd1e681e359f"
+    },
+    {
+      "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/ruff.log",
+      "bytes": 19,
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    {
+      "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/runtime-resolution.log",
+      "bytes": 2190,
+      "sha256": "fb790baa2a3c36079ef26eec23ead4cf652dea773a7328d19dd66638ee4749c7"
+    },
+    {
+      "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/scenario-preservation-manifest.json",
+      "bytes": 10018,
+      "sha256": "fa9fcad54923d05ccdc46dbad3889eda2d691b62532d62c0249c418a82da3ea9"
+    },
+    {
+      "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/whitespace-manifest.json",
+      "bytes": 2251,
+      "sha256": "a2abc9cf93afc98600a596536160f3b5443d432765da506c057ad008e7ab2e73"
+    },
+    {
+      "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/test_wp04_02_r1c03a_boundary_oracle_r1_20260916.py",
+      "bytes": 24496,
+      "sha256": "0ae19f9103b328afc3f7b5b017390569ead2a5239f18765d8c82f369d8818b0b"
+    },
+    {
+      "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/TASK-WP04-02-R1C-03A-ORACLE-R1-execution-report.md",
+      "bytes": 10017,
+      "sha256": "54370888f03498b073d6df8835c9260e1c88fdc60b1b18e66ad83fbc14d401f1"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "label": "alembic-heads",
+  "argv": [
+    "/opt/miniconda3/bin/alembic",
+    "-c",
+    "migrations/alembic.ini",
+    "heads"
+  ],
+  "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+  "environment": {
+    "PATH": "/opt/miniconda3/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONPATH": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service:/opt/miniconda3/lib/python3.12/site-packages:/opt/homebrew/lib/python3.12/site-packages"
+  },
+  "forbidden_variables_absent": [
+    "TG_TEST_ADMIN_DATABASE_URL",
+    "TG_R1C_REPLAY_BASELINE",
+    "TG_R1C02_REPLAY_PRIOR"
+  ],
+  "start": "2026-09-16T03:15:48.487420+00:00",
+  "end": "2026-09-16T03:15:48.922481+00:00",
+  "seconds": 0.43395425000016985,
+  "exit_code": 0,
+  "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/TASK-WP04-02-R1C-04A-evidence/alembic-heads.log",
+  "log_sha256": "31d4749ed58dbcf9931529c93a38536a7b00c8842fd6090fdb1f0d549ed6a3c7",
+  "candidate_before": {
+    "backend/evidence/errors.py": "3cf37eb3efbf4c7bf7ab3d4213e4ce9865f2b9209fdbeb3d6c267fe84b06d1ec",
+    "backend/evidence/services.py": "94bb12823690a07ef323323cffacbd756081f23b2edd7de04fc25884e5e612a6",
+    "tests/test_evidence_services.py": "db8fc14512b04b916724ce693c49844cd6e0f153e7baa1389b72a08ba83352a2"
+  },
+  "candidate_after": {
+    "backend/evidence/errors.py": "3cf37eb3efbf4c7bf7ab3d4213e4ce9865f2b9209fdbeb3d6c267fe84b06d1ec",
+    "backend/evidence/services.py": "94bb12823690a07ef323323cffacbd756081f23b2edd7de04fc25884e5e612a6",
+    "tests/test_evidence_services.py": "db8fc14512b04b916724ce693c49844cd6e0f153e7baa1389b72a08ba83352a2"
+  }
+}

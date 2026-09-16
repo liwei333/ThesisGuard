@@ -1,0 +1,40 @@
+{
+  "label": "focused-green",
+  "argv": [
+    "/opt/miniconda3/bin/pytest",
+    "-p",
+    "no:cacheprovider",
+    "-q",
+    "tests/test_evidence_services.py",
+    "-k",
+    "r1c04a",
+    "-rs"
+  ],
+  "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+  "environment": {
+    "PATH": "/opt/miniconda3/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONPATH": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service:/opt/miniconda3/lib/python3.12/site-packages:/opt/homebrew/lib/python3.12/site-packages"
+  },
+  "forbidden_variables_absent": [
+    "TG_TEST_ADMIN_DATABASE_URL",
+    "TG_R1C_REPLAY_BASELINE",
+    "TG_R1C02_REPLAY_PRIOR"
+  ],
+  "start": "2026-09-16T03:14:37.974297+00:00",
+  "end": "2026-09-16T03:15:50.851805+00:00",
+  "seconds": 72.87703512500048,
+  "exit_code": 1,
+  "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/TASK-WP04-02-R1C-04A-evidence/focused-green.log",
+  "log_sha256": "074f163c63c9c99f79616329fd6ad1ba57c300ea9d72cf381433f3cf29cf234c",
+  "candidate_before": {
+    "backend/evidence/errors.py": "3cf37eb3efbf4c7bf7ab3d4213e4ce9865f2b9209fdbeb3d6c267fe84b06d1ec",
+    "backend/evidence/services.py": "94bb12823690a07ef323323cffacbd756081f23b2edd7de04fc25884e5e612a6",
+    "tests/test_evidence_services.py": "db8fc14512b04b916724ce693c49844cd6e0f153e7baa1389b72a08ba83352a2"
+  },
+  "candidate_after": {
+    "backend/evidence/errors.py": "3cf37eb3efbf4c7bf7ab3d4213e4ce9865f2b9209fdbeb3d6c267fe84b06d1ec",
+    "backend/evidence/services.py": "94bb12823690a07ef323323cffacbd756081f23b2edd7de04fc25884e5e612a6",
+    "tests/test_evidence_services.py": "db8fc14512b04b916724ce693c49844cd6e0f153e7baa1389b72a08ba83352a2"
+  }
+}

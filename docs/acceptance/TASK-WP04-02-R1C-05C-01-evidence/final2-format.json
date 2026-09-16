@@ -1,0 +1,25 @@
+{
+  "argv": [
+    "/opt/miniconda3/bin/ruff",
+    "format",
+    "--check",
+    "--no-cache",
+    "backend/evidence/errors.py",
+    "backend/evidence/services.py",
+    "tests/test_evidence_services.py"
+  ],
+  "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+  "environment": {
+    "PATH": "/opt/miniconda3/bin:/opt/homebrew/Cellar/openjdk@17/17.0.20/libexec/openjdk.jdk/Contents/Home/bin:/Users/qianduoduo/.kimi-code/bin:/Users/qianduoduo/.grok/bin:/Users/qianduoduo/.tencent-news-cli/bin:/Users/qianduoduo/.local/bin:/opt/homebrew/opt/postgresql@16/bin:/opt/homebrew/opt/mysql@8.4/bin:/usr/local/mysql/bin:/Users/qianduoduo/.codeium/windsurf/bin:/Users/qianduoduo/.nvm/versions/node/v25.6.0/bin:/usr/local/opt/mysql-client/bin:/opt/miniconda3/bin:/opt/miniconda3/condabin:/opt/homebrew/bin:/opt/homebrew/sbin:/Library/Frameworks/Python.framework/Versions/3.5/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/pkg/env/active/bin:/opt/pmk/env/global/bin:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/qianduoduo/.cargo/bin:/Users/qianduoduo/.codex/tmp/arg0/codex-arg0TucSYj:/Users/qianduoduo/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/qianduoduo/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Users/qianduoduo/.docker/bin:/Users/qianduoduo/flutter/bin:/Users/qianduoduo/flutter/bin/cache/dart-sdk/bin:/opt/homebrew/opt/dart/libexec/bin:/Users/qianduoduo/development/flutter/bin:/Users/qianduoduo/Library/Application Support/taobao/cli/bin",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONPATH": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service:/opt/homebrew/lib/python3.12/site-packages",
+    "MYPYPATH": null,
+    "PYTHONPYCACHEPREFIX": null
+  },
+  "diagnostics_unset": true,
+  "start": "2026-09-16T08:25:24.717469+00:00",
+  "end": "2026-09-16T08:25:24.732990+00:00",
+  "exit_code": 0,
+  "log_sha256": "eee76f865de5a9f2456950f710ae5d5f9b5bd0ea02aa54f614c5eed6642a0bfd",
+  "services_sha256": "7ce76b02928019347625048e7d0acb523d74168cd6bbbdf03184163ac277f959"
+}

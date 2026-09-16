@@ -1,0 +1,51 @@
+--- accepted-baseline/services.py
++++ 05C-01-candidate/services.py
+@@ -721,6 +721,13 @@
+             verification_status=verification_status,
+         )
+     if supersedes_evidence_version_id is not None and trusted_correction_rule is None:
++        prior = await get_exact_evidence_version(db, supersedes_evidence_version_id)
++        if prior is None:
++            raise EvidenceVersionNotFound(
++                f"EvidenceVersion {supersedes_evidence_version_id} not found",
++                evidence_version_id=supersedes_evidence_version_id,
++            )
++        _validate_ordinary_correction_prior(prior)
+         # A predecessor makes this a correction, even for version 1. Preserve
+         # initial import and historical replay; new ordinary rows await review.
+         verification_status = "UNREVIEWED"
+@@ -1210,6 +1217,8 @@
+ 
+     _validate_display_text(display_text)
+     _validate_trusted_correction_rule(trusted_correction_rule)
++    if trusted_correction_rule is None:
++        _validate_ordinary_correction_prior(prior)
+     created = await create_evidence_series_version(
+         db,
+         scope_type=scope_type,
+@@ -1460,6 +1469,7 @@
+     if status_change_kind == "CORRECTION":
+         _validate_trusted_correction_rule(correction_rule)
+         if correction_rule is None:
++            _validate_ordinary_correction_prior(current)
+             verification_status = "UNREVIEWED"
+     child_locators = _current_locator_inputs(current)
+     child_links = (
+@@ -1562,6 +1572,17 @@
+     return loaded
+ 
+ 
++def _validate_ordinary_correction_prior(prior: EvidenceVersion) -> None:
++    """Qualify a new ordinary write; committed replay is handled by each caller."""
++    if prior.verification_status not in {"VERIFIED", "UNREVIEWED"}:
++        raise EvidenceInvalidStateTransition(
++            "Ordinary correction requires a VERIFIED or UNREVIEWED prior",
++            prior_evidence_version_id=prior.id,
++            evidence_series_id=prior.evidence_series_id,
++            from_status=prior.verification_status,
++        )
++
++
+ def _validate_display_text(value: object) -> None:
+     """Admit new body content without changing valid text or historical replay."""
+     if not isinstance(value, str):

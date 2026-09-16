@@ -1,0 +1,39 @@
+{
+  "paths": {
+    "python": "/opt/homebrew/bin/python3.12",
+    "pytest": "/opt/homebrew/bin/pytest",
+    "ruff": "/opt/miniconda3/bin/ruff",
+    "mypy": "/opt/miniconda3/bin/mypy",
+    "alembic": "/opt/miniconda3/bin/alembic"
+  },
+  "resolved": {
+    "python": "/opt/homebrew/Cellar/python@3.12/3.12.9/Frameworks/Python.framework/Versions/3.12/bin/python3.12",
+    "pytest": "/opt/homebrew/bin/pytest",
+    "ruff": "/opt/miniconda3/bin/ruff",
+    "mypy": "/opt/miniconda3/bin/mypy",
+    "alembic": "/opt/miniconda3/bin/alembic"
+  },
+  "versions": {
+    "python": "Python 3.12.9",
+    "pytest": "pytest 9.1.1",
+    "ruff": "ruff 0.16.1",
+    "mypy": "mypy 2.3.0 (compiled: yes)",
+    "alembic": "alembic 1.18.5"
+  },
+  "libraries": {
+    "pytest": "9.1.1",
+    "pytest-asyncio": "1.4.0",
+    "asyncpg": "0.31.0",
+    "SQLAlchemy": "2.0.52",
+    "boto3": "1.43.93"
+  },
+  "diagnostics_unset": {
+    "TG_TEST_ADMIN_DATABASE_URL": true,
+    "TG_R1C_REPLAY_BASELINE": true,
+    "TG_R1C02_REPLAY_PRIOR": true
+  },
+  "fixture_host": "127.0.0.1",
+  "fixture_port": 15432,
+  "postgresql_observed": "17.11",
+  "unused_default_python": "3.14.6 lacks pytest metadata; existing Python3.12 selected, no install"
+}

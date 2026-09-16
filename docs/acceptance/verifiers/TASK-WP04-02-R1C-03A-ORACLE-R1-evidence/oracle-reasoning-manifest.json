@@ -1,0 +1,49 @@
+{
+  "role": "Verifier-artifact repair executor only; independent acceptance pending",
+  "authority": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/TASK-WP04-02-R1C-03A-ORACLE-R1-repair-contract.md",
+  "authority_sha256": "15ad3888c80475f463f4ee878963cad197a48d55b0d51654b7bcc85be40feeb2",
+  "new_oracle": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/test_wp04_02_r1c03a_boundary_oracle_r1_20260916.py",
+  "new_oracle_sha256": "0ae19f9103b328afc3f7b5b017390569ead2a5239f18765d8c82f369d8818b0b",
+  "VF-01": {
+    "root": "Legacy seed exact FACT support is initial v1 with no predecessor. Old request constructor stopped before production revise.",
+    "repair": "Public ordinary support correction \u2192 request_review \u2192 verify_or_reject VERIFIED; four exact IDs preserved, leaf provenance/acyclic links/old exact immutable asserted; commit before no-residue baseline. Command does no setup writes.",
+    "coverage": "Nine automatic negatives and omitted/None automatic ordinary cases, within identical58-case collection"
+  },
+  "VF-02": {
+    "root": "Unfrozen universal EVIDENCE_CORRECTION audit-event assertion conflated row lifecycle and creation taxonomy.",
+    "repair": "Strict repair-contract route map; exact aggregate/type/event cardinality, known ownership actor/time, input-specific payload, retained complete CORRECTION row tuple/exact supersedes/history/children.",
+    "explicit_inputs": {
+      "status_actor": "USER",
+      "status_at": "2026-09-16T00:00:00Z",
+      "same_event_owner": "USER,2026-09-16T00:00:00Z",
+      "automatic_event_owner": "legacy IMPORTER,2026-09-16T00:00:00Z",
+      "direct_create_owner": "SYSTEM,2026-09-16T00:00:00Z",
+      "underlying_create_owner": "ADMIN_SCRIPT,2026-09-17T00:00:00Z",
+      "initial_create_owner": "ADMIN_SCRIPT,2026-09-17T00:00:00Z"
+    },
+    "taxonomy": {
+      "same": "EVIDENCE_CORRECTION",
+      "automatic": "EVIDENCE_VERSION_CREATED",
+      "direct": "EVIDENCE_VERSION_CREATED",
+      "underlying-replacement": "EVIDENCE_VERSION_CREATED"
+    }
+  },
+  "shared_helpers": [
+    "candidate pg_sessionmaker",
+    "candidate db",
+    "constraint-legal r1c03a_legacy_prior seed"
+  ],
+  "oracle_owned": [
+    "Public command wrapper",
+    "all nine-table durable row comparisons",
+    "history/exact snapshots",
+    "acyclic graph check",
+    "expected DERIVED exact-support origin",
+    "audit route/ownership/payload assertions"
+  ],
+  "not_imported": [
+    "Candidate command/oracle/count expectation helpers"
+  ],
+  "production_approved_rules": "empty; no positive rule or injection enabled",
+  "source_history": "Old supplemental source/log/manifests retained; new58 GREEN follows preserved old verifier RED, not business bugfix RED."
+}

@@ -1,0 +1,39 @@
+{
+  "label": "format-final",
+  "argv": [
+    "/opt/miniconda3/bin/ruff",
+    "format",
+    "--check",
+    "--no-cache",
+    "backend/evidence/errors.py",
+    "backend/evidence/services.py",
+    "tests/test_evidence_services.py"
+  ],
+  "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+  "environment": {
+    "PATH": "/opt/miniconda3/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONPATH": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service:/opt/miniconda3/lib/python3.12/site-packages:/opt/homebrew/lib/python3.12/site-packages"
+  },
+  "forbidden_variables_absent": [
+    "TG_TEST_ADMIN_DATABASE_URL",
+    "TG_R1C_REPLAY_BASELINE",
+    "TG_R1C02_REPLAY_PRIOR"
+  ],
+  "start": "2026-09-16T03:18:04.861814+00:00",
+  "end": "2026-09-16T03:18:04.969332+00:00",
+  "seconds": 0.10743854199972702,
+  "exit_code": 0,
+  "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/TASK-WP04-02-R1C-04A-evidence/format-final.log",
+  "log_sha256": "eee76f865de5a9f2456950f710ae5d5f9b5bd0ea02aa54f614c5eed6642a0bfd",
+  "candidate_before": {
+    "backend/evidence/errors.py": "3cf37eb3efbf4c7bf7ab3d4213e4ce9865f2b9209fdbeb3d6c267fe84b06d1ec",
+    "backend/evidence/services.py": "94bb12823690a07ef323323cffacbd756081f23b2edd7de04fc25884e5e612a6",
+    "tests/test_evidence_services.py": "fb1e5265924e85c88d096270b336bdb3cbd2afe943b70724d3f782c7491281a0"
+  },
+  "candidate_after": {
+    "backend/evidence/errors.py": "3cf37eb3efbf4c7bf7ab3d4213e4ce9865f2b9209fdbeb3d6c267fe84b06d1ec",
+    "backend/evidence/services.py": "94bb12823690a07ef323323cffacbd756081f23b2edd7de04fc25884e5e612a6",
+    "tests/test_evidence_services.py": "fb1e5265924e85c88d096270b336bdb3cbd2afe943b70724d3f782c7491281a0"
+  }
+}

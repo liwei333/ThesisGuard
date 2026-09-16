@@ -1,0 +1,52 @@
+[
+  {
+    "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/after-manifest.json",
+    "trailing_whitespace_lines": [],
+    "ends_with_newline": true
+  },
+  {
+    "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/before-manifest.json",
+    "trailing_whitespace_lines": [],
+    "ends_with_newline": true
+  },
+  {
+    "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/commands-manifest.json",
+    "trailing_whitespace_lines": [],
+    "ends_with_newline": true
+  },
+  {
+    "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/execution-source-manifest.json",
+    "trailing_whitespace_lines": [],
+    "ends_with_newline": true
+  },
+  {
+    "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/oracle-reasoning-manifest.json",
+    "trailing_whitespace_lines": [],
+    "ends_with_newline": true
+  },
+  {
+    "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/persistence-proof-manifest.json",
+    "trailing_whitespace_lines": [],
+    "ends_with_newline": true
+  },
+  {
+    "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/results-manifest.json",
+    "trailing_whitespace_lines": [],
+    "ends_with_newline": true
+  },
+  {
+    "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-ORACLE-R1-evidence/scenario-preservation-manifest.json",
+    "trailing_whitespace_lines": [],
+    "ends_with_newline": true
+  },
+  {
+    "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/test_wp04_02_r1c03a_boundary_oracle_r1_20260916.py",
+    "trailing_whitespace_lines": [],
+    "ends_with_newline": true
+  },
+  {
+    "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/TASK-WP04-02-R1C-03A-ORACLE-R1-execution-report.md",
+    "trailing_whitespace_lines": [],
+    "ends_with_newline": true
+  }
+]

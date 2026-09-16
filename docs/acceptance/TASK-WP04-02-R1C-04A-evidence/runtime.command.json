@@ -1,0 +1,35 @@
+{
+  "label": "runtime",
+  "argv": [
+    "/opt/miniconda3/bin/python",
+    "-c",
+    "import importlib,json,shutil,sys,os; names=[\"pytest\",\"pytest_asyncio\",\"asyncpg\",\"sqlalchemy\",\"alembic\",\"fastapi\",\"pydantic\",\"boto3\",\"botocore\",\"s3transfer\",\"dramatiq\",\"redis\"]; print(json.dumps({\"executable\":sys.executable,\"version\":sys.version,\"sys_path\":sys.path,\"tools\":{n:shutil.which(n) for n in [\"python\",\"pytest\",\"ruff\",\"mypy\",\"alembic\"]},\"modules\":{n:{\"path\":(m:=importlib.import_module(n)).__file__,\"version\":getattr(m,\"__version__\",None)} for n in names},\"forbidden_absent\":{n:n not in os.environ for n in [\"TG_TEST_ADMIN_DATABASE_URL\",\"TG_R1C_REPLAY_BASELINE\",\"TG_R1C02_REPLAY_PRIOR\"]}},indent=2))"
+  ],
+  "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+  "environment": {
+    "PATH": "/opt/miniconda3/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONPATH": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service:/opt/miniconda3/lib/python3.12/site-packages:/opt/homebrew/lib/python3.12/site-packages"
+  },
+  "forbidden_variables_absent": [
+    "TG_TEST_ADMIN_DATABASE_URL",
+    "TG_R1C_REPLAY_BASELINE",
+    "TG_R1C02_REPLAY_PRIOR"
+  ],
+  "start": "2026-09-16T03:12:25.320849+00:00",
+  "end": "2026-09-16T03:12:26.141990+00:00",
+  "seconds": 0.8210552920008922,
+  "exit_code": 0,
+  "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/TASK-WP04-02-R1C-04A-evidence/runtime.log",
+  "log_sha256": "95317136056c7f53ebaa67a35a1f435c465f060101966b1b176d6248a32b4c74",
+  "candidate_before": {
+    "backend/evidence/errors.py": "3cf37eb3efbf4c7bf7ab3d4213e4ce9865f2b9209fdbeb3d6c267fe84b06d1ec",
+    "backend/evidence/services.py": "43b548232df4267f377c5e144222c9278c3cc478f6800720240c4618b689ebe3",
+    "tests/test_evidence_services.py": "3e3bf45172a36857593a1956381c4c94d3380aa0a065c2cdf0eb623611a4ee03"
+  },
+  "candidate_after": {
+    "backend/evidence/errors.py": "3cf37eb3efbf4c7bf7ab3d4213e4ce9865f2b9209fdbeb3d6c267fe84b06d1ec",
+    "backend/evidence/services.py": "43b548232df4267f377c5e144222c9278c3cc478f6800720240c4618b689ebe3",
+    "tests/test_evidence_services.py": "3e3bf45172a36857593a1956381c4c94d3380aa0a065c2cdf0eb623611a4ee03"
+  }
+}
