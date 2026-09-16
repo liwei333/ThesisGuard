@@ -8,6 +8,7 @@ the deterministic domain-service layer for the WP-04-01 persistence foundation.
 from __future__ import annotations
 
 import asyncio
+import json
 import os
 import subprocess
 from collections.abc import AsyncIterator
@@ -20,7 +21,12 @@ import asyncpg
 import pytest
 import pytest_asyncio
 from backend.evidence import services
-from backend.evidence.errors import EvidenceDomainError, EvidenceValidationError
+from backend.evidence.errors import (
+    EvidenceDomainError,
+    EvidenceIdempotencyConflict,
+    EvidenceInvalidProvenance,
+    EvidenceValidationError,
+)
 from backend.evidence.models import (
     EvidenceAuditEvent,
     EvidenceDerivationLink,
@@ -303,7 +309,7 @@ async def verified_evidence_fact(
     key_suffix: str,
     source_status: str = "ACTIVE",
 ) -> EvidenceVersion:
-    """Create a source-backed FACT whose latest version is eligible VERIFIED."""
+    """Seed disclosed historical VERIFIED v1 state; not production capability evidence."""
     source, source_version = await source_with_version(db, key_suffix=f"{key_suffix}-source")
     if source_status == "RETRACTED":
         source_version = await append_source_version(
@@ -322,27 +328,26 @@ async def verified_evidence_fact(
             source_status_reason="issuer retracted document",
             idempotency_key=f"source-version-{key_suffix}-retracted",
         )
-    return await services.create_evidence_series_version(
-        db,
-        scope_type="INSTRUMENT",
-        scope_key=QIANGRUI_INSTRUMENT_ID,
-        information_type="FACT",
-        claim_key=f"{QIANGRUI_INSTRUMENT_ID}:verified:{key_suffix}",
-        metric_key=f"verified_{key_suffix}",
-        period_start=datetime(2026, 1, 1, tzinfo=UTC),
-        period_end=datetime(2026, 6, 30, tzinfo=UTC),
-        provenance_kind="SOURCE_BACKED",
-        primary_source_document_id=source.id,
-        source_document_version_id=source_version.id,
-        display_title=f"Verified fact {key_suffix}",
-        display_text=f"Verified fact {key_suffix}",
-        raw_value="32.5%",
-        raw_unit="percent",
-        normalized_value=Decimal("32.5"),
-        normalized_unit="percent",
-        as_of=datetime(2026, 8, 31, tzinfo=UTC),
-        effective_from=datetime(2026, 8, 31, tzinfo=UTC),
-        locators=[
+    fields: dict[str, Any] = {
+        "scope_type": "INSTRUMENT",
+        "scope_key": QIANGRUI_INSTRUMENT_ID,
+        "information_type": "FACT",
+        "claim_key": f"{QIANGRUI_INSTRUMENT_ID}:verified:{key_suffix}",
+        "metric_key": f"verified_{key_suffix}",
+        "period_start": datetime(2026, 1, 1, tzinfo=UTC),
+        "period_end": datetime(2026, 6, 30, tzinfo=UTC),
+        "provenance_kind": "SOURCE_BACKED",
+        "primary_source_document_id": source.id,
+        "source_document_version_id": source_version.id,
+        "display_title": f"Verified fact {key_suffix}",
+        "display_text": f"Verified fact {key_suffix}",
+        "raw_value": "32.5%",
+        "raw_unit": "percent",
+        "normalized_value": Decimal("32.5"),
+        "normalized_unit": "percent",
+        "as_of": datetime(2026, 8, 31, tzinfo=UTC),
+        "effective_from": datetime(2026, 8, 31, tzinfo=UTC),
+        "locators": [
             services.SourceLocatorInput(
                 locator_type="PAGE",
                 raw_locator="p.12",
@@ -351,7 +356,7 @@ async def verified_evidence_fact(
                 quote_hash=f"{key_suffix}-quote".ljust(64, "0")[:64],
             )
         ],
-        instrument_links=[
+        "instrument_links": [
             services.InstrumentLinkInput(
                 instrument_id=QIANGRUI_INSTRUMENT_ID,
                 role="PRIMARY_SCOPE",
@@ -359,17 +364,149 @@ async def verified_evidence_fact(
                 link_metadata={"scope": "primary"},
             )
         ],
-        extractor_name="tg-parser",
-        extractor_version="1.0",
-        verification_status="VERIFIED",
-        status_changed_at=dt(day=13),
-        status_changed_by_actor="IMPORTER",
-        status_change_kind="INITIAL_VERIFICATION",
-        status_reason="deterministic import accepted",
-        created_by_actor="IMPORTER",
-        idempotency_key=f"evidence-verified-{key_suffix}",
-        created_at=dt(day=13),
+        "extractor_name": "tg-parser",
+        "extractor_version": "1.0",
+        "verification_status": "VERIFIED",
+        "status_changed_at": dt(day=13),
+        "status_changed_by_actor": "IMPORTER",
+        "status_change_kind": "INITIAL_VERIFICATION",
+        "status_reason": "deterministic import accepted",
+        "created_by_actor": "IMPORTER",
+        "idempotency_key": f"evidence-verified-{key_suffix}",
+        "created_at": dt(day=13),
+    }
+    series_hash = services._series_identity_hash(
+        scope_type=fields["scope_type"],
+        scope_key=fields["scope_key"],
+        information_type=fields["information_type"],
+        claim_key=fields["claim_key"],
+        metric_key=fields["metric_key"],
+        period_start=fields["period_start"],
+        period_end=fields["period_end"],
+        provenance_kind=fields["provenance_kind"],
+        primary_source_document_id=fields["primary_source_document_id"],
+        origin_key=None,
     )
+    series_values = {
+        "id": str(uuid4()),
+        "series_identity_hash": series_hash,
+        "origin_key": None,
+        **{
+            key: fields[key]
+            for key in [
+                "scope_type",
+                "scope_key",
+                "information_type",
+                "claim_key",
+                "metric_key",
+                "period_start",
+                "period_end",
+                "provenance_kind",
+                "primary_source_document_id",
+                "created_at",
+                "created_by_actor",
+            ]
+        },
+    }
+    series = EvidenceSeries(**series_values)
+    version_values = {
+        "id": str(uuid4()),
+        "evidence_series_id": series.id,
+        "version": 1,
+        "source_grade_snapshot": source_version.source_grade,
+        **{
+            key: fields.get(key)
+            for key in [
+                "source_document_version_id",
+                "information_type",
+                "provenance_kind",
+                "verification_status",
+                "status_changed_at",
+                "status_changed_by_actor",
+                "status_change_kind",
+                "status_reason",
+                "display_title",
+                "display_text",
+                "claim_key",
+                "metric_key",
+                "raw_value",
+                "raw_unit",
+                "normalized_value",
+                "normalized_text_value",
+                "normalized_unit",
+                "currency",
+                "period_start",
+                "period_end",
+                "as_of",
+                "effective_from",
+                "effective_to",
+                "supersedes_evidence_version_id",
+                "created_at",
+                "created_by_actor",
+                "extractor_name",
+                "extractor_version",
+                "prompt_template_version",
+                "manual_entry_reason",
+                "manual_observed_at",
+                "trusted_correction_rule",
+            ]
+        },
+    }
+    version = EvidenceVersion(**version_values)
+    services._attach_children(
+        version, source_version.id, fields["locators"], fields["instrument_links"], ()
+    )
+    payload = {
+        "series_hash": series_hash,
+        "source_document_version_id": source_version.id,
+        "display_title": fields["display_title"],
+        "display_text": fields["display_text"],
+        "raw_value": fields["raw_value"],
+        "normalized_value": fields["normalized_value"],
+        "as_of": fields["as_of"],
+        "locators": [item.__dict__ for item in fields["locators"]],
+        "instrument_links": [item.__dict__ for item in fields["instrument_links"]],
+        "derivation_links": [],
+        "verification_status": "VERIFIED",
+    }
+    audit_payload = json.loads(services.canonical_json(payload))
+    db.add_all(
+        [
+            series,
+            version,
+            EvidenceIdempotencyRecord(
+                scope="create_evidence_series_version",
+                idempotency_key=fields["idempotency_key"],
+                request_hash=services.stable_hash(payload),
+                status="COMMITTED",
+                response_ref_type="EvidenceVersion",
+                response_ref_id=version.id,
+                created_at=fields["created_at"],
+            ),
+            EvidenceAuditEvent(
+                id=str(uuid4()),
+                aggregate_type="EvidenceSeries",
+                aggregate_id=series.id,
+                event_type="EVIDENCE_SERIES_CREATED",
+                payload={"series_hash": series_hash},
+                occurred_at=fields["created_at"],
+                actor=fields["created_by_actor"],
+            ),
+            EvidenceAuditEvent(
+                id=str(uuid4()),
+                aggregate_type="EvidenceVersion",
+                aggregate_id=version.id,
+                event_type="EVIDENCE_VERSION_CREATED",
+                payload=audit_payload,
+                occurred_at=fields["created_at"],
+                actor=fields["created_by_actor"],
+            ),
+        ]
+    )
+    await db.flush()
+    loaded = await services.get_exact_evidence_version(db, version.id)
+    assert loaded is not None
+    return loaded
 
 
 def assert_error(exc_info: pytest.ExceptionInfo[EvidenceDomainError], code: str) -> None:
@@ -3815,3 +3952,1482 @@ async def test_r1c03a_replay_does_not_swallow_new_trusted_request(
         assert persisted is not None
         assert persisted.verification_status == "UNREVIEWED"
         assert persisted.trusted_correction_rule is None
+
+
+R1C04A_ROUTES = ["same", "automatic", "direct", "initial", "underlying"]
+R1C04A_MODELS: list[Any] = [
+    SourceDocument,
+    SourceDocumentVersion,
+    EvidenceSeries,
+    EvidenceVersion,
+    EvidenceSourceLocator,
+    EvidenceInstrumentLink,
+    EvidenceDerivationLink,
+    EvidenceIdempotencyRecord,
+    EvidenceAuditEvent,
+]
+R1C04A_TEXT = " \t净利润同比增长 32.5%，金额为人民币 1,234.00 万元。\n　"
+R1C04A_REASON = "R1C04A display text correction"
+
+
+async def r1c04a_rows(db: AsyncSession) -> dict[str, list[dict[str, Any]]]:
+    """Compare every persisted column, including compound idempotency keys."""
+    result = {}
+    for model in R1C04A_MODELS:
+        rows = (await db.execute(select(model.__table__))).mappings().all()
+        result[model.__tablename__] = sorted([dict(row) for row in rows], key=repr)
+    return result
+
+
+def r1c04a_preserved(
+    before: dict[str, list[dict[str, Any]]], after: dict[str, list[dict[str, Any]]]
+) -> None:
+    for model in R1C04A_MODELS:
+        keys = [column.name for column in model.__table__.primary_key.columns]
+        index = {tuple(row[k] for k in keys): row for row in after[model.__tablename__]}
+        for row in before[model.__tablename__]:
+            assert index[tuple(row[k] for k in keys)] == row
+
+
+async def r1c04a_prepare(db: AsyncSession, route: str) -> tuple[EvidenceVersion, str | None]:
+    prior = await r1c03a_legacy_prior(db, derived=route == "automatic")
+    alternate_id = None
+    if route == "automatic":
+        support = await services.get_exact_evidence_version(
+            db, prior.derived_links[0].supporting_evidence_version_id
+        )
+        assert support is not None and support.supersedes_evidence_version_id is None
+        old_support = r1c03a_exact_snapshot(support)
+        corrected = await services.revise_correct_evidence(
+            db,
+            evidence_series_id=support.evidence_series_id,
+            expected_version=support.version,
+            display_text="Alternate exact source-backed support",
+            status_changed_at=dt(day=13),
+            status_changed_by_actor="USER",
+            status_reason="R1C04A support setup",
+            idempotency_key="r1c04a-support-correct",
+        )
+        pending = await services.request_review(
+            db,
+            evidence_series_id=support.evidence_series_id,
+            expected_version=corrected.version,
+            reason="R1C04A support review",
+            actor="USER",
+            idempotency_key="r1c04a-support-review",
+            as_of=dt(day=14),
+        )
+        verified = await services.verify_or_reject(
+            db,
+            evidence_series_id=support.evidence_series_id,
+            expected_version=pending.version,
+            decision="VERIFIED",
+            reason="R1C04A support accepted",
+            actor="USER",
+            idempotency_key="r1c04a-support-verify",
+            as_of=dt(day=15),
+        )
+        ids = [support.id, corrected.id, pending.id, verified.id]
+        assert len(set(ids)) == 4 and verified.id != prior.id
+        assert [support.version, corrected.version, pending.version, verified.version] == [
+            1,
+            2,
+            3,
+            4,
+        ]
+        assert corrected.supersedes_evidence_version_id == support.id
+        assert pending.supersedes_evidence_version_id == corrected.id
+        assert verified.supersedes_evidence_version_id == pending.id
+        assert verified.verification_status == "VERIFIED"
+        assert verified.provenance_kind == "SOURCE_BACKED" and not verified.derived_links
+        assert r1c03a_exact_snapshot(support) == old_support
+        alternate_id = verified.id
+        print(f"r1c04a automatic setup exact support IDs: {ids}; prior={prior.id}")
+    await db.commit()
+    assert not db.in_transaction()
+    print(
+        f"r1c04a committed fixture={db.get_bind().engine.url.render_as_string(hide_password=True)}; "
+        f"server_version={db.get_bind().dialect.server_version_info}; prior={prior.id}"
+    )
+    return prior, alternate_id
+
+
+async def r1c04a_command(
+    db: AsyncSession,
+    prior: EvidenceVersion,
+    alternate_id: str | None,
+    route: str,
+    body: dict[str, Any],
+    key: str,
+    *,
+    clear_nullable: bool = False,
+) -> EvidenceVersion:
+    audit: dict[str, Any] = {
+        "status_changed_at": dt(day=16),
+        "status_changed_by_actor": "USER",
+        "status_reason": R1C04A_REASON,
+        "idempotency_key": key,
+    }
+    if route in {"same", "automatic"}:
+        changes: dict[str, Any] = dict(body)
+        if clear_nullable:
+            changes.update(raw_value=None, normalized_value=None, currency=None)
+        if route == "automatic":
+            assert alternate_id is not None
+            changes["derivation_links"] = [
+                services.DerivationLinkInput(
+                    supporting_evidence_version_id=alternate_id,
+                    role="INPUT_FACT",
+                    support_order=1,
+                )
+            ]
+        return await services.revise_correct_evidence(
+            db,
+            evidence_series_id=prior.evidence_series_id,
+            expected_version=prior.version,
+            **audit,
+            **changes,
+        )
+    series = await db.get(EvidenceSeries, prior.evidence_series_id)
+    assert series is not None
+    fields = r1c03a_create_fields(prior, series)
+    fields.update(body)
+    fields["created_by_actor"] = "SYSTEM" if route == "direct" else "ADMIN_SCRIPT"
+    if route == "direct":
+        return await services.create_replacement_evidence_series(
+            db, prior_evidence_version_id=prior.id, **fields, **audit
+        )
+    if route == "initial":
+        return await services.create_evidence_series_version(
+            db, **fields, created_at=dt(day=17), idempotency_key=key
+        )
+    assert route == "underlying"
+    return await services.create_evidence_series_version(
+        db,
+        **fields,
+        created_at=dt(day=17),
+        supersedes_evidence_version_id=prior.id,
+        verification_status="VERIFIED",
+        status_change_kind="CORRECTION",
+        **audit,
+    )
+
+
+async def r1c04a_reject_and_commit(
+    db: AsyncSession,
+    pg_sessionmaker: async_sessionmaker[AsyncSession],
+    route: str,
+    text: Any,
+) -> None:
+    prior, alternate_id = await r1c04a_prepare(db, route)
+    before = await r1c04a_rows(db)
+    exact_before = r1c03a_exact_snapshot(prior)
+    print(f"r1c04a baseline committed; production call route={route}, body={text!r}")
+    error_type = (
+        EvidenceInvalidProvenance
+        if text is None and route in {"same", "automatic"}
+        else EvidenceValidationError
+    )
+    with pytest.raises(error_type) as error:
+        accepted = await r1c04a_command(
+            db, prior, alternate_id, route, {"display_text": text}, "r1c04a-invalid-body"
+        )
+        print(
+            f"BASELINE ACCEPTED route={route}, exact={accepted.id}, "
+            f"body={accepted.display_text!r}, status={accepted.verification_status}"
+        )
+    if error_type is EvidenceValidationError:
+        assert error.value.code == "EVIDENCE_VALIDATION_ERROR"
+        assert error.value.details["validation_path"] == "display_text"
+        assert error.value.details["reason"] == (
+            "blank_display_text" if isinstance(text, str) else "invalid_display_text_type"
+        )
+        assert error.value.details["display_text_type"] == type(text).__name__
+        assert error.value.details["display_text"] == text
+    else:
+        assert error.value.code == "EVIDENCE_INVALID_PROVENANCE"
+        assert str(error.value) == "display_text cannot be cleared"
+    assert not db.new and not db.dirty and not db.deleted
+    await db.commit()
+    async with pg_sessionmaker() as fresh:
+        assert fresh is not db
+        after = await r1c04a_rows(fresh)
+        assert after == before
+        old = await services.get_exact_evidence_version(fresh, prior.id)
+        assert old is not None and r1c03a_exact_snapshot(old) == exact_before
+        current = await services.get_current_evidence(fresh, prior.evidence_series_id)
+        assert current is not None and current.id == prior.id
+        assert not any(
+            row["idempotency_key"].startswith("r1c04a-invalid-body")
+            for row in after[EvidenceIdempotencyRecord.__tablename__]
+        )
+    print(
+        f"r1c04a fresh-session all-nine-table equality; route={route}; prior={prior.id}; "
+        f"caller commit succeeded; rows={ {name: len(rows) for name, rows in before.items()} }"
+    )
+
+
+@pytest.mark.parametrize("route", ["same", "initial"])
+async def test_r1c04a_empty_body_rejected(
+    db: AsyncSession, pg_sessionmaker: async_sessionmaker[AsyncSession], route: str
+) -> None:
+    await r1c04a_reject_and_commit(db, pg_sessionmaker, route, "")
+
+
+@pytest.mark.parametrize("route", R1C04A_ROUTES)
+@pytest.mark.parametrize(
+    "text",
+    [
+        pytest.param("", id="empty"),
+        pytest.param("   ", id="ascii-space"),
+        pytest.param("\t\r\n", id="tab-newline"),
+        pytest.param("\u00a0\u2003\u3000", id="unicode-space"),
+        pytest.param(False, id="bool"),
+        pytest.param(0, id="integer"),
+        pytest.param([], id="empty-list"),
+        pytest.param(["正文"], id="list"),
+        pytest.param({}, id="empty-dict"),
+        pytest.param({"正文": "内容"}, id="dict"),
+        pytest.param(None, id="none"),
+        pytest.param(b"body", id="bytes-before-hash"),
+        pytest.param({"body"}, id="set-before-hash"),
+    ],
+)
+async def test_r1c04a_invalid_body_no_residue(
+    db: AsyncSession,
+    pg_sessionmaker: async_sessionmaker[AsyncSession],
+    route: str,
+    text: Any,
+) -> None:
+    await r1c04a_reject_and_commit(db, pg_sessionmaker, route, text)
+
+
+@pytest.mark.parametrize("route", R1C04A_ROUTES)
+@pytest.mark.parametrize("text", [R1C04A_TEXT, "　2026年净利润为 −0.25 亿元。　"])
+async def test_r1c04a_valid_body_preserves_content_and_history(
+    db: AsyncSession,
+    pg_sessionmaker: async_sessionmaker[AsyncSession],
+    route: str,
+    text: str,
+) -> None:
+    await r1c04a_positive(db, pg_sessionmaker, route, {"display_text": text})
+
+
+@pytest.mark.parametrize("route", ["same", "automatic"])
+async def test_r1c04a_omitted_body_and_nullable_machine_fields(
+    db: AsyncSession, pg_sessionmaker: async_sessionmaker[AsyncSession], route: str
+) -> None:
+    await r1c04a_positive(db, pg_sessionmaker, route, {}, clear_nullable=True)
+
+
+async def r1c04a_positive(
+    db: AsyncSession,
+    pg_sessionmaker: async_sessionmaker[AsyncSession],
+    route: str,
+    body: dict[str, Any],
+    *,
+    clear_nullable: bool = False,
+) -> None:
+    prior, alternate_id = await r1c04a_prepare(db, route)
+    before = await r1c04a_rows(db)
+    old_exact = r1c03a_exact_snapshot(prior)
+    result = await r1c04a_command(
+        db, prior, alternate_id, route, body, "r1c04a-valid", clear_nullable=clear_nullable
+    )
+    result_id = result.id
+    await db.commit()
+    async with pg_sessionmaker() as fresh:
+        stored = await services.get_exact_evidence_version(fresh, result_id)
+        assert stored is not None
+        assert stored.display_text == body.get("display_text", prior.display_text)
+        assert stored.display_text.encode() == body.get("display_text", prior.display_text).encode()
+        assert stored.verification_status == "UNREVIEWED" and stored.trusted_correction_rule is None
+        assert await services.get_current_valid_evidence(fresh, stored.evidence_series_id) is None
+        if route == "same":
+            assert stored.evidence_series_id == prior.evidence_series_id
+            assert stored.version == prior.version + 1
+        else:
+            assert stored.evidence_series_id != prior.evidence_series_id and stored.version == 1
+        if route == "initial":
+            assert stored.supersedes_evidence_version_id is None
+            assert [
+                stored.status_change_kind,
+                stored.status_changed_at,
+                stored.status_changed_by_actor,
+                stored.status_reason,
+            ] == [None, None, None, None]
+        else:
+            assert stored.supersedes_evidence_version_id == prior.id
+            assert stored.status_change_kind == "CORRECTION"
+            assert stored.status_changed_at == dt(day=16)
+            assert stored.status_changed_by_actor == "USER"
+            assert stored.status_reason == R1C04A_REASON
+        if clear_nullable:
+            assert stored.raw_value is None and stored.normalized_value is None
+            assert stored.currency is None
+        old = await services.get_exact_evidence_version(fresh, prior.id)
+        assert old is not None and r1c03a_exact_snapshot(old) == old_exact
+        assert old.trusted_correction_rule == "legacy-historical-rule"
+        for rel in ["source_locators", "instrument_links", "derived_links"]:
+            assert {c.id for c in getattr(old, rel)}.isdisjoint(
+                {c.id for c in getattr(stored, rel)}
+            )
+        if route == "automatic":
+            assert [c.supporting_evidence_version_id for c in stored.derived_links] == [
+                alternate_id
+            ]
+            support = await services.get_exact_evidence_version(fresh, alternate_id or "")
+            assert support is not None and support.provenance_kind == "SOURCE_BACKED"
+            assert not support.derived_links and support.id != stored.id
+            old_series = await fresh.get(EvidenceSeries, prior.evidence_series_id)
+            new_series = await fresh.get(EvidenceSeries, stored.evidence_series_id)
+            assert old_series is not None and new_series is not None
+            assert old_series.origin_key != new_series.origin_key
+        after = await r1c04a_rows(fresh)
+        r1c04a_preserved(before, after)
+        new_events = [
+            row
+            for row in after[EvidenceAuditEvent.__tablename__]
+            if row["id"] not in {event["id"] for event in before[EvidenceAuditEvent.__tablename__]}
+        ]
+        assert len(new_events) == (1 if route == "same" else 2)
+        events = [event for event in new_events if event["aggregate_id"] == stored.id]
+        assert len(events) == 1
+        event = events[0]
+        actor = {"same": "USER", "automatic": "IMPORTER", "direct": "SYSTEM"}.get(
+            route, "ADMIN_SCRIPT"
+        )
+        occurred_at = dt(day=17) if route in {"initial", "underlying"} else dt(day=16)
+        assert event["aggregate_type"] == "EvidenceVersion"
+        assert event["event_type"] == (
+            "EVIDENCE_CORRECTION" if route == "same" else "EVIDENCE_VERSION_CREATED"
+        )
+        assert event["actor"] == actor and event["occurred_at"] == occurred_at
+        assert stored.created_by_actor == actor and stored.created_at == occurred_at
+        if route != "same":
+            series_event = [e for e in new_events if e["aggregate_id"] == stored.evidence_series_id]
+            assert len(series_event) == 1
+            assert series_event[0]["aggregate_type"] == "EvidenceSeries"
+            assert series_event[0]["event_type"] == "EVIDENCE_SERIES_CREATED"
+            assert series_event[0]["actor"] == actor
+            assert series_event[0]["occurred_at"] == occurred_at
+        payload = event["payload"]
+        if route == "same":
+            overrides = dict(body)
+            if clear_nullable:
+                overrides.update(raw_value=None, normalized_value=None, currency=None)
+            assert payload == {
+                "evidence_series_id": prior.evidence_series_id,
+                "expected_version": prior.version,
+                "overrides": overrides,
+                "status_changed_at": "2026-09-16T00:00:00Z",
+                "status_changed_by_actor": "USER",
+                "status_reason": R1C04A_REASON,
+                "instrument_links": [
+                    {
+                        "instrument_id": link.instrument_id,
+                        "role": link.role,
+                        "link_order": link.link_order,
+                        "link_metadata": dict(link.link_metadata or {}),
+                    }
+                    for link in prior.instrument_links
+                ],
+                "derivation_links": [],
+            }
+        else:
+            assert payload["display_text"] == stored.display_text
+            assert payload["display_title"] == prior.display_title
+            assert payload["source_document_version_id"] == prior.source_document_version_id
+            assert payload["verification_status"] == (
+                "VERIFIED" if route == "underlying" else "UNREVIEWED"
+            )
+            assert payload["as_of"] == prior.as_of.isoformat().replace("+00:00", "Z")
+            series = await fresh.get(EvidenceSeries, stored.evidence_series_id)
+            assert series is not None and payload["series_hash"] == series.series_identity_hash
+            assert payload["instrument_links"][0]["instrument_id"] == QIANGRUI_INSTRUMENT_ID
+            assert len(payload["instrument_links"]) == len(prior.instrument_links)
+            assert len(payload["locators"]) == len(prior.source_locators)
+            assert payload["derivation_links"] == (
+                [
+                    {
+                        "supporting_evidence_version_id": alternate_id,
+                        "role": "INPUT_FACT",
+                        "support_order": 1,
+                        "support_weight": None,
+                    }
+                ]
+                if route == "automatic"
+                else []
+            )
+            assert payload == {
+                "series_hash": series.series_identity_hash,
+                "source_document_version_id": prior.source_document_version_id,
+                "display_title": prior.display_title,
+                "display_text": body.get("display_text", prior.display_text),
+                "raw_value": None if clear_nullable else prior.raw_value,
+                "normalized_value": (
+                    None
+                    if clear_nullable or prior.normalized_value is None
+                    else str(prior.normalized_value)
+                ),
+                "as_of": prior.as_of.isoformat().replace("+00:00", "Z"),
+                "locators": [
+                    {
+                        "locator_type": c.locator_type,
+                        "raw_locator": c.raw_locator,
+                        "short_citation": c.short_citation,
+                        "locator_payload": dict(c.locator_payload),
+                        "quote_hash": c.quote_hash,
+                    }
+                    for c in prior.source_locators
+                ],
+                "instrument_links": [
+                    {
+                        "instrument_id": c.instrument_id,
+                        "role": c.role,
+                        "link_order": c.link_order,
+                        "link_metadata": dict(c.link_metadata or {}),
+                    }
+                    for c in prior.instrument_links
+                ],
+                "derivation_links": (
+                    [
+                        {
+                            "supporting_evidence_version_id": alternate_id,
+                            "role": "INPUT_FACT",
+                            "support_order": 1,
+                            "support_weight": None,
+                        }
+                    ]
+                    if route == "automatic"
+                    else []
+                ),
+                "verification_status": "VERIFIED" if route == "underlying" else "UNREVIEWED",
+            }
+            assert series_event[0]["payload"] == {"series_hash": series.series_identity_hash}
+    print(f"r1c04a fresh-session exact text/history/children/audit checked; route={route}")
+
+
+@pytest.mark.parametrize("route", ["initial", "direct", "underlying", "automatic"])
+async def test_r1c04a_committed_exact_request_replay_is_read_only(
+    db: AsyncSession, pg_sessionmaker: async_sessionmaker[AsyncSession], route: str
+) -> None:
+    prior, alternate_id = await r1c04a_prepare(db, route)
+    result = await r1c04a_command(
+        db, prior, alternate_id, route, {"display_text": R1C04A_TEXT}, "r1c04a-replay"
+    )
+    result_id = result.id
+    await db.commit()
+    before = await r1c04a_rows(db)
+    async with pg_sessionmaker() as caller:
+        old = await services.get_exact_evidence_version(caller, prior.id)
+        assert old is not None
+        replay = await r1c04a_command(
+            caller, old, alternate_id, route, {"display_text": R1C04A_TEXT}, "r1c04a-replay"
+        )
+        assert replay.id == result_id and replay.display_text == R1C04A_TEXT
+        assert not caller.new and not caller.dirty
+        await caller.commit()
+    async with pg_sessionmaker() as fresh:
+        assert await r1c04a_rows(fresh) == before
+    print(
+        f"r1c04a committed exact replay: route={route}; exact={result_id}; all nine tables unchanged"
+    )
+
+
+@pytest.mark.parametrize(
+    "command", ["omitted-correction", "request-review", "repair", "historical-create-replay"]
+)
+async def test_r1c04a_legacy_blank_is_readable_but_not_propagated(
+    db: AsyncSession,
+    pg_sessionmaker: async_sessionmaker[AsyncSession],
+    command: str,
+) -> None:
+    prior, _ = await r1c04a_prepare(db, "same")
+    # Disclosed constraint-legal append-only historical seed, no service bypass API.
+    values = r1c03a_columns(prior)
+    values.update(
+        id=str(uuid4()),
+        version=prior.version + 1,
+        supersedes_evidence_version_id=prior.id,
+        display_text=" \t　",
+    )
+    if command == "request-review":
+        # REVIEW_REQUEST is legal only from UNREVIEWED; the new historical
+        # seed follows that existing state table without changing prior rows.
+        values.update(verification_status="UNREVIEWED", trusted_correction_rule=None)
+    legacy = EvidenceVersion(**values)
+    for rel, model, fk in [
+        ("source_locators", EvidenceSourceLocator, "evidence_version_id"),
+        ("instrument_links", EvidenceInstrumentLink, "evidence_version_id"),
+        ("derived_links", EvidenceDerivationLink, "derived_evidence_version_id"),
+    ]:
+        children = []
+        for child in getattr(prior, rel):
+            data = r1c03a_columns(child)
+            data.update(id=str(uuid4()), **{fk: legacy.id})
+            children.append(model(**data))
+        setattr(legacy, rel, children)
+    db.add(legacy)
+    await db.flush()
+    await db.commit()
+    old = await services.get_exact_evidence_version(db, legacy.id)
+    assert old is not None and old.display_text == " \t　"
+    fields: dict[str, Any] = {}
+    if command == "historical-create-replay":
+        series = await db.get(EvidenceSeries, old.evidence_series_id)
+        assert series is not None
+        fields = r1c03a_create_fields(old, series)
+        fields.update(metric_key=series.metric_key, display_text=old.display_text)
+        # Historical COMMITTED request/response seed: no change to an old row,
+        # production rule set, hashing behavior or runtime registration.
+        payload = {
+            "series_hash": series.series_identity_hash,
+            "source_document_version_id": old.source_document_version_id,
+            "display_title": old.display_title,
+            "display_text": old.display_text,
+            "raw_value": old.raw_value,
+            "normalized_value": old.normalized_value,
+            "as_of": old.as_of,
+            "locators": [locator.__dict__ for locator in fields["locators"]],
+            "instrument_links": [link.__dict__ for link in fields["instrument_links"]],
+            "derivation_links": [],
+            "verification_status": "UNREVIEWED",
+        }
+        db.add(
+            EvidenceIdempotencyRecord(
+                scope="create_evidence_series_version",
+                idempotency_key="r1c04a-historical-replay",
+                request_hash=services.stable_hash(payload),
+                status="COMMITTED",
+                response_ref_type="EvidenceVersion",
+                response_ref_id=old.id,
+                created_at=dt(day=15),
+            )
+        )
+        await db.commit()
+    before = await r1c04a_rows(db)
+    if command == "historical-create-replay":
+        replay = await services.create_evidence_series_version(
+            db, **fields, idempotency_key="r1c04a-historical-replay"
+        )
+        assert replay.id == old.id and replay.display_text == old.display_text
+        assert not db.new and not db.dirty
+    elif command == "repair":
+        result = await r1c04a_command(
+            db, old, None, "same", {"display_text": R1C04A_TEXT}, "r1c04a-legacy"
+        )
+        assert result.display_text == R1C04A_TEXT and result.verification_status == "UNREVIEWED"
+        assert result.trusted_correction_rule is None
+    else:
+        with pytest.raises(EvidenceValidationError) as error:
+            if command == "omitted-correction":
+                await r1c04a_command(db, old, None, "same", {}, "r1c04a-legacy")
+            else:
+                await services.request_review(
+                    db,
+                    evidence_series_id=old.evidence_series_id,
+                    expected_version=old.version,
+                    reason="Review legacy body",
+                    actor="USER",
+                    idempotency_key="r1c04a-legacy",
+                )
+        assert error.value.details["reason"] == "blank_display_text"
+        assert not db.new and not db.dirty
+    await db.commit()
+    async with pg_sessionmaker() as fresh:
+        after = await r1c04a_rows(fresh)
+        r1c04a_preserved(before, after)
+        if command != "repair":
+            assert after == before
+        historic = await services.get_exact_evidence_version(fresh, old.id)
+        assert historic is not None and r1c03a_exact_snapshot(historic) == r1c03a_exact_snapshot(
+            old
+        )
+
+
+async def r1c05a_initial_fields(db: AsyncSession, suffix: str) -> dict[str, Any]:
+    """Build a structurally lawful import that has no semantic admission proof."""
+    source, source_version = await source_with_version(db, key_suffix=f"r1c05a-{suffix}")
+    return {
+        "scope_type": "INSTRUMENT",
+        "scope_key": QIANGRUI_INSTRUMENT_ID,
+        "information_type": "FACT",
+        "claim_key": f"{QIANGRUI_INSTRUMENT_ID}:r1c05a:{suffix}",
+        "metric_key": f"r1c05a_{suffix}",
+        "period_start": datetime(2026, 1, 1, tzinfo=UTC),
+        "period_end": datetime(2026, 6, 30, tzinfo=UTC),
+        "provenance_kind": "SOURCE_BACKED",
+        "primary_source_document_id": source.id,
+        "source_document_version_id": source_version.id,
+        "display_title": "Initial import without semantic proof",
+        "display_text": " \t净利润同比增长 32.5%，金额为人民币 1,234.00 万元。\n　",
+        "raw_value": "32.5%",
+        "raw_unit": "percent",
+        "normalized_value": Decimal("32.5"),
+        "normalized_unit": "percent",
+        "as_of": datetime(2026, 8, 31, tzinfo=UTC),
+        "effective_from": datetime(2026, 8, 31, tzinfo=UTC),
+        "locators": [
+            services.SourceLocatorInput(
+                locator_type="PAGE",
+                raw_locator="p.12",
+                short_citation="2026H1 p.12",
+                locator_payload={"page_number": 12},
+                quote_hash=f"r1c05a-{suffix}-quote".ljust(64, "0")[:64],
+            )
+        ],
+        "instrument_links": [
+            services.InstrumentLinkInput(
+                instrument_id=QIANGRUI_INSTRUMENT_ID,
+                role="PRIMARY_SCOPE",
+                link_order=1,
+                link_metadata={"scope": "primary"},
+            )
+        ],
+        "extractor_name": "tg-parser",
+        "extractor_version": "1.0",
+        "verification_status": "VERIFIED",
+        "status_changed_at": dt(day=16),
+        "status_changed_by_actor": "IMPORTER",
+        "status_change_kind": "INITIAL_VERIFICATION",
+        "status_reason": "Caller asserts deterministic import",
+        "created_by_actor": "IMPORTER",
+        "created_at": dt(day=16),
+    }
+
+
+async def test_r1c05a_new_initial_verified_is_fail_closed_without_residue(
+    pg_sessionmaker: async_sessionmaker[AsyncSession],
+) -> None:
+    async with pg_sessionmaker() as setup:
+        fields = await r1c05a_initial_fields(setup, "deny")
+        await setup.commit()
+        before = await r1c04a_rows(setup)
+
+    key = "r1c05a-deny"
+    async with pg_sessionmaker() as caller:
+        try:
+            created = await services.create_evidence_series_version(
+                caller, **fields, idempotency_key=key
+            )
+        except EvidenceValidationError as error:
+            assert error.code == "EVIDENCE_VALIDATION_ERROR"
+            assert error.details == {
+                "validation_path": "verification_status",
+                "reason": "unqualified_initial_verified_import",
+                "verification_status": "VERIFIED",
+            }
+        else:
+            raise AssertionError(
+                "fail-open: a structurally valid but semantically unqualified initial "
+                f"VERIFIED import became eligible as exact {created.id}"
+            )
+        assert not caller.new and not caller.dirty and not caller.deleted
+        await caller.commit()
+
+    async with pg_sessionmaker() as fresh:
+        assert await r1c04a_rows(fresh) == before
+        assert (
+            await fresh.scalar(
+                select(EvidenceIdempotencyRecord).where(
+                    EvidenceIdempotencyRecord.scope == "create_evidence_series_version",
+                    EvidenceIdempotencyRecord.idempotency_key == key,
+                )
+            )
+            is None
+        )
+
+
+def r1c05a_historical_replay_fields(
+    historical: EvidenceVersion, series: EvidenceSeries
+) -> dict[str, Any]:
+    fields = r1c03a_create_fields(historical, series)
+    fields.update(
+        metric_key=series.metric_key,
+        display_text=historical.display_text,
+        verification_status="VERIFIED",
+        status_changed_at=dt(day=13),
+        status_changed_by_actor="IMPORTER",
+        status_change_kind="INITIAL_VERIFICATION",
+        status_reason="deterministic import accepted",
+        created_by_actor="IMPORTER",
+        created_at=dt(day=13),
+    )
+    return fields
+
+
+async def test_r1c05a_historical_exact_verified_replay_is_read_only_but_new_key_denied(
+    pg_sessionmaker: async_sessionmaker[AsyncSession],
+) -> None:
+    async with pg_sessionmaker() as setup:
+        historical = await verified_evidence_fact(setup, key_suffix="r1c05a-replay")
+        series = await setup.get(EvidenceSeries, historical.evidence_series_id)
+        assert series is not None
+        fields = r1c05a_historical_replay_fields(historical, series)
+        historical_id = historical.id
+        historical_snapshot = r1c03a_exact_snapshot(historical)
+        await setup.commit()
+        before = await r1c04a_rows(setup)
+
+    historical_key = "evidence-verified-r1c05a-replay"
+    async with pg_sessionmaker() as caller:
+        replay = await services.create_evidence_series_version(
+            caller, **fields, idempotency_key=historical_key
+        )
+        assert replay.id == historical_id
+        assert not caller.new and not caller.dirty and not caller.deleted
+        await caller.commit()
+
+    async with pg_sessionmaker() as new_key_caller:
+        with pytest.raises(EvidenceValidationError) as error:
+            await services.create_evidence_series_version(
+                new_key_caller, **fields, idempotency_key="r1c05a-new-key"
+            )
+        assert error.value.details["reason"] == "unqualified_initial_verified_import"
+        assert not new_key_caller.new and not new_key_caller.dirty
+        await new_key_caller.commit()
+
+    async with pg_sessionmaker() as fresh:
+        assert await r1c04a_rows(fresh) == before
+        exact = await services.get_exact_evidence_version(fresh, historical_id)
+        assert exact is not None
+        assert r1c03a_exact_snapshot(exact) == historical_snapshot
+        current = await services.get_current_valid_evidence(fresh, series.id)
+        assert current is not None and current.id == historical_id
+
+
+@pytest.mark.parametrize(
+    ("changed_field", "changed_value"),
+    [
+        ("status_changed_at", dt(day=14)),
+        ("status_changed_by_actor", "USER"),
+        ("status_change_kind", "REVIEW_DECISION"),
+        ("status_reason", "deterministic import accepted with changed reason"),
+    ],
+)
+async def test_r1c05a_changed_historical_audit_tuple_cannot_borrow_replay(
+    pg_sessionmaker: async_sessionmaker[AsyncSession],
+    changed_field: str,
+    changed_value: Any,
+) -> None:
+    suffix = f"r1c05a-audit-{changed_field}"
+    key = f"evidence-verified-{suffix}"
+    audit_fields = (
+        "status_changed_at",
+        "status_changed_by_actor",
+        "status_change_kind",
+        "status_reason",
+    )
+    async with pg_sessionmaker() as setup:
+        historical = await verified_evidence_fact(setup, key_suffix=suffix)
+        series = await setup.get(EvidenceSeries, historical.evidence_series_id)
+        assert series is not None
+        fields = r1c05a_historical_replay_fields(historical, series)
+        original_audit = {field: fields[field] for field in audit_fields}
+        historical_id = historical.id
+        series_id = series.id
+        historical_snapshot = r1c03a_exact_snapshot(historical)
+        await setup.commit()
+        before = await r1c04a_rows(setup)
+
+    fields[changed_field] = changed_value
+    assert fields["verification_status"] == "VERIFIED"
+    assert fields[changed_field] != original_audit[changed_field]
+    assert all(
+        fields[field] == original_audit[field] for field in audit_fields if field != changed_field
+    )
+
+    async with pg_sessionmaker() as caller:
+        with pytest.raises(EvidenceIdempotencyConflict) as error:
+            await services.create_evidence_series_version(caller, **fields, idempotency_key=key)
+        assert error.value.details == {
+            "scope": "create_evidence_series_version",
+            "idempotency_key": key,
+            "mismatch_field": changed_field,
+            "reason": "audit_tuple_mismatch",
+        }
+        assert not caller.new and not caller.dirty and not caller.deleted
+        await caller.commit()
+
+    async with pg_sessionmaker() as fresh:
+        assert await r1c04a_rows(fresh) == before
+        exact = await services.get_exact_evidence_version(fresh, historical_id)
+        assert exact is not None
+        assert r1c03a_exact_snapshot(exact) == historical_snapshot
+        current = await services.get_current_valid_evidence(fresh, series_id)
+        assert current is not None and current.id == historical_id
+
+
+@pytest.mark.parametrize("changed_part", ["display_text", "source", "locator", "status"])
+async def test_r1c05a_changed_historical_payload_cannot_borrow_replay(
+    pg_sessionmaker: async_sessionmaker[AsyncSession], changed_part: str
+) -> None:
+    async with pg_sessionmaker() as setup:
+        historical = await verified_evidence_fact(
+            setup, key_suffix=f"r1c05a-changed-{changed_part}"
+        )
+        series = await setup.get(EvidenceSeries, historical.evidence_series_id)
+        assert series is not None
+        fields = r1c05a_historical_replay_fields(historical, series)
+        if changed_part == "display_text":
+            fields["display_text"] = f"{historical.display_text} changed"
+        elif changed_part == "source":
+            source, version = await source_with_version(
+                setup, key_suffix="r1c05a-replay-alternate-source"
+            )
+            fields.update(
+                primary_source_document_id=source.id,
+                source_document_version_id=version.id,
+            )
+        elif changed_part == "locator":
+            locator = fields["locators"][0]
+            fields["locators"] = [
+                services.SourceLocatorInput(
+                    locator_type=locator.locator_type,
+                    raw_locator="p.13",
+                    short_citation="2026H1 p.13",
+                    locator_payload={"page_number": 13},
+                    quote_hash="changed-locator-quote".ljust(64, "0")[:64],
+                )
+            ]
+        else:
+            fields.update(
+                verification_status="UNREVIEWED",
+                status_changed_at=None,
+                status_changed_by_actor=None,
+                status_change_kind=None,
+                status_reason=None,
+            )
+        key = f"evidence-verified-r1c05a-changed-{changed_part}"
+        historical_id = historical.id
+        historical_snapshot = r1c03a_exact_snapshot(historical)
+        await setup.commit()
+        before = await r1c04a_rows(setup)
+
+    async with pg_sessionmaker() as caller:
+        with pytest.raises(EvidenceIdempotencyConflict):
+            await services.create_evidence_series_version(caller, **fields, idempotency_key=key)
+        assert not caller.new and not caller.dirty and not caller.deleted
+        await caller.commit()
+
+    async with pg_sessionmaker() as fresh:
+        assert await r1c04a_rows(fresh) == before
+        exact = await services.get_exact_evidence_version(fresh, historical_id)
+        assert exact is not None
+        assert r1c03a_exact_snapshot(exact) == historical_snapshot
+
+
+async def test_r1c05a_ordinary_initial_and_review_verify_lifecycle_remain_legal(
+    pg_sessionmaker: async_sessionmaker[AsyncSession],
+) -> None:
+    async with pg_sessionmaker() as caller:
+        fields = await r1c05a_initial_fields(caller, "ordinary")
+        display_text = fields["display_text"]
+        fields.update(
+            verification_status="UNREVIEWED",
+            status_changed_at=None,
+            status_changed_by_actor=None,
+            status_change_kind=None,
+            status_reason=None,
+        )
+        initial = await services.create_evidence_series_version(
+            caller, **fields, idempotency_key="r1c05a-ordinary"
+        )
+        assert initial.version == 1 and initial.verification_status == "UNREVIEWED"
+        assert initial.display_text == display_text
+        pending = await services.request_review(
+            caller,
+            evidence_series_id=initial.evidence_series_id,
+            expected_version=initial.version,
+            reason="R1C05A ordinary review",
+            actor="USER",
+            idempotency_key="r1c05a-ordinary-review",
+            as_of=dt(day=17),
+        )
+        verified = await services.verify_or_reject(
+            caller,
+            evidence_series_id=initial.evidence_series_id,
+            expected_version=pending.version,
+            decision="VERIFIED",
+            reason="R1C05A review accepted",
+            actor="USER",
+            idempotency_key="r1c05a-ordinary-verify",
+            as_of=dt(day=18),
+        )
+        assert [initial.version, pending.version, verified.version] == [1, 2, 3]
+        assert verified.verification_status == "VERIFIED"
+        assert verified.trusted_correction_rule is None
+        ids = (initial.id, pending.id, verified.id)
+        series_id = initial.evidence_series_id
+        await caller.commit()
+
+    async with pg_sessionmaker() as fresh:
+        versions = list(
+            await fresh.scalars(
+                select(EvidenceVersion)
+                .where(EvidenceVersion.evidence_series_id == series_id)
+                .order_by(EvidenceVersion.version)
+            )
+        )
+        assert [version.id for version in versions] == list(ids)
+        assert all(version.display_text == display_text for version in versions)
+        eligible = await services.get_current_valid_evidence(fresh, series_id)
+        assert eligible is not None and eligible.id == verified.id
+
+
+# R1C-05C-01: new-write from-status admission; legacy fixtures below are history only.
+R1C05C01_ROUTES = ["same", "automatic", "direct", "underlying"]
+R1C05C01_DENIED = ["PENDING_REVIEW", "DISPUTED", "REJECTED", "INVALIDATED", "RETRACTED"]
+R1C05C01_REASON = "R1C05C01 ordinary correction admission"
+
+
+async def r1c05c01_rows(db: AsyncSession) -> dict[str, list[dict[str, Any]]]:
+    result = {}
+    for model in R1C04A_MODELS:
+        table = model.__table__
+        rows = (await db.execute(select(table).order_by(*table.primary_key.columns))).mappings()
+        result[table.name] = [dict(row) for row in rows]
+    return result
+
+
+async def r1c05c01_prepare(
+    db: AsyncSession, route: str, status: str
+) -> tuple[EvidenceVersion, str | None]:
+    support = await evidence_fact(db, key_suffix="r1c05c01-support")
+    prior = support
+    alternate_id = None
+    if route == "automatic":
+        corrected = await services.revise_correct_evidence(
+            db,
+            evidence_series_id=support.evidence_series_id,
+            expected_version=support.version,
+            display_text="Alternate exact financial support",
+            status_changed_at=dt(day=13),
+            status_changed_by_actor="USER",
+            status_reason="R1C05C01 lawful support correction",
+            idempotency_key="c01-support-correct",
+        )
+        pending = await services.request_review(
+            db,
+            evidence_series_id=support.evidence_series_id,
+            expected_version=corrected.version,
+            reason="Support review",
+            actor="USER",
+            idempotency_key="c01-support-review",
+        )
+        alternate = await services.verify_or_reject(
+            db,
+            evidence_series_id=support.evidence_series_id,
+            expected_version=pending.version,
+            decision="VERIFIED",
+            reason="Support accepted",
+            actor="USER",
+            idempotency_key="c01-support-verify",
+        )
+        assert len({support.id, corrected.id, pending.id, alternate.id}) == 4
+        assert alternate.verification_status == "VERIFIED" and not alternate.derived_links
+        alternate_id = alternate.id
+        prior = await services.create_evidence_series_version(
+            db,
+            scope_type="INSTRUMENT",
+            scope_key=QIANGRUI_INSTRUMENT_ID,
+            information_type="THESIS_INFERENCE",
+            claim_key="r1c05c01-derived",
+            provenance_kind="DERIVED",
+            display_title="Financial inference",
+            display_text="Financial inference",
+            as_of=dt(),
+            created_by_actor="IMPORTER",
+            derivation_links=[services.DerivationLinkInput(support.id, "INPUT_FACT", 1)],
+            instrument_links=[
+                services.InstrumentLinkInput(QIANGRUI_INSTRUMENT_ID, "PRIMARY_SCOPE", 1)
+            ],
+            idempotency_key="c01-derived",
+        )
+        assert prior.id not in {support.id, alternate.id}
+        print(f"r1c05c01 lawful automatic support exact IDs: {support.id}, {alternate.id}")
+    if status != "UNREVIEWED":
+        prior = await services.request_review(
+            db,
+            evidence_series_id=prior.evidence_series_id,
+            expected_version=prior.version,
+            reason="Prior review",
+            actor="USER",
+            idempotency_key="c01-prior-review",
+        )
+        if status != "PENDING_REVIEW":
+            prior = await services.verify_or_reject(
+                db,
+                evidence_series_id=prior.evidence_series_id,
+                expected_version=prior.version,
+                decision="REJECTED" if status == "REJECTED" else "VERIFIED",
+                reason="Prior decision",
+                actor="USER",
+                idempotency_key="c01-prior-decision",
+            )
+            if status == "DISPUTED":
+                prior = await services.mark_disputed(
+                    db,
+                    evidence_series_id=prior.evidence_series_id,
+                    expected_version=prior.version,
+                    reason="Prior disputed",
+                    actor="USER",
+                    idempotency_key="c01-prior-dispute",
+                )
+            elif status in {"INVALIDATED", "RETRACTED"}:
+                prior = await services.retract_or_invalidate(
+                    db,
+                    evidence_series_id=prior.evidence_series_id,
+                    expected_version=prior.version,
+                    target_status=status,
+                    reason="Prior tombstone",
+                    actor="USER",
+                    idempotency_key="c01-prior-tombstone",
+                )
+    assert prior.verification_status == status
+    await db.commit()
+    assert not db.in_transaction()
+    print(
+        f"r1c05c01 committed setup: route={route}, status={status}, exact={prior.id}, "
+        f"server={db.get_bind().dialect.server_version_info}"
+    )
+    return prior, alternate_id
+
+
+async def r1c05c01_fields(db: AsyncSession, prior: EvidenceVersion, route: str) -> dict[str, Any]:
+    series = await db.get(EvidenceSeries, prior.evidence_series_id)
+    assert series is not None
+    fields = r1c03a_create_fields(prior, series)
+    fields.update(
+        display_text=R1C04A_TEXT, created_by_actor="SYSTEM" if route == "direct" else "ADMIN_SCRIPT"
+    )
+    return fields
+
+
+async def r1c05c01_command(
+    db: AsyncSession,
+    prior: EvidenceVersion,
+    alternate_id: str | None,
+    route: str,
+    key: str,
+    *,
+    explicit_none: bool = False,
+) -> EvidenceVersion:
+    rule: dict[str, Any] = {"trusted_correction_rule": None} if explicit_none else {}
+    audit: dict[str, Any] = {
+        "status_changed_at": dt(day=20),
+        "status_changed_by_actor": "USER",
+        "status_reason": R1C05C01_REASON,
+        "idempotency_key": key,
+    }
+    if route in {"same", "automatic"}:
+        children: dict[str, Any] = {}
+        if route == "automatic":
+            assert alternate_id is not None
+            children["derivation_links"] = [
+                services.DerivationLinkInput(alternate_id, "INPUT_FACT", 1)
+            ]
+        return await services.revise_correct_evidence(
+            db,
+            evidence_series_id=prior.evidence_series_id,
+            expected_version=prior.version,
+            display_text=R1C04A_TEXT,
+            **children,
+            **audit,
+            **rule,
+        )
+    fields = await r1c05c01_fields(db, prior, route)
+    if route == "direct":
+        return await services.create_replacement_evidence_series(
+            db,
+            prior_evidence_version_id=prior.id,
+            **fields,
+            **audit,
+            **rule,
+        )
+    assert route == "underlying"
+    return await services.create_evidence_series_version(
+        db,
+        **fields,
+        created_at=dt(day=21),
+        supersedes_evidence_version_id=prior.id,
+        verification_status="VERIFIED",
+        status_change_kind="CORRECTION",
+        **audit,
+        **rule,
+    )
+
+
+def r1c05c01_create_payload(
+    fields: dict[str, Any], series_hash: str, status: str
+) -> dict[str, Any]:
+    return {
+        "series_hash": series_hash,
+        "source_document_version_id": fields["source_document_version_id"],
+        "display_title": fields["display_title"],
+        "display_text": fields["display_text"],
+        "raw_value": fields["raw_value"],
+        "normalized_value": fields["normalized_value"],
+        "as_of": fields["as_of"],
+        "locators": [x.__dict__ for x in fields["locators"]],
+        "instrument_links": [x.__dict__ for x in fields["instrument_links"]],
+        "derivation_links": [],
+        "verification_status": status,
+    }
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("route", R1C05C01_ROUTES)
+@pytest.mark.parametrize("status", R1C05C01_DENIED)
+async def test_r1c05c01_forbidden_status_commit_fresh_no_residue(
+    db: AsyncSession,
+    pg_sessionmaker: async_sessionmaker[AsyncSession],
+    route: str,
+    status: str,
+) -> None:
+    prior, alternate_id = await r1c05c01_prepare(db, route, status)
+    old = r1c03a_exact_snapshot(prior)
+    before = await r1c05c01_rows(db)
+    with pytest.raises(services.EvidenceInvalidStateTransition) as error:
+        await r1c05c01_command(db, prior, alternate_id, route, "c01-denied")
+    assert error.value.code == "EVIDENCE_INVALID_STATE_TRANSITION"
+    assert error.value.details["prior_evidence_version_id"] == prior.id
+    assert error.value.details["evidence_series_id"] == prior.evidence_series_id
+    assert error.value.details["from_status"] == status
+    assert not db.new and not db.dirty and not db.deleted
+    await db.commit()
+    async with pg_sessionmaker() as fresh:
+        assert fresh is not db
+        after = await r1c05c01_rows(fresh)
+        assert after == before
+        exact = await services.get_exact_evidence_version(fresh, prior.id)
+        assert exact is not None and r1c03a_exact_snapshot(exact) == old
+        current = await services.get_current_evidence(fresh, prior.evidence_series_id)
+        assert current is not None and current.id == prior.id
+        assert not any(
+            row["idempotency_key"] in {"c01-denied", "c01-denied:inner"}
+            for row in after[EvidenceIdempotencyRecord.__tablename__]
+        )
+        print(
+            f"r1c05c01 caller-commit fresh-nine-table equality: {route}/{status}, "
+            f"before={services.stable_hash(before)}, after={services.stable_hash(after)}"
+        )
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("route", R1C05C01_ROUTES)
+@pytest.mark.parametrize("status", ["VERIFIED", "UNREVIEWED"])
+@pytest.mark.parametrize("explicit_none", [False, True], ids=["omitted", "none"])
+async def test_r1c05c01_allowed_routing_history_audit(
+    db: AsyncSession,
+    pg_sessionmaker: async_sessionmaker[AsyncSession],
+    route: str,
+    status: str,
+    explicit_none: bool,
+) -> None:
+    prior, alternate_id = await r1c05c01_prepare(db, route, status)
+    before = await r1c05c01_rows(db)
+    old = r1c03a_exact_snapshot(prior)
+    fields = await r1c05c01_fields(db, prior, route) if route in {"direct", "underlying"} else None
+    result = await r1c05c01_command(
+        db,
+        prior,
+        alternate_id,
+        route,
+        "c01-positive",
+        explicit_none=explicit_none,
+    )
+    result_id = result.id
+    await db.commit()
+    async with pg_sessionmaker() as fresh:
+        stored = await services.get_exact_evidence_version(fresh, result_id)
+        original = await services.get_exact_evidence_version(fresh, prior.id)
+        assert stored is not None and original is not None
+        assert r1c03a_exact_snapshot(original) == old
+        assert stored.verification_status == "UNREVIEWED" and stored.trusted_correction_rule is None
+        assert stored.display_text == R1C04A_TEXT
+        assert await services.get_current_valid_evidence(fresh, stored.evidence_series_id) is None
+        assert (
+            stored.status_changed_at,
+            stored.status_changed_by_actor,
+            stored.status_change_kind,
+            stored.status_reason,
+        ) == (dt(day=20), "USER", "CORRECTION", R1C05C01_REASON)
+        assert stored.supersedes_evidence_version_id == prior.id
+        if route == "same":
+            assert stored.evidence_series_id == prior.evidence_series_id
+            assert stored.version == prior.version + 1
+        else:
+            assert stored.evidence_series_id != prior.evidence_series_id and stored.version == 1
+        for relationship in ["source_locators", "instrument_links", "derived_links"]:
+            assert {x.id for x in getattr(original, relationship)}.isdisjoint(
+                x.id for x in getattr(stored, relationship)
+            )
+        if route == "automatic":
+            assert [x.supporting_evidence_version_id for x in stored.derived_links] == [
+                alternate_id
+            ]
+            old_series = await fresh.get(EvidenceSeries, prior.evidence_series_id)
+            new_series = await fresh.get(EvidenceSeries, stored.evidence_series_id)
+            assert old_series is not None and new_series is not None
+            assert old_series.series_identity_hash != new_series.series_identity_hash
+            assert old_series.origin_key != new_series.origin_key
+            support = await services.get_exact_evidence_version(fresh, alternate_id or "")
+            assert support is not None and not support.derived_links and support.id != stored.id
+        after = await r1c05c01_rows(fresh)
+        r1c04a_preserved(before, after)
+        old_ids = {x["id"] for x in before[EvidenceAuditEvent.__tablename__]}
+        events = [x for x in after[EvidenceAuditEvent.__tablename__] if x["id"] not in old_ids]
+        assert len(events) == (1 if route == "same" else 2)
+        version_events = [x for x in events if x["aggregate_id"] == stored.id]
+        assert len(version_events) == 1
+        event = version_events[0]
+        actor = {
+            "same": "USER",
+            "automatic": "USER" if status == "VERIFIED" else "IMPORTER",
+            "direct": "SYSTEM",
+            "underlying": "ADMIN_SCRIPT",
+        }[route]
+        occurred = dt(day=21) if route == "underlying" else dt(day=20)
+        assert event["aggregate_type"] == "EvidenceVersion"
+        assert event["event_type"] == (
+            "EVIDENCE_CORRECTION" if route == "same" else "EVIDENCE_VERSION_CREATED"
+        )
+        assert event["actor"] == stored.created_by_actor == actor
+        assert event["occurred_at"] == stored.created_at == occurred
+        if route == "same":
+            expected = {
+                "evidence_series_id": prior.evidence_series_id,
+                "expected_version": prior.version,
+                "overrides": {
+                    "display_text": R1C04A_TEXT,
+                    **({"trusted_correction_rule": None} if explicit_none else {}),
+                },
+                "status_changed_at": dt(day=20),
+                "status_changed_by_actor": "USER",
+                "status_reason": R1C05C01_REASON,
+                "instrument_links": [
+                    x.__dict__ for x in services._current_instrument_inputs(prior)
+                ],
+                "derivation_links": [],
+            }
+        else:
+            series = await fresh.get(EvidenceSeries, stored.evidence_series_id)
+            assert series is not None
+            if fields is None:
+                prior_series = await fresh.get(EvidenceSeries, prior.evidence_series_id)
+                assert prior_series is not None
+                fields = r1c03a_create_fields(prior, prior_series)
+                fields["display_text"] = R1C04A_TEXT
+                expected = r1c05c01_create_payload(
+                    fields, series.series_identity_hash, "UNREVIEWED"
+                )
+                expected["derivation_links"] = [
+                    services.DerivationLinkInput(alternate_id or "", "INPUT_FACT", 1).__dict__
+                ]
+            else:
+                expected = r1c05c01_create_payload(
+                    fields,
+                    series.series_identity_hash,
+                    "VERIFIED" if route == "underlying" else "UNREVIEWED",
+                )
+            series_events = [x for x in events if x["aggregate_id"] == series.id]
+            assert len(series_events) == 1
+            se = series_events[0]
+            assert se["aggregate_type"] == "EvidenceSeries"
+            assert se["event_type"] == "EVIDENCE_SERIES_CREATED"
+            assert se["actor"] == actor and se["occurred_at"] == occurred
+            assert se["payload"] == {"series_hash": series.series_identity_hash}
+        assert event["payload"] == json.loads(services.canonical_json(expected))
+        print(
+            f"r1c05c01 positive persisted: {route}/{status}, exact={stored.id}, "
+            f"supersedes={stored.supersedes_evidence_version_id}, audit={event}"
+        )
+        pending = await services.request_review(
+            fresh,
+            evidence_series_id=stored.evidence_series_id,
+            expected_version=stored.version,
+            reason="Result still requires review",
+            actor="USER",
+            idempotency_key="c01-result-review",
+        )
+        accepted = await services.verify_or_reject(
+            fresh,
+            evidence_series_id=stored.evidence_series_id,
+            expected_version=pending.version,
+            decision="VERIFIED",
+            reason="Explicit result review",
+            actor="USER",
+            idempotency_key="c01-result-verify",
+        )
+        assert accepted.verification_status == "VERIFIED"
+        await fresh.commit()
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("route", ["automatic", "direct", "underlying"])
+async def test_r1c05c01_committed_exact_replay_read_only(
+    db: AsyncSession,
+    pg_sessionmaker: async_sessionmaker[AsyncSession],
+    route: str,
+) -> None:
+    prior, alternate_id = await r1c05c01_prepare(db, route, "UNREVIEWED")
+    result = await r1c05c01_command(db, prior, alternate_id, route, "c01-replay")
+    result_id = result.id
+    await db.commit()
+    before = await r1c05c01_rows(db)
+    async with pg_sessionmaker() as caller:
+        original = await services.get_exact_evidence_version(caller, prior.id)
+        assert original is not None
+        replay = await r1c05c01_command(caller, original, alternate_id, route, "c01-replay")
+        assert replay.id == result_id and not caller.new and not caller.dirty
+        await caller.commit()
+    async with pg_sessionmaker() as fresh:
+        assert await r1c05c01_rows(fresh) == before
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("route", ["direct", "underlying"])
+async def test_r1c05c01_legacy_forbidden_prior_committed_replay(
+    db: AsyncSession,
+    pg_sessionmaker: async_sessionmaker[AsyncSession],
+    route: str,
+) -> None:
+    """Disclosed ORM history seed: never a production admission bypass."""
+    prior, alternate_id = await r1c05c01_prepare(db, route, "PENDING_REVIEW")
+    fields = await r1c05c01_fields(db, prior, route)
+    prior_series = await db.get(EvidenceSeries, prior.evidence_series_id)
+    assert prior_series is not None
+    occurred = dt(day=21) if route == "underlying" else dt(day=20)
+    series_values = r1c03a_columns(prior_series)
+    series_values.update(
+        id=str(uuid4()),
+        metric_key=fields["metric_key"],
+        created_by_actor=fields["created_by_actor"],
+        created_at=occurred,
+    )
+    identity = services._series_identity_hash(
+        **{
+            k: series_values[k]
+            for k in [
+                "scope_type",
+                "scope_key",
+                "information_type",
+                "claim_key",
+                "metric_key",
+                "period_start",
+                "period_end",
+                "provenance_kind",
+                "primary_source_document_id",
+                "origin_key",
+            ]
+        }
+    )
+    series_values["series_identity_hash"] = identity
+    series = EvidenceSeries(**series_values)
+    values = r1c03a_columns(prior)
+    values.update(
+        id=str(uuid4()),
+        evidence_series_id=series.id,
+        version=1,
+        metric_key=fields["metric_key"],
+        display_text=R1C04A_TEXT,
+        verification_status="UNREVIEWED",
+        trusted_correction_rule=None,
+        supersedes_evidence_version_id=prior.id,
+        status_changed_at=dt(day=20),
+        status_changed_by_actor="USER",
+        status_change_kind="CORRECTION",
+        status_reason=R1C05C01_REASON,
+        created_at=occurred,
+        created_by_actor=fields["created_by_actor"],
+    )
+    legacy = EvidenceVersion(**values)
+    for relationship, model in [
+        ("source_locators", EvidenceSourceLocator),
+        ("instrument_links", EvidenceInstrumentLink),
+    ]:
+        copied = []
+        for child in getattr(prior, relationship):
+            v = r1c03a_columns(child)
+            v.update(id=str(uuid4()), evidence_version_id=legacy.id)
+            copied.append(model(**v))
+        setattr(legacy, relationship, copied)
+    db.add_all([series, legacy])
+    payload = r1c05c01_create_payload(
+        fields, identity, "VERIFIED" if route == "underlying" else "UNREVIEWED"
+    )
+    key = "c01-legacy"
+    records = [
+        (
+            "create_evidence_series_version",
+            key if route == "underlying" else key + ":inner",
+            services.stable_hash(payload),
+        )
+    ]
+    if route == "direct":
+        records.append(
+            (
+                "create_replacement_evidence_series",
+                key,
+                services.stable_hash(
+                    {
+                        "prior_evidence_version_id": prior.id,
+                        "new_identity": identity,
+                        "display_title": fields["display_title"],
+                        "display_text": R1C04A_TEXT,
+                        "status_changed_at": dt(day=20),
+                        "status_changed_by_actor": "USER",
+                        "status_reason": R1C05C01_REASON,
+                    }
+                ),
+            )
+        )
+    for scope, record_key, request_hash in records:
+        db.add(
+            EvidenceIdempotencyRecord(
+                scope=scope,
+                idempotency_key=record_key,
+                request_hash=request_hash,
+                status="COMMITTED",
+                response_ref_type="EvidenceVersion",
+                response_ref_id=legacy.id,
+                created_at=dt(day=20),
+            )
+        )
+    services._audit(
+        db,
+        "EvidenceSeries",
+        series.id,
+        "EVIDENCE_SERIES_CREATED",
+        {"series_hash": identity},
+        fields["created_by_actor"],
+        occurred,
+    )
+    services._audit(
+        db,
+        "EvidenceVersion",
+        legacy.id,
+        "EVIDENCE_VERSION_CREATED",
+        payload,
+        fields["created_by_actor"],
+        occurred,
+    )
+    await db.commit()
+    before = await r1c05c01_rows(db)
+    async with pg_sessionmaker() as caller:
+        original = await services.get_exact_evidence_version(caller, prior.id)
+        assert original is not None
+        replay = await r1c05c01_command(caller, original, alternate_id, route, key)
+        assert replay.id == legacy.id and not caller.new and not caller.dirty
+        await caller.commit()
+    async with pg_sessionmaker() as caller:
+        original = await services.get_exact_evidence_version(caller, prior.id)
+        assert original is not None
+        with pytest.raises(services.EvidenceInvalidStateTransition):
+            await r1c05c01_command(caller, original, alternate_id, route, "c01-legacy-new-key")
+        await caller.commit()
+    async with pg_sessionmaker() as fresh:
+        assert await r1c05c01_rows(fresh) == before
+    print(f"r1c05c01 disclosed historical COMMITTED fixture: {route}, response={legacy.id}")

@@ -608,6 +608,8 @@ async def create_evidence_series_version(
     supersedes_evidence_version_id: str | None = None,
 ) -> EvidenceVersion:
     """Create an EvidenceSeries if needed and insert immutable version 1."""
+    if not isinstance(display_text, str):
+        _validate_display_text(display_text)
     _validate_identity_enums(scope_type, information_type, provenance_kind)
     _ensure_actor(created_by_actor)
     locators = locators or ()
@@ -688,11 +690,44 @@ async def create_evidence_series_version(
             raise EvidencePersistenceConflict(
                 "EvidenceVersion idempotency record points to missing row"
             )
+        if existing.verification_status == "VERIFIED" and (
+            existing.supersedes_evidence_version_id is None
+        ):
+            requested_audit_tuple = {
+                "status_changed_at": status_changed_at,
+                "status_changed_by_actor": status_changed_by_actor,
+                "status_change_kind": status_change_kind,
+                "status_reason": status_reason,
+            }
+            for field, requested_value in requested_audit_tuple.items():
+                if requested_value != getattr(existing, field):
+                    raise EvidenceIdempotencyConflict(
+                        "Idempotent replay lifecycle audit tuple does not match",
+                        scope="create_evidence_series_version",
+                        idempotency_key=idempotency_key,
+                        mismatch_field=field,
+                        reason="audit_tuple_mismatch",
+                    )
         _validate_trusted_correction_rule(trusted_correction_rule, replayed_version=existing)
         return existing
 
+    _validate_display_text(display_text)
     _validate_trusted_correction_rule(trusted_correction_rule)
+    if supersedes_evidence_version_id is None and verification_status == "VERIFIED":
+        raise EvidenceValidationError(
+            "Initial VERIFIED import requires an approved deterministic validator",
+            validation_path="verification_status",
+            reason="unqualified_initial_verified_import",
+            verification_status=verification_status,
+        )
     if supersedes_evidence_version_id is not None and trusted_correction_rule is None:
+        prior = await get_exact_evidence_version(db, supersedes_evidence_version_id)
+        if prior is None:
+            raise EvidenceVersionNotFound(
+                f"EvidenceVersion {supersedes_evidence_version_id} not found",
+                evidence_version_id=supersedes_evidence_version_id,
+            )
+        _validate_ordinary_correction_prior(prior)
         # A predecessor makes this a correction, even for version 1. Preserve
         # initial import and historical replay; new ordinary rows await review.
         verification_status = "UNREVIEWED"
@@ -1153,6 +1188,8 @@ async def create_replacement_evidence_series(
     if new_identity == prior_series.series_identity_hash:
         raise EvidenceValidationError("Replacement must change at least one identity dimension")
 
+    if not isinstance(display_text, str):
+        _validate_display_text(display_text)
     payload = {
         "prior_evidence_version_id": prior_evidence_version_id,
         "new_identity": new_identity,
@@ -1178,7 +1215,10 @@ async def create_replacement_evidence_series(
         _validate_trusted_correction_rule(trusted_correction_rule, replayed_version=existing)
         return existing
 
+    _validate_display_text(display_text)
     _validate_trusted_correction_rule(trusted_correction_rule)
+    if trusted_correction_rule is None:
+        _validate_ordinary_correction_prior(prior)
     created = await create_evidence_series_version(
         db,
         scope_type=scope_type,
@@ -1399,6 +1439,9 @@ async def _append_status_or_revision(
     instrument_links: Sequence[InstrumentLinkInput] | None = None,
     derivation_links: Sequence[DerivationLinkInput] | None = None,
 ) -> EvidenceVersion:
+    display_text = _override(overrides, "display_text", current.display_text)
+    if not isinstance(display_text, str):
+        _validate_display_text(display_text)
     correction_rule = _override(overrides, "trusted_correction_rule", None)
     if (
         status_change_kind == "CORRECTION"
@@ -1422,9 +1465,11 @@ async def _append_status_or_revision(
         if status_change_kind == "CORRECTION":
             _validate_trusted_correction_rule(correction_rule, replayed_version=existing)
         return existing
+    _validate_display_text(display_text)
     if status_change_kind == "CORRECTION":
         _validate_trusted_correction_rule(correction_rule)
         if correction_rule is None:
+            _validate_ordinary_correction_prior(current)
             verification_status = "UNREVIEWED"
     child_locators = _current_locator_inputs(current)
     child_links = (
@@ -1525,6 +1570,34 @@ async def _append_status_or_revision(
     if loaded is None:
         raise EvidencePersistenceConflict("EvidenceVersion was not persisted")
     return loaded
+
+
+def _validate_ordinary_correction_prior(prior: EvidenceVersion) -> None:
+    """Qualify a new ordinary write; committed replay is handled by each caller."""
+    if prior.verification_status not in {"VERIFIED", "UNREVIEWED"}:
+        raise EvidenceInvalidStateTransition(
+            "Ordinary correction requires a VERIFIED or UNREVIEWED prior",
+            prior_evidence_version_id=prior.id,
+            evidence_series_id=prior.evidence_series_id,
+            from_status=prior.verification_status,
+        )
+
+
+def _validate_display_text(value: object) -> None:
+    """Admit new body content without changing valid text or historical replay."""
+    if not isinstance(value, str):
+        reason = "invalid_display_text_type"
+    elif not value.strip():
+        reason = "blank_display_text"
+    else:
+        return
+    raise EvidenceValidationError(
+        "Evidence display_text must be a nonblank string",
+        validation_path="display_text",
+        display_text=value,
+        display_text_type=type(value).__name__,
+        reason=reason,
+    )
 
 
 def _validate_trusted_correction_rule(
