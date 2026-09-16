@@ -10,14 +10,12 @@ from __future__ import annotations
 import asyncio
 import json
 import os
-import subprocess
 from collections.abc import AsyncIterator
 from datetime import UTC, datetime
 from decimal import Decimal
 from typing import Any
 from uuid import uuid4
 
-import asyncpg
 import pytest
 import pytest_asyncio
 from backend.evidence import services
@@ -39,8 +37,9 @@ from backend.evidence.models import (
     SourceDocumentVersion,
 )
 from sqlalchemy import func, select
-from sqlalchemy.engine import make_url
-from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
+from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker
+
+from tests.evidence_pg_fixture import disposable_sessionmaker
 
 QIANGRUI_INSTRUMENT_ID = "11111111-1111-4111-8111-111111111111"
 SHENLING_INSTRUMENT_ID = "22222222-2222-4222-8222-222222222222"
@@ -84,56 +83,15 @@ FORBIDDEN_GRADE_CASES = [
 
 
 @pytest_asyncio.fixture
-async def pg_sessionmaker() -> AsyncIterator[async_sessionmaker[AsyncSession]]:
-    """Create a disposable PostgreSQL database and run Alembic migrations."""
-    admin_url = make_url(os.getenv("TG_TEST_ADMIN_DATABASE_URL", DEFAULT_ADMIN_DATABASE_URL))
-    test_db_name = f"tg_wp04_service_{uuid4().hex}"
-    admin_db = admin_url.database or "postgres"
-
-    admin_conn = await asyncpg.connect(
-        user=admin_url.username,
-        password=admin_url.password,
-        host=admin_url.host or "127.0.0.1",
-        port=admin_url.port or 5432,
-        database=admin_db,
-    )
-    await admin_conn.execute(f'CREATE DATABASE "{test_db_name}"')
-    await admin_conn.close()
-
-    test_url = admin_url.set(database=test_db_name)
-    test_database_url = test_url.render_as_string(hide_password=False)
-    subprocess.run(  # noqa: ASYNC221
-        ["alembic", "-c", "migrations/alembic.ini", "upgrade", "head"],
-        check=True,
-        env={**os.environ, "DATABASE_URL": test_database_url},
-        capture_output=True,
-        text=True,
-    )
-
-    engine = create_async_engine(test_database_url, pool_pre_ping=True)
-    sessionmaker = async_sessionmaker(engine, expire_on_commit=False, autoflush=False)
-
-    try:
+async def pg_sessionmaker(
+    request: pytest.FixtureRequest,
+) -> AsyncIterator[async_sessionmaker[AsyncSession]]:
+    """Create and release an exactly attributed disposable PostgreSQL database."""
+    async with disposable_sessionmaker(
+        os.getenv("TG_TEST_ADMIN_DATABASE_URL", DEFAULT_ADMIN_DATABASE_URL),
+        node=request.node.nodeid,
+    ) as sessionmaker:
         yield sessionmaker
-    finally:
-        await engine.dispose()
-        cleanup_conn = await asyncpg.connect(
-            user=admin_url.username,
-            password=admin_url.password,
-            host=admin_url.host or "127.0.0.1",
-            port=admin_url.port or 5432,
-            database=admin_db,
-        )
-        await cleanup_conn.execute(
-            """
-            SELECT pg_terminate_backend(pid)
-            FROM pg_stat_activity
-            WHERE datname = $1 AND pid <> pg_backend_pid()
-            """,
-            test_db_name,
-        )
-        await cleanup_conn.execute(f'DROP DATABASE IF EXISTS "{test_db_name}"')
-        await cleanup_conn.close()
 
 
 @pytest_asyncio.fixture
