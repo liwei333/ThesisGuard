@@ -1,0 +1,56 @@
+[
+  {
+    "name": "fresh-focused",
+    "result": "142 passed, 97 deselected in 117.93s (0:01:57)",
+    "exit_code": 0,
+    "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/fresh-focused.log"
+  },
+  {
+    "name": "fresh-r1c02",
+    "result": "43 passed in 34.08s",
+    "exit_code": 0,
+    "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/fresh-r1c02.log"
+  },
+  {
+    "name": "fresh-r1c01",
+    "result": "8 passed in 6.93s",
+    "exit_code": 0,
+    "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/fresh-r1c01.log"
+  },
+  {
+    "name": "fresh-r1b-wiring",
+    "result": "3 passed in 2.80s",
+    "exit_code": 0,
+    "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/fresh-r1b-wiring.log"
+  },
+  {
+    "name": "fresh-r1b-reverify",
+    "result": "4 passed in 3.66s",
+    "exit_code": 0,
+    "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/fresh-r1b-reverify.log"
+  },
+  {
+    "name": "fresh-r1a",
+    "result": "12 passed in 6.49s",
+    "exit_code": 0,
+    "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/fresh-r1a.log"
+  },
+  {
+    "name": "fresh-full-services",
+    "result": "239 passed in 176.76s (0:02:56)",
+    "exit_code": 0,
+    "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/fresh-full-services.log"
+  },
+  {
+    "name": "fresh-regression",
+    "result": "35 passed, 2 warnings in 22.48s",
+    "exit_code": 0,
+    "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/fresh-regression.log"
+  },
+  {
+    "name": "owned-boundary",
+    "result": "15 failed, 43 passed in 45.34s",
+    "exit_code": 1,
+    "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/owned-boundary.log"
+  }
+]

@@ -1,0 +1,122 @@
+{
+  "task": "TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1",
+  "timestamp_utc": "2026-09-16T01:20:16.186290+00:00",
+  "method": "Mechanical materialization of complete original Add File source plus exact subsequent recorded patch sections. No historical command executed; no source rewritten or reformatted.",
+  "artifacts": [
+    {
+      "filename": "test_wp04_02_r1b_r1_wiring_20260915.py",
+      "expected_sha256": "909f50bd902ecd9c0013121681b614fcbc302f718cc7c9d5dc96f6237d106786",
+      "actual_sha256": "909f50bd902ecd9c0013121681b614fcbc302f718cc7c9d5dc96f6237d106786",
+      "restored_path": "/tmp/test_wp04_02_r1b_r1_wiring_20260915.py",
+      "restored_from_absent_path": true,
+      "durable_copy": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/test_wp04_02_r1b_r1_wiring_20260915.py",
+      "source_records": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/test_wp04_02_r1b_r1_wiring_20260915.py.source-records.json",
+      "source_record_lines": [
+        {
+          "export": "/Users/qianduoduo/.codex/sessions/2026/09/14/rollout-2026-09-14T17-50-45-01a09f53-8329-7303-a582-0e477073f77e.jsonl",
+          "line_number": 3170,
+          "record_sha256": "c1ec8b845ec0b84f504bef0d3272ea28eeabf78904cd7735d922d26f04d07637"
+        }
+      ]
+    },
+    {
+      "filename": "test_wp04_02_r1b_reverify.py",
+      "expected_sha256": "0f7cea4d14735bd165b75d756444259a64483a97e6a338227bc09af806490cc9",
+      "actual_sha256": "0f7cea4d14735bd165b75d756444259a64483a97e6a338227bc09af806490cc9",
+      "restored_path": "/tmp/test_wp04_02_r1b_reverify.py",
+      "restored_from_absent_path": true,
+      "durable_copy": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/test_wp04_02_r1b_reverify.py",
+      "source_records": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/test_wp04_02_r1b_reverify.py.source-records.json",
+      "source_record_lines": [
+        {
+          "export": "/Users/qianduoduo/.codex/sessions/2026/09/14/rollout-2026-09-14T18-50-00-01a09f89-c36c-7403-b3b5-fe2be965523e.jsonl",
+          "line_number": 4344,
+          "record_sha256": "862b05770c5776379b7f78d33f0f24032f6e07f02ad5af76c72a4337879e8c94"
+        },
+        {
+          "export": "/Users/qianduoduo/.codex/sessions/2026/09/14/rollout-2026-09-14T18-50-00-01a09f89-c36c-7403-b3b5-fe2be965523e.jsonl",
+          "line_number": 4362,
+          "record_sha256": "c15b24cde913e425f06ecf5ee9fb3cddf2b244e19bf21ae68f2ad1ad7f4dba22"
+        },
+        {
+          "export": "/Users/qianduoduo/.codex/sessions/2026/09/14/rollout-2026-09-14T18-50-00-01a09f89-c36c-7403-b3b5-fe2be965523e.jsonl",
+          "line_number": 4376,
+          "record_sha256": "ca6148f05e36ed24ed85cd194f2cdc8150768220022fe59cc34e76a8a52eca86"
+        }
+      ]
+    },
+    {
+      "filename": "test_wp04_02_r1a_verifier.py",
+      "expected_sha256": "66be45f354d1df34370eedd9811b3bc68cf29852d45027ea576a67975b18ddfe",
+      "actual_sha256": "66be45f354d1df34370eedd9811b3bc68cf29852d45027ea576a67975b18ddfe",
+      "restored_path": "/tmp/test_wp04_02_r1a_verifier.py",
+      "restored_from_absent_path": true,
+      "durable_copy": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/test_wp04_02_r1a_verifier.py",
+      "source_records": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/test_wp04_02_r1a_verifier.py.source-records.json",
+      "source_record_lines": [
+        {
+          "export": "/Users/qianduoduo/.codex/sessions/2026/09/14/rollout-2026-09-14T17-50-45-01a09f53-8329-7303-a582-0e477073f77e.jsonl",
+          "line_number": 2238,
+          "record_sha256": "d41fa298c59cbf24e7676a8e164d3ef056854836496bb9df750d1eb06a4a74bf"
+        },
+        {
+          "export": "/Users/qianduoduo/.codex/sessions/2026/09/14/rollout-2026-09-14T17-50-45-01a09f53-8329-7303-a582-0e477073f77e.jsonl",
+          "line_number": 2260,
+          "record_sha256": "8222f9bf02ad65c31fa59656c8156849f48e9bda10d7ee55de8c41f002521ae9"
+        },
+        {
+          "export": "/Users/qianduoduo/.codex/sessions/2026/09/14/rollout-2026-09-14T17-50-45-01a09f53-8329-7303-a582-0e477073f77e.jsonl",
+          "line_number": 2319,
+          "record_sha256": "16f0edca05c66d9eda522d849da574f03fa3f727c8156672561c456337c448bc"
+        },
+        {
+          "export": "/Users/qianduoduo/.codex/sessions/2026/09/14/rollout-2026-09-14T17-50-45-01a09f53-8329-7303-a582-0e477073f77e.jsonl",
+          "line_number": 2516,
+          "record_sha256": "f23fb4a88d39574046ffbae56b0936da5fb5de1fb5b5b8768a6f4b480021d80f"
+        }
+      ]
+    },
+    {
+      "filename": "test_wp04_02_r1c_01_independent_20260915.py",
+      "expected_sha256": "857914f073c552be98f895a456d2f0ec486452e1c9aed06a87176c6e7fefd48a",
+      "actual_sha256": "857914f073c552be98f895a456d2f0ec486452e1c9aed06a87176c6e7fefd48a",
+      "restored_path": "/tmp/test_wp04_02_r1c_01_independent_20260915.py",
+      "restored_from_absent_path": true,
+      "durable_copy": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/test_wp04_02_r1c_01_independent_20260915.py",
+      "source_records": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/test_wp04_02_r1c_01_independent_20260915.py.source-records.json",
+      "source_record_lines": [
+        {
+          "export": "/Users/qianduoduo/.codex/sessions/2026/09/14/rollout-2026-09-14T17-50-45-01a09f53-8329-7303-a582-0e477073f77e.jsonl",
+          "line_number": 3963,
+          "record_sha256": "f3d351b14eff360401b1e9df525ce7fb2f28ea33ca91a12ee7f82164d41fddaa"
+        },
+        {
+          "export": "/Users/qianduoduo/.codex/sessions/2026/09/14/rollout-2026-09-14T17-50-45-01a09f53-8329-7303-a582-0e477073f77e.jsonl",
+          "line_number": 4013,
+          "record_sha256": "28411f4fcc5ef36f7dba3b8b9be1a170e2c360afc73240bb6562f29215666f05"
+        }
+      ]
+    },
+    {
+      "filename": "test_wp04_02_r1c_02_independent_20260915.py",
+      "expected_sha256": "64162c0aafc3ad620ee0cab5e4d8d0ed10e6d61ab8dc21322f4364144c442a05",
+      "actual_sha256": "64162c0aafc3ad620ee0cab5e4d8d0ed10e6d61ab8dc21322f4364144c442a05",
+      "restored_path": "/tmp/test_wp04_02_r1c_02_independent_20260915.py",
+      "restored_from_absent_path": true,
+      "durable_copy": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/test_wp04_02_r1c_02_independent_20260915.py",
+      "source_records": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/test_wp04_02_r1c_02_independent_20260915.py.source-records.json",
+      "source_record_lines": [
+        {
+          "export": "/Users/qianduoduo/.codex/sessions/2026/09/14/rollout-2026-09-14T17-50-45-01a09f53-8329-7303-a582-0e477073f77e.jsonl",
+          "line_number": 4176,
+          "record_sha256": "2b8986e7fce9fb2cd812dd1cb09cd90f3924bbff6041c92b481cea6a3528b20e"
+        },
+        {
+          "export": "/Users/qianduoduo/.codex/sessions/2026/09/14/rollout-2026-09-14T17-50-45-01a09f53-8329-7303-a582-0e477073f77e.jsonl",
+          "line_number": 4216,
+          "record_sha256": "d9676b17e587f761552f7d74a39da47eb63ec31d224c0ba44d40a09139940977"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "pytest": {
+    "path": "/opt/miniconda3/lib/python3.12/site-packages/pytest/__init__.py",
+    "version": "9.1.1"
+  },
+  "pytest_asyncio": {
+    "path": "/opt/miniconda3/lib/python3.12/site-packages/pytest_asyncio/__init__.py",
+    "version": "1.4.0"
+  },
+  "asyncpg": {
+    "path": "/opt/miniconda3/lib/python3.12/site-packages/asyncpg/__init__.py",
+    "version": "0.31.0"
+  },
+  "sqlalchemy": {
+    "path": "/opt/miniconda3/lib/python3.12/site-packages/sqlalchemy/__init__.py",
+    "version": "2.0.48"
+  },
+  "fastapi": {
+    "path": "/opt/miniconda3/lib/python3.12/site-packages/fastapi/__init__.py",
+    "version": "0.135.1"
+  },
+  "pydantic": {
+    "path": "/opt/miniconda3/lib/python3.12/site-packages/pydantic/__init__.py",
+    "version": "2.12.5"
+  },
+  "httpx": {
+    "path": "/opt/miniconda3/lib/python3.12/site-packages/httpx/__init__.py",
+    "version": "0.28.1"
+  },
+  "alembic": {
+    "path": "/opt/miniconda3/lib/python3.12/site-packages/alembic/__init__.py",
+    "version": "1.18.5"
+  },
+  "boto3": {
+    "path": "/opt/homebrew/lib/python3.12/site-packages/boto3/__init__.py",
+    "version": "1.43.93"
+  },
+  "botocore": {
+    "path": "/opt/homebrew/lib/python3.12/site-packages/botocore/__init__.py",
+    "version": "1.43.93"
+  },
+  "s3transfer": {
+    "path": "/opt/homebrew/lib/python3.12/site-packages/s3transfer/__init__.py",
+    "version": "0.19.2"
+  },
+  "jmespath": {
+    "path": "/opt/miniconda3/lib/python3.12/site-packages/jmespath/__init__.py",
+    "version": "0.10.0"
+  },
+  "dramatiq": {
+    "path": "/opt/miniconda3/lib/python3.12/site-packages/dramatiq/__init__.py",
+    "version": "2.2.0"
+  },
+  "redis": {
+    "path": "/opt/miniconda3/lib/python3.12/site-packages/redis/__init__.py",
+    "version": "5.0.8"
+  },
+  "pydantic_settings": {
+    "path": "/opt/miniconda3/lib/python3.12/site-packages/pydantic_settings/__init__.py",
+    "version": "2.13.1"
+  },
+  "application_import": "success",
+  "sys_path": [
+    "",
+    "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+    "/opt/miniconda3/lib/python3.12/site-packages",
+    "/opt/homebrew/lib/python3.12/site-packages",
+    "/opt/miniconda3/lib/python312.zip",
+    "/opt/miniconda3/lib/python3.12",
+    "/opt/miniconda3/lib/python3.12/lib-dynload",
+    "/Users/qianduoduo/.local/lib/python3.12/site-packages",
+    "/Users/qianduoduo/Desktop/AI_app/ai_stock_sys/stock_service/src"
+  ],
+  "required_unset": {
+    "TG_TEST_ADMIN_DATABASE_URL": true,
+    "TG_R1C_REPLAY_BASELINE": true,
+    "TG_R1C02_REPLAY_PRIOR": true
+  },
+  "candidate_hashes": {
+    "backend/evidence/errors.py": "3cf37eb3efbf4c7bf7ab3d4213e4ce9865f2b9209fdbeb3d6c267fe84b06d1ec",
+    "backend/evidence/services.py": "43b548232df4267f377c5e144222c9278c3cc478f6800720240c4618b689ebe3",
+    "tests/test_evidence_services.py": "47ff645c0f782af67e9f6ee64520105febdb28c6547a43bf89b435bead6c5108"
+  }
+}

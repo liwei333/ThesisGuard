@@ -1,0 +1,31 @@
+{
+  "timestamp_utc": "2026-09-16T01:33:12.668603+00:00",
+  "candidate": {
+    "status": "## codex/wp04-02-evidence-domain-service...origin/codex/wp04-02-evidence-domain-service\n M backend/evidence/services.py\n M tests/test_evidence_services.py\n",
+    "branch": "codex/wp04-02-evidence-domain-service\n",
+    "head_parent": "bdd70edc153b6ed5def65ed99c41f325df45f066\nf7c50ab6cbfb0a737f01fa77d565a76ba77cb6af\n",
+    "diff": {
+      "sha256": "87191ad61bb565553ac89431386a5c029f10da630f3c60ec71e209576d2f00f8",
+      "bytes": 60912
+    },
+    "candidate_file_hashes": {
+      "backend/evidence/errors.py": "3cf37eb3efbf4c7bf7ab3d4213e4ce9865f2b9209fdbeb3d6c267fe84b06d1ec",
+      "backend/evidence/services.py": "43b548232df4267f377c5e144222c9278c3cc478f6800720240c4618b689ebe3",
+      "tests/test_evidence_services.py": "47ff645c0f782af67e9f6ee64520105febdb28c6547a43bf89b435bead6c5108"
+    }
+  },
+  "main": {
+    "status": "## main...origin/main\n?? docs/MARKET_DATA_DOMAIN_CONTRACT.md\n?? docs/MARKET_DATA_TECHNICAL_PLAN.md\n?? docs/acceptance/TASK-MD00-CONTRACT-R1-acceptance.md\n?? docs/acceptance/TASK-MD00-CONTRACT-R1-task-contract.md\n?? docs/acceptance/TASK-WP04-02-R1C-01-acceptance.md\n?? docs/acceptance/TASK-WP04-02-R1C-01-dispatch-prompt.md\n?? docs/acceptance/TASK-WP04-02-R1C-01-task-contract.md\n?? docs/acceptance/TASK-WP04-02-R1C-02-acceptance.md\n?? docs/acceptance/TASK-WP04-02-R1C-02-task-contract.md\n?? docs/acceptance/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-execution-report.md\n?? docs/acceptance/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-task-contract.md\n?? docs/acceptance/TASK-WP04-02-R1C-03A-acceptance.md\n?? docs/acceptance/TASK-WP04-02-R1C-03A-task-contract.md\n?? docs/acceptance/TASK-WP04-02-R1C-BASELINE-CONFIRM-R1-INDEPENDENT-REVIEW-acceptance.md\n?? docs/acceptance/TASK-WP04-02-R1C-BASELINE-CONFIRM-R1-acceptance.md\n?? docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/after-snapshots.json\n?? docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/archive-whitespace-check.json\n?? docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/before-snapshots.json\n?? docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/command-results.json\n?? docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/effective-runtime.json\n?? docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/prerequisite-events.json\n?? docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/recovery-manifest.json\n?? docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/restored-artifact-check.json\n?? docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/runtime-resolution.json\n?? docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/source-export-hashes.json\n?? docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/static-command-results.json\n?? docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/supplemental-findings.json\n?? docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/test-summary.json\n?? docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/test_wp04_02_r1a_verifier.py.source-records.json\n?? docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/test_wp04_02_r1b_r1_wiring_20260915.py.source-records.json\n?? docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/test_wp04_02_r1b_reverify.py.source-records.json\n?? docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/test_wp04_02_r1c_01_independent_20260915.py.source-records.json\n?? docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/test_wp04_02_r1c_02_independent_20260915.py.source-records.json\n?? docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/tg-prerequisites-finalize.py\n?? docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/tg-prerequisites-run.py\n?? docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/tg-wp04-02-prerequisites-recover.py\n?? docs/acceptance/verifiers/test_wp04_02_r1a_verifier.py\n?? docs/acceptance/verifiers/test_wp04_02_r1b_r1_wiring_20260915.py\n?? docs/acceptance/verifiers/test_wp04_02_r1b_reverify.py\n?? docs/acceptance/verifiers/test_wp04_02_r1c03a_prerequisites_boundary_20260916.py\n?? docs/acceptance/verifiers/test_wp04_02_r1c_01_independent_20260915.py\n?? docs/acceptance/verifiers/test_wp04_02_r1c_02_independent_20260915.py\n",
+    "branch": "main\n",
+    "head_parent": "7d3734bc8346c16f9bbf7f7d9806309949c996de\n6e1d38e79035bfb6cd36964a16a289f8cd332eb8\n",
+    "diff": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "candidate_file_hashes": {
+      "backend/evidence/errors.py": "3cf37eb3efbf4c7bf7ab3d4213e4ce9865f2b9209fdbeb3d6c267fe84b06d1ec",
+      "backend/evidence/services.py": "43b548232df4267f377c5e144222c9278c3cc478f6800720240c4618b689ebe3",
+      "tests/test_evidence_services.py": "47ff645c0f782af67e9f6ee64520105febdb28c6547a43bf89b435bead6c5108"
+    }
+  }
+}

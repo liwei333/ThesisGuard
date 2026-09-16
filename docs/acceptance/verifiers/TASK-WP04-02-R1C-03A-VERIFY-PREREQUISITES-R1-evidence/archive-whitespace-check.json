@@ -1,0 +1,38 @@
+[
+  {
+    "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/test_wp04_02_r1b_r1_wiring_20260915.py",
+    "trailing_whitespace_lines": [],
+    "ends_with_newline": true,
+    "action": "Preserve exact original bytes"
+  },
+  {
+    "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/test_wp04_02_r1b_reverify.py",
+    "trailing_whitespace_lines": [],
+    "ends_with_newline": true,
+    "action": "Preserve exact original bytes"
+  },
+  {
+    "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/test_wp04_02_r1a_verifier.py",
+    "trailing_whitespace_lines": [],
+    "ends_with_newline": true,
+    "action": "Preserve exact original bytes"
+  },
+  {
+    "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/test_wp04_02_r1c_01_independent_20260915.py",
+    "trailing_whitespace_lines": [],
+    "ends_with_newline": true,
+    "action": "Preserve exact original bytes"
+  },
+  {
+    "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/test_wp04_02_r1c_02_independent_20260915.py",
+    "trailing_whitespace_lines": [],
+    "ends_with_newline": true,
+    "action": "Preserve exact original bytes"
+  },
+  {
+    "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/test_wp04_02_r1c03a_prerequisites_boundary_20260916.py",
+    "trailing_whitespace_lines": [],
+    "ends_with_newline": true,
+    "action": "New verifier syntax/format checked before execution"
+  }
+]

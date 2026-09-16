@@ -1,0 +1,52 @@
+[
+  {
+    "path": "/tmp/test_wp04_02_r1b_r1_wiring_20260915.py",
+    "sha256": "909f50bd902ecd9c0013121681b614fcbc302f718cc7c9d5dc96f6237d106786",
+    "matches_fixed_hash": true
+  },
+  {
+    "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/test_wp04_02_r1b_r1_wiring_20260915.py",
+    "sha256": "909f50bd902ecd9c0013121681b614fcbc302f718cc7c9d5dc96f6237d106786",
+    "matches_fixed_hash": true
+  },
+  {
+    "path": "/tmp/test_wp04_02_r1b_reverify.py",
+    "sha256": "0f7cea4d14735bd165b75d756444259a64483a97e6a338227bc09af806490cc9",
+    "matches_fixed_hash": true
+  },
+  {
+    "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/test_wp04_02_r1b_reverify.py",
+    "sha256": "0f7cea4d14735bd165b75d756444259a64483a97e6a338227bc09af806490cc9",
+    "matches_fixed_hash": true
+  },
+  {
+    "path": "/tmp/test_wp04_02_r1a_verifier.py",
+    "sha256": "66be45f354d1df34370eedd9811b3bc68cf29852d45027ea576a67975b18ddfe",
+    "matches_fixed_hash": true
+  },
+  {
+    "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/test_wp04_02_r1a_verifier.py",
+    "sha256": "66be45f354d1df34370eedd9811b3bc68cf29852d45027ea576a67975b18ddfe",
+    "matches_fixed_hash": true
+  },
+  {
+    "path": "/tmp/test_wp04_02_r1c_01_independent_20260915.py",
+    "sha256": "857914f073c552be98f895a456d2f0ec486452e1c9aed06a87176c6e7fefd48a",
+    "matches_fixed_hash": true
+  },
+  {
+    "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/test_wp04_02_r1c_01_independent_20260915.py",
+    "sha256": "857914f073c552be98f895a456d2f0ec486452e1c9aed06a87176c6e7fefd48a",
+    "matches_fixed_hash": true
+  },
+  {
+    "path": "/tmp/test_wp04_02_r1c_02_independent_20260915.py",
+    "sha256": "64162c0aafc3ad620ee0cab5e4d8d0ed10e6d61ab8dc21322f4364144c442a05",
+    "matches_fixed_hash": true
+  },
+  {
+    "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/test_wp04_02_r1c_02_independent_20260915.py",
+    "sha256": "64162c0aafc3ad620ee0cab5e4d8d0ed10e6d61ab8dc21322f4364144c442a05",
+    "matches_fixed_hash": true
+  }
+]

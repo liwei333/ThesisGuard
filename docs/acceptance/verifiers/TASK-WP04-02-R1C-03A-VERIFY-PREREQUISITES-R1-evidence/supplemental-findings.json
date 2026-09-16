@@ -1,0 +1,39 @@
+{
+  "result": "15 failed, 43 passed; exit1",
+  "nodes": [
+    "test_rejected_trusted_commit_preserves_every_durable_row[empty-automatic]",
+    "test_rejected_trusted_commit_preserves_every_durable_row[whitespace-automatic]",
+    "test_rejected_trusted_commit_preserves_every_durable_row[unknown-automatic]",
+    "test_rejected_trusted_commit_preserves_every_durable_row[legacy-fixture-automatic]",
+    "test_rejected_trusted_commit_preserves_every_durable_row[case-automatic]",
+    "test_rejected_trusted_commit_preserves_every_durable_row[bool-automatic]",
+    "test_rejected_trusted_commit_preserves_every_durable_row[int-automatic]",
+    "test_rejected_trusted_commit_preserves_every_durable_row[mapping-automatic]",
+    "test_rejected_trusted_commit_preserves_every_durable_row[list-automatic]",
+    "test_ordinary_never_inherits_and_retains_correction_routing[omitted-automatic]",
+    "test_ordinary_never_inherits_and_retains_correction_routing[omitted-direct]",
+    "test_ordinary_never_inherits_and_retains_correction_routing[omitted-underlying-replacement]",
+    "test_ordinary_never_inherits_and_retains_correction_routing[none-automatic]",
+    "test_ordinary_never_inherits_and_retains_correction_routing[none-direct]",
+    "test_ordinary_never_inherits_and_retains_correction_routing[none-underlying-replacement]"
+  ],
+  "classification": {
+    "11_automatic_nodes": {
+      "stage": "Verifier command construction before business service call",
+      "line": 80,
+      "assertion": "old_support.supersedes_evidence_version_id is not None",
+      "observed": "None; legacy FACT seed is initial version1, so predecessor is not guaranteed",
+      "business_failure_demonstrated": false
+    },
+    "4_ordinary_direct_underlying_nodes": {
+      "stage": "Persisted audit-event assertion after successful command, caller commit, fresh-session history/status/routing checks",
+      "line": 262,
+      "expected": "EVIDENCE_CORRECTION",
+      "observed": "EVIDENCE_VERSION_CREATED",
+      "contract_basis": "Frozen contract specifies complete CORRECTION status tuple; audit event schema uses generic Created/etc., no required EVIDENCE_CORRECTION event_type literal for replacement create",
+      "business_failure_demonstrated": "Unresolved oracle contract interpretation; do not label candidate defect or adjust expectations in this task"
+    }
+  },
+  "preservation": "Executed new verifier and its complete failing log retained. No candidate or original-verifier changes; no post-failure expectation adjustment.",
+  "needed_action": "Independent verifier/dispatcher review of request construction and audit-event oracle; separately authorized corrected verifier contract if needed. No implementation repair inferred by executor."
+}

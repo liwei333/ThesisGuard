@@ -1,0 +1,12 @@
+{
+  "python": "/opt/miniconda3/bin/python",
+  "pytest": "/opt/miniconda3/bin/pytest",
+  "ruff": "/opt/miniconda3/bin/ruff",
+  "mypy": "/opt/miniconda3/bin/mypy",
+  "alembic": "/opt/miniconda3/bin/alembic",
+  "required_unset": {
+    "TG_TEST_ADMIN_DATABASE_URL": true,
+    "TG_R1C_REPLAY_BASELINE": true,
+    "TG_R1C02_REPLAY_PRIOR": true
+  }
+}

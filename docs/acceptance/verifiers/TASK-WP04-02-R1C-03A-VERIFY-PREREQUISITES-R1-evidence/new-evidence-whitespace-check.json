@@ -1,0 +1,142 @@
+[
+  {
+    "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/after-snapshots.json",
+    "trailing_whitespace_lines": [],
+    "ends_with_newline": true
+  },
+  {
+    "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/archive-whitespace-check.json",
+    "trailing_whitespace_lines": [],
+    "ends_with_newline": true
+  },
+  {
+    "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/before-snapshots.json",
+    "trailing_whitespace_lines": [],
+    "ends_with_newline": true
+  },
+  {
+    "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/command-results.json",
+    "trailing_whitespace_lines": [],
+    "ends_with_newline": true
+  },
+  {
+    "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/effective-runtime.json",
+    "trailing_whitespace_lines": [],
+    "ends_with_newline": true
+  },
+  {
+    "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/prerequisite-events.json",
+    "trailing_whitespace_lines": [],
+    "ends_with_newline": true
+  },
+  {
+    "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/recovery-manifest.json",
+    "trailing_whitespace_lines": [],
+    "ends_with_newline": true
+  },
+  {
+    "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/restored-artifact-check.json",
+    "trailing_whitespace_lines": [],
+    "ends_with_newline": true
+  },
+  {
+    "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/runtime-resolution.json",
+    "trailing_whitespace_lines": [],
+    "ends_with_newline": true
+  },
+  {
+    "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/source-export-hashes.json",
+    "trailing_whitespace_lines": [],
+    "ends_with_newline": true
+  },
+  {
+    "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/static-command-results.json",
+    "trailing_whitespace_lines": [],
+    "ends_with_newline": true
+  },
+  {
+    "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/supplemental-findings.json",
+    "trailing_whitespace_lines": [],
+    "ends_with_newline": true
+  },
+  {
+    "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/test-summary.json",
+    "trailing_whitespace_lines": [],
+    "ends_with_newline": true
+  },
+  {
+    "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/test_wp04_02_r1a_verifier.py.source-records.json",
+    "trailing_whitespace_lines": [],
+    "ends_with_newline": true
+  },
+  {
+    "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/test_wp04_02_r1b_r1_wiring_20260915.py.source-records.json",
+    "trailing_whitespace_lines": [],
+    "ends_with_newline": true
+  },
+  {
+    "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/test_wp04_02_r1b_reverify.py.source-records.json",
+    "trailing_whitespace_lines": [],
+    "ends_with_newline": true
+  },
+  {
+    "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/test_wp04_02_r1c_01_independent_20260915.py.source-records.json",
+    "trailing_whitespace_lines": [],
+    "ends_with_newline": true
+  },
+  {
+    "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/test_wp04_02_r1c_02_independent_20260915.py.source-records.json",
+    "trailing_whitespace_lines": [],
+    "ends_with_newline": true
+  },
+  {
+    "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/tg-prerequisites-finalize.py",
+    "trailing_whitespace_lines": [],
+    "ends_with_newline": true
+  },
+  {
+    "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/tg-prerequisites-run.py",
+    "trailing_whitespace_lines": [],
+    "ends_with_newline": true
+  },
+  {
+    "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/tg-wp04-02-prerequisites-recover.py",
+    "trailing_whitespace_lines": [],
+    "ends_with_newline": true
+  },
+  {
+    "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-execution-report.md",
+    "trailing_whitespace_lines": [],
+    "ends_with_newline": true
+  },
+  {
+    "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/test_wp04_02_r1b_r1_wiring_20260915.py",
+    "trailing_whitespace_lines": [],
+    "ends_with_newline": true
+  },
+  {
+    "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/test_wp04_02_r1b_reverify.py",
+    "trailing_whitespace_lines": [],
+    "ends_with_newline": true
+  },
+  {
+    "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/test_wp04_02_r1a_verifier.py",
+    "trailing_whitespace_lines": [],
+    "ends_with_newline": true
+  },
+  {
+    "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/test_wp04_02_r1c_01_independent_20260915.py",
+    "trailing_whitespace_lines": [],
+    "ends_with_newline": true
+  },
+  {
+    "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/test_wp04_02_r1c_02_independent_20260915.py",
+    "trailing_whitespace_lines": [],
+    "ends_with_newline": true
+  },
+  {
+    "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/test_wp04_02_r1c03a_prerequisites_boundary_20260916.py",
+    "trailing_whitespace_lines": [],
+    "ends_with_newline": true
+  }
+]

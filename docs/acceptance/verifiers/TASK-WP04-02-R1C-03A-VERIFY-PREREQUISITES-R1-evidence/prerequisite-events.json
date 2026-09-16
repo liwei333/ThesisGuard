@@ -1,0 +1,62 @@
+{
+  "scope": "Observed prerequisite diagnosis/startup tool results; no business SQL, dependency installation, candidate or Git mutation.",
+  "before": [
+    {
+      "command": "/usr/sbin/lsof -nP -iTCP:15432 -sTCP:LISTEN",
+      "exit_code": 1,
+      "output": "No listener"
+    },
+    {
+      "command": "/usr/local/bin/docker context inspect desktop-linux --format '{{.Name}} {{.Endpoints.docker.Host}}'",
+      "exit_code": 0,
+      "output": "desktop-linux unix:///Users/qianduoduo/.docker/run/docker.sock"
+    },
+    {
+      "command": "/usr/local/bin/docker ps -a --format '{{.ID}} {{.Names}} {{.Image}} {{.Status}} {{.Ports}}'",
+      "exit_code": 1,
+      "output": "Cannot connect: existing Docker socket absent; daemon off"
+    },
+    {
+      "command": "/usr/local/bin/docker desktop status",
+      "output": "Could not retrieve status. Is Docker Desktop running?",
+      "exit_code": null,
+      "note": "Individual exit not captured in multi-command diagnosis; batch exit0 from final help command."
+    },
+    {
+      "command": "/usr/bin/stat -f '%N size=%z modified=%Sm' /Users/qianduoduo/Library/Containers/com.docker.docker/Data/vms/0/data/Docker.raw",
+      "output": "Existing disk size494384709632, modified2026-09-16 08:47:55 local",
+      "permission": "require_escalated approved"
+    }
+  ],
+  "startup": {
+    "command": "/usr/local/bin/docker desktop start --timeout 60",
+    "exit_code": 0,
+    "output": "✓ Starting Docker Desktop",
+    "permission": "require_escalated approved",
+    "effect": "Existing daemon resumed; existing unless-stopped containers automatically resumed, including other local projects. No container creation/start/up command was issued."
+  },
+  "post_start_diagnosis": {
+    "command": "/usr/local/bin/docker volume inspect thesisguard_thesisguard-postgres-data",
+    "output": "No such volume; incorrect project-prefixed name was only queried, not created. Actual inspect Mounts identifies thesisguard-postgres-data.",
+    "exit_code": null,
+    "note": "Individual exit not captured in multi-command diagnosis; batch exit0 from postgres --version."
+  },
+  "approval_review_rejections": [],
+  "sandbox_diagnosis_notes": [
+    "Default ps denied Operation not permitted; subsequent scoped read-only checks used normal require_escalated. Docker desktop help log-hook denied OS log write but help was displayed. These were sandbox limitations, not automatic approval-review rejections."
+  ],
+  "recovery": {
+    "command": "/opt/miniconda3/bin/python /tmp/tg-wp04-02-prerequisites-recover.py",
+    "exit_code": 0,
+    "output": "All five MATCH; missing /tmp files and identical durable evidence recovered. Detailed source records in recovery-manifest.json."
+  },
+  "first_matrix_attempt": {
+    "name": "focused",
+    "exit_code": 4,
+    "result": "Conftest import failed before test collection: ModuleNotFoundError boto3. No business RED."
+  },
+  "runtime_remediation": {
+    "method": "Existing Miniconda Python3.12 primary site-packages, existing Homebrew Python3.12 fallback for boto3/botocore/s3transfer. No install/upgrade or application injection. All loaded module sources are in effective-runtime.json.",
+    "application_import_exit_code": 0
+  }
+}

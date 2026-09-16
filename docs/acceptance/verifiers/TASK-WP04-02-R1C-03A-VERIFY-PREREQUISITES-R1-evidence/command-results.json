@@ -1,0 +1,953 @@
+[
+  {
+    "name": "docker-version",
+    "argv": [
+      "/usr/local/bin/docker",
+      "version"
+    ],
+    "command": "/usr/local/bin/docker version",
+    "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+    "environment": {
+      "PATH": "/opt/miniconda3/bin:/opt/homebrew/Cellar/openjdk@17/17.0.20/libexec/openjdk.jdk/Contents/Home/bin:/Users/qianduoduo/.kimi-code/bin:/Users/qianduoduo/.grok/bin:/Users/qianduoduo/.tencent-news-cli/bin:/Users/qianduoduo/.local/bin:/opt/homebrew/opt/postgresql@16/bin:/opt/homebrew/opt/mysql@8.4/bin:/usr/local/mysql/bin:/Users/qianduoduo/.codeium/windsurf/bin:/Users/qianduoduo/.nvm/versions/node/v25.6.0/bin:/usr/local/opt/mysql-client/bin:/opt/miniconda3/bin:/opt/miniconda3/condabin:/opt/homebrew/bin:/opt/homebrew/sbin:/Library/Frameworks/Python.framework/Versions/3.5/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/pkg/env/active/bin:/opt/pmk/env/global/bin:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/qianduoduo/.cargo/bin:/Users/qianduoduo/.codex/tmp/arg0/codex-arg0TucSYj:/Users/qianduoduo/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/qianduoduo/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Users/qianduoduo/.docker/bin:/Users/qianduoduo/flutter/bin:/Users/qianduoduo/flutter/bin/cache/dart-sdk/bin:/opt/homebrew/opt/dart/libexec/bin:/Users/qianduoduo/development/flutter/bin:/Users/qianduoduo/Library/Application Support/taobao/cli/bin",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONPATH": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+      "MYPYPATH": null,
+      "PYTHONPYCACHEPREFIX": null
+    },
+    "required_unset": [
+      "TG_TEST_ADMIN_DATABASE_URL",
+      "TG_R1C_REPLAY_BASELINE",
+      "TG_R1C02_REPLAY_PRIOR"
+    ],
+    "start": "2026-09-16T01:24:21.382036+00:00",
+    "end": "2026-09-16T01:24:21.406872+00:00",
+    "exit_code": 0,
+    "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/docker-version.log",
+    "log_sha256": "27572066f8a5fd7b28225f8b0da1a4454a24590dea414555759faaf743326529"
+  },
+  {
+    "name": "docker-context",
+    "argv": [
+      "/usr/local/bin/docker",
+      "context",
+      "inspect",
+      "desktop-linux",
+      "--format",
+      "{{.Name}} {{.Endpoints.docker.Host}}"
+    ],
+    "command": "/usr/local/bin/docker context inspect desktop-linux --format '{{.Name}} {{.Endpoints.docker.Host}}'",
+    "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+    "environment": {
+      "PATH": "/opt/miniconda3/bin:/opt/homebrew/Cellar/openjdk@17/17.0.20/libexec/openjdk.jdk/Contents/Home/bin:/Users/qianduoduo/.kimi-code/bin:/Users/qianduoduo/.grok/bin:/Users/qianduoduo/.tencent-news-cli/bin:/Users/qianduoduo/.local/bin:/opt/homebrew/opt/postgresql@16/bin:/opt/homebrew/opt/mysql@8.4/bin:/usr/local/mysql/bin:/Users/qianduoduo/.codeium/windsurf/bin:/Users/qianduoduo/.nvm/versions/node/v25.6.0/bin:/usr/local/opt/mysql-client/bin:/opt/miniconda3/bin:/opt/miniconda3/condabin:/opt/homebrew/bin:/opt/homebrew/sbin:/Library/Frameworks/Python.framework/Versions/3.5/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/pkg/env/active/bin:/opt/pmk/env/global/bin:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/qianduoduo/.cargo/bin:/Users/qianduoduo/.codex/tmp/arg0/codex-arg0TucSYj:/Users/qianduoduo/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/qianduoduo/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Users/qianduoduo/.docker/bin:/Users/qianduoduo/flutter/bin:/Users/qianduoduo/flutter/bin/cache/dart-sdk/bin:/opt/homebrew/opt/dart/libexec/bin:/Users/qianduoduo/development/flutter/bin:/Users/qianduoduo/Library/Application Support/taobao/cli/bin",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONPATH": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+      "MYPYPATH": null,
+      "PYTHONPYCACHEPREFIX": null
+    },
+    "required_unset": [
+      "TG_TEST_ADMIN_DATABASE_URL",
+      "TG_R1C_REPLAY_BASELINE",
+      "TG_R1C02_REPLAY_PRIOR"
+    ],
+    "start": "2026-09-16T01:24:21.407187+00:00",
+    "end": "2026-09-16T01:24:21.423267+00:00",
+    "exit_code": 0,
+    "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/docker-context.log",
+    "log_sha256": "16c9bbe3a3c1f78832c212f22bc29569a65f64086ef9bff390c72c1b1b463173"
+  },
+  {
+    "name": "postgres-inspect",
+    "argv": [
+      "/usr/local/bin/docker",
+      "inspect",
+      "thesisguard-postgres",
+      "--format",
+      "{{json .Id}} {{json .Name}} {{json .Config.Image}} {{json .Created}} {{json .State}} {{json .HostConfig.RestartPolicy}} {{json .HostConfig.PortBindings}} {{json .Mounts}} {{json .Config.Labels}}"
+    ],
+    "command": "/usr/local/bin/docker inspect thesisguard-postgres --format '{{json .Id}} {{json .Name}} {{json .Config.Image}} {{json .Created}} {{json .State}} {{json .HostConfig.RestartPolicy}} {{json .HostConfig.PortBindings}} {{json .Mounts}} {{json .Config.Labels}}'",
+    "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+    "environment": {
+      "PATH": "/opt/miniconda3/bin:/opt/homebrew/Cellar/openjdk@17/17.0.20/libexec/openjdk.jdk/Contents/Home/bin:/Users/qianduoduo/.kimi-code/bin:/Users/qianduoduo/.grok/bin:/Users/qianduoduo/.tencent-news-cli/bin:/Users/qianduoduo/.local/bin:/opt/homebrew/opt/postgresql@16/bin:/opt/homebrew/opt/mysql@8.4/bin:/usr/local/mysql/bin:/Users/qianduoduo/.codeium/windsurf/bin:/Users/qianduoduo/.nvm/versions/node/v25.6.0/bin:/usr/local/opt/mysql-client/bin:/opt/miniconda3/bin:/opt/miniconda3/condabin:/opt/homebrew/bin:/opt/homebrew/sbin:/Library/Frameworks/Python.framework/Versions/3.5/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/pkg/env/active/bin:/opt/pmk/env/global/bin:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/qianduoduo/.cargo/bin:/Users/qianduoduo/.codex/tmp/arg0/codex-arg0TucSYj:/Users/qianduoduo/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/qianduoduo/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Users/qianduoduo/.docker/bin:/Users/qianduoduo/flutter/bin:/Users/qianduoduo/flutter/bin/cache/dart-sdk/bin:/opt/homebrew/opt/dart/libexec/bin:/Users/qianduoduo/development/flutter/bin:/Users/qianduoduo/Library/Application Support/taobao/cli/bin",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONPATH": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+      "MYPYPATH": null,
+      "PYTHONPYCACHEPREFIX": null
+    },
+    "required_unset": [
+      "TG_TEST_ADMIN_DATABASE_URL",
+      "TG_R1C_REPLAY_BASELINE",
+      "TG_R1C02_REPLAY_PRIOR"
+    ],
+    "start": "2026-09-16T01:24:21.423567+00:00",
+    "end": "2026-09-16T01:24:21.447957+00:00",
+    "exit_code": 0,
+    "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/postgres-inspect.log",
+    "log_sha256": "22bfa0f6c1dc8bf00db8438eaf2fa05aaad0d4dc97f49b31636bbee73da6ece0"
+  },
+  {
+    "name": "postgres-volume",
+    "argv": [
+      "/usr/local/bin/docker",
+      "volume",
+      "inspect",
+      "thesisguard-postgres-data"
+    ],
+    "command": "/usr/local/bin/docker volume inspect thesisguard-postgres-data",
+    "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+    "environment": {
+      "PATH": "/opt/miniconda3/bin:/opt/homebrew/Cellar/openjdk@17/17.0.20/libexec/openjdk.jdk/Contents/Home/bin:/Users/qianduoduo/.kimi-code/bin:/Users/qianduoduo/.grok/bin:/Users/qianduoduo/.tencent-news-cli/bin:/Users/qianduoduo/.local/bin:/opt/homebrew/opt/postgresql@16/bin:/opt/homebrew/opt/mysql@8.4/bin:/usr/local/mysql/bin:/Users/qianduoduo/.codeium/windsurf/bin:/Users/qianduoduo/.nvm/versions/node/v25.6.0/bin:/usr/local/opt/mysql-client/bin:/opt/miniconda3/bin:/opt/miniconda3/condabin:/opt/homebrew/bin:/opt/homebrew/sbin:/Library/Frameworks/Python.framework/Versions/3.5/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/pkg/env/active/bin:/opt/pmk/env/global/bin:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/qianduoduo/.cargo/bin:/Users/qianduoduo/.codex/tmp/arg0/codex-arg0TucSYj:/Users/qianduoduo/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/qianduoduo/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Users/qianduoduo/.docker/bin:/Users/qianduoduo/flutter/bin:/Users/qianduoduo/flutter/bin/cache/dart-sdk/bin:/opt/homebrew/opt/dart/libexec/bin:/Users/qianduoduo/development/flutter/bin:/Users/qianduoduo/Library/Application Support/taobao/cli/bin",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONPATH": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+      "MYPYPATH": null,
+      "PYTHONPYCACHEPREFIX": null
+    },
+    "required_unset": [
+      "TG_TEST_ADMIN_DATABASE_URL",
+      "TG_R1C_REPLAY_BASELINE",
+      "TG_R1C02_REPLAY_PRIOR"
+    ],
+    "start": "2026-09-16T01:24:21.448331+00:00",
+    "end": "2026-09-16T01:24:21.469839+00:00",
+    "exit_code": 0,
+    "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/postgres-volume.log",
+    "log_sha256": "015777259e5bdaca959f2b04aebe84884b44482c4c66896fa6da5efb3f3bd25d"
+  },
+  {
+    "name": "postgres-ready",
+    "argv": [
+      "/usr/local/bin/docker",
+      "exec",
+      "thesisguard-postgres",
+      "pg_isready",
+      "-U",
+      "thesisguard",
+      "-d",
+      "postgres"
+    ],
+    "command": "/usr/local/bin/docker exec thesisguard-postgres pg_isready -U thesisguard -d postgres",
+    "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+    "environment": {
+      "PATH": "/opt/miniconda3/bin:/opt/homebrew/Cellar/openjdk@17/17.0.20/libexec/openjdk.jdk/Contents/Home/bin:/Users/qianduoduo/.kimi-code/bin:/Users/qianduoduo/.grok/bin:/Users/qianduoduo/.tencent-news-cli/bin:/Users/qianduoduo/.local/bin:/opt/homebrew/opt/postgresql@16/bin:/opt/homebrew/opt/mysql@8.4/bin:/usr/local/mysql/bin:/Users/qianduoduo/.codeium/windsurf/bin:/Users/qianduoduo/.nvm/versions/node/v25.6.0/bin:/usr/local/opt/mysql-client/bin:/opt/miniconda3/bin:/opt/miniconda3/condabin:/opt/homebrew/bin:/opt/homebrew/sbin:/Library/Frameworks/Python.framework/Versions/3.5/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/pkg/env/active/bin:/opt/pmk/env/global/bin:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/qianduoduo/.cargo/bin:/Users/qianduoduo/.codex/tmp/arg0/codex-arg0TucSYj:/Users/qianduoduo/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/qianduoduo/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Users/qianduoduo/.docker/bin:/Users/qianduoduo/flutter/bin:/Users/qianduoduo/flutter/bin/cache/dart-sdk/bin:/opt/homebrew/opt/dart/libexec/bin:/Users/qianduoduo/development/flutter/bin:/Users/qianduoduo/Library/Application Support/taobao/cli/bin",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONPATH": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+      "MYPYPATH": null,
+      "PYTHONPYCACHEPREFIX": null
+    },
+    "required_unset": [
+      "TG_TEST_ADMIN_DATABASE_URL",
+      "TG_R1C_REPLAY_BASELINE",
+      "TG_R1C02_REPLAY_PRIOR"
+    ],
+    "start": "2026-09-16T01:24:21.470395+00:00",
+    "end": "2026-09-16T01:24:21.539561+00:00",
+    "exit_code": 0,
+    "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/postgres-ready.log",
+    "log_sha256": "6e168fc3b5a0662104b5e5da92e87b870e8b7c65fec827d267115b5123d18614"
+  },
+  {
+    "name": "postgres-version",
+    "argv": [
+      "/usr/local/bin/docker",
+      "exec",
+      "thesisguard-postgres",
+      "postgres",
+      "--version"
+    ],
+    "command": "/usr/local/bin/docker exec thesisguard-postgres postgres --version",
+    "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+    "environment": {
+      "PATH": "/opt/miniconda3/bin:/opt/homebrew/Cellar/openjdk@17/17.0.20/libexec/openjdk.jdk/Contents/Home/bin:/Users/qianduoduo/.kimi-code/bin:/Users/qianduoduo/.grok/bin:/Users/qianduoduo/.tencent-news-cli/bin:/Users/qianduoduo/.local/bin:/opt/homebrew/opt/postgresql@16/bin:/opt/homebrew/opt/mysql@8.4/bin:/usr/local/mysql/bin:/Users/qianduoduo/.codeium/windsurf/bin:/Users/qianduoduo/.nvm/versions/node/v25.6.0/bin:/usr/local/opt/mysql-client/bin:/opt/miniconda3/bin:/opt/miniconda3/condabin:/opt/homebrew/bin:/opt/homebrew/sbin:/Library/Frameworks/Python.framework/Versions/3.5/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/pkg/env/active/bin:/opt/pmk/env/global/bin:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/qianduoduo/.cargo/bin:/Users/qianduoduo/.codex/tmp/arg0/codex-arg0TucSYj:/Users/qianduoduo/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/qianduoduo/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Users/qianduoduo/.docker/bin:/Users/qianduoduo/flutter/bin:/Users/qianduoduo/flutter/bin/cache/dart-sdk/bin:/opt/homebrew/opt/dart/libexec/bin:/Users/qianduoduo/development/flutter/bin:/Users/qianduoduo/Library/Application Support/taobao/cli/bin",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONPATH": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+      "MYPYPATH": null,
+      "PYTHONPYCACHEPREFIX": null
+    },
+    "required_unset": [
+      "TG_TEST_ADMIN_DATABASE_URL",
+      "TG_R1C_REPLAY_BASELINE",
+      "TG_R1C02_REPLAY_PRIOR"
+    ],
+    "start": "2026-09-16T01:24:21.539972+00:00",
+    "end": "2026-09-16T01:24:21.601965+00:00",
+    "exit_code": 0,
+    "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/postgres-version.log",
+    "log_sha256": "3329f2aad4b9b6e02694f9baf1335677cd17e3920678f3723085590373b94764"
+  },
+  {
+    "name": "python-version",
+    "argv": [
+      "/opt/miniconda3/bin/python",
+      "--version"
+    ],
+    "command": "/opt/miniconda3/bin/python --version",
+    "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+    "environment": {
+      "PATH": "/opt/miniconda3/bin:/opt/homebrew/Cellar/openjdk@17/17.0.20/libexec/openjdk.jdk/Contents/Home/bin:/Users/qianduoduo/.kimi-code/bin:/Users/qianduoduo/.grok/bin:/Users/qianduoduo/.tencent-news-cli/bin:/Users/qianduoduo/.local/bin:/opt/homebrew/opt/postgresql@16/bin:/opt/homebrew/opt/mysql@8.4/bin:/usr/local/mysql/bin:/Users/qianduoduo/.codeium/windsurf/bin:/Users/qianduoduo/.nvm/versions/node/v25.6.0/bin:/usr/local/opt/mysql-client/bin:/opt/miniconda3/bin:/opt/miniconda3/condabin:/opt/homebrew/bin:/opt/homebrew/sbin:/Library/Frameworks/Python.framework/Versions/3.5/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/pkg/env/active/bin:/opt/pmk/env/global/bin:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/qianduoduo/.cargo/bin:/Users/qianduoduo/.codex/tmp/arg0/codex-arg0TucSYj:/Users/qianduoduo/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/qianduoduo/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Users/qianduoduo/.docker/bin:/Users/qianduoduo/flutter/bin:/Users/qianduoduo/flutter/bin/cache/dart-sdk/bin:/opt/homebrew/opt/dart/libexec/bin:/Users/qianduoduo/development/flutter/bin:/Users/qianduoduo/Library/Application Support/taobao/cli/bin",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONPATH": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+      "MYPYPATH": null,
+      "PYTHONPYCACHEPREFIX": null
+    },
+    "required_unset": [
+      "TG_TEST_ADMIN_DATABASE_URL",
+      "TG_R1C_REPLAY_BASELINE",
+      "TG_R1C02_REPLAY_PRIOR"
+    ],
+    "start": "2026-09-16T01:24:21.603401+00:00",
+    "end": "2026-09-16T01:24:21.608325+00:00",
+    "exit_code": 0,
+    "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/python-version.log",
+    "log_sha256": "e190b5caf3d07d7e36240e7e05303180c43034e5e9b601f33a2b89df456c2aa0"
+  },
+  {
+    "name": "pytest-version",
+    "argv": [
+      "/opt/miniconda3/bin/pytest",
+      "--version"
+    ],
+    "command": "/opt/miniconda3/bin/pytest --version",
+    "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+    "environment": {
+      "PATH": "/opt/miniconda3/bin:/opt/homebrew/Cellar/openjdk@17/17.0.20/libexec/openjdk.jdk/Contents/Home/bin:/Users/qianduoduo/.kimi-code/bin:/Users/qianduoduo/.grok/bin:/Users/qianduoduo/.tencent-news-cli/bin:/Users/qianduoduo/.local/bin:/opt/homebrew/opt/postgresql@16/bin:/opt/homebrew/opt/mysql@8.4/bin:/usr/local/mysql/bin:/Users/qianduoduo/.codeium/windsurf/bin:/Users/qianduoduo/.nvm/versions/node/v25.6.0/bin:/usr/local/opt/mysql-client/bin:/opt/miniconda3/bin:/opt/miniconda3/condabin:/opt/homebrew/bin:/opt/homebrew/sbin:/Library/Frameworks/Python.framework/Versions/3.5/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/pkg/env/active/bin:/opt/pmk/env/global/bin:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/qianduoduo/.cargo/bin:/Users/qianduoduo/.codex/tmp/arg0/codex-arg0TucSYj:/Users/qianduoduo/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/qianduoduo/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Users/qianduoduo/.docker/bin:/Users/qianduoduo/flutter/bin:/Users/qianduoduo/flutter/bin/cache/dart-sdk/bin:/opt/homebrew/opt/dart/libexec/bin:/Users/qianduoduo/development/flutter/bin:/Users/qianduoduo/Library/Application Support/taobao/cli/bin",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONPATH": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+      "MYPYPATH": null,
+      "PYTHONPYCACHEPREFIX": null
+    },
+    "required_unset": [
+      "TG_TEST_ADMIN_DATABASE_URL",
+      "TG_R1C_REPLAY_BASELINE",
+      "TG_R1C02_REPLAY_PRIOR"
+    ],
+    "start": "2026-09-16T01:24:21.608667+00:00",
+    "end": "2026-09-16T01:24:22.192862+00:00",
+    "exit_code": 0,
+    "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/pytest-version.log",
+    "log_sha256": "ef5a4d39b097310ed885c4a4dc78e963c7ef42c92ed56ab09571200962f53779"
+  },
+  {
+    "name": "ruff-version",
+    "argv": [
+      "/opt/miniconda3/bin/ruff",
+      "--version"
+    ],
+    "command": "/opt/miniconda3/bin/ruff --version",
+    "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+    "environment": {
+      "PATH": "/opt/miniconda3/bin:/opt/homebrew/Cellar/openjdk@17/17.0.20/libexec/openjdk.jdk/Contents/Home/bin:/Users/qianduoduo/.kimi-code/bin:/Users/qianduoduo/.grok/bin:/Users/qianduoduo/.tencent-news-cli/bin:/Users/qianduoduo/.local/bin:/opt/homebrew/opt/postgresql@16/bin:/opt/homebrew/opt/mysql@8.4/bin:/usr/local/mysql/bin:/Users/qianduoduo/.codeium/windsurf/bin:/Users/qianduoduo/.nvm/versions/node/v25.6.0/bin:/usr/local/opt/mysql-client/bin:/opt/miniconda3/bin:/opt/miniconda3/condabin:/opt/homebrew/bin:/opt/homebrew/sbin:/Library/Frameworks/Python.framework/Versions/3.5/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/pkg/env/active/bin:/opt/pmk/env/global/bin:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/qianduoduo/.cargo/bin:/Users/qianduoduo/.codex/tmp/arg0/codex-arg0TucSYj:/Users/qianduoduo/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/qianduoduo/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Users/qianduoduo/.docker/bin:/Users/qianduoduo/flutter/bin:/Users/qianduoduo/flutter/bin/cache/dart-sdk/bin:/opt/homebrew/opt/dart/libexec/bin:/Users/qianduoduo/development/flutter/bin:/Users/qianduoduo/Library/Application Support/taobao/cli/bin",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONPATH": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+      "MYPYPATH": null,
+      "PYTHONPYCACHEPREFIX": null
+    },
+    "required_unset": [
+      "TG_TEST_ADMIN_DATABASE_URL",
+      "TG_R1C_REPLAY_BASELINE",
+      "TG_R1C02_REPLAY_PRIOR"
+    ],
+    "start": "2026-09-16T01:24:22.193638+00:00",
+    "end": "2026-09-16T01:24:22.218734+00:00",
+    "exit_code": 0,
+    "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/ruff-version.log",
+    "log_sha256": "d546fb1e5b6e5233b246ad986854eac8286a6064eeacaae4784ddd1e681e359f"
+  },
+  {
+    "name": "mypy-version",
+    "argv": [
+      "/opt/miniconda3/bin/mypy",
+      "--version"
+    ],
+    "command": "/opt/miniconda3/bin/mypy --version",
+    "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+    "environment": {
+      "PATH": "/opt/miniconda3/bin:/opt/homebrew/Cellar/openjdk@17/17.0.20/libexec/openjdk.jdk/Contents/Home/bin:/Users/qianduoduo/.kimi-code/bin:/Users/qianduoduo/.grok/bin:/Users/qianduoduo/.tencent-news-cli/bin:/Users/qianduoduo/.local/bin:/opt/homebrew/opt/postgresql@16/bin:/opt/homebrew/opt/mysql@8.4/bin:/usr/local/mysql/bin:/Users/qianduoduo/.codeium/windsurf/bin:/Users/qianduoduo/.nvm/versions/node/v25.6.0/bin:/usr/local/opt/mysql-client/bin:/opt/miniconda3/bin:/opt/miniconda3/condabin:/opt/homebrew/bin:/opt/homebrew/sbin:/Library/Frameworks/Python.framework/Versions/3.5/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/pkg/env/active/bin:/opt/pmk/env/global/bin:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/qianduoduo/.cargo/bin:/Users/qianduoduo/.codex/tmp/arg0/codex-arg0TucSYj:/Users/qianduoduo/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/qianduoduo/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Users/qianduoduo/.docker/bin:/Users/qianduoduo/flutter/bin:/Users/qianduoduo/flutter/bin/cache/dart-sdk/bin:/opt/homebrew/opt/dart/libexec/bin:/Users/qianduoduo/development/flutter/bin:/Users/qianduoduo/Library/Application Support/taobao/cli/bin",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONPATH": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+      "MYPYPATH": null,
+      "PYTHONPYCACHEPREFIX": null
+    },
+    "required_unset": [
+      "TG_TEST_ADMIN_DATABASE_URL",
+      "TG_R1C_REPLAY_BASELINE",
+      "TG_R1C02_REPLAY_PRIOR"
+    ],
+    "start": "2026-09-16T01:24:22.219319+00:00",
+    "end": "2026-09-16T01:24:22.534155+00:00",
+    "exit_code": 0,
+    "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/mypy-version.log",
+    "log_sha256": "4324ecc2e3ffc44c620254f1a5c0cec85b7268d79bccf66e01c1527bf2c5aa20"
+  },
+  {
+    "name": "alembic-version",
+    "argv": [
+      "/opt/miniconda3/bin/alembic",
+      "--version"
+    ],
+    "command": "/opt/miniconda3/bin/alembic --version",
+    "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+    "environment": {
+      "PATH": "/opt/miniconda3/bin:/opt/homebrew/Cellar/openjdk@17/17.0.20/libexec/openjdk.jdk/Contents/Home/bin:/Users/qianduoduo/.kimi-code/bin:/Users/qianduoduo/.grok/bin:/Users/qianduoduo/.tencent-news-cli/bin:/Users/qianduoduo/.local/bin:/opt/homebrew/opt/postgresql@16/bin:/opt/homebrew/opt/mysql@8.4/bin:/usr/local/mysql/bin:/Users/qianduoduo/.codeium/windsurf/bin:/Users/qianduoduo/.nvm/versions/node/v25.6.0/bin:/usr/local/opt/mysql-client/bin:/opt/miniconda3/bin:/opt/miniconda3/condabin:/opt/homebrew/bin:/opt/homebrew/sbin:/Library/Frameworks/Python.framework/Versions/3.5/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/pkg/env/active/bin:/opt/pmk/env/global/bin:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/qianduoduo/.cargo/bin:/Users/qianduoduo/.codex/tmp/arg0/codex-arg0TucSYj:/Users/qianduoduo/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/qianduoduo/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Users/qianduoduo/.docker/bin:/Users/qianduoduo/flutter/bin:/Users/qianduoduo/flutter/bin/cache/dart-sdk/bin:/opt/homebrew/opt/dart/libexec/bin:/Users/qianduoduo/development/flutter/bin:/Users/qianduoduo/Library/Application Support/taobao/cli/bin",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONPATH": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+      "MYPYPATH": null,
+      "PYTHONPYCACHEPREFIX": null
+    },
+    "required_unset": [
+      "TG_TEST_ADMIN_DATABASE_URL",
+      "TG_R1C_REPLAY_BASELINE",
+      "TG_R1C02_REPLAY_PRIOR"
+    ],
+    "start": "2026-09-16T01:24:22.534791+00:00",
+    "end": "2026-09-16T01:24:23.202450+00:00",
+    "exit_code": 0,
+    "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/alembic-version.log",
+    "log_sha256": "4d93344eacb0ce003bc14ca2fac9da1060d7f6482fff1f5e4a9f7efcc5c7611c"
+  },
+  {
+    "name": "runtime-libraries",
+    "argv": [
+      "/opt/miniconda3/bin/python",
+      "-c",
+      "import importlib.metadata as m,json; print(json.dumps({n:m.version(n) for n in ['pytest','pytest-asyncio','asyncpg','SQLAlchemy','fastapi','pydantic','httpx','alembic','ruff','mypy']},indent=2))"
+    ],
+    "command": "/opt/miniconda3/bin/python -c 'import importlib.metadata as m,json; print(json.dumps({n:m.version(n) for n in ['\"'\"'pytest'\"'\"','\"'\"'pytest-asyncio'\"'\"','\"'\"'asyncpg'\"'\"','\"'\"'SQLAlchemy'\"'\"','\"'\"'fastapi'\"'\"','\"'\"'pydantic'\"'\"','\"'\"'httpx'\"'\"','\"'\"'alembic'\"'\"','\"'\"'ruff'\"'\"','\"'\"'mypy'\"'\"']},indent=2))'",
+    "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+    "environment": {
+      "PATH": "/opt/miniconda3/bin:/opt/homebrew/Cellar/openjdk@17/17.0.20/libexec/openjdk.jdk/Contents/Home/bin:/Users/qianduoduo/.kimi-code/bin:/Users/qianduoduo/.grok/bin:/Users/qianduoduo/.tencent-news-cli/bin:/Users/qianduoduo/.local/bin:/opt/homebrew/opt/postgresql@16/bin:/opt/homebrew/opt/mysql@8.4/bin:/usr/local/mysql/bin:/Users/qianduoduo/.codeium/windsurf/bin:/Users/qianduoduo/.nvm/versions/node/v25.6.0/bin:/usr/local/opt/mysql-client/bin:/opt/miniconda3/bin:/opt/miniconda3/condabin:/opt/homebrew/bin:/opt/homebrew/sbin:/Library/Frameworks/Python.framework/Versions/3.5/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/pkg/env/active/bin:/opt/pmk/env/global/bin:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/qianduoduo/.cargo/bin:/Users/qianduoduo/.codex/tmp/arg0/codex-arg0TucSYj:/Users/qianduoduo/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/qianduoduo/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Users/qianduoduo/.docker/bin:/Users/qianduoduo/flutter/bin:/Users/qianduoduo/flutter/bin/cache/dart-sdk/bin:/opt/homebrew/opt/dart/libexec/bin:/Users/qianduoduo/development/flutter/bin:/Users/qianduoduo/Library/Application Support/taobao/cli/bin",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONPATH": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+      "MYPYPATH": null,
+      "PYTHONPYCACHEPREFIX": null
+    },
+    "required_unset": [
+      "TG_TEST_ADMIN_DATABASE_URL",
+      "TG_R1C_REPLAY_BASELINE",
+      "TG_R1C02_REPLAY_PRIOR"
+    ],
+    "start": "2026-09-16T01:24:23.203123+00:00",
+    "end": "2026-09-16T01:24:23.285993+00:00",
+    "exit_code": 0,
+    "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/runtime-libraries.log",
+    "log_sha256": "fa56f58b245fc9b257c033f6642b8316edf345bdc77cc11574ec9767e67bf877"
+  },
+  {
+    "name": "focused",
+    "argv": [
+      "/opt/miniconda3/bin/pytest",
+      "-p",
+      "no:cacheprovider",
+      "-q",
+      "tests/test_evidence_services.py",
+      "-k",
+      "r1c or trusted or current_valid or lifecycle or state_transition",
+      "-rs"
+    ],
+    "command": "/opt/miniconda3/bin/pytest -p no:cacheprovider -q tests/test_evidence_services.py -k 'r1c or trusted or current_valid or lifecycle or state_transition' -rs",
+    "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+    "environment": {
+      "PATH": "/opt/miniconda3/bin:/opt/homebrew/Cellar/openjdk@17/17.0.20/libexec/openjdk.jdk/Contents/Home/bin:/Users/qianduoduo/.kimi-code/bin:/Users/qianduoduo/.grok/bin:/Users/qianduoduo/.tencent-news-cli/bin:/Users/qianduoduo/.local/bin:/opt/homebrew/opt/postgresql@16/bin:/opt/homebrew/opt/mysql@8.4/bin:/usr/local/mysql/bin:/Users/qianduoduo/.codeium/windsurf/bin:/Users/qianduoduo/.nvm/versions/node/v25.6.0/bin:/usr/local/opt/mysql-client/bin:/opt/miniconda3/bin:/opt/miniconda3/condabin:/opt/homebrew/bin:/opt/homebrew/sbin:/Library/Frameworks/Python.framework/Versions/3.5/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/pkg/env/active/bin:/opt/pmk/env/global/bin:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/qianduoduo/.cargo/bin:/Users/qianduoduo/.codex/tmp/arg0/codex-arg0TucSYj:/Users/qianduoduo/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/qianduoduo/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Users/qianduoduo/.docker/bin:/Users/qianduoduo/flutter/bin:/Users/qianduoduo/flutter/bin/cache/dart-sdk/bin:/opt/homebrew/opt/dart/libexec/bin:/Users/qianduoduo/development/flutter/bin:/Users/qianduoduo/Library/Application Support/taobao/cli/bin",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONPATH": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+      "MYPYPATH": null,
+      "PYTHONPYCACHEPREFIX": null
+    },
+    "required_unset": [
+      "TG_TEST_ADMIN_DATABASE_URL",
+      "TG_R1C_REPLAY_BASELINE",
+      "TG_R1C02_REPLAY_PRIOR"
+    ],
+    "start": "2026-09-16T01:24:38.345919+00:00",
+    "end": "2026-09-16T01:24:40.868417+00:00",
+    "exit_code": 4,
+    "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/focused.log",
+    "log_sha256": "20c5085cccf6705f85c50aad9ca2c8d210e52e6fc601bd039d00d9a53dcc0b70"
+  },
+  {
+    "name": "ruff",
+    "argv": [
+      "/opt/miniconda3/bin/ruff",
+      "check",
+      "--no-cache",
+      "backend/evidence/errors.py",
+      "backend/evidence/services.py",
+      "tests/test_evidence_services.py"
+    ],
+    "command": "/opt/miniconda3/bin/ruff check --no-cache backend/evidence/errors.py backend/evidence/services.py tests/test_evidence_services.py",
+    "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+    "environment": {
+      "PATH": "/opt/miniconda3/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Library/Frameworks/Python.framework/Versions/3.5/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/pkg/env/active/bin:/opt/pmk/env/global/bin:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/qianduoduo/.cargo/bin:/Users/qianduoduo/.codex/tmp/arg0/codex-arg0TucSYj:/Users/qianduoduo/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/qianduoduo/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Users/qianduoduo/.docker/bin",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONPATH": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+      "MYPYPATH": null,
+      "PYTHONPYCACHEPREFIX": null
+    },
+    "required_unset": [
+      "TG_TEST_ADMIN_DATABASE_URL",
+      "TG_R1C_REPLAY_BASELINE",
+      "TG_R1C02_REPLAY_PRIOR"
+    ],
+    "start": "2026-09-16T01:24:44.264654+00:00",
+    "end": "2026-09-16T01:24:44.335175+00:00",
+    "exit_code": 0,
+    "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/ruff.log",
+    "log_sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+  },
+  {
+    "name": "format",
+    "argv": [
+      "/opt/miniconda3/bin/ruff",
+      "format",
+      "--check",
+      "--no-cache",
+      "backend/evidence/errors.py",
+      "backend/evidence/services.py",
+      "tests/test_evidence_services.py"
+    ],
+    "command": "/opt/miniconda3/bin/ruff format --check --no-cache backend/evidence/errors.py backend/evidence/services.py tests/test_evidence_services.py",
+    "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+    "environment": {
+      "PATH": "/opt/miniconda3/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Library/Frameworks/Python.framework/Versions/3.5/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/pkg/env/active/bin:/opt/pmk/env/global/bin:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/qianduoduo/.cargo/bin:/Users/qianduoduo/.codex/tmp/arg0/codex-arg0TucSYj:/Users/qianduoduo/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/qianduoduo/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Users/qianduoduo/.docker/bin",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONPATH": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+      "MYPYPATH": null,
+      "PYTHONPYCACHEPREFIX": null
+    },
+    "required_unset": [
+      "TG_TEST_ADMIN_DATABASE_URL",
+      "TG_R1C_REPLAY_BASELINE",
+      "TG_R1C02_REPLAY_PRIOR"
+    ],
+    "start": "2026-09-16T01:24:44.335747+00:00",
+    "end": "2026-09-16T01:24:44.358952+00:00",
+    "exit_code": 0,
+    "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/format.log",
+    "log_sha256": "eee76f865de5a9f2456950f710ae5d5f9b5bd0ea02aa54f614c5eed6642a0bfd"
+  },
+  {
+    "name": "mypy",
+    "argv": [
+      "/opt/miniconda3/bin/mypy",
+      "--explicit-package-bases",
+      "--ignore-missing-imports",
+      "--cache-dir=/tmp/tg-r1c-03a-mypy",
+      "backend/evidence/errors.py",
+      "backend/evidence/services.py",
+      "tests/test_evidence_services.py"
+    ],
+    "command": "/opt/miniconda3/bin/mypy --explicit-package-bases --ignore-missing-imports --cache-dir=/tmp/tg-r1c-03a-mypy backend/evidence/errors.py backend/evidence/services.py tests/test_evidence_services.py",
+    "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+    "environment": {
+      "PATH": "/opt/miniconda3/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Library/Frameworks/Python.framework/Versions/3.5/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/pkg/env/active/bin:/opt/pmk/env/global/bin:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/qianduoduo/.cargo/bin:/Users/qianduoduo/.codex/tmp/arg0/codex-arg0TucSYj:/Users/qianduoduo/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/qianduoduo/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Users/qianduoduo/.docker/bin",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONPATH": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+      "MYPYPATH": ".",
+      "PYTHONPYCACHEPREFIX": null
+    },
+    "required_unset": [
+      "TG_TEST_ADMIN_DATABASE_URL",
+      "TG_R1C_REPLAY_BASELINE",
+      "TG_R1C02_REPLAY_PRIOR"
+    ],
+    "start": "2026-09-16T01:24:44.359660+00:00",
+    "end": "2026-09-16T01:24:50.607005+00:00",
+    "exit_code": 0,
+    "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/mypy.log",
+    "log_sha256": "32eae7784a0dcce589a0e44a9d9cc2e082825d9572c97c4ae535c10c66b53498"
+  },
+  {
+    "name": "compileall",
+    "argv": [
+      "/opt/miniconda3/bin/python",
+      "-m",
+      "compileall",
+      "-q",
+      "backend/evidence/errors.py",
+      "backend/evidence/services.py",
+      "tests/test_evidence_services.py"
+    ],
+    "command": "/opt/miniconda3/bin/python -m compileall -q backend/evidence/errors.py backend/evidence/services.py tests/test_evidence_services.py",
+    "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+    "environment": {
+      "PATH": "/opt/miniconda3/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Library/Frameworks/Python.framework/Versions/3.5/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/pkg/env/active/bin:/opt/pmk/env/global/bin:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/qianduoduo/.cargo/bin:/Users/qianduoduo/.codex/tmp/arg0/codex-arg0TucSYj:/Users/qianduoduo/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/qianduoduo/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Users/qianduoduo/.docker/bin",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONPATH": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+      "MYPYPATH": null,
+      "PYTHONPYCACHEPREFIX": "/tmp/tg-r1c-03a-pycache"
+    },
+    "required_unset": [
+      "TG_TEST_ADMIN_DATABASE_URL",
+      "TG_R1C_REPLAY_BASELINE",
+      "TG_R1C02_REPLAY_PRIOR"
+    ],
+    "start": "2026-09-16T01:24:50.607598+00:00",
+    "end": "2026-09-16T01:24:50.755770+00:00",
+    "exit_code": 0,
+    "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/compileall.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "alembic-heads",
+    "argv": [
+      "/opt/miniconda3/bin/alembic",
+      "-c",
+      "migrations/alembic.ini",
+      "heads"
+    ],
+    "command": "/opt/miniconda3/bin/alembic -c migrations/alembic.ini heads",
+    "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+    "environment": {
+      "PATH": "/opt/miniconda3/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Library/Frameworks/Python.framework/Versions/3.5/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/pkg/env/active/bin:/opt/pmk/env/global/bin:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/qianduoduo/.cargo/bin:/Users/qianduoduo/.codex/tmp/arg0/codex-arg0TucSYj:/Users/qianduoduo/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/qianduoduo/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Users/qianduoduo/.docker/bin",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONPATH": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+      "MYPYPATH": null,
+      "PYTHONPYCACHEPREFIX": null
+    },
+    "required_unset": [
+      "TG_TEST_ADMIN_DATABASE_URL",
+      "TG_R1C_REPLAY_BASELINE",
+      "TG_R1C02_REPLAY_PRIOR"
+    ],
+    "start": "2026-09-16T01:24:50.756423+00:00",
+    "end": "2026-09-16T01:24:51.046001+00:00",
+    "exit_code": 0,
+    "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/alembic-heads.log",
+    "log_sha256": "31d4749ed58dbcf9931529c93a38536a7b00c8842fd6090fdb1f0d549ed6a3c7"
+  },
+  {
+    "name": "fresh-focused",
+    "argv": [
+      "/opt/miniconda3/bin/pytest",
+      "-p",
+      "no:cacheprovider",
+      "-q",
+      "tests/test_evidence_services.py",
+      "-k",
+      "r1c or trusted or current_valid or lifecycle or state_transition",
+      "-rs"
+    ],
+    "command": "/opt/miniconda3/bin/pytest -p no:cacheprovider -q tests/test_evidence_services.py -k 'r1c or trusted or current_valid or lifecycle or state_transition' -rs",
+    "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+    "environment": {
+      "PATH": "/opt/miniconda3/bin:/opt/homebrew/Cellar/openjdk@17/17.0.20/libexec/openjdk.jdk/Contents/Home/bin:/Users/qianduoduo/.kimi-code/bin:/Users/qianduoduo/.grok/bin:/Users/qianduoduo/.tencent-news-cli/bin:/Users/qianduoduo/.local/bin:/opt/homebrew/opt/postgresql@16/bin:/opt/homebrew/opt/mysql@8.4/bin:/usr/local/mysql/bin:/Users/qianduoduo/.codeium/windsurf/bin:/Users/qianduoduo/.nvm/versions/node/v25.6.0/bin:/usr/local/opt/mysql-client/bin:/opt/miniconda3/bin:/opt/miniconda3/condabin:/opt/homebrew/bin:/opt/homebrew/sbin:/Library/Frameworks/Python.framework/Versions/3.5/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/pkg/env/active/bin:/opt/pmk/env/global/bin:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/qianduoduo/.cargo/bin:/Users/qianduoduo/.codex/tmp/arg0/codex-arg0TucSYj:/Users/qianduoduo/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/qianduoduo/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Users/qianduoduo/.docker/bin:/Users/qianduoduo/flutter/bin:/Users/qianduoduo/flutter/bin/cache/dart-sdk/bin:/opt/homebrew/opt/dart/libexec/bin:/Users/qianduoduo/development/flutter/bin:/Users/qianduoduo/Library/Application Support/taobao/cli/bin",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONPATH": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service:/opt/miniconda3/lib/python3.12/site-packages:/opt/homebrew/lib/python3.12/site-packages",
+      "MYPYPATH": null,
+      "PYTHONPYCACHEPREFIX": null
+    },
+    "required_unset": [
+      "TG_TEST_ADMIN_DATABASE_URL",
+      "TG_R1C_REPLAY_BASELINE",
+      "TG_R1C02_REPLAY_PRIOR"
+    ],
+    "start": "2026-09-16T01:25:45.015215+00:00",
+    "end": "2026-09-16T01:27:44.714789+00:00",
+    "exit_code": 0,
+    "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/fresh-focused.log",
+    "log_sha256": "cbb24a41a974a87c8c871f0e2154a469d6f80256c8a852d5fcc3a900cb7adf25"
+  },
+  {
+    "name": "fresh-r1c02",
+    "argv": [
+      "/opt/miniconda3/bin/pytest",
+      "-p",
+      "no:cacheprovider",
+      "-q",
+      "/tmp/test_wp04_02_r1c_02_independent_20260915.py",
+      "-rs"
+    ],
+    "command": "/opt/miniconda3/bin/pytest -p no:cacheprovider -q /tmp/test_wp04_02_r1c_02_independent_20260915.py -rs",
+    "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+    "environment": {
+      "PATH": "/opt/miniconda3/bin:/opt/homebrew/Cellar/openjdk@17/17.0.20/libexec/openjdk.jdk/Contents/Home/bin:/Users/qianduoduo/.kimi-code/bin:/Users/qianduoduo/.grok/bin:/Users/qianduoduo/.tencent-news-cli/bin:/Users/qianduoduo/.local/bin:/opt/homebrew/opt/postgresql@16/bin:/opt/homebrew/opt/mysql@8.4/bin:/usr/local/mysql/bin:/Users/qianduoduo/.codeium/windsurf/bin:/Users/qianduoduo/.nvm/versions/node/v25.6.0/bin:/usr/local/opt/mysql-client/bin:/opt/miniconda3/bin:/opt/miniconda3/condabin:/opt/homebrew/bin:/opt/homebrew/sbin:/Library/Frameworks/Python.framework/Versions/3.5/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/pkg/env/active/bin:/opt/pmk/env/global/bin:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/qianduoduo/.cargo/bin:/Users/qianduoduo/.codex/tmp/arg0/codex-arg0TucSYj:/Users/qianduoduo/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/qianduoduo/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Users/qianduoduo/.docker/bin:/Users/qianduoduo/flutter/bin:/Users/qianduoduo/flutter/bin/cache/dart-sdk/bin:/opt/homebrew/opt/dart/libexec/bin:/Users/qianduoduo/development/flutter/bin:/Users/qianduoduo/Library/Application Support/taobao/cli/bin",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONPATH": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service:/opt/miniconda3/lib/python3.12/site-packages:/opt/homebrew/lib/python3.12/site-packages",
+      "MYPYPATH": null,
+      "PYTHONPYCACHEPREFIX": null
+    },
+    "required_unset": [
+      "TG_TEST_ADMIN_DATABASE_URL",
+      "TG_R1C_REPLAY_BASELINE",
+      "TG_R1C02_REPLAY_PRIOR"
+    ],
+    "start": "2026-09-16T01:27:44.715617+00:00",
+    "end": "2026-09-16T01:28:19.577732+00:00",
+    "exit_code": 0,
+    "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/fresh-r1c02.log",
+    "log_sha256": "b6cae7063843fc8be35fcae65d548137f681c9fa2efffd431958bba98e8e9fb0"
+  },
+  {
+    "name": "owned-boundary",
+    "argv": [
+      "/opt/miniconda3/bin/pytest",
+      "-p",
+      "no:cacheprovider",
+      "-q",
+      "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/test_wp04_02_r1c03a_prerequisites_boundary_20260916.py",
+      "-rs"
+    ],
+    "command": "/opt/miniconda3/bin/pytest -p no:cacheprovider -q /Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/test_wp04_02_r1c03a_prerequisites_boundary_20260916.py -rs",
+    "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+    "environment": {
+      "PATH": "/opt/miniconda3/bin:/opt/homebrew/Cellar/openjdk@17/17.0.20/libexec/openjdk.jdk/Contents/Home/bin:/Users/qianduoduo/.kimi-code/bin:/Users/qianduoduo/.grok/bin:/Users/qianduoduo/.tencent-news-cli/bin:/Users/qianduoduo/.local/bin:/opt/homebrew/opt/postgresql@16/bin:/opt/homebrew/opt/mysql@8.4/bin:/usr/local/mysql/bin:/Users/qianduoduo/.codeium/windsurf/bin:/Users/qianduoduo/.nvm/versions/node/v25.6.0/bin:/usr/local/opt/mysql-client/bin:/opt/miniconda3/bin:/opt/miniconda3/condabin:/opt/homebrew/bin:/opt/homebrew/sbin:/Library/Frameworks/Python.framework/Versions/3.5/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/pkg/env/active/bin:/opt/pmk/env/global/bin:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/qianduoduo/.cargo/bin:/Users/qianduoduo/.codex/tmp/arg0/codex-arg0TucSYj:/Users/qianduoduo/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/qianduoduo/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Users/qianduoduo/.docker/bin:/Users/qianduoduo/flutter/bin:/Users/qianduoduo/flutter/bin/cache/dart-sdk/bin:/opt/homebrew/opt/dart/libexec/bin:/Users/qianduoduo/development/flutter/bin:/Users/qianduoduo/Library/Application Support/taobao/cli/bin",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONPATH": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service:/opt/miniconda3/lib/python3.12/site-packages:/opt/homebrew/lib/python3.12/site-packages",
+      "MYPYPATH": null,
+      "PYTHONPYCACHEPREFIX": null
+    },
+    "required_unset": [
+      "TG_TEST_ADMIN_DATABASE_URL",
+      "TG_R1C_REPLAY_BASELINE",
+      "TG_R1C02_REPLAY_PRIOR"
+    ],
+    "start": "2026-09-16T01:28:00.051740+00:00",
+    "end": "2026-09-16T01:28:46.306026+00:00",
+    "exit_code": 1,
+    "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/owned-boundary.log",
+    "log_sha256": "030b6fba4e6e7d12ddbaee183f45f5be108c1effe333e05b9f2acb93ac9e95d0"
+  },
+  {
+    "name": "fresh-r1c01",
+    "argv": [
+      "/opt/miniconda3/bin/pytest",
+      "-p",
+      "no:cacheprovider",
+      "-q",
+      "/tmp/test_wp04_02_r1c_01_independent_20260915.py",
+      "-rs"
+    ],
+    "command": "/opt/miniconda3/bin/pytest -p no:cacheprovider -q /tmp/test_wp04_02_r1c_01_independent_20260915.py -rs",
+    "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+    "environment": {
+      "PATH": "/opt/miniconda3/bin:/opt/homebrew/Cellar/openjdk@17/17.0.20/libexec/openjdk.jdk/Contents/Home/bin:/Users/qianduoduo/.kimi-code/bin:/Users/qianduoduo/.grok/bin:/Users/qianduoduo/.tencent-news-cli/bin:/Users/qianduoduo/.local/bin:/opt/homebrew/opt/postgresql@16/bin:/opt/homebrew/opt/mysql@8.4/bin:/usr/local/mysql/bin:/Users/qianduoduo/.codeium/windsurf/bin:/Users/qianduoduo/.nvm/versions/node/v25.6.0/bin:/usr/local/opt/mysql-client/bin:/opt/miniconda3/bin:/opt/miniconda3/condabin:/opt/homebrew/bin:/opt/homebrew/sbin:/Library/Frameworks/Python.framework/Versions/3.5/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/pkg/env/active/bin:/opt/pmk/env/global/bin:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/qianduoduo/.cargo/bin:/Users/qianduoduo/.codex/tmp/arg0/codex-arg0TucSYj:/Users/qianduoduo/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/qianduoduo/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Users/qianduoduo/.docker/bin:/Users/qianduoduo/flutter/bin:/Users/qianduoduo/flutter/bin/cache/dart-sdk/bin:/opt/homebrew/opt/dart/libexec/bin:/Users/qianduoduo/development/flutter/bin:/Users/qianduoduo/Library/Application Support/taobao/cli/bin",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONPATH": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service:/opt/miniconda3/lib/python3.12/site-packages:/opt/homebrew/lib/python3.12/site-packages",
+      "MYPYPATH": null,
+      "PYTHONPYCACHEPREFIX": null
+    },
+    "required_unset": [
+      "TG_TEST_ADMIN_DATABASE_URL",
+      "TG_R1C_REPLAY_BASELINE",
+      "TG_R1C02_REPLAY_PRIOR"
+    ],
+    "start": "2026-09-16T01:28:19.578635+00:00",
+    "end": "2026-09-16T01:28:27.157004+00:00",
+    "exit_code": 0,
+    "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/fresh-r1c01.log",
+    "log_sha256": "6b2a290651aa0fea6e2a5a4a34bf6bde48b49efe30473a9657ab82ef01c50dba"
+  },
+  {
+    "name": "fresh-r1b-wiring",
+    "argv": [
+      "/opt/miniconda3/bin/pytest",
+      "-p",
+      "no:cacheprovider",
+      "-q",
+      "/tmp/test_wp04_02_r1b_r1_wiring_20260915.py",
+      "-rs"
+    ],
+    "command": "/opt/miniconda3/bin/pytest -p no:cacheprovider -q /tmp/test_wp04_02_r1b_r1_wiring_20260915.py -rs",
+    "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+    "environment": {
+      "PATH": "/opt/miniconda3/bin:/opt/homebrew/Cellar/openjdk@17/17.0.20/libexec/openjdk.jdk/Contents/Home/bin:/Users/qianduoduo/.kimi-code/bin:/Users/qianduoduo/.grok/bin:/Users/qianduoduo/.tencent-news-cli/bin:/Users/qianduoduo/.local/bin:/opt/homebrew/opt/postgresql@16/bin:/opt/homebrew/opt/mysql@8.4/bin:/usr/local/mysql/bin:/Users/qianduoduo/.codeium/windsurf/bin:/Users/qianduoduo/.nvm/versions/node/v25.6.0/bin:/usr/local/opt/mysql-client/bin:/opt/miniconda3/bin:/opt/miniconda3/condabin:/opt/homebrew/bin:/opt/homebrew/sbin:/Library/Frameworks/Python.framework/Versions/3.5/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/pkg/env/active/bin:/opt/pmk/env/global/bin:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/qianduoduo/.cargo/bin:/Users/qianduoduo/.codex/tmp/arg0/codex-arg0TucSYj:/Users/qianduoduo/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/qianduoduo/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Users/qianduoduo/.docker/bin:/Users/qianduoduo/flutter/bin:/Users/qianduoduo/flutter/bin/cache/dart-sdk/bin:/opt/homebrew/opt/dart/libexec/bin:/Users/qianduoduo/development/flutter/bin:/Users/qianduoduo/Library/Application Support/taobao/cli/bin",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONPATH": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service:/opt/miniconda3/lib/python3.12/site-packages:/opt/homebrew/lib/python3.12/site-packages",
+      "MYPYPATH": null,
+      "PYTHONPYCACHEPREFIX": null
+    },
+    "required_unset": [
+      "TG_TEST_ADMIN_DATABASE_URL",
+      "TG_R1C_REPLAY_BASELINE",
+      "TG_R1C02_REPLAY_PRIOR"
+    ],
+    "start": "2026-09-16T01:28:27.157547+00:00",
+    "end": "2026-09-16T01:28:30.598438+00:00",
+    "exit_code": 0,
+    "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/fresh-r1b-wiring.log",
+    "log_sha256": "be612ed015d306ae46658cc4198224c4c141b865a80dd985f30d4364b0076068"
+  },
+  {
+    "name": "fresh-r1b-reverify",
+    "argv": [
+      "/opt/miniconda3/bin/pytest",
+      "-p",
+      "no:cacheprovider",
+      "-q",
+      "/tmp/test_wp04_02_r1b_reverify.py",
+      "-rs"
+    ],
+    "command": "/opt/miniconda3/bin/pytest -p no:cacheprovider -q /tmp/test_wp04_02_r1b_reverify.py -rs",
+    "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+    "environment": {
+      "PATH": "/opt/miniconda3/bin:/opt/homebrew/Cellar/openjdk@17/17.0.20/libexec/openjdk.jdk/Contents/Home/bin:/Users/qianduoduo/.kimi-code/bin:/Users/qianduoduo/.grok/bin:/Users/qianduoduo/.tencent-news-cli/bin:/Users/qianduoduo/.local/bin:/opt/homebrew/opt/postgresql@16/bin:/opt/homebrew/opt/mysql@8.4/bin:/usr/local/mysql/bin:/Users/qianduoduo/.codeium/windsurf/bin:/Users/qianduoduo/.nvm/versions/node/v25.6.0/bin:/usr/local/opt/mysql-client/bin:/opt/miniconda3/bin:/opt/miniconda3/condabin:/opt/homebrew/bin:/opt/homebrew/sbin:/Library/Frameworks/Python.framework/Versions/3.5/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/pkg/env/active/bin:/opt/pmk/env/global/bin:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/qianduoduo/.cargo/bin:/Users/qianduoduo/.codex/tmp/arg0/codex-arg0TucSYj:/Users/qianduoduo/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/qianduoduo/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Users/qianduoduo/.docker/bin:/Users/qianduoduo/flutter/bin:/Users/qianduoduo/flutter/bin/cache/dart-sdk/bin:/opt/homebrew/opt/dart/libexec/bin:/Users/qianduoduo/development/flutter/bin:/Users/qianduoduo/Library/Application Support/taobao/cli/bin",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONPATH": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service:/opt/miniconda3/lib/python3.12/site-packages:/opt/homebrew/lib/python3.12/site-packages",
+      "MYPYPATH": null,
+      "PYTHONPYCACHEPREFIX": null
+    },
+    "required_unset": [
+      "TG_TEST_ADMIN_DATABASE_URL",
+      "TG_R1C_REPLAY_BASELINE",
+      "TG_R1C02_REPLAY_PRIOR"
+    ],
+    "start": "2026-09-16T01:28:30.599033+00:00",
+    "end": "2026-09-16T01:28:34.850630+00:00",
+    "exit_code": 0,
+    "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/fresh-r1b-reverify.log",
+    "log_sha256": "fa6d5c3ec8faae88c7fa3ea71047a12c7d85b6858bbe6d4994a3242c793f9a52"
+  },
+  {
+    "name": "fresh-r1a",
+    "argv": [
+      "/opt/miniconda3/bin/pytest",
+      "-p",
+      "no:cacheprovider",
+      "-q",
+      "/tmp/test_wp04_02_r1a_verifier.py",
+      "-rs"
+    ],
+    "command": "/opt/miniconda3/bin/pytest -p no:cacheprovider -q /tmp/test_wp04_02_r1a_verifier.py -rs",
+    "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+    "environment": {
+      "PATH": "/opt/miniconda3/bin:/opt/homebrew/Cellar/openjdk@17/17.0.20/libexec/openjdk.jdk/Contents/Home/bin:/Users/qianduoduo/.kimi-code/bin:/Users/qianduoduo/.grok/bin:/Users/qianduoduo/.tencent-news-cli/bin:/Users/qianduoduo/.local/bin:/opt/homebrew/opt/postgresql@16/bin:/opt/homebrew/opt/mysql@8.4/bin:/usr/local/mysql/bin:/Users/qianduoduo/.codeium/windsurf/bin:/Users/qianduoduo/.nvm/versions/node/v25.6.0/bin:/usr/local/opt/mysql-client/bin:/opt/miniconda3/bin:/opt/miniconda3/condabin:/opt/homebrew/bin:/opt/homebrew/sbin:/Library/Frameworks/Python.framework/Versions/3.5/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/pkg/env/active/bin:/opt/pmk/env/global/bin:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/qianduoduo/.cargo/bin:/Users/qianduoduo/.codex/tmp/arg0/codex-arg0TucSYj:/Users/qianduoduo/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/qianduoduo/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Users/qianduoduo/.docker/bin:/Users/qianduoduo/flutter/bin:/Users/qianduoduo/flutter/bin/cache/dart-sdk/bin:/opt/homebrew/opt/dart/libexec/bin:/Users/qianduoduo/development/flutter/bin:/Users/qianduoduo/Library/Application Support/taobao/cli/bin",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONPATH": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service:/opt/miniconda3/lib/python3.12/site-packages:/opt/homebrew/lib/python3.12/site-packages",
+      "MYPYPATH": null,
+      "PYTHONPYCACHEPREFIX": null
+    },
+    "required_unset": [
+      "TG_TEST_ADMIN_DATABASE_URL",
+      "TG_R1C_REPLAY_BASELINE",
+      "TG_R1C02_REPLAY_PRIOR"
+    ],
+    "start": "2026-09-16T01:28:34.851204+00:00",
+    "end": "2026-09-16T01:28:41.896631+00:00",
+    "exit_code": 0,
+    "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/fresh-r1a.log",
+    "log_sha256": "e941eeca9e078136b34268f7dc80935b2028ebe75725d7fe9f5b2806e549882a"
+  },
+  {
+    "name": "fresh-full-services",
+    "argv": [
+      "/opt/miniconda3/bin/pytest",
+      "-p",
+      "no:cacheprovider",
+      "-q",
+      "tests/test_evidence_services.py",
+      "-rs"
+    ],
+    "command": "/opt/miniconda3/bin/pytest -p no:cacheprovider -q tests/test_evidence_services.py -rs",
+    "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+    "environment": {
+      "PATH": "/opt/miniconda3/bin:/opt/homebrew/Cellar/openjdk@17/17.0.20/libexec/openjdk.jdk/Contents/Home/bin:/Users/qianduoduo/.kimi-code/bin:/Users/qianduoduo/.grok/bin:/Users/qianduoduo/.tencent-news-cli/bin:/Users/qianduoduo/.local/bin:/opt/homebrew/opt/postgresql@16/bin:/opt/homebrew/opt/mysql@8.4/bin:/usr/local/mysql/bin:/Users/qianduoduo/.codeium/windsurf/bin:/Users/qianduoduo/.nvm/versions/node/v25.6.0/bin:/usr/local/opt/mysql-client/bin:/opt/miniconda3/bin:/opt/miniconda3/condabin:/opt/homebrew/bin:/opt/homebrew/sbin:/Library/Frameworks/Python.framework/Versions/3.5/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/pkg/env/active/bin:/opt/pmk/env/global/bin:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/qianduoduo/.cargo/bin:/Users/qianduoduo/.codex/tmp/arg0/codex-arg0TucSYj:/Users/qianduoduo/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/qianduoduo/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Users/qianduoduo/.docker/bin:/Users/qianduoduo/flutter/bin:/Users/qianduoduo/flutter/bin/cache/dart-sdk/bin:/opt/homebrew/opt/dart/libexec/bin:/Users/qianduoduo/development/flutter/bin:/Users/qianduoduo/Library/Application Support/taobao/cli/bin",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONPATH": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service:/opt/miniconda3/lib/python3.12/site-packages:/opt/homebrew/lib/python3.12/site-packages",
+      "MYPYPATH": null,
+      "PYTHONPYCACHEPREFIX": null
+    },
+    "required_unset": [
+      "TG_TEST_ADMIN_DATABASE_URL",
+      "TG_R1C_REPLAY_BASELINE",
+      "TG_R1C02_REPLAY_PRIOR"
+    ],
+    "start": "2026-09-16T01:28:41.897236+00:00",
+    "end": "2026-09-16T01:31:40.214069+00:00",
+    "exit_code": 0,
+    "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/fresh-full-services.log",
+    "log_sha256": "8f5208b044d773d3855210e73b7ec4fe08c01ca58fcabe9a33eee0039dbfdc94"
+  },
+  {
+    "name": "fresh-regression",
+    "argv": [
+      "/opt/miniconda3/bin/pytest",
+      "-p",
+      "no:cacheprovider",
+      "-q",
+      "tests/test_evidence_persistence.py",
+      "tests/test_migrations.py",
+      "tests/test_evidence_migrations.py",
+      "tests/test_research_api.py",
+      "tests/test_research_persistence.py",
+      "-rs"
+    ],
+    "command": "/opt/miniconda3/bin/pytest -p no:cacheprovider -q tests/test_evidence_persistence.py tests/test_migrations.py tests/test_evidence_migrations.py tests/test_research_api.py tests/test_research_persistence.py -rs",
+    "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+    "environment": {
+      "PATH": "/opt/miniconda3/bin:/opt/homebrew/Cellar/openjdk@17/17.0.20/libexec/openjdk.jdk/Contents/Home/bin:/Users/qianduoduo/.kimi-code/bin:/Users/qianduoduo/.grok/bin:/Users/qianduoduo/.tencent-news-cli/bin:/Users/qianduoduo/.local/bin:/opt/homebrew/opt/postgresql@16/bin:/opt/homebrew/opt/mysql@8.4/bin:/usr/local/mysql/bin:/Users/qianduoduo/.codeium/windsurf/bin:/Users/qianduoduo/.nvm/versions/node/v25.6.0/bin:/usr/local/opt/mysql-client/bin:/opt/miniconda3/bin:/opt/miniconda3/condabin:/opt/homebrew/bin:/opt/homebrew/sbin:/Library/Frameworks/Python.framework/Versions/3.5/bin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/opt/pkg/env/active/bin:/opt/pmk/env/global/bin:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/qianduoduo/.cargo/bin:/Users/qianduoduo/.codex/tmp/arg0/codex-arg0TucSYj:/Users/qianduoduo/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/override:/Users/qianduoduo/.cache/codex-runtimes/codex-primary-runtime/dependencies/bin/fallback:/Applications/ChatGPT.app/Contents/Resources:/Users/qianduoduo/.docker/bin:/Users/qianduoduo/flutter/bin:/Users/qianduoduo/flutter/bin/cache/dart-sdk/bin:/opt/homebrew/opt/dart/libexec/bin:/Users/qianduoduo/development/flutter/bin:/Users/qianduoduo/Library/Application Support/taobao/cli/bin",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONPATH": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service:/opt/miniconda3/lib/python3.12/site-packages:/opt/homebrew/lib/python3.12/site-packages",
+      "MYPYPATH": null,
+      "PYTHONPYCACHEPREFIX": null
+    },
+    "required_unset": [
+      "TG_TEST_ADMIN_DATABASE_URL",
+      "TG_R1C_REPLAY_BASELINE",
+      "TG_R1C02_REPLAY_PRIOR"
+    ],
+    "start": "2026-09-16T01:31:40.214921+00:00",
+    "end": "2026-09-16T01:32:03.843689+00:00",
+    "exit_code": 0,
+    "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/fresh-regression.log",
+    "log_sha256": "35e05cb396ecb66869677b8b5711042a3d88a74aeba266ad63c0ad45cce19eb1"
+  },
+  {
+    "name": "candidate-final-status",
+    "argv": [
+      "git",
+      "status",
+      "--short",
+      "--branch",
+      "--untracked-files=all"
+    ],
+    "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+    "start": "2026-09-16T01:33:12.668701+00:00",
+    "end": "2026-09-16T01:33:12.687438+00:00",
+    "exit_code": 0,
+    "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/candidate-final-status.log",
+    "log_sha256": "9223a95a376daee792cb98941a6a238fd77e76140bf77d8e9f6943279822b378"
+  },
+  {
+    "name": "candidate-final-branch",
+    "argv": [
+      "git",
+      "branch",
+      "--show-current"
+    ],
+    "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+    "start": "2026-09-16T01:33:12.688089+00:00",
+    "end": "2026-09-16T01:33:12.694810+00:00",
+    "exit_code": 0,
+    "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/candidate-final-branch.log",
+    "log_sha256": "26b779b8c470bf4184449b097f9022875b322111d2bab0d2ad2640159c60f46e"
+  },
+  {
+    "name": "candidate-final-head-parent",
+    "argv": [
+      "git",
+      "rev-parse",
+      "HEAD",
+      "HEAD^"
+    ],
+    "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+    "start": "2026-09-16T01:33:12.695568+00:00",
+    "end": "2026-09-16T01:33:12.702926+00:00",
+    "exit_code": 0,
+    "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/candidate-final-head-parent.log",
+    "log_sha256": "1487d5f10b557559f366c9b63e43a1764a71c96bd82d8dbf3f71863c222a0de4"
+  },
+  {
+    "name": "candidate-final-diff-check",
+    "argv": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+    "start": "2026-09-16T01:33:12.714068+00:00",
+    "end": "2026-09-16T01:33:12.722756+00:00",
+    "exit_code": 0,
+    "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/candidate-final-diff-check.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "main-final-status",
+    "argv": [
+      "git",
+      "status",
+      "--short",
+      "--branch",
+      "--untracked-files=all"
+    ],
+    "cwd": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard",
+    "start": "2026-09-16T01:33:12.723947+00:00",
+    "end": "2026-09-16T01:33:12.739282+00:00",
+    "exit_code": 0,
+    "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/main-final-status.log",
+    "log_sha256": "4a27e69c3d12b0025298fb17ce22de01e88b2ec511856e251ed25f5ff988531c"
+  },
+  {
+    "name": "main-final-branch",
+    "argv": [
+      "git",
+      "branch",
+      "--show-current"
+    ],
+    "cwd": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard",
+    "start": "2026-09-16T01:33:12.739964+00:00",
+    "end": "2026-09-16T01:33:12.746954+00:00",
+    "exit_code": 0,
+    "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/main-final-branch.log",
+    "log_sha256": "6403203dd5a0867eb14d104ee8a73730bd72dd9ad92e78d996a6dba0a5dcfc01"
+  },
+  {
+    "name": "main-final-head-parent",
+    "argv": [
+      "git",
+      "rev-parse",
+      "HEAD",
+      "HEAD^"
+    ],
+    "cwd": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard",
+    "start": "2026-09-16T01:33:12.747652+00:00",
+    "end": "2026-09-16T01:33:12.754513+00:00",
+    "exit_code": 0,
+    "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/main-final-head-parent.log",
+    "log_sha256": "9c6ad28aff0995315fa1c0419d5006bd0737a8fdfa36bed29ba1c312cf21db08"
+  },
+  {
+    "name": "main-final-diff-check",
+    "argv": [
+      "git",
+      "diff",
+      "--check"
+    ],
+    "cwd": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard",
+    "start": "2026-09-16T01:33:12.761559+00:00",
+    "end": "2026-09-16T01:33:12.768031+00:00",
+    "exit_code": 0,
+    "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/main-final-diff-check.log",
+    "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "name": "final-fixed-hashes",
+    "argv": [
+      "shasum",
+      "-a",
+      "256",
+      "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service/backend/evidence/errors.py",
+      "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service/backend/evidence/services.py",
+      "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service/tests/test_evidence_services.py",
+      "/tmp/test_wp04_02_r1b_r1_wiring_20260915.py",
+      "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/test_wp04_02_r1b_r1_wiring_20260915.py",
+      "/tmp/test_wp04_02_r1b_reverify.py",
+      "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/test_wp04_02_r1b_reverify.py",
+      "/tmp/test_wp04_02_r1a_verifier.py",
+      "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/test_wp04_02_r1a_verifier.py",
+      "/tmp/test_wp04_02_r1c_01_independent_20260915.py",
+      "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/test_wp04_02_r1c_01_independent_20260915.py",
+      "/tmp/test_wp04_02_r1c_02_independent_20260915.py",
+      "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/test_wp04_02_r1c_02_independent_20260915.py"
+    ],
+    "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+    "start": "2026-09-16T01:33:12.771800+00:00",
+    "end": "2026-09-16T01:33:12.809267+00:00",
+    "exit_code": 0,
+    "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/final-fixed-hashes.log",
+    "log_sha256": "f31f0dfcee9e65756a80e910de2deb2a36af84b29e41d2d792904d96929a5ac8"
+  },
+  {
+    "name": "main-final-with-report-status",
+    "argv": [
+      "git",
+      "status",
+      "--short",
+      "--branch",
+      "--untracked-files=all"
+    ],
+    "cwd": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard",
+    "start": "2026-09-16T01:33:13.074233+00:00",
+    "end": "2026-09-16T01:33:13.083852+00:00",
+    "exit_code": 0,
+    "log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/verifiers/TASK-WP04-02-R1C-03A-VERIFY-PREREQUISITES-R1-evidence/main-final-with-report-status.log",
+    "log_sha256": "b1d141fa6e1f0dee486632a44dbd4608989cd89376c27c463170313561f28cf8"
+  }
+]
