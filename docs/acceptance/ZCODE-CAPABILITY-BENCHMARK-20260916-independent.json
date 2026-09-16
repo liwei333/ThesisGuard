@@ -1,0 +1,152 @@
+{
+  "review_date": "2026-09-16",
+  "reviewer": "Codex",
+  "source_attachment": "/Users/qianduoduo/.codex/attachments/325a4e27-6b1e-4d14-8328-148deb8bbeeb/pasted-text.txt",
+  "candidate_root": "/private/tmp/thesisguard-zcode-eval-20260916181453-77706",
+  "independent_root": "/private/tmp/thesisguard-zcode-independent-20260916",
+  "overall": "FAIL",
+  "domain_verdicts": {
+    "b1": "FAIL",
+    "b2": "FAIL",
+    "b3": "PASS_WITH_REQUIRED_FIXES"
+  },
+  "not_run": [
+    "real DB",
+    "project pytest",
+    "worker",
+    "MinIO"
+  ],
+  "checks": [
+    {
+      "label": "independent boundary tests",
+      "command": "/opt/miniconda3/bin/python3 -m pytest -q -o addopts= --tb=short test_independent.py",
+      "result": {
+        "status": "fulfilled",
+        "value": {
+          "chunk_id": "5f162f",
+          "wall_time_seconds": 1.145245833,
+          "exit_code": 1,
+          "original_token_count": 1469,
+          "output": ".FFFFFFFFFFFF........                                                    [100%]\n=================================== FAILURES ===================================\n_________________________ test_api_strict_version[1.0] _________________________\ntest_independent.py:33: in test_api_strict_version\n    assert client.post('/probe/eligibility', json=body).status_code == 422\nE   AssertionError: assert 200 == 422\nE    +  where 200 = <Response [200 OK]>.status_code\nE    +    where <Response [200 OK]> = post('/probe/eligibility', json={'series_id': 's1', 'now': '2026-09-15T00:00:00Z', 'snapshots': [{'series_id': 's1', 'version': 1.0, 'status': 'VERIFIED', 'observed_at': '2026-09-01T00:00:00Z', ...}]})\nE    +      where post = <starlette.testclient.TestClient object at 0x1087c0470>.post\n__________________________ test_api_strict_version[1] __________________________\ntest_independent.py:33: in test_api_strict_version\n    assert client.post('/probe/eligibility', json=body).status_code == 422\nE   AssertionError: assert 200 == 422\nE    +  where 200 = <Response [200 OK]>.status_code\nE    +    where <Response [200 OK]> = post('/probe/eligibility', json={'series_id': 's1', 'now': '2026-09-15T00:00:00Z', 'snapshots': [{'series_id': 's1', 'version': '1', 'status': 'VERIFIED', 'observed_at': '2026-09-01T00:00:00Z', ...}]})\nE    +      where post = <starlette.testclient.TestClient object at 0x1087c0470>.post\n___________ test_api_invalid_time_order_is_422[2026-09-01T00:00:00Z] ___________\ntest_independent.py:40: in test_api_invalid_time_order_is_422\n    assert client.post('/probe/eligibility', json=body).status_code == 422\nE   AssertionError: assert 500 == 422\nE    +  where 500 = <Response [500 Internal Server Error]>.status_code\nE    +    where <Response [500 Internal Server Error]> = post('/probe/eligibility', json={'series_id': 's1', 'now': '2026-09-15T00:00:00Z', 'snapshots': [{'series_id': 's1', 'version': 1, 'status': 'VERIFIED', 'observed_at': '2026-09-01T00:00:00Z', ...}]})\nE    +      where post = <starlette.testclient.TestClient object at 0x1087c0470>.post\n___________ test_api_invalid_time_order_is_422[2026-08-31T00:00:00Z] ___________\ntest_independent.py:40: in test_api_invalid_time_order_is_422\n    assert client.post('/probe/eligibility', json=body).status_code == 422\nE   AssertionError: assert 500 == 422\nE    +  where 500 = <Response [500 Internal Server Error]>.status_code\nE    +    where <Response [500 Internal Server Error]> = post('/probe/eligibility', json={'series_id': 's1', 'now': '2026-09-15T00:00:00Z', 'snapshots': [{'series_id': 's1', 'version': 1, 'status': 'VERIFIED', 'observed_at': '2026-09-01T00:00:00Z', ...}]})\nE    +      where post = <starlette.testclient.TestClient object at 0x1087c0470>.post\n____________ test_api_unique_latest_snapshot_is_returned[DISPUTED] _____________\ntest_independent.py:50: in test_api_unique_latest_snapshot_is_returned\n    assert response.json()['snapshot'] is not None\nE   assert None is not None\n____________ test_api_unique_latest_snapshot_is_returned[RETRACTED] ____________\ntest_independent.py:50: in test_api_unique_latest_snapshot_is_returned\n    assert response.json()['snapshot'] is not None\nE   assert None is not None\n___________ test_api_unique_latest_snapshot_is_returned[UNREVIEWED] ____________\ntest_independent.py:50: in test_api_unique_latest_snapshot_is_returned\n    assert response.json()['snapshot'] is not None\nE   assert None is not None\n______________ test_api_future_unique_latest_snapshot_is_returned ______________\ntest_independent.py:59: in test_api_future_unique_latest_snapshot_is_returned\n    assert response.json()['snapshot'] is not None\nE   assert None is not None\n_________________ test_snapshot_rejects_non_json_value[value0] _________________\ntest_independent.py:64: in test_snapshot_rejects_non_json_value\n    with pytest.raises(ValueError):\n         ^^^^^^^^^^^^^^^^^^^^^^^^^\nE   Failed: DID NOT RAISE ValueError\n_________________ test_snapshot_rejects_non_json_value[value1] _________________\ntest_independent.py:64: in test_snapshot_rejects_non_json_value\n    with pytest.raises(ValueError):\n         ^^^^^^^^^^^^^^^^^^^^^^^^^\nE   Failed: DID NOT RAISE ValueError\n_________________ test_snapshot_rejects_non_json_value[value2] _________________\ntest_independent.py:64: in test_snapshot_rejects_non_json_value\n    with pytest.raises(ValueError):\n         ^^^^^^^^^^^^^^^^^^^^^^^^^\nE   Failed: DID NOT RAISE ValueError\n________________ test_input_nested_value_cannot_change_snapshot ________________\ntest_independent.py:74: in test_input_nested_value_cannot_change_snapshot\n    assert snapshot.value == {'x': [1]}\nE   AssertionError: assert {'x': [1, 2]} == {'x': [1]}\nE     \nE     Differing items:\nE     {'x': [1, 2]} != {'x': [1]}\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_independent.py::test_api_strict_version[1.0] - AssertionError: as...\nFAILED test_independent.py::test_api_strict_version[1] - AssertionError: asse...\nFAILED test_independent.py::test_api_invalid_time_order_is_422[2026-09-01T00:00:00Z]\nFAILED test_independent.py::test_api_invalid_time_order_is_422[2026-08-31T00:00:00Z]\nFAILED test_independent.py::test_api_unique_latest_snapshot_is_returned[DISPUTED]\nFAILED test_independent.py::test_api_unique_latest_snapshot_is_returned[RETRACTED]\nFAILED test_independent.py::test_api_unique_latest_snapshot_is_returned[UNREVIEWED]\nFAILED test_independent.py::test_api_future_unique_latest_snapshot_is_returned\nFAILED test_independent.py::test_snapshot_rejects_non_json_value[value0] - Fa...\nFAILED test_independent.py::test_snapshot_rejects_non_json_value[value1] - Fa...\nFAILED test_independent.py::test_snapshot_rejects_non_json_value[value2] - Fa...\nFAILED test_independent.py::test_input_nested_value_cannot_change_snapshot - ...\n12 failed, 9 passed in 0.27s\n"
+        }
+      }
+    },
+    {
+      "label": "original tests",
+      "result": {
+        "status": "fulfilled",
+        "value": {
+          "chunk_id": "4a5a1e",
+          "wall_time_seconds": 1.099214583,
+          "exit_code": 0,
+          "original_token_count": 25,
+          "output": "................................................                         [100%]\n48 passed in 0.26s\n"
+        }
+      }
+    },
+    {
+      "label": "candidate SHA256 checks before rerun",
+      "result": {
+        "status": "fulfilled",
+        "value": {
+          "chunk_id": "bf830f",
+          "wall_time_seconds": 0.000002125,
+          "exit_code": 0,
+          "original_token_count": 101,
+          "output": "{\n  \"b1\": {\n    \"b1/snapshot.py\": true,\n    \"b1/test_snapshot.py\": true\n  },\n  \"b2\": {\n    \"b2/app.py\": true,\n    \"b2/test_api.py\": true,\n    \"b2/openapi.json\": true\n  },\n  \"b3\": {\n    \"b3/App.vue\": true,\n    \"b3/main.ts\": true,\n    \"b3/index.html\": true,\n    \"b3/package.json\": true,\n    \"b3/tsconfig.json\": true,\n    \"b3/vite.config.ts\": true,\n    \"b3/style.css\": true,\n    \"b3/env.d.ts\": true\n  }\n}\n"
+        }
+      }
+    },
+    {
+      "label": "project Ruff config",
+      "result": {
+        "status": "fulfilled",
+        "value": {
+          "chunk_id": "51df71",
+          "wall_time_seconds": 0.000001667,
+          "exit_code": 1,
+          "original_token_count": 1296,
+          "output": "UP042 Class SnapshotStatus inherits from both `str` and `enum.Enum`\n  --> /private/tmp/thesisguard-zcode-eval-20260916181453-77706/b1/snapshot.py:15:7\n   |\n15 | class SnapshotStatus(str, Enum):\n   |       ^^^^^^^^^^^^^^\n16 |     UNREVIEWED = \"UNREVIEWED\"\n17 |     VERIFIED = \"VERIFIED\"\n   |\nhelp: Inherit from `enum.StrEnum`\n\nUP042 Class EligibilityReason inherits from both `str` and `enum.Enum`\n  --> /private/tmp/thesisguard-zcode-eval-20260916181453-77706/b1/snapshot.py:22:7\n   |\n22 | class EligibilityReason(str, Enum):\n   |       ^^^^^^^^^^^^^^^^^\n23 |     ELIGIBLE = \"ELIGIBLE\"\n24 |     STALE = \"STALE\"\n   |\nhelp: Inherit from `enum.StrEnum`\n\nI001 [*] Import block is un-sorted or un-formatted\n  --> /private/tmp/thesisguard-zcode-eval-20260916181453-77706/b1/test_snapshot.py:3:1\n   |\n 1 |   \"\"\"Tests for B1 versioned snapshot selection pure functions.\"\"\"\n 2 |\n 3 | / from __future__ import annotations\n 4 | |\n 5 | | from datetime import datetime, timedelta, timezone\n 6 | | from typing import Any\n 7 | |\n 8 | | import pytest\n 9 | |\n10 | | from b1.snapshot import (\n11 | |     EligibilityReason,\n12 | |     Snapshot,\n13 | |     SnapshotStatus,\n14 | |     select_current,\n15 | | )\n   | |_^\n16 |\n17 |   # --- Fixtures ---\n   |\nhelp: Organize imports\n  |\n8 | import pytest\n  -\n9 | from b1.snapshot import (\n  |\n\nUP017 [*] Use `datetime.UTC` alias\n  --> /private/tmp/thesisguard-zcode-eval-20260916181453-77706/b1/test_snapshot.py:19:7\n   |\n17 | # --- Fixtures ---\n18 |\n19 | UTC = timezone.utc\n   |       ^^^^^^^^^^^^\n20 | CST = timezone(timedelta(hours=8))\n   |\nhelp: Convert to `datetime.UTC` alias\n   |\n4  |\n   - from datetime import datetime, timedelta, timezone\n5  + from datetime import datetime, timedelta, timezone, UTC\n6  | from typing import Any\n--------------------------------------------------------------------------------\n18 |\n   - UTC = timezone.utc\n19 + UTC = UTC\n20 | CST = timezone(timedelta(hours=8))\n   |\n\nI001 [*] Import block is un-sorted or un-formatted\n  --> /private/tmp/thesisguard-zcode-eval-20260916181453-77706/b2/test_api.py:3:1\n   |\n 1 |   \"\"\"Tests for B2 FastAPI/Pydantic eligibility probe endpoint.\"\"\"\n 2 |\n 3 | / from __future__ import annotations\n 4 | |\n 5 | | import json\n 6 | | from datetime import datetime, timedelta, timezone\n 7 | | from pathlib import Path\n 8 | |\n 9 | | import pytest\n10 | | from fastapi.testclient import TestClient\n11 | |\n12 | | from b2.app import app, export_openapi\n   | |______________________________________^\n13 |\n14 |   client = TestClient(app)\n   |\nhelp: Organize imports\n   |\n9  | import pytest\n   - from fastapi.testclient import TestClient\n   -\n10 | from b2.app import app, export_openapi\n11 + from fastapi.testclient import TestClient\n12 |\n   |\n\nF401 [*] `pytest` imported but unused\n  --> /private/tmp/thesisguard-zcode-eval-20260916181453-77706/b2/test_api.py:9:8\n   |\n 7 | from pathlib import Path\n 8 |\n 9 | import pytest\n   |        ^^^^^^\n10 | from fastapi.testclient import TestClient\n   |\nhelp: Remove unused import: `pytest`\n  |\n8 |\n  - import pytest\n9 | from fastapi.testclient import TestClient\n  |\n\nUP017 [*] Use `datetime.UTC` alias\n  --> /private/tmp/thesisguard-zcode-eval-20260916181453-77706/b2/test_api.py:16:7\n   |\n14 | client = TestClient(app)\n15 |\n16 | UTC = timezone.utc\n   |       ^^^^^^^^^^^^\n17 | CST = timezone(timedelta(hours=8))\n   |\nhelp: Convert to `datetime.UTC` alias\n   |\n5  | import json\n   - from datetime import datetime, timedelta, timezone\n6  + from datetime import datetime, timedelta, timezone, UTC\n7  | from pathlib import Path\n--------------------------------------------------------------------------------\n15 |\n   - UTC = timezone.utc\n16 + UTC = UTC\n17 | CST = timezone(timedelta(hours=8))\n   |\n\nI001 [*] Import block is un-sorted or un-formatted\n   --> /private/tmp/thesisguard-zcode-eval-20260916181453-77706/b2/test_api.py:192:5\n    |\n190 | def test_http_reason_matches_b1_pure_logic() -> None:\n191 |     \"\"\"DISPUTED via HTTP must match direct B1 call.\"\"\"\n192 |     from b1.snapshot import select_current, Snapshot, SnapshotStatus\n    |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n193 |     snapshots = [\n194 |         Snapshot(\"s1\", 1, SnapshotStatus.VERIFIED,\n    |\nhelp: Organize imports\n    |\n191 |     \"\"\"DISPUTED via HTTP must match direct B1 call.\"\"\"\n    -     from b1.snapshot import select_current, Snapshot, SnapshotStatus\n192 +     from b1.snapshot import Snapshot, SnapshotStatus, select_current\n193 |     snapshots = [\n    |\n\nF841 Local variable `components` is assigned to but never used\n   --> /private/tmp/thesisguard-zcode-eval-20260916181453-77706/b2/test_api.py:220:5\n    |\n218 | def test_openapi_response_schema_references_resolvable() -> None:\n219 |     spec = export_openapi()\n220 |     components = spec.get(\"components\", {}).get(\"schemas\", {})\n    |     ^^^^^^^^^^\n221 |     # The response schema must reference SnapshotOut or inline it.\n222 |     resp_schema = spec[\"paths\"][\"/probe/eligibility\"][\"post\"][\"responses\"][\"200\"]\n    |\nhelp: Remove assignment to unused variable `components`\n\nFound 9 errors.\n[*] 6 fixable with the `--fix` option (3 hidden fixes can be enabled with the `--unsafe-fixes` option).\n"
+        }
+      }
+    },
+    {
+      "label": "initial frontend PATH failure",
+      "result": {
+        "status": "fulfilled",
+        "value": {
+          "chunk_id": "c651a1",
+          "wall_time_seconds": 0.000004333,
+          "exit_code": 127,
+          "original_token_count": 10,
+          "output": "env: node: No such file or directory\n"
+        }
+      }
+    },
+    {
+      "label": "corrected absolute Node typecheck",
+      "result": {
+        "status": "fulfilled",
+        "value": {
+          "chunk_id": "e3b925",
+          "wall_time_seconds": 3.3435036670000002,
+          "exit_code": 0,
+          "original_token_count": 0,
+          "output": ""
+        }
+      }
+    },
+    {
+      "label": "independent output Vite build",
+      "result": {
+        "status": "fulfilled",
+        "value": {
+          "chunk_id": "6494e2",
+          "wall_time_seconds": 3.114849,
+          "exit_code": 0,
+          "original_token_count": 154,
+          "output": "vite v5.4.21 building for production...\n\n(!) outDir /private/tmp/thesisguard-zcode-independent-20260916/dist is not inside project root and will not be emptied.\nUse --emptyOutDir to override.\n\ntransforming...\n✓ 12 modules transformed.\nrendering chunks...\ncomputing gzip size...\n../../thesisguard-zcode-independent-20260916/dist/index.html                  0.43 kB │ gzip:  0.31 kB\n../../thesisguard-zcode-independent-20260916/dist/assets/index-C4PSpaPm.css   5.86 kB │ gzip:  1.69 kB\n../../thesisguard-zcode-independent-20260916/dist/assets/index-Dx7VsWna.js   72.31 kB │ gzip: 29.24 kB\n✓ built in 389ms\n"
+        }
+      }
+    },
+    {
+      "label": "mypy explicit namespace bases",
+      "result": {
+        "status": "fulfilled",
+        "value": {
+          "chunk_id": "e95d74",
+          "wall_time_seconds": 2.722682,
+          "exit_code": 1,
+          "original_token_count": 117,
+          "output": "b1/snapshot.py:145: error: Invalid index type \"str\" for \"dict[SnapshotStatus, EligibilityReason]\"; expected type \"SnapshotStatus\"  [index]\nb2/app.py:125: error: Argument \"status\" to \"SnapshotOut\" has incompatible type \"SnapshotStatus | str\"; expected \"SnapshotStatus\"  [arg-type]\n/Users/qianduoduo/Desktop/AI_app/ThesisGuard/pyproject.toml: note: unused section(s): module = ['boto3.*', 'botocore.*', 'dramatiq.*']\nFound 2 errors in 2 files (checked 2 source files)\n"
+        }
+      }
+    }
+  ],
+  "browser": {
+    "command": "/opt/miniconda3/bin/python3 browser_review.py",
+    "launch": "headless installed Chrome; sandbox launch failed; rerun approved with require_escalated",
+    "passed": [
+      "draft A/B isolation",
+      "reference selection isolation",
+      "reset A preserves B",
+      "filter preserves data/selection",
+      "no document overflow at 320 and 1440",
+      "no title/status overlap",
+      "no pageerrors"
+    ],
+    "failed": [
+      "ArrowRight moves focus to selected tab",
+      "Tab after ArrowRight reaches filter"
+    ],
+    "screenshots": [
+      "/private/tmp/thesisguard-zcode-independent-20260916/frontend-320.png",
+      "/private/tmp/thesisguard-zcode-independent-20260916/frontend-1440.png"
+    ],
+    "result_file": "/private/tmp/thesisguard-zcode-independent-20260916/browser-results.json",
+    "temporary_server": "127.0.0.1:19347; stopped after review",
+    "browser_closed": true
+  },
+  "token_cost": "UNKNOWN",
+  "candidate_source_modified_by_reviewer": false
+}

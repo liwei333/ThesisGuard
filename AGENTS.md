@@ -187,21 +187,27 @@ Refer to `docs/ARCHITECTURE_REFERENCES.md` for the complete authority map. Docum
 ### Current Evaluation Record
 
 - 评估日期：2026-09-16；组合：`zcode-agent-thesisguard-d3acc1c-20260916`；模型/工具版本 `UNKNOWN`。
-- 已收到 Stage 1 只读自评；Codex 复核结论：`PASS_WITH_REQUIRED_FIXES`。常规项目权限最高 `L1_READ_ONLY`；真实开发、测试执行、运行时验证和失败修复能力为 `UNPROVEN`。
+- Stage 2 首验整体 FAIL 的历史保留；R1 目录 `thesisguard-zcode-eval-r1-202609161835-36243` 已独立复验。R1 整份交付仍 FAIL（API 新复现的错误路径及未完整修复的交付要求），不判 FAIL_SAFETY；原 21 独立断言全部通过。B1/B3 功能通过、交付 `PASS_WITH_REQUIRED_FIXES`；允许对应领域 `L2_RESTRICTED` 指定 S 任务试用，禁止自动集成。API 维持 L1，真实 DB/迁移/worker 等 UNPROVEN。
 - 已确认基础文件定位、主分支 SHA 和主分支 Evidence 文件结构；未取得完整执行日志及探针前后快照，不能证明全部历史操作只读。
-- 必须补正：遗漏候选 worktree；混入 WP-04-03 API/schema 范围；把本轮权限限制当作工具能力缺失；从代码阅读推导高度适合开发；未完整交付能力路由和任务规模。
+- 前轮分支/WP边界/权限表述已有补正。现已独立复跑自测 `48 passed`，补充检查 `12 failed, 9 passed`；13 个源码/契约哈希吻合。基础 Python/API 编码及隔离测试执行已观察，不代表事务/幂等/真实 DB 能力通过。
+- R1 独立结果：自测 68 通过；原独立断言 21 通过；另加 5 检查后 `24 passed, 2 failed`（含原 21）。核心源码 Ruff/mypy 通过；全 b1/b2（含测试）Ruff 仍 6 错误。前端类型/build、方向键焦点/Tab、双实体状态、320/1440 检查通过，截图已由 Codex 补足。13 个新文件及 13 个原文件哈希吻合；原独立脚本未改，新目录副本仅替换 ROOT。
+- 剩余限制：API value=1e309/NaN 经 B1 验证在路由内抛异常，返回 500 而非 422；B3 仍 8 个源/配置文件，不能把总数 13 当作符合单任务六文件；原始命令/运行时间证据不足，报告的 Ruff 清洁只覆盖源码。下一真实任务必须明确文件范围、全改动质量检查和证据，不复用未验收基准作生产实现。
 - 2026-09-16 复核时 main HEAD 为 `d3acc1c6f4a2e5ce1fe4b973d7855409c0db1da5`，存在未跟踪验收材料；候选 `codex/wp04-02-evidence-domain-service@af4f2cbbb0a50bd6c215bcaa78dd9fcd98414cc8` 已有服务/测试，且有 fixture 相关未提交修改。以上为时点快照；每次任务重新检查，不得覆盖在途修改或重新从零实现服务。
-- 完整记录：`docs/ZCODE_CAPABILITY_EVALUATION_2026-09-16.md`；下一轮提示词：`docs/prompts/ZCODE_CAPABILITY_BENCHMARK_2026-09-16.md`。
+- 本轮独立复核时 main 为 `0dc2c5fd016af63f4836debf6ffa9d36b41a7703` 且 clean；前条 d3acc1c/af4f2cbb 是历史评估快照，不是下一任务固定基线。
+- 完整记录：`docs/ZCODE_CAPABILITY_EVALUATION_2026-09-16.md`（最新 R1 Review and Routing）；本轮派工评估已形成可用结论，后续在真实指定 S 任务中验证稳定性，不再自动派整轮 R2。候选已存在 `_ensure_source_grade_allowed`，不能重复实现。费用/token/完整耗时 UNKNOWN，实际节省尚未测得。
 
 ### Current Routing
 
 | Task | Current executor | zcode evidence / condition |
 |---|---|---|
-| 文件定位、单模块结构梳理、文档/测试场景草稿 | zcode；Codex 核验关键事实 | L1，只读 XS/S，仍需补正证据 |
+| 文件定位、单模块结构梳理、文档/测试场景草稿 | zcode；Codex 核验关键事实 | L1，只读 XS/S，注意基线及证据一致性 |
 | 合同与代码对应检查、任务拆分初稿 | zcode；Codex 复核 | L1，每次一个明确约束，不独立宣布业务 PASS |
-| Python 后端、FastAPI/OpenAPI、Vue/TypeScript 常规实现 | 当前 Codex；相应基准通过后优先 zcode | UNPROVEN，按能力域分别升级，不能跨域推广 |
+| Python 纯函数和对应单元测试 | 优先 zcode；Codex 独立验收 | L2 指定 S，已冻结输入/输出，不涉及 DB/事务/真实风险规则决策；源码及测试全量质量检查 |
+| FastAPI/Pydantic/OpenAPI | 当前 Codex；zcode 可给草稿 | L1；ASGI 常规测试已过，非法 JSON 数值仍 500，不授予完整 API L2 |
+| Vue/TypeScript 组件和双实体状态 | 优先 zcode；Codex 独立验收 | L2 指定 S，先限独立组件/局部状态；不据此推导跨页面/client/auth 集成已验证，桌面/移动及键盘检查必需 |
+| 对已授权纯函数/组件的测试编写和隔离执行 | zcode；Codex 独立验收 | L2 随该任务范围；未知领域测试只给草稿，不能独立宣布合同 PASS |
 | ORM/repository、迁移、真实 PostgreSQL/worker/MinIO 集成 | 当前 Codex | 需单独真实环境测试；模拟/内存验证不算通过 |
-| 调试、失败恢复、行为保留重构 | 当前 Codex；通过受控返修后再评估 zcode | 不根据首次写码成功推断修复能力 |
+| 单函数/组件内明确反馈修复 | zcode 在对应 L2 任务内；Codex 复验 | 已观察受控返修；跨模块调试、事务恢复、行为保留重构仍 Codex/UNPROVEN |
 | 产品/架构决策、冻结风险规则解释与修改决策、最终独立验收、Git 集成 | Codex；产品规则仍按用户批准流程 | zcode 可提供候选材料，不能自批授权或验收自己 |
 
 ### Dispatch Protocol
@@ -218,7 +224,8 @@ Refer to `docs/ARCHITECTURE_REFERENCES.md` for the complete authority map. Docum
 ```
 
 - 尚未验证的常规开发能力优先进入隔离 XS/S 基准，不直接派主线完整 WP。用户已授权准备评估；本次基准提示词仅授权其指定临时目录中的开发测试，不扩展到候选 worktree、项目文件或数据库操作。
-- 同能力域一次隔离 S 基准独立通过后，可试用 `L2_RESTRICTED` 的明确 S 任务；首次必须隔离且指定文件，Codex 独立验收。一次成功不足以授予 L3。
+- 同能力域隔离 S 功能基准独立通过，可试用 `L2_RESTRICTED` 的明确 S 任务；非业务阻断的 lint/文件数/报告遗留须披露并列入新任务交付门槛，原基准不能作为整份已验收交付。首次必须隔离且指定最多 2-6 文件；完整 source/test/配置检查不过不得集成。一次成功不足以授予 L3。
+- 当前下一步可派 zcode 做上述已验证域的一个真实指定 S 任务；API 和其他未过域由 Codex 主责。一次受控返修已用，不自动追加整轮 R2；根据必要真实任务接管或收窄范围。通过哪个能力域就试用哪个域，不重做无关全项目评估。
 - 同类至少三个明确任务独立验收通过，或一个基准重复两次并完成一次受监督真实任务；无越界/虚报，返修成本可接受，才考虑该域 `L3_SINGLE_TASK` 和 M 规模。不默认授予 L4。
 - 达到 L2/L3 的能力域，常规已冻结合同的任务优先派 zcode；Codex 只读必要事实源、完整相关 diff 和独立验证结果，按风险检查，不重复整套开发。
 - 无法运行必要验证时标记 `BLOCKED_VALIDATION / UNPROVEN`；可交付草稿，但不能作为已验收实现集成。独立验收方可执行缺失验证并单独记录。

@@ -1,0 +1,656 @@
+{
+  "task": "TASK-TEST-INFRA-PG-FIXTURE-LIFECYCLE-R1-INDEPENDENT-REVERIFY",
+  "status": "PASS",
+  "run_id": "0348c037ded74f91b992077a49fd9d9c",
+  "cache_dir": "/private/tmp/tg-pg-independent-29r_qwxr",
+  "create_attempt_budget": 4,
+  "real_invocations": 1,
+  "fixed_sha256": {
+    "backend/evidence/errors.py": "3cf37eb3efbf4c7bf7ab3d4213e4ce9865f2b9209fdbeb3d6c267fe84b06d1ec",
+    "backend/evidence/services.py": "7ce76b02928019347625048e7d0acb523d74168cd6bbbdf03184163ac277f959",
+    "tests/test_evidence_services.py": "c54e2306b7ec9625f0498faeebd8a23ceb55c6366769ac0d944f228e2aa84851",
+    "tests/evidence_pg_fixture.py": "bb84518f354f2f7752881fb529dcd6df31b58085bf32d6728c2ccf6998c3e9db",
+    "tests/test_evidence_pg_fixture_lifecycle.py": "3887a89945a770ed22bac5839ff6a61e5daf47cb05a8b0105d1cfce8f3c12fc7"
+  },
+  "commands": [
+    {
+      "label": "environment",
+      "argv": [
+        "/opt/homebrew/bin/python3.12",
+        "/private/tmp/tg-pg-independent-29r_qwxr/probe.py"
+      ],
+      "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+      "environment": {
+        "PATH": "/opt/miniconda3/bin:/opt/homebrew/bin:/opt/homebrew/opt/postgresql@16/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service:/opt/homebrew/lib/python3.12/site-packages",
+        "PYTHONPYCACHEPREFIX": "/private/tmp/tg-pg-independent-29r_qwxr/pycache",
+        "TG_EVIDENCE_PG_LEDGER": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/TASK-TEST-INFRA-PG-FIXTURE-LIFECYCLE-R1-INDEPENDENT-REVERIFY-evidence/resources.jsonl",
+        "TG_EVIDENCE_PG_RUN_ID": "0348c037ded74f91b992077a49fd9d9c",
+        "RUFF_CACHE_DIR": "/private/tmp/tg-pg-independent-29r_qwxr/ruff"
+      },
+      "diagnostic_variables_originally_unset": true,
+      "real_opt_in": false,
+      "started_at": "2026-09-16T11:48:36.293403+00:00",
+      "ended_at": "2026-09-16T11:48:39.454030+00:00",
+      "exit_code": 1,
+      "stdout": "python /opt/homebrew/opt/python@3.12/bin/python3.12 3.12.9 (main, Feb  4 2025, 14:38:38) [Clang 15.0.0 (clang-1500.1.0.2.5)]\npytest /opt/miniconda3/bin/pytest\nalembic /opt/miniconda3/bin/alembic\nruff /opt/miniconda3/bin/ruff\nmypy /opt/miniconda3/bin/mypy\npsql /opt/homebrew/bin/psql\nchild_alembic /opt/miniconda3/bin/alembic\n[\"/opt/homebrew/bin/pytest\", \"--version\"]\npytest 9.1.1\n[\"/opt/miniconda3/bin/alembic\", \"--version\"]\nalembic 1.18.5\n[\"/opt/miniconda3/bin/ruff\", \"--version\"]\nruff 0.16.1\n[\"/opt/miniconda3/bin/mypy\", \"--version\"]\nmypy 2.3.0 (compiled: yes)\n[\"/opt/homebrew/opt/postgresql@16/bin/psql\", \"--version\"]\npsql (PostgreSQL) 16.13 (Homebrew)\n",
+      "stderr": "Traceback (most recent call last):\n  File \"/private/tmp/tg-pg-independent-29r_qwxr/probe.py\", line 9, in <module>\n    heads=subprocess.check_output(['/opt/miniconda3/bin/alembic','heads'],text=True).strip(); print('heads',heads); assert heads=='000000000004 (head)'\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/homebrew/Cellar/python@3.12/3.12.9/Frameworks/Python.framework/Versions/3.12/lib/python3.12/subprocess.py\", line 468, in check_output\n    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/homebrew/Cellar/python@3.12/3.12.9/Frameworks/Python.framework/Versions/3.12/lib/python3.12/subprocess.py\", line 573, in run\n    raise CalledProcessError(retcode, process.args,\nsubprocess.CalledProcessError: Command '['/opt/miniconda3/bin/alembic', 'heads']' returned non-zero exit status 255.\n"
+    },
+    {
+      "label": "deterministic",
+      "argv": [
+        "/opt/homebrew/bin/pytest",
+        "-p",
+        "no:cacheprovider",
+        "-q",
+        "tests/test_evidence_pg_fixture_lifecycle.py",
+        "-k",
+        "not real",
+        "-rs",
+        "-x",
+        "--basetemp",
+        "/private/tmp/tg-pg-independent-29r_qwxr/pytest-deterministic"
+      ],
+      "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+      "environment": {
+        "PATH": "/opt/miniconda3/bin:/opt/homebrew/bin:/opt/homebrew/opt/postgresql@16/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service:/opt/homebrew/lib/python3.12/site-packages",
+        "PYTHONPYCACHEPREFIX": "/private/tmp/tg-pg-independent-29r_qwxr/pycache",
+        "TG_EVIDENCE_PG_LEDGER": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/TASK-TEST-INFRA-PG-FIXTURE-LIFECYCLE-R1-INDEPENDENT-REVERIFY-evidence/resources.jsonl",
+        "TG_EVIDENCE_PG_RUN_ID": "0348c037ded74f91b992077a49fd9d9c",
+        "RUFF_CACHE_DIR": "/private/tmp/tg-pg-independent-29r_qwxr/ruff"
+      },
+      "diagnostic_variables_originally_unset": true,
+      "real_opt_in": false,
+      "started_at": "2026-09-16T11:48:39.758319+00:00",
+      "ended_at": "2026-09-16T11:48:42.742287+00:00",
+      "exit_code": 0,
+      "stdout": "============================= test session starts ==============================\nplatform darwin -- Python 3.12.9, pytest-9.1.1, pluggy-1.6.0\nrootdir: /Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service\nconfigfile: pyproject.toml\nplugins: asyncio-1.4.0, anyio-4.15.1\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollected 36 items / 4 deselected / 32 selected\n\ntests/test_evidence_pg_fixture_lifecycle.py ............................ [ 87%]\n....                                                                     [100%]\n\n=============================== warnings summary ===============================\n../../../../../../../opt/homebrew/lib/python3.12/site-packages/fastapi/testclient.py:1\n  /opt/homebrew/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.\n    from starlette.testclient import TestClient as TestClient  # noqa\n\n../../../../../../../opt/homebrew/lib/python3.12/site-packages/starlette/testclient.py:53\n  /opt/homebrew/lib/python3.12/site-packages/starlette/testclient.py:53: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.\n    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n================= 32 passed, 4 deselected, 2 warnings in 0.35s =================\n",
+      "stderr": ""
+    },
+    {
+      "label": "environment-corrected",
+      "argv": [
+        "/opt/homebrew/bin/python3.12",
+        "/private/tmp/tg-pg-independent-29r_qwxr/probe.py"
+      ],
+      "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+      "environment": {
+        "PATH": "/opt/miniconda3/bin:/opt/homebrew/bin:/opt/homebrew/opt/postgresql@16/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service:/opt/homebrew/lib/python3.12/site-packages",
+        "PYTHONPYCACHEPREFIX": "/private/tmp/tg-pg-independent-29r_qwxr/pycache",
+        "TG_EVIDENCE_PG_LEDGER": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/TASK-TEST-INFRA-PG-FIXTURE-LIFECYCLE-R1-INDEPENDENT-REVERIFY-evidence/resources.jsonl",
+        "TG_EVIDENCE_PG_RUN_ID": "0348c037ded74f91b992077a49fd9d9c",
+        "RUFF_CACHE_DIR": "/private/tmp/tg-pg-independent-29r_qwxr/ruff"
+      },
+      "diagnostic_variables_originally_unset": true,
+      "real_opt_in": false,
+      "started_at": "2026-09-16T11:49:08.596258+00:00",
+      "ended_at": "2026-09-16T11:49:11.265754+00:00",
+      "exit_code": 0,
+      "stdout": "python /opt/homebrew/opt/python@3.12/bin/python3.12 3.12.9 (main, Feb  4 2025, 14:38:38) [Clang 15.0.0 (clang-1500.1.0.2.5)]\npytest /opt/miniconda3/bin/pytest\nalembic /opt/miniconda3/bin/alembic\nruff /opt/miniconda3/bin/ruff\nmypy /opt/miniconda3/bin/mypy\npsql /opt/homebrew/bin/psql\nchild_alembic /opt/miniconda3/bin/alembic\n[\"/opt/homebrew/bin/pytest\", \"--version\"]\npytest 9.1.1\n[\"/opt/miniconda3/bin/alembic\", \"--version\"]\nalembic 1.18.5\n[\"/opt/miniconda3/bin/ruff\", \"--version\"]\nruff 0.16.1\n[\"/opt/miniconda3/bin/mypy\", \"--version\"]\nmypy 2.3.0 (compiled: yes)\n[\"/opt/homebrew/opt/postgresql@16/bin/psql\", \"--version\"]\npsql (PostgreSQL) 16.13 (Homebrew)\nheads 000000000004 (head)\n",
+      "stderr": ""
+    },
+    {
+      "label": "deterministic",
+      "argv": [
+        "/opt/homebrew/bin/pytest",
+        "-p",
+        "no:cacheprovider",
+        "-q",
+        "tests/test_evidence_pg_fixture_lifecycle.py",
+        "-k",
+        "not real",
+        "-rs",
+        "-x",
+        "--basetemp",
+        "/private/tmp/tg-pg-independent-29r_qwxr/pytest-deterministic-confirmed"
+      ],
+      "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+      "environment": {
+        "PATH": "/opt/miniconda3/bin:/opt/homebrew/bin:/opt/homebrew/opt/postgresql@16/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service:/opt/homebrew/lib/python3.12/site-packages",
+        "PYTHONPYCACHEPREFIX": "/private/tmp/tg-pg-independent-29r_qwxr/pycache",
+        "TG_EVIDENCE_PG_LEDGER": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/TASK-TEST-INFRA-PG-FIXTURE-LIFECYCLE-R1-INDEPENDENT-REVERIFY-evidence/resources.jsonl",
+        "TG_EVIDENCE_PG_RUN_ID": "0348c037ded74f91b992077a49fd9d9c",
+        "RUFF_CACHE_DIR": "/private/tmp/tg-pg-independent-29r_qwxr/ruff"
+      },
+      "diagnostic_variables_originally_unset": true,
+      "real_opt_in": false,
+      "started_at": "2026-09-16T11:49:11.552067+00:00",
+      "ended_at": "2026-09-16T11:49:14.194856+00:00",
+      "exit_code": 0,
+      "stdout": "============================= test session starts ==============================\nplatform darwin -- Python 3.12.9, pytest-9.1.1, pluggy-1.6.0\nrootdir: /Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service\nconfigfile: pyproject.toml\nplugins: asyncio-1.4.0, anyio-4.15.1\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollected 36 items / 4 deselected / 32 selected\n\ntests/test_evidence_pg_fixture_lifecycle.py ............................ [ 87%]\n....                                                                     [100%]\n\n=============================== warnings summary ===============================\n../../../../../../../opt/homebrew/lib/python3.12/site-packages/fastapi/testclient.py:1\n  /opt/homebrew/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.\n    from starlette.testclient import TestClient as TestClient  # noqa\n\n../../../../../../../opt/homebrew/lib/python3.12/site-packages/starlette/testclient.py:53\n  /opt/homebrew/lib/python3.12/site-packages/starlette/testclient.py:53: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.\n    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n================= 32 passed, 4 deselected, 2 warnings in 0.36s =================\n",
+      "stderr": ""
+    },
+    {
+      "label": "real-postgres",
+      "argv": [
+        "/opt/homebrew/bin/pytest",
+        "-p",
+        "no:cacheprovider",
+        "-q",
+        "tests/test_evidence_pg_fixture_lifecycle.py",
+        "-k",
+        "real",
+        "-rs",
+        "-x",
+        "--basetemp",
+        "/private/tmp/tg-pg-independent-29r_qwxr/pytest-real"
+      ],
+      "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+      "environment": {
+        "PATH": "/opt/miniconda3/bin:/opt/homebrew/bin:/opt/homebrew/opt/postgresql@16/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service:/opt/homebrew/lib/python3.12/site-packages",
+        "PYTHONPYCACHEPREFIX": "/private/tmp/tg-pg-independent-29r_qwxr/pycache",
+        "TG_EVIDENCE_PG_LEDGER": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/TASK-TEST-INFRA-PG-FIXTURE-LIFECYCLE-R1-INDEPENDENT-REVERIFY-evidence/resources.jsonl",
+        "TG_EVIDENCE_PG_RUN_ID": "0348c037ded74f91b992077a49fd9d9c",
+        "RUFF_CACHE_DIR": "/private/tmp/tg-pg-independent-29r_qwxr/ruff"
+      },
+      "diagnostic_variables_originally_unset": true,
+      "real_opt_in": true,
+      "started_at": "2026-09-16T11:49:35.529139+00:00",
+      "ended_at": "2026-09-16T11:49:51.875978+00:00",
+      "exit_code": 0,
+      "stdout": "============================= test session starts ==============================\nplatform darwin -- Python 3.12.9, pytest-9.1.1, pluggy-1.6.0\nrootdir: /Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service\nconfigfile: pyproject.toml\nplugins: asyncio-1.4.0, anyio-4.15.1\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollected 36 items / 32 deselected / 4 selected\n\ntests/test_evidence_pg_fixture_lifecycle.py ....                         [100%]\n\n=============================== warnings summary ===============================\n../../../../../../../opt/homebrew/lib/python3.12/site-packages/fastapi/testclient.py:1\n  /opt/homebrew/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.\n    from starlette.testclient import TestClient as TestClient  # noqa\n\n../../../../../../../opt/homebrew/lib/python3.12/site-packages/starlette/testclient.py:53\n  /opt/homebrew/lib/python3.12/site-packages/starlette/testclient.py:53: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.\n    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n================ 4 passed, 32 deselected, 2 warnings in 13.95s =================\n",
+      "stderr": ""
+    },
+    {
+      "label": "ruff",
+      "argv": [
+        "/opt/miniconda3/bin/ruff",
+        "check",
+        "tests/test_evidence_services.py",
+        "tests/evidence_pg_fixture.py",
+        "tests/test_evidence_pg_fixture_lifecycle.py"
+      ],
+      "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+      "environment": {
+        "PATH": "/opt/miniconda3/bin:/opt/homebrew/bin:/opt/homebrew/opt/postgresql@16/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service:/opt/homebrew/lib/python3.12/site-packages",
+        "PYTHONPYCACHEPREFIX": "/private/tmp/tg-pg-independent-29r_qwxr/pycache",
+        "TG_EVIDENCE_PG_LEDGER": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/TASK-TEST-INFRA-PG-FIXTURE-LIFECYCLE-R1-INDEPENDENT-REVERIFY-evidence/resources.jsonl",
+        "TG_EVIDENCE_PG_RUN_ID": "0348c037ded74f91b992077a49fd9d9c",
+        "RUFF_CACHE_DIR": "/private/tmp/tg-pg-independent-29r_qwxr/ruff"
+      },
+      "diagnostic_variables_originally_unset": true,
+      "real_opt_in": false,
+      "started_at": "2026-09-16T11:50:13.195998+00:00",
+      "ended_at": "2026-09-16T11:50:13.268417+00:00",
+      "exit_code": 0,
+      "stdout": "All checks passed!\n",
+      "stderr": ""
+    },
+    {
+      "label": "format-check",
+      "argv": [
+        "/opt/miniconda3/bin/ruff",
+        "format",
+        "--check",
+        "tests/test_evidence_services.py",
+        "tests/evidence_pg_fixture.py",
+        "tests/test_evidence_pg_fixture_lifecycle.py"
+      ],
+      "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+      "environment": {
+        "PATH": "/opt/miniconda3/bin:/opt/homebrew/bin:/opt/homebrew/opt/postgresql@16/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service:/opt/homebrew/lib/python3.12/site-packages",
+        "PYTHONPYCACHEPREFIX": "/private/tmp/tg-pg-independent-29r_qwxr/pycache",
+        "TG_EVIDENCE_PG_LEDGER": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/TASK-TEST-INFRA-PG-FIXTURE-LIFECYCLE-R1-INDEPENDENT-REVERIFY-evidence/resources.jsonl",
+        "TG_EVIDENCE_PG_RUN_ID": "0348c037ded74f91b992077a49fd9d9c",
+        "RUFF_CACHE_DIR": "/private/tmp/tg-pg-independent-29r_qwxr/ruff"
+      },
+      "diagnostic_variables_originally_unset": true,
+      "real_opt_in": false,
+      "started_at": "2026-09-16T11:50:13.559821+00:00",
+      "ended_at": "2026-09-16T11:50:13.577765+00:00",
+      "exit_code": 0,
+      "stdout": "3 files already formatted\n",
+      "stderr": ""
+    },
+    {
+      "label": "mypy",
+      "argv": [
+        "/opt/miniconda3/bin/mypy",
+        "--cache-dir",
+        "/private/tmp/tg-pg-independent-29r_qwxr/mypy",
+        "tests/test_evidence_services.py",
+        "tests/evidence_pg_fixture.py",
+        "tests/test_evidence_pg_fixture_lifecycle.py"
+      ],
+      "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+      "environment": {
+        "PATH": "/opt/miniconda3/bin:/opt/homebrew/bin:/opt/homebrew/opt/postgresql@16/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service:/opt/homebrew/lib/python3.12/site-packages",
+        "PYTHONPYCACHEPREFIX": "/private/tmp/tg-pg-independent-29r_qwxr/pycache",
+        "TG_EVIDENCE_PG_LEDGER": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/TASK-TEST-INFRA-PG-FIXTURE-LIFECYCLE-R1-INDEPENDENT-REVERIFY-evidence/resources.jsonl",
+        "TG_EVIDENCE_PG_RUN_ID": "0348c037ded74f91b992077a49fd9d9c",
+        "RUFF_CACHE_DIR": "/private/tmp/tg-pg-independent-29r_qwxr/ruff"
+      },
+      "diagnostic_variables_originally_unset": true,
+      "real_opt_in": false,
+      "started_at": "2026-09-16T11:50:13.873134+00:00",
+      "ended_at": "2026-09-16T11:50:19.691386+00:00",
+      "exit_code": 0,
+      "stdout": "pyproject.toml: note: unused section(s): module = ['boto3.*', 'botocore.*', 'dramatiq.*']\nSuccess: no issues found in 3 source files\n",
+      "stderr": ""
+    },
+    {
+      "label": "compileall",
+      "argv": [
+        "/opt/homebrew/bin/python3.12",
+        "-m",
+        "compileall",
+        "-q",
+        "tests/test_evidence_services.py",
+        "tests/evidence_pg_fixture.py",
+        "tests/test_evidence_pg_fixture_lifecycle.py"
+      ],
+      "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+      "environment": {
+        "PATH": "/opt/miniconda3/bin:/opt/homebrew/bin:/opt/homebrew/opt/postgresql@16/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service:/opt/homebrew/lib/python3.12/site-packages",
+        "PYTHONPYCACHEPREFIX": "/private/tmp/tg-pg-independent-29r_qwxr/pycache",
+        "TG_EVIDENCE_PG_LEDGER": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/TASK-TEST-INFRA-PG-FIXTURE-LIFECYCLE-R1-INDEPENDENT-REVERIFY-evidence/resources.jsonl",
+        "TG_EVIDENCE_PG_RUN_ID": "0348c037ded74f91b992077a49fd9d9c",
+        "RUFF_CACHE_DIR": "/private/tmp/tg-pg-independent-29r_qwxr/ruff"
+      },
+      "diagnostic_variables_originally_unset": true,
+      "real_opt_in": false,
+      "started_at": "2026-09-16T11:50:19.985892+00:00",
+      "ended_at": "2026-09-16T11:50:20.124683+00:00",
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "label": "final-evidence-assessment",
+      "argv": [
+        "/opt/homebrew/bin/python3.12",
+        "/private/tmp/tg-pg-independent-29r_qwxr/assess.py"
+      ],
+      "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+      "environment": {
+        "PATH": "/opt/miniconda3/bin:/opt/homebrew/bin:/opt/homebrew/opt/postgresql@16/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service:/opt/homebrew/lib/python3.12/site-packages",
+        "PYTHONPYCACHEPREFIX": "/private/tmp/tg-pg-independent-29r_qwxr/pycache",
+        "TG_EVIDENCE_PG_LEDGER": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/TASK-TEST-INFRA-PG-FIXTURE-LIFECYCLE-R1-INDEPENDENT-REVERIFY-evidence/resources.jsonl",
+        "TG_EVIDENCE_PG_RUN_ID": "0348c037ded74f91b992077a49fd9d9c",
+        "RUFF_CACHE_DIR": "/private/tmp/tg-pg-independent-29r_qwxr/ruff"
+      },
+      "diagnostic_variables_originally_unset": true,
+      "real_opt_in": false,
+      "started_at": "2026-09-16T11:51:20.949170+00:00",
+      "ended_at": "2026-09-16T11:51:21.227977+00:00",
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"/private/tmp/tg-pg-independent-29r_qwxr/assess.py\", line 28, in <module>\n    assert (errors[0]['phase'],errors[0]['error_type'])=={'migration_fault':('migration','CalledProcessError'),'engine_fault':('engine','InjectedFailure'),'body_fault':('body','InjectedFailure')}[scenario]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n"
+    },
+    {
+      "label": "final-evidence-assessment-corrected",
+      "argv": [
+        "/opt/homebrew/bin/python3.12",
+        "/private/tmp/tg-pg-independent-29r_qwxr/assess.py"
+      ],
+      "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+      "environment": {
+        "PATH": "/opt/miniconda3/bin:/opt/homebrew/bin:/opt/homebrew/opt/postgresql@16/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPATH": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service:/opt/homebrew/lib/python3.12/site-packages",
+        "PYTHONPYCACHEPREFIX": "/private/tmp/tg-pg-independent-29r_qwxr/pycache",
+        "TG_EVIDENCE_PG_LEDGER": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/TASK-TEST-INFRA-PG-FIXTURE-LIFECYCLE-R1-INDEPENDENT-REVERIFY-evidence/resources.jsonl",
+        "TG_EVIDENCE_PG_RUN_ID": "0348c037ded74f91b992077a49fd9d9c",
+        "RUFF_CACHE_DIR": "/private/tmp/tg-pg-independent-29r_qwxr/ruff"
+      },
+      "diagnostic_variables_originally_unset": true,
+      "real_opt_in": false,
+      "started_at": "2026-09-16T11:51:51.983138+00:00",
+      "ended_at": "2026-09-16T11:51:52.389947+00:00",
+      "exit_code": 0,
+      "stdout": "{\n  \"event_counts\": {\n    \"catalog_before\": 4,\n    \"declared_scenario\": 4,\n    \"attempt\": 4,\n    \"tools_checked\": 4,\n    \"target_checked\": 4,\n    \"create_sent\": 4,\n    \"created\": 4,\n    \"admin_closed\": 4,\n    \"migrated\": 3,\n    \"ready\": 2,\n    \"engine_disposed\": 2,\n    \"cleanup_checked\": 4,\n    \"drop_sent\": 4,\n    \"dropped\": 4,\n    \"cleanup_admin_closed\": 4,\n    \"catalog_after\": 4,\n    \"primary_error\": 3\n  },\n  \"resources\": [\n    {\n      \"run_id\": \"0348c037ded74f91b992077a49fd9d9c\",\n      \"attempt_id\": \"986c40d28d2e4b828ea78706127e1d4d\",\n      \"node\": \"tests/test_evidence_pg_fixture_lifecycle.py::test_real_postgres_resource_lifecycle[normal]\",\n      \"name\": \"tg_wp04_service_986c40d28d2e4b828ea78706127e1d4d\",\n      \"oid\": 8327525,\n      \"owner\": \"thesisguard\",\n      \"owner_oid\": 10,\n      \"scenario\": \"normal\",\n      \"connections_before_drop\": 0,\n      \"created_status\": \"CONFIRMED\",\n      \"drop_status\": \"ABSENT\",\n      \"event_sequence\": [\n        \"catalog_before\",\n        \"declared_scenario\",\n        \"attempt\",\n        \"tools_checked\",\n        \"target_checked\",\n        \"create_sent\",\n        \"created\",\n        \"admin_closed\",\n        \"migrated\",\n        \"ready\",\n        \"engine_disposed\",\n        \"cleanup_checked\",\n        \"drop_sent\",\n        \"dropped\",\n        \"cleanup_admin_closed\",\n        \"catalog_after\"\n      ],\n      \"expected_primary_error\": []\n    },\n    {\n      \"run_id\": \"0348c037ded74f91b992077a49fd9d9c\",\n      \"attempt_id\": \"46fa5ca4e7e64fe49119979e73069571\",\n      \"node\": \"tests/test_evidence_pg_fixture_lifecycle.py::test_real_postgres_resource_lifecycle[migration_fault]\",\n      \"name\": \"tg_wp04_service_46fa5ca4e7e64fe49119979e73069571\",\n      \"oid\": 8328225,\n      \"owner\": \"thesisguard\",\n      \"owner_oid\": 10,\n      \"scenario\": \"migration_fault\",\n      \"connections_before_drop\": 0,\n      \"created_status\": \"CONFIRMED\",\n      \"drop_status\": \"ABSENT\",\n      \"event_sequence\": [\n        \"catalog_before\",\n        \"declared_scenario\",\n        \"attempt\",\n        \"tools_checked\",\n        \"target_checked\",\n        \"create_sent\",\n        \"created\",\n        \"admin_closed\",\n        \"primary_error\",\n        \"cleanup_checked\",\n        \"drop_sent\",\n        \"dropped\",\n        \"cleanup_admin_closed\",\n        \"catalog_after\"\n      ],\n      \"expected_primary_error\": [\n        {\n          \"admin_database\": \"postgres\",\n          \"attempt_id\": \"46fa5ca4e7e64fe49119979e73069571\",\n          \"error_type\": \"CalledProcessError\",\n          \"event\": \"primary_error\",\n          \"host\": \"127.0.0.1\",\n          \"name\": \"tg_wp04_service_46fa5ca4e7e64fe49119979e73069571\",\n          \"node\": \"tests/test_evidence_pg_fixture_lifecycle.py::test_real_postgres_resource_lifecycle[migration_fault]\",\n          \"phase\": \"migration\",\n          \"port\": 15432,\n          \"run_id\": \"0348c037ded74f91b992077a49fd9d9c\",\n          \"time\": \"2026-09-16T11:49:44.197150+00:00\"\n        }\n      ]\n    },\n    {\n      \"run_id\": \"0348c037ded74f91b992077a49fd9d9c\",\n      \"attempt_id\": \"7fe7afdba012426fa8a4bb459699f5ed\",\n      \"node\": \"tests/test_evidence_pg_fixture_lifecycle.py::test_real_postgres_resource_lifecycle[engine_fault]\",\n      \"name\": \"tg_wp04_service_7fe7afdba012426fa8a4bb459699f5ed\",\n      \"oid\": 8328226,\n      \"owner\": \"thesisguard\",\n      \"owner_oid\": 10,\n      \"scenario\": \"engine_fault\",\n      \"connections_before_drop\": 0,\n      \"created_status\": \"CONFIRMED\",\n      \"drop_status\": \"ABSENT\",\n      \"event_sequence\": [\n        \"catalog_before\",\n        \"declared_scenario\",\n        \"attempt\",\n        \"tools_checked\",\n        \"target_checked\",\n        \"create_sent\",\n        \"created\",\n        \"admin_closed\",\n        \"migrated\",\n        \"primary_error\",\n        \"cleanup_checked\",\n        \"drop_sent\",\n        \"dropped\",\n        \"cleanup_admin_closed\",\n        \"catalog_after\"\n      ],\n      \"expected_primary_error\": [\n        {\n          \"admin_database\": \"postgres\",\n          \"attempt_id\": \"7fe7afdba012426fa8a4bb459699f5ed\",\n          \"error_type\": \"InjectedFailure\",\n          \"event\": \"primary_error\",\n          \"host\": \"127.0.0.1\",\n          \"name\": \"tg_wp04_service_7fe7afdba012426fa8a4bb459699f5ed\",\n          \"node\": \"tests/test_evidence_pg_fixture_lifecycle.py::test_real_postgres_resource_lifecycle[engine_fault]\",\n          \"phase\": \"engine\",\n          \"port\": 15432,\n          \"run_id\": \"0348c037ded74f91b992077a49fd9d9c\",\n          \"time\": \"2026-09-16T11:49:47.848225+00:00\"\n        }\n      ]\n    },\n    {\n      \"run_id\": \"0348c037ded74f91b992077a49fd9d9c\",\n      \"attempt_id\": \"c762b6f9e00247079d363e07e23bf30f\",\n      \"node\": \"tests/test_evidence_pg_fixture_lifecycle.py::test_real_postgres_resource_lifecycle[body_fault]\",\n      \"name\": \"tg_wp04_service_c762b6f9e00247079d363e07e23bf30f\",\n      \"oid\": 8328926,\n      \"owner\": \"thesisguard\",\n      \"owner_oid\": 10,\n      \"scenario\": \"body_fault\",\n      \"connections_before_drop\": 0,\n      \"created_status\": \"CONFIRMED\",\n      \"drop_status\": \"ABSENT\",\n      \"event_sequence\": [\n        \"catalog_before\",\n        \"declared_scenario\",\n        \"attempt\",\n        \"tools_checked\",\n        \"target_checked\",\n        \"create_sent\",\n        \"created\",\n        \"admin_closed\",\n        \"migrated\",\n        \"ready\",\n        \"primary_error\",\n        \"engine_disposed\",\n        \"cleanup_checked\",\n        \"drop_sent\",\n        \"dropped\",\n        \"cleanup_admin_closed\",\n        \"catalog_after\"\n      ],\n      \"expected_primary_error\": [\n        {\n          \"admin_database\": \"postgres\",\n          \"attempt_id\": \"c762b6f9e00247079d363e07e23bf30f\",\n          \"error_type\": \"InjectedFailure\",\n          \"event\": \"primary_error\",\n          \"host\": \"127.0.0.1\",\n          \"name\": \"tg_wp04_service_c762b6f9e00247079d363e07e23bf30f\",\n          \"node\": \"tests/test_evidence_pg_fixture_lifecycle.py::test_real_postgres_resource_lifecycle[body_fault]\",\n          \"phase\": \"test_body\",\n          \"port\": 15432,\n          \"run_id\": \"0348c037ded74f91b992077a49fd9d9c\",\n          \"time\": \"2026-09-16T11:49:51.640968+00:00\"\n        }\n      ]\n    }\n  ],\n  \"protected_preservation\": \"All 397 initial main file hashes, 368 protected acceptance file hashes, and 186 candidate file hashes unchanged; candidate clean/index empty and both fixed identities unchanged\",\n  \"final_fixed_sha256\": {\n    \"backend/evidence/errors.py\": \"3cf37eb3efbf4c7bf7ab3d4213e4ce9865f2b9209fdbeb3d6c267fe84b06d1ec\",\n    \"backend/evidence/services.py\": \"7ce76b02928019347625048e7d0acb523d74168cd6bbbdf03184163ac277f959\",\n    \"tests/test_evidence_services.py\": \"c54e2306b7ec9625f0498faeebd8a23ceb55c6366769ac0d944f228e2aa84851\",\n    \"tests/evidence_pg_fixture.py\": \"bb84518f354f2f7752881fb529dcd6df31b58085bf32d6728c2ccf6998c3e9db\",\n    \"tests/test_evidence_pg_fixture_lifecycle.py\": \"3887a89945a770ed22bac5839ff6a61e5daf47cb05a8b0105d1cfce8f3c12fc7\"\n  }\n}\n",
+      "stderr": ""
+    }
+  ],
+  "execution_support_sources": {
+    "runner": "MAIN='/Users/qianduoduo/Desktop/AI_app/ThesisGuard'\nCAND='/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service'\nEVIDENCE='/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/TASK-TEST-INFRA-PG-FIXTURE-LIFECYCLE-R1-INDEPENDENT-REVERIFY-evidence'\nCACHE_PATH='/private/tmp/tg-pg-independent-29r_qwxr'\nTASK='TASK-TEST-INFRA-PG-FIXTURE-LIFECYCLE-R1-INDEPENDENT-REVERIFY'\nFIXED={'backend/evidence/errors.py': '3cf37eb3efbf4c7bf7ab3d4213e4ce9865f2b9209fdbeb3d6c267fe84b06d1ec', 'backend/evidence/services.py': '7ce76b02928019347625048e7d0acb523d74168cd6bbbdf03184163ac277f959', 'tests/test_evidence_services.py': 'c54e2306b7ec9625f0498faeebd8a23ceb55c6366769ac0d944f228e2aa84851', 'tests/evidence_pg_fixture.py': 'bb84518f354f2f7752881fb529dcd6df31b58085bf32d6728c2ccf6998c3e9db', 'tests/test_evidence_pg_fixture_lifecycle.py': '3887a89945a770ed22bac5839ff6a61e5daf47cb05a8b0105d1cfce8f3c12fc7'}\nRUN_ID='0348c037ded74f91b992077a49fd9d9c'\nTOOL_PATH='/opt/miniconda3/bin:/opt/homebrew/bin:/opt/homebrew/opt/postgresql@16/bin:/usr/bin:/bin:/usr/sbin:/sbin'\nimport os,sys,json,hashlib,subprocess,datetime\nfrom pathlib import Path\nM=Path(MAIN); C=Path(CAND); E=Path(EVIDENCE); CACHE=Path(CACHE_PATH)\ndef sha(p): return hashlib.sha256(p.read_bytes()).hexdigest()\ndef git(root,*args): return subprocess.check_output(['git',*args],cwd=root,env={**os.environ,'GIT_OPTIONAL_LOCKS':'0'},text=True).strip()\ndef snap(root):\n files=set(subprocess.check_output(['git','ls-files','-co','--exclude-standard','-z'],cwd=root,env={**os.environ,'GIT_OPTIONAL_LOCKS':'0'}).decode().split('\\0'))-{''}\n hashes={p:sha(root/p) for p in sorted(files) if (root/p).is_file() and not p.startswith('docs/acceptance/'+TASK+'-')}\n protected={str(p.relative_to(root)):sha(p) for p in sorted((root/'docs/acceptance').rglob('*')) if p.is_file() and not str(p.relative_to(root)).startswith('docs/acceptance/'+TASK+'-')} if root==M else {}\n return {'branch':git(root,'branch','--show-current'),'head':git(root,'rev-parse','HEAD'),'parent':git(root,'rev-parse','HEAD^'),'status':git(root,'status','--porcelain=v1','--untracked-files=all'),'index_diff':git(root,'diff','--cached','--name-only'),'files':hashes,'protected_acceptance':protected}\ndef save(d): (E/'manifest.json').write_text(json.dumps(d,indent=2,ensure_ascii=False)+'\\n')\ndef validate():\n for k in ['TG_TEST_ADMIN_DATABASE_URL','TG_R1C_REPLAY_BASELINE','TG_R1C02_REPLAY_PRIOR']:\n  if k in os.environ: raise RuntimeError(k+' originally set: STOP')\n for p,h in FIXED.items():\n  if sha(C/p)!=h: raise RuntimeError('Fixed candidate bytes drift: '+p)\n for root,expected in [(M,('main','0dc2c5fd016af63f4836debf6ffa9d36b41a7703','d3acc1c6f4a2e5ce1fe4b973d7855409c0db1da5')),(C,('codex/wp04-02-evidence-domain-service','e942cbcc9e0b5d95a6c7ee46d4d74ee90ff03ad4','af4f2cbbb0a50bd6c215bcaa78dd9fcd98414cc8'))]:\n  if (git(root,'branch','--show-current'),git(root,'rev-parse','HEAD'),git(root,'rev-parse','HEAD^'))!=expected: raise RuntimeError('Repository identity drift: STOP')\n if git(C,'status','--porcelain=v1') or git(C,'diff','--cached','--name-only'): raise RuntimeError('Candidate scope drift: STOP')\n if (E/'before.json').exists():\n  before=json.loads((E/'before.json').read_text())\n  for label,root in [('main',M),('candidate',C)]:\n   now=snap(root)\n   if now['files']!=before[label]['files'] or now['protected_acceptance']!=before[label]['protected_acceptance']: raise RuntimeError('Protected file drift: STOP; read-only classification required')\nif __name__=='__main__':\n validate(); d=json.loads((E/'manifest.json').read_text()); args=sys.argv[1:]; real=args and args[0]=='--real'\n if real:\n  args=args[1:]\n  assert not d['real_invocations'], 'Real invocation budget gate: STOP'\n  assert (E/'resources.jsonl').stat().st_size==0, 'Ledger not empty: STOP'\n  assert any(c['label']=='deterministic' and c['exit_code']==0 and '32 passed, 4 deselected' in c['stdout'] and 'skipped' not in c['stdout'] for c in d['commands']), 'Deterministic gate: STOP'\n  d['real_invocations']=1; save(d)\n label=args.pop(0); env={**os.environ,'PATH':TOOL_PATH,'PYTHONDONTWRITEBYTECODE':'1','PYTHONPATH':str(C)+':/opt/homebrew/lib/python3.12/site-packages','PYTHONPYCACHEPREFIX':str(CACHE/'pycache'),'TG_EVIDENCE_PG_LEDGER':str(E/'resources.jsonl'),'TG_EVIDENCE_PG_RUN_ID':RUN_ID,'GIT_OPTIONAL_LOCKS':'0','RUFF_CACHE_DIR':str(CACHE/'ruff')}\n if real: env['TG_RUN_PG_FIXTURE_LIFECYCLE_REAL']='1'\n elif 'TG_RUN_PG_FIXTURE_LIFECYCLE_REAL' in env: raise RuntimeError('Unexpected original real opt-in: STOP')\n start=datetime.datetime.now(datetime.timezone.utc).isoformat(); p=subprocess.run(args,cwd=C,env=env,text=True,capture_output=True); end=datetime.datetime.now(datetime.timezone.utc).isoformat()\n record={'label':label,'argv':args,'cwd':str(C),'environment':{k:env[k] for k in ['PATH','PYTHONDONTWRITEBYTECODE','PYTHONPATH','PYTHONPYCACHEPREFIX','TG_EVIDENCE_PG_LEDGER','TG_EVIDENCE_PG_RUN_ID','RUFF_CACHE_DIR']},'diagnostic_variables_originally_unset':True,'real_opt_in':real,'started_at':start,'ended_at':end,'exit_code':p.returncode,'stdout':p.stdout,'stderr':p.stderr}\n d['commands'].append(record); save(d)\n with (E/'execution.log').open('a') as f: f.write(json.dumps({k:v for k,v in record.items() if k not in ['stdout','stderr']},ensure_ascii=False)+'\\nSTDOUT\\n'+p.stdout+'\\nSTDERR\\n'+p.stderr+'\\n')\n print(p.stdout,end=''); print(p.stderr,end='',file=sys.stderr); sys.exit(p.returncode)\n",
+    "probe": "import os,sys,subprocess,shutil,json\nprint('python',sys.executable,sys.version)\nfor tool in ['pytest','alembic','ruff','mypy','psql']:\n p=shutil.which(tool); assert p and p.startswith('/'); print(tool,p)\nprint('child_alembic',subprocess.check_output([sys.executable,'-c','import shutil; print(shutil.which(\"alembic\"))'],text=True).strip())\nassert shutil.which('alembic')=='/opt/miniconda3/bin/alembic'\nfor argv in [['/opt/homebrew/bin/pytest','--version'],['/opt/miniconda3/bin/alembic','--version'],['/opt/miniconda3/bin/ruff','--version'],['/opt/miniconda3/bin/mypy','--version'],['/opt/homebrew/opt/postgresql@16/bin/psql','--version']]:\n print(json.dumps(argv)); print(subprocess.check_output(argv,text=True).strip())\nheads=subprocess.check_output(['/opt/miniconda3/bin/alembic','heads'],text=True).strip(); print('heads',heads); assert heads=='000000000004 (head)'\n",
+    "corrected_probe": "import os,sys,subprocess,shutil,json\nprint('python',sys.executable,sys.version)\nfor tool in ['pytest','alembic','ruff','mypy','psql']:\n p=shutil.which(tool); assert p and p.startswith('/'); print(tool,p)\nprint('child_alembic',subprocess.check_output([sys.executable,'-c','import shutil; print(shutil.which(\"alembic\"))'],text=True).strip())\nassert shutil.which('alembic')=='/opt/miniconda3/bin/alembic'\nfor argv in [['/opt/homebrew/bin/pytest','--version'],['/opt/miniconda3/bin/alembic','--version'],['/opt/miniconda3/bin/ruff','--version'],['/opt/miniconda3/bin/mypy','--version'],['/opt/homebrew/opt/postgresql@16/bin/psql','--version']]:\n print(json.dumps(argv)); print(subprocess.check_output(argv,text=True).strip())\nheads=subprocess.check_output(['/opt/miniconda3/bin/alembic','-c','migrations/alembic.ini','heads'],text=True).strip(); print('heads',heads); assert heads=='000000000004 (head)'\n",
+    "assessment": "import importlib.util,json,collections,datetime\nfrom pathlib import Path\nspec=importlib.util.spec_from_file_location('verifier_support','/private/tmp/tg-pg-independent-29r_qwxr/run.py'); v=importlib.util.module_from_spec(spec); spec.loader.exec_module(v); v.validate()\nE=v.E; d=json.loads((E/'manifest.json').read_text()); rows=[json.loads(x) for x in (E/'resources.jsonl').read_text().splitlines()]; counts=dict(collections.Counter(r['event'] for r in rows)); assert d['real_invocations']==1\nfor event in ['attempt','tools_checked','target_checked','create_sent','created','cleanup_checked','drop_sent','dropped','catalog_before','catalog_after']: assert counts[event]==4,(event,counts)\nassert not any(r['event'] in ['cleanup_failed','create_failed','ownership_unknown'] for r in rows)\nassert all(r['run_id']==d['run_id'] for r in rows)\nplanpath=v.M/'docs/acceptance/TASK-WP04-02-R1C-05C-01-INDEPENDENT-REVERIFY-R1-evidence/phase-a-20260916-exact-cleanup-plan.json'; plan=json.loads(planpath.read_text()); historical={r['name']:(r['oid'],r['owner']) for r in plan['per_name']}; assert len(historical)==45 and len(plan['unknown_names'])==45 and not plan['confirmed_cleanup_names']\ncatalogs=[r for r in rows if r['event'].startswith('catalog_')]; assert len(catalogs)==8\nfor r in catalogs:\n assert r['databases']==catalogs[0]['databases']; assert len(r['databases'])==49\n actual={x['name']:(x['oid'],x['owner']) for x in r['databases']}; assert {k:actual.get(k) for k in historical}==historical\nresources=[]\nfor created in [r for r in rows if r['event']=='created']:\n node=created['node']; events=[r for r in rows if r['node']==node]; order=[r['event'] for r in events]\n def one(event):\n  found=[r for r in events if r['event']==event]; assert len(found)==1; return found[0]\n for event in ['cleanup_checked','drop_sent','dropped']:\n  r=one(event)\n  for field in ['run_id','attempt_id','node','name','oid','owner','owner_oid','host','port','admin_database']: assert r[field]==created[field]\n assert created['status']=='CONFIRMED' and one('dropped')['status']=='ABSENT' and one('cleanup_checked')['connections']==0\n assert one('attempt')['status']=='PRE_ATTEMPT' and one('target_checked')['status']=='ABSENT'\n assert order.index('attempt')<order.index('tools_checked')<order.index('target_checked')<order.index('create_sent')<order.index('created')<order.index('cleanup_checked')<order.index('drop_sent')<order.index('dropped')<order.index('catalog_after')\n tools=one('tools_checked'); assert tools['alembic']==tools['child_alembic']=='/opt/miniconda3/bin/alembic' and tools['heads']=='000000000004 (head)'\n assert created['host']=='127.0.0.1' and created['port']==15432 and created['admin_database']=='postgres' and created['owner']=='thesisguard' and created['owner_oid']==10\n scenario=one('declared_scenario')['scenario']; errors=[r for r in events if r['event']=='primary_error']; assert len(errors)==(0 if scenario=='normal' else 1)\n if errors:\n  assert (errors[0]['phase'],errors[0]['error_type'])=={'migration_fault':('migration','CalledProcessError'),'engine_fault':('engine','InjectedFailure'),'body_fault':('body','InjectedFailure')}[scenario]\n resources.append({**{k:created[k] for k in ['run_id','attempt_id','node','name','oid','owner','owner_oid']},'scenario':scenario,'connections_before_drop':0,'created_status':'CONFIRMED','drop_status':'ABSENT','event_sequence':order,'expected_primary_error':errors})\nassert len({r['name'] for r in resources})==4 and not set(r['name'] for r in resources)&set(historical)\nfor label in ['environment-corrected','deterministic','real-postgres','ruff','format-check','mypy','compileall']:\n commands=[c for c in d['commands'] if c['label']==label]; assert commands and all(c['exit_code']==0 for c in commands)\nreal=next(c for c in d['commands'] if c['label']=='real-postgres'); assert '4 passed, 32 deselected' in real['stdout'] and 'skipped' not in real['stdout']; assert not any(c['real_opt_in'] for c in d['commands'] if c['label']!='real-postgres')\nafter={'timestamp':datetime.datetime.now(datetime.timezone.utc).isoformat(),'main':v.snap(v.M),'candidate':v.snap(v.C),'database_catalog_before':catalogs[0],'database_catalog_after':catalogs[-1],'catalog_snapshots_compared':8,'historical_unknown_identity':historical,'historical_unknown_count':45,'historical_ownership_stays':'UNKNOWN','resources':resources,'event_counts':counts,'final_fixed_sha256':{p:v.sha(v.C/p) for p in v.FIXED},'protected_preservation':'All 397 initial main file hashes, 368 protected acceptance file hashes, and 186 candidate file hashes unchanged; candidate clean/index empty and both fixed identities unchanged'}\n(E/'after.json').write_text(json.dumps(after,indent=2,ensure_ascii=False)+'\\n'); print(json.dumps({k:after[k] for k in ['event_counts','resources','protected_preservation','final_fixed_sha256']},indent=2,ensure_ascii=False))\n",
+    "corrected_assessment": "import importlib.util,json,collections,datetime\nfrom pathlib import Path\nspec=importlib.util.spec_from_file_location('verifier_support','/private/tmp/tg-pg-independent-29r_qwxr/run.py'); v=importlib.util.module_from_spec(spec); spec.loader.exec_module(v); v.validate()\nE=v.E; d=json.loads((E/'manifest.json').read_text()); rows=[json.loads(x) for x in (E/'resources.jsonl').read_text().splitlines()]; counts=dict(collections.Counter(r['event'] for r in rows)); assert d['real_invocations']==1\nfor event in ['attempt','tools_checked','target_checked','create_sent','created','cleanup_checked','drop_sent','dropped','catalog_before','catalog_after']: assert counts[event]==4,(event,counts)\nassert not any(r['event'] in ['cleanup_failed','create_failed','ownership_unknown'] for r in rows)\nassert all(r['run_id']==d['run_id'] for r in rows)\nplanpath=v.M/'docs/acceptance/TASK-WP04-02-R1C-05C-01-INDEPENDENT-REVERIFY-R1-evidence/phase-a-20260916-exact-cleanup-plan.json'; plan=json.loads(planpath.read_text()); historical={r['name']:(r['oid'],r['owner']) for r in plan['per_name']}; assert len(historical)==45 and len(plan['unknown_names'])==45 and not plan['confirmed_cleanup_names']\ncatalogs=[r for r in rows if r['event'].startswith('catalog_')]; assert len(catalogs)==8\nfor r in catalogs:\n assert r['databases']==catalogs[0]['databases']; assert len(r['databases'])==49\n actual={x['name']:(x['oid'],x['owner']) for x in r['databases']}; assert {k:actual.get(k) for k in historical}==historical\nresources=[]\nfor created in [r for r in rows if r['event']=='created']:\n node=created['node']; events=[r for r in rows if r['node']==node]; order=[r['event'] for r in events]\n def one(event):\n  found=[r for r in events if r['event']==event]; assert len(found)==1; return found[0]\n for event in ['cleanup_checked','drop_sent','dropped']:\n  r=one(event)\n  for field in ['run_id','attempt_id','node','name','oid','owner','owner_oid','host','port','admin_database']: assert r[field]==created[field]\n assert created['status']=='CONFIRMED' and one('dropped')['status']=='ABSENT' and one('cleanup_checked')['connections']==0\n assert one('attempt')['status']=='PRE_ATTEMPT' and one('target_checked')['status']=='ABSENT'\n assert order.index('attempt')<order.index('tools_checked')<order.index('target_checked')<order.index('create_sent')<order.index('created')<order.index('cleanup_checked')<order.index('drop_sent')<order.index('dropped')<order.index('catalog_after')\n tools=one('tools_checked'); assert tools['alembic']==tools['child_alembic']=='/opt/miniconda3/bin/alembic' and tools['heads']=='000000000004 (head)'\n assert created['host']=='127.0.0.1' and created['port']==15432 and created['admin_database']=='postgres' and created['owner']=='thesisguard' and created['owner_oid']==10\n scenario=one('declared_scenario')['scenario']; errors=[r for r in events if r['event']=='primary_error']; assert len(errors)==(0 if scenario=='normal' else 1)\n if errors:\n  assert (errors[0]['phase'],errors[0]['error_type'])=={'migration_fault':('migration','CalledProcessError'),'engine_fault':('engine','InjectedFailure'),'body_fault':('test_body','InjectedFailure')}[scenario]\n resources.append({**{k:created[k] for k in ['run_id','attempt_id','node','name','oid','owner','owner_oid']},'scenario':scenario,'connections_before_drop':0,'created_status':'CONFIRMED','drop_status':'ABSENT','event_sequence':order,'expected_primary_error':errors})\nassert len({r['name'] for r in resources})==4 and not set(r['name'] for r in resources)&set(historical)\nfor label in ['environment-corrected','deterministic','real-postgres','ruff','format-check','mypy','compileall']:\n commands=[c for c in d['commands'] if c['label']==label]; assert commands and all(c['exit_code']==0 for c in commands)\nreal=next(c for c in d['commands'] if c['label']=='real-postgres'); assert '4 passed, 32 deselected' in real['stdout'] and 'skipped' not in real['stdout']; assert not any(c['real_opt_in'] for c in d['commands'] if c['label']!='real-postgres')\nafter={'timestamp':datetime.datetime.now(datetime.timezone.utc).isoformat(),'main':v.snap(v.M),'candidate':v.snap(v.C),'database_catalog_before':catalogs[0],'database_catalog_after':catalogs[-1],'catalog_snapshots_compared':8,'historical_unknown_identity':historical,'historical_unknown_count':45,'historical_ownership_stays':'UNKNOWN','resources':resources,'event_counts':counts,'final_fixed_sha256':{p:v.sha(v.C/p) for p in v.FIXED},'protected_preservation':'All 397 initial main file hashes, 368 protected acceptance file hashes, and 186 candidate file hashes unchanged; candidate clean/index empty and both fixed identities unchanged'}\n(E/'after.json').write_text(json.dumps(after,indent=2,ensure_ascii=False)+'\\n'); print(json.dumps({k:after[k] for k in ['event_counts','resources','protected_preservation','final_fixed_sha256']},indent=2,ensure_ascii=False))\n",
+    "finalizer": "import importlib.util,json,hashlib,datetime\nfrom pathlib import Path\nspec=importlib.util.spec_from_file_location('verifier_support','/private/tmp/tg-pg-independent-29r_qwxr/run.py'); v=importlib.util.module_from_spec(spec); spec.loader.exec_module(v); v.validate()\nE=v.E; d=json.loads((E/'manifest.json').read_text()); a=json.loads((E/'after.json').read_text()); b=json.loads((E/'before.json').read_text()); oldpath=v.M/'docs/acceptance/TASK-TEST-INFRA-PG-FIXTURE-LIFECYCLE-R1-evidence'; old=json.loads((oldpath/'manifest.json').read_text())\noldhashes={'manifest.json':'236a67b8adbeb1b6f408b8bfb6318ca1330134e83754f8cf0ea0363840a7a4ab','execution.log':'338a5202c20c58e8cf7c94f2ed3ebfbdcc303c2135252e40c9dfccf51782bcb6','resources.jsonl':'7cc9359e2ca8676bb4c25b23e66fa95a026b4aab4ec522a6237772c0217b2ef7'}\nfor p,h in oldhashes.items(): assert v.sha(oldpath/p)==h\noldreport=v.M/'docs/acceptance/TASK-TEST-INFRA-PG-FIXTURE-LIFECYCLE-R1-execution-report.md'; assert v.sha(oldreport)=='dfa5d5648e7597ec8bd5cf174f315f0a9d91eb1dc3f770bc819669d6d6f18b90'\noldrows=[json.loads(s) for s in (oldpath/'resources.jsonl').read_text().splitlines()]; oldcreated=[r for r in oldrows if r['event']=='created']; assert len(oldcreated)==4 and old['run_id']!=d['run_id']\nplan=v.M/'docs/acceptance/TASK-WP04-02-R1C-05C-01-INDEPENDENT-REVERIFY-R1-evidence/phase-a-20260916-exact-cleanup-plan.json'; contract=Path('/Users/qianduoduo/.codex/attachments/a3c3abcd-a72e-4837-bed6-c2dff1ce4310/pasted-text.txt'); contracthash=v.sha(contract)\nreal=next(c for c in d['commands'] if c['label']=='real-postgres'); det=[c for c in d['commands'] if c['label']=='deterministic'][-1]\nreport=v.M/'docs/acceptance'/f'{v.TASK}-acceptance.md'; assert not report.exists()\ntext=f'''# {v.TASK} — 独立验收\n\n日期：2026-09-16 / Asia/Shanghai。身份：独立验证者；执行工具：Codex。结论：**PASS，仅关闭 PostgreSQL fixture 生命周期独立验证边界。**\n\n本轮依据原 R1 feedback acceptance 第 5 节完整 successor prompt 和用户本次明确派发执行。采用新固定基线及独立四次 CREATE 尝试预算，不追认历史 Git 操作，不替代原 R1 报告，不扩大至业务验收或 Git 集成。未修改候选代码、断言、旧 verifier、冻结合同、模型、迁移或历史证据，未安装依赖或修改 shell profile。\n\n## 1. 基线、输入及 scope\n\n| 仓库 | 分支 | HEAD | Parent | 本轮最终状态 |\n| --- | --- | --- | --- | --- |\n| 主仓 | main | {a['main']['head']} | {a['main']['parent']} | 保留既有外部状态及本轮允许产物；index empty |\n| 候选 | codex/wp04-02-evidence-domain-service | {a['candidate']['head']} | {a['candidate']['parent']} | clean；index empty |\n\n主仓：`{v.M}`。候选：`{v.C}`。入口及最终 branch/HEAD/parent 均匹配用户授权，不自动重定基线，没有 Git 修改。\n\n完整阅读主仓 AGENTS.md、原任务合同附件、原执行报告、feedback acceptance/successor prompt、候选 helper/专门 lifecycle tests/pg_sessionmaker 接线；读取并解析原 manifest、ledger、execution.log 及 Phase A 精确名单。原 manifest 已登记产物的大小/哈希及 29 个原命令记录得到核验。旧结果只作为带版本限定的保存证据。\n\n原合同附件：`{contract}`，SHA-256 `{contracthash}`。当前授权输入与旧合同的替代范围严格限于 successor 指定身份、独立新预算和主仓无关变化分类门槛。\n\n| 候选五个固定文件 | 本轮前后 SHA-256 |\n| --- | --- |\n'''\nfor p,h in d['fixed_sha256'].items(): text+=f'| {p} | {h} |\\n'\ntext+='''\n主仓入口现有状态逐项保留：\n\n| 路径/状态 | 分类及只读依据 |\n| --- | --- |\n| AGENTS.md / tracked modified | NON_BLOCKING_EXTERNAL_CHANGE；变更为隔离 zcode benchmark/routing；真实 DB、故障路径及独立验收仍由 Codex 承担，未改变冻结金融政策 |\n| docs/ZCODE_CAPABILITY_EVALUATION_2026-09-16.md / tracked modified | NON_BLOCKING_EXTERNAL_CHANGE；隔离 benchmark 评审记录 |\n| docs/prompts/ZCODE_CAPABILITY_REPAIR_R1_2026-09-16.md / untracked | NON_BLOCKING_EXTERNAL_CHANGE；仅授权临时隔离 benchmark 修复，明确项目/候选只读、不得 DB 操作 |\n| docs/acceptance/ZCODE-CAPABILITY-BENCHMARK-20260916-independent.json / untracked | NON_BLOCKING_EXTERNAL_CHANGE；隔离 benchmark 独立结果，不是本任务 fixture 证据；JSON 已完整解析 |\n| docs/acceptance/TASK-TEST-INFRA-PG-FIXTURE-LIFECYCLE-R1-acceptance.md / untracked | PRESERVED_AUTHORITY_INPUT；本次 successor 合同，原 BLOCKED 记录保留 |\n\n未推断外部变化的作者或授权来源。上述文件本轮前后哈希相同，不恢复 dirty 状态、不撤销提交、不提交这些变化。\n\n## 2. 有效工具环境及子进程发现\n\n每个实际验证命令在候选 cwd 中使用同一 command-local 环境：\n\n```text\nPATH=/opt/miniconda3/bin:/opt/homebrew/bin:/opt/homebrew/opt/postgresql@16/bin:/usr/bin:/bin:/usr/sbin:/sbin\nPYTHONDONTWRITEBYTECODE=1\nPYTHONPATH=<candidate>:/opt/homebrew/lib/python3.12/site-packages\nPython invocation=/opt/homebrew/bin/python3.12\npytest invocation=/opt/homebrew/bin/pytest\nAlembic=/opt/miniconda3/bin/alembic\nRuff=/opt/miniconda3/bin/ruff\nmypy=/opt/miniconda3/bin/mypy\n```\n\n原有 TG_TEST_ADMIN_DATABASE_URL、TG_R1C_REPLAY_BASELINE、TG_R1C02_REPLAY_PRIOR 均未设置；入口及每个验证 runner 调用再次检查，没有静默清除。真实调用仅局部设置本轮 opt-in、run_id、ledger。使用既有本地 admin 配置；报告、原始日志及 manifest 不包含密码或 DATABASE_URL。\n\n| 工具/检查 | 新鲜结果 |\n| --- | --- |\n| 显式 Python | 3.12.9；sys.executable 实际解析 /opt/homebrew/opt/python@3.12/bin/python3.12 |\n| 显式 pytest | /opt/homebrew/bin/pytest，9.1.1；PATH 的 which pytest 为 /opt/miniconda3/bin/pytest，故始终使用合同指定显式入口 |\n| Alembic | /opt/miniconda3/bin/alembic，1.18.5 |\n| Python 子进程 which Alembic | /opt/miniconda3/bin/alembic，与父检查一致 |\n| heads | /opt/miniconda3/bin/alembic -c migrations/alembic.ini heads → 单 head 000000000004 (head) |\n| Ruff | 0.16.1 |\n| mypy | 2.3.0 |\n| psql 客户端版本（无连接） | 显式 /opt/homebrew/opt/postgresql@16/bin/psql，16.13；未将客户端版本当作服务器版本 |\n\n本轮复用了原成功环境，没有换用默认 shell PATH。每个真实场景的 tools_checked 在实际测试子进程环境内再次确认显式 Python/pytest、Alembic 路径/版本、child discovery 和同一个 head；四次均匹配。\n\n验证者自己的两个错误已保留，未当作候选缺陷或隐去：首次环境探针遗漏现有 `-c migrations/alembic.ini`，退出 255；随后按现有 fixture argv 补齐并成功检查 head，再按 A→B 顺序重新运行确定性节点。首次离线 ledger 评估脚本误以为 body 阶段名为 `body`，触发 AssertionError；固定 helper 实际字段为 `test_body`，按源码和原始 ledger 纠正评估字段后全部通过。两者均仅修改 /tmp 验证执行辅助脚本；原始失败命令、stdout/stderr、辅助源码原版及纠正版均存于单一 manifest/log。没有真实测试重跑或额外 CREATE。\n\n## 3. 验证矩阵与新鲜结果\n\n| 层级/验收关注点 | 最终固定字节上的证据 | 结论 |\n| --- | --- | --- |\n| AC-01 环境/preflight | 工具、child/head/target 失败的确定性零 CREATE；实际环境探针及四真实节点的 tools_checked/target_checked | PASS |\n| AC-02 生命周期异常 | migration/engine/sessionmaker/body 确定性异常与原异常保留；真实 migration/engine/body 注入后精确释放 | PASS |\n| AC-03 归属/CREATE | durable PRE_ATTEMPT 与 create_sent 先于 CREATE；ack+精确 name/OID/owner/owner_oid 确认；SQLSTATE 连接/停机/不分类结果 UNKNOWN 不 DROP；ledger 失败保留原异常 | PASS |\n| AC-04 精确 teardown | 已知身份匹配才允许释放；identity mismatch、active session、dispose/admin close/DROP 失败按确定性测试 fail closed；真实四资源均零连接、exact DROP、ABSENT | PASS |\n| AC-05 范围和保全 | 两仓固定身份及五哈希、候选 clean/index empty、前后全文件哈希比较、旧报告/manifest/log/ledger/verifier 保全、历史 45 UNKNOWN 身份保全 | PASS（按 successor 漂移分类） |\n| L1_STATIC_REVIEWED | 完整候选 source 与接线只读审查，未发现已建立的阻塞语义缺陷 | PASS，限 fixture |\n| L2_BUILD_VERIFIED | 三 fixture 文件新鲜 Ruff、format-check、mypy、compileall 全部 exit 0；缓存仅独立 /tmp | PASS |\n| L3_CONTRACT_VERIFIED | 独立确定性节点 32 passed、4 deselected、零 skip | PASS，限专门生命周期合同 |\n| L4_DB_VERIFIED | 单次四真实 PostgreSQL 场景 4 passed、32 deselected、零 skip；本轮 ledger 和八份 catalog 对比 | PASS，限有界四场景 |\n\n'''\ntext+=f'''最终确认的确定性命令时间：{det['started_at']} 至 {det['ended_at']}，pytest 32 passed / 4 deselected，0.36s。此前同字节确定性 run 同样 32 passed / 4 deselected，但首次工具探针尚未补齐，因此复验一次明确恢复 A→B 顺序；两次均不开真实数据库。\n\n唯一真实调用时间：{real['started_at']} 至 {real['ended_at']}，pytest 4 passed / 32 deselected，13.95s。命令带 `-x`，首个未预期测试错误即停止；无追加/补跑。实际 argv/cwd/脱敏局部环境/UTC 时间/退出码/stdout/stderr 见 execution.log 与 manifest。\n\nRuff：All checks passed；format-check：3 files already formatted；mypy：Success: no issues found in 3 source files；compileall：exit 0，pycache prefix 在独立 /tmp。两类既有依赖 deprecation warnings 及 mypy unused-section note 已保留；没有 skip、未预期 setup/teardown/test error 或 cleanup failure。\n\n## 4. 本轮精确资源与释放证据\n\nrun_id：`{d['run_id']}`。独立 ledger：`{E/'resources.jsonl'}`。总预算四次 CREATE 尝试；实际四次 create_sent、四次 created、四次 cleanup_checked、四次 drop_sent、四次 dropped，0 create_failed、0 cleanup_failed、0 ownership uncertainty。本轮预算已耗尽，不意味着允许第五次创建或重新清空 ledger。\n\n每个节点均先通过 admin postgres 确认目标名字 ABSENT，再确认 CREATE ack 和 OID/owner。释放前关闭所拥有的 engine/admin/session，重新从 admin 查询精确身份相符和 pg_stat_activity 计数为 0，仅执行 `DROP DATABASE \"<该完整精确名称>\"`，检查 ack 后目录查询为 ABSENT。没有 IF EXISTS/FORCE、连接终止或历史库处置。\n\n共同身份：host `127.0.0.1`、port `15432`、admin database `postgres`、owner `thesisguard`、owner_oid `10`。node 完整前缀为 `tests/test_evidence_pg_fixture_lifecycle.py::test_real_postgres_resource_lifecycle`，下表列出参数；每资源的完整 run/node/attempt/name/OID/owner 和事件时间在 ledger/after.json。\n\n| 场景/node 参数 | attempt_id / 数据库完整名称 | OID | 释放前连接 | 结果 |\n| --- | --- | --- | --- | --- |\n'''\nfor r in a['resources']: text+=f\"| [{r['scenario']}] | {r['attempt_id']} / {r['name']} | {r['oid']} | 0 | CONFIRMED → exact DROP → ABSENT |\\n\"\ntext+='''\nnormal 实际迁移及建立 sessionmaker，SELECT 1 后 rollback/关闭 session，再正常关闭 fixture。migration fault 在已确认 CREATE 后、upgrade 调用处注入 CalledProcessError(returncode 19)，此场景不把一次未执行的迁移视为成功。engine fault 在真实迁移完成后注入 engine factory 异常；body fault 在真实迁移、engine/sessionmaker 及 SELECT 1 后，通过 generator.athrow 注入同一异常对象。真实迁移成功事件总计三次，与设计一致。\n\nledger 的三条 primary_error 分别为 migration/CalledProcessError、engine/InjectedFailure、test_body/InjectedFailure，全部是预期注入；pytest 验证原异常对象或 returncode 并确认没有 cleanup note。normal 无 primary_error。它们不是三次未预期测试失败。\n\n## 5. 历史 UNKNOWN 与实际 catalog 保全\n\n'''\ntext+=f'''精确输入：`{plan}`，SHA-256 `{v.sha(plan)}`；既有 45 个名称的归属继续为 UNKNOWN，不因共同前缀、owner 或数量改判。confirmed cleanup 列表仍为空。\n\n四个场景各自有一份真实 catalog_before 和 catalog_after；八份按完整 name/OID/owner 数组比较完全相同，每份实际列出 49 个库。以下为本轮 admin catalog 中实际身份（45 UNKNOWN + 四个非清理目标）；本轮未逐库连接 UNKNOWN，未读取其内容、终止连接或清理。历史库 owner 均为 thesisguard，但 owner 单独不证明归属。\n\n| 实际名称 | OID | Owner | 本轮分类 |\n| --- | --- | --- | --- |\n'''\nunknown=set(a['historical_unknown_identity'])\nfor r in a['database_catalog_after']['databases']: text+=f\"| {r['name']} | {r['oid']} | {r['owner']} | {'UNKNOWN；八次身份一致，禁止清理' if r['name'] in unknown else 'EXCLUDED；非本轮资源'} |\\n\"\ntext+='''\n本輪清理范围仅上节四个已证明归属的新资源，均已释放；剩余待清理本轮名单为空。历史 45 个 UNKNOWN 不列入拟执行目标，无后续数据库操作待执行。\n\n## 6. 原四库与本轮四库的版本、预算区别\n\n'''\ntext+=f'''| 记录 | Run ID | CREATE 预算 | 真实结果及版本归属 |\n| --- | --- | --- | --- |\n| 原 R1 保存执行证据 | {old['run_id']} | 原独立预算 4/4，已用尽 | 原 4 passed / 29 deselected；helper 和专门 tests 为最终加固前版本，只支持那次记录的字节；原报告 BLOCKED 保留 |\n| 本轮独立最终字节复验 | {d['run_id']} | 用户新批准预算 4/4，已用尽 | 新鲜 4 passed / 32 deselected；最终固定五哈希验证；本轮 fixture PASS |\n\n原真实运行 helper SHA-256：`{old['code_sha256_at_real_run']['tests/evidence_pg_fixture.py']}`；原真实运行专门 tests SHA-256：`{old['code_sha256_at_real_run']['tests/test_evidence_pg_fixture_lifecycle.py']}`。本轮分别为第 1 节固定最终哈希。原 fixture 接线文件哈希与本轮固定值相同；原结果不追认为最终全部字节的独立验证。\n\n| 原 R1 已释放资源（仅历史记录，本轮未操作） | OID |\n| --- | --- |\n'''\nfor r in oldcreated: text+=f\"| {r['name']} | {r['oid']} |\\n\"\ntext+='''\n## 7. 证据保护、产物与限制\n\n'''\ntext+=f'''前后比较：397 个主仓入口文件哈希全部不变，368 个受保护 acceptance 文件哈希全部不变（包括 Git 忽略的旧原始日志），186 个候选入口文件哈希全部不变。候选最终 clean/index empty；两仓 HEAD/parent/branch 均不变。只新增本报告及独立 evidence 目录五个必要文件：before.json、after.json、execution.log、resources.jsonl、manifest.json。测试缓存/执行辅助源码在独立 `{d['cache_dir']}`；辅助源码也作为 manifest 的审查数据保存，未写入候选或旧 verifier。\n\n| 旧证据 | 本轮核验 SHA-256（原件未修改） |\n| --- | --- |\n'''\nfor p,h in oldhashes.items(): text+=f'| 原 R1 evidence/{p} | {h} |\\n'\ntext+='| 原 R1 execution-report.md | dfa5d5648e7597ec8bd5cf174f315f0a9d91eb1dc3f770bc819669d6d6f18b90 |\\n'\ntext+='''\n本轮限制：真实验证仅四个获批场景。连接中断/停机、CREATE 回执不确定、ledger 写失败、identity/连接漂移及 cleanup failure 等其他失败路径取得确定性测试证据，没有额外真实故障预算。迁移 fault 是调用处异常注入；不声称验证 PostgreSQL 服务器故障或真实 Alembic 内部失败。不可中断的进程死亡无法由 Python finally 保证释放；此类未来不确定资源仍须精确调查，不允许强制清理。catalog 保全只证明八次观测中的 name/OID/owner 完整一致，不声称历史数据库内容的当前验证，也不证明其归属。\n\n**下一任务仅建议另行派发 05C-01 独立业务复验**：使用本轮接受的固定 fixture，单独明确 CREATE 尝试预算、全新 run_id/空 ledger、精确释放及历史 UNKNOWN 保全前置。本任务不运行 full Evidence service、七份业务 verifier 或 Research 回归；不宣告 05C-01、R1C、WP04-02 完成，不进入 05C-02/R1D，不授权 Git 集成。\n'''\nreport.write_text(text)\nd['status']='PASS'; d['scope']='Final fixed-byte bounded PostgreSQL fixture lifecycle independent verification only'; d['finalized_at']=datetime.datetime.now(datetime.timezone.utc).isoformat(); d['resources_summary']={'event_counts':a['event_counts'],'resources':a['resources'],'create_budget':4,'create_attempts':4,'remaining_create_attempts':0,'cleanup_failure':0,'historical_unknown_count':45,'catalog_count':49,'catalog_snapshots_equal':8}; d['preservation']=a['protected_preservation']; d['old_run']={'run_id':old['run_id'],'budget':4,'spent':4,'status_preserved':old['status'],'code_sha256_at_real_run':old['code_sha256_at_real_run'],'ledger_resources':oldcreated}; d['input_hashes']={'original_contract_attachment':contracthash,'phase_a_exact_plan':v.sha(plan),'old_manifest':oldhashes['manifest.json'],'old_ledger':oldhashes['resources.jsonl'],'old_execution_log':oldhashes['execution.log'],'old_execution_report':v.sha(oldreport),'feedback_successor_contract':v.sha(v.M/'docs/acceptance/TASK-TEST-INFRA-PG-FIXTURE-LIFECYCLE-R1-acceptance.md'),'current_main_AGENTS':v.sha(v.M/'AGENTS.md')}; d['execution_support_sources']['finalizer']=Path(__file__).read_text(); d['artifacts']={str(p.relative_to(v.M)):{'bytes':p.stat().st_size,'sha256':v.sha(p)} for p in [report,E/'before.json',E/'after.json',E/'execution.log',E/'resources.jsonl']}; d['manifest_hash_policy']='Manifest indexes every other final artifact; no recursive self-hash. Its SHA-256 is verified and reported externally.'; (E/'manifest.json').write_text(json.dumps(d,indent=2,ensure_ascii=False)+'\\n'); v.validate()\nfor p in [report,E/'manifest.json',E/'resources.jsonl']: print(json.dumps({'path':str(p),'sha256':v.sha(p),'bytes':p.stat().st_size}))\n"
+  },
+  "external_change_classification": {
+    "AGENTS.md": "NON_BLOCKING_EXTERNAL_CHANGE: isolated zcode routing; DB/final verification remains Codex; financial policy unchanged",
+    "docs/ZCODE_CAPABILITY_EVALUATION_2026-09-16.md": "NON_BLOCKING_EXTERNAL_CHANGE: isolated benchmark evaluation",
+    "docs/prompts/ZCODE_CAPABILITY_REPAIR_R1_2026-09-16.md": "NON_BLOCKING_EXTERNAL_CHANGE: isolated benchmark-only repair prompt prohibits project DB/code changes",
+    "docs/acceptance/ZCODE-CAPABILITY-BENCHMARK-20260916-independent.json": "NON_BLOCKING_EXTERNAL_CHANGE: isolated benchmark independent evidence; not project fixture evidence",
+    "docs/acceptance/TASK-TEST-INFRA-PG-FIXTURE-LIFECYCLE-R1-acceptance.md": "PRESERVED_AUTHORITY_INPUT: successor contract"
+  },
+  "verifier_command_correction": {
+    "first_probe": "Missing -c migrations/alembic.ini; exit 255; no database access",
+    "classification": "VERIFIER_COMMAND_ASSEMBLY_ERROR; not candidate defect or environment drift",
+    "action": "Use exact existing fixture heads argv; then repeat deterministic verification before any real invocation"
+  },
+  "verifier_assessment_correction": {
+    "issue": "Verifier initially expected phase body; fixed helper records test_body",
+    "evidence": "Final fixed source phase assignment and unchanged ledger three primary_error rows",
+    "classification": "VERIFIER_SCHEMA_EXPECTATION_ERROR; no candidate change, no runtime retest, no additional DB attempt"
+  },
+  "scope": "Final fixed-byte bounded PostgreSQL fixture lifecycle independent verification only",
+  "finalized_at": "2026-09-16T11:53:46.978996+00:00",
+  "resources_summary": {
+    "event_counts": {
+      "catalog_before": 4,
+      "declared_scenario": 4,
+      "attempt": 4,
+      "tools_checked": 4,
+      "target_checked": 4,
+      "create_sent": 4,
+      "created": 4,
+      "admin_closed": 4,
+      "migrated": 3,
+      "ready": 2,
+      "engine_disposed": 2,
+      "cleanup_checked": 4,
+      "drop_sent": 4,
+      "dropped": 4,
+      "cleanup_admin_closed": 4,
+      "catalog_after": 4,
+      "primary_error": 3
+    },
+    "resources": [
+      {
+        "run_id": "0348c037ded74f91b992077a49fd9d9c",
+        "attempt_id": "986c40d28d2e4b828ea78706127e1d4d",
+        "node": "tests/test_evidence_pg_fixture_lifecycle.py::test_real_postgres_resource_lifecycle[normal]",
+        "name": "tg_wp04_service_986c40d28d2e4b828ea78706127e1d4d",
+        "oid": 8327525,
+        "owner": "thesisguard",
+        "owner_oid": 10,
+        "scenario": "normal",
+        "connections_before_drop": 0,
+        "created_status": "CONFIRMED",
+        "drop_status": "ABSENT",
+        "event_sequence": [
+          "catalog_before",
+          "declared_scenario",
+          "attempt",
+          "tools_checked",
+          "target_checked",
+          "create_sent",
+          "created",
+          "admin_closed",
+          "migrated",
+          "ready",
+          "engine_disposed",
+          "cleanup_checked",
+          "drop_sent",
+          "dropped",
+          "cleanup_admin_closed",
+          "catalog_after"
+        ],
+        "expected_primary_error": []
+      },
+      {
+        "run_id": "0348c037ded74f91b992077a49fd9d9c",
+        "attempt_id": "46fa5ca4e7e64fe49119979e73069571",
+        "node": "tests/test_evidence_pg_fixture_lifecycle.py::test_real_postgres_resource_lifecycle[migration_fault]",
+        "name": "tg_wp04_service_46fa5ca4e7e64fe49119979e73069571",
+        "oid": 8328225,
+        "owner": "thesisguard",
+        "owner_oid": 10,
+        "scenario": "migration_fault",
+        "connections_before_drop": 0,
+        "created_status": "CONFIRMED",
+        "drop_status": "ABSENT",
+        "event_sequence": [
+          "catalog_before",
+          "declared_scenario",
+          "attempt",
+          "tools_checked",
+          "target_checked",
+          "create_sent",
+          "created",
+          "admin_closed",
+          "primary_error",
+          "cleanup_checked",
+          "drop_sent",
+          "dropped",
+          "cleanup_admin_closed",
+          "catalog_after"
+        ],
+        "expected_primary_error": [
+          {
+            "admin_database": "postgres",
+            "attempt_id": "46fa5ca4e7e64fe49119979e73069571",
+            "error_type": "CalledProcessError",
+            "event": "primary_error",
+            "host": "127.0.0.1",
+            "name": "tg_wp04_service_46fa5ca4e7e64fe49119979e73069571",
+            "node": "tests/test_evidence_pg_fixture_lifecycle.py::test_real_postgres_resource_lifecycle[migration_fault]",
+            "phase": "migration",
+            "port": 15432,
+            "run_id": "0348c037ded74f91b992077a49fd9d9c",
+            "time": "2026-09-16T11:49:44.197150+00:00"
+          }
+        ]
+      },
+      {
+        "run_id": "0348c037ded74f91b992077a49fd9d9c",
+        "attempt_id": "7fe7afdba012426fa8a4bb459699f5ed",
+        "node": "tests/test_evidence_pg_fixture_lifecycle.py::test_real_postgres_resource_lifecycle[engine_fault]",
+        "name": "tg_wp04_service_7fe7afdba012426fa8a4bb459699f5ed",
+        "oid": 8328226,
+        "owner": "thesisguard",
+        "owner_oid": 10,
+        "scenario": "engine_fault",
+        "connections_before_drop": 0,
+        "created_status": "CONFIRMED",
+        "drop_status": "ABSENT",
+        "event_sequence": [
+          "catalog_before",
+          "declared_scenario",
+          "attempt",
+          "tools_checked",
+          "target_checked",
+          "create_sent",
+          "created",
+          "admin_closed",
+          "migrated",
+          "primary_error",
+          "cleanup_checked",
+          "drop_sent",
+          "dropped",
+          "cleanup_admin_closed",
+          "catalog_after"
+        ],
+        "expected_primary_error": [
+          {
+            "admin_database": "postgres",
+            "attempt_id": "7fe7afdba012426fa8a4bb459699f5ed",
+            "error_type": "InjectedFailure",
+            "event": "primary_error",
+            "host": "127.0.0.1",
+            "name": "tg_wp04_service_7fe7afdba012426fa8a4bb459699f5ed",
+            "node": "tests/test_evidence_pg_fixture_lifecycle.py::test_real_postgres_resource_lifecycle[engine_fault]",
+            "phase": "engine",
+            "port": 15432,
+            "run_id": "0348c037ded74f91b992077a49fd9d9c",
+            "time": "2026-09-16T11:49:47.848225+00:00"
+          }
+        ]
+      },
+      {
+        "run_id": "0348c037ded74f91b992077a49fd9d9c",
+        "attempt_id": "c762b6f9e00247079d363e07e23bf30f",
+        "node": "tests/test_evidence_pg_fixture_lifecycle.py::test_real_postgres_resource_lifecycle[body_fault]",
+        "name": "tg_wp04_service_c762b6f9e00247079d363e07e23bf30f",
+        "oid": 8328926,
+        "owner": "thesisguard",
+        "owner_oid": 10,
+        "scenario": "body_fault",
+        "connections_before_drop": 0,
+        "created_status": "CONFIRMED",
+        "drop_status": "ABSENT",
+        "event_sequence": [
+          "catalog_before",
+          "declared_scenario",
+          "attempt",
+          "tools_checked",
+          "target_checked",
+          "create_sent",
+          "created",
+          "admin_closed",
+          "migrated",
+          "ready",
+          "primary_error",
+          "engine_disposed",
+          "cleanup_checked",
+          "drop_sent",
+          "dropped",
+          "cleanup_admin_closed",
+          "catalog_after"
+        ],
+        "expected_primary_error": [
+          {
+            "admin_database": "postgres",
+            "attempt_id": "c762b6f9e00247079d363e07e23bf30f",
+            "error_type": "InjectedFailure",
+            "event": "primary_error",
+            "host": "127.0.0.1",
+            "name": "tg_wp04_service_c762b6f9e00247079d363e07e23bf30f",
+            "node": "tests/test_evidence_pg_fixture_lifecycle.py::test_real_postgres_resource_lifecycle[body_fault]",
+            "phase": "test_body",
+            "port": 15432,
+            "run_id": "0348c037ded74f91b992077a49fd9d9c",
+            "time": "2026-09-16T11:49:51.640968+00:00"
+          }
+        ]
+      }
+    ],
+    "create_budget": 4,
+    "create_attempts": 4,
+    "remaining_create_attempts": 0,
+    "cleanup_failure": 0,
+    "historical_unknown_count": 45,
+    "catalog_count": 49,
+    "catalog_snapshots_equal": 8
+  },
+  "preservation": "All 397 initial main file hashes, 368 protected acceptance file hashes, and 186 candidate file hashes unchanged; candidate clean/index empty and both fixed identities unchanged",
+  "old_run": {
+    "run_id": "b2404b6ba2f348dbb962fb822177bc42",
+    "budget": 4,
+    "spent": 4,
+    "status_preserved": "BLOCKED",
+    "code_sha256_at_real_run": {
+      "tests/test_evidence_services.py": "c54e2306b7ec9625f0498faeebd8a23ceb55c6366769ac0d944f228e2aa84851",
+      "tests/evidence_pg_fixture.py": "2a5eeda1edcce7905fdc85ba7d4429aeb2b56d1d22a83573d1bc65b26318bd14",
+      "tests/test_evidence_pg_fixture_lifecycle.py": "029c9c24176d43cee22d8b82f715e14c6c9b45b8dbc7802e52fccd4fa122e618"
+    },
+    "ledger_resources": [
+      {
+        "admin_database": "postgres",
+        "attempt_id": "c014108206a84be18b3eef20bb238d19",
+        "event": "created",
+        "host": "127.0.0.1",
+        "name": "tg_wp04_service_c014108206a84be18b3eef20bb238d19",
+        "node": "tests/test_evidence_pg_fixture_lifecycle.py::test_real_postgres_resource_lifecycle[normal]",
+        "oid": 8325423,
+        "owner": "thesisguard",
+        "owner_oid": 10,
+        "port": 15432,
+        "run_id": "b2404b6ba2f348dbb962fb822177bc42",
+        "status": "CONFIRMED",
+        "time": "2026-09-16T10:07:17.780063+00:00"
+      },
+      {
+        "admin_database": "postgres",
+        "attempt_id": "b9725319f4194a9bb13a29983c90ba57",
+        "event": "created",
+        "host": "127.0.0.1",
+        "name": "tg_wp04_service_b9725319f4194a9bb13a29983c90ba57",
+        "node": "tests/test_evidence_pg_fixture_lifecycle.py::test_real_postgres_resource_lifecycle[migration_fault]",
+        "oid": 8326123,
+        "owner": "thesisguard",
+        "owner_oid": 10,
+        "port": 15432,
+        "run_id": "b2404b6ba2f348dbb962fb822177bc42",
+        "status": "CONFIRMED",
+        "time": "2026-09-16T10:07:21.576043+00:00"
+      },
+      {
+        "admin_database": "postgres",
+        "attempt_id": "99981375cf3f44fdbcfa4a107acd50de",
+        "event": "created",
+        "host": "127.0.0.1",
+        "name": "tg_wp04_service_99981375cf3f44fdbcfa4a107acd50de",
+        "node": "tests/test_evidence_pg_fixture_lifecycle.py::test_real_postgres_resource_lifecycle[engine_fault]",
+        "oid": 8326124,
+        "owner": "thesisguard",
+        "owner_oid": 10,
+        "port": 15432,
+        "run_id": "b2404b6ba2f348dbb962fb822177bc42",
+        "status": "CONFIRMED",
+        "time": "2026-09-16T10:07:23.878416+00:00"
+      },
+      {
+        "admin_database": "postgres",
+        "attempt_id": "120283d9ce8b4861bf9386617acad778",
+        "event": "created",
+        "host": "127.0.0.1",
+        "name": "tg_wp04_service_120283d9ce8b4861bf9386617acad778",
+        "node": "tests/test_evidence_pg_fixture_lifecycle.py::test_real_postgres_resource_lifecycle[body_fault]",
+        "oid": 8326824,
+        "owner": "thesisguard",
+        "owner_oid": 10,
+        "port": 15432,
+        "run_id": "b2404b6ba2f348dbb962fb822177bc42",
+        "status": "CONFIRMED",
+        "time": "2026-09-16T10:07:28.501913+00:00"
+      }
+    ]
+  },
+  "input_hashes": {
+    "original_contract_attachment": "a3c72d8ab7b8145edaa4e89eb0ab94fede31dc5407144cf83b749d30532f53bc",
+    "phase_a_exact_plan": "635ba4aad0468c15b4360733c784d52f4430f03477a14ef8a271a1e32bada360",
+    "old_manifest": "236a67b8adbeb1b6f408b8bfb6318ca1330134e83754f8cf0ea0363840a7a4ab",
+    "old_ledger": "7cc9359e2ca8676bb4c25b23e66fa95a026b4aab4ec522a6237772c0217b2ef7",
+    "old_execution_log": "338a5202c20c58e8cf7c94f2ed3ebfbdcc303c2135252e40c9dfccf51782bcb6",
+    "old_execution_report": "dfa5d5648e7597ec8bd5cf174f315f0a9d91eb1dc3f770bc819669d6d6f18b90",
+    "feedback_successor_contract": "320da6271230fe8f4b7d65695a0887dd541a8fb38f59143f0afdcf4049fd2e1b",
+    "current_main_AGENTS": "66196fb024e3e3d4e1cb6b4fdbdd1c810799f6ef35b60b094430c50a2325ca0f"
+  },
+  "artifacts": {
+    "docs/acceptance/TASK-TEST-INFRA-PG-FIXTURE-LIFECYCLE-R1-INDEPENDENT-REVERIFY-acceptance.md": {
+      "bytes": 22074,
+      "sha256": "daf2779bda9602a7397ffc01398b940b704091a3529015475542d5e7ad66de89"
+    },
+    "docs/acceptance/TASK-TEST-INFRA-PG-FIXTURE-LIFECYCLE-R1-INDEPENDENT-REVERIFY-evidence/before.json": {
+      "bytes": 132540,
+      "sha256": "2cc9e29b575e1b542bac19ee5b5310d2083f91871014050d87262a1eef94073d"
+    },
+    "docs/acceptance/TASK-TEST-INFRA-PG-FIXTURE-LIFECYCLE-R1-INDEPENDENT-REVERIFY-evidence/after.json": {
+      "bytes": 158224,
+      "sha256": "9cb939bca086a99f4af2899f53a3cdbd8c4b6eb3ac3d8658a1c62141474dfdab"
+    },
+    "docs/acceptance/TASK-TEST-INFRA-PG-FIXTURE-LIFECYCLE-R1-INDEPENDENT-REVERIFY-evidence/execution.log": {
+      "bytes": 27618,
+      "sha256": "9fef014279018d0451e4d945abfd0b404726fef350f0652d933251f4a8b37ed9"
+    },
+    "docs/acceptance/TASK-TEST-INFRA-PG-FIXTURE-LIFECYCLE-R1-INDEPENDENT-REVERIFY-evidence/resources.jsonl": {
+      "bytes": 64760,
+      "sha256": "d48c5df3fbb496b56c116b30178ae7aebe7df112a71db532eba925d079bd0b40"
+    }
+  },
+  "manifest_hash_policy": "Manifest indexes every other final artifact; no recursive self-hash. Its SHA-256 is verified and reported externally."
+}
