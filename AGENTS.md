@@ -177,3 +177,51 @@ make rebuild
 - `docs/ThesisGuard_V1_Technical_Architecture_Design (1).md`: non-canonical historical duplicate; do not delete or edit without separate approval.
 
 Refer to `docs/ARCHITECTURE_REFERENCES.md` for the complete authority map. Document all significant approved decisions under `docs/`, but never turn a proposal or historical report into implementation evidence.
+
+## Coding Agent Routing and Evaluation
+
+用户目标：让 zcode 承担大部分已明确合同的常规代码开发，以减少 Codex 用量；Codex 负责必要的任务定义、独立验收、复杂问题和失败接管。节省效果以实际执行与返修成本判断，不承诺固定 token 节省比例。
+
+此处 `zcode` 指用户转发任务的 zcode agent 应用；用户写的 `zcodex / zodex / zcode` 暂按同一候选工具称呼处理，实际工具或模型变化必须重新记录组合身份。项目产品内的 read-only Agent 规则不禁止受授权的工程 coding agent 编辑代码；工程权限仍由具体任务范围决定。
+
+### Current Evaluation Record
+
+- 评估日期：2026-09-16；组合：`zcode-agent-thesisguard-d3acc1c-20260916`；模型/工具版本 `UNKNOWN`。
+- 已收到 Stage 1 只读自评；Codex 复核结论：`PASS_WITH_REQUIRED_FIXES`。常规项目权限最高 `L1_READ_ONLY`；真实开发、测试执行、运行时验证和失败修复能力为 `UNPROVEN`。
+- 已确认基础文件定位、主分支 SHA 和主分支 Evidence 文件结构；未取得完整执行日志及探针前后快照，不能证明全部历史操作只读。
+- 必须补正：遗漏候选 worktree；混入 WP-04-03 API/schema 范围；把本轮权限限制当作工具能力缺失；从代码阅读推导高度适合开发；未完整交付能力路由和任务规模。
+- 2026-09-16 复核时 main HEAD 为 `d3acc1c6f4a2e5ce1fe4b973d7855409c0db1da5`，存在未跟踪验收材料；候选 `codex/wp04-02-evidence-domain-service@af4f2cbbb0a50bd6c215bcaa78dd9fcd98414cc8` 已有服务/测试，且有 fixture 相关未提交修改。以上为时点快照；每次任务重新检查，不得覆盖在途修改或重新从零实现服务。
+- 完整记录：`docs/ZCODE_CAPABILITY_EVALUATION_2026-09-16.md`；下一轮提示词：`docs/prompts/ZCODE_CAPABILITY_BENCHMARK_2026-09-16.md`。
+
+### Current Routing
+
+| Task | Current executor | zcode evidence / condition |
+|---|---|---|
+| 文件定位、单模块结构梳理、文档/测试场景草稿 | zcode；Codex 核验关键事实 | L1，只读 XS/S，仍需补正证据 |
+| 合同与代码对应检查、任务拆分初稿 | zcode；Codex 复核 | L1，每次一个明确约束，不独立宣布业务 PASS |
+| Python 后端、FastAPI/OpenAPI、Vue/TypeScript 常规实现 | 当前 Codex；相应基准通过后优先 zcode | UNPROVEN，按能力域分别升级，不能跨域推广 |
+| ORM/repository、迁移、真实 PostgreSQL/worker/MinIO 集成 | 当前 Codex | 需单独真实环境测试；模拟/内存验证不算通过 |
+| 调试、失败恢复、行为保留重构 | 当前 Codex；通过受控返修后再评估 zcode | 不根据首次写码成功推断修复能力 |
+| 产品/架构决策、冻结风险规则解释与修改决策、最终独立验收、Git 集成 | Codex；产品规则仍按用户批准流程 | zcode 可提供候选材料，不能自批授权或验收自己 |
+
+### Dispatch Protocol
+
+每次提出或派发工程任务，明确向用户给出以下字段（可用短段落，不必另建合同文件）：
+
+```text
+执行者：zcode / Codex
+任务：单一可验收目标
+依据：当前该能力域的验证记录、任务规模和风险
+范围：允许修改文件、必要禁止范围、明确验收标准
+验收者：Codex；列出必要独立检查
+失败接管：zcode 一次受控返修，仍失败由 Codex 接管
+```
+
+- 尚未验证的常规开发能力优先进入隔离 XS/S 基准，不直接派主线完整 WP。用户已授权准备评估；本次基准提示词仅授权其指定临时目录中的开发测试，不扩展到候选 worktree、项目文件或数据库操作。
+- 同能力域一次隔离 S 基准独立通过后，可试用 `L2_RESTRICTED` 的明确 S 任务；首次必须隔离且指定文件，Codex 独立验收。一次成功不足以授予 L3。
+- 同类至少三个明确任务独立验收通过，或一个基准重复两次并完成一次受监督真实任务；无越界/虚报，返修成本可接受，才考虑该域 `L3_SINGLE_TASK` 和 M 规模。不默认授予 L4。
+- 达到 L2/L3 的能力域，常规已冻结合同的任务优先派 zcode；Codex 只读必要事实源、完整相关 diff 和独立验证结果，按风险检查，不重复整套开发。
+- 无法运行必要验证时标记 `BLOCKED_VALIDATION / UNPROVEN`；可交付草稿，但不能作为已验收实现集成。独立验收方可执行缺失验证并单独记录。
+- 不委托候选 zcode 更新自身评级、`AGENTS.md` 或历史验收材料。Codex 根据用户转发的源码/diff/执行证据更新能力表；自评分不作为授权依据。
+- 虚报测试或只读越界：暂停项目写入；模型/工具/权限/上下文发生实质变化：保留旧记录并重测相关能力。评估结论不授权 Capability Runtime、Sector Crowding 或其他延后需求。
+- 每个试用任务尽量记录执行时间、首验结论、返修次数、Codex 修复量及双方可见 token/费用；不可见写 `UNKNOWN`。若 Codex 返修量超过候选改动量的 50%，暂停该域主开发路由并复评。

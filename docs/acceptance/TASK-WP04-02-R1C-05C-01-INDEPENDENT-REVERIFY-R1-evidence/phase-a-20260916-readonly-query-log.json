@@ -1,0 +1,3885 @@
+[
+  {
+    "start": "2026-09-16T08:58:47.328534+00:00",
+    "end": "2026-09-16T08:58:47.391044+00:00",
+    "database": null,
+    "sql": "SELECT d.oid,d.datname,pg_get_userbyid(d.datdba) AS owner,d.datistemplate,d.datallowconn,d.datconnlimit,d.datacl::text,shobj_description(d.oid,'pg_database') AS comment,pg_database_size(d.oid) AS size_bytes FROM pg_database d ORDER BY d.datname",
+    "parameters": [],
+    "result": [
+      {
+        "oid": 5,
+        "datname": "postgres",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": "default administrative connection database",
+        "size_bytes": 7665331
+      },
+      {
+        "oid": 4,
+        "datname": "template0",
+        "owner": "thesisguard",
+        "datistemplate": true,
+        "datallowconn": false,
+        "datconnlimit": -1,
+        "datacl": "{=c/thesisguard,thesisguard=CTc/thesisguard}",
+        "comment": "unmodifiable empty database",
+        "size_bytes": 7496207
+      },
+      {
+        "oid": 1,
+        "datname": "template1",
+        "owner": "thesisguard",
+        "datistemplate": true,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": "{=c/thesisguard,thesisguard=CTc/thesisguard}",
+        "comment": "default template for new databases",
+        "size_bytes": 7730867
+      },
+      {
+        "oid": 8325396,
+        "datname": "tg_wp04_service_01c0f5f8121e450b9c71ace44928c802",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7569935
+      },
+      {
+        "oid": 8325415,
+        "datname": "tg_wp04_service_0685f5c993834a349abaf61fc3e3b657",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7569935
+      },
+      {
+        "oid": 8325419,
+        "datname": "tg_wp04_service_11e6867d5f3542b293cdfd4a4fead7cf",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7569935
+      },
+      {
+        "oid": 8325405,
+        "datname": "tg_wp04_service_13471ec2ece84b93b8407e29c6054a6f",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7569935
+      },
+      {
+        "oid": 8325409,
+        "datname": "tg_wp04_service_1c5af01292b24f1aaec6fd4637403885",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7569935
+      },
+      {
+        "oid": 8325404,
+        "datname": "tg_wp04_service_1ddedcea542a49f796be0bda8b9ac972",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7569935
+      },
+      {
+        "oid": 8325391,
+        "datname": "tg_wp04_service_1f6901c614364010b70a6ea69fa01385",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7569935
+      },
+      {
+        "oid": 8325387,
+        "datname": "tg_wp04_service_1fb496c5fa934a4b96d850d08ae192da",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7569935
+      },
+      {
+        "oid": 8325421,
+        "datname": "tg_wp04_service_28cbba54558442e4b7bff6179cf71746",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7569935
+      },
+      {
+        "oid": 8325411,
+        "datname": "tg_wp04_service_29b5f21b05e64c35bcfba641816cee26",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7569935
+      },
+      {
+        "oid": 8325399,
+        "datname": "tg_wp04_service_3cf61d305a374021b958d8c32c3cf5a0",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7569935
+      },
+      {
+        "oid": 8325389,
+        "datname": "tg_wp04_service_3f430b834ec8486a892dad86209b9c48",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7569935
+      },
+      {
+        "oid": 8325384,
+        "datname": "tg_wp04_service_430bc500937c40f19fd82fba561d6087",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7569935
+      },
+      {
+        "oid": 8325390,
+        "datname": "tg_wp04_service_45c63d3d38894f7ea7643f10d250f370",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7569935
+      },
+      {
+        "oid": 8325410,
+        "datname": "tg_wp04_service_470ab881404544a6995142c846276e47",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7569935
+      },
+      {
+        "oid": 6893828,
+        "datname": "tg_wp04_service_4f008d22a8154f82954820a749edfeff",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7569935
+      },
+      {
+        "oid": 8325407,
+        "datname": "tg_wp04_service_534131d65bb74a449f6eaf7c31648b21",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7569935
+      },
+      {
+        "oid": 8325416,
+        "datname": "tg_wp04_service_53f41488c0dd47d88d4591bec041a7a7",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7569935
+      },
+      {
+        "oid": 8325400,
+        "datname": "tg_wp04_service_58cbbcc50bb44e5aad52b85c1c56c155",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7569935
+      },
+      {
+        "oid": 6893827,
+        "datname": "tg_wp04_service_5d4c8451727743f79f7abdb40a4d88dc",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7569935
+      },
+      {
+        "oid": 8325412,
+        "datname": "tg_wp04_service_5f625721e89d4e728e9bd0d64d93dd17",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7569935
+      },
+      {
+        "oid": 8325393,
+        "datname": "tg_wp04_service_69104f67fa53491589b4701388407499",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7569935
+      },
+      {
+        "oid": 8325398,
+        "datname": "tg_wp04_service_737b02e3182f41b7a963126331b81279",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7569935
+      },
+      {
+        "oid": 8325403,
+        "datname": "tg_wp04_service_758b5d420b0e400089a7b4b243cc3b0e",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7569935
+      },
+      {
+        "oid": 8325406,
+        "datname": "tg_wp04_service_762754d8160247888e78b9417afedb2c",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7569935
+      },
+      {
+        "oid": 8325395,
+        "datname": "tg_wp04_service_79a475ac90224a4b99082d145d292c15",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7569935
+      },
+      {
+        "oid": 8325402,
+        "datname": "tg_wp04_service_81815e010a3d4f00973b55e8c8f1c856",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7569935
+      },
+      {
+        "oid": 8325383,
+        "datname": "tg_wp04_service_90a93dc7364d4d9d92520f20675aed5c",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7569935
+      },
+      {
+        "oid": 8325401,
+        "datname": "tg_wp04_service_90be9919c0ff4891a0350ae6d28f5226",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7569935
+      },
+      {
+        "oid": 8325385,
+        "datname": "tg_wp04_service_9725b95671f94617a4f29806a20db7a8",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7569935
+      },
+      {
+        "oid": 8325388,
+        "datname": "tg_wp04_service_99f9613e82ea4c738deef31efbef215d",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7569935
+      },
+      {
+        "oid": 8325397,
+        "datname": "tg_wp04_service_b6f8802bd7e243eba1e6e0e138b40ebe",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7569935
+      },
+      {
+        "oid": 8325408,
+        "datname": "tg_wp04_service_bed9e7cc62514f188fe67180264772eb",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7569935
+      },
+      {
+        "oid": 8325414,
+        "datname": "tg_wp04_service_c52791461a844e15b463397e1670aeb6",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7569935
+      },
+      {
+        "oid": 6893825,
+        "datname": "tg_wp04_service_ca3fc690d42142278b9dd2b8e76de967",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7569935
+      },
+      {
+        "oid": 8325417,
+        "datname": "tg_wp04_service_d71be47c791b40788f67cdd0958c50e9",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7569935
+      },
+      {
+        "oid": 8325420,
+        "datname": "tg_wp04_service_dc37c69cb5354bd18e5a3dcd01812e31",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7569935
+      },
+      {
+        "oid": 6893826,
+        "datname": "tg_wp04_service_dd591583d60d4f8287f4adce3d5d1cfe",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7569935
+      },
+      {
+        "oid": 8325382,
+        "datname": "tg_wp04_service_de58a56a5edf406eb94693a9b9e83dba",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7569935
+      },
+      {
+        "oid": 8325392,
+        "datname": "tg_wp04_service_f33a4b72076e4499899debaf5e88885b",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7569935
+      },
+      {
+        "oid": 8325418,
+        "datname": "tg_wp04_service_f510786c26d24a2c98218f8949e8e7fb",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7569935
+      },
+      {
+        "oid": 8325386,
+        "datname": "tg_wp04_service_f5e42809dab54b8ca01a35a34f4ce0cb",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7569935
+      },
+      {
+        "oid": 8325394,
+        "datname": "tg_wp04_service_f62a9d9bee2147b7a6fbcf4ecc3d851f",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7569935
+      },
+      {
+        "oid": 8325422,
+        "datname": "tg_wp04_service_f99981ab17b74ba7a1028c973689388c",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7569935
+      },
+      {
+        "oid": 8325413,
+        "datname": "tg_wp04_service_fa9205d9393e4de0a9bf75eca36ffc1b",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7569935
+      },
+      {
+        "oid": 16384,
+        "datname": "thesisguard",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 8517299
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.392124+00:00",
+    "end": "2026-09-16T08:58:47.398426+00:00",
+    "database": null,
+    "sql": "SELECT version(),inet_server_addr()::text AS address,inet_server_port() AS internal_port,current_user,pg_postmaster_start_time() AS postmaster_start,current_setting('transaction_read_only') AS transaction_read_only",
+    "parameters": [],
+    "result": [
+      {
+        "version": "PostgreSQL 17.11 (Debian 17.11-1.pgdg12+2) on aarch64-unknown-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit",
+        "address": "172.24.0.4/32",
+        "internal_port": 5432,
+        "current_user": "thesisguard",
+        "postmaster_start": "2026-09-16 01:22:57.242534+00:00",
+        "transaction_read_only": "on"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.398438+00:00",
+    "end": "2026-09-16T08:58:47.401930+00:00",
+    "database": null,
+    "sql": "SELECT name,setting FROM pg_settings WHERE name IN ('logging_collector','log_destination','log_directory','log_filename','log_statement','log_min_duration_statement') ORDER BY name",
+    "parameters": [],
+    "result": [
+      {
+        "name": "log_destination",
+        "setting": "stderr"
+      },
+      {
+        "name": "log_directory",
+        "setting": "log"
+      },
+      {
+        "name": "log_filename",
+        "setting": "postgresql-%Y-%m-%d_%H%M%S.log"
+      },
+      {
+        "name": "logging_collector",
+        "setting": "off"
+      },
+      {
+        "name": "log_min_duration_statement",
+        "setting": "-1"
+      },
+      {
+        "name": "log_statement",
+        "setting": "none"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.401938+00:00",
+    "end": "2026-09-16T08:58:47.403933+00:00",
+    "database": null,
+    "sql": "SELECT rolname,rolsuper,rolcreatedb,rolcanlogin FROM pg_roles WHERE rolname=current_user",
+    "parameters": [],
+    "result": [
+      {
+        "rolname": "thesisguard",
+        "rolsuper": true,
+        "rolcreatedb": true,
+        "rolcanlogin": true
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.403944+00:00",
+    "end": "2026-09-16T08:58:47.407953+00:00",
+    "database": null,
+    "sql": "SELECT datname,pid,usename,application_name,client_addr::text,backend_start,xact_start,query_start,state,wait_event_type,wait_event,backend_type FROM pg_stat_activity WHERE datname=ANY($1::text[]) AND pid<>pg_backend_pid() ORDER BY datname,pid",
+    "parameters": [
+      [
+        "tg_wp04_service_01c0f5f8121e450b9c71ace44928c802",
+        "tg_wp04_service_0685f5c993834a349abaf61fc3e3b657",
+        "tg_wp04_service_11e6867d5f3542b293cdfd4a4fead7cf",
+        "tg_wp04_service_13471ec2ece84b93b8407e29c6054a6f",
+        "tg_wp04_service_1c5af01292b24f1aaec6fd4637403885",
+        "tg_wp04_service_1ddedcea542a49f796be0bda8b9ac972",
+        "tg_wp04_service_1f6901c614364010b70a6ea69fa01385",
+        "tg_wp04_service_1fb496c5fa934a4b96d850d08ae192da",
+        "tg_wp04_service_28cbba54558442e4b7bff6179cf71746",
+        "tg_wp04_service_29b5f21b05e64c35bcfba641816cee26",
+        "tg_wp04_service_3cf61d305a374021b958d8c32c3cf5a0",
+        "tg_wp04_service_3f430b834ec8486a892dad86209b9c48",
+        "tg_wp04_service_430bc500937c40f19fd82fba561d6087",
+        "tg_wp04_service_45c63d3d38894f7ea7643f10d250f370",
+        "tg_wp04_service_470ab881404544a6995142c846276e47",
+        "tg_wp04_service_4f008d22a8154f82954820a749edfeff",
+        "tg_wp04_service_534131d65bb74a449f6eaf7c31648b21",
+        "tg_wp04_service_53f41488c0dd47d88d4591bec041a7a7",
+        "tg_wp04_service_58cbbcc50bb44e5aad52b85c1c56c155",
+        "tg_wp04_service_5d4c8451727743f79f7abdb40a4d88dc",
+        "tg_wp04_service_5f625721e89d4e728e9bd0d64d93dd17",
+        "tg_wp04_service_69104f67fa53491589b4701388407499",
+        "tg_wp04_service_737b02e3182f41b7a963126331b81279",
+        "tg_wp04_service_758b5d420b0e400089a7b4b243cc3b0e",
+        "tg_wp04_service_762754d8160247888e78b9417afedb2c",
+        "tg_wp04_service_79a475ac90224a4b99082d145d292c15",
+        "tg_wp04_service_81815e010a3d4f00973b55e8c8f1c856",
+        "tg_wp04_service_90a93dc7364d4d9d92520f20675aed5c",
+        "tg_wp04_service_90be9919c0ff4891a0350ae6d28f5226",
+        "tg_wp04_service_9725b95671f94617a4f29806a20db7a8",
+        "tg_wp04_service_99f9613e82ea4c738deef31efbef215d",
+        "tg_wp04_service_b6f8802bd7e243eba1e6e0e138b40ebe",
+        "tg_wp04_service_bed9e7cc62514f188fe67180264772eb",
+        "tg_wp04_service_c52791461a844e15b463397e1670aeb6",
+        "tg_wp04_service_ca3fc690d42142278b9dd2b8e76de967",
+        "tg_wp04_service_d71be47c791b40788f67cdd0958c50e9",
+        "tg_wp04_service_dc37c69cb5354bd18e5a3dcd01812e31",
+        "tg_wp04_service_dd591583d60d4f8287f4adce3d5d1cfe",
+        "tg_wp04_service_de58a56a5edf406eb94693a9b9e83dba",
+        "tg_wp04_service_f33a4b72076e4499899debaf5e88885b",
+        "tg_wp04_service_f510786c26d24a2c98218f8949e8e7fb",
+        "tg_wp04_service_f5e42809dab54b8ca01a35a34f4ce0cb",
+        "tg_wp04_service_f62a9d9bee2147b7a6fbcf4ecc3d851f",
+        "tg_wp04_service_f99981ab17b74ba7a1028c973689388c",
+        "tg_wp04_service_fa9205d9393e4de0a9bf75eca36ffc1b"
+      ]
+    ],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:47.432045+00:00",
+    "end": "2026-09-16T08:58:47.435277+00:00",
+    "database": null,
+    "sql": "SELECT current_database() AS database,current_user,current_setting('transaction_read_only') AS transaction_read_only,(SELECT count(*) FROM pg_largeobject_metadata) AS large_object_count",
+    "parameters": [],
+    "result": [
+      {
+        "database": "tg_wp04_service_01c0f5f8121e450b9c71ace44928c802",
+        "current_user": "thesisguard",
+        "transaction_read_only": "on",
+        "large_object_count": 0
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.435285+00:00",
+    "end": "2026-09-16T08:58:47.437251+00:00",
+    "database": null,
+    "sql": "SELECT nspname,pg_get_userbyid(nspowner) AS owner,obj_description(oid,'pg_namespace') AS comment FROM pg_namespace WHERE nspname NOT LIKE 'pg_%' AND nspname<>'information_schema' ORDER BY nspname",
+    "parameters": [],
+    "result": [
+      {
+        "nspname": "public",
+        "owner": "pg_database_owner",
+        "comment": "standard public schema"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.437258+00:00",
+    "end": "2026-09-16T08:58:47.438055+00:00",
+    "database": null,
+    "sql": "SELECT extname,extversion FROM pg_extension ORDER BY extname",
+    "parameters": [],
+    "result": [
+      {
+        "extname": "plpgsql",
+        "extversion": "1.0"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.438067+00:00",
+    "end": "2026-09-16T08:58:47.439048+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,c.relname,c.relkind,pg_get_userbyid(c.relowner) AS owner,c.reltuples,pg_total_relation_size(c.oid) AS total_bytes,obj_description(c.oid,'pg_class') AS comment FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,c.relname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:47.439059+00:00",
+    "end": "2026-09-16T08:58:47.440460+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,p.proname,p.prokind FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,p.proname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:47.466724+00:00",
+    "end": "2026-09-16T08:58:47.470667+00:00",
+    "database": null,
+    "sql": "SELECT current_database() AS database,current_user,current_setting('transaction_read_only') AS transaction_read_only,(SELECT count(*) FROM pg_largeobject_metadata) AS large_object_count",
+    "parameters": [],
+    "result": [
+      {
+        "database": "tg_wp04_service_0685f5c993834a349abaf61fc3e3b657",
+        "current_user": "thesisguard",
+        "transaction_read_only": "on",
+        "large_object_count": 0
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.470682+00:00",
+    "end": "2026-09-16T08:58:47.472759+00:00",
+    "database": null,
+    "sql": "SELECT nspname,pg_get_userbyid(nspowner) AS owner,obj_description(oid,'pg_namespace') AS comment FROM pg_namespace WHERE nspname NOT LIKE 'pg_%' AND nspname<>'information_schema' ORDER BY nspname",
+    "parameters": [],
+    "result": [
+      {
+        "nspname": "public",
+        "owner": "pg_database_owner",
+        "comment": "standard public schema"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.472771+00:00",
+    "end": "2026-09-16T08:58:47.473499+00:00",
+    "database": null,
+    "sql": "SELECT extname,extversion FROM pg_extension ORDER BY extname",
+    "parameters": [],
+    "result": [
+      {
+        "extname": "plpgsql",
+        "extversion": "1.0"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.473505+00:00",
+    "end": "2026-09-16T08:58:47.474458+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,c.relname,c.relkind,pg_get_userbyid(c.relowner) AS owner,c.reltuples,pg_total_relation_size(c.oid) AS total_bytes,obj_description(c.oid,'pg_class') AS comment FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,c.relname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:47.474465+00:00",
+    "end": "2026-09-16T08:58:47.476049+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,p.proname,p.prokind FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,p.proname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:47.496489+00:00",
+    "end": "2026-09-16T08:58:47.497701+00:00",
+    "database": null,
+    "sql": "SELECT current_database() AS database,current_user,current_setting('transaction_read_only') AS transaction_read_only,(SELECT count(*) FROM pg_largeobject_metadata) AS large_object_count",
+    "parameters": [],
+    "result": [
+      {
+        "database": "tg_wp04_service_11e6867d5f3542b293cdfd4a4fead7cf",
+        "current_user": "thesisguard",
+        "transaction_read_only": "on",
+        "large_object_count": 0
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.497712+00:00",
+    "end": "2026-09-16T08:58:47.499224+00:00",
+    "database": null,
+    "sql": "SELECT nspname,pg_get_userbyid(nspowner) AS owner,obj_description(oid,'pg_namespace') AS comment FROM pg_namespace WHERE nspname NOT LIKE 'pg_%' AND nspname<>'information_schema' ORDER BY nspname",
+    "parameters": [],
+    "result": [
+      {
+        "nspname": "public",
+        "owner": "pg_database_owner",
+        "comment": "standard public schema"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.499234+00:00",
+    "end": "2026-09-16T08:58:47.499831+00:00",
+    "database": null,
+    "sql": "SELECT extname,extversion FROM pg_extension ORDER BY extname",
+    "parameters": [],
+    "result": [
+      {
+        "extname": "plpgsql",
+        "extversion": "1.0"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.499841+00:00",
+    "end": "2026-09-16T08:58:47.500641+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,c.relname,c.relkind,pg_get_userbyid(c.relowner) AS owner,c.reltuples,pg_total_relation_size(c.oid) AS total_bytes,obj_description(c.oid,'pg_class') AS comment FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,c.relname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:47.500647+00:00",
+    "end": "2026-09-16T08:58:47.501598+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,p.proname,p.prokind FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,p.proname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:47.519336+00:00",
+    "end": "2026-09-16T08:58:47.520679+00:00",
+    "database": null,
+    "sql": "SELECT current_database() AS database,current_user,current_setting('transaction_read_only') AS transaction_read_only,(SELECT count(*) FROM pg_largeobject_metadata) AS large_object_count",
+    "parameters": [],
+    "result": [
+      {
+        "database": "tg_wp04_service_13471ec2ece84b93b8407e29c6054a6f",
+        "current_user": "thesisguard",
+        "transaction_read_only": "on",
+        "large_object_count": 0
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.520687+00:00",
+    "end": "2026-09-16T08:58:47.525741+00:00",
+    "database": null,
+    "sql": "SELECT nspname,pg_get_userbyid(nspowner) AS owner,obj_description(oid,'pg_namespace') AS comment FROM pg_namespace WHERE nspname NOT LIKE 'pg_%' AND nspname<>'information_schema' ORDER BY nspname",
+    "parameters": [],
+    "result": [
+      {
+        "nspname": "public",
+        "owner": "pg_database_owner",
+        "comment": "standard public schema"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.525747+00:00",
+    "end": "2026-09-16T08:58:47.526384+00:00",
+    "database": null,
+    "sql": "SELECT extname,extversion FROM pg_extension ORDER BY extname",
+    "parameters": [],
+    "result": [
+      {
+        "extname": "plpgsql",
+        "extversion": "1.0"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.526388+00:00",
+    "end": "2026-09-16T08:58:47.527177+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,c.relname,c.relkind,pg_get_userbyid(c.relowner) AS owner,c.reltuples,pg_total_relation_size(c.oid) AS total_bytes,obj_description(c.oid,'pg_class') AS comment FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,c.relname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:47.527183+00:00",
+    "end": "2026-09-16T08:58:47.528831+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,p.proname,p.prokind FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,p.proname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:47.547286+00:00",
+    "end": "2026-09-16T08:58:47.548997+00:00",
+    "database": null,
+    "sql": "SELECT current_database() AS database,current_user,current_setting('transaction_read_only') AS transaction_read_only,(SELECT count(*) FROM pg_largeobject_metadata) AS large_object_count",
+    "parameters": [],
+    "result": [
+      {
+        "database": "tg_wp04_service_1c5af01292b24f1aaec6fd4637403885",
+        "current_user": "thesisguard",
+        "transaction_read_only": "on",
+        "large_object_count": 0
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.549004+00:00",
+    "end": "2026-09-16T08:58:47.550455+00:00",
+    "database": null,
+    "sql": "SELECT nspname,pg_get_userbyid(nspowner) AS owner,obj_description(oid,'pg_namespace') AS comment FROM pg_namespace WHERE nspname NOT LIKE 'pg_%' AND nspname<>'information_schema' ORDER BY nspname",
+    "parameters": [],
+    "result": [
+      {
+        "nspname": "public",
+        "owner": "pg_database_owner",
+        "comment": "standard public schema"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.550464+00:00",
+    "end": "2026-09-16T08:58:47.551109+00:00",
+    "database": null,
+    "sql": "SELECT extname,extversion FROM pg_extension ORDER BY extname",
+    "parameters": [],
+    "result": [
+      {
+        "extname": "plpgsql",
+        "extversion": "1.0"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.551115+00:00",
+    "end": "2026-09-16T08:58:47.551891+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,c.relname,c.relkind,pg_get_userbyid(c.relowner) AS owner,c.reltuples,pg_total_relation_size(c.oid) AS total_bytes,obj_description(c.oid,'pg_class') AS comment FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,c.relname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:47.551897+00:00",
+    "end": "2026-09-16T08:58:47.552939+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,p.proname,p.prokind FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,p.proname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:47.571254+00:00",
+    "end": "2026-09-16T08:58:47.573014+00:00",
+    "database": null,
+    "sql": "SELECT current_database() AS database,current_user,current_setting('transaction_read_only') AS transaction_read_only,(SELECT count(*) FROM pg_largeobject_metadata) AS large_object_count",
+    "parameters": [],
+    "result": [
+      {
+        "database": "tg_wp04_service_1ddedcea542a49f796be0bda8b9ac972",
+        "current_user": "thesisguard",
+        "transaction_read_only": "on",
+        "large_object_count": 0
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.573024+00:00",
+    "end": "2026-09-16T08:58:47.575098+00:00",
+    "database": null,
+    "sql": "SELECT nspname,pg_get_userbyid(nspowner) AS owner,obj_description(oid,'pg_namespace') AS comment FROM pg_namespace WHERE nspname NOT LIKE 'pg_%' AND nspname<>'information_schema' ORDER BY nspname",
+    "parameters": [],
+    "result": [
+      {
+        "nspname": "public",
+        "owner": "pg_database_owner",
+        "comment": "standard public schema"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.575103+00:00",
+    "end": "2026-09-16T08:58:47.575688+00:00",
+    "database": null,
+    "sql": "SELECT extname,extversion FROM pg_extension ORDER BY extname",
+    "parameters": [],
+    "result": [
+      {
+        "extname": "plpgsql",
+        "extversion": "1.0"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.575692+00:00",
+    "end": "2026-09-16T08:58:47.576565+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,c.relname,c.relkind,pg_get_userbyid(c.relowner) AS owner,c.reltuples,pg_total_relation_size(c.oid) AS total_bytes,obj_description(c.oid,'pg_class') AS comment FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,c.relname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:47.576572+00:00",
+    "end": "2026-09-16T08:58:47.577982+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,p.proname,p.prokind FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,p.proname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:47.601621+00:00",
+    "end": "2026-09-16T08:58:47.603187+00:00",
+    "database": null,
+    "sql": "SELECT current_database() AS database,current_user,current_setting('transaction_read_only') AS transaction_read_only,(SELECT count(*) FROM pg_largeobject_metadata) AS large_object_count",
+    "parameters": [],
+    "result": [
+      {
+        "database": "tg_wp04_service_1f6901c614364010b70a6ea69fa01385",
+        "current_user": "thesisguard",
+        "transaction_read_only": "on",
+        "large_object_count": 0
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.603192+00:00",
+    "end": "2026-09-16T08:58:47.604875+00:00",
+    "database": null,
+    "sql": "SELECT nspname,pg_get_userbyid(nspowner) AS owner,obj_description(oid,'pg_namespace') AS comment FROM pg_namespace WHERE nspname NOT LIKE 'pg_%' AND nspname<>'information_schema' ORDER BY nspname",
+    "parameters": [],
+    "result": [
+      {
+        "nspname": "public",
+        "owner": "pg_database_owner",
+        "comment": "standard public schema"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.604883+00:00",
+    "end": "2026-09-16T08:58:47.605544+00:00",
+    "database": null,
+    "sql": "SELECT extname,extversion FROM pg_extension ORDER BY extname",
+    "parameters": [],
+    "result": [
+      {
+        "extname": "plpgsql",
+        "extversion": "1.0"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.605548+00:00",
+    "end": "2026-09-16T08:58:47.606416+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,c.relname,c.relkind,pg_get_userbyid(c.relowner) AS owner,c.reltuples,pg_total_relation_size(c.oid) AS total_bytes,obj_description(c.oid,'pg_class') AS comment FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,c.relname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:47.606421+00:00",
+    "end": "2026-09-16T08:58:47.607766+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,p.proname,p.prokind FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,p.proname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:47.630254+00:00",
+    "end": "2026-09-16T08:58:47.636393+00:00",
+    "database": null,
+    "sql": "SELECT current_database() AS database,current_user,current_setting('transaction_read_only') AS transaction_read_only,(SELECT count(*) FROM pg_largeobject_metadata) AS large_object_count",
+    "parameters": [],
+    "result": [
+      {
+        "database": "tg_wp04_service_1fb496c5fa934a4b96d850d08ae192da",
+        "current_user": "thesisguard",
+        "transaction_read_only": "on",
+        "large_object_count": 0
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.636398+00:00",
+    "end": "2026-09-16T08:58:47.638819+00:00",
+    "database": null,
+    "sql": "SELECT nspname,pg_get_userbyid(nspowner) AS owner,obj_description(oid,'pg_namespace') AS comment FROM pg_namespace WHERE nspname NOT LIKE 'pg_%' AND nspname<>'information_schema' ORDER BY nspname",
+    "parameters": [],
+    "result": [
+      {
+        "nspname": "public",
+        "owner": "pg_database_owner",
+        "comment": "standard public schema"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.638823+00:00",
+    "end": "2026-09-16T08:58:47.639526+00:00",
+    "database": null,
+    "sql": "SELECT extname,extversion FROM pg_extension ORDER BY extname",
+    "parameters": [],
+    "result": [
+      {
+        "extname": "plpgsql",
+        "extversion": "1.0"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.639534+00:00",
+    "end": "2026-09-16T08:58:47.640456+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,c.relname,c.relkind,pg_get_userbyid(c.relowner) AS owner,c.reltuples,pg_total_relation_size(c.oid) AS total_bytes,obj_description(c.oid,'pg_class') AS comment FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,c.relname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:47.640464+00:00",
+    "end": "2026-09-16T08:58:47.642170+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,p.proname,p.prokind FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,p.proname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:47.661676+00:00",
+    "end": "2026-09-16T08:58:47.662734+00:00",
+    "database": null,
+    "sql": "SELECT current_database() AS database,current_user,current_setting('transaction_read_only') AS transaction_read_only,(SELECT count(*) FROM pg_largeobject_metadata) AS large_object_count",
+    "parameters": [],
+    "result": [
+      {
+        "database": "tg_wp04_service_28cbba54558442e4b7bff6179cf71746",
+        "current_user": "thesisguard",
+        "transaction_read_only": "on",
+        "large_object_count": 0
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.662742+00:00",
+    "end": "2026-09-16T08:58:47.669057+00:00",
+    "database": null,
+    "sql": "SELECT nspname,pg_get_userbyid(nspowner) AS owner,obj_description(oid,'pg_namespace') AS comment FROM pg_namespace WHERE nspname NOT LIKE 'pg_%' AND nspname<>'information_schema' ORDER BY nspname",
+    "parameters": [],
+    "result": [
+      {
+        "nspname": "public",
+        "owner": "pg_database_owner",
+        "comment": "standard public schema"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.669067+00:00",
+    "end": "2026-09-16T08:58:47.669727+00:00",
+    "database": null,
+    "sql": "SELECT extname,extversion FROM pg_extension ORDER BY extname",
+    "parameters": [],
+    "result": [
+      {
+        "extname": "plpgsql",
+        "extversion": "1.0"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.669733+00:00",
+    "end": "2026-09-16T08:58:47.670523+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,c.relname,c.relkind,pg_get_userbyid(c.relowner) AS owner,c.reltuples,pg_total_relation_size(c.oid) AS total_bytes,obj_description(c.oid,'pg_class') AS comment FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,c.relname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:47.670528+00:00",
+    "end": "2026-09-16T08:58:47.671569+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,p.proname,p.prokind FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,p.proname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:47.694138+00:00",
+    "end": "2026-09-16T08:58:47.696032+00:00",
+    "database": null,
+    "sql": "SELECT current_database() AS database,current_user,current_setting('transaction_read_only') AS transaction_read_only,(SELECT count(*) FROM pg_largeobject_metadata) AS large_object_count",
+    "parameters": [],
+    "result": [
+      {
+        "database": "tg_wp04_service_29b5f21b05e64c35bcfba641816cee26",
+        "current_user": "thesisguard",
+        "transaction_read_only": "on",
+        "large_object_count": 0
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.696046+00:00",
+    "end": "2026-09-16T08:58:47.697723+00:00",
+    "database": null,
+    "sql": "SELECT nspname,pg_get_userbyid(nspowner) AS owner,obj_description(oid,'pg_namespace') AS comment FROM pg_namespace WHERE nspname NOT LIKE 'pg_%' AND nspname<>'information_schema' ORDER BY nspname",
+    "parameters": [],
+    "result": [
+      {
+        "nspname": "public",
+        "owner": "pg_database_owner",
+        "comment": "standard public schema"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.697730+00:00",
+    "end": "2026-09-16T08:58:47.698419+00:00",
+    "database": null,
+    "sql": "SELECT extname,extversion FROM pg_extension ORDER BY extname",
+    "parameters": [],
+    "result": [
+      {
+        "extname": "plpgsql",
+        "extversion": "1.0"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.698425+00:00",
+    "end": "2026-09-16T08:58:47.699328+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,c.relname,c.relkind,pg_get_userbyid(c.relowner) AS owner,c.reltuples,pg_total_relation_size(c.oid) AS total_bytes,obj_description(c.oid,'pg_class') AS comment FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,c.relname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:47.699334+00:00",
+    "end": "2026-09-16T08:58:47.700721+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,p.proname,p.prokind FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,p.proname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:47.720085+00:00",
+    "end": "2026-09-16T08:58:47.721666+00:00",
+    "database": null,
+    "sql": "SELECT current_database() AS database,current_user,current_setting('transaction_read_only') AS transaction_read_only,(SELECT count(*) FROM pg_largeobject_metadata) AS large_object_count",
+    "parameters": [],
+    "result": [
+      {
+        "database": "tg_wp04_service_3cf61d305a374021b958d8c32c3cf5a0",
+        "current_user": "thesisguard",
+        "transaction_read_only": "on",
+        "large_object_count": 0
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.721673+00:00",
+    "end": "2026-09-16T08:58:47.728405+00:00",
+    "database": null,
+    "sql": "SELECT nspname,pg_get_userbyid(nspowner) AS owner,obj_description(oid,'pg_namespace') AS comment FROM pg_namespace WHERE nspname NOT LIKE 'pg_%' AND nspname<>'information_schema' ORDER BY nspname",
+    "parameters": [],
+    "result": [
+      {
+        "nspname": "public",
+        "owner": "pg_database_owner",
+        "comment": "standard public schema"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.728412+00:00",
+    "end": "2026-09-16T08:58:47.728990+00:00",
+    "database": null,
+    "sql": "SELECT extname,extversion FROM pg_extension ORDER BY extname",
+    "parameters": [],
+    "result": [
+      {
+        "extname": "plpgsql",
+        "extversion": "1.0"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.728995+00:00",
+    "end": "2026-09-16T08:58:47.730174+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,c.relname,c.relkind,pg_get_userbyid(c.relowner) AS owner,c.reltuples,pg_total_relation_size(c.oid) AS total_bytes,obj_description(c.oid,'pg_class') AS comment FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,c.relname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:47.730178+00:00",
+    "end": "2026-09-16T08:58:47.732677+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,p.proname,p.prokind FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,p.proname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:47.751544+00:00",
+    "end": "2026-09-16T08:58:47.752939+00:00",
+    "database": null,
+    "sql": "SELECT current_database() AS database,current_user,current_setting('transaction_read_only') AS transaction_read_only,(SELECT count(*) FROM pg_largeobject_metadata) AS large_object_count",
+    "parameters": [],
+    "result": [
+      {
+        "database": "tg_wp04_service_3f430b834ec8486a892dad86209b9c48",
+        "current_user": "thesisguard",
+        "transaction_read_only": "on",
+        "large_object_count": 0
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.752948+00:00",
+    "end": "2026-09-16T08:58:47.754634+00:00",
+    "database": null,
+    "sql": "SELECT nspname,pg_get_userbyid(nspowner) AS owner,obj_description(oid,'pg_namespace') AS comment FROM pg_namespace WHERE nspname NOT LIKE 'pg_%' AND nspname<>'information_schema' ORDER BY nspname",
+    "parameters": [],
+    "result": [
+      {
+        "nspname": "public",
+        "owner": "pg_database_owner",
+        "comment": "standard public schema"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.754640+00:00",
+    "end": "2026-09-16T08:58:47.755306+00:00",
+    "database": null,
+    "sql": "SELECT extname,extversion FROM pg_extension ORDER BY extname",
+    "parameters": [],
+    "result": [
+      {
+        "extname": "plpgsql",
+        "extversion": "1.0"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.755311+00:00",
+    "end": "2026-09-16T08:58:47.756113+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,c.relname,c.relkind,pg_get_userbyid(c.relowner) AS owner,c.reltuples,pg_total_relation_size(c.oid) AS total_bytes,obj_description(c.oid,'pg_class') AS comment FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,c.relname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:47.756119+00:00",
+    "end": "2026-09-16T08:58:47.762107+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,p.proname,p.prokind FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,p.proname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:47.781243+00:00",
+    "end": "2026-09-16T08:58:47.782436+00:00",
+    "database": null,
+    "sql": "SELECT current_database() AS database,current_user,current_setting('transaction_read_only') AS transaction_read_only,(SELECT count(*) FROM pg_largeobject_metadata) AS large_object_count",
+    "parameters": [],
+    "result": [
+      {
+        "database": "tg_wp04_service_430bc500937c40f19fd82fba561d6087",
+        "current_user": "thesisguard",
+        "transaction_read_only": "on",
+        "large_object_count": 0
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.782442+00:00",
+    "end": "2026-09-16T08:58:47.783933+00:00",
+    "database": null,
+    "sql": "SELECT nspname,pg_get_userbyid(nspowner) AS owner,obj_description(oid,'pg_namespace') AS comment FROM pg_namespace WHERE nspname NOT LIKE 'pg_%' AND nspname<>'information_schema' ORDER BY nspname",
+    "parameters": [],
+    "result": [
+      {
+        "nspname": "public",
+        "owner": "pg_database_owner",
+        "comment": "standard public schema"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.783939+00:00",
+    "end": "2026-09-16T08:58:47.784599+00:00",
+    "database": null,
+    "sql": "SELECT extname,extversion FROM pg_extension ORDER BY extname",
+    "parameters": [],
+    "result": [
+      {
+        "extname": "plpgsql",
+        "extversion": "1.0"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.784608+00:00",
+    "end": "2026-09-16T08:58:47.785403+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,c.relname,c.relkind,pg_get_userbyid(c.relowner) AS owner,c.reltuples,pg_total_relation_size(c.oid) AS total_bytes,obj_description(c.oid,'pg_class') AS comment FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,c.relname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:47.785407+00:00",
+    "end": "2026-09-16T08:58:47.786809+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,p.proname,p.prokind FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,p.proname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:47.805429+00:00",
+    "end": "2026-09-16T08:58:47.806651+00:00",
+    "database": null,
+    "sql": "SELECT current_database() AS database,current_user,current_setting('transaction_read_only') AS transaction_read_only,(SELECT count(*) FROM pg_largeobject_metadata) AS large_object_count",
+    "parameters": [],
+    "result": [
+      {
+        "database": "tg_wp04_service_45c63d3d38894f7ea7643f10d250f370",
+        "current_user": "thesisguard",
+        "transaction_read_only": "on",
+        "large_object_count": 0
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.806656+00:00",
+    "end": "2026-09-16T08:58:47.808537+00:00",
+    "database": null,
+    "sql": "SELECT nspname,pg_get_userbyid(nspowner) AS owner,obj_description(oid,'pg_namespace') AS comment FROM pg_namespace WHERE nspname NOT LIKE 'pg_%' AND nspname<>'information_schema' ORDER BY nspname",
+    "parameters": [],
+    "result": [
+      {
+        "nspname": "public",
+        "owner": "pg_database_owner",
+        "comment": "standard public schema"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.808542+00:00",
+    "end": "2026-09-16T08:58:47.810300+00:00",
+    "database": null,
+    "sql": "SELECT extname,extversion FROM pg_extension ORDER BY extname",
+    "parameters": [],
+    "result": [
+      {
+        "extname": "plpgsql",
+        "extversion": "1.0"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.810306+00:00",
+    "end": "2026-09-16T08:58:47.814179+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,c.relname,c.relkind,pg_get_userbyid(c.relowner) AS owner,c.reltuples,pg_total_relation_size(c.oid) AS total_bytes,obj_description(c.oid,'pg_class') AS comment FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,c.relname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:47.814184+00:00",
+    "end": "2026-09-16T08:58:47.815938+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,p.proname,p.prokind FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,p.proname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:47.836909+00:00",
+    "end": "2026-09-16T08:58:47.838054+00:00",
+    "database": null,
+    "sql": "SELECT current_database() AS database,current_user,current_setting('transaction_read_only') AS transaction_read_only,(SELECT count(*) FROM pg_largeobject_metadata) AS large_object_count",
+    "parameters": [],
+    "result": [
+      {
+        "database": "tg_wp04_service_470ab881404544a6995142c846276e47",
+        "current_user": "thesisguard",
+        "transaction_read_only": "on",
+        "large_object_count": 0
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.838060+00:00",
+    "end": "2026-09-16T08:58:47.840506+00:00",
+    "database": null,
+    "sql": "SELECT nspname,pg_get_userbyid(nspowner) AS owner,obj_description(oid,'pg_namespace') AS comment FROM pg_namespace WHERE nspname NOT LIKE 'pg_%' AND nspname<>'information_schema' ORDER BY nspname",
+    "parameters": [],
+    "result": [
+      {
+        "nspname": "public",
+        "owner": "pg_database_owner",
+        "comment": "standard public schema"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.840515+00:00",
+    "end": "2026-09-16T08:58:47.841204+00:00",
+    "database": null,
+    "sql": "SELECT extname,extversion FROM pg_extension ORDER BY extname",
+    "parameters": [],
+    "result": [
+      {
+        "extname": "plpgsql",
+        "extversion": "1.0"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.841208+00:00",
+    "end": "2026-09-16T08:58:47.842177+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,c.relname,c.relkind,pg_get_userbyid(c.relowner) AS owner,c.reltuples,pg_total_relation_size(c.oid) AS total_bytes,obj_description(c.oid,'pg_class') AS comment FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,c.relname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:47.842183+00:00",
+    "end": "2026-09-16T08:58:47.845495+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,p.proname,p.prokind FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,p.proname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:47.884001+00:00",
+    "end": "2026-09-16T08:58:47.893342+00:00",
+    "database": null,
+    "sql": "SELECT current_database() AS database,current_user,current_setting('transaction_read_only') AS transaction_read_only,(SELECT count(*) FROM pg_largeobject_metadata) AS large_object_count",
+    "parameters": [],
+    "result": [
+      {
+        "database": "tg_wp04_service_4f008d22a8154f82954820a749edfeff",
+        "current_user": "thesisguard",
+        "transaction_read_only": "on",
+        "large_object_count": 0
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.893356+00:00",
+    "end": "2026-09-16T08:58:47.903479+00:00",
+    "database": null,
+    "sql": "SELECT nspname,pg_get_userbyid(nspowner) AS owner,obj_description(oid,'pg_namespace') AS comment FROM pg_namespace WHERE nspname NOT LIKE 'pg_%' AND nspname<>'information_schema' ORDER BY nspname",
+    "parameters": [],
+    "result": [
+      {
+        "nspname": "public",
+        "owner": "pg_database_owner",
+        "comment": "standard public schema"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.903488+00:00",
+    "end": "2026-09-16T08:58:47.905481+00:00",
+    "database": null,
+    "sql": "SELECT extname,extversion FROM pg_extension ORDER BY extname",
+    "parameters": [],
+    "result": [
+      {
+        "extname": "plpgsql",
+        "extversion": "1.0"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.905486+00:00",
+    "end": "2026-09-16T08:58:47.907687+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,c.relname,c.relkind,pg_get_userbyid(c.relowner) AS owner,c.reltuples,pg_total_relation_size(c.oid) AS total_bytes,obj_description(c.oid,'pg_class') AS comment FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,c.relname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:47.907694+00:00",
+    "end": "2026-09-16T08:58:47.919697+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,p.proname,p.prokind FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,p.proname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:47.938992+00:00",
+    "end": "2026-09-16T08:58:47.940356+00:00",
+    "database": null,
+    "sql": "SELECT current_database() AS database,current_user,current_setting('transaction_read_only') AS transaction_read_only,(SELECT count(*) FROM pg_largeobject_metadata) AS large_object_count",
+    "parameters": [],
+    "result": [
+      {
+        "database": "tg_wp04_service_534131d65bb74a449f6eaf7c31648b21",
+        "current_user": "thesisguard",
+        "transaction_read_only": "on",
+        "large_object_count": 0
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.940364+00:00",
+    "end": "2026-09-16T08:58:47.942587+00:00",
+    "database": null,
+    "sql": "SELECT nspname,pg_get_userbyid(nspowner) AS owner,obj_description(oid,'pg_namespace') AS comment FROM pg_namespace WHERE nspname NOT LIKE 'pg_%' AND nspname<>'information_schema' ORDER BY nspname",
+    "parameters": [],
+    "result": [
+      {
+        "nspname": "public",
+        "owner": "pg_database_owner",
+        "comment": "standard public schema"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.942592+00:00",
+    "end": "2026-09-16T08:58:47.943390+00:00",
+    "database": null,
+    "sql": "SELECT extname,extversion FROM pg_extension ORDER BY extname",
+    "parameters": [],
+    "result": [
+      {
+        "extname": "plpgsql",
+        "extversion": "1.0"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.943395+00:00",
+    "end": "2026-09-16T08:58:47.944338+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,c.relname,c.relkind,pg_get_userbyid(c.relowner) AS owner,c.reltuples,pg_total_relation_size(c.oid) AS total_bytes,obj_description(c.oid,'pg_class') AS comment FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,c.relname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:47.944343+00:00",
+    "end": "2026-09-16T08:58:47.945695+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,p.proname,p.prokind FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,p.proname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:47.963786+00:00",
+    "end": "2026-09-16T08:58:47.964691+00:00",
+    "database": null,
+    "sql": "SELECT current_database() AS database,current_user,current_setting('transaction_read_only') AS transaction_read_only,(SELECT count(*) FROM pg_largeobject_metadata) AS large_object_count",
+    "parameters": [],
+    "result": [
+      {
+        "database": "tg_wp04_service_53f41488c0dd47d88d4591bec041a7a7",
+        "current_user": "thesisguard",
+        "transaction_read_only": "on",
+        "large_object_count": 0
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.964699+00:00",
+    "end": "2026-09-16T08:58:47.965951+00:00",
+    "database": null,
+    "sql": "SELECT nspname,pg_get_userbyid(nspowner) AS owner,obj_description(oid,'pg_namespace') AS comment FROM pg_namespace WHERE nspname NOT LIKE 'pg_%' AND nspname<>'information_schema' ORDER BY nspname",
+    "parameters": [],
+    "result": [
+      {
+        "nspname": "public",
+        "owner": "pg_database_owner",
+        "comment": "standard public schema"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.965957+00:00",
+    "end": "2026-09-16T08:58:47.966570+00:00",
+    "database": null,
+    "sql": "SELECT extname,extversion FROM pg_extension ORDER BY extname",
+    "parameters": [],
+    "result": [
+      {
+        "extname": "plpgsql",
+        "extversion": "1.0"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.966576+00:00",
+    "end": "2026-09-16T08:58:47.967297+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,c.relname,c.relkind,pg_get_userbyid(c.relowner) AS owner,c.reltuples,pg_total_relation_size(c.oid) AS total_bytes,obj_description(c.oid,'pg_class') AS comment FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,c.relname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:47.967302+00:00",
+    "end": "2026-09-16T08:58:47.968217+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,p.proname,p.prokind FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,p.proname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:47.986414+00:00",
+    "end": "2026-09-16T08:58:47.988205+00:00",
+    "database": null,
+    "sql": "SELECT current_database() AS database,current_user,current_setting('transaction_read_only') AS transaction_read_only,(SELECT count(*) FROM pg_largeobject_metadata) AS large_object_count",
+    "parameters": [],
+    "result": [
+      {
+        "database": "tg_wp04_service_58cbbcc50bb44e5aad52b85c1c56c155",
+        "current_user": "thesisguard",
+        "transaction_read_only": "on",
+        "large_object_count": 0
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.988211+00:00",
+    "end": "2026-09-16T08:58:47.989911+00:00",
+    "database": null,
+    "sql": "SELECT nspname,pg_get_userbyid(nspowner) AS owner,obj_description(oid,'pg_namespace') AS comment FROM pg_namespace WHERE nspname NOT LIKE 'pg_%' AND nspname<>'information_schema' ORDER BY nspname",
+    "parameters": [],
+    "result": [
+      {
+        "nspname": "public",
+        "owner": "pg_database_owner",
+        "comment": "standard public schema"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.989915+00:00",
+    "end": "2026-09-16T08:58:47.990555+00:00",
+    "database": null,
+    "sql": "SELECT extname,extversion FROM pg_extension ORDER BY extname",
+    "parameters": [],
+    "result": [
+      {
+        "extname": "plpgsql",
+        "extversion": "1.0"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:47.990563+00:00",
+    "end": "2026-09-16T08:58:47.991336+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,c.relname,c.relkind,pg_get_userbyid(c.relowner) AS owner,c.reltuples,pg_total_relation_size(c.oid) AS total_bytes,obj_description(c.oid,'pg_class') AS comment FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,c.relname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:47.991340+00:00",
+    "end": "2026-09-16T08:58:47.994409+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,p.proname,p.prokind FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,p.proname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:48.016670+00:00",
+    "end": "2026-09-16T08:58:48.020255+00:00",
+    "database": null,
+    "sql": "SELECT current_database() AS database,current_user,current_setting('transaction_read_only') AS transaction_read_only,(SELECT count(*) FROM pg_largeobject_metadata) AS large_object_count",
+    "parameters": [],
+    "result": [
+      {
+        "database": "tg_wp04_service_5d4c8451727743f79f7abdb40a4d88dc",
+        "current_user": "thesisguard",
+        "transaction_read_only": "on",
+        "large_object_count": 0
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.020262+00:00",
+    "end": "2026-09-16T08:58:48.024402+00:00",
+    "database": null,
+    "sql": "SELECT nspname,pg_get_userbyid(nspowner) AS owner,obj_description(oid,'pg_namespace') AS comment FROM pg_namespace WHERE nspname NOT LIKE 'pg_%' AND nspname<>'information_schema' ORDER BY nspname",
+    "parameters": [],
+    "result": [
+      {
+        "nspname": "public",
+        "owner": "pg_database_owner",
+        "comment": "standard public schema"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.024410+00:00",
+    "end": "2026-09-16T08:58:48.025435+00:00",
+    "database": null,
+    "sql": "SELECT extname,extversion FROM pg_extension ORDER BY extname",
+    "parameters": [],
+    "result": [
+      {
+        "extname": "plpgsql",
+        "extversion": "1.0"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.025439+00:00",
+    "end": "2026-09-16T08:58:48.026342+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,c.relname,c.relkind,pg_get_userbyid(c.relowner) AS owner,c.reltuples,pg_total_relation_size(c.oid) AS total_bytes,obj_description(c.oid,'pg_class') AS comment FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,c.relname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:48.026346+00:00",
+    "end": "2026-09-16T08:58:48.028927+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,p.proname,p.prokind FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,p.proname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:48.047611+00:00",
+    "end": "2026-09-16T08:58:48.049118+00:00",
+    "database": null,
+    "sql": "SELECT current_database() AS database,current_user,current_setting('transaction_read_only') AS transaction_read_only,(SELECT count(*) FROM pg_largeobject_metadata) AS large_object_count",
+    "parameters": [],
+    "result": [
+      {
+        "database": "tg_wp04_service_5f625721e89d4e728e9bd0d64d93dd17",
+        "current_user": "thesisguard",
+        "transaction_read_only": "on",
+        "large_object_count": 0
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.049126+00:00",
+    "end": "2026-09-16T08:58:48.050565+00:00",
+    "database": null,
+    "sql": "SELECT nspname,pg_get_userbyid(nspowner) AS owner,obj_description(oid,'pg_namespace') AS comment FROM pg_namespace WHERE nspname NOT LIKE 'pg_%' AND nspname<>'information_schema' ORDER BY nspname",
+    "parameters": [],
+    "result": [
+      {
+        "nspname": "public",
+        "owner": "pg_database_owner",
+        "comment": "standard public schema"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.050570+00:00",
+    "end": "2026-09-16T08:58:48.051126+00:00",
+    "database": null,
+    "sql": "SELECT extname,extversion FROM pg_extension ORDER BY extname",
+    "parameters": [],
+    "result": [
+      {
+        "extname": "plpgsql",
+        "extversion": "1.0"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.051130+00:00",
+    "end": "2026-09-16T08:58:48.051900+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,c.relname,c.relkind,pg_get_userbyid(c.relowner) AS owner,c.reltuples,pg_total_relation_size(c.oid) AS total_bytes,obj_description(c.oid,'pg_class') AS comment FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,c.relname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:48.051904+00:00",
+    "end": "2026-09-16T08:58:48.053303+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,p.proname,p.prokind FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,p.proname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:48.071500+00:00",
+    "end": "2026-09-16T08:58:48.072622+00:00",
+    "database": null,
+    "sql": "SELECT current_database() AS database,current_user,current_setting('transaction_read_only') AS transaction_read_only,(SELECT count(*) FROM pg_largeobject_metadata) AS large_object_count",
+    "parameters": [],
+    "result": [
+      {
+        "database": "tg_wp04_service_69104f67fa53491589b4701388407499",
+        "current_user": "thesisguard",
+        "transaction_read_only": "on",
+        "large_object_count": 0
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.072629+00:00",
+    "end": "2026-09-16T08:58:48.074503+00:00",
+    "database": null,
+    "sql": "SELECT nspname,pg_get_userbyid(nspowner) AS owner,obj_description(oid,'pg_namespace') AS comment FROM pg_namespace WHERE nspname NOT LIKE 'pg_%' AND nspname<>'information_schema' ORDER BY nspname",
+    "parameters": [],
+    "result": [
+      {
+        "nspname": "public",
+        "owner": "pg_database_owner",
+        "comment": "standard public schema"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.074509+00:00",
+    "end": "2026-09-16T08:58:48.075405+00:00",
+    "database": null,
+    "sql": "SELECT extname,extversion FROM pg_extension ORDER BY extname",
+    "parameters": [],
+    "result": [
+      {
+        "extname": "plpgsql",
+        "extversion": "1.0"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.075410+00:00",
+    "end": "2026-09-16T08:58:48.076254+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,c.relname,c.relkind,pg_get_userbyid(c.relowner) AS owner,c.reltuples,pg_total_relation_size(c.oid) AS total_bytes,obj_description(c.oid,'pg_class') AS comment FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,c.relname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:48.076258+00:00",
+    "end": "2026-09-16T08:58:48.077864+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,p.proname,p.prokind FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,p.proname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:48.095912+00:00",
+    "end": "2026-09-16T08:58:48.097279+00:00",
+    "database": null,
+    "sql": "SELECT current_database() AS database,current_user,current_setting('transaction_read_only') AS transaction_read_only,(SELECT count(*) FROM pg_largeobject_metadata) AS large_object_count",
+    "parameters": [],
+    "result": [
+      {
+        "database": "tg_wp04_service_737b02e3182f41b7a963126331b81279",
+        "current_user": "thesisguard",
+        "transaction_read_only": "on",
+        "large_object_count": 0
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.097284+00:00",
+    "end": "2026-09-16T08:58:48.099052+00:00",
+    "database": null,
+    "sql": "SELECT nspname,pg_get_userbyid(nspowner) AS owner,obj_description(oid,'pg_namespace') AS comment FROM pg_namespace WHERE nspname NOT LIKE 'pg_%' AND nspname<>'information_schema' ORDER BY nspname",
+    "parameters": [],
+    "result": [
+      {
+        "nspname": "public",
+        "owner": "pg_database_owner",
+        "comment": "standard public schema"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.099058+00:00",
+    "end": "2026-09-16T08:58:48.099772+00:00",
+    "database": null,
+    "sql": "SELECT extname,extversion FROM pg_extension ORDER BY extname",
+    "parameters": [],
+    "result": [
+      {
+        "extname": "plpgsql",
+        "extversion": "1.0"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.099776+00:00",
+    "end": "2026-09-16T08:58:48.100781+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,c.relname,c.relkind,pg_get_userbyid(c.relowner) AS owner,c.reltuples,pg_total_relation_size(c.oid) AS total_bytes,obj_description(c.oid,'pg_class') AS comment FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,c.relname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:48.100785+00:00",
+    "end": "2026-09-16T08:58:48.102737+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,p.proname,p.prokind FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,p.proname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:48.121835+00:00",
+    "end": "2026-09-16T08:58:48.123172+00:00",
+    "database": null,
+    "sql": "SELECT current_database() AS database,current_user,current_setting('transaction_read_only') AS transaction_read_only,(SELECT count(*) FROM pg_largeobject_metadata) AS large_object_count",
+    "parameters": [],
+    "result": [
+      {
+        "database": "tg_wp04_service_758b5d420b0e400089a7b4b243cc3b0e",
+        "current_user": "thesisguard",
+        "transaction_read_only": "on",
+        "large_object_count": 0
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.123180+00:00",
+    "end": "2026-09-16T08:58:48.124852+00:00",
+    "database": null,
+    "sql": "SELECT nspname,pg_get_userbyid(nspowner) AS owner,obj_description(oid,'pg_namespace') AS comment FROM pg_namespace WHERE nspname NOT LIKE 'pg_%' AND nspname<>'information_schema' ORDER BY nspname",
+    "parameters": [],
+    "result": [
+      {
+        "nspname": "public",
+        "owner": "pg_database_owner",
+        "comment": "standard public schema"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.124858+00:00",
+    "end": "2026-09-16T08:58:48.125459+00:00",
+    "database": null,
+    "sql": "SELECT extname,extversion FROM pg_extension ORDER BY extname",
+    "parameters": [],
+    "result": [
+      {
+        "extname": "plpgsql",
+        "extversion": "1.0"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.125462+00:00",
+    "end": "2026-09-16T08:58:48.126388+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,c.relname,c.relkind,pg_get_userbyid(c.relowner) AS owner,c.reltuples,pg_total_relation_size(c.oid) AS total_bytes,obj_description(c.oid,'pg_class') AS comment FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,c.relname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:48.126399+00:00",
+    "end": "2026-09-16T08:58:48.128092+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,p.proname,p.prokind FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,p.proname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:48.147848+00:00",
+    "end": "2026-09-16T08:58:48.149448+00:00",
+    "database": null,
+    "sql": "SELECT current_database() AS database,current_user,current_setting('transaction_read_only') AS transaction_read_only,(SELECT count(*) FROM pg_largeobject_metadata) AS large_object_count",
+    "parameters": [],
+    "result": [
+      {
+        "database": "tg_wp04_service_762754d8160247888e78b9417afedb2c",
+        "current_user": "thesisguard",
+        "transaction_read_only": "on",
+        "large_object_count": 0
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.149452+00:00",
+    "end": "2026-09-16T08:58:48.150997+00:00",
+    "database": null,
+    "sql": "SELECT nspname,pg_get_userbyid(nspowner) AS owner,obj_description(oid,'pg_namespace') AS comment FROM pg_namespace WHERE nspname NOT LIKE 'pg_%' AND nspname<>'information_schema' ORDER BY nspname",
+    "parameters": [],
+    "result": [
+      {
+        "nspname": "public",
+        "owner": "pg_database_owner",
+        "comment": "standard public schema"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.151002+00:00",
+    "end": "2026-09-16T08:58:48.151595+00:00",
+    "database": null,
+    "sql": "SELECT extname,extversion FROM pg_extension ORDER BY extname",
+    "parameters": [],
+    "result": [
+      {
+        "extname": "plpgsql",
+        "extversion": "1.0"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.151602+00:00",
+    "end": "2026-09-16T08:58:48.152420+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,c.relname,c.relkind,pg_get_userbyid(c.relowner) AS owner,c.reltuples,pg_total_relation_size(c.oid) AS total_bytes,obj_description(c.oid,'pg_class') AS comment FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,c.relname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:48.152428+00:00",
+    "end": "2026-09-16T08:58:48.153870+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,p.proname,p.prokind FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,p.proname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:48.171496+00:00",
+    "end": "2026-09-16T08:58:48.173478+00:00",
+    "database": null,
+    "sql": "SELECT current_database() AS database,current_user,current_setting('transaction_read_only') AS transaction_read_only,(SELECT count(*) FROM pg_largeobject_metadata) AS large_object_count",
+    "parameters": [],
+    "result": [
+      {
+        "database": "tg_wp04_service_79a475ac90224a4b99082d145d292c15",
+        "current_user": "thesisguard",
+        "transaction_read_only": "on",
+        "large_object_count": 0
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.173484+00:00",
+    "end": "2026-09-16T08:58:48.175083+00:00",
+    "database": null,
+    "sql": "SELECT nspname,pg_get_userbyid(nspowner) AS owner,obj_description(oid,'pg_namespace') AS comment FROM pg_namespace WHERE nspname NOT LIKE 'pg_%' AND nspname<>'information_schema' ORDER BY nspname",
+    "parameters": [],
+    "result": [
+      {
+        "nspname": "public",
+        "owner": "pg_database_owner",
+        "comment": "standard public schema"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.175091+00:00",
+    "end": "2026-09-16T08:58:48.175667+00:00",
+    "database": null,
+    "sql": "SELECT extname,extversion FROM pg_extension ORDER BY extname",
+    "parameters": [],
+    "result": [
+      {
+        "extname": "plpgsql",
+        "extversion": "1.0"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.175675+00:00",
+    "end": "2026-09-16T08:58:48.176485+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,c.relname,c.relkind,pg_get_userbyid(c.relowner) AS owner,c.reltuples,pg_total_relation_size(c.oid) AS total_bytes,obj_description(c.oid,'pg_class') AS comment FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,c.relname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:48.176490+00:00",
+    "end": "2026-09-16T08:58:48.177789+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,p.proname,p.prokind FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,p.proname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:48.196293+00:00",
+    "end": "2026-09-16T08:58:48.197837+00:00",
+    "database": null,
+    "sql": "SELECT current_database() AS database,current_user,current_setting('transaction_read_only') AS transaction_read_only,(SELECT count(*) FROM pg_largeobject_metadata) AS large_object_count",
+    "parameters": [],
+    "result": [
+      {
+        "database": "tg_wp04_service_81815e010a3d4f00973b55e8c8f1c856",
+        "current_user": "thesisguard",
+        "transaction_read_only": "on",
+        "large_object_count": 0
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.197845+00:00",
+    "end": "2026-09-16T08:58:48.199725+00:00",
+    "database": null,
+    "sql": "SELECT nspname,pg_get_userbyid(nspowner) AS owner,obj_description(oid,'pg_namespace') AS comment FROM pg_namespace WHERE nspname NOT LIKE 'pg_%' AND nspname<>'information_schema' ORDER BY nspname",
+    "parameters": [],
+    "result": [
+      {
+        "nspname": "public",
+        "owner": "pg_database_owner",
+        "comment": "standard public schema"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.199732+00:00",
+    "end": "2026-09-16T08:58:48.200311+00:00",
+    "database": null,
+    "sql": "SELECT extname,extversion FROM pg_extension ORDER BY extname",
+    "parameters": [],
+    "result": [
+      {
+        "extname": "plpgsql",
+        "extversion": "1.0"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.200316+00:00",
+    "end": "2026-09-16T08:58:48.201170+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,c.relname,c.relkind,pg_get_userbyid(c.relowner) AS owner,c.reltuples,pg_total_relation_size(c.oid) AS total_bytes,obj_description(c.oid,'pg_class') AS comment FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,c.relname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:48.201174+00:00",
+    "end": "2026-09-16T08:58:48.203593+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,p.proname,p.prokind FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,p.proname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:48.221071+00:00",
+    "end": "2026-09-16T08:58:48.223292+00:00",
+    "database": null,
+    "sql": "SELECT current_database() AS database,current_user,current_setting('transaction_read_only') AS transaction_read_only,(SELECT count(*) FROM pg_largeobject_metadata) AS large_object_count",
+    "parameters": [],
+    "result": [
+      {
+        "database": "tg_wp04_service_90a93dc7364d4d9d92520f20675aed5c",
+        "current_user": "thesisguard",
+        "transaction_read_only": "on",
+        "large_object_count": 0
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.223299+00:00",
+    "end": "2026-09-16T08:58:48.225878+00:00",
+    "database": null,
+    "sql": "SELECT nspname,pg_get_userbyid(nspowner) AS owner,obj_description(oid,'pg_namespace') AS comment FROM pg_namespace WHERE nspname NOT LIKE 'pg_%' AND nspname<>'information_schema' ORDER BY nspname",
+    "parameters": [],
+    "result": [
+      {
+        "nspname": "public",
+        "owner": "pg_database_owner",
+        "comment": "standard public schema"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.225884+00:00",
+    "end": "2026-09-16T08:58:48.226912+00:00",
+    "database": null,
+    "sql": "SELECT extname,extversion FROM pg_extension ORDER BY extname",
+    "parameters": [],
+    "result": [
+      {
+        "extname": "plpgsql",
+        "extversion": "1.0"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.226916+00:00",
+    "end": "2026-09-16T08:58:48.228113+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,c.relname,c.relkind,pg_get_userbyid(c.relowner) AS owner,c.reltuples,pg_total_relation_size(c.oid) AS total_bytes,obj_description(c.oid,'pg_class') AS comment FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,c.relname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:48.228121+00:00",
+    "end": "2026-09-16T08:58:48.230151+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,p.proname,p.prokind FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,p.proname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:48.248159+00:00",
+    "end": "2026-09-16T08:58:48.249627+00:00",
+    "database": null,
+    "sql": "SELECT current_database() AS database,current_user,current_setting('transaction_read_only') AS transaction_read_only,(SELECT count(*) FROM pg_largeobject_metadata) AS large_object_count",
+    "parameters": [],
+    "result": [
+      {
+        "database": "tg_wp04_service_90be9919c0ff4891a0350ae6d28f5226",
+        "current_user": "thesisguard",
+        "transaction_read_only": "on",
+        "large_object_count": 0
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.249633+00:00",
+    "end": "2026-09-16T08:58:48.251644+00:00",
+    "database": null,
+    "sql": "SELECT nspname,pg_get_userbyid(nspowner) AS owner,obj_description(oid,'pg_namespace') AS comment FROM pg_namespace WHERE nspname NOT LIKE 'pg_%' AND nspname<>'information_schema' ORDER BY nspname",
+    "parameters": [],
+    "result": [
+      {
+        "nspname": "public",
+        "owner": "pg_database_owner",
+        "comment": "standard public schema"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.251648+00:00",
+    "end": "2026-09-16T08:58:48.252440+00:00",
+    "database": null,
+    "sql": "SELECT extname,extversion FROM pg_extension ORDER BY extname",
+    "parameters": [],
+    "result": [
+      {
+        "extname": "plpgsql",
+        "extversion": "1.0"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.252444+00:00",
+    "end": "2026-09-16T08:58:48.253405+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,c.relname,c.relkind,pg_get_userbyid(c.relowner) AS owner,c.reltuples,pg_total_relation_size(c.oid) AS total_bytes,obj_description(c.oid,'pg_class') AS comment FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,c.relname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:48.253411+00:00",
+    "end": "2026-09-16T08:58:48.256417+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,p.proname,p.prokind FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,p.proname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:48.274917+00:00",
+    "end": "2026-09-16T08:58:48.276512+00:00",
+    "database": null,
+    "sql": "SELECT current_database() AS database,current_user,current_setting('transaction_read_only') AS transaction_read_only,(SELECT count(*) FROM pg_largeobject_metadata) AS large_object_count",
+    "parameters": [],
+    "result": [
+      {
+        "database": "tg_wp04_service_9725b95671f94617a4f29806a20db7a8",
+        "current_user": "thesisguard",
+        "transaction_read_only": "on",
+        "large_object_count": 0
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.276521+00:00",
+    "end": "2026-09-16T08:58:48.278723+00:00",
+    "database": null,
+    "sql": "SELECT nspname,pg_get_userbyid(nspowner) AS owner,obj_description(oid,'pg_namespace') AS comment FROM pg_namespace WHERE nspname NOT LIKE 'pg_%' AND nspname<>'information_schema' ORDER BY nspname",
+    "parameters": [],
+    "result": [
+      {
+        "nspname": "public",
+        "owner": "pg_database_owner",
+        "comment": "standard public schema"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.278730+00:00",
+    "end": "2026-09-16T08:58:48.279533+00:00",
+    "database": null,
+    "sql": "SELECT extname,extversion FROM pg_extension ORDER BY extname",
+    "parameters": [],
+    "result": [
+      {
+        "extname": "plpgsql",
+        "extversion": "1.0"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.279538+00:00",
+    "end": "2026-09-16T08:58:48.280488+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,c.relname,c.relkind,pg_get_userbyid(c.relowner) AS owner,c.reltuples,pg_total_relation_size(c.oid) AS total_bytes,obj_description(c.oid,'pg_class') AS comment FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,c.relname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:48.280499+00:00",
+    "end": "2026-09-16T08:58:48.282229+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,p.proname,p.prokind FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,p.proname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:48.301318+00:00",
+    "end": "2026-09-16T08:58:48.302784+00:00",
+    "database": null,
+    "sql": "SELECT current_database() AS database,current_user,current_setting('transaction_read_only') AS transaction_read_only,(SELECT count(*) FROM pg_largeobject_metadata) AS large_object_count",
+    "parameters": [],
+    "result": [
+      {
+        "database": "tg_wp04_service_99f9613e82ea4c738deef31efbef215d",
+        "current_user": "thesisguard",
+        "transaction_read_only": "on",
+        "large_object_count": 0
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.302797+00:00",
+    "end": "2026-09-16T08:58:48.304904+00:00",
+    "database": null,
+    "sql": "SELECT nspname,pg_get_userbyid(nspowner) AS owner,obj_description(oid,'pg_namespace') AS comment FROM pg_namespace WHERE nspname NOT LIKE 'pg_%' AND nspname<>'information_schema' ORDER BY nspname",
+    "parameters": [],
+    "result": [
+      {
+        "nspname": "public",
+        "owner": "pg_database_owner",
+        "comment": "standard public schema"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.304911+00:00",
+    "end": "2026-09-16T08:58:48.305626+00:00",
+    "database": null,
+    "sql": "SELECT extname,extversion FROM pg_extension ORDER BY extname",
+    "parameters": [],
+    "result": [
+      {
+        "extname": "plpgsql",
+        "extversion": "1.0"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.305632+00:00",
+    "end": "2026-09-16T08:58:48.306551+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,c.relname,c.relkind,pg_get_userbyid(c.relowner) AS owner,c.reltuples,pg_total_relation_size(c.oid) AS total_bytes,obj_description(c.oid,'pg_class') AS comment FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,c.relname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:48.306556+00:00",
+    "end": "2026-09-16T08:58:48.308294+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,p.proname,p.prokind FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,p.proname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:48.326284+00:00",
+    "end": "2026-09-16T08:58:48.327737+00:00",
+    "database": null,
+    "sql": "SELECT current_database() AS database,current_user,current_setting('transaction_read_only') AS transaction_read_only,(SELECT count(*) FROM pg_largeobject_metadata) AS large_object_count",
+    "parameters": [],
+    "result": [
+      {
+        "database": "tg_wp04_service_b6f8802bd7e243eba1e6e0e138b40ebe",
+        "current_user": "thesisguard",
+        "transaction_read_only": "on",
+        "large_object_count": 0
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.327742+00:00",
+    "end": "2026-09-16T08:58:48.329746+00:00",
+    "database": null,
+    "sql": "SELECT nspname,pg_get_userbyid(nspowner) AS owner,obj_description(oid,'pg_namespace') AS comment FROM pg_namespace WHERE nspname NOT LIKE 'pg_%' AND nspname<>'information_schema' ORDER BY nspname",
+    "parameters": [],
+    "result": [
+      {
+        "nspname": "public",
+        "owner": "pg_database_owner",
+        "comment": "standard public schema"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.329750+00:00",
+    "end": "2026-09-16T08:58:48.330592+00:00",
+    "database": null,
+    "sql": "SELECT extname,extversion FROM pg_extension ORDER BY extname",
+    "parameters": [],
+    "result": [
+      {
+        "extname": "plpgsql",
+        "extversion": "1.0"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.330597+00:00",
+    "end": "2026-09-16T08:58:48.331628+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,c.relname,c.relkind,pg_get_userbyid(c.relowner) AS owner,c.reltuples,pg_total_relation_size(c.oid) AS total_bytes,obj_description(c.oid,'pg_class') AS comment FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,c.relname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:48.331636+00:00",
+    "end": "2026-09-16T08:58:48.336730+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,p.proname,p.prokind FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,p.proname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:48.354235+00:00",
+    "end": "2026-09-16T08:58:48.355690+00:00",
+    "database": null,
+    "sql": "SELECT current_database() AS database,current_user,current_setting('transaction_read_only') AS transaction_read_only,(SELECT count(*) FROM pg_largeobject_metadata) AS large_object_count",
+    "parameters": [],
+    "result": [
+      {
+        "database": "tg_wp04_service_bed9e7cc62514f188fe67180264772eb",
+        "current_user": "thesisguard",
+        "transaction_read_only": "on",
+        "large_object_count": 0
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.355695+00:00",
+    "end": "2026-09-16T08:58:48.357385+00:00",
+    "database": null,
+    "sql": "SELECT nspname,pg_get_userbyid(nspowner) AS owner,obj_description(oid,'pg_namespace') AS comment FROM pg_namespace WHERE nspname NOT LIKE 'pg_%' AND nspname<>'information_schema' ORDER BY nspname",
+    "parameters": [],
+    "result": [
+      {
+        "nspname": "public",
+        "owner": "pg_database_owner",
+        "comment": "standard public schema"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.357395+00:00",
+    "end": "2026-09-16T08:58:48.358124+00:00",
+    "database": null,
+    "sql": "SELECT extname,extversion FROM pg_extension ORDER BY extname",
+    "parameters": [],
+    "result": [
+      {
+        "extname": "plpgsql",
+        "extversion": "1.0"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.358129+00:00",
+    "end": "2026-09-16T08:58:48.359122+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,c.relname,c.relkind,pg_get_userbyid(c.relowner) AS owner,c.reltuples,pg_total_relation_size(c.oid) AS total_bytes,obj_description(c.oid,'pg_class') AS comment FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,c.relname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:48.359134+00:00",
+    "end": "2026-09-16T08:58:48.361283+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,p.proname,p.prokind FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,p.proname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:48.378687+00:00",
+    "end": "2026-09-16T08:58:48.379987+00:00",
+    "database": null,
+    "sql": "SELECT current_database() AS database,current_user,current_setting('transaction_read_only') AS transaction_read_only,(SELECT count(*) FROM pg_largeobject_metadata) AS large_object_count",
+    "parameters": [],
+    "result": [
+      {
+        "database": "tg_wp04_service_c52791461a844e15b463397e1670aeb6",
+        "current_user": "thesisguard",
+        "transaction_read_only": "on",
+        "large_object_count": 0
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.379995+00:00",
+    "end": "2026-09-16T08:58:48.381601+00:00",
+    "database": null,
+    "sql": "SELECT nspname,pg_get_userbyid(nspowner) AS owner,obj_description(oid,'pg_namespace') AS comment FROM pg_namespace WHERE nspname NOT LIKE 'pg_%' AND nspname<>'information_schema' ORDER BY nspname",
+    "parameters": [],
+    "result": [
+      {
+        "nspname": "public",
+        "owner": "pg_database_owner",
+        "comment": "standard public schema"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.381609+00:00",
+    "end": "2026-09-16T08:58:48.382335+00:00",
+    "database": null,
+    "sql": "SELECT extname,extversion FROM pg_extension ORDER BY extname",
+    "parameters": [],
+    "result": [
+      {
+        "extname": "plpgsql",
+        "extversion": "1.0"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.382341+00:00",
+    "end": "2026-09-16T08:58:48.383288+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,c.relname,c.relkind,pg_get_userbyid(c.relowner) AS owner,c.reltuples,pg_total_relation_size(c.oid) AS total_bytes,obj_description(c.oid,'pg_class') AS comment FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,c.relname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:48.383293+00:00",
+    "end": "2026-09-16T08:58:48.384931+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,p.proname,p.prokind FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,p.proname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:48.405645+00:00",
+    "end": "2026-09-16T08:58:48.408805+00:00",
+    "database": null,
+    "sql": "SELECT current_database() AS database,current_user,current_setting('transaction_read_only') AS transaction_read_only,(SELECT count(*) FROM pg_largeobject_metadata) AS large_object_count",
+    "parameters": [],
+    "result": [
+      {
+        "database": "tg_wp04_service_ca3fc690d42142278b9dd2b8e76de967",
+        "current_user": "thesisguard",
+        "transaction_read_only": "on",
+        "large_object_count": 0
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.408812+00:00",
+    "end": "2026-09-16T08:58:48.410590+00:00",
+    "database": null,
+    "sql": "SELECT nspname,pg_get_userbyid(nspowner) AS owner,obj_description(oid,'pg_namespace') AS comment FROM pg_namespace WHERE nspname NOT LIKE 'pg_%' AND nspname<>'information_schema' ORDER BY nspname",
+    "parameters": [],
+    "result": [
+      {
+        "nspname": "public",
+        "owner": "pg_database_owner",
+        "comment": "standard public schema"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.410600+00:00",
+    "end": "2026-09-16T08:58:48.411586+00:00",
+    "database": null,
+    "sql": "SELECT extname,extversion FROM pg_extension ORDER BY extname",
+    "parameters": [],
+    "result": [
+      {
+        "extname": "plpgsql",
+        "extversion": "1.0"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.411591+00:00",
+    "end": "2026-09-16T08:58:48.413021+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,c.relname,c.relkind,pg_get_userbyid(c.relowner) AS owner,c.reltuples,pg_total_relation_size(c.oid) AS total_bytes,obj_description(c.oid,'pg_class') AS comment FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,c.relname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:48.413028+00:00",
+    "end": "2026-09-16T08:58:48.416063+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,p.proname,p.prokind FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,p.proname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:48.432994+00:00",
+    "end": "2026-09-16T08:58:48.434130+00:00",
+    "database": null,
+    "sql": "SELECT current_database() AS database,current_user,current_setting('transaction_read_only') AS transaction_read_only,(SELECT count(*) FROM pg_largeobject_metadata) AS large_object_count",
+    "parameters": [],
+    "result": [
+      {
+        "database": "tg_wp04_service_d71be47c791b40788f67cdd0958c50e9",
+        "current_user": "thesisguard",
+        "transaction_read_only": "on",
+        "large_object_count": 0
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.434138+00:00",
+    "end": "2026-09-16T08:58:48.435557+00:00",
+    "database": null,
+    "sql": "SELECT nspname,pg_get_userbyid(nspowner) AS owner,obj_description(oid,'pg_namespace') AS comment FROM pg_namespace WHERE nspname NOT LIKE 'pg_%' AND nspname<>'information_schema' ORDER BY nspname",
+    "parameters": [],
+    "result": [
+      {
+        "nspname": "public",
+        "owner": "pg_database_owner",
+        "comment": "standard public schema"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.435563+00:00",
+    "end": "2026-09-16T08:58:48.436322+00:00",
+    "database": null,
+    "sql": "SELECT extname,extversion FROM pg_extension ORDER BY extname",
+    "parameters": [],
+    "result": [
+      {
+        "extname": "plpgsql",
+        "extversion": "1.0"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.436326+00:00",
+    "end": "2026-09-16T08:58:48.437244+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,c.relname,c.relkind,pg_get_userbyid(c.relowner) AS owner,c.reltuples,pg_total_relation_size(c.oid) AS total_bytes,obj_description(c.oid,'pg_class') AS comment FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,c.relname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:48.437249+00:00",
+    "end": "2026-09-16T08:58:48.438569+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,p.proname,p.prokind FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,p.proname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:48.455795+00:00",
+    "end": "2026-09-16T08:58:48.456927+00:00",
+    "database": null,
+    "sql": "SELECT current_database() AS database,current_user,current_setting('transaction_read_only') AS transaction_read_only,(SELECT count(*) FROM pg_largeobject_metadata) AS large_object_count",
+    "parameters": [],
+    "result": [
+      {
+        "database": "tg_wp04_service_dc37c69cb5354bd18e5a3dcd01812e31",
+        "current_user": "thesisguard",
+        "transaction_read_only": "on",
+        "large_object_count": 0
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.456936+00:00",
+    "end": "2026-09-16T08:58:48.458563+00:00",
+    "database": null,
+    "sql": "SELECT nspname,pg_get_userbyid(nspowner) AS owner,obj_description(oid,'pg_namespace') AS comment FROM pg_namespace WHERE nspname NOT LIKE 'pg_%' AND nspname<>'information_schema' ORDER BY nspname",
+    "parameters": [],
+    "result": [
+      {
+        "nspname": "public",
+        "owner": "pg_database_owner",
+        "comment": "standard public schema"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.458572+00:00",
+    "end": "2026-09-16T08:58:48.459292+00:00",
+    "database": null,
+    "sql": "SELECT extname,extversion FROM pg_extension ORDER BY extname",
+    "parameters": [],
+    "result": [
+      {
+        "extname": "plpgsql",
+        "extversion": "1.0"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.459299+00:00",
+    "end": "2026-09-16T08:58:48.460319+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,c.relname,c.relkind,pg_get_userbyid(c.relowner) AS owner,c.reltuples,pg_total_relation_size(c.oid) AS total_bytes,obj_description(c.oid,'pg_class') AS comment FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,c.relname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:48.460325+00:00",
+    "end": "2026-09-16T08:58:48.461798+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,p.proname,p.prokind FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,p.proname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:48.484556+00:00",
+    "end": "2026-09-16T08:58:48.487671+00:00",
+    "database": null,
+    "sql": "SELECT current_database() AS database,current_user,current_setting('transaction_read_only') AS transaction_read_only,(SELECT count(*) FROM pg_largeobject_metadata) AS large_object_count",
+    "parameters": [],
+    "result": [
+      {
+        "database": "tg_wp04_service_dd591583d60d4f8287f4adce3d5d1cfe",
+        "current_user": "thesisguard",
+        "transaction_read_only": "on",
+        "large_object_count": 0
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.487683+00:00",
+    "end": "2026-09-16T08:58:48.490169+00:00",
+    "database": null,
+    "sql": "SELECT nspname,pg_get_userbyid(nspowner) AS owner,obj_description(oid,'pg_namespace') AS comment FROM pg_namespace WHERE nspname NOT LIKE 'pg_%' AND nspname<>'information_schema' ORDER BY nspname",
+    "parameters": [],
+    "result": [
+      {
+        "nspname": "public",
+        "owner": "pg_database_owner",
+        "comment": "standard public schema"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.490177+00:00",
+    "end": "2026-09-16T08:58:48.490823+00:00",
+    "database": null,
+    "sql": "SELECT extname,extversion FROM pg_extension ORDER BY extname",
+    "parameters": [],
+    "result": [
+      {
+        "extname": "plpgsql",
+        "extversion": "1.0"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.490828+00:00",
+    "end": "2026-09-16T08:58:48.492623+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,c.relname,c.relkind,pg_get_userbyid(c.relowner) AS owner,c.reltuples,pg_total_relation_size(c.oid) AS total_bytes,obj_description(c.oid,'pg_class') AS comment FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,c.relname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:48.492634+00:00",
+    "end": "2026-09-16T08:58:48.494987+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,p.proname,p.prokind FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,p.proname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:48.513414+00:00",
+    "end": "2026-09-16T08:58:48.514901+00:00",
+    "database": null,
+    "sql": "SELECT current_database() AS database,current_user,current_setting('transaction_read_only') AS transaction_read_only,(SELECT count(*) FROM pg_largeobject_metadata) AS large_object_count",
+    "parameters": [],
+    "result": [
+      {
+        "database": "tg_wp04_service_de58a56a5edf406eb94693a9b9e83dba",
+        "current_user": "thesisguard",
+        "transaction_read_only": "on",
+        "large_object_count": 0
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.514910+00:00",
+    "end": "2026-09-16T08:58:48.516890+00:00",
+    "database": null,
+    "sql": "SELECT nspname,pg_get_userbyid(nspowner) AS owner,obj_description(oid,'pg_namespace') AS comment FROM pg_namespace WHERE nspname NOT LIKE 'pg_%' AND nspname<>'information_schema' ORDER BY nspname",
+    "parameters": [],
+    "result": [
+      {
+        "nspname": "public",
+        "owner": "pg_database_owner",
+        "comment": "standard public schema"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.516896+00:00",
+    "end": "2026-09-16T08:58:48.517641+00:00",
+    "database": null,
+    "sql": "SELECT extname,extversion FROM pg_extension ORDER BY extname",
+    "parameters": [],
+    "result": [
+      {
+        "extname": "plpgsql",
+        "extversion": "1.0"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.517646+00:00",
+    "end": "2026-09-16T08:58:48.518663+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,c.relname,c.relkind,pg_get_userbyid(c.relowner) AS owner,c.reltuples,pg_total_relation_size(c.oid) AS total_bytes,obj_description(c.oid,'pg_class') AS comment FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,c.relname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:48.518668+00:00",
+    "end": "2026-09-16T08:58:48.520883+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,p.proname,p.prokind FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,p.proname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:48.538321+00:00",
+    "end": "2026-09-16T08:58:48.539665+00:00",
+    "database": null,
+    "sql": "SELECT current_database() AS database,current_user,current_setting('transaction_read_only') AS transaction_read_only,(SELECT count(*) FROM pg_largeobject_metadata) AS large_object_count",
+    "parameters": [],
+    "result": [
+      {
+        "database": "tg_wp04_service_f33a4b72076e4499899debaf5e88885b",
+        "current_user": "thesisguard",
+        "transaction_read_only": "on",
+        "large_object_count": 0
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.539672+00:00",
+    "end": "2026-09-16T08:58:48.542080+00:00",
+    "database": null,
+    "sql": "SELECT nspname,pg_get_userbyid(nspowner) AS owner,obj_description(oid,'pg_namespace') AS comment FROM pg_namespace WHERE nspname NOT LIKE 'pg_%' AND nspname<>'information_schema' ORDER BY nspname",
+    "parameters": [],
+    "result": [
+      {
+        "nspname": "public",
+        "owner": "pg_database_owner",
+        "comment": "standard public schema"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.542086+00:00",
+    "end": "2026-09-16T08:58:48.542793+00:00",
+    "database": null,
+    "sql": "SELECT extname,extversion FROM pg_extension ORDER BY extname",
+    "parameters": [],
+    "result": [
+      {
+        "extname": "plpgsql",
+        "extversion": "1.0"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.542802+00:00",
+    "end": "2026-09-16T08:58:48.543604+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,c.relname,c.relkind,pg_get_userbyid(c.relowner) AS owner,c.reltuples,pg_total_relation_size(c.oid) AS total_bytes,obj_description(c.oid,'pg_class') AS comment FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,c.relname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:48.543612+00:00",
+    "end": "2026-09-16T08:58:48.545872+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,p.proname,p.prokind FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,p.proname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:48.562917+00:00",
+    "end": "2026-09-16T08:58:48.563908+00:00",
+    "database": null,
+    "sql": "SELECT current_database() AS database,current_user,current_setting('transaction_read_only') AS transaction_read_only,(SELECT count(*) FROM pg_largeobject_metadata) AS large_object_count",
+    "parameters": [],
+    "result": [
+      {
+        "database": "tg_wp04_service_f510786c26d24a2c98218f8949e8e7fb",
+        "current_user": "thesisguard",
+        "transaction_read_only": "on",
+        "large_object_count": 0
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.563916+00:00",
+    "end": "2026-09-16T08:58:48.565187+00:00",
+    "database": null,
+    "sql": "SELECT nspname,pg_get_userbyid(nspowner) AS owner,obj_description(oid,'pg_namespace') AS comment FROM pg_namespace WHERE nspname NOT LIKE 'pg_%' AND nspname<>'information_schema' ORDER BY nspname",
+    "parameters": [],
+    "result": [
+      {
+        "nspname": "public",
+        "owner": "pg_database_owner",
+        "comment": "standard public schema"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.565192+00:00",
+    "end": "2026-09-16T08:58:48.565716+00:00",
+    "database": null,
+    "sql": "SELECT extname,extversion FROM pg_extension ORDER BY extname",
+    "parameters": [],
+    "result": [
+      {
+        "extname": "plpgsql",
+        "extversion": "1.0"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.565720+00:00",
+    "end": "2026-09-16T08:58:48.566454+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,c.relname,c.relkind,pg_get_userbyid(c.relowner) AS owner,c.reltuples,pg_total_relation_size(c.oid) AS total_bytes,obj_description(c.oid,'pg_class') AS comment FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,c.relname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:48.566459+00:00",
+    "end": "2026-09-16T08:58:48.567555+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,p.proname,p.prokind FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,p.proname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:48.587094+00:00",
+    "end": "2026-09-16T08:58:48.588799+00:00",
+    "database": null,
+    "sql": "SELECT current_database() AS database,current_user,current_setting('transaction_read_only') AS transaction_read_only,(SELECT count(*) FROM pg_largeobject_metadata) AS large_object_count",
+    "parameters": [],
+    "result": [
+      {
+        "database": "tg_wp04_service_f5e42809dab54b8ca01a35a34f4ce0cb",
+        "current_user": "thesisguard",
+        "transaction_read_only": "on",
+        "large_object_count": 0
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.588808+00:00",
+    "end": "2026-09-16T08:58:48.590529+00:00",
+    "database": null,
+    "sql": "SELECT nspname,pg_get_userbyid(nspowner) AS owner,obj_description(oid,'pg_namespace') AS comment FROM pg_namespace WHERE nspname NOT LIKE 'pg_%' AND nspname<>'information_schema' ORDER BY nspname",
+    "parameters": [],
+    "result": [
+      {
+        "nspname": "public",
+        "owner": "pg_database_owner",
+        "comment": "standard public schema"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.590535+00:00",
+    "end": "2026-09-16T08:58:48.591195+00:00",
+    "database": null,
+    "sql": "SELECT extname,extversion FROM pg_extension ORDER BY extname",
+    "parameters": [],
+    "result": [
+      {
+        "extname": "plpgsql",
+        "extversion": "1.0"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.591202+00:00",
+    "end": "2026-09-16T08:58:48.591960+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,c.relname,c.relkind,pg_get_userbyid(c.relowner) AS owner,c.reltuples,pg_total_relation_size(c.oid) AS total_bytes,obj_description(c.oid,'pg_class') AS comment FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,c.relname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:48.591964+00:00",
+    "end": "2026-09-16T08:58:48.593678+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,p.proname,p.prokind FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,p.proname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:48.612829+00:00",
+    "end": "2026-09-16T08:58:48.615614+00:00",
+    "database": null,
+    "sql": "SELECT current_database() AS database,current_user,current_setting('transaction_read_only') AS transaction_read_only,(SELECT count(*) FROM pg_largeobject_metadata) AS large_object_count",
+    "parameters": [],
+    "result": [
+      {
+        "database": "tg_wp04_service_f62a9d9bee2147b7a6fbcf4ecc3d851f",
+        "current_user": "thesisguard",
+        "transaction_read_only": "on",
+        "large_object_count": 0
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.615628+00:00",
+    "end": "2026-09-16T08:58:48.618228+00:00",
+    "database": null,
+    "sql": "SELECT nspname,pg_get_userbyid(nspowner) AS owner,obj_description(oid,'pg_namespace') AS comment FROM pg_namespace WHERE nspname NOT LIKE 'pg_%' AND nspname<>'information_schema' ORDER BY nspname",
+    "parameters": [],
+    "result": [
+      {
+        "nspname": "public",
+        "owner": "pg_database_owner",
+        "comment": "standard public schema"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.618241+00:00",
+    "end": "2026-09-16T08:58:48.618958+00:00",
+    "database": null,
+    "sql": "SELECT extname,extversion FROM pg_extension ORDER BY extname",
+    "parameters": [],
+    "result": [
+      {
+        "extname": "plpgsql",
+        "extversion": "1.0"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.618967+00:00",
+    "end": "2026-09-16T08:58:48.619969+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,c.relname,c.relkind,pg_get_userbyid(c.relowner) AS owner,c.reltuples,pg_total_relation_size(c.oid) AS total_bytes,obj_description(c.oid,'pg_class') AS comment FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,c.relname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:48.619978+00:00",
+    "end": "2026-09-16T08:58:48.621484+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,p.proname,p.prokind FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,p.proname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:48.639713+00:00",
+    "end": "2026-09-16T08:58:48.641058+00:00",
+    "database": null,
+    "sql": "SELECT current_database() AS database,current_user,current_setting('transaction_read_only') AS transaction_read_only,(SELECT count(*) FROM pg_largeobject_metadata) AS large_object_count",
+    "parameters": [],
+    "result": [
+      {
+        "database": "tg_wp04_service_f99981ab17b74ba7a1028c973689388c",
+        "current_user": "thesisguard",
+        "transaction_read_only": "on",
+        "large_object_count": 0
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.641072+00:00",
+    "end": "2026-09-16T08:58:48.642702+00:00",
+    "database": null,
+    "sql": "SELECT nspname,pg_get_userbyid(nspowner) AS owner,obj_description(oid,'pg_namespace') AS comment FROM pg_namespace WHERE nspname NOT LIKE 'pg_%' AND nspname<>'information_schema' ORDER BY nspname",
+    "parameters": [],
+    "result": [
+      {
+        "nspname": "public",
+        "owner": "pg_database_owner",
+        "comment": "standard public schema"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.642713+00:00",
+    "end": "2026-09-16T08:58:48.643515+00:00",
+    "database": null,
+    "sql": "SELECT extname,extversion FROM pg_extension ORDER BY extname",
+    "parameters": [],
+    "result": [
+      {
+        "extname": "plpgsql",
+        "extversion": "1.0"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.643527+00:00",
+    "end": "2026-09-16T08:58:48.644862+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,c.relname,c.relkind,pg_get_userbyid(c.relowner) AS owner,c.reltuples,pg_total_relation_size(c.oid) AS total_bytes,obj_description(c.oid,'pg_class') AS comment FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,c.relname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:48.644891+00:00",
+    "end": "2026-09-16T08:58:48.646661+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,p.proname,p.prokind FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,p.proname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:48.678975+00:00",
+    "end": "2026-09-16T08:58:48.681532+00:00",
+    "database": null,
+    "sql": "SELECT current_database() AS database,current_user,current_setting('transaction_read_only') AS transaction_read_only,(SELECT count(*) FROM pg_largeobject_metadata) AS large_object_count",
+    "parameters": [],
+    "result": [
+      {
+        "database": "tg_wp04_service_fa9205d9393e4de0a9bf75eca36ffc1b",
+        "current_user": "thesisguard",
+        "transaction_read_only": "on",
+        "large_object_count": 0
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.681553+00:00",
+    "end": "2026-09-16T08:58:48.684278+00:00",
+    "database": null,
+    "sql": "SELECT nspname,pg_get_userbyid(nspowner) AS owner,obj_description(oid,'pg_namespace') AS comment FROM pg_namespace WHERE nspname NOT LIKE 'pg_%' AND nspname<>'information_schema' ORDER BY nspname",
+    "parameters": [],
+    "result": [
+      {
+        "nspname": "public",
+        "owner": "pg_database_owner",
+        "comment": "standard public schema"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.684296+00:00",
+    "end": "2026-09-16T08:58:48.685447+00:00",
+    "database": null,
+    "sql": "SELECT extname,extversion FROM pg_extension ORDER BY extname",
+    "parameters": [],
+    "result": [
+      {
+        "extname": "plpgsql",
+        "extversion": "1.0"
+      }
+    ]
+  },
+  {
+    "start": "2026-09-16T08:58:48.685458+00:00",
+    "end": "2026-09-16T08:58:48.686644+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,c.relname,c.relkind,pg_get_userbyid(c.relowner) AS owner,c.reltuples,pg_total_relation_size(c.oid) AS total_bytes,obj_description(c.oid,'pg_class') AS comment FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,c.relname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:48.686674+00:00",
+    "end": "2026-09-16T08:58:48.688441+00:00",
+    "database": null,
+    "sql": "SELECT n.nspname,p.proname,p.prokind FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace WHERE n.nspname NOT LIKE 'pg_%' AND n.nspname<>'information_schema' ORDER BY n.nspname,p.proname",
+    "parameters": [],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:48.690274+00:00",
+    "end": "2026-09-16T08:58:48.691321+00:00",
+    "database": null,
+    "sql": "SELECT datname,pid,usename,application_name,client_addr::text,backend_start,xact_start,query_start,state,wait_event_type,wait_event,backend_type FROM pg_stat_activity WHERE datname=ANY($1::text[]) AND pid<>pg_backend_pid() ORDER BY datname,pid",
+    "parameters": [
+      [
+        "tg_wp04_service_01c0f5f8121e450b9c71ace44928c802",
+        "tg_wp04_service_0685f5c993834a349abaf61fc3e3b657",
+        "tg_wp04_service_11e6867d5f3542b293cdfd4a4fead7cf",
+        "tg_wp04_service_13471ec2ece84b93b8407e29c6054a6f",
+        "tg_wp04_service_1c5af01292b24f1aaec6fd4637403885",
+        "tg_wp04_service_1ddedcea542a49f796be0bda8b9ac972",
+        "tg_wp04_service_1f6901c614364010b70a6ea69fa01385",
+        "tg_wp04_service_1fb496c5fa934a4b96d850d08ae192da",
+        "tg_wp04_service_28cbba54558442e4b7bff6179cf71746",
+        "tg_wp04_service_29b5f21b05e64c35bcfba641816cee26",
+        "tg_wp04_service_3cf61d305a374021b958d8c32c3cf5a0",
+        "tg_wp04_service_3f430b834ec8486a892dad86209b9c48",
+        "tg_wp04_service_430bc500937c40f19fd82fba561d6087",
+        "tg_wp04_service_45c63d3d38894f7ea7643f10d250f370",
+        "tg_wp04_service_470ab881404544a6995142c846276e47",
+        "tg_wp04_service_4f008d22a8154f82954820a749edfeff",
+        "tg_wp04_service_534131d65bb74a449f6eaf7c31648b21",
+        "tg_wp04_service_53f41488c0dd47d88d4591bec041a7a7",
+        "tg_wp04_service_58cbbcc50bb44e5aad52b85c1c56c155",
+        "tg_wp04_service_5d4c8451727743f79f7abdb40a4d88dc",
+        "tg_wp04_service_5f625721e89d4e728e9bd0d64d93dd17",
+        "tg_wp04_service_69104f67fa53491589b4701388407499",
+        "tg_wp04_service_737b02e3182f41b7a963126331b81279",
+        "tg_wp04_service_758b5d420b0e400089a7b4b243cc3b0e",
+        "tg_wp04_service_762754d8160247888e78b9417afedb2c",
+        "tg_wp04_service_79a475ac90224a4b99082d145d292c15",
+        "tg_wp04_service_81815e010a3d4f00973b55e8c8f1c856",
+        "tg_wp04_service_90a93dc7364d4d9d92520f20675aed5c",
+        "tg_wp04_service_90be9919c0ff4891a0350ae6d28f5226",
+        "tg_wp04_service_9725b95671f94617a4f29806a20db7a8",
+        "tg_wp04_service_99f9613e82ea4c738deef31efbef215d",
+        "tg_wp04_service_b6f8802bd7e243eba1e6e0e138b40ebe",
+        "tg_wp04_service_bed9e7cc62514f188fe67180264772eb",
+        "tg_wp04_service_c52791461a844e15b463397e1670aeb6",
+        "tg_wp04_service_ca3fc690d42142278b9dd2b8e76de967",
+        "tg_wp04_service_d71be47c791b40788f67cdd0958c50e9",
+        "tg_wp04_service_dc37c69cb5354bd18e5a3dcd01812e31",
+        "tg_wp04_service_dd591583d60d4f8287f4adce3d5d1cfe",
+        "tg_wp04_service_de58a56a5edf406eb94693a9b9e83dba",
+        "tg_wp04_service_f33a4b72076e4499899debaf5e88885b",
+        "tg_wp04_service_f510786c26d24a2c98218f8949e8e7fb",
+        "tg_wp04_service_f5e42809dab54b8ca01a35a34f4ce0cb",
+        "tg_wp04_service_f62a9d9bee2147b7a6fbcf4ecc3d851f",
+        "tg_wp04_service_f99981ab17b74ba7a1028c973689388c",
+        "tg_wp04_service_fa9205d9393e4de0a9bf75eca36ffc1b"
+      ]
+    ],
+    "result": []
+  },
+  {
+    "start": "2026-09-16T08:58:48.691332+00:00",
+    "end": "2026-09-16T08:58:48.704358+00:00",
+    "database": null,
+    "sql": "SELECT d.oid,d.datname,pg_get_userbyid(d.datdba) AS owner,d.datistemplate,d.datallowconn,d.datconnlimit,d.datacl::text,shobj_description(d.oid,'pg_database') AS comment,pg_database_size(d.oid) AS size_bytes FROM pg_database d ORDER BY d.datname",
+    "parameters": [],
+    "result": [
+      {
+        "oid": 5,
+        "datname": "postgres",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": "default administrative connection database",
+        "size_bytes": 7665331
+      },
+      {
+        "oid": 4,
+        "datname": "template0",
+        "owner": "thesisguard",
+        "datistemplate": true,
+        "datallowconn": false,
+        "datconnlimit": -1,
+        "datacl": "{=c/thesisguard,thesisguard=CTc/thesisguard}",
+        "comment": "unmodifiable empty database",
+        "size_bytes": 7496207
+      },
+      {
+        "oid": 1,
+        "datname": "template1",
+        "owner": "thesisguard",
+        "datistemplate": true,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": "{=c/thesisguard,thesisguard=CTc/thesisguard}",
+        "comment": "default template for new databases",
+        "size_bytes": 7730867
+      },
+      {
+        "oid": 8325396,
+        "datname": "tg_wp04_service_01c0f5f8121e450b9c71ace44928c802",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7730867
+      },
+      {
+        "oid": 8325415,
+        "datname": "tg_wp04_service_0685f5c993834a349abaf61fc3e3b657",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7730867
+      },
+      {
+        "oid": 8325419,
+        "datname": "tg_wp04_service_11e6867d5f3542b293cdfd4a4fead7cf",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7730867
+      },
+      {
+        "oid": 8325405,
+        "datname": "tg_wp04_service_13471ec2ece84b93b8407e29c6054a6f",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7730867
+      },
+      {
+        "oid": 8325409,
+        "datname": "tg_wp04_service_1c5af01292b24f1aaec6fd4637403885",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7730867
+      },
+      {
+        "oid": 8325404,
+        "datname": "tg_wp04_service_1ddedcea542a49f796be0bda8b9ac972",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7730867
+      },
+      {
+        "oid": 8325391,
+        "datname": "tg_wp04_service_1f6901c614364010b70a6ea69fa01385",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7730867
+      },
+      {
+        "oid": 8325387,
+        "datname": "tg_wp04_service_1fb496c5fa934a4b96d850d08ae192da",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7730867
+      },
+      {
+        "oid": 8325421,
+        "datname": "tg_wp04_service_28cbba54558442e4b7bff6179cf71746",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7730867
+      },
+      {
+        "oid": 8325411,
+        "datname": "tg_wp04_service_29b5f21b05e64c35bcfba641816cee26",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7730867
+      },
+      {
+        "oid": 8325399,
+        "datname": "tg_wp04_service_3cf61d305a374021b958d8c32c3cf5a0",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7730867
+      },
+      {
+        "oid": 8325389,
+        "datname": "tg_wp04_service_3f430b834ec8486a892dad86209b9c48",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7730867
+      },
+      {
+        "oid": 8325384,
+        "datname": "tg_wp04_service_430bc500937c40f19fd82fba561d6087",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7730867
+      },
+      {
+        "oid": 8325390,
+        "datname": "tg_wp04_service_45c63d3d38894f7ea7643f10d250f370",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7730867
+      },
+      {
+        "oid": 8325410,
+        "datname": "tg_wp04_service_470ab881404544a6995142c846276e47",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7730867
+      },
+      {
+        "oid": 6893828,
+        "datname": "tg_wp04_service_4f008d22a8154f82954820a749edfeff",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7730867
+      },
+      {
+        "oid": 8325407,
+        "datname": "tg_wp04_service_534131d65bb74a449f6eaf7c31648b21",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7730867
+      },
+      {
+        "oid": 8325416,
+        "datname": "tg_wp04_service_53f41488c0dd47d88d4591bec041a7a7",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7730867
+      },
+      {
+        "oid": 8325400,
+        "datname": "tg_wp04_service_58cbbcc50bb44e5aad52b85c1c56c155",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7730867
+      },
+      {
+        "oid": 6893827,
+        "datname": "tg_wp04_service_5d4c8451727743f79f7abdb40a4d88dc",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7730867
+      },
+      {
+        "oid": 8325412,
+        "datname": "tg_wp04_service_5f625721e89d4e728e9bd0d64d93dd17",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7730867
+      },
+      {
+        "oid": 8325393,
+        "datname": "tg_wp04_service_69104f67fa53491589b4701388407499",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7730867
+      },
+      {
+        "oid": 8325398,
+        "datname": "tg_wp04_service_737b02e3182f41b7a963126331b81279",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7730867
+      },
+      {
+        "oid": 8325403,
+        "datname": "tg_wp04_service_758b5d420b0e400089a7b4b243cc3b0e",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7730867
+      },
+      {
+        "oid": 8325406,
+        "datname": "tg_wp04_service_762754d8160247888e78b9417afedb2c",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7730867
+      },
+      {
+        "oid": 8325395,
+        "datname": "tg_wp04_service_79a475ac90224a4b99082d145d292c15",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7730867
+      },
+      {
+        "oid": 8325402,
+        "datname": "tg_wp04_service_81815e010a3d4f00973b55e8c8f1c856",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7730867
+      },
+      {
+        "oid": 8325383,
+        "datname": "tg_wp04_service_90a93dc7364d4d9d92520f20675aed5c",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7730867
+      },
+      {
+        "oid": 8325401,
+        "datname": "tg_wp04_service_90be9919c0ff4891a0350ae6d28f5226",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7730867
+      },
+      {
+        "oid": 8325385,
+        "datname": "tg_wp04_service_9725b95671f94617a4f29806a20db7a8",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7730867
+      },
+      {
+        "oid": 8325388,
+        "datname": "tg_wp04_service_99f9613e82ea4c738deef31efbef215d",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7730867
+      },
+      {
+        "oid": 8325397,
+        "datname": "tg_wp04_service_b6f8802bd7e243eba1e6e0e138b40ebe",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7730867
+      },
+      {
+        "oid": 8325408,
+        "datname": "tg_wp04_service_bed9e7cc62514f188fe67180264772eb",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7730867
+      },
+      {
+        "oid": 8325414,
+        "datname": "tg_wp04_service_c52791461a844e15b463397e1670aeb6",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7730867
+      },
+      {
+        "oid": 6893825,
+        "datname": "tg_wp04_service_ca3fc690d42142278b9dd2b8e76de967",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7730867
+      },
+      {
+        "oid": 8325417,
+        "datname": "tg_wp04_service_d71be47c791b40788f67cdd0958c50e9",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7730867
+      },
+      {
+        "oid": 8325420,
+        "datname": "tg_wp04_service_dc37c69cb5354bd18e5a3dcd01812e31",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7730867
+      },
+      {
+        "oid": 6893826,
+        "datname": "tg_wp04_service_dd591583d60d4f8287f4adce3d5d1cfe",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7730867
+      },
+      {
+        "oid": 8325382,
+        "datname": "tg_wp04_service_de58a56a5edf406eb94693a9b9e83dba",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7730867
+      },
+      {
+        "oid": 8325392,
+        "datname": "tg_wp04_service_f33a4b72076e4499899debaf5e88885b",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7730867
+      },
+      {
+        "oid": 8325418,
+        "datname": "tg_wp04_service_f510786c26d24a2c98218f8949e8e7fb",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7730867
+      },
+      {
+        "oid": 8325386,
+        "datname": "tg_wp04_service_f5e42809dab54b8ca01a35a34f4ce0cb",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7730867
+      },
+      {
+        "oid": 8325394,
+        "datname": "tg_wp04_service_f62a9d9bee2147b7a6fbcf4ecc3d851f",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7730867
+      },
+      {
+        "oid": 8325422,
+        "datname": "tg_wp04_service_f99981ab17b74ba7a1028c973689388c",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7730867
+      },
+      {
+        "oid": 8325413,
+        "datname": "tg_wp04_service_fa9205d9393e4de0a9bf75eca36ffc1b",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 7730867
+      },
+      {
+        "oid": 16384,
+        "datname": "thesisguard",
+        "owner": "thesisguard",
+        "datistemplate": false,
+        "datallowconn": true,
+        "datconnlimit": -1,
+        "datacl": null,
+        "comment": null,
+        "size_bytes": 8517299
+      }
+    ]
+  }
+]

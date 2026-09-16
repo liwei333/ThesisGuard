@@ -1,0 +1,190 @@
+{
+  "time": "2026-09-16T08:58:28.862405+00:00",
+  "effective_environment": {
+    "PATH": "/opt/miniconda3/bin:/opt/homebrew/bin:/opt/homebrew/opt/postgresql@16/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+    "PYTHONPATH": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service:/opt/homebrew/lib/python3.12/site-packages",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "diagnostic_variables_unset": {
+    "TG_TEST_ADMIN_DATABASE_URL": true,
+    "TG_R1C_REPLAY_BASELINE": true,
+    "TG_R1C02_REPLAY_PRIOR": true
+  },
+  "paths": {
+    "python": {
+      "path": "/opt/homebrew/bin/python3.12",
+      "realpath": "/opt/homebrew/Cellar/python@3.12/3.12.9/Frameworks/Python.framework/Versions/3.12/bin/python3.12",
+      "fingerprint": {
+        "size": 52640,
+        "sha256": "bfd21dde47f1c2d95b80a40a0ddc8652ba578aafa7c0681b62edb530c7edf040"
+      },
+      "shebang": null
+    },
+    "pytest": {
+      "path": "/opt/homebrew/bin/pytest",
+      "realpath": "/opt/homebrew/bin/pytest",
+      "fingerprint": {
+        "size": 259,
+        "sha256": "8135a3de9693f1c8c8b43be1c5b28f9873e1340d471ca7299aa532eb7fe2f1e4"
+      },
+      "shebang": "#!/opt/homebrew/opt/python@3.12/bin/python3.12"
+    },
+    "alembic": {
+      "path": "/opt/miniconda3/bin/alembic",
+      "realpath": "/opt/miniconda3/bin/alembic",
+      "fingerprint": {
+        "size": 223,
+        "sha256": "632272180cc3040e526f224d77fd79b46f2c6f0ed76e59d8928155d81cac6fed"
+      },
+      "shebang": "#!/opt/miniconda3/bin/python"
+    },
+    "ruff": {
+      "path": "/opt/miniconda3/bin/ruff",
+      "realpath": "/opt/miniconda3/bin/ruff",
+      "fingerprint": {
+        "size": 23851360,
+        "sha256": "0e79b9bbd82c564dafebac4b54391df85f73c25cabea3c8e6b47821d00944079"
+      },
+      "shebang": null
+    },
+    "mypy": {
+      "path": "/opt/miniconda3/bin/mypy",
+      "realpath": "/opt/miniconda3/bin/mypy",
+      "fingerprint": {
+        "size": 240,
+        "sha256": "cc600b31919e01330b9d6cf1b3f6635d69b40db0ebdfd211c78e6073c7c3b2b2"
+      },
+      "shebang": "#!/opt/miniconda3/bin/python"
+    },
+    "psql": {
+      "path": "/opt/homebrew/opt/postgresql@16/bin/psql",
+      "realpath": "/opt/homebrew/Cellar/postgresql@16/16.13/bin/psql",
+      "fingerprint": {
+        "size": 723760,
+        "sha256": "5d5b74a77b010cb7e199af2288e099c72c54b0f27039bf99233ed1a6eec76b66"
+      },
+      "shebang": null
+    }
+  },
+  "sys_executable": "/opt/homebrew/opt/python@3.12/bin/python3.12",
+  "libraries": {
+    "pytest": "9.1.1",
+    "pytest-asyncio": "1.4.0",
+    "asyncpg": "0.31.0",
+    "SQLAlchemy": "2.0.52",
+    "boto3": "1.43.93"
+  },
+  "versions": [
+    {
+      "argv": [
+        "/opt/homebrew/bin/python3.12",
+        "--version"
+      ],
+      "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+      "start": "2026-09-16T08:58:27.657328+00:00",
+      "end": "2026-09-16T08:58:27.667112+00:00",
+      "exit_code": 0,
+      "stdout": "Python 3.12.9\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/opt/homebrew/bin/pytest",
+        "--version"
+      ],
+      "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+      "start": "2026-09-16T08:58:27.667140+00:00",
+      "end": "2026-09-16T08:58:27.789431+00:00",
+      "exit_code": 0,
+      "stdout": "pytest 9.1.1\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/opt/miniconda3/bin/alembic",
+        "--version"
+      ],
+      "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+      "start": "2026-09-16T08:58:27.789466+00:00",
+      "end": "2026-09-16T08:58:28.268391+00:00",
+      "exit_code": 0,
+      "stdout": "alembic 1.18.5\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/opt/miniconda3/bin/ruff",
+        "--version"
+      ],
+      "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+      "start": "2026-09-16T08:58:28.268437+00:00",
+      "end": "2026-09-16T08:58:28.296796+00:00",
+      "exit_code": 0,
+      "stdout": "ruff 0.16.1\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/opt/miniconda3/bin/mypy",
+        "--version"
+      ],
+      "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+      "start": "2026-09-16T08:58:28.296833+00:00",
+      "end": "2026-09-16T08:58:28.550314+00:00",
+      "exit_code": 0,
+      "stdout": "mypy 2.3.0 (compiled: yes)\n",
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "/opt/homebrew/opt/postgresql@16/bin/psql",
+        "--version"
+      ],
+      "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+      "start": "2026-09-16T08:58:28.550402+00:00",
+      "end": "2026-09-16T08:58:28.584412+00:00",
+      "exit_code": 0,
+      "stdout": "psql (PostgreSQL) 16.13 (Homebrew)\n",
+      "stderr": ""
+    }
+  ],
+  "child_discovery": {
+    "argv": [
+      "/opt/homebrew/bin/python3.12",
+      "-c",
+      "import os,shutil,sys,json; print(json.dumps({'sys_executable':sys.executable,'PATH':os.environ['PATH'],'PYTHONPATH':os.environ['PYTHONPATH'],'which_alembic':shutil.which('alembic'),'which_pytest':shutil.which('pytest')}))"
+    ],
+    "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+    "start": "2026-09-16T08:58:28.584487+00:00",
+    "end": "2026-09-16T08:58:28.609533+00:00",
+    "exit_code": 0,
+    "stdout": "{\"sys_executable\": \"/opt/homebrew/opt/python@3.12/bin/python3.12\", \"PATH\": \"/opt/miniconda3/bin:/opt/homebrew/bin:/opt/homebrew/opt/postgresql@16/bin:/usr/bin:/bin:/usr/sbin:/sbin\", \"PYTHONPATH\": \"/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service:/opt/homebrew/lib/python3.12/site-packages\", \"which_alembic\": \"/opt/miniconda3/bin/alembic\", \"which_pytest\": \"/opt/miniconda3/bin/pytest\"}\n",
+    "stderr": ""
+  },
+  "heads": {
+    "argv": [
+      "alembic",
+      "-c",
+      "migrations/alembic.ini",
+      "heads"
+    ],
+    "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+    "start": "2026-09-16T08:58:28.609568+00:00",
+    "end": "2026-09-16T08:58:28.858707+00:00",
+    "exit_code": 0,
+    "stdout": "000000000004 (head)\n",
+    "stderr": ""
+  },
+  "approval_environment": "normal require_escalated exec_command; login=false; command-local PATH",
+  "future_test_argv": [
+    "/opt/homebrew/bin/pytest",
+    "-p",
+    "no:cacheprovider",
+    "-q",
+    "tests/test_evidence_services.py",
+    "-k",
+    "r1c05c01",
+    "-rs"
+  ],
+  "future_tests_executed": false
+}
