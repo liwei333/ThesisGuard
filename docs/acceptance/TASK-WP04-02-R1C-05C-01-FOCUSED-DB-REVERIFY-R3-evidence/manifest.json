@@ -1,0 +1,66 @@
+{
+  "task_id": "TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R3",
+  "run_id": "r3_e933fa17680041018f0e8d2284f5f1d6",
+  "verdict": "BLOCKED",
+  "artifacts": {
+    "after.json": {
+      "bytes": 5629,
+      "sha256": "5f1ade8e666b1d60bbe564eab608e7005b26dceda9ae2222095d1f2ceebb0383"
+    },
+    "alembic-heads.stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "alembic-heads.stdout.txt": {
+      "bytes": 20,
+      "sha256": "31d4749ed58dbcf9931529c93a38536a7b00c8842fd6090fdb1f0d549ed6a3c7"
+    },
+    "before.json": {
+      "bytes": 5221,
+      "sha256": "d2e4a6942a256187ad3268724a56becf7a7e0f20b4820b83214838c66962a27a"
+    },
+    "close-evidence.py": {
+      "bytes": 5336,
+      "sha256": "efc29c6ec98dc715a85a5f285ecca28f4390796e578b33c04a2bea2de28d1b2a"
+    },
+    "collect-only.stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "collect-only.stdout.txt": {
+      "bytes": 5156,
+      "sha256": "502363314da1f4285048a2350c1add25e46f3f99ca4fa082e710a90b07e787e5"
+    },
+    "collected-nodeids.json": {
+      "bytes": 4883,
+      "sha256": "489c28415046395a4ca30e4fd9e076b7df1abc9c8a73980d1d99339bd2595fcd"
+    },
+    "execution.log": {
+      "bytes": 10475,
+      "sha256": "bbf666a77b3a25f7473f1794e3311ef355dfbd6a2080c3d6a2cc03d79d4114bf"
+    },
+    "module-import-no-db-side-effect.stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "module-import-no-db-side-effect.stdout.txt": {
+      "bytes": 10,
+      "sha256": "c2b19bc459e35b962e9452635673c4eeb23d5fbe629cf7559fa6bafbe99a3d17"
+    },
+    "resources.jsonl": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tool-preflight.stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "tool-preflight.stdout.txt": {
+      "bytes": 284,
+      "sha256": "ae02874d55758c535796853c53f73fac82efd02ece166be7f32eb48e73e111d4"
+    }
+  },
+  "self_hash_excluded": true,
+  "original_helper_source_sha256_unverified": "88a8335cba23cdc29a36cfaae65fa72f809db32190b1711a0d7fc622185fd4c8",
+  "closure_helper_source": "close-evidence.py"
+}

@@ -1,0 +1,31 @@
+{
+  "artifacts": {
+    "after": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R2-evidence/after.json",
+    "before": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R2-evidence/before.json",
+    "execution_log": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R2-evidence/execution.log",
+    "manifest": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R2-evidence/manifest.json",
+    "resources": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R2-evidence/resources.jsonl"
+  },
+  "blocked_before_collect": true,
+  "blocked_before_create": true,
+  "collected_count": 0,
+  "create_sent_count": 0,
+  "created_at": "2026-09-16T12:33:38Z",
+  "fixed_hashes": {
+    "backend/evidence/errors.py": "3cf37eb3efbf4c7bf7ab3d4213e4ce9865f2b9209fdbeb3d6c267fe84b06d1ec",
+    "backend/evidence/services.py": "7ce76b02928019347625048e7d0acb523d74168cd6bbbdf03184163ac277f959",
+    "tests/evidence_pg_fixture.py": "bb84518f354f2f7752881fb529dcd6df31b58085bf32d6728c2ccf6998c3e9db",
+    "tests/test_evidence_pg_fixture_lifecycle.py": "3887a89945a770ed22bac5839ff6a61e5daf47cb05a8b0105d1cfce8f3c12fc7",
+    "tests/test_evidence_services.py": "c54e2306b7ec9625f0498faeebd8a23ceb55c6366769ac0d944f228e2aa84851"
+  },
+  "helper": {
+    "path": "/private/tmp/tg_wp04_02_r1c_05c_01_focused_db_reverify_r2_runner.py",
+    "sha256": "1f06d6684ebd72bfd3610524e4cec9ed117816ace3f55f69b777323cd026b826"
+  },
+  "main_actual_head": "554a87dce995c98d41021f6ae99c2173f4221c09",
+  "main_expected_head": "0dc2c5fd016af63f4836debf6ffa9d36b41a7703",
+  "reason": "MAIN_BASELINE_MISMATCH",
+  "run_id": "r2_44b108eb48744559910a43d1511678a7",
+  "task_id": "TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R2",
+  "verdict": "BLOCKED"
+}

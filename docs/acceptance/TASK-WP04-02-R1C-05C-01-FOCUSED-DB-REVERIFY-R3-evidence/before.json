@@ -1,0 +1,82 @@
+{
+  "candidate_gate": {
+    "branch": "codex/wp04-02-evidence-domain-service",
+    "fixed_hash_match": true,
+    "fixed_hashes": {
+      "backend/evidence/errors.py": "3cf37eb3efbf4c7bf7ab3d4213e4ce9865f2b9209fdbeb3d6c267fe84b06d1ec",
+      "backend/evidence/services.py": "7ce76b02928019347625048e7d0acb523d74168cd6bbbdf03184163ac277f959",
+      "tests/evidence_pg_fixture.py": "bb84518f354f2f7752881fb529dcd6df31b58085bf32d6728c2ccf6998c3e9db",
+      "tests/test_evidence_pg_fixture_lifecycle.py": "3887a89945a770ed22bac5839ff6a61e5daf47cb05a8b0105d1cfce8f3c12fc7",
+      "tests/test_evidence_services.py": "c54e2306b7ec9625f0498faeebd8a23ceb55c6366769ac0d944f228e2aa84851"
+    },
+    "head": "e942cbcc9e0b5d95a6c7ee46d4d74ee90ff03ad4",
+    "parent": "af4f2cbbb0a50bd6c215bcaa78dd9fcd98414cc8",
+    "porcelain": [],
+    "status_short": "## codex/wp04-02-evidence-domain-service...origin/codex/wp04-02-evidence-domain-service"
+  },
+  "fixed_candidate_hashes_expected": {
+    "backend/evidence/errors.py": "3cf37eb3efbf4c7bf7ab3d4213e4ce9865f2b9209fdbeb3d6c267fe84b06d1ec",
+    "backend/evidence/services.py": "7ce76b02928019347625048e7d0acb523d74168cd6bbbdf03184163ac277f959",
+    "tests/evidence_pg_fixture.py": "bb84518f354f2f7752881fb529dcd6df31b58085bf32d6728c2ccf6998c3e9db",
+    "tests/test_evidence_pg_fixture_lifecycle.py": "3887a89945a770ed22bac5839ff6a61e5daf47cb05a8b0105d1cfce8f3c12fc7",
+    "tests/test_evidence_services.py": "c54e2306b7ec9625f0498faeebd8a23ceb55c6366769ac0d944f228e2aa84851"
+  },
+  "forbidden_environment": {
+    "TG_R1C02_REPLAY_PRIOR": null,
+    "TG_R1C_REPLAY_BASELINE": null,
+    "TG_TEST_ADMIN_DATABASE_URL": null
+  },
+  "helper_source_sha256": "88a8335cba23cdc29a36cfaae65fa72f809db32190b1711a0d7fc622185fd4c8",
+  "main_gate": {
+    "anchor": "554a87dce995c98d41021f6ae99c2173f4221c09",
+    "anchor_is_ancestor": true,
+    "blocking_classifications": [],
+    "classifications": [
+      {
+        "classification": "NON_BLOCKING_EXTERNAL_CHANGE",
+        "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R2-FEEDBACK-REVIEW-acceptance.md"
+      },
+      {
+        "classification": "NON_BLOCKING_EXTERNAL_CHANGE",
+        "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R2-acceptance.md"
+      },
+      {
+        "classification": "NON_BLOCKING_EXTERNAL_CHANGE",
+        "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R2-evidence"
+      },
+      {
+        "classification": "NON_BLOCKING_EXTERNAL_CHANGE",
+        "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R3-evidence"
+      },
+      {
+        "classification": "NON_BLOCKING_EXTERNAL_CHANGE",
+        "path": "docs/prompts/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R3.md"
+      }
+    ],
+    "committed_diff_name_status": "",
+    "head": "554a87dce995c98d41021f6ae99c2173f4221c09",
+    "status_porcelain": [
+      "?? docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R2-FEEDBACK-REVIEW-acceptance.md",
+      "?? docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R2-acceptance.md",
+      "?? docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R2-evidence/",
+      "?? docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R3-evidence/",
+      "?? docs/prompts/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R3.md"
+    ],
+    "status_short": "## main...origin/main\n?? docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R2-FEEDBACK-REVIEW-acceptance.md\n?? docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R2-acceptance.md\n?? docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R2-evidence/\n?? docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R3-evidence/\n?? docs/prompts/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R3.md"
+  },
+  "pinned_main_hashes": {
+    "docs/WP04_EVIDENCE_CORRECTION_POLICY_ADDENDUM_2026-09-16.md": "af345e2604497171dc2d2ef13489ec3cffa1528caa5175c2ccf245b6a987a955",
+    "docs/WP04_EVIDENCE_DOMAIN_CONTRACT.md": "b179ecc6ea60ffed75f7179a2d36e47ad2b55153f6d4fa62b8be7e4926fd1288",
+    "docs/acceptance/TASK-TEST-INFRA-PG-FIXTURE-LIFECYCLE-R1-INDEPENDENT-REVERIFY-acceptance.md": "daf2779bda9602a7397ffc01398b940b704091a3529015475542d5e7ad66de89",
+    "docs/acceptance/TASK-WP04-02-R1C-05C-01-INDEPENDENT-REVERIFY-R1-evidence/phase-a-20260916-exact-cleanup-plan.json": "635ba4aad0468c15b4360733c784d52f4430f03477a14ef8a271a1e32bada360"
+  },
+  "pinned_main_hashes_expected": {
+    "docs/WP04_EVIDENCE_CORRECTION_POLICY_ADDENDUM_2026-09-16.md": "af345e2604497171dc2d2ef13489ec3cffa1528caa5175c2ccf245b6a987a955",
+    "docs/WP04_EVIDENCE_DOMAIN_CONTRACT.md": "b179ecc6ea60ffed75f7179a2d36e47ad2b55153f6d4fa62b8be7e4926fd1288",
+    "docs/acceptance/TASK-TEST-INFRA-PG-FIXTURE-LIFECYCLE-R1-INDEPENDENT-REVERIFY-acceptance.md": "daf2779bda9602a7397ffc01398b940b704091a3529015475542d5e7ad66de89",
+    "docs/acceptance/TASK-WP04-02-R1C-05C-01-INDEPENDENT-REVERIFY-R1-evidence/phase-a-20260916-exact-cleanup-plan.json": "635ba4aad0468c15b4360733c784d52f4430f03477a14ef8a271a1e32bada360"
+  },
+  "run_id": "r3_e933fa17680041018f0e8d2284f5f1d6",
+  "started_at": "2026-09-17T00:27:56.204497+00:00",
+  "task_id": "TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R3"
+}

@@ -1,0 +1,289 @@
+{
+  "candidate": {
+    "branch": "codex/wp04-02-evidence-domain-service",
+    "branch_status": "## codex/wp04-02-evidence-domain-service...origin/codex/wp04-02-evidence-domain-service",
+    "head": "e942cbcc9e0b5d95a6c7ee46d4d74ee90ff03ad4",
+    "parent": "af4f2cbbb0a50bd6c215bcaa78dd9fcd98414cc8",
+    "path": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service"
+  },
+  "candidate_catalog_before": [
+    {
+      "name": "postgres",
+      "oid": 5,
+      "owner": "thesisguard"
+    },
+    {
+      "name": "template0",
+      "oid": 4,
+      "owner": "thesisguard"
+    },
+    {
+      "name": "template1",
+      "oid": 1,
+      "owner": "thesisguard"
+    },
+    {
+      "name": "tg_wp04_service_01c0f5f8121e450b9c71ace44928c802",
+      "oid": 8325396,
+      "owner": "thesisguard"
+    },
+    {
+      "name": "tg_wp04_service_0685f5c993834a349abaf61fc3e3b657",
+      "oid": 8325415,
+      "owner": "thesisguard"
+    },
+    {
+      "name": "tg_wp04_service_11e6867d5f3542b293cdfd4a4fead7cf",
+      "oid": 8325419,
+      "owner": "thesisguard"
+    },
+    {
+      "name": "tg_wp04_service_13471ec2ece84b93b8407e29c6054a6f",
+      "oid": 8325405,
+      "owner": "thesisguard"
+    },
+    {
+      "name": "tg_wp04_service_1c5af01292b24f1aaec6fd4637403885",
+      "oid": 8325409,
+      "owner": "thesisguard"
+    },
+    {
+      "name": "tg_wp04_service_1ddedcea542a49f796be0bda8b9ac972",
+      "oid": 8325404,
+      "owner": "thesisguard"
+    },
+    {
+      "name": "tg_wp04_service_1f6901c614364010b70a6ea69fa01385",
+      "oid": 8325391,
+      "owner": "thesisguard"
+    },
+    {
+      "name": "tg_wp04_service_1fb496c5fa934a4b96d850d08ae192da",
+      "oid": 8325387,
+      "owner": "thesisguard"
+    },
+    {
+      "name": "tg_wp04_service_28cbba54558442e4b7bff6179cf71746",
+      "oid": 8325421,
+      "owner": "thesisguard"
+    },
+    {
+      "name": "tg_wp04_service_29b5f21b05e64c35bcfba641816cee26",
+      "oid": 8325411,
+      "owner": "thesisguard"
+    },
+    {
+      "name": "tg_wp04_service_3cf61d305a374021b958d8c32c3cf5a0",
+      "oid": 8325399,
+      "owner": "thesisguard"
+    },
+    {
+      "name": "tg_wp04_service_3f430b834ec8486a892dad86209b9c48",
+      "oid": 8325389,
+      "owner": "thesisguard"
+    },
+    {
+      "name": "tg_wp04_service_430bc500937c40f19fd82fba561d6087",
+      "oid": 8325384,
+      "owner": "thesisguard"
+    },
+    {
+      "name": "tg_wp04_service_45c63d3d38894f7ea7643f10d250f370",
+      "oid": 8325390,
+      "owner": "thesisguard"
+    },
+    {
+      "name": "tg_wp04_service_470ab881404544a6995142c846276e47",
+      "oid": 8325410,
+      "owner": "thesisguard"
+    },
+    {
+      "name": "tg_wp04_service_4f008d22a8154f82954820a749edfeff",
+      "oid": 6893828,
+      "owner": "thesisguard"
+    },
+    {
+      "name": "tg_wp04_service_534131d65bb74a449f6eaf7c31648b21",
+      "oid": 8325407,
+      "owner": "thesisguard"
+    },
+    {
+      "name": "tg_wp04_service_53f41488c0dd47d88d4591bec041a7a7",
+      "oid": 8325416,
+      "owner": "thesisguard"
+    },
+    {
+      "name": "tg_wp04_service_58cbbcc50bb44e5aad52b85c1c56c155",
+      "oid": 8325400,
+      "owner": "thesisguard"
+    },
+    {
+      "name": "tg_wp04_service_5d4c8451727743f79f7abdb40a4d88dc",
+      "oid": 6893827,
+      "owner": "thesisguard"
+    },
+    {
+      "name": "tg_wp04_service_5f625721e89d4e728e9bd0d64d93dd17",
+      "oid": 8325412,
+      "owner": "thesisguard"
+    },
+    {
+      "name": "tg_wp04_service_69104f67fa53491589b4701388407499",
+      "oid": 8325393,
+      "owner": "thesisguard"
+    },
+    {
+      "name": "tg_wp04_service_737b02e3182f41b7a963126331b81279",
+      "oid": 8325398,
+      "owner": "thesisguard"
+    },
+    {
+      "name": "tg_wp04_service_758b5d420b0e400089a7b4b243cc3b0e",
+      "oid": 8325403,
+      "owner": "thesisguard"
+    },
+    {
+      "name": "tg_wp04_service_762754d8160247888e78b9417afedb2c",
+      "oid": 8325406,
+      "owner": "thesisguard"
+    },
+    {
+      "name": "tg_wp04_service_79a475ac90224a4b99082d145d292c15",
+      "oid": 8325395,
+      "owner": "thesisguard"
+    },
+    {
+      "name": "tg_wp04_service_81815e010a3d4f00973b55e8c8f1c856",
+      "oid": 8325402,
+      "owner": "thesisguard"
+    },
+    {
+      "name": "tg_wp04_service_90a93dc7364d4d9d92520f20675aed5c",
+      "oid": 8325383,
+      "owner": "thesisguard"
+    },
+    {
+      "name": "tg_wp04_service_90be9919c0ff4891a0350ae6d28f5226",
+      "oid": 8325401,
+      "owner": "thesisguard"
+    },
+    {
+      "name": "tg_wp04_service_9725b95671f94617a4f29806a20db7a8",
+      "oid": 8325385,
+      "owner": "thesisguard"
+    },
+    {
+      "name": "tg_wp04_service_99f9613e82ea4c738deef31efbef215d",
+      "oid": 8325388,
+      "owner": "thesisguard"
+    },
+    {
+      "name": "tg_wp04_service_b6f8802bd7e243eba1e6e0e138b40ebe",
+      "oid": 8325397,
+      "owner": "thesisguard"
+    },
+    {
+      "name": "tg_wp04_service_bed9e7cc62514f188fe67180264772eb",
+      "oid": 8325408,
+      "owner": "thesisguard"
+    },
+    {
+      "name": "tg_wp04_service_c52791461a844e15b463397e1670aeb6",
+      "oid": 8325414,
+      "owner": "thesisguard"
+    },
+    {
+      "name": "tg_wp04_service_ca3fc690d42142278b9dd2b8e76de967",
+      "oid": 6893825,
+      "owner": "thesisguard"
+    },
+    {
+      "name": "tg_wp04_service_d71be47c791b40788f67cdd0958c50e9",
+      "oid": 8325417,
+      "owner": "thesisguard"
+    },
+    {
+      "name": "tg_wp04_service_dc37c69cb5354bd18e5a3dcd01812e31",
+      "oid": 8325420,
+      "owner": "thesisguard"
+    },
+    {
+      "name": "tg_wp04_service_dd591583d60d4f8287f4adce3d5d1cfe",
+      "oid": 6893826,
+      "owner": "thesisguard"
+    },
+    {
+      "name": "tg_wp04_service_de58a56a5edf406eb94693a9b9e83dba",
+      "oid": 8325382,
+      "owner": "thesisguard"
+    },
+    {
+      "name": "tg_wp04_service_f33a4b72076e4499899debaf5e88885b",
+      "oid": 8325392,
+      "owner": "thesisguard"
+    },
+    {
+      "name": "tg_wp04_service_f510786c26d24a2c98218f8949e8e7fb",
+      "oid": 8325418,
+      "owner": "thesisguard"
+    },
+    {
+      "name": "tg_wp04_service_f5e42809dab54b8ca01a35a34f4ce0cb",
+      "oid": 8325386,
+      "owner": "thesisguard"
+    },
+    {
+      "name": "tg_wp04_service_f62a9d9bee2147b7a6fbcf4ecc3d851f",
+      "oid": 8325394,
+      "owner": "thesisguard"
+    },
+    {
+      "name": "tg_wp04_service_f99981ab17b74ba7a1028c973689388c",
+      "oid": 8325422,
+      "owner": "thesisguard"
+    },
+    {
+      "name": "tg_wp04_service_fa9205d9393e4de0a9bf75eca36ffc1b",
+      "oid": 8325413,
+      "owner": "thesisguard"
+    },
+    {
+      "name": "thesisguard",
+      "oid": 16384,
+      "owner": "thesisguard"
+    }
+  ],
+  "commands": [],
+  "fixed_hash_match": true,
+  "fixed_hashes": {
+    "backend/evidence/errors.py": "3cf37eb3efbf4c7bf7ab3d4213e4ce9865f2b9209fdbeb3d6c267fe84b06d1ec",
+    "backend/evidence/services.py": "7ce76b02928019347625048e7d0acb523d74168cd6bbbdf03184163ac277f959",
+    "tests/evidence_pg_fixture.py": "bb84518f354f2f7752881fb529dcd6df31b58085bf32d6728c2ccf6998c3e9db",
+    "tests/test_evidence_pg_fixture_lifecycle.py": "3887a89945a770ed22bac5839ff6a61e5daf47cb05a8b0105d1cfce8f3c12fc7",
+    "tests/test_evidence_services.py": "c54e2306b7ec9625f0498faeebd8a23ceb55c6366769ac0d944f228e2aa84851"
+  },
+  "forbidden_environment": {
+    "TG_R1C02_REPLAY_PRIOR": null,
+    "TG_R1C_REPLAY_BASELINE": null,
+    "TG_TEST_ADMIN_DATABASE_URL": null
+  },
+  "main": {
+    "branch_status": "## main...origin/main",
+    "head": "554a87dce995c98d41021f6ae99c2173f4221c09",
+    "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard"
+  },
+  "original_tg_environment": {},
+  "run_id": "r2_44b108eb48744559910a43d1511678a7",
+  "started_at": "2026-09-16T12:32:35.018753+00:00",
+  "task_id": "TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R2",
+  "unknown_plan_sha256": "635ba4aad0468c15b4360733c784d52f4430f03477a14ef8a271a1e32bada360",
+  "unknown_plan_summary": {
+    "confirmed_cleanup_count": 0,
+    "execute_now": "NO DATABASE CLEANUP; NO PHASE B; NO DB TESTS",
+    "host": "127.0.0.1",
+    "port": 15432,
+    "proposed_mutating_operations": [],
+    "status": "BLOCKED",
+    "unknown_count": 45
+  }
+}

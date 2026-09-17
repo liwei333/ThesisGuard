@@ -1,0 +1,30 @@
+{
+  "catalog_identity_unchanged_after_real": "NOT_RUN",
+  "collect_count": 0,
+  "create_sent_count": 0,
+  "dropped_count": 0,
+  "ended_at": "2026-09-16T12:33:38Z",
+  "focused_real_postgres": {
+    "executed": false,
+    "reason": "BLOCKED_BEFORE_CREATE_MAIN_BASELINE_MISMATCH"
+  },
+  "ledger_summary": {
+    "attempt_count": 0,
+    "event_count": 0,
+    "event_counts": {}
+  },
+  "main": {
+    "actual_head": "554a87dce995c98d41021f6ae99c2173f4221c09",
+    "expected_head": "0dc2c5fd016af63f4836debf6ffa9d36b41a7703",
+    "status": "BASELINE_MISMATCH"
+  },
+  "resources": {
+    "historical_unknown_count": 45,
+    "historical_unknown_disposition": "PRESERVED_UNTOUCHED",
+    "new_disposable_databases_created": 0,
+    "remaining_new_resources": []
+  },
+  "run_id": "r2_44b108eb48744559910a43d1511678a7",
+  "task_id": "TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R2",
+  "verdict": "BLOCKED"
+}

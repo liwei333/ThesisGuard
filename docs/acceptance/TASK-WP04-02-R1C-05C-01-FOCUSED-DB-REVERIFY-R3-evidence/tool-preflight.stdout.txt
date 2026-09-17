@@ -1,0 +1,1 @@
+{"python": "/opt/homebrew/opt/python@3.12/bin/python3.12", "python_version": "3.12.9", "pytest_explicit": "/opt/homebrew/bin/pytest", "pytest_version": "pytest 9.1.1", "alembic_parent": "/opt/miniconda3/bin/alembic", "alembic_child": "{\"alembic\": \"/opt/miniconda3/bin/alembic\"}"}
