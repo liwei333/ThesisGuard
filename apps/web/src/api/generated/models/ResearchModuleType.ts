@@ -3,7 +3,7 @@
 /* tslint:disable */
 /* eslint-disable */
 /**
- * Supported Research module types.
+ * Supported Research module types. 与 RESEARCH_MODULE_TYPES 一一对应。
  */
 export enum ResearchModuleType {
     COMPANY = 'COMPANY',

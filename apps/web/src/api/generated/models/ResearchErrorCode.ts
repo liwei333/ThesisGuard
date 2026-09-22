@@ -4,6 +4,9 @@
 /* eslint-disable */
 /**
  * Stable public Research API error codes.
+ *
+ * 错误码值与领域服务异常的 .code 属性保持一致，
+ * API 层据此构造 ResearchErrorResponse 返回给客户端。
  */
 export enum ResearchErrorCode {
     INSTRUMENT_NOT_FOUND = 'INSTRUMENT_NOT_FOUND',
