@@ -1,0 +1,12 @@
+{
+  "candidate_head": "e942cbcc9e0b5d95a6c7ee46d4d74ee90ff03ad4",
+  "candidate_status_short": "",
+  "harness_head": "f9a41ea045d3ab8ad18db32d65a8484d6c96ec25",
+  "harness_status_short": "",
+  "main_head": "77abbe72decfe5437ffed90521b8101f1eae1153",
+  "main_index_empty": true,
+  "main_tracked_diff_empty": true,
+  "repair_branch_head": "77abbe72decfe5437ffed90521b8101f1eae1153",
+  "repair_index_empty": true,
+  "stage_commit_merge_rebase_push_reset_clean_stash_prune_performed": false
+}

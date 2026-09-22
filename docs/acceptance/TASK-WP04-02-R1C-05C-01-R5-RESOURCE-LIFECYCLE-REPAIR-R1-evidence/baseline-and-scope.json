@@ -1,0 +1,25 @@
+{
+  "baseline": {
+    "main": "77abbe72decfe5437ffed90521b8101f1eae1153",
+    "main_parent": "cc55162341fd99653b4ac6cd8f81da043cf7484c",
+    "origin_main": "77abbe72decfe5437ffed90521b8101f1eae1153",
+    "tracked_diff_empty": true,
+    "index_empty": true
+  },
+  "fixed_input_sha256": {
+    "r5_acceptance": "7a76be1fa3dbc8daf18e3d50699a17eb357b67579eb110aff822694ace026d75",
+    "r5_manifest": "a10316c137050a9af53292f5043dd30129c9f10213094dd6fafd683967ebb014",
+    "tests/evidence_pg_fixture.py": "6639a61295b18b412a8c18b71efc99f0389989dd39a0c265ad11605ffce327e3",
+    "tests/test_evidence_pg_fixture_lifecycle.py": "f6fe68de1cf37ebd00857960c12e35ed409012939a53063f95d1cde9592f7c13"
+  },
+  "repair_worktree": {
+    "branch": "codex/wp04-02-r5-resource-lifecycle-repair-r1",
+    "head": "77abbe72decfe5437ffed90521b8101f1eae1153",
+    "path": "/Users/qianduoduo/Desktop/AI_app/codex-wp04-02-r5-resource-lifecycle-repair-r1"
+  },
+  "tracked_files_modified": [
+    "tests/evidence_pg_fixture.py",
+    "tests/test_evidence_pg_fixture_lifecycle.py"
+  ],
+  "protected_existing_untracked_paths_touched": false
+}

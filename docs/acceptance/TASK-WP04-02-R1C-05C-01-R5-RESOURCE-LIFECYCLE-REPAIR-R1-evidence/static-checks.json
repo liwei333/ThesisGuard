@@ -1,0 +1,26 @@
+{
+  "checks": [
+    {
+      "command": "RUFF_CACHE_DIR=/private/tmp/tg-r5-resource-lifecycle-repair-ruff /opt/miniconda3/bin/ruff check tests/evidence_pg_fixture.py tests/test_evidence_pg_fixture_lifecycle.py",
+      "exit_code": 0,
+      "output": "All checks passed!"
+    },
+    {
+      "command": "RUFF_CACHE_DIR=/private/tmp/tg-r5-resource-lifecycle-repair-ruff /opt/miniconda3/bin/ruff format --check tests/evidence_pg_fixture.py tests/test_evidence_pg_fixture_lifecycle.py",
+      "exit_code": 0,
+      "output": "2 files already formatted"
+    },
+    {
+      "command": "PYTHONPYCACHEPREFIX=/private/tmp/tg-r5-resource-lifecycle-repair-pyc /opt/homebrew/bin/python3.12 -m compileall -q tests/evidence_pg_fixture.py tests/test_evidence_pg_fixture_lifecycle.py",
+      "exit_code": 0,
+      "output": ""
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0,
+      "output": ""
+    }
+  ],
+  "executed_at_utc": "2026-09-22T07:45:33Z",
+  "note": "An earlier sandboxed Ruff attempt could not create its default cache; the recorded checks use a task-specific cache under /private/tmp."
+}

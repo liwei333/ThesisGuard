@@ -1,0 +1,126 @@
+{
+  "all_created_dropped_identity_fields_match": true,
+  "all_run_ids_match": true,
+  "business_test_nodes_executed": 0,
+  "cleanup_failed": 0,
+  "confirmed_created_equals_dropped": true,
+  "counts": {
+    "admin_closed": 4,
+    "attempt": 4,
+    "catalog_after": 4,
+    "catalog_before": 4,
+    "cleanup_admin_closed": 4,
+    "cleanup_checked": 4,
+    "cleanup_identity_reconfirmed": 4,
+    "create_sent": 4,
+    "created": 4,
+    "declared_scenario": 4,
+    "drop_sent": 4,
+    "dropped": 4,
+    "engine_disposed": 2,
+    "migrated": 3,
+    "primary_error": 3,
+    "ready": 2,
+    "target_checked": 4,
+    "tools_checked": 4
+  },
+  "create_budget": {
+    "create_sent": 4,
+    "maximum": 5,
+    "within_budget": true
+  },
+  "create_failed": 0,
+  "current_run_residual": 0,
+  "current_run_unknown": 0,
+  "ledger_rows": 66,
+  "resources": [
+    {
+      "attempt_id": "b7b8f6cb75424e4cb7e9e198e0ff5911",
+      "created_dropped_exact_match": true,
+      "events": [
+        "attempt",
+        "tools_checked",
+        "target_checked",
+        "create_sent",
+        "created",
+        "admin_closed",
+        "migrated",
+        "ready",
+        "engine_disposed",
+        "cleanup_checked",
+        "cleanup_identity_reconfirmed",
+        "drop_sent",
+        "dropped",
+        "cleanup_admin_closed"
+      ],
+      "name": "tg_wp04_service_b7b8f6cb75424e4cb7e9e198e0ff5911",
+      "residual": false
+    },
+    {
+      "attempt_id": "1bee92439b7e4de598b733f99ac87141",
+      "created_dropped_exact_match": true,
+      "events": [
+        "attempt",
+        "tools_checked",
+        "target_checked",
+        "create_sent",
+        "created",
+        "admin_closed",
+        "primary_error",
+        "cleanup_checked",
+        "cleanup_identity_reconfirmed",
+        "drop_sent",
+        "dropped",
+        "cleanup_admin_closed"
+      ],
+      "name": "tg_wp04_service_1bee92439b7e4de598b733f99ac87141",
+      "residual": false
+    },
+    {
+      "attempt_id": "13293e34bc2a4e299f48095e966b8c18",
+      "created_dropped_exact_match": true,
+      "events": [
+        "attempt",
+        "tools_checked",
+        "target_checked",
+        "create_sent",
+        "created",
+        "admin_closed",
+        "migrated",
+        "primary_error",
+        "cleanup_checked",
+        "cleanup_identity_reconfirmed",
+        "drop_sent",
+        "dropped",
+        "cleanup_admin_closed"
+      ],
+      "name": "tg_wp04_service_13293e34bc2a4e299f48095e966b8c18",
+      "residual": false
+    },
+    {
+      "attempt_id": "886f8040b200479abb2587078de37f8d",
+      "created_dropped_exact_match": true,
+      "events": [
+        "attempt",
+        "tools_checked",
+        "target_checked",
+        "create_sent",
+        "created",
+        "admin_closed",
+        "migrated",
+        "ready",
+        "primary_error",
+        "engine_disposed",
+        "cleanup_checked",
+        "cleanup_identity_reconfirmed",
+        "drop_sent",
+        "dropped",
+        "cleanup_admin_closed"
+      ],
+      "name": "tg_wp04_service_886f8040b200479abb2587078de37f8d",
+      "residual": false
+    }
+  ],
+  "run_id": "a085753a6d144ae98b287d6a98547621",
+  "selected_test_scope": "tests/test_evidence_pg_fixture_lifecycle.py -k real_postgres"
+}

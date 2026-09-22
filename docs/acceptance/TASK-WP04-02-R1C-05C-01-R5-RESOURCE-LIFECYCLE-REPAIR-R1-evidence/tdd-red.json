@@ -1,0 +1,14 @@
+{
+  "command": "/opt/homebrew/bin/pytest -p no:cacheprovider tests/test_evidence_pg_fixture_lifecycle.py::test_transient_client_backend_drains_before_exact_drop -q",
+  "executed_at_utc": "2026-09-22T07:40:13Z",
+  "exit_code": 1,
+  "fixture_implementation_modified_before_run": false,
+  "observed": {
+    "collected": 1,
+    "failed": 1,
+    "failure_type": "EvidencePGCleanupError",
+    "reason": "The baseline implementation stopped after the first client-backend observation of 1 and did not recheck the deterministic [1, 0] sequence.",
+    "drop_sent": false
+  },
+  "test": "tests/test_evidence_pg_fixture_lifecycle.py::test_transient_client_backend_drains_before_exact_drop"
+}

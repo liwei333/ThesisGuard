@@ -1,0 +1,10 @@
+{
+  "modified_sha256": {
+    "tests/evidence_pg_fixture.py": "894630daace9489e19534cdff9b8b4f95b5c33e31bdce7452512ff76a584b42b",
+    "tests/test_evidence_pg_fixture_lifecycle.py": "5c8e4ed5a9cfdadb00ebde21fa3057a2687b05aa34b0f9bba54160c57a10de36"
+  },
+  "original_r5_material_sha256_after_repair": {
+    "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-acceptance.md": "7a76be1fa3dbc8daf18e3d50699a17eb357b67579eb110aff822694ace026d75",
+    "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/manifest.json": "a10316c137050a9af53292f5043dd30129c9f10213094dd6fafd683967ebb014"
+  }
+}

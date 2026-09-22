@@ -1,0 +1,11 @@
+{
+  "command": "/opt/homebrew/bin/pytest -p no:cacheprovider tests/test_evidence_pg_fixture_lifecycle.py -k 'not real_postgres' -q",
+  "executed_at_utc": "2026-09-22T07:45:33Z",
+  "exit_code": 0,
+  "observed": {
+    "collected": 47,
+    "deselected_real_postgres": 4,
+    "passed": 43,
+    "warnings": 2
+  }
+}

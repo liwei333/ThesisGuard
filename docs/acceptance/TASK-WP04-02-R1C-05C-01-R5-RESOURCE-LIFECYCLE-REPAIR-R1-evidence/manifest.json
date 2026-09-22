@@ -1,0 +1,100 @@
+{
+  "excluded": [
+    "manifest.json"
+  ],
+  "file_count": 18,
+  "files": [
+    {
+      "bytes": 1107,
+      "path": "baseline-and-scope.json",
+      "sha256": "83cf12988ab22ce7e8f19607808836ed64531d1baa9c06bb29a7d176b604dcc1"
+    },
+    {
+      "bytes": 425,
+      "path": "credential-scan.json",
+      "sha256": "4ccc6faa2cc0f81c0f2a72ae989d99e319f18379660ad7e21c9ea5ac15bcea06"
+    },
+    {
+      "bytes": 310,
+      "path": "deterministic-lifecycle.json",
+      "sha256": "e986acc5e9e84b35ee9879318f2b3088bd3414ce02d0ffb3746d1bd8cc2ce4a2"
+    },
+    {
+      "bytes": 488,
+      "path": "git-identity-closure.json",
+      "sha256": "87b6c873dd135a699123a05da4d53b5a183c8dced5c7785e50481607c96fa184"
+    },
+    {
+      "bytes": 3218,
+      "path": "ledger-audit.json",
+      "sha256": "15c28b2627fc825a32a36e783a9af414300b3b7c242cbd85b6c648478809f7b4"
+    },
+    {
+      "bytes": 7810,
+      "path": "real-catalog-after.json",
+      "sha256": "7b00e6e2e26b0d0fa7d49167dde3d548821039cbcba8927cf59284b2f7024ca4"
+    },
+    {
+      "bytes": 7741,
+      "path": "real-catalog-before.json",
+      "sha256": "486666addb1964f6854546e03402caa5990758e5ccff7dcaa19e538de0eb5571"
+    },
+    {
+      "bytes": 526,
+      "path": "real-pytest.meta.json",
+      "sha256": "d6f9a7ad62800f0622ca1199aaefb1280dce5b629b659f76e9de9e279c580ec5"
+    },
+    {
+      "bytes": 0,
+      "path": "real-pytest.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 1474,
+      "path": "real-pytest.stdout.txt",
+      "sha256": "e0e59997a46e52bea6bfe5df30187e07bc77ece78e315badbad30dca3adb098a"
+    },
+    {
+      "bytes": 19670,
+      "path": "residual-recovery.json",
+      "sha256": "04498b6e3b6c67e46f756d7c6d8fd6cfc19ef5a89b49bb5429cab92510532559"
+    },
+    {
+      "bytes": 67218,
+      "path": "resources.jsonl",
+      "sha256": "f456cdfc3e41fd59e224f32005607e2548917213893f1927723f603ef8dbf94c"
+    },
+    {
+      "bytes": 1400,
+      "path": "root-cause.json",
+      "sha256": "ff8aa67f3596097b1b4bdb2b19789898cdb62274a2875dd1efca1f0b8ec88210"
+    },
+    {
+      "bytes": 618,
+      "path": "source-hashes.json",
+      "sha256": "1b9b0e3f2e01336277aea077d87abf1d6702d61d3fc4dae0e9e89ea39a2e2dce"
+    },
+    {
+      "bytes": 1106,
+      "path": "static-checks.json",
+      "sha256": "c5bae4380b47cc4883de6eab8e228834bfa9c10145381ba5d58be1d6385bbef0"
+    },
+    {
+      "bytes": 374,
+      "path": "tdd-green.json",
+      "sha256": "f379053f9fd3df273cd7edd659f7acaa74c62d33a5f9932df4030a65452da0c7"
+    },
+    {
+      "bytes": 320,
+      "path": "tdd-red-output.txt",
+      "sha256": "aa8abeb07074514e343ab20d127441e8adc2306412a4aa622efcd86b0151dde7"
+    },
+    {
+      "bytes": 681,
+      "path": "tdd-red.json",
+      "sha256": "68df2f1169b3060676db49f598c432fec03361c0284b2da5ff562e0e178e97da"
+    }
+  ],
+  "generated_at_utc": "2026-09-22T07:56:32.832504+00:00",
+  "root": "TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-R1-evidence"
+}

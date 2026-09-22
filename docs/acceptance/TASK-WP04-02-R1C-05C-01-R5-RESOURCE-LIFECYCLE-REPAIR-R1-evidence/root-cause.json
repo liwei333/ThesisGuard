@@ -1,0 +1,11 @@
+{
+  "conclusion": "The fixture performed one immediate client-backend observation after awaited engine disposal and treated any nonzero value as persistent. This converts a short teardown/close visibility window into a cleanup failure even when the backend subsequently disappears.",
+  "evidence": [
+    "R5 recorded engine_disposed at 2026-09-22T06:41:26.576454+00:00 and cleanup_checked connections=1 at 2026-09-22T06:41:26.595285+00:00, about 19 ms later.",
+    "The R5 after-catalog observation later contained the exact database identity but no task-prefix client session.",
+    "The db fixture closes and rolls back before its dependency pg_sessionmaker exits; the failing test also closes its explicit fresh session through an async context manager.",
+    "The deterministic [1, 0] counterexample failed on the baseline because only the first value was observed, then passed after bounded recheck was introduced."
+  ],
+  "non_attribution": "The available R5 evidence did not retain backend PID/application metadata for the transient connection, so this repair does not claim that SQLAlchemy, asyncpg, pytest-asyncio, or an external client was uniquely responsible.",
+  "repair_boundary": "The change only permits exact DROP after a monotonic bounded drain observes zero and the exact OID/owner/owner_oid identity is reconfirmed. Persistent, failed-query, or drift cases remain fail closed."
+}

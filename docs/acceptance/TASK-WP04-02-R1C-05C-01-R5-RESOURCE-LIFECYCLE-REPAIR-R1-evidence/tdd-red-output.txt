@@ -1,0 +1,7 @@
+collected 1 item
+tests/test_evidence_pg_fixture_lifecycle.py F [100%]
+
+FAILED tests/test_evidence_pg_fixture_lifecycle.py::test_transient_client_backend_drains_before_exact_drop
+EvidencePGCleanupError: Evidence PostgreSQL cleanup failed; errors=['database_cleanup:EvidencePGCleanupError']
+
+1 failed, 2 warnings in 0.36s

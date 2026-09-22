@@ -1,0 +1,18 @@
+{
+  "command": [
+    "/opt/homebrew/bin/pytest",
+    "-p",
+    "no:cacheprovider",
+    "tests/test_evidence_pg_fixture_lifecycle.py",
+    "-k",
+    "real_postgres",
+    "-q"
+  ],
+  "credential_userinfo_redacted": false,
+  "cwd": "/Users/qianduoduo/Desktop/AI_app/codex-wp04-02-r5-resource-lifecycle-repair-r1",
+  "ended_at_utc": "2026-09-22T07:49:29.854653+00:00",
+  "real_pytest_invocation_count": 1,
+  "returncode": 0,
+  "run_id": "a085753a6d144ae98b287d6a98547621",
+  "started_at_utc": "2026-09-22T07:49:20.371704+00:00"
+}
