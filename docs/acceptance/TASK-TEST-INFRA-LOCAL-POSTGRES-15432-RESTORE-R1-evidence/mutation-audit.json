@@ -1,0 +1,18 @@
+{
+  "pytest_count": 0,
+  "create_database_count": 0,
+  "drop_database_count": 0,
+  "alter_database_count": 0,
+  "database_rename_count": 0,
+  "connection_termination_count": 0,
+  "migration_count": 0,
+  "schema_ddl_count": 0,
+  "business_dml_count": 0,
+  "fixture_count": 0,
+  "database_cleanup_count": 0,
+  "logical_database_mutation_count": 0,
+  "docker_volume_create_count": 0,
+  "docker_volume_delete_count": 0,
+  "container_recreate_count": 0,
+  "postgres_explicit_start_count": 0
+}

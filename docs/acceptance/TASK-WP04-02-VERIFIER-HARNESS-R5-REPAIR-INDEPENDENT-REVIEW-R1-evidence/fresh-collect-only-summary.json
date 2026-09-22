@@ -1,0 +1,32 @@
+{
+  "run_root": "/private/tmp/tg-wp04-02-r5-independent-r1-20260921",
+  "environment": "env -i with synthetic port-1 database URLs, an empty ledger path and Python sitecustomize socket guard",
+  "runner_exit": 0,
+  "valid": true,
+  "verdict": "PASS",
+  "pytest_returncode": 0,
+  "count": 41,
+  "expected_count": 41,
+  "distribution": {
+    "forbidden_status_commit_fresh_no_residue": 20,
+    "allowed_routing_history_audit": 16,
+    "committed_exact_replay_read_only": 3,
+    "legacy_forbidden_prior_committed_replay": 2
+  },
+  "missing": [],
+  "extra": [],
+  "duplicates": [],
+  "unclassified": [],
+  "manifest_entries": 10,
+  "manifest_integrity_failures": [],
+  "runner_source_hash": "201966382113a5a29e13876a36cb9ac0cd0a4efa7b9ea8d96d8924de025191fc",
+  "retained_runner_source_hash": "201966382113a5a29e13876a36cb9ac0cd0a4efa7b9ea8d96d8924de025191fc",
+  "plugin_source_hash": "044062900509c011576cb1501c73c2298064fc1362c0e56f5e2e7dc0fd8acc08",
+  "retained_plugin_source_hash": "044062900509c011576cb1501c73c2298064fc1362c0e56f5e2e7dc0fd8acc08",
+  "socket_guard_log": "ABSENT",
+  "database_fixture_ledger": "ABSENT",
+  "test_bodies_executed": 0,
+  "real_postgresql_authorized": false,
+  "real_postgresql_used": false,
+  "scope_note": "This independently proves the current working tree happy path only; it does not repair or validate the executor's stale retained bundle or the negative-path contract failures."
+}

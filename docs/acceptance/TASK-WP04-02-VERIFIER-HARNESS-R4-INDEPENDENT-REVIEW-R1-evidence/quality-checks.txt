@@ -1,0 +1,7 @@
+COMMAND: ruff check tg_verifier_tools/verification/wp04_02_r4_pytest_plugin.py tg_verifier_tools/verification/wp04_02_r4_runner.py tg_verifier_tests/verification/test_wp04_02_r4_runner.py
+EXIT_CODE: 0
+All checks passed!
+
+COMMAND: ruff format --check tg_verifier_tools/verification/wp04_02_r4_pytest_plugin.py tg_verifier_tools/verification/wp04_02_r4_runner.py tg_verifier_tests/verification/test_wp04_02_r4_runner.py
+EXIT_CODE: 0
+3 files already formatted

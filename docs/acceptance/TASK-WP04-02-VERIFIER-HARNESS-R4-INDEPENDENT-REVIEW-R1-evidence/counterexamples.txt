@@ -1,0 +1,71 @@
+COMMAND: env PYTHONDONTWRITEBYTECODE=1 /opt/homebrew/bin/pytest -p no:cacheprovider /private/tmp/tg-wp04-02-r4-review-r1.o31SWt/test_r4_fail_closed_counterexamples.py -vv --tb=short
+EXIT_CODE: 1
+
+============================= test session starts ==============================
+platform darwin -- Python 3.12.9, pytest-9.1.1, pluggy-1.6.0 -- /opt/homebrew/opt/python@3.12/bin/python3.12
+rootdir: /private/tmp/tg-wp04-02-r4-review-r1.o31SWt
+plugins: asyncio-1.4.0, anyio-4.15.1
+asyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 12 items
+
+../test_r4_fail_closed_counterexamples.py::test_candidate_pin_mismatch_fails_closed PASSED [  8%]
+../test_r4_fail_closed_counterexamples.py::test_main_pin_mismatch_fails_closed FAILED [ 16%]
+../test_r4_fail_closed_counterexamples.py::test_wrong_candidate_git_identity_fails_closed_even_when_pins_match FAILED [ 25%]
+../test_r4_fail_closed_counterexamples.py::test_nonzero_pytest_exit_cannot_pass_with_valid_json FAILED [ 33%]
+../test_r4_fail_closed_counterexamples.py::test_missing_collection_json_fails_closed PASSED [ 41%]
+../test_r4_fail_closed_counterexamples.py::test_malformed_collection_json_returns_recorded_failure FAILED [ 50%]
+../test_r4_fail_closed_counterexamples.py::test_stale_collection_json_cannot_rescue_current_failed_invocation FAILED [ 58%]
+../test_r4_fail_closed_counterexamples.py::test_missing_extra_duplicate_and_wrong_distribution_fail_validation PASSED [ 66%]
+../test_r4_fail_closed_counterexamples.py::test_preexisting_evidence_directory_is_rejected_without_overwrite FAILED [ 75%]
+../test_r4_fail_closed_counterexamples.py::test_manifest_covers_every_retained_nonmanifest_artifact FAILED [ 83%]
+../test_r4_fail_closed_counterexamples.py::test_sensitive_stdout_is_redacted_before_retention FAILED [ 91%]
+../test_r4_fail_closed_counterexamples.py::test_representative_sensitive_env_key_variants_are_redacted FAILED [100%]
+
+=================================== FAILURES ===================================
+_____________________ test_main_pin_mismatch_fails_closed ______________________
+../test_r4_fail_closed_counterexamples.py:114: in test_main_pin_mismatch_fails_closed
+    assert result["valid"] is False
+E   assert True is False
+_____ test_wrong_candidate_git_identity_fails_closed_even_when_pins_match ______
+../test_r4_fail_closed_counterexamples.py:119: in test_wrong_candidate_git_identity_fails_closed_even_when_pins_match
+    assert result["valid"] is False
+E   assert True is False
+_____________ test_nonzero_pytest_exit_cannot_pass_with_valid_json _____________
+../test_r4_fail_closed_counterexamples.py:124: in test_nonzero_pytest_exit_cannot_pass_with_valid_json
+    assert result["valid"] is False
+E   assert True is False
+___________ test_malformed_collection_json_returns_recorded_failure ____________
+../test_r4_fail_closed_counterexamples.py:133: in test_malformed_collection_json_returns_recorded_failure
+    result, evidence = _run(tmp_path, name="malformed-json", write="malformed")
+../test_r4_fail_closed_counterexamples.py:103: in _run
+    result = runner.run_collect_only(candidate, main, evidence)
+tg_verifier_tools/verification/wp04_02_r4_runner.py:385: in run_collect_only
+    raw = json.loads(collection_json.read_text(encoding="utf-8"))
+E   json.decoder.JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)
+______ test_stale_collection_json_cannot_rescue_current_failed_invocation ______
+../test_r4_fail_closed_counterexamples.py:160: in test_stale_collection_json_cannot_rescue_current_failed_invocation
+    assert result["valid"] is False
+E   assert True is False
+______ test_preexisting_evidence_directory_is_rejected_without_overwrite _______
+../test_r4_fail_closed_counterexamples.py:178: in test_preexisting_evidence_directory_is_rejected_without_overwrite
+    assert result["valid"] is False
+E   assert True is False
+___________ test_manifest_covers_every_retained_nonmanifest_artifact ___________
+../test_r4_fail_closed_counterexamples.py:189: in test_manifest_covers_every_retained_nonmanifest_artifact
+    assert set(manifest["artifacts"]) == retained
+E   AssertionError: manifest omitted collected-nodeids.json
+______________ test_sensitive_stdout_is_redacted_before_retention ______________
+../test_r4_fail_closed_counterexamples.py:205: in test_sensitive_stdout_is_redacted_before_retention
+    assert secret not in (evidence / "collect-only.stdout.txt").read_text(encoding="utf-8")
+E   AssertionError: representative synthetic secret was retained verbatim
+_________ test_representative_sensitive_env_key_variants_are_redacted __________
+../test_r4_fail_closed_counterexamples.py:219: in test_representative_sensitive_env_key_variants_are_redacted
+    assert secret not in redacted.values()
+E   AssertionError: representative synthetic secret remained under all four variant keys
+
+========================= 9 failed, 3 passed in 0.08s ==========================
+
+NOTE: The two secret-related failure lines above intentionally summarize the
+assertion without reproducing any real credential. The only value used by the
+helper was the synthetic literal `representative-secret-value` present in the
+retained helper source. No real secret value is present in this log.

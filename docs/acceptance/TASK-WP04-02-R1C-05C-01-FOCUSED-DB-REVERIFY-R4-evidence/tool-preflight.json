@@ -1,0 +1,15 @@
+{
+  "alembic_heads": "000000000004 (head)",
+  "child_alembic": "/opt/miniconda3/bin/alembic",
+  "diagnostic_variables_absent": [
+    "TG_TEST_ADMIN_DATABASE_URL",
+    "TG_R1C_REPLAY_BASELINE",
+    "TG_R1C02_REPLAY_PRIOR"
+  ],
+  "path": "/opt/miniconda3/bin:/opt/homebrew/bin:/opt/homebrew/opt/postgresql@16/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+  "pytest": "/opt/homebrew/bin/pytest",
+  "pytest_version": "9.1.1",
+  "python": "/opt/homebrew/bin/python3.12",
+  "python_version": "3.12.9",
+  "result": "PASS"
+}

@@ -1,0 +1,22 @@
+{
+  "algorithm": "sha256",
+  "manifest_excludes_itself": true,
+  "files": {
+    "counterexamples.json": {
+      "bytes": 1244,
+      "sha256": "f9c038969e8a63a1ef6e1c42d8a25745e6c9600d3dda6344526fe58bdf03873a"
+    },
+    "fresh-collect-only-summary.json": {
+      "bytes": 1417,
+      "sha256": "9d177a7bcb2e0684861d79cb37be6c7dfd50c36c0886cd0428fdd5f73718f6d1"
+    },
+    "source-attribution.json": {
+      "bytes": 740,
+      "sha256": "456591e5486312ba9cedd19ce4724a99d8b86880bb00031f816fe3e3943b6441"
+    },
+    "verification-summary.json": {
+      "bytes": 1519,
+      "sha256": "aebfadeeb037c30de713d8febdc8ff9c193a09f1e081be8389df3f24d4701f4a"
+    }
+  }
+}

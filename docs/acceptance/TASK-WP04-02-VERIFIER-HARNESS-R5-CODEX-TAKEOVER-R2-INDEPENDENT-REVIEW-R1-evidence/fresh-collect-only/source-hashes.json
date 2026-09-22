@@ -1,0 +1,15 @@
+{
+  "runner": {
+    "live": "3b3145f0a17e593db8d7689ba942ad43fcd4f4be15ddc61d7196e0cc061c3b36",
+    "retained": "3b3145f0a17e593db8d7689ba942ad43fcd4f4be15ddc61d7196e0cc061c3b36",
+    "equal": true
+  },
+  "plugin": {
+    "live": "3ab4b45feb356fcecdaa5363f09d3256dc0c6a2b8f2bb067d32da8438f3bdbc4",
+    "retained": "3ab4b45feb356fcecdaa5363f09d3256dc0c6a2b8f2bb067d32da8438f3bdbc4",
+    "equal_live_retained": true,
+    "staged": "3ab4b45feb356fcecdaa5363f09d3256dc0c6a2b8f2bb067d32da8438f3bdbc4",
+    "staged_recorded": "3ab4b45feb356fcecdaa5363f09d3256dc0c6a2b8f2bb067d32da8438f3bdbc4",
+    "equal_live_staged_retained": true
+  }
+}

@@ -1,0 +1,470 @@
+{
+  "captured_at_utc": "2026-09-22T02:12:36.730743+00:00",
+  "count": 77,
+  "databases": [
+    {
+      "datname": "postgres",
+      "oid": 5,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "template0",
+      "oid": 4,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "template1",
+      "oid": 1,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_01c0f5f8121e450b9c71ace44928c802",
+      "oid": 8325396,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_0685f5c993834a349abaf61fc3e3b657",
+      "oid": 8325415,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_1041352172984cae897f801eb8ec5943",
+      "oid": 8457320,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_11e6867d5f3542b293cdfd4a4fead7cf",
+      "oid": 8325419,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_13471ec2ece84b93b8407e29c6054a6f",
+      "oid": 8325405,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_13bf1858820d44858d496edbca6f215d",
+      "oid": 8386590,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_166b8d3f901b45e59e58314b2f8d45b3",
+      "oid": 8387291,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_1c5af01292b24f1aaec6fd4637403885",
+      "oid": 8325409,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_1ddedcea542a49f796be0bda8b9ac972",
+      "oid": 8325404,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_1f6901c614364010b70a6ea69fa01385",
+      "oid": 8325391,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_1fb496c5fa934a4b96d850d08ae192da",
+      "oid": 8325387,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_28cbba54558442e4b7bff6179cf71746",
+      "oid": 8325421,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_29b5f21b05e64c35bcfba641816cee26",
+      "oid": 8325411,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_30ddc7776e364aaca73e60c36f4bf72c",
+      "oid": 8656203,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_39c9057fed214e58b53d3788eb05003e",
+      "oid": 8577769,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_3cf61d305a374021b958d8c32c3cf5a0",
+      "oid": 8325399,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_3f430b834ec8486a892dad86209b9c48",
+      "oid": 8325389,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_430bc500937c40f19fd82fba561d6087",
+      "oid": 8325384,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_43d31b5079b5483f98fc0664274d9401",
+      "oid": 8420205,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_45c63d3d38894f7ea7643f10d250f370",
+      "oid": 8325390,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_470ab881404544a6995142c846276e47",
+      "oid": 8325410,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_4f008d22a8154f82954820a749edfeff",
+      "oid": 6893828,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_50499f0beef449c8847c1dbdf34ade3b",
+      "oid": 8612784,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_534131d65bb74a449f6eaf7c31648b21",
+      "oid": 8325407,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_53f41488c0dd47d88d4591bec041a7a7",
+      "oid": 8325416,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_579537713a844112bfab10bd15796d27",
+      "oid": 8649201,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_58cbbcc50bb44e5aad52b85c1c56c155",
+      "oid": 8325400,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_5d4c8451727743f79f7abdb40a4d88dc",
+      "oid": 6893827,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_5f625721e89d4e728e9bd0d64d93dd17",
+      "oid": 8325412,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_62054926e4b74b66b279acb450d11e71",
+      "oid": 8615586,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_69104f67fa53491589b4701388407499",
+      "oid": 8325393,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_737b02e3182f41b7a963126331b81279",
+      "oid": 8325398,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_758b5d420b0e400089a7b4b243cc3b0e",
+      "oid": 8325403,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_762754d8160247888e78b9417afedb2c",
+      "oid": 8325406,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_79a475ac90224a4b99082d145d292c15",
+      "oid": 8325395,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_7b896870b6664f53ad79e48740ef4c21",
+      "oid": 8432108,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_81815e010a3d4f00973b55e8c8f1c856",
+      "oid": 8325402,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_90a93dc7364d4d9d92520f20675aed5c",
+      "oid": 8325383,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_90be9919c0ff4891a0350ae6d28f5226",
+      "oid": 8325401,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_9725b95671f94617a4f29806a20db7a8",
+      "oid": 8325385,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_977c36410bca4e869b474079e294608e",
+      "oid": 8388693,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_99f9613e82ea4c738deef31efbef215d",
+      "oid": 8325388,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_9cb8e0868a2641d5b93d1117f1732177",
+      "oid": 8385188,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_9d6c3898eb1d4b3da3c376b8aa5c1511",
+      "oid": 8380286,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_a323dff3b6e2439590ccc6dce613ec34",
+      "oid": 8645700,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_a95176dae1364c6d97e1aaa3a455c90b",
+      "oid": 8385889,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_acdf1f18fcdc471799cde2fa1e99cffa",
+      "oid": 8663207,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_b6f8802bd7e243eba1e6e0e138b40ebe",
+      "oid": 8325397,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_b73b74d41e9c495e87a278adf86831c8",
+      "oid": 8667410,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_bed9e7cc62514f188fe67180264772eb",
+      "oid": 8325408,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_c19b15e6dca14048971d65bf91eb3199",
+      "oid": 8664608,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_c52791461a844e15b463397e1670aeb6",
+      "oid": 8325414,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_ca3fc690d42142278b9dd2b8e76de967",
+      "oid": 6893825,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_ce700450681744e496fe3620e337c554",
+      "oid": 8390794,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_d2896a851eda44558cfe508be22abee2",
+      "oid": 8659004,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_d71be47c791b40788f67cdd0958c50e9",
+      "oid": 8325417,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_dc37c69cb5354bd18e5a3dcd01812e31",
+      "oid": 8325420,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_dd591583d60d4f8287f4adce3d5d1cfe",
+      "oid": 6893826,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_de58a56a5edf406eb94693a9b9e83dba",
+      "oid": 8325382,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_e67989d8ea3f47d2862ef14256e03069",
+      "oid": 8467824,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_ebc287b3e75949f9a02c707d6e5b49c9",
+      "oid": 8652702,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_ecf65b145d894e07bb885fe38295535b",
+      "oid": 8387992,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_f169e6673a7c44619dd096b16cae0a4a",
+      "oid": 8660405,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_f33a4b72076e4499899debaf5e88885b",
+      "oid": 8325392,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_f510786c26d24a2c98218f8949e8e7fb",
+      "oid": 8325418,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_f5e42809dab54b8ca01a35a34f4ce0cb",
+      "oid": 8325386,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_f62a9d9bee2147b7a6fbcf4ecc3d851f",
+      "oid": 8325394,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_f99981ab17b74ba7a1028c973689388c",
+      "oid": 8325422,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_f9fc5d8f612c4c4c9f7c45c70a57db4d",
+      "oid": 8560962,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_fa9205d9393e4de0a9bf75eca36ffc1b",
+      "oid": 8325413,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_fb031b5d9b924d9986b9e3546c7deae7",
+      "oid": 8522445,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_fbd18b28125b44bda9ecda57191f83a7",
+      "oid": 8384487,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "tg_wp04_service_fef9bbe9c29a42eaa258696f4c8ab630",
+      "oid": 8582671,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    },
+    {
+      "datname": "thesisguard",
+      "oid": 16384,
+      "owner": "thesisguard",
+      "owner_oid": 10
+    }
+  ],
+  "query": "SELECT d.datname, d.oid::bigint, r.rolname AS owner, d.datdba::bigint AS owner_oid FROM pg_database d JOIN pg_roles r ON r.oid = d.datdba ORDER BY d.datname;",
+  "snapshot_semantics": "complete point-in-time pg_database catalog from one authorized SELECT"
+}

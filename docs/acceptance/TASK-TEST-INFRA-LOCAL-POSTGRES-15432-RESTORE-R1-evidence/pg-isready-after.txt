@@ -1,0 +1,4 @@
+127.0.0.1:15432 - accepting connections
+exit_code=0
+
+An earlier default-sandbox call after container auto-start returned no response because local network access was restricted. The exact same command through the approved local-access path returned the result above.

@@ -1,0 +1,24 @@
+{
+  "status": "IMPLEMENTATION_COMPLETE",
+  "restore_path": "A",
+  "required_acceptance_achieved": [
+    "L1_STATIC_REVIEWED",
+    "PostgreSQL-service-scope L4_RUNTIME_VERIFIED"
+  ],
+  "required_acceptance_missing": [],
+  "business_l3_contract_verified_claimed": false,
+  "business_l4_db_verified_claimed": false,
+  "postgres_running": true,
+  "postgres_healthy": true,
+  "pg_isready_accepting": true,
+  "historical_unknown_exact_matches": 45,
+  "initial_catalog_count": 49,
+  "point_in_time_final_catalog_count": 77,
+  "externally_or_concurrently_observed_additional_databases": 28,
+  "catalog_stability_claimed": false,
+  "operations_on_additional_databases": 0,
+  "logical_database_mutations": 0,
+  "pytest_count": 0,
+  "r5_focused_db_verification_executed": false,
+  "requires_separate_codex_acceptance": true
+}

@@ -1,0 +1,14 @@
+{
+  "plan_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-INDEPENDENT-REVERIFY-R1-evidence/phase-a-20260916-exact-cleanup-plan.json",
+  "plan_sha256": "635ba4aad0468c15b4360733c784d52f4430f03477a14ef8a271a1e32bada360",
+  "expected_count": 45,
+  "observed_count": 45,
+  "exact_match_count": 45,
+  "missing": [],
+  "mismatches": [],
+  "comparison_fields": ["name", "oid", "owner", "owner_oid"],
+  "owner_oid_basis": "The cleanup plan stores name/OID/owner. Required fixture lifecycle acceptance records the same preserved catalog owner_oid as 10; current rows all remain owner_oid 10.",
+  "individual_database_connections": 0,
+  "ownership_reclassification": false,
+  "cleanup_authorized": false
+}

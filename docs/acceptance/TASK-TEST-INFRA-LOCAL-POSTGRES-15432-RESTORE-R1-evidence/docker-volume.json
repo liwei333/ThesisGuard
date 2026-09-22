@@ -1,0 +1,14 @@
+{
+  "name": "thesisguard-postgres-data",
+  "driver": "local",
+  "mountpoint": "/var/lib/docker/volumes/thesisguard-postgres-data/_data",
+  "created_at": "2026-09-12T12:13:59Z",
+  "labels": {
+    "com.docker.compose.config-hash": "c985d0a2d85d358db2cb4b9438c169334a2f319eb55a93da59d86de493e0d56e",
+    "com.docker.compose.project": "thesisguard",
+    "com.docker.compose.version": "5.5.1",
+    "com.docker.compose.volume": "postgres_data"
+  },
+  "existed_before_any_postgres_start_or_create_command": true,
+  "created_or_replaced_by_task": false
+}

@@ -1,0 +1,23 @@
+{
+  "commands": [
+    {"class": "read-only", "command": "git status/rev-parse/diff checks for main, candidate, and harness"},
+    {"class": "read-only", "command": "shasum -a 256 for required configuration, source, contract, and evidence inputs"},
+    {"class": "read-only", "command": "lsof -nP -iTCP:15432 -sTCP:LISTEN"},
+    {"class": "read-only", "command": "/opt/homebrew/opt/postgresql@16/bin/pg_isready -h 127.0.0.1 -p 15432 -d postgres"},
+    {"class": "authorized host state change", "command": "open -a Docker"},
+    {"class": "read-only", "command": "docker version and docker info with allowlisted formats"},
+    {"class": "read-only", "command": "docker volume inspect thesisguard-postgres-data with allowlisted format"},
+    {"class": "read-only", "command": "docker image inspect pgvector/pgvector:pg17 with allowlisted format"},
+    {"class": "read-only", "command": "docker container inspect thesisguard-postgres with allowlisted format"},
+    {"class": "read-only", "command": "docker ps -a with allowlisted format"},
+    {"class": "read-only", "command": "docker compose ps postgres --format json"},
+    {"class": "read-only SQL", "command": "credential-free helper loading candidate test configuration in memory; exactly two authorized SELECT statements"}
+  ],
+  "postgres_start_commands": 0,
+  "docker_compose_up_commands": 0,
+  "docker_pull_commands": 0,
+  "docker_build_commands": 0,
+  "unrelated_container_operation_commands": 0,
+  "pytest_commands": 0,
+  "credentials_in_command_argv": 0
+}

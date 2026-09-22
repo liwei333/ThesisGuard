@@ -1,0 +1,21 @@
+{
+  "connection_source": "candidate test configuration loaded in memory",
+  "credential_retained": false,
+  "authorized_target": {
+    "host": "127.0.0.1",
+    "port": 15432,
+    "database": "postgres",
+    "declared_user": "thesisguard"
+  },
+  "observed": {
+    "current_database": "postgres",
+    "current_user": "thesisguard",
+    "server_version": "17.11 (Debian 17.11-1.pgdg12+2)"
+  },
+  "target_match": true,
+  "user_match": true,
+  "sql_statements": [
+    "SELECT current_database(), current_user, current_setting('server_version');",
+    "SELECT d.datname, d.oid::bigint, r.rolname AS owner, d.datdba::bigint AS owner_oid FROM pg_database d JOIN pg_roles r ON r.oid = d.datdba ORDER BY d.datname;"
+  ]
+}

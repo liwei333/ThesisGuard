@@ -1,0 +1,24 @@
+{
+  "attempts": [
+    {
+      "error_type": "PermissionError",
+      "exit_code": 1,
+      "kind": "sandboxed_read_only_preflight"
+    },
+    {
+      "error_type": "ConnectionRefusedError",
+      "exit_code": 1,
+      "kind": "approved_read_only_preflight"
+    }
+  ],
+  "authorized_target": {
+    "admin_database": "postgres",
+    "driver": "postgresql+asyncpg",
+    "host": "127.0.0.1",
+    "port": 15432
+  },
+  "catalog_captured": false,
+  "create_sent": 0,
+  "result": "BLOCKED_DATABASE_UNAVAILABLE",
+  "successful_database_connections": 0
+}

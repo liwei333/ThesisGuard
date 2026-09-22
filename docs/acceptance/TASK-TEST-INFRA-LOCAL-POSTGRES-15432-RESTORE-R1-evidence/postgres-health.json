@@ -1,0 +1,11 @@
+{
+  "container": "thesisguard-postgres",
+  "container_state": "running",
+  "docker_health": "healthy",
+  "compose_state": "running",
+  "compose_health": "healthy",
+  "host_listener": "Docker Desktop on TCP *:15432",
+  "container_port": "5432/tcp",
+  "published_port": 15432,
+  "pg_isready": "accepting connections"
+}

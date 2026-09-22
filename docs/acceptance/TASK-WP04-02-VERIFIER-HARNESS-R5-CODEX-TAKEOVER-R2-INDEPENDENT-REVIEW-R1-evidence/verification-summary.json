@@ -1,0 +1,57 @@
+{
+  "review_id": "TASK-WP04-02-VERIFIER-HARNESS-R5-CODEX-TAKEOVER-R2-INDEPENDENT-REVIEW-R1",
+  "date": "2026-09-21",
+  "verdict": "PASS",
+  "r5_worktree": "/Users/qianduoduo/Desktop/AI_app/codex-wp04-02-verifier-harness-r5-repair",
+  "r5_branch": "codex/wp04-02-verifier-harness-r5-repair",
+  "r5_head": "df836cb39a1234aae967553b3783a67df9ad6672",
+  "r5_parent": "675217c3a15c0f416aa4462ca6edc491bf99f9f6",
+  "main_head": "675217c3a15c0f416aa4462ca6edc491bf99f9f6",
+  "candidate_branch": "codex/wp04-02-evidence-domain-service",
+  "candidate_head": "e942cbcc9e0b5d95a6c7ee46d4d74ee90ff03ad4",
+  "candidate_parent": "af4f2cbbb0a50bd6c215bcaa78dd9fcd98414cc8",
+  "candidate_clean": true,
+  "source_hashes": {
+    "tg_verifier_tools/verification/wp04_02_r4_runner.py": "3b3145f0a17e593db8d7689ba942ad43fcd4f4be15ddc61d7196e0cc061c3b36",
+    "tg_verifier_tools/verification/wp04_02_r4_pytest_plugin.py": "3ab4b45feb356fcecdaa5363f09d3256dc0c6a2b8f2bb067d32da8438f3bdbc4",
+    "tg_verifier_tests/verification/test_wp04_02_r4_runner.py": "aafa9e54ab1bd1fbf7ce3d3cf78c2854125264e73291c264a49dba142cf8ff75"
+  },
+  "r2_repairs": {
+    "complete_inherited_environment_copied_or_enumerated": false,
+    "early_failure_inherited_keys_accessed": [],
+    "outer_manifest_actual_files": 51,
+    "outer_manifest_entries": 51,
+    "outer_manifest_inventory_equal": true,
+    "outer_manifest_size_hash_equal": true,
+    "nested_manifests_included": [
+      "harness-run/manifest.json",
+      "negative/controlled-interruption/manifest.json",
+      "negative/embedded-url-redaction/manifest.json",
+      "negative/staged-mismatch/manifest.json"
+    ]
+  },
+  "independent_quality": {
+    "focused_tests": "82 passed in 1.70s",
+    "ruff_check": "PASS",
+    "ruff_format_check": "PASS; 3 files already formatted",
+    "compileall": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "fresh_collect_only": {
+    "cli_exit": 0,
+    "pytest_returncode": 0,
+    "valid": true,
+    "count": 41,
+    "distribution": [20, 16, 3, 2],
+    "test_body_calls": 0,
+    "fixture_ledger_absent": true,
+    "socket_attempt_log_absent": true,
+    "inner_manifest_actual": 10,
+    "inner_manifest_listed": 10,
+    "inner_manifest_equal": true,
+    "runner_live_retained_equal": true,
+    "plugin_live_staged_recorded_retained_equal": true
+  },
+  "real_postgresql_connected": false,
+  "l4_db_verified": false
+}

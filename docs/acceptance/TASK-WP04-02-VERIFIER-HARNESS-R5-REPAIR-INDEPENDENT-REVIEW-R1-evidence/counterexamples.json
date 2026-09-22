@@ -1,0 +1,36 @@
+{
+  "synthetic_values_only": true,
+  "interruption_closed_evidence": {
+    "stimulus": "run_subprocess raises KeyboardInterrupt after the runner owns a new evidence directory",
+    "interruption_escaped": true,
+    "staging_cleaned": true,
+    "result_json_exists": false,
+    "manifest_json_exists": false,
+    "retained_files": [
+      "baseline-pins.json",
+      "plugin-staging.json",
+      "plugin.source.py",
+      "runner.source.py",
+      "source-hashes.json"
+    ],
+    "contract_result": "FAIL"
+  },
+  "staged_plugin_integrity": {
+    "stimulus": "replace the staged plugin with synthetic tampered bytes, then return a nonce-matched 41-node collection",
+    "runner_valid": true,
+    "runner_verdict": "PASS",
+    "count": 41,
+    "distribution": [20, 16, 3, 2],
+    "staged_hash_verified": false,
+    "contract_result": "FAIL"
+  },
+  "credential_redaction": {
+    "stimulus": "place a synthetic credential-bearing PostgreSQL URL inside surrounding stdout text and in argv metadata",
+    "embedded_url_userinfo_leaked": true,
+    "embedded_url_query_secret_leaked": true,
+    "metadata_argv_userinfo_leaked": true,
+    "metadata_argv_query_secret_leaked": true,
+    "real_credentials_read": false,
+    "contract_result": "FAIL"
+  }
+}

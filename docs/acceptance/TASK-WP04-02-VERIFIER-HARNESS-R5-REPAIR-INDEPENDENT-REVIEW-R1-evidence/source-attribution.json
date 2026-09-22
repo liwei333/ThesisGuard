@@ -1,0 +1,14 @@
+{
+  "delivered_working_tree": {
+    "runner_sha256": "201966382113a5a29e13876a36cb9ac0cd0a4efa7b9ea8d96d8924de025191fc",
+    "plugin_sha256": "044062900509c011576cb1501c73c2298064fc1362c0e56f5e2e7dc0fd8acc08",
+    "tests_sha256": "29d2ab792a35c6c2d74eb79a53d7d7bd273b1646274b4846a18f51225c324588"
+  },
+  "executor_harness_run": {
+    "runner_source_sha256": "944e4a61f3ea1ce2a3746f7e54303bcd4a600dba6719eef56a794506f3cb6e02",
+    "plugin_source_sha256": "044062900509c011576cb1501c73c2298064fc1362c0e56f5e2e7dc0fd8acc08"
+  },
+  "runner_source_equal": false,
+  "plugin_source_equal": true,
+  "finding": "The executor fresh collect-only evidence predates the final runner edit and cannot be attributed to the final delivered runner bytes."
+}

@@ -1,0 +1,34 @@
+{
+  "argv": [
+    "/opt/homebrew/bin/pytest",
+    "-p",
+    "tg_verifier_tools.verification.wp04_02_r4_pytest_plugin",
+    "-p",
+    "no:cacheprovider",
+    "--collect-only",
+    "-q",
+    "tests/test_evidence_services.py::test_r1c05c01_forbidden_status_commit_fresh_no_residue",
+    "tests/test_evidence_services.py::test_r1c05c01_allowed_routing_history_audit",
+    "tests/test_evidence_services.py::test_r1c05c01_committed_exact_replay_read_only",
+    "tests/test_evidence_services.py::test_r1c05c01_legacy_forbidden_prior_committed_replay"
+  ],
+  "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+  "env": {
+    "DATABASE_URL": "<REDACTED>",
+    "HOME": "/private/tmp/tg-wp04-02-r4-review-r1.o31SWt",
+    "LANG": "C.UTF-8",
+    "PATH": "/opt/homebrew/bin:/usr/bin:/bin",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONPATH": "/private/tmp/tg-wp04-02-r4-review-r1.o31SWt/tg_r4_plugin_m0yqg_s9:/private/tmp/tg-wp04-02-r4-review-r1.o31SWt/socket_guard",
+    "TG_EVIDENCE_PG_LEDGER": "/private/tmp/tg-wp04-02-r4-review-r1.o31SWt/happy-safe-ledger.jsonl",
+    "TG_R4_COLLECTION_JSON": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/TASK-WP04-02-VERIFIER-HARNESS-R4-INDEPENDENT-REVIEW-R1-evidence/happy-path-safe/collected-nodeids.json",
+    "TG_SOCKET_GUARD_LOG": "/private/tmp/tg-wp04-02-r4-review-r1.o31SWt/happy-safe-sockets.jsonl",
+    "TG_TEST_ADMIN_DATABASE_URL": "<REDACTED>",
+    "TMPDIR": "/private/tmp/tg-wp04-02-r4-review-r1.o31SWt",
+    "__CF_USER_TEXT_ENCODING": "0x1F5:0x19:0x34"
+  },
+  "start_utc": "2026-09-20T02:55:05.146915+00:00",
+  "end_utc": "2026-09-20T02:55:06.351855+00:00",
+  "returncode": 0,
+  "timeout_seconds": 120
+}

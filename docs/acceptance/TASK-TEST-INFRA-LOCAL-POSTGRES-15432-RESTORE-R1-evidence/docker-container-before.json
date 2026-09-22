@@ -1,0 +1,17 @@
+{
+  "initial_pre_daemon_observation": "unavailable because Docker daemon socket was absent",
+  "first_post_daemon_pre_command_observation": {
+    "name": "thesisguard-postgres",
+    "image_reference": "pgvector/pgvector:pg17",
+    "image_id": "sha256:cf134a767f474095eeba57e0117be8e568e011a63f33fbf252f14c9b760f8e6f",
+    "state": "running",
+    "health": "healthy",
+    "restart_policy": "unless-stopped",
+    "volume": "thesisguard-postgres-data",
+    "mount_target": "/var/lib/postgresql/data",
+    "port_binding": "15432 -> 5432/tcp",
+    "created_at": "2026-09-12T13:10:02.651706346Z"
+  },
+  "task_issued_start_or_up_before_observation": false,
+  "restore_path": "A"
+}

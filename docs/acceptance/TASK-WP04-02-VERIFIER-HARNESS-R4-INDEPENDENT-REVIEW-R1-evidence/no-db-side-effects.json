@@ -1,0 +1,14 @@
+{
+  "collect_only_pytest_version": "9.1.1",
+  "collected_count": 41,
+  "business_test_bodies_executed": 0,
+  "database_fixture_ledger_path": "/private/tmp/tg-wp04-02-r4-review-r1.o31SWt/happy-safe-ledger.jsonl",
+  "database_fixture_ledger_state": "ABSENT",
+  "python_socket_guard_log_path": "/private/tmp/tg-wp04-02-r4-review-r1.o31SWt/happy-safe-sockets.jsonl",
+  "python_socket_guard_log_state": "ABSENT",
+  "admin_database_url": "REDACTED_POISONED_LOOPBACK_PORT_1",
+  "postgresql_connections_observed": 0,
+  "create_attempts_observed": 0,
+  "real_postgresql_authorized": false,
+  "real_postgresql_used": false
+}

@@ -1,0 +1,35 @@
+{
+  "argv": [
+    "/opt/homebrew/bin/pytest",
+    "-p",
+    "_tg_wp04_02_verifier_583e3fd01c2dbf618574d36fb881404c.plugin",
+    "-p",
+    "no:cacheprovider",
+    "--collect-only",
+    "-q",
+    "tests/test_evidence_services.py::test_r1c05c01_forbidden_status_commit_fresh_no_residue",
+    "tests/test_evidence_services.py::test_r1c05c01_allowed_routing_history_audit",
+    "tests/test_evidence_services.py::test_r1c05c01_committed_exact_replay_read_only",
+    "tests/test_evidence_services.py::test_r1c05c01_legacy_forbidden_prior_committed_replay"
+  ],
+  "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+  "env": {
+    "HOME": "/private/tmp",
+    "LANG": "C.UTF-8",
+    "PATH": "/opt/homebrew/bin:/usr/bin:/bin",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONPATH": "/tmp/tg_wp04_02_verifier_ktyax65_:/private/tmp/tg-wp04-02-r5-r2-independent-r1-20260921/guard",
+    "TG_EVIDENCE_PG_LEDGER": "/private/tmp/tg-wp04-02-r5-r2-independent-r1-20260921/harness-run/_fixture-ledger.jsonl",
+    "TG_R4_COLLECTION_JSON": "/private/tmp/tg-wp04-02-r5-r2-independent-r1-20260921/harness-run/_collected-nodeids.json",
+    "TG_R4_INVOCATION_NONCE": "47bcdfdb1fbb2a8800170ab3d3610085",
+    "TG_R4_PLUGIN_SHA256": "3ab4b45feb356fcecdaa5363f09d3256dc0c6a2b8f2bb067d32da8438f3bdbc4",
+    "TG_TEST_ADMIN_DATABASE_URL": "<REDACTED>",
+    "USER": "verifier"
+  },
+  "start_utc": "2026-09-21T08:35:04.302268+00:00",
+  "end_utc": "2026-09-21T08:35:05.450256+00:00",
+  "returncode": 0,
+  "failure_category": null,
+  "error_type": null,
+  "timeout_seconds": 120
+}

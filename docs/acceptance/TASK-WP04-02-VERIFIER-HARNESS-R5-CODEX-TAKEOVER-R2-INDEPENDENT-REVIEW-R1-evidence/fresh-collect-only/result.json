@@ -1,0 +1,26 @@
+{
+  "valid": true,
+  "verdict": "PASS",
+  "count": 41,
+  "expected_count": 41,
+  "distribution": {
+    "forbidden_status_commit_fresh_no_residue": 20,
+    "allowed_routing_history_audit": 16,
+    "committed_exact_replay_read_only": 3,
+    "legacy_forbidden_prior_committed_replay": 2
+  },
+  "expected_distribution": {
+    "forbidden_status_commit_fresh_no_residue": 20,
+    "allowed_routing_history_audit": 16,
+    "committed_exact_replay_read_only": 3,
+    "legacy_forbidden_prior_committed_replay": 2
+  },
+  "missing": [],
+  "extra": [],
+  "duplicates": [],
+  "unclassified": [],
+  "pytest_returncode": 0,
+  "invocation_nonce": "47bcdfdb1fbb2a8800170ab3d3610085",
+  "plugin_module": "_tg_wp04_02_verifier_583e3fd01c2dbf618574d36fb881404c.plugin",
+  "test_body_calls": 0
+}

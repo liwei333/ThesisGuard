@@ -1,0 +1,60 @@
+INITIAL BASELINE — 2026-09-20 Asia/Shanghai
+
+Main repository:
+path=/Users/qianduoduo/Desktop/AI_app/ThesisGuard
+branch=main
+HEAD=675217c3a15c0f416aa4462ca6edc491bf99f9f6
+status:
+## main...origin/main
+?? docs/workbench.html
+
+R4 commit:
+commit=df836cb39a1234aae967553b3783a67df9ad6672
+parent=675217c3a15c0f416aa4462ca6edc491bf99f9f6
+tree=cb55bfd8639966392fe58bb3cc11c7d1606d910f
+git diff --check parent...commit exit=0
+
+Fresh isolated detached worktree:
+path=/private/tmp/tg-wp04-02-r4-review-r1.o31SWt/review
+status=## HEAD (no branch)
+HEAD=df836cb39a1234aae967553b3783a67df9ad6672
+parent=675217c3a15c0f416aa4462ca6edc491bf99f9f6
+
+Business candidate:
+path=/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service
+branch=codex/wp04-02-evidence-domain-service
+HEAD=e942cbcc9e0b5d95a6c7ee46d4d74ee90ff03ad4
+parent=af4f2cbbb0a50bd6c215bcaa78dd9fcd98414cc8
+status=clean
+
+Pre-existing dirty R4 checkout (observed only; not used for trusted execution):
+path=/Users/qianduoduo/Desktop/AI_app/codex-wp04-02-verifier-harness-r4
+branch=codex/wp04-02-verifier-harness-r4
+HEAD=df836cb39a1234aae967553b3783a67df9ad6672
+status included 16 deleted tracked files under tests/, untracked evidence/,
+untracked tg_verifier_tests/conftest.py and 15 additional untracked copied test files.
+No file in this checkout was cleaned, restored, staged, moved, deleted or edited.
+
+Committed diff enumeration (parent...R4):
+A docs/acceptance/TASK-WP04-02-VERIFIER-HARNESS-R4-acceptance.md
+A docs/acceptance/TASK-WP04-02-VERIFIER-HARNESS-R4-evidence/baseline-pins.json
+A docs/acceptance/TASK-WP04-02-VERIFIER-HARNESS-R4-evidence/collect-only.meta.json
+A docs/acceptance/TASK-WP04-02-VERIFIER-HARNESS-R4-evidence/collect-only.stderr.txt
+A docs/acceptance/TASK-WP04-02-VERIFIER-HARNESS-R4-evidence/collect-only.stdout.txt
+A docs/acceptance/TASK-WP04-02-VERIFIER-HARNESS-R4-evidence/collected-nodeids.json
+A docs/acceptance/TASK-WP04-02-VERIFIER-HARNESS-R4-evidence/manifest.json
+A docs/acceptance/TASK-WP04-02-VERIFIER-HARNESS-R4-evidence/plugin-staging.json
+A docs/acceptance/TASK-WP04-02-VERIFIER-HARNESS-R4-evidence/plugin.source.py
+A docs/acceptance/TASK-WP04-02-VERIFIER-HARNESS-R4-evidence/result.json
+A docs/acceptance/TASK-WP04-02-VERIFIER-HARNESS-R4-evidence/runner.source.py
+A docs/acceptance/TASK-WP04-02-VERIFIER-HARNESS-R4-evidence/source-hashes.json
+A docs/development/BRANCH_WORKFLOW.md
+A tg_verifier_tests/__init__.py
+A tg_verifier_tests/verification/__init__.py
+A tg_verifier_tests/verification/test_wp04_02_r4_runner.py
+A tg_verifier_tools/__init__.py
+A tg_verifier_tools/verification/__init__.py
+A tg_verifier_tools/verification/wp04_02_r4_pytest_plugin.py
+A tg_verifier_tools/verification/wp04_02_r4_runner.py
+
+Total committed diff: 20 added files, 2137 insertions, no modified or deleted parent files.

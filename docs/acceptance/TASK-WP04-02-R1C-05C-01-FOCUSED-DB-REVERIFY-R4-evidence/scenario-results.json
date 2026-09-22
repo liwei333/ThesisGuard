@@ -1,0 +1,14 @@
+{
+  "collected": 41,
+  "distribution": [
+    20,
+    16,
+    3,
+    2
+  ],
+  "errors": 0,
+  "executed": 0,
+  "failed": 0,
+  "passed": 0,
+  "result": "NOT_RUN_DATABASE_PREFLIGHT_BLOCKED"
+}

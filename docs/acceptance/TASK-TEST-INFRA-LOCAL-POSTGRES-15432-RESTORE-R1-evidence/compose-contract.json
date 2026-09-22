@@ -1,0 +1,16 @@
+{
+  "compose_file": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docker-compose.yml",
+  "sha256": "eed9951ef6b4e900d7abc29a55df25bc51e44a0e637e17dc62017fca5cca500b",
+  "service": "postgres",
+  "container_name": "thesisguard-postgres",
+  "image": "pgvector/pgvector:pg17",
+  "host_port": 15432,
+  "container_port": 5432,
+  "volume_compose_key": "postgres_data",
+  "volume_name": "thesisguard-postgres-data",
+  "mount_target": "/var/lib/postgresql/data",
+  "restart_policy": "unless-stopped",
+  "contract_match": true,
+  "env_file_present": true,
+  "postgres_host_port_override": "absent; compose default 15432 applies"
+}

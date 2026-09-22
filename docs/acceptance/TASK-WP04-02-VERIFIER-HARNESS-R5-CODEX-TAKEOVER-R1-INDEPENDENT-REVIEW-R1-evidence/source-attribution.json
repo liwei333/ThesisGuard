@@ -1,0 +1,11 @@
+{
+  "runner_live_sha256": "3ee2be0614c9ba6ebc9b2f305ec8e26e49c5d11adc0fc72ddecbc05e9e92e537",
+  "runner_retained_sha256": "3ee2be0614c9ba6ebc9b2f305ec8e26e49c5d11adc0fc72ddecbc05e9e92e537",
+  "runner_equal": true,
+  "plugin_live_sha256": "3ab4b45feb356fcecdaa5363f09d3256dc0c6a2b8f2bb067d32da8438f3bdbc4",
+  "plugin_staged_sha256": "3ab4b45feb356fcecdaa5363f09d3256dc0c6a2b8f2bb067d32da8438f3bdbc4",
+  "plugin_recorded_sha256": "3ab4b45feb356fcecdaa5363f09d3256dc0c6a2b8f2bb067d32da8438f3bdbc4",
+  "plugin_retained_sha256": "3ab4b45feb356fcecdaa5363f09d3256dc0c6a2b8f2bb067d32da8438f3bdbc4",
+  "plugin_all_equal": true,
+  "focused_tests_sha256": "506e038c9159cf2846f2a3a90e9386817399d1c4918a8312de2a07aadeb8e99f"
+}

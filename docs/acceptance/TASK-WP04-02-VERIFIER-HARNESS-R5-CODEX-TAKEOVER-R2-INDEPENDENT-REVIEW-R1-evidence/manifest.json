@@ -1,0 +1,60 @@
+{
+  "artifacts": {
+    "fresh-collect-only/baseline-pins.json": {
+      "bytes": 382,
+      "sha256": "bcccf6fdc59e13841b4addf2b2f18c3f28bf574ea1f536ed375cd8bc50041ed6"
+    },
+    "fresh-collect-only/collect-only.meta.json": {
+      "bytes": 1598,
+      "sha256": "f30e018f9ef34783e6a3be9ef82be3151b2e974db2dfbeb5ec480c2e12c7ff0b"
+    },
+    "fresh-collect-only/collect-only.stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "fresh-collect-only/collect-only.stdout.txt": {
+      "bytes": 5428,
+      "sha256": "fda2e39d54eaec51e2a6cc3864bbab5489eb3106ac8749a575f826afe6c0603a"
+    },
+    "fresh-collect-only/collected-nodeids.json": {
+      "bytes": 5327,
+      "sha256": "efc88325ce0cd51ab114a8c9ea5ff7134e926061c866f81a019420d1ac4e7050"
+    },
+    "fresh-collect-only/manifest.json": {
+      "bytes": 1416,
+      "sha256": "2e804079ca27040609735d006063e3767287973f7fb1635b08d8fd42580f14f4"
+    },
+    "fresh-collect-only/plugin-staging.json": {
+      "bytes": 363,
+      "sha256": "8d5cc262cd5e76a91b1fca7ec507f5c3125673bec18772d8cea2de35afc332a4"
+    },
+    "fresh-collect-only/plugin.source.py": {
+      "bytes": 11175,
+      "sha256": "3ab4b45feb356fcecdaa5363f09d3256dc0c6a2b8f2bb067d32da8438f3bdbc4"
+    },
+    "fresh-collect-only/result.json": {
+      "bytes": 773,
+      "sha256": "c698dbd12cdae9ee80101f566ab3d975f7b7ad75535cd1124a70513291d6daac"
+    },
+    "fresh-collect-only/runner.source.py": {
+      "bytes": 40951,
+      "sha256": "3b3145f0a17e593db8d7689ba942ad43fcd4f4be15ddc61d7196e0cc061c3b36"
+    },
+    "fresh-collect-only/source-hashes.json": {
+      "bytes": 631,
+      "sha256": "a0e45a99be82fb70548be5bbd3e55faa1860ff537365a987e92783476bc1924e"
+    },
+    "guard/sitecustomize.py": {
+      "bytes": 1118,
+      "sha256": "39de6da46e35cd6ea50241baab32968483b301d4292c8f83ee5dbd4d638ece1c"
+    },
+    "quality-checks.txt": {
+      "bytes": 1303,
+      "sha256": "a27d2b6825234680f98c9f67a2824239b43c74f249b164975f06f54ea015351a"
+    },
+    "verification-summary.json": {
+      "bytes": 2364,
+      "sha256": "f07bfe6de7ec746bd262f707d6c1891dca4378d03ccb0b912fa5e8020932ebf1"
+    }
+  }
+}

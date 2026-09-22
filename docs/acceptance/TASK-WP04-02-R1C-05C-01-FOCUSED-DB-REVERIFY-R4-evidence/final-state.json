@@ -1,0 +1,18 @@
+{
+  "blocker": "BLOCKED_POSTGRESQL_SERVICE_UNAVAILABLE",
+  "candidate_final_clean": true,
+  "candidate_final_index_empty": true,
+  "collect_only": "PASS 41/41; 20/16/3/2; bodies 0; sockets 0; ledger absent",
+  "create_budget": 41,
+  "create_sent": 0,
+  "created": 0,
+  "dropped": 0,
+  "fixed_hashes_unchanged": true,
+  "historical_unknown_fresh_identity_result": "BLOCKED",
+  "real_invocations": 0,
+  "root_manifest_generation_order": "last after credential scan and JSON/JSONL validation",
+  "task_id": "TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R4",
+  "task_residuals": 0,
+  "unknown_task_resources": 0,
+  "verdict": "BLOCKED"
+}

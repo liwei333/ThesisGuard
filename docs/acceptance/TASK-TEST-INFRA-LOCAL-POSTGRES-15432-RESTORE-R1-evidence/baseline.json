@@ -1,0 +1,33 @@
+{
+  "main": {
+    "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard",
+    "branch": "main",
+    "head": "675217c3a15c0f416aa4462ca6edc491bf99f9f6",
+    "parent": "554a87dce995c98d41021f6ae99c2173f4221c09",
+    "tracked_diff_empty": true,
+    "index_empty": true,
+    "preexisting_untracked_preserved": true,
+    "pre_task_status_digest_sha256": "bce75814d979772a8c85af734fbcaad30683761beb6dcbf417f0e143a04fd699"
+  },
+  "candidate": {
+    "path": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+    "branch": "codex/wp04-02-evidence-domain-service",
+    "head": "e942cbcc9e0b5d95a6c7ee46d4d74ee90ff03ad4",
+    "parent": "af4f2cbbb0a50bd6c215bcaa78dd9fcd98414cc8",
+    "clean": true,
+    "index_empty": true,
+    "status_digest_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "harness": {
+    "path": "/Users/qianduoduo/Desktop/AI_app/codex-wp04-02-verifier-harness-r5-repair",
+    "branch": "codex/wp04-02-verifier-harness-r5-repair",
+    "head": "df836cb39a1234aae967553b3783a67df9ad6672",
+    "parent": "675217c3a15c0f416aa4462ca6edc491bf99f9f6",
+    "accepted_existing_tracked_modifications": 3,
+    "index_empty": true,
+    "status_digest_sha256": "71c5124fcc5eb880005d0ba0d3af1738e0113eb5e466467103082254f25e797c"
+  },
+  "compose_sha256": "eed9951ef6b4e900d7abc29a55df25bc51e44a0e637e17dc62017fca5cca500b",
+  "env_sha256_first_capture": "8c135d233c987c5d9a338c6d5e20171dbbb16cfb3cfc04412bc4b55d9ffabaf0",
+  "cleanup_plan_sha256": "635ba4aad0468c15b4360733c784d52f4430f03477a14ef8a271a1e32bada360"
+}

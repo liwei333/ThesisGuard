@@ -1,0 +1,28 @@
+Independent commands executed on 2026-09-21 from:
+/Users/qianduoduo/Desktop/AI_app/codex-wp04-02-verifier-harness-r5-repair
+
+1. PYTHONDONTWRITEBYTECODE=1 /opt/homebrew/bin/pytest -p no:cacheprovider tg_verifier_tests/verification/test_wp04_02_r4_runner.py -q --tb=short
+   RESULT: exit 0; 82 passed in 1.70s.
+
+2. ruff check --no-cache on runner, plugin and focused tests
+   RESULT: exit 0; All checks passed.
+
+3. ruff format --check --no-cache on runner, plugin and focused tests
+   RESULT: exit 0; 3 files already formatted.
+
+4. PYTHONPYCACHEPREFIX=/private/tmp/tg-r2-review-pycache python -m compileall on runner, plugin and focused tests
+   RESULT: exit 0; all three files compiled.
+
+5. git diff --check
+   RESULT: exit 0; no output.
+
+6. Independent recursive audit of executor R2 evidence
+   RESULT: actual=51; listed=51; paths_equal=true; content_equal=true;
+   missing=[]; extra=[]; all four nested manifest.json files included.
+
+7. Fresh collect-only under env -i with an independent fail-closed socket guard
+   RESULT: exit 0; runner PASS; pytest return 0; 41 unique node IDs;
+   distribution 20/16/3/2; test_body_calls=0; fixture ledger absent;
+   socket-attempt log absent; inner manifest actual=listed=10 with exact hashes.
+
+No real PostgreSQL connection or database operation was performed.

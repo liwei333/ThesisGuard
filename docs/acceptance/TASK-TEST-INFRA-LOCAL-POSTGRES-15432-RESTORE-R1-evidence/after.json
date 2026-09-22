@@ -1,0 +1,19 @@
+{
+  "captured_at_utc": "2026-09-22T01:53:31Z",
+  "restore_path": "A",
+  "docker_daemon_accessible": true,
+  "docker_server_version": "29.7.2",
+  "container": "thesisguard-postgres",
+  "container_state": "running",
+  "container_health": "healthy",
+  "port_mapping": "0.0.0.0:15432 and [::]:15432 -> 5432/tcp",
+  "pg_isready": "127.0.0.1:15432 - accepting connections",
+  "database": "postgres",
+  "database_user": "thesisguard",
+  "server_version": "17.11 (Debian 17.11-1.pgdg12+2)",
+  "catalog_count": 49,
+  "historical_unknown_exact_matches": 45,
+  "historical_unknown_missing": 0,
+  "historical_unknown_mismatches": 0,
+  "postgres_left_running": true
+}

@@ -1,0 +1,8 @@
+{
+  "captured_at_utc": "2026-09-22T01:46:47Z",
+  "docker_client_version": "29.7.2",
+  "docker_server_available": false,
+  "socket_path": "/Users/qianduoduo/.docker/run/docker.sock",
+  "socket_state": "absent",
+  "error_class": "daemon socket unavailable"
+}

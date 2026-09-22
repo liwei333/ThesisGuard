@@ -1,0 +1,30 @@
+{
+  "run_root": "/private/tmp/tg-r5-takeover-independent-r1-20260921",
+  "environment": "env -i with synthetic loopback port-1 database URL, fresh ledger path and Python socket guard",
+  "runner_exit": 0,
+  "valid": true,
+  "verdict": "PASS",
+  "pytest_returncode": 0,
+  "count": 41,
+  "distribution": {
+    "forbidden_status_commit_fresh_no_residue": 20,
+    "allowed_routing_history_audit": 16,
+    "committed_exact_replay_read_only": 3,
+    "legacy_forbidden_prior_committed_replay": 2
+  },
+  "missing": [],
+  "extra": [],
+  "duplicates": [],
+  "unclassified": [],
+  "test_body_calls": 0,
+  "inner_manifest_entries": 10,
+  "inner_manifest_inventory_equal": true,
+  "inner_manifest_integrity_failures": [],
+  "runner_live_retained_equal": true,
+  "plugin_live_staged_recorded_retained_equal": true,
+  "socket_guard_log": "ABSENT",
+  "database_fixture_ledger": "ABSENT",
+  "real_postgresql_authorized": false,
+  "real_postgresql_used": false,
+  "scope_note": "This proves the final-source happy path and preserved behavior only; it does not cure the inherited-environment read or the incomplete delivered outer manifest."
+}

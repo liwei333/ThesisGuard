@@ -1,0 +1,9 @@
+{
+  "docker_client_version": "29.7.2",
+  "docker_server_version": "29.7.2",
+  "daemon_id": "ce947e54-c61d-470d-b71b-511d67cab4f6",
+  "daemon_name": "docker-desktop",
+  "storage_driver": "overlayfs",
+  "startup_method": "open -a Docker",
+  "startup_authorized": true
+}

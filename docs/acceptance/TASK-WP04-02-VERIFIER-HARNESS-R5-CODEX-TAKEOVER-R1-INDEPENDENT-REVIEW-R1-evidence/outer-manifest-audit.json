@@ -1,0 +1,22 @@
+{
+  "outer_manifest_schema": "artifacts",
+  "retained_files_except_outer_manifest": 60,
+  "outer_manifest_entries": 55,
+  "inventory_equal": false,
+  "listed_entry_integrity_failures": [],
+  "missing_entries": [
+    "harness-run/manifest.json",
+    "negative/controlled-interruption/manifest.json",
+    "negative/embedded-url-redaction/manifest.json",
+    "negative/interruption/manifest.json",
+    "negative/staged-mismatch/manifest.json"
+  ],
+  "inner_manifest_results": {
+    "harness-run/manifest.json": "PASS_10_OF_10",
+    "negative/controlled-interruption/manifest.json": "PASS_9_OF_9",
+    "negative/embedded-url-redaction/manifest.json": "PASS_9_OF_9",
+    "negative/interruption/manifest.json": "PASS_9_OF_9",
+    "negative/staged-mismatch/manifest.json": "PASS_6_OF_6"
+  },
+  "contract_result": "FAIL"
+}

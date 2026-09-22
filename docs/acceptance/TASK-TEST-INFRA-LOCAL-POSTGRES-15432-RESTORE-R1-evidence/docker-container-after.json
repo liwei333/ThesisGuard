@@ -1,0 +1,20 @@
+{
+  "name": "thesisguard-postgres",
+  "image_reference": "pgvector/pgvector:pg17",
+  "image_id": "sha256:cf134a767f474095eeba57e0117be8e568e011a63f33fbf252f14c9b760f8e6f",
+  "restart_policy": "unless-stopped",
+  "mount": {
+    "type": "volume",
+    "name": "thesisguard-postgres-data",
+    "destination": "/var/lib/postgresql/data",
+    "read_write": true
+  },
+  "port_bindings": [
+    "0.0.0.0:15432 -> 5432/tcp",
+    "[::]:15432 -> 5432/tcp"
+  ],
+  "state": "running",
+  "health": "healthy",
+  "recreated_by_task": false,
+  "started_explicitly_by_task": false
+}

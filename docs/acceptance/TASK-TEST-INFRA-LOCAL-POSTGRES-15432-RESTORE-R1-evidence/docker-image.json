@@ -1,0 +1,10 @@
+{
+  "reference": "pgvector/pgvector:pg17",
+  "image_id": "sha256:cf134a767f474095eeba57e0117be8e568e011a63f33fbf252f14c9b760f8e6f",
+  "repo_digest": "pgvector/pgvector@sha256:cf134a767f474095eeba57e0117be8e568e011a63f33fbf252f14c9b760f8e6f",
+  "created_at": "2026-08-13T21:26:32.515595343Z",
+  "architecture": "arm64",
+  "os": "linux",
+  "existed_before_any_postgres_start_or_create_command": true,
+  "pulled_or_built_by_task": false
+}

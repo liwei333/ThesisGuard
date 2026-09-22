@@ -1,0 +1,40 @@
+Committed R4 source hashes:
+plugin: 77d5631395f6d600df05340da82769d1d1c24f9b9c58d72a138971fe390e4811
+runner: a9f5c53a210b001e6e0f0c098d03a844af758df05df73e134edba54f26076494
+
+Committed executor bundle source-copy hashes:
+plugin.source.py: d4069b158d003e18725a2acd273dce7ca4c163c752ba4c14c49302d2543229e6
+runner.source.py: f9c283afd17258c7b5c9e8634f75fd5d7d7675d2330586ffb88b2e550e1288b8
+plugin_copy_cmp=1
+runner_copy_cmp=1
+
+Fresh independent bundle source-copy hashes:
+plugin.source.py: 77d5631395f6d600df05340da82769d1d1c24f9b9c58d72a138971fe390e4811
+runner.source.py: a9f5c53a210b001e6e0f0c098d03a844af758df05df73e134edba54f26076494
+fresh_plugin_cmp=0
+fresh_runner_cmp=0
+
+Committed executor bundle files absent from its manifest:
+collected-nodeids.json
+
+Fresh independent happy-path bundle files absent from its manifest:
+collected-nodeids.json
+
+Actual main pinned-file hash:
+daf2779bda9602a7397ffc01398b940b704091a3529015475542d5e7ad66de89  docs/acceptance/TASK-TEST-INFRA-PG-FIXTURE-LIFECYCLE-R1-INDEPENDENT-REVERIFY-acceptance.md
+
+Runner expected hash:
+daf2779bda9602a7397ffc01398b940b704091a3529014775542d5e7ad66de89
+
+Fresh run recorded the mismatch above but returned valid=true and verdict=PASS.
+
+Unsafe inherited-environment probe (key names only; values were neither read nor retained):
+ANTHROPIC_AUTH_TOKEN
+CODEX_SESSION_ID
+SSH_AUTH_SOCK
+
+The unsafe task-generated bundle was removed immediately. The retained fresh run used env -i;
+its only environment keys are DATABASE_URL, HOME, LANG, PATH, PYTHONDONTWRITEBYTECODE,
+PYTHONPATH, TG_EVIDENCE_PG_LEDGER, TG_R4_COLLECTION_JSON, TG_SOCKET_GUARD_LOG,
+TG_TEST_ADMIN_DATABASE_URL, TMPDIR and __CF_USER_TEXT_ENCODING. Exact database URL values
+are redacted by the committed runner in the retained bundle.

@@ -1,0 +1,130 @@
+{
+  "excluded": [
+    "manifest.json"
+  ],
+  "file_count": 24,
+  "files": [
+    {
+      "bytes": 655,
+      "path": "after.json",
+      "sha256": "d89822003c7fc2aec5bd5cc3d41113aec8dd425ba59ab6659dd3ec9b80d6e05d"
+    },
+    {
+      "bytes": 1595,
+      "path": "baseline.json",
+      "sha256": "c0d944f0e5ffb100ed014cb42d0aedb31c1bae5f2cceab9ede75841620958e98"
+    },
+    {
+      "bytes": 447,
+      "path": "before.json",
+      "sha256": "3669fa4aad4d3f5138abd20000593ac841a859d73b1fabfb0bec3f460478f01c"
+    },
+    {
+      "bytes": 5228,
+      "path": "catalog-drift-observation.json",
+      "sha256": "da6981ed255bed7faa94ea406474cd7c967aa6f866d6a73a0921584e65fd6280"
+    },
+    {
+      "bytes": 1515,
+      "path": "command-audit.json",
+      "sha256": "d85e20ac99ec157a4a00ea55e1fd644f1adee84fe0006c01da16dd03401920b3"
+    },
+    {
+      "bytes": 621,
+      "path": "compose-contract.json",
+      "sha256": "5b84cd15683af353953761b29f6f30c1d1245df9a35a0d955b14eb45462fd02e"
+    },
+    {
+      "bytes": 491,
+      "path": "credential-scan.json",
+      "sha256": "4354f74158eb3c5a042e6e0cff777a02c4b17fb4e385b2c901731972ee136bea"
+    },
+    {
+      "bytes": 12202,
+      "path": "database-catalog.json",
+      "sha256": "cd144820b383b0144152c4fa93294328db2753a3d09d1f7ec43507f9ef444f6f"
+    },
+    {
+      "bytes": 712,
+      "path": "database-identity.json",
+      "sha256": "bc41d82496ba783dcd80f62839819c63a1ad694856286bd5a6b1ff13c37aa252"
+    },
+    {
+      "bytes": 679,
+      "path": "docker-auto-start-observation.json",
+      "sha256": "296d24b8fde66dbb41cd685e879f662361a27efeb5252cc275de4e7414fdb382"
+    },
+    {
+      "bytes": 564,
+      "path": "docker-container-after.json",
+      "sha256": "7e94cfacad2f86fb2c33f9424e734fc8685642d200d5906d2aadbfe1dbd911bf"
+    },
+    {
+      "bytes": 674,
+      "path": "docker-container-before.json",
+      "sha256": "a84bb80496b2ce00faf634e44836d09ea9ed0ae3c0152918011de1513d6687d0"
+    },
+    {
+      "bytes": 268,
+      "path": "docker-daemon-after.json",
+      "sha256": "3d71c45dd9cb0b863781a371989829b87be1fee94dc4ee8c9b959c5b6fe940ba"
+    },
+    {
+      "bytes": 257,
+      "path": "docker-daemon-before.json",
+      "sha256": "4d6b61b14e7a677ec2fc132326c58ddbf3b320f9b7c84b640ddba05a4568c3d2"
+    },
+    {
+      "bytes": 436,
+      "path": "docker-image.json",
+      "sha256": "394dd3014c32e68acf766a6ef64f78a37615ffab023b05fa0a19d7e0b0513c5d"
+    },
+    {
+      "bytes": 547,
+      "path": "docker-volume.json",
+      "sha256": "3aa759aeb99982438607b1bf029df1bd0090265890896caf4b144f59dcc0221f"
+    },
+    {
+      "bytes": 815,
+      "path": "final-state.json",
+      "sha256": "3f222fef1318bce2b8014ff11809d3c1994689520f2aa19d3c307a0130993c5d"
+    },
+    {
+      "bytes": 696,
+      "path": "historical-unknown-comparison.json",
+      "sha256": "9f6a1e0d7b04a5b0c7ed45f897c285135072506bdd651890b252390326994ff1"
+    },
+    {
+      "bytes": 488,
+      "path": "mutation-audit.json",
+      "sha256": "14d05a6f4c581f0fffcc91e0e3582b1efbd96e94657191f06d6ca53e46333b5c"
+    },
+    {
+      "bytes": 267,
+      "path": "pg-isready-after.txt",
+      "sha256": "d5b54afd211442e1b38c7a796d7332980534739599b334c962c44839f995d272"
+    },
+    {
+      "bytes": 42,
+      "path": "pg-isready-before.txt",
+      "sha256": "becaf394c2b3b2f412fa45007ef11c9465f6cfdd3c8d7da8b18c5635ae285b83"
+    },
+    {
+      "bytes": 266,
+      "path": "port-after.txt",
+      "sha256": "c280e877468eec77ebf16d96a24ba9f985c09f7b7522ace6d19b707a662954a7"
+    },
+    {
+      "bytes": 49,
+      "path": "port-before.txt",
+      "sha256": "80c4af9f5cbaf93ebe496f6f85e1cfe9f925ee52d1264f29eafab531ad81267b"
+    },
+    {
+      "bytes": 317,
+      "path": "postgres-health.json",
+      "sha256": "1e1fab7688887b103c9a8045b82fda0d0f01e1194d2e51611ae6647a6d2aa611"
+    }
+  ],
+  "generated_at_utc": "2026-09-22T02:15:17.632110+00:00",
+  "root": "TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R1-evidence"
+}

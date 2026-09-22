@@ -1,0 +1,26 @@
+{
+  "algorithm": "sha256",
+  "manifest_excludes_itself": true,
+  "files": {
+    "fresh-collect-only-summary.json": {
+      "bytes": 1125,
+      "sha256": "82befb2c852aefda4be38f4093378c054fb08fa7524e5e66b62448d4e67d84db"
+    },
+    "inherited-environment-counterexample.json": {
+      "bytes": 546,
+      "sha256": "085c37b9687afd44efad45d3f93124953d81e184e6664db721162f4de05decd4"
+    },
+    "outer-manifest-audit.json": {
+      "bytes": 815,
+      "sha256": "ac22b6e60c500ade5bc2cef1f5846cda3fd5ae42bbf1652aeef230b6d2f8c4ab"
+    },
+    "source-attribution.json": {
+      "bytes": 715,
+      "sha256": "6f3b0bf4007923bf3fc96e635bcc646ab986312a713208cb34a57637a1197d04"
+    },
+    "verification-summary.json": {
+      "bytes": 1297,
+      "sha256": "98aed08cac6e93518c2b8e389926a6a84ace68756952f28f5582830240ea59e6"
+    }
+  }
+}

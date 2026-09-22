@@ -1,0 +1,11 @@
+{
+  "expected_count": 45,
+  "fresh_catalog_identity_checks": 0,
+  "fresh_result": "BLOCKED_DATABASE_UNAVAILABLE",
+  "plan_count": 45,
+  "preservation_claim": "UNPROVEN_FRESH; no successful DB connection and no mutating DB command",
+  "task_connections_to_historical_databases": 0,
+  "task_drops": 0,
+  "task_renames": 0,
+  "task_terminations": 0
+}

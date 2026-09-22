@@ -1,0 +1,34 @@
+{
+  "task_id": "TASK-WP04-02-VERIFIER-HARNESS-R5-REPAIR-INDEPENDENT-REVIEW-R1",
+  "verdict": "FAIL",
+  "reviewed_delivery": {
+    "branch": "codex/wp04-02-verifier-harness-r5-repair",
+    "head": "df836cb39a1234aae967553b3783a67df9ad6672",
+    "delivery_form": "uncommitted working tree",
+    "tracked_files_modified": 3,
+    "report_present": true,
+    "executor_evidence_present": true
+  },
+  "fresh_checks": {
+    "focused_pytest": "67 passed in 1.44s",
+    "focused_pytest_exit": 0,
+    "ruff_check": "All checks passed",
+    "ruff_format_check": "3 files already formatted",
+    "ast_parse": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "acceptance_levels": {
+    "L1_STATIC_REVIEWED": "ACHIEVED",
+    "L2_BUILD_VERIFIED": "ACHIEVED",
+    "L3_CONTRACT_VERIFIED": "NOT_ACHIEVED",
+    "L4_RUNTIME_VERIFIED": "PARTIAL_HAPPY_PATH_ONLY",
+    "L4_DB_VERIFIED": "NOT_RUN_NOT_AUTHORIZED"
+  },
+  "blocking_findings": [
+    "final delivered runner bytes do not match the runner source retained in the executor harness-run bundle",
+    "an interrupted invocation can leave an owned evidence directory without result.json or manifest.json",
+    "the staged pytest plugin is neither collision-resistant nor hash-verified before execution and a tampered staged plugin can still lead to PASS",
+    "embedded credential-bearing URLs and credential-bearing argv metadata are not redacted",
+    "the executor evidence bundle omits required baseline, test, quality, counterexample, no-DB, final-state and negative-run evidence"
+  ]
+}

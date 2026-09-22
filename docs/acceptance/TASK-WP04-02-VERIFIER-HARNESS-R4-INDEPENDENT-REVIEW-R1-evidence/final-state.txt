@@ -1,0 +1,40 @@
+FINAL STATE — 2026-09-20 Asia/Shanghai
+
+Main:
+## main...origin/main
+HEAD=675217c3a15c0f416aa4462ca6edc491bf99f9f6
+Untracked task-attributable additions:
+?? docs/acceptance/TASK-WP04-02-VERIFIER-HARNESS-R4-INDEPENDENT-REVIEW-R1-acceptance.md
+?? docs/acceptance/TASK-WP04-02-VERIFIER-HARNESS-R4-INDEPENDENT-REVIEW-R1-evidence/
+Preserved pre-existing untracked file:
+?? docs/workbench.html
+SHA256=1dbd4d40accd6edcdd03ab68dc9b8b0370bac49d635a64aa4a989b5ddf96a6b0
+size=114165
+mtime=2026-09-19T10:53:13+0800
+
+Business candidate:
+## codex/wp04-02-evidence-domain-service...origin/codex/wp04-02-evidence-domain-service
+parent=af4f2cbbb0a50bd6c215bcaa78dd9fcd98414cc8
+HEAD=e942cbcc9e0b5d95a6c7ee46d4d74ee90ff03ad4
+status=clean
+
+Fresh isolated review checkout:
+## HEAD (no branch)
+parent=675217c3a15c0f416aa4462ca6edc491bf99f9f6
+HEAD=df836cb39a1234aae967553b3783a67df9ad6672
+status=clean
+
+Existing dirty R4 checkout:
+Its final short status is identical to the initial inventory: the same 16
+tracked tests/ deletions, untracked evidence/ directory, untracked
+tg_verifier_tests/conftest.py and the same 15 untracked copied test files.
+No task-attributable edit was made there.
+
+Final fresh verification:
+- committed R4 self-tests: 21 passed in 1.13s
+- focused Ruff check: exit 0, All checks passed
+- focused Ruff format check: exit 0, 3 files already formatted
+- independent counterexamples: 9 failed, 3 passed in 0.10s; failures match
+  the reported harness defects
+- final self-test socket guard log: ABSENT
+- final self-test database fixture ledger: ABSENT

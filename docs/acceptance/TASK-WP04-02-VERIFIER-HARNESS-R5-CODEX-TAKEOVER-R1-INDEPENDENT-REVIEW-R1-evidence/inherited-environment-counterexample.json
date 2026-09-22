@@ -1,0 +1,14 @@
+{
+  "synthetic_values_only": true,
+  "scenario": "invoke run_collect_only with a synthetic unrelated sensitive inherited variable and force a main identity failure before pytest",
+  "inherited_keys_observed_by_sensitive_value_collector": [
+    "PATH",
+    "UNRELATED_NORMAL",
+    "UNRELATED_PASSWORD_BACKUP"
+  ],
+  "synthetic_sensitive_inherited_value_was_read": true,
+  "child_subprocess_started": false,
+  "runner_result_reason": "main_git_identity_mismatch",
+  "real_credentials_read_by_independent_test": false,
+  "contract_result": "FAIL"
+}

@@ -1,0 +1,20 @@
+{
+  "docker_desktop_was_started_by_task": true,
+  "target_auto_restored": true,
+  "target": "thesisguard-postgres",
+  "other_containers_observed_running_after_daemon_start": [
+    "thesisguard-api",
+    "thesisguard-worker",
+    "thesisguard-web",
+    "thesisguard-redis",
+    "thesisguard-minio",
+    "omni-order-server-app-1",
+    "plus-ui-prod",
+    "omni-order-server-mysql-1",
+    "omni-order-server-redis-1",
+    "open-design"
+  ],
+  "other_containers_operated_by_task": [],
+  "port_15432_conflict": false,
+  "note": "Statuses showed Up About a minute after Docker Desktop start; the task issued no start, stop, create, recreate, or remove command for these containers."
+}

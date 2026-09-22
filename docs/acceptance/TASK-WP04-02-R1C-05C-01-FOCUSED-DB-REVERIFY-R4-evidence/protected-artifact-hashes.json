@@ -1,0 +1,34 @@
+{
+  "additional_final_observation_only": {
+    "AGENTS.md": "abaf80d081b7c8e50e47dfa534b1407ff2f155876d5c36eb2a60aabe65dc6d81",
+    "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R3-acceptance.md": "68da3892b3908dfd72347cba3aa73bcefb0f669f76b2c8403d3989fc8d3813a9",
+    "docs/acceptance/TASK-WP04-02-R1C-05C-01-acceptance.md": "d4f9ba27fff54907729c185222284b1cb5370481ce498a33fff61fc88f3a90a0",
+    "docs/acceptance/TASK-WP04-02-R1C-05C-01-dispatch.md": "843e440aab3eab9da74e4cd8909eb609a530e2bff7a40258d5bd4e37f69ceae4",
+    "docs/acceptance/TASK-WP04-02-R1C-05C-01-execution-report.md": "e1678c9818f6673cf950433c3ae3b183c3a45f83b36e7cb0828da65d09057dfd",
+    "docs/acceptance/TASK-WP04-02-R1C-05C-01-task-contract.md": "5b7cb4cf1577ece9fb454bb713108702fa067375d06fc4f031581d464eefdb58",
+    "docs/acceptance/TASK-WP04-02-VERIFIER-HARNESS-R5-CODEX-TAKEOVER-R2-INDEPENDENT-REVIEW-R1-acceptance.md": "bffdc5c25c00ab5d5d9dd7fd9d0ddb486cc50cf8dfc09817090cc254959561ca",
+    "docs/acceptance/TASK-WP04-02-VERIFIER-HARNESS-R5-CODEX-TAKEOVER-R2-INDEPENDENT-REVIEW-R1-evidence/manifest.json": "7628b4a94388dab26add222fed650a5a24796500671c91f231e6eb8378bd7de1",
+    "docs/prompts/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R3.md": "c7c4affd9e3d4af7bf0c8a106ea8634a7f90ffc6878abd7eb419fd4b336a3f23"
+  },
+  "fixed_before_and_after": {
+    "candidate_pins": {
+      "backend/evidence/errors.py": "3cf37eb3efbf4c7bf7ab3d4213e4ce9865f2b9209fdbeb3d6c267fe84b06d1ec",
+      "backend/evidence/services.py": "7ce76b02928019347625048e7d0acb523d74168cd6bbbdf03184163ac277f959",
+      "tests/evidence_pg_fixture.py": "bb84518f354f2f7752881fb529dcd6df31b58085bf32d6728c2ccf6998c3e9db",
+      "tests/test_evidence_pg_fixture_lifecycle.py": "3887a89945a770ed22bac5839ff6a61e5daf47cb05a8b0105d1cfce8f3c12fc7",
+      "tests/test_evidence_services.py": "c54e2306b7ec9625f0498faeebd8a23ceb55c6366769ac0d944f228e2aa84851"
+    },
+    "harness_pins": {
+      "tg_verifier_tests/verification/test_wp04_02_r4_runner.py": "aafa9e54ab1bd1fbf7ce3d3cf78c2854125264e73291c264a49dba142cf8ff75",
+      "tg_verifier_tools/verification/wp04_02_r4_pytest_plugin.py": "3ab4b45feb356fcecdaa5363f09d3256dc0c6a2b8f2bb067d32da8438f3bdbc4",
+      "tg_verifier_tools/verification/wp04_02_r4_runner.py": "3b3145f0a17e593db8d7689ba942ad43fcd4f4be15ddc61d7196e0cc061c3b36"
+    },
+    "main_pins": {
+      "docs/WP04_EVIDENCE_CORRECTION_POLICY_ADDENDUM_2026-09-16.md": "af345e2604497171dc2d2ef13489ec3cffa1528caa5175c2ccf245b6a987a955",
+      "docs/WP04_EVIDENCE_DOMAIN_CONTRACT.md": "b179ecc6ea60ffed75f7179a2d36e47ad2b55153f6d4fa62b8be7e4926fd1288",
+      "docs/acceptance/TASK-TEST-INFRA-PG-FIXTURE-LIFECYCLE-R1-INDEPENDENT-REVERIFY-acceptance.md": "daf2779bda9602a7397ffc01398b940b704091a3529015475542d5e7ad66de89",
+      "docs/acceptance/TASK-WP04-02-R1C-05C-01-INDEPENDENT-REVERIFY-R1-evidence/phase-a-20260916-exact-cleanup-plan.json": "635ba4aad0468c15b4360733c784d52f4430f03477a14ef8a271a1e32bada360"
+    }
+  },
+  "limitation": "Additional context artifacts were not all hashed in a retained pre-collect file; this prevents no claim because the verdict is already BLOCKED before CREATE."
+}
