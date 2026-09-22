@@ -1,0 +1,48 @@
+{
+  "artifacts": {
+    "harness-run/baseline-pins.json": {
+      "bytes": 382,
+      "sha256": "bcccf6fdc59e13841b4addf2b2f18c3f28bf574ea1f536ed375cd8bc50041ed6"
+    },
+    "harness-run/collect-only.meta.json": {
+      "bytes": 1353,
+      "sha256": "f574caa735855fd9c1c932580fa99c19894910a2c639abaee169cbec00890f27"
+    },
+    "harness-run/collect-only.stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "harness-run/collect-only.stdout.txt": {
+      "bytes": 5156,
+      "sha256": "502363314da1f4285048a2350c1add25e46f3f99ca4fa082e710a90b07e787e5"
+    },
+    "harness-run/collected-nodeids.json": {
+      "bytes": 5303,
+      "sha256": "6b5a93d9deb1896d8aff4cb0ee04af2db562eb12f4ef44171a11977d524aa10c"
+    },
+    "harness-run/manifest.json": {
+      "bytes": 1416,
+      "sha256": "6e3ca0f659cdb8be3e1039b78b1c51b9324372a297fc478917cedec93d2fc632"
+    },
+    "harness-run/plugin-staging.json": {
+      "bytes": 164,
+      "sha256": "2172d5a34c850deb6dfeef5b44ff436c66272ed48fc5e8291f9084573d38d1ce"
+    },
+    "harness-run/plugin.source.py": {
+      "bytes": 10576,
+      "sha256": "044062900509c011576cb1501c73c2298064fc1362c0e56f5e2e7dc0fd8acc08"
+    },
+    "harness-run/result.json": {
+      "bytes": 666,
+      "sha256": "3eee2e96e8e780dcdea606306d76538e25f55c919af2006ab696dc05bc74e095"
+    },
+    "harness-run/runner.source.py": {
+      "bytes": 30964,
+      "sha256": "944e4a61f3ea1ce2a3746f7e54303bcd4a600dba6719eef56a794506f3cb6e02"
+    },
+    "harness-run/source-hashes.json": {
+      "bytes": 162,
+      "sha256": "495fbefca9f2f43f8602c2f821b6a68549a09e25a6d2fbb8dd9221a1da29f8f7"
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "argv": [
+    "/opt/homebrew/bin/pytest",
+    "-p",
+    "tg_verifier_tools.verification.wp04_02_r4_pytest_plugin",
+    "-p",
+    "no:cacheprovider",
+    "--collect-only",
+    "-q",
+    "tests/test_evidence_services.py::test_r1c05c01_forbidden_status_commit_fresh_no_residue",
+    "tests/test_evidence_services.py::test_r1c05c01_allowed_routing_history_audit",
+    "tests/test_evidence_services.py::test_r1c05c01_committed_exact_replay_read_only",
+    "tests/test_evidence_services.py::test_r1c05c01_legacy_forbidden_prior_committed_replay"
+  ],
+  "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+  "env": {
+    "HOME": "/Users/qianduoduo",
+    "LANG": "en_US.UTF-8",
+    "PATH": "/opt/homebrew/bin:/usr/bin:/bin",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONPATH": "/tmp/tg_r4_plugin_qn59dchh:/opt/homebrew/lib/python3.12/site-packages",
+    "TG_R4_COLLECTION_JSON": "/Users/qianduoduo/Desktop/AI_app/codex-wp04-02-verifier-harness-r5-repair/docs/acceptance/TASK-WP04-02-VERIFIER-HARNESS-R5-REPAIR-evidence/harness-run/_collected-nodeids.json",
+    "TG_R4_INVOCATION_NONCE": "14f0f17a0304cecb3f0375f5754afccd",
+    "USER": "zh_CN.UTF-8"
+  },
+  "start_utc": "2026-09-21T04:03:30.728121+00:00",
+  "end_utc": "2026-09-21T04:03:31.757650+00:00",
+  "returncode": 0,
+  "timeout_seconds": 120
+}

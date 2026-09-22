@@ -1,0 +1,15 @@
+Command:
+PYTHONDONTWRITEBYTECODE=1 /opt/homebrew/bin/pytest -p no:cacheprovider tg_verifier_tests/verification/test_wp04_02_r4_runner.py -q --tb=short
+
+============================= test session starts ==============================
+platform darwin -- Python 3.12.9, pytest-9.1.1, pluggy-1.6.0
+rootdir: /Users/qianduoduo/Desktop/AI_app/codex-wp04-02-verifier-harness-r5-repair
+configfile: pyproject.toml
+plugins: asyncio-1.4.0, anyio-4.15.1
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 82 items
+
+tg_verifier_tests/verification/test_wp04_02_r4_runner.py ............... [ 18%]
+...................................................................      [100%]
+
+============================== 82 passed in 1.44s ==============================

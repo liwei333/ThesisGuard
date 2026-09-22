@@ -1,0 +1,35 @@
+{
+  "argv": [
+    "/opt/homebrew/bin/pytest",
+    "-p",
+    "_tg_wp04_02_verifier_35a4bd81f24a828878d7fab76a075c2a.plugin",
+    "-p",
+    "no:cacheprovider",
+    "--collect-only",
+    "-q",
+    "tests/test_evidence_services.py::test_r1c05c01_forbidden_status_commit_fresh_no_residue",
+    "tests/test_evidence_services.py::test_r1c05c01_allowed_routing_history_audit",
+    "tests/test_evidence_services.py::test_r1c05c01_committed_exact_replay_read_only",
+    "tests/test_evidence_services.py::test_r1c05c01_legacy_forbidden_prior_committed_replay"
+  ],
+  "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+  "env": {
+    "HOME": "/private/tmp",
+    "LANG": "C.UTF-8",
+    "PATH": "/opt/homebrew/bin:/usr/bin:/bin",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONPATH": "/tmp/tg_wp04_02_verifier_akzbnzox:/Users/qianduoduo/Desktop/AI_app/codex-wp04-02-verifier-harness-r5-repair/docs/acceptance/TASK-WP04-02-VERIFIER-HARNESS-R5-CODEX-TAKEOVER-R2-evidence/guards",
+    "TG_EVIDENCE_PG_LEDGER": "/Users/qianduoduo/Desktop/AI_app/codex-wp04-02-verifier-harness-r5-repair/docs/acceptance/TASK-WP04-02-VERIFIER-HARNESS-R5-CODEX-TAKEOVER-R2-evidence/harness-run/_fixture-ledger.jsonl",
+    "TG_R4_COLLECTION_JSON": "/Users/qianduoduo/Desktop/AI_app/codex-wp04-02-verifier-harness-r5-repair/docs/acceptance/TASK-WP04-02-VERIFIER-HARNESS-R5-CODEX-TAKEOVER-R2-evidence/harness-run/_collected-nodeids.json",
+    "TG_R4_INVOCATION_NONCE": "ab412625fdde6727ca50f47b67517e91",
+    "TG_R4_PLUGIN_SHA256": "3ab4b45feb356fcecdaa5363f09d3256dc0c6a2b8f2bb067d32da8438f3bdbc4",
+    "TG_TEST_ADMIN_DATABASE_URL": "<REDACTED>",
+    "USER": "verifier"
+  },
+  "start_utc": "2026-09-21T08:13:29.605041+00:00",
+  "end_utc": "2026-09-21T08:13:30.693860+00:00",
+  "returncode": 0,
+  "failure_category": null,
+  "error_type": null,
+  "timeout_seconds": 120
+}

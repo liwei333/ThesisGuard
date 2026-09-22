@@ -1,0 +1,7 @@
+Command:
+PYTHONDONTWRITEBYTECODE=1 /opt/homebrew/bin/pytest -p no:cacheprovider tg_verifier_tests/verification/test_wp04_02_r4_runner.py -q --tb=short
+
+Exit: 0
+Collected: 80
+Result: 80 passed in 1.48s
+Existing useful R4/R5 tests were retained; takeover added targeted closure, staging, redaction, self-test, body-count, source-attribution and guard-environment coverage.

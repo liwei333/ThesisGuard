@@ -1,0 +1,24 @@
+{
+  "final_guarded_cli_exit": 0,
+  "runner_valid": true,
+  "pytest_returncode": 0,
+  "nodeid_count": 41,
+  "unique_nodeid_count": 41,
+  "distribution": {
+    "forbidden_status_commit_fresh_no_residue": 20,
+    "allowed_routing_history_audit": 16,
+    "committed_exact_replay_read_only": 3,
+    "legacy_forbidden_prior_committed_replay": 2
+  },
+  "test_body_calls": 0,
+  "database_url_policy": "synthetic PostgreSQL URL on 127.0.0.1 port 1 only",
+  "fixture_ledger_exists_or_nonempty": false,
+  "socket_attempt_log_exists_or_nonempty": false,
+  "create_sql_matches": 0,
+  "real_credentials_used": false,
+  "real_services_contacted": false,
+  "invocation_nonce": "b8a912a4646974d5a7af91d571e8029d",
+  "plugin_namespace": "_tg_wp04_02_verifier_5e05a7dded54780f947ecdda819314fc",
+  "inner_manifest_artifacts": 10,
+  "inner_manifest_hash_and_size_check": true
+}

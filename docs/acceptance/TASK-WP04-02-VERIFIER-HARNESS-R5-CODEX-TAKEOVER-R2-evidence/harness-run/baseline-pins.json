@@ -1,0 +1,10 @@
+{
+  "main_git_mismatches": [],
+  "candidate_git_mismatches": [],
+  "candidate_pin_mismatches": [],
+  "main_pin_mismatches": [],
+  "main_head": "675217c3a15c0f416aa4462ca6edc491bf99f9f6",
+  "candidate_commit": "e942cbcc9e0b5d95a6c7ee46d4d74ee90ff03ad4",
+  "candidate_branch": "codex/wp04-02-evidence-domain-service",
+  "candidate_parent": "af4f2cbbb0a50bd6c215bcaa78dd9fcd98414cc8"
+}

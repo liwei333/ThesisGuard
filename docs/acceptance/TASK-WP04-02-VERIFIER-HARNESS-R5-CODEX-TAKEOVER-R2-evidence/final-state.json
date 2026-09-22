@@ -1,0 +1,25 @@
+{
+  "captured_utc": "2026-09-21T08:15:47Z",
+  "r5_branch": "codex/wp04-02-verifier-harness-r5-repair",
+  "r5_head_unchanged": "df836cb39a1234aae967553b3783a67df9ad6672",
+  "r5_parent_unchanged": "675217c3a15c0f416aa4462ca6edc491bf99f9f6",
+  "main_head_unchanged": "675217c3a15c0f416aa4462ca6edc491bf99f9f6",
+  "candidate_head_unchanged": "e942cbcc9e0b5d95a6c7ee46d4d74ee90ff03ad4",
+  "candidate_clean": true,
+  "r2_modified_source_test_files": [
+    "tg_verifier_tools/verification/wp04_02_r4_runner.py",
+    "tg_verifier_tests/verification/test_wp04_02_r4_runner.py"
+  ],
+  "r2_added_paths": [
+    "docs/acceptance/TASK-WP04-02-VERIFIER-HARNESS-R5-CODEX-TAKEOVER-R2-execution-report.md",
+    "docs/acceptance/TASK-WP04-02-VERIFIER-HARNESS-R5-CODEX-TAKEOVER-R2-evidence/"
+  ],
+  "preexisting_r1_modified_plugin_preserved": true,
+  "plugin_sha256_unchanged_during_r2": "3ab4b45feb356fcecdaa5363f09d3256dc0c6a2b8f2bb067d32da8438f3bdbc4",
+  "r1_report_sha256_unchanged": "9b166943f15248eefb08742f6694e93b11f5df0489806625573d817a2e32cf5b",
+  "r1_evidence_tree_sha256_unchanged": "55b461968db358304d78b15865b7360fabc923e3687e0cab38d42e0bf367bf9b",
+  "historical_report_sha256_unchanged": "bc59272b2ef8e88ecb2c9e984f8527036c959e86039ecf75edeec95f2da8338b",
+  "historical_evidence_tree_sha256_unchanged": "4aee924467315ef4e016ba14d6bc063bd1ff13221ef7bab90e4a0c1e81545668",
+  "real_database_activity_authorized_or_performed": false,
+  "git_commit_merge_rebase_push_reset_clean_stash_performed": false
+}

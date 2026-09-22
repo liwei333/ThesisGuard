@@ -1,0 +1,27 @@
+{
+  "captured_at": "2026-09-21T14:35:20+08:00",
+  "r5_branch": "codex/wp04-02-verifier-harness-r5-repair",
+  "r5_head_unchanged": "df836cb39a1234aae967553b3783a67df9ad6672",
+  "main_head_unchanged": "675217c3a15c0f416aa4462ca6edc491bf99f9f6",
+  "candidate_head_unchanged": "e942cbcc9e0b5d95a6c7ee46d4d74ee90ff03ad4",
+  "candidate_clean": true,
+  "authorized_modified_source_test_files": [
+    "tg_verifier_tools/verification/wp04_02_r4_runner.py",
+    "tg_verifier_tools/verification/wp04_02_r4_pytest_plugin.py",
+    "tg_verifier_tests/verification/test_wp04_02_r4_runner.py"
+  ],
+  "authorized_new_delivery_paths": [
+    "docs/acceptance/TASK-WP04-02-VERIFIER-HARNESS-R5-CODEX-TAKEOVER-R1-execution-report.md",
+    "docs/acceptance/TASK-WP04-02-VERIFIER-HARNESS-R5-CODEX-TAKEOVER-R1-evidence/"
+  ],
+  "historical_zcode_report_sha256_unchanged": "bc59272b2ef8e88ecb2c9e984f8527036c959e86039ecf75edeec95f2da8338b",
+  "historical_zcode_outer_manifest_sha256_unchanged": "f365f1ee253ecc7170916aa517c1c103bd3c8829bd53940857fc8a8d11d01dc3",
+  "tracked_diff_numstat_vs_head": {
+    "test_wp04_02_r4_runner.py": {"insertions": 904, "deletions": 35},
+    "wp04_02_r4_pytest_plugin.py": {"insertions": 54, "deletions": 22},
+    "wp04_02_r4_runner.py": {"insertions": 781, "deletions": 212}
+  },
+  "merge_performed": false,
+  "push_performed": false,
+  "real_postgresql_used": false
+}

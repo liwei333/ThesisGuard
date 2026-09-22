@@ -1,0 +1,21 @@
+{
+  "captured_before_takeover_edits": true,
+  "r5_worktree": "/Users/qianduoduo/Desktop/AI_app/codex-wp04-02-verifier-harness-r5-repair",
+  "r5_branch": "codex/wp04-02-verifier-harness-r5-repair",
+  "r5_head": "df836cb39a1234aae967553b3783a67df9ad6672",
+  "main_head": "675217c3a15c0f416aa4462ca6edc491bf99f9f6",
+  "candidate_branch": "codex/wp04-02-evidence-domain-service",
+  "candidate_head": "e942cbcc9e0b5d95a6c7ee46d4d74ee90ff03ad4",
+  "candidate_parent": "af4f2cbbb0a50bd6c215bcaa78dd9fcd98414cc8",
+  "candidate_clean": true,
+  "initial_source_hashes": {
+    "tg_verifier_tools/verification/wp04_02_r4_runner.py": "201966382113a5a29e13876a36cb9ac0cd0a4efa7b9ea8d96d8924de025191fc",
+    "tg_verifier_tools/verification/wp04_02_r4_pytest_plugin.py": "044062900509c011576cb1501c73c2298064fc1362c0e56f5e2e7dc0fd8acc08",
+    "tg_verifier_tests/verification/test_wp04_02_r4_runner.py": "29d2ab792a35c6c2d74eb79a53d7d7bd273b1646274b4846a18f51225c324588"
+  },
+  "historical_zcode_delivery": {
+    "report_sha256": "bc59272b2ef8e88ecb2c9e984f8527036c959e86039ecf75edeec95f2da8338b",
+    "evidence_outer_manifest_sha256": "f365f1ee253ecc7170916aa517c1c103bd3c8829bd53940857fc8a8d11d01dc3",
+    "preserved_unchanged": true
+  }
+}

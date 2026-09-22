@@ -1,0 +1,24 @@
+{
+  "valid": true,
+  "verdict": "PASS",
+  "count": 41,
+  "expected_count": 41,
+  "distribution": {
+    "forbidden_status_commit_fresh_no_residue": 20,
+    "allowed_routing_history_audit": 16,
+    "committed_exact_replay_read_only": 3,
+    "legacy_forbidden_prior_committed_replay": 2
+  },
+  "expected_distribution": {
+    "forbidden_status_commit_fresh_no_residue": 20,
+    "allowed_routing_history_audit": 16,
+    "committed_exact_replay_read_only": 3,
+    "legacy_forbidden_prior_committed_replay": 2
+  },
+  "missing": [],
+  "extra": [],
+  "duplicates": [],
+  "unclassified": [],
+  "pytest_returncode": 0,
+  "invocation_nonce": "14f0f17a0304cecb3f0375f5754afccd"
+}
