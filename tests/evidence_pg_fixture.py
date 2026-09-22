@@ -17,6 +17,7 @@ from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
 from datetime import UTC, datetime
 from pathlib import Path
+from time import monotonic
 from typing import Any
 from uuid import uuid4
 
@@ -25,6 +26,8 @@ from sqlalchemy.engine import make_url
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 
 ROOT = Path(__file__).resolve().parents[1]
+CLEANUP_DRAIN_TIMEOUT_SECONDS = 1.0
+CLEANUP_DRAIN_RECHECK_SECONDS = 0.05
 IDENTITY_SQL = """SELECT d.oid::bigint AS oid, r.rolname AS owner,
     d.datdba::bigint AS owner_oid FROM pg_database d
     JOIN pg_roles r ON r.oid = d.datdba WHERE d.datname = $1"""
@@ -245,19 +248,80 @@ async def disposable_sessionmaker(
             cleanup: Any = None
             try:
                 cleanup = await asyncpg.connect(**connect_kwargs)
-                current = await cleanup.fetchrow(IDENTITY_SQL, name)
-                if current is None or dict(current) != identity:
-                    raise EvidencePGCleanupError("Exact name/OID/owner changed; DROP forbidden")
-                connections = await cleanup.fetchval(
-                    "SELECT count(*) FROM pg_stat_activity "
-                    "WHERE datname = $1 AND backend_type = 'client backend'",
-                    name,
-                )
-                ledger.record("cleanup_checked", **identity, connections=connections)
-                if connections != 0:
-                    raise EvidencePGCleanupError(
-                        "Target has unreleased/external connections; DROP forbidden"
-                    )
+                drain_started = monotonic()
+                drain_deadline = drain_started + CLEANUP_DRAIN_TIMEOUT_SECONDS
+                check_index = 0
+                while True:
+                    check_index += 1
+                    elapsed = monotonic() - drain_started
+                    try:
+                        current = await cleanup.fetchrow(IDENTITY_SQL, name)
+                        current_identity = dict(current) if current is not None else None
+                        if current_identity != identity:
+                            ledger.record(
+                                "cleanup_checked",
+                                check_index=check_index,
+                                elapsed_seconds=round(elapsed, 6),
+                                connections=None,
+                                identity_matches=False,
+                                expected_identity=identity,
+                                observed_identity=current_identity,
+                            )
+                            raise EvidencePGCleanupError(
+                                "Exact name/OID/owner changed; DROP forbidden"
+                            )
+                        connections = await cleanup.fetchval(
+                            "SELECT count(*) FROM pg_stat_activity "
+                            "WHERE datname = $1 AND backend_type = 'client backend'",
+                            name,
+                        )
+                        ledger.record(
+                            "cleanup_checked",
+                            **identity,
+                            check_index=check_index,
+                            elapsed_seconds=round(elapsed, 6),
+                            connections=connections,
+                            identity_matches=True,
+                        )
+                    except EvidencePGCleanupError:
+                        raise
+                    except BaseException as exc:
+                        ledger.record(
+                            "cleanup_check_failed",
+                            check_index=check_index,
+                            elapsed_seconds=round(elapsed, 6),
+                            error_type=type(exc).__name__,
+                        )
+                        raise
+                    if connections == 0:
+                        confirmed = await cleanup.fetchrow(IDENTITY_SQL, name)
+                        confirmed_identity = dict(confirmed) if confirmed is not None else None
+                        if confirmed_identity != identity:
+                            ledger.record(
+                                "cleanup_identity_reconfirmed",
+                                check_index=check_index,
+                                elapsed_seconds=round(monotonic() - drain_started, 6),
+                                identity_matches=False,
+                                expected_identity=identity,
+                                observed_identity=confirmed_identity,
+                            )
+                            raise EvidencePGCleanupError(
+                                "Exact name/OID/owner changed after drain; DROP forbidden"
+                            )
+                        ledger.record(
+                            "cleanup_identity_reconfirmed",
+                            **identity,
+                            check_index=check_index,
+                            elapsed_seconds=round(monotonic() - drain_started, 6),
+                            identity_matches=True,
+                        )
+                        break
+                    remaining = drain_deadline - monotonic()
+                    if remaining <= 0:
+                        raise EvidencePGCleanupError(
+                            "Target has persistent client connections; DROP forbidden"
+                        )
+                    await asyncio.sleep(min(CLEANUP_DRAIN_RECHECK_SECONDS, remaining))
                 ledger.record("drop_sent", **identity)
                 status = await cleanup.execute(f'DROP DATABASE "{name}"')
                 if (

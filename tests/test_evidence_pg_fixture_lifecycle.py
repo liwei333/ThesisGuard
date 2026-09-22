@@ -20,15 +20,18 @@ class FakeAdmin:
 
     def __init__(self) -> None:
         self.events: list[str] = []
+        self.sql: list[str] = []
         self.created: list[str] = []
         self.dropped: list[str] = []
         self.identity: dict[str, Any] | None = None
+        self.client_connection_sequence: list[int] = []
 
     async def connect(self, **kwargs: Any) -> FakeAdmin:
         self.events.append("connect")
         return self
 
     async def execute(self, query: str, *args: Any) -> str:
+        self.sql.append(query)
         if query.startswith("CREATE DATABASE"):
             name = query.split('"')[1]
             self.created.append(name)
@@ -36,6 +39,7 @@ class FakeAdmin:
             self.events.append("create")
             return "CREATE DATABASE"
         if query.startswith("DROP DATABASE"):
+            assert query == f'DROP DATABASE "{self.created[-1]}"'
             self.dropped.append(query.split('"')[1])
             self.identity = None
             self.events.append("drop")
@@ -43,12 +47,19 @@ class FakeAdmin:
         raise AssertionError("Unexpected or unsafe SQL: " + query)
 
     async def fetchrow(self, query: str, *args: Any) -> dict[str, Any] | None:
+        self.sql.append(query)
         if "FROM pg_database" in query:
             return self.identity
         return {"current_database": "postgres", "current_user": "thesisguard"}
 
     async def fetchval(self, query: str, *args: Any) -> Any:
+        self.sql.append(query)
         if "pg_stat_activity" in query:
+            if self.client_connection_sequence:
+                value = self.client_connection_sequence[0]
+                if len(self.client_connection_sequence) > 1:
+                    self.client_connection_sequence.pop(0)
+                return value
             return 0
         if "pg_roles" in query:
             return True
@@ -119,6 +130,7 @@ def install_infrastructure(
     original_fetchrow = admin.fetchrow
     original_fetchval = admin.fetchval
     original_close = admin.close
+    cleanup_identity_fetches = 0
 
     async def execute(query: str, *args: Any) -> str:
         if query.startswith("CREATE DATABASE") and fault == "create_rejected":
@@ -131,12 +143,22 @@ def install_infrastructure(
         return await original_execute(query, *args)
 
     async def fetchrow(query: str, *args: Any) -> dict[str, Any] | None:
+        nonlocal cleanup_identity_fetches
         row = await original_fetchrow(query, *args)
         if "FROM pg_database" in query and "dispose" in admin.events and row:
+            cleanup_identity_fetches += 1
             if fault == "oid_drift":
                 return {**row, "oid": 9999}
             if fault == "owner_drift":
                 return {**row, "owner": "other", "owner_oid": 99}
+            if fault == "owner_oid_drift":
+                return {**row, "owner_oid": 99}
+            if fault == "oid_drift_after_zero" and cleanup_identity_fetches >= 3:
+                return {**row, "oid": 9999}
+            if fault == "owner_drift_after_zero" and cleanup_identity_fetches >= 3:
+                return {**row, "owner": "other", "owner_oid": 99}
+            if fault == "owner_oid_drift_after_zero" and cleanup_identity_fetches >= 3:
+                return {**row, "owner_oid": 99}
         if fault == "confirm" and "create" in admin.events and "FROM pg_database" in query:
             raise primary
         if fault == "target" and "current_database()" in query:
@@ -144,6 +166,8 @@ def install_infrastructure(
         return row
 
     async def fetchval(query: str, *args: Any) -> Any:
+        if "pg_stat_activity" in query and fault == "connection_query":
+            raise primary
         if "pg_stat_activity" in query and fault == "external_connection":
             return 1
         if "pg_stat_activity" in query and fault == "autovacuum_connection":
@@ -288,8 +312,104 @@ async def test_internal_autovacuum_does_not_block_owned_database_cleanup(
     assert checked["connections"] == 0
 
 
+async def test_transient_client_backend_drains_before_exact_drop(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path, request: pytest.FixtureRequest
+) -> None:
+    admin, ledger, _ = install_infrastructure(monkeypatch, tmp_path)
+    admin.client_connection_sequence = [1, 0]
+    generator = fixture_generator(request)
+    await anext(generator)
+    await generator.aclose()
+
+    assert admin.dropped == admin.created
+    checked = [row for row in records(ledger) if row["event"] == "cleanup_checked"]
+    assert [row["connections"] for row in checked] == [1, 0]
+    assert all(row["oid"] == 1234 for row in checked)
+    assert [row["check_index"] for row in checked] == [1, 2]
+    assert all(row["elapsed_seconds"] >= 0 for row in checked)
+    reconfirmed = next(
+        row for row in records(ledger) if row["event"] == "cleanup_identity_reconfirmed"
+    )
+    assert reconfirmed["identity_matches"] is True
+    assert admin.events.index("dispose") < admin.events.index("drop")
+    assert not any("pg_terminate_backend" in query for query in admin.sql)
+    assert not any("WITH (FORCE)" in query for query in admin.sql)
+
+
+async def test_persistent_client_backend_reaches_deadline_without_drop(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path, request: pytest.FixtureRequest
+) -> None:
+    from tests import evidence_pg_fixture as lifecycle
+    from tests.evidence_pg_fixture import EvidencePGCleanupError
+
+    monkeypatch.setattr(lifecycle, "CLEANUP_DRAIN_TIMEOUT_SECONDS", 0.05)
+    monkeypatch.setattr(lifecycle, "CLEANUP_DRAIN_RECHECK_SECONDS", 0.005)
+    admin, ledger, _ = install_infrastructure(monkeypatch, tmp_path)
+    admin.client_connection_sequence = [1]
+    generator = fixture_generator(request)
+    await anext(generator)
+    with pytest.raises(EvidencePGCleanupError, match="cleanup failed"):
+        await generator.aclose()
+
+    checked = [row for row in records(ledger) if row["event"] == "cleanup_checked"]
+    assert len(checked) >= 2
+    assert all(row["connections"] == 1 for row in checked)
+    assert admin.dropped == []
+    assert records(ledger)[-1]["event"] == "cleanup_failed"
+
+
 @pytest.mark.parametrize(
-    "fault", ["drop", "dispose", "external_connection", "oid_drift", "owner_drift"]
+    "fault", ["oid_drift_after_zero", "owner_drift_after_zero", "owner_oid_drift_after_zero"]
+)
+async def test_identity_drift_after_connection_drain_forbids_drop(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+    request: pytest.FixtureRequest,
+    fault: str,
+) -> None:
+    from tests.evidence_pg_fixture import EvidencePGCleanupError
+
+    admin, ledger, _ = install_infrastructure(monkeypatch, tmp_path, fault=fault)
+    admin.client_connection_sequence = [1, 0]
+    generator = fixture_generator(request)
+    await anext(generator)
+    with pytest.raises(EvidencePGCleanupError, match="cleanup failed"):
+        await generator.aclose()
+
+    assert admin.dropped == []
+    reconfirmed = next(
+        row for row in records(ledger) if row["event"] == "cleanup_identity_reconfirmed"
+    )
+    assert reconfirmed["identity_matches"] is False
+    assert records(ledger)[-1]["event"] == "cleanup_failed"
+
+
+async def test_initial_zero_connection_path_does_not_recheck_or_wait(
+    monkeypatch: pytest.MonkeyPatch, tmp_path: Path, request: pytest.FixtureRequest
+) -> None:
+    admin, ledger, _ = install_infrastructure(monkeypatch, tmp_path)
+    generator = fixture_generator(request)
+    await anext(generator)
+    await generator.aclose()
+
+    checked = [row for row in records(ledger) if row["event"] == "cleanup_checked"]
+    assert len(checked) == 1
+    assert checked[0]["connections"] == 0
+    assert checked[0]["check_index"] == 1
+    assert admin.dropped == admin.created
+
+
+@pytest.mark.parametrize(
+    "fault",
+    [
+        "drop",
+        "dispose",
+        "external_connection",
+        "connection_query",
+        "oid_drift",
+        "owner_drift",
+        "owner_oid_drift",
+    ],
 )
 @pytest.mark.parametrize("body_fault", [False, True])
 async def test_cleanup_errors_are_explicit_and_never_mask_primary(
@@ -316,6 +436,11 @@ async def test_cleanup_errors_are_explicit_and_never_mask_primary(
     assert admin.dropped == []
     assert records(ledger)[-1]["event"] == "cleanup_failed"
     assert len(admin.created) == 1
+    if fault == "connection_query":
+        check_failure = next(
+            row for row in records(ledger) if row["event"] == "cleanup_check_failed"
+        )
+        assert check_failure["error_type"] == "InjectedFailure"
     if fault != "dispose":
         assert admin.events[-1] == "close"
 
