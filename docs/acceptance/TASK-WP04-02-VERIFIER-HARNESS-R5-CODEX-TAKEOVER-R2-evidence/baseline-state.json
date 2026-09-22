@@ -1,0 +1,27 @@
+{
+  "captured_utc": "2026-09-21T08:11:18Z",
+  "r5_worktree": "/Users/qianduoduo/Desktop/AI_app/codex-wp04-02-verifier-harness-r5-repair",
+  "r5_branch": "codex/wp04-02-verifier-harness-r5-repair",
+  "r5_head": "df836cb39a1234aae967553b3783a67df9ad6672",
+  "r5_parent": "675217c3a15c0f416aa4462ca6edc491bf99f9f6",
+  "main_head": "675217c3a15c0f416aa4462ca6edc491bf99f9f6",
+  "candidate_branch": "codex/wp04-02-evidence-domain-service",
+  "candidate_head": "e942cbcc9e0b5d95a6c7ee46d4d74ee90ff03ad4",
+  "candidate_parent": "af4f2cbbb0a50bd6c215bcaa78dd9fcd98414cc8",
+  "candidate_clean": true,
+  "r2_starting_source_hashes": {
+    "tg_verifier_tools/verification/wp04_02_r4_runner.py": "3ee2be0614c9ba6ebc9b2f305ec8e26e49c5d11adc0fc72ddecbc05e9e92e537",
+    "tg_verifier_tools/verification/wp04_02_r4_pytest_plugin.py": "3ab4b45feb356fcecdaa5363f09d3256dc0c6a2b8f2bb067d32da8438f3bdbc4",
+    "tg_verifier_tests/verification/test_wp04_02_r4_runner.py": "506e038c9159cf2846f2a3a90e9386817399d1c4918a8312de2a07aadeb8e99f"
+  },
+  "preserved_r1_report_sha256": "9b166943f15248eefb08742f6694e93b11f5df0489806625573d817a2e32cf5b",
+  "preserved_r1_evidence_tree_sha256": "55b461968db358304d78b15865b7360fabc923e3687e0cab38d42e0bf367bf9b",
+  "preserved_historical_report_sha256": "bc59272b2ef8e88ecb2c9e984f8527036c959e86039ecf75edeec95f2da8338b",
+  "preserved_historical_evidence_tree_sha256": "4aee924467315ef4e016ba14d6bc063bd1ff13221ef7bab90e4a0c1e81545668",
+  "pre_edit_counterexamples": {
+    "unrelated_inherited_secret_read_by_collector": true,
+    "r1_outer_actual_retained_files": 60,
+    "r1_outer_manifest_entries": 55,
+    "r1_outer_missing_nested_manifests": 5
+  }
+}

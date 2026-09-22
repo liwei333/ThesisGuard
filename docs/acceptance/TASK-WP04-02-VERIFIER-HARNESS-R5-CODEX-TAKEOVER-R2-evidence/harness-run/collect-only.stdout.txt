@@ -1,0 +1,64 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.12.9, pytest-9.1.1, pluggy-1.6.0
+rootdir: /Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service
+configfile: pyproject.toml
+plugins: asyncio-1.4.0, anyio-4.15.1
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 41 items
+
+<Dir codex-wp04-02-evidence-domain-service>
+  <Package tests>
+    <Module test_evidence_services.py>
+      <Coroutine test_r1c05c01_forbidden_status_commit_fresh_no_residue[PENDING_REVIEW-same]>
+      <Coroutine test_r1c05c01_forbidden_status_commit_fresh_no_residue[PENDING_REVIEW-automatic]>
+      <Coroutine test_r1c05c01_forbidden_status_commit_fresh_no_residue[PENDING_REVIEW-direct]>
+      <Coroutine test_r1c05c01_forbidden_status_commit_fresh_no_residue[PENDING_REVIEW-underlying]>
+      <Coroutine test_r1c05c01_forbidden_status_commit_fresh_no_residue[DISPUTED-same]>
+      <Coroutine test_r1c05c01_forbidden_status_commit_fresh_no_residue[DISPUTED-automatic]>
+      <Coroutine test_r1c05c01_forbidden_status_commit_fresh_no_residue[DISPUTED-direct]>
+      <Coroutine test_r1c05c01_forbidden_status_commit_fresh_no_residue[DISPUTED-underlying]>
+      <Coroutine test_r1c05c01_forbidden_status_commit_fresh_no_residue[REJECTED-same]>
+      <Coroutine test_r1c05c01_forbidden_status_commit_fresh_no_residue[REJECTED-automatic]>
+      <Coroutine test_r1c05c01_forbidden_status_commit_fresh_no_residue[REJECTED-direct]>
+      <Coroutine test_r1c05c01_forbidden_status_commit_fresh_no_residue[REJECTED-underlying]>
+      <Coroutine test_r1c05c01_forbidden_status_commit_fresh_no_residue[INVALIDATED-same]>
+      <Coroutine test_r1c05c01_forbidden_status_commit_fresh_no_residue[INVALIDATED-automatic]>
+      <Coroutine test_r1c05c01_forbidden_status_commit_fresh_no_residue[INVALIDATED-direct]>
+      <Coroutine test_r1c05c01_forbidden_status_commit_fresh_no_residue[INVALIDATED-underlying]>
+      <Coroutine test_r1c05c01_forbidden_status_commit_fresh_no_residue[RETRACTED-same]>
+      <Coroutine test_r1c05c01_forbidden_status_commit_fresh_no_residue[RETRACTED-automatic]>
+      <Coroutine test_r1c05c01_forbidden_status_commit_fresh_no_residue[RETRACTED-direct]>
+      <Coroutine test_r1c05c01_forbidden_status_commit_fresh_no_residue[RETRACTED-underlying]>
+      <Coroutine test_r1c05c01_allowed_routing_history_audit[omitted-VERIFIED-same]>
+      <Coroutine test_r1c05c01_allowed_routing_history_audit[omitted-VERIFIED-automatic]>
+      <Coroutine test_r1c05c01_allowed_routing_history_audit[omitted-VERIFIED-direct]>
+      <Coroutine test_r1c05c01_allowed_routing_history_audit[omitted-VERIFIED-underlying]>
+      <Coroutine test_r1c05c01_allowed_routing_history_audit[omitted-UNREVIEWED-same]>
+      <Coroutine test_r1c05c01_allowed_routing_history_audit[omitted-UNREVIEWED-automatic]>
+      <Coroutine test_r1c05c01_allowed_routing_history_audit[omitted-UNREVIEWED-direct]>
+      <Coroutine test_r1c05c01_allowed_routing_history_audit[omitted-UNREVIEWED-underlying]>
+      <Coroutine test_r1c05c01_allowed_routing_history_audit[none-VERIFIED-same]>
+      <Coroutine test_r1c05c01_allowed_routing_history_audit[none-VERIFIED-automatic]>
+      <Coroutine test_r1c05c01_allowed_routing_history_audit[none-VERIFIED-direct]>
+      <Coroutine test_r1c05c01_allowed_routing_history_audit[none-VERIFIED-underlying]>
+      <Coroutine test_r1c05c01_allowed_routing_history_audit[none-UNREVIEWED-same]>
+      <Coroutine test_r1c05c01_allowed_routing_history_audit[none-UNREVIEWED-automatic]>
+      <Coroutine test_r1c05c01_allowed_routing_history_audit[none-UNREVIEWED-direct]>
+      <Coroutine test_r1c05c01_allowed_routing_history_audit[none-UNREVIEWED-underlying]>
+      <Coroutine test_r1c05c01_committed_exact_replay_read_only[automatic]>
+      <Coroutine test_r1c05c01_committed_exact_replay_read_only[direct]>
+      <Coroutine test_r1c05c01_committed_exact_replay_read_only[underlying]>
+      <Coroutine test_r1c05c01_legacy_forbidden_prior_committed_replay[direct]>
+      <Coroutine test_r1c05c01_legacy_forbidden_prior_committed_replay[underlying]>
+
+=============================== warnings summary ===============================
+../../../../../../../opt/homebrew/Cellar/python@3.12/3.12.9/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/fastapi/testclient.py:1
+  /opt/homebrew/Cellar/python@3.12/3.12.9/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+../../../../../../../opt/homebrew/Cellar/python@3.12/3.12.9/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/starlette/testclient.py:53
+  /opt/homebrew/Cellar/python@3.12/3.12.9/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/starlette/testclient.py:53: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+========================= 41 tests collected in 0.25s ==========================

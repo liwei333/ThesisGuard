@@ -1,0 +1,32 @@
+{
+  "argv": [
+    "docs/acceptance/TASK-WP04-02-VERIFIER-HARNESS-R5-CODEX-TAKEOVER-R1-evidence/guards/interrupt_pytest.py",
+    "-p",
+    "_tg_wp04_02_verifier_4f1ba2be047240f128d50e257c90fe1d.plugin",
+    "-p",
+    "no:cacheprovider",
+    "--collect-only",
+    "-q",
+    "tests/test_evidence_services.py::test_r1c05c01_forbidden_status_commit_fresh_no_residue",
+    "tests/test_evidence_services.py::test_r1c05c01_allowed_routing_history_audit",
+    "tests/test_evidence_services.py::test_r1c05c01_committed_exact_replay_read_only",
+    "tests/test_evidence_services.py::test_r1c05c01_legacy_forbidden_prior_committed_replay"
+  ],
+  "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+  "env": {
+    "HOME": "/private/tmp/tg-r5-takeover-home",
+    "LANG": "C.UTF-8",
+    "PATH": "/opt/homebrew/bin:/usr/bin:/bin",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONPATH": "/tmp/tg_wp04_02_verifier_myadoy6m:/opt/homebrew/lib/python3.12/site-packages",
+    "TG_R4_COLLECTION_JSON": "/Users/qianduoduo/Desktop/AI_app/codex-wp04-02-verifier-harness-r5-repair/docs/acceptance/TASK-WP04-02-VERIFIER-HARNESS-R5-CODEX-TAKEOVER-R1-evidence/negative/interruption/_collected-nodeids.json",
+    "TG_R4_INVOCATION_NONCE": "26eec544ad9fc53f6f3b11ccf96edf40",
+    "TG_R4_PLUGIN_SHA256": "3ab4b45feb356fcecdaa5363f09d3256dc0c6a2b8f2bb067d32da8438f3bdbc4"
+  },
+  "start_utc": "2026-09-21T06:32:45.918235+00:00",
+  "end_utc": "2026-09-21T06:32:45.919657+00:00",
+  "returncode": 1,
+  "failure_category": "startup_failure",
+  "error_type": "FileNotFoundError",
+  "timeout_seconds": 120
+}

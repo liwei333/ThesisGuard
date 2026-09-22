@@ -1,0 +1,28 @@
+{
+  "artifacts": {
+    "baseline-pins.json": {
+      "bytes": 382,
+      "sha256": "bcccf6fdc59e13841b4addf2b2f18c3f28bf574ea1f536ed375cd8bc50041ed6"
+    },
+    "plugin-staging.json": {
+      "bytes": 364,
+      "sha256": "f1db879e62070591a9922d26b9925cc92bb9f92179c9ff2398da9583b2d664be"
+    },
+    "plugin.source.py": {
+      "bytes": 11175,
+      "sha256": "3ab4b45feb356fcecdaa5363f09d3256dc0c6a2b8f2bb067d32da8438f3bdbc4"
+    },
+    "result.json": {
+      "bytes": 82,
+      "sha256": "128825f68630159d936d74814b7bac71fcc8ee757507018dd59b66edd6061a2c"
+    },
+    "runner.source.py": {
+      "bytes": 38135,
+      "sha256": "3ee2be0614c9ba6ebc9b2f305ec8e26e49c5d11adc0fc72ddecbc05e9e92e537"
+    },
+    "source-hashes.json": {
+      "bytes": 632,
+      "sha256": "42991ca789bf7c18f27b11f7ca9cdd1234db0971080bb9f854821868ff49eadb"
+    }
+  }
+}

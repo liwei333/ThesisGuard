@@ -1,0 +1,40 @@
+{
+  "artifacts": {
+    "baseline-pins.json": {
+      "bytes": 382,
+      "sha256": "bcccf6fdc59e13841b4addf2b2f18c3f28bf574ea1f536ed375cd8bc50041ed6"
+    },
+    "collect-only.meta.json": {
+      "bytes": 1596,
+      "sha256": "67e428b07009c15d15da83dc80cf3dbc6e50f0328a07ad12beddbcbd0d3dd7ce"
+    },
+    "collect-only.stderr.txt": {
+      "bytes": 124,
+      "sha256": "93defea1be1d7a3a911a9eec2c8d1feb3d0c65d4bbd481d89ee4c0a1a5b1696a"
+    },
+    "collect-only.stdout.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "plugin-staging.json": {
+      "bytes": 363,
+      "sha256": "904d25ffdc50b9ff0c6e43f1ef0bc9174f74f2afaa3922d42c2044eb30312213"
+    },
+    "plugin.source.py": {
+      "bytes": 11175,
+      "sha256": "3ab4b45feb356fcecdaa5363f09d3256dc0c6a2b8f2bb067d32da8438f3bdbc4"
+    },
+    "result.json": {
+      "bytes": 153,
+      "sha256": "84381786f588bc15caeceec00b58f8c72528a3bfafef4cfdc9bbb70aaf4dfe69"
+    },
+    "runner.source.py": {
+      "bytes": 38135,
+      "sha256": "3ee2be0614c9ba6ebc9b2f305ec8e26e49c5d11adc0fc72ddecbc05e9e92e537"
+    },
+    "source-hashes.json": {
+      "bytes": 631,
+      "sha256": "8a54739b8f567cc86d5a4f008513712d0db2c22a2f75831e2807f179ac83640f"
+    }
+  }
+}

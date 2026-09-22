@@ -1,0 +1,7 @@
+{
+  "valid": false,
+  "verdict": "BLOCKED",
+  "reason": "subprocess_startup_failure",
+  "failure_category": "startup_failure",
+  "pytest_returncode": 1
+}

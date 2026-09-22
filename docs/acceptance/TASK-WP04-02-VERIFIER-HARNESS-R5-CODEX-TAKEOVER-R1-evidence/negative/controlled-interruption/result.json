@@ -1,0 +1,7 @@
+{
+  "valid": false,
+  "verdict": "BLOCKED",
+  "reason": "interrupted",
+  "failure_category": "interrupted",
+  "pytest_returncode": 130
+}

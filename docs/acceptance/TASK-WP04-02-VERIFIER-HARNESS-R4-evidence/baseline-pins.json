@@ -1,0 +1,8 @@
+{
+  "candidate_mismatches": [],
+  "main_mismatches": [
+    "docs/acceptance/TASK-TEST-INFRA-PG-FIXTURE-LIFECYCLE-R1-INDEPENDENT-REVERIFY-acceptance.md: expected daf2779bda9602a7... got daf2779bda9602a7..."
+  ],
+  "candidate_commit": "e942cbcc9e0b595a6c7ee46d4d74ee90ff03ad4",
+  "candidate_branch": "codex/wp04-02-evidence-domain-service"
+}

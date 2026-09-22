@@ -1,0 +1,28 @@
+Pre-repair reproduction, 2026-09-21 Asia/Shanghai
+
+Command:
+PYTHONDONTWRITEBYTECODE=1 /opt/homebrew/bin/pytest -p no:cacheprovider tg_verifier_tests/verification/test_wp04_02_r4_runner.py -q --tb=short -k 'embedded_credential_urls or recursive_metadata'
+
+Exit: 1
+Observed: 2 failed, 70 deselected.
+- An embedded synthetic credential-bearing PostgreSQL URL remained verbatim in surrounding text (literal removed from retained evidence).
+- _redact_metadata did not exist, so nested argv/cwd/error values were not recursively sanitized.
+
+Command:
+PYTHONDONTWRITEBYTECODE=1 /opt/homebrew/bin/pytest -p no:cacheprovider tg_verifier_tests/verification/test_wp04_02_r4_runner.py -q --tb=short -k keyboard_interrupt_closes
+
+Exit: 2
+Observed: KeyboardInterrupt escaped the runner; pytest stopped with 71 deselected and no test result. The owned evidence leaf had no guaranteed result.json/manifest.json closure.
+
+Command:
+Focused staging counterexamples under the initial implementation.
+
+Observed:
+- _stage_plugin_to_temp copied the complete public tg_verifier_tools package under its ambient name.
+- Two focused pytest probes grew to approximately 0.8-0.9 GiB RSS and had to be stopped after the recursive copy failed to complete promptly.
+- Initial implementation had no staged-byte comparison before pytest and loaded -p tg_verifier_tools.verification.wp04_02_r4_pytest_plugin.
+
+Independent B-01 source-attribution reproduction:
+- final live runner SHA-256: 201966382113a5a29e13876a36cb9ac0cd0a4efa7b9ea8d96d8924de025191fc
+- historical retained runner SHA-256: 944e4a61f3ea1ce2a3746f7e54303bcd4a600dba6719eef56a794506f3cb6e02
+- mismatch confirmed before takeover edits.
