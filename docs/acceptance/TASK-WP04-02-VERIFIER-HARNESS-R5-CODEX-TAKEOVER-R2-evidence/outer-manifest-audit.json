@@ -1,0 +1,20 @@
+{
+  "method": "Precreate this audit record, generate the outer manifest, mechanically audit it, then regenerate the byte-identical outer manifest last without changing any other evidence file.",
+  "outer_manifest_exact_exclusion": "manifest.json",
+  "actual_retained_files": 51,
+  "expected_manifest_entries": 51,
+  "inventory_equal": true,
+  "size_hash_equal": true,
+  "missing": [],
+  "extra": [],
+  "size_hash_mismatches": [],
+  "nested_manifests": [
+    "harness-run/manifest.json",
+    "negative/controlled-interruption/manifest.json",
+    "negative/embedded-url-redaction/manifest.json",
+    "negative/staged-mismatch/manifest.json"
+  ],
+  "first_generation_audited_before_final_regeneration": true,
+  "final_regeneration_byte_identical": true,
+  "evidence_modified_after_final_regeneration": false
+}

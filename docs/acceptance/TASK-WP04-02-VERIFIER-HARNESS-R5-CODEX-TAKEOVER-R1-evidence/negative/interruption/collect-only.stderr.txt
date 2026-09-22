@@ -1,0 +1,1 @@
+SUBPROCESS_ERROR: [Errno 2] No such file or directory: 'docs/acceptance/TASK-WP04-02-VERIFIER-HARNESS-R5-CODEX-TAKEOVER-R1-evidence/guards/interrupt_pytest.py'

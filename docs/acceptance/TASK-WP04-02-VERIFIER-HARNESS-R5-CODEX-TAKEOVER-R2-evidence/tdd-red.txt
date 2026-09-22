@@ -1,0 +1,11 @@
+Command:
+PYTHONDONTWRITEBYTECODE=1 /opt/homebrew/bin/pytest -p no:cacheprovider tg_verifier_tests/verification/test_wp04_02_r4_runner.py -q --tb=short -k 'minimal_env_uses_verifier_owned or early_baseline_failure_never_inspects or outer_manifest_audit_includes'
+
+Result before implementation:
+- 3 selected tests
+- 3 failed
+- test_minimal_env_uses_verifier_owned_guards_without_inherited_credentials: old three-argument API rejected verifier-owned ledger/guard inputs
+- test_early_baseline_failure_never_inspects_unrelated_inherited_secret: dict(os.environ) enumerated the complete inherited environment
+- test_outer_manifest_audit_includes_nested_manifests: mechanical recursive manifest audit helper did not exist
+
+This RED result was obtained before the runner implementation changed.

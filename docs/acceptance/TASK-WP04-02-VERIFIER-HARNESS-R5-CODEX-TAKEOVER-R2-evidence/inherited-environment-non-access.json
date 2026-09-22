@@ -1,0 +1,18 @@
+{
+  "scenario": "run_collect_only early main identity mismatch",
+  "result_valid": false,
+  "result_reason": "main_git_identity_mismatch",
+  "inherited_environment_enumerated_or_copied": false,
+  "inherited_environment_accessed_keys": [],
+  "sensitive_collector_calls_before_child_env": 0,
+  "secret_key_passed_to_collector": false,
+  "secret_key_retained": false,
+  "secret_value_retained": false,
+  "evidence_files": [
+    "manifest.json",
+    "plugin.source.py",
+    "result.json",
+    "runner.source.py",
+    "source-hashes.json"
+  ]
+}

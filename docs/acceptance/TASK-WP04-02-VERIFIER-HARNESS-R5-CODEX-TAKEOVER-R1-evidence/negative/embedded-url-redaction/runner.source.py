@@ -78,7 +78,6 @@ MAIN_HEAD = "675217c3a15c0f416aa4462ca6edc491bf99f9f6"
 CANDIDATE_BRANCH = "codex/wp04-02-evidence-domain-service"
 CANDIDATE_COMMIT = "e942cbcc9e0b5d95a6c7ee46d4d74ee90ff03ad4"
 CANDIDATE_PARENT = "af4f2cbbb0a50bd6c215bcaa78dd9fcd98414cc8"
-SYNTHETIC_DB_GUARD_URL = "postgresql+asyncpg://verifier:verifier@127.0.0.1:1/postgres"
 
 # Sensitive env-key tokens for case-insensitive classification.
 # Any env key that contains one of these tokens (case-insensitive), including
@@ -527,50 +526,6 @@ class EvidenceBundle:
         return {"artifacts": entries}
 
 
-def _audit_recursive_manifest(
-    root: Path,
-    manifest: dict[str, object],
-) -> dict[str, object]:
-    """Mechanically audit exact recursive coverage, byte sizes and SHA-256.
-
-    The exact outer ``root/manifest.json`` is the sole exclusion.  Nested files
-    named ``manifest.json`` are ordinary retained artifacts and must be listed.
-    """
-    root = root.resolve()
-    outer_manifest = root / "manifest.json"
-    actual: dict[str, dict[str, object]] = {}
-    for path in sorted(root.rglob("*")):
-        if not path.is_file() or path.resolve() == outer_manifest:
-            continue
-        data = path.read_bytes()
-        actual[str(path.relative_to(root))] = {
-            "bytes": len(data),
-            "sha256": hashlib.sha256(data).hexdigest(),
-        }
-
-    raw_artifacts = manifest.get("artifacts", {})
-    artifacts = raw_artifacts if isinstance(raw_artifacts, dict) else {}
-    actual_names = set(actual)
-    manifest_names = set(artifacts)
-    mismatches: list[str] = []
-    for name in sorted(actual_names & manifest_names):
-        if artifacts[name] != actual[name]:
-            mismatches.append(name)
-
-    return {
-        "actual_retained_files": len(actual_names),
-        "manifest_entries": len(manifest_names),
-        "inventory_equal": actual_names == manifest_names,
-        "size_hash_equal": not mismatches,
-        "missing": sorted(actual_names - manifest_names),
-        "extra": sorted(manifest_names - actual_names),
-        "size_hash_mismatches": mismatches,
-        "nested_manifests": sorted(
-            name for name in actual_names if name.endswith("/manifest.json")
-        ),
-    }
-
-
 # ---------------------------------------------------------------------------
 # Subprocess execution with evidence capture
 # ---------------------------------------------------------------------------
@@ -675,39 +630,32 @@ def run_subprocess(
 def _build_minimal_env(
     collection_json: Path,
     staged: StagedPlugin,
-    ledger_path: Path,
-    guard_pythonpath: Path | None = None,
+    existing_pythonpath: str,
 ) -> dict[str, str]:
-    """Build a fixed, verifier-owned child environment for pytest.
-
-    No credential-bearing inherited variables are consulted.  The optional
-    guard path is an explicit runner input and must resolve to a directory.
-    """
+    """Build an explicit minimal child environment for the pytest subprocess."""
     env: dict[str, str] = {
         "PATH": os.environ.get("PATH", "/usr/bin:/bin"),
         "PYTHONDONTWRITEBYTECODE": "1",
         "TG_R4_COLLECTION_JSON": str(collection_json),
         "TG_R4_INVOCATION_NONCE": secrets.token_hex(16),
         "TG_R4_PLUGIN_SHA256": staged.source_sha256,
-        "TG_TEST_ADMIN_DATABASE_URL": SYNTHETIC_DB_GUARD_URL,
-        "TG_EVIDENCE_PG_LEDGER": str(ledger_path.resolve()),
     }
-    # Preserve only non-credential process basics from a fixed allowlist.
-    for key in ("HOME", "USER", "LANG", "LC_ALL"):
+    # Preserve only process basics plus the explicit synthetic no-DB guards.
+    for key in (
+        "HOME",
+        "USER",
+        "LANG",
+        "LC_ALL",
+        "TG_TEST_ADMIN_DATABASE_URL",
+        "TG_EVIDENCE_PG_LEDGER",
+    ):
         val = os.environ.get(key)
         if val is not None:
             env[key] = val
-
-    python_paths = [str(staged.root)]
-    if guard_pythonpath is not None:
-        try:
-            resolved_guard = guard_pythonpath.resolve(strict=True)
-        except OSError as exc:
-            raise ValueError("guard_pythonpath must resolve to an existing directory") from exc
-        if not resolved_guard.is_dir():
-            raise ValueError("guard_pythonpath must resolve to an existing directory")
-        python_paths.append(str(resolved_guard))
-    env["PYTHONPATH"] = os.pathsep.join(python_paths)
+    pythonpath = str(staged.root)
+    if existing_pythonpath:
+        pythonpath += ":" + existing_pythonpath
+    env["PYTHONPATH"] = pythonpath
     return env
 
 
@@ -769,7 +717,6 @@ def run_collect_only(
     evidence_root: Path,
     *,
     pytest_path: str = "pytest",
-    guard_pythonpath: Path | None = None,
 ) -> dict[str, object]:
     """Execute authenticated structured collect-only and fail closed."""
     evidence_root = evidence_root.resolve()
@@ -782,9 +729,7 @@ def run_collect_only(
     bundle.copy_file(runner_src, "runner.source.py")
     bundle.copy_file(plugin_src, "plugin.source.py")
     bundle.write_json("source-hashes.json", _source_hashes(runner_src, plugin_src, bundle))
-    # Before the minimal child environment exists there are deliberately no
-    # inherited credential literals to inspect or use for redaction.
-    sensitive_values: frozenset[str] = frozenset()
+    sensitive_values = _collect_sensitive_values(dict(os.environ))
     staged: StagedPlugin | None = None
 
     try:
@@ -867,13 +812,7 @@ def run_collect_only(
                 sensitive_values=sensitive_values,
             )
 
-        env = _build_minimal_env(
-            collection_json,
-            staged,
-            evidence_root / "_fixture-ledger.jsonl",
-            guard_pythonpath,
-        )
-        sensitive_values = _collect_sensitive_values(env)
+        env = _build_minimal_env(collection_json, staged, os.environ.get("PYTHONPATH", ""))
         invocation_nonce = env["TG_R4_INVOCATION_NONCE"]
         pytest_path_obj = Path(pytest_path)
         base_argv = (
@@ -1069,12 +1008,6 @@ def main(argv: list[str] | None = None) -> int:
         default="pytest",
         help="pytest executable (default: pytest on PATH)",
     )
-    parser.add_argument(
-        "--guard-pythonpath",
-        type=Path,
-        default=None,
-        help="Explicit verifier-owned sitecustomize guard directory",
-    )
     args = parser.parse_args(argv)
 
     evidence_dir: Path = args.evidence_dir or (Path.cwd() / "evidence")
@@ -1087,7 +1020,6 @@ def main(argv: list[str] | None = None) -> int:
         main_root=args.main_root.resolve(),
         evidence_root=evidence_dir.resolve(),
         pytest_path=args.pytest,
-        guard_pythonpath=args.guard_pythonpath,
     )
     print(json.dumps(result, indent=2))
     return 0 if result.get("valid") else 1

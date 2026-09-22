@@ -1,0 +1,32 @@
+{
+  "all_cli_exit_nonzero": true,
+  "all_owned_bundles_closed": true,
+  "synthetic_embedded_url_secret_scan_matches": 0,
+  "runs": [
+    {
+      "name": "controlled-interruption",
+      "cli_exit": 1,
+      "reason": "interrupted",
+      "subprocess_returncode": 130,
+      "manifest_artifacts": 9,
+      "manifest_inventory_size_hash_equal": true
+    },
+    {
+      "name": "staged-mismatch",
+      "cli_exit": 1,
+      "reason": "staged_plugin_mismatch",
+      "pytest_started": false,
+      "manifest_artifacts": 6,
+      "manifest_inventory_size_hash_equal": true
+    },
+    {
+      "name": "embedded-url-redaction",
+      "cli_exit": 1,
+      "reason": "subprocess_startup_failure",
+      "subprocess_returncode": 1,
+      "manifest_artifacts": 9,
+      "manifest_inventory_size_hash_equal": true,
+      "synthetic_url_literals_retained": 0
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "all_cli_exit_nonzero": true,
+  "all_owned_bundles_closed": true,
+  "synthetic_secret_scan_matches": 0,
+  "runs": [
+    {
+      "name": "controlled-interruption",
+      "cli_exit": 1,
+      "reason": "interrupted",
+      "subprocess_returncode": 130,
+      "manifest_artifacts": 9
+    },
+    {
+      "name": "interruption",
+      "note": "First relative-stub invocation retained as an additional startup-failure case; it was not overwritten.",
+      "cli_exit": 1,
+      "reason": "subprocess_startup_failure",
+      "subprocess_returncode": 1,
+      "manifest_artifacts": 9
+    },
+    {
+      "name": "staged-mismatch",
+      "cli_exit": 1,
+      "reason": "staged_plugin_mismatch",
+      "pytest_started": false,
+      "manifest_artifacts": 6
+    },
+    {
+      "name": "embedded-url-redaction",
+      "cli_exit": 1,
+      "reason": "subprocess_startup_failure",
+      "subprocess_returncode": 1,
+      "manifest_artifacts": 9,
+      "synthetic_url_literals_retained": 0
+    }
+  ]
+}

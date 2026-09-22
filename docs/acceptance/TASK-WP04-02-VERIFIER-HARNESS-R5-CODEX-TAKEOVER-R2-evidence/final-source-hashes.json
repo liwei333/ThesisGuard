@@ -1,0 +1,8 @@
+{
+  "tg_verifier_tools/verification/wp04_02_r4_runner.py": "3b3145f0a17e593db8d7689ba942ad43fcd4f4be15ddc61d7196e0cc061c3b36",
+  "tg_verifier_tools/verification/wp04_02_r4_pytest_plugin.py": "3ab4b45feb356fcecdaa5363f09d3256dc0c6a2b8f2bb067d32da8438f3bdbc4",
+  "tg_verifier_tests/verification/test_wp04_02_r4_runner.py": "aafa9e54ab1bd1fbf7ce3d3cf78c2854125264e73291c264a49dba142cf8ff75",
+  "plugin_unchanged_during_r2": true,
+  "positive_runner_live_retained_equal": true,
+  "positive_plugin_live_staged_recorded_retained_equal": true
+}

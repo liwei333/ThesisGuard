@@ -1,0 +1,35 @@
+{
+  "argv": [
+    "postgresql:/<REDACTED>@127.0.0.1:1/pytest?token=<REDACTED>",
+    "-p",
+    "_tg_wp04_02_verifier_4007df1829c114925e619e835a130cef.plugin",
+    "-p",
+    "no:cacheprovider",
+    "--collect-only",
+    "-q",
+    "tests/test_evidence_services.py::test_r1c05c01_forbidden_status_commit_fresh_no_residue",
+    "tests/test_evidence_services.py::test_r1c05c01_allowed_routing_history_audit",
+    "tests/test_evidence_services.py::test_r1c05c01_committed_exact_replay_read_only",
+    "tests/test_evidence_services.py::test_r1c05c01_legacy_forbidden_prior_committed_replay"
+  ],
+  "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+  "env": {
+    "HOME": "/private/tmp",
+    "LANG": "C.UTF-8",
+    "PATH": "/opt/homebrew/bin:/usr/bin:/bin",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONPATH": "/tmp/tg_wp04_02_verifier_3l2v4zkd:/Users/qianduoduo/Desktop/AI_app/codex-wp04-02-verifier-harness-r5-repair/docs/acceptance/TASK-WP04-02-VERIFIER-HARNESS-R5-CODEX-TAKEOVER-R2-evidence/guards",
+    "TG_EVIDENCE_PG_LEDGER": "/Users/qianduoduo/Desktop/AI_app/codex-wp04-02-verifier-harness-r5-repair/docs/acceptance/TASK-WP04-02-VERIFIER-HARNESS-R5-CODEX-TAKEOVER-R2-evidence/negative/embedded-url-redaction/_fixture-ledger.jsonl",
+    "TG_R4_COLLECTION_JSON": "/Users/qianduoduo/Desktop/AI_app/codex-wp04-02-verifier-harness-r5-repair/docs/acceptance/TASK-WP04-02-VERIFIER-HARNESS-R5-CODEX-TAKEOVER-R2-evidence/negative/embedded-url-redaction/_collected-nodeids.json",
+    "TG_R4_INVOCATION_NONCE": "9b50173efe769c738b8f68c682f1b9e9",
+    "TG_R4_PLUGIN_SHA256": "3ab4b45feb356fcecdaa5363f09d3256dc0c6a2b8f2bb067d32da8438f3bdbc4",
+    "TG_TEST_ADMIN_DATABASE_URL": "<REDACTED>",
+    "USER": "verifier"
+  },
+  "start_utc": "2026-09-21T08:14:41.068148+00:00",
+  "end_utc": "2026-09-21T08:14:41.069506+00:00",
+  "returncode": 1,
+  "failure_category": "startup_failure",
+  "error_type": "FileNotFoundError",
+  "timeout_seconds": 120
+}

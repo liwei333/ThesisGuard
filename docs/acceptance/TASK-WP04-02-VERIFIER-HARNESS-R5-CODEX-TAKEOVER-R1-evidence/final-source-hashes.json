@@ -1,0 +1,12 @@
+{
+  "generated_after_final_formatting": true,
+  "no_source_edits_after_harness_run": true,
+  "source_files": {
+    "tg_verifier_tools/verification/wp04_02_r4_runner.py": "3ee2be0614c9ba6ebc9b2f305ec8e26e49c5d11adc0fc72ddecbc05e9e92e537",
+    "tg_verifier_tools/verification/wp04_02_r4_pytest_plugin.py": "3ab4b45feb356fcecdaa5363f09d3256dc0c6a2b8f2bb067d32da8438f3bdbc4",
+    "tg_verifier_tests/verification/test_wp04_02_r4_runner.py": "506e038c9159cf2846f2a3a90e9386817399d1c4918a8312de2a07aadeb8e99f"
+  },
+  "runner_live_retained_equal": true,
+  "plugin_live_staged_recorded_retained_equal": true,
+  "plugin_common_sha256": "3ab4b45feb356fcecdaa5363f09d3256dc0c6a2b8f2bb067d32da8438f3bdbc4"
+}

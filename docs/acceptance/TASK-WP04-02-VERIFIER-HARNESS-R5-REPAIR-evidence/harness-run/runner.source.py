@@ -35,17 +35,14 @@ import argparse
 import hashlib
 import json
 import os
-import re
 import secrets
 import shutil
 import subprocess
 import sys
 import tempfile
 import urllib.parse
-from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
-from typing import Any
 
 # Allow running directly from the tg_verifier_tools/verification directory.
 _HERE = Path(__file__).resolve().parent
@@ -78,7 +75,6 @@ MAIN_HEAD = "675217c3a15c0f416aa4462ca6edc491bf99f9f6"
 CANDIDATE_BRANCH = "codex/wp04-02-evidence-domain-service"
 CANDIDATE_COMMIT = "e942cbcc9e0b5d95a6c7ee46d4d74ee90ff03ad4"
 CANDIDATE_PARENT = "af4f2cbbb0a50bd6c215bcaa78dd9fcd98414cc8"
-SYNTHETIC_DB_GUARD_URL = "postgresql+asyncpg://verifier:verifier@127.0.0.1:1/postgres"
 
 # Sensitive env-key tokens for case-insensitive classification.
 # Any env key that contains one of these tokens (case-insensitive), including
@@ -124,53 +120,20 @@ _SENSITIVE_QUERY_PARAMS = (
 # ---------------------------------------------------------------------------
 
 
-@dataclass(frozen=True)
-class StagedPlugin:
-    """Authenticated, verifier-only pytest plugin staging descriptor."""
+def _stage_plugin_to_temp() -> Path:
+    """Copy the plugin and its package to a fresh temp directory.
 
-    root: Path
-    namespace: str
-    module_name: str
-    plugin_path: Path
-    source_path: Path
-    source_sha256: str
-    staged_sha256: str
-
-
-def _stage_plugin_to_temp() -> StagedPlugin:
-    """Stage only the verifier plugin under a collision-resistant namespace."""
-    source_path = _HERE / "wp04_02_r4_pytest_plugin.py"
-    namespace = f"_tg_wp04_02_verifier_{secrets.token_hex(16)}"
-    root = Path(tempfile.mkdtemp(prefix="tg_wp04_02_verifier_"))
-    package = root / namespace
-    package.mkdir()
-    (package / "__init__.py").write_text("", encoding="utf-8")
-    plugin_path = package / "plugin.py"
-    shutil.copyfile(source_path, plugin_path)
-    source_sha256 = sha256_file(source_path)
-    staged_sha256 = sha256_file(plugin_path)
-    return StagedPlugin(
-        root=root,
-        namespace=namespace,
-        module_name=f"{namespace}.plugin",
-        plugin_path=plugin_path,
-        source_path=source_path,
-        source_sha256=source_sha256,
-        staged_sha256=staged_sha256,
-    )
-
-
-def _verify_staged_plugin(staged: StagedPlugin) -> bool:
-    """Return whether current source and staged bytes match the staged record."""
-    try:
-        return (
-            staged.plugin_path.is_file()
-            and sha256_file(staged.source_path) == staged.source_sha256
-            and sha256_file(staged.plugin_path) == staged.source_sha256
-            and staged.staged_sha256 == staged.source_sha256
-        )
-    except OSError:
-        return False
+    Returns the path to the temp directory containing the ``tg_verifier_tools``
+    package.  Using an isolated temp dir avoids any ``__pycache__`` or
+    module-name conflicts in the original worktree.
+    """
+    src_pkg = _HERE.parent  # .../tg_verifier_tools
+    dst_root = Path(tempfile.mkdtemp(prefix="tg_r4_plugin_"))
+    shutil.copytree(src_pkg, dst_root / src_pkg.name)
+    # Remove any copied __pycache__ to avoid stale bytecode.
+    for pycache in (dst_root / src_pkg.name).rglob("__pycache__"):
+        shutil.rmtree(pycache)
+    return dst_root
 
 
 def sha256_file(path: Path) -> str:
@@ -232,28 +195,6 @@ def _redact_url_value(value: str) -> str:
     return parsed.geturl()
 
 
-_EMBEDDED_URL_RE = re.compile(r"[A-Za-z][A-Za-z0-9+.-]*:/+[^\s\"'<>]+")
-
-
-def _redact_embedded_urls(value: str) -> str:
-    """Redact credential-bearing URLs even when embedded in surrounding text."""
-
-    def replace(match: re.Match[str]) -> str:
-        raw = match.group(0)
-        trailing = ""
-        while raw and raw[-1] in ").,;]}":
-            trailing = raw[-1] + trailing
-            raw = raw[:-1]
-        if "://" in raw:
-            return _redact_url_value(raw) + trailing
-        scheme, remainder = raw.split(":/", 1)
-        normalized = f"{scheme}://{remainder.lstrip('/')}"
-        redacted = _redact_url_value(normalized).replace("://", ":/", 1)
-        return redacted + trailing
-
-    return _EMBEDDED_URL_RE.sub(replace, value)
-
-
 def _redact_value(value: str, sensitive_values: frozenset[str]) -> str:
     """Apply value-level redaction to a string.
 
@@ -263,27 +204,8 @@ def _redact_value(value: str, sensitive_values: frozenset[str]) -> str:
     for sv in sensitive_values:
         if sv and sv in result:
             result = result.replace(sv, "<REDACTED>")
-    result = _redact_embedded_urls(result)
+    result = _redact_url_value(result)
     return result
-
-
-def _redact_metadata(value: Any, sensitive_values: frozenset[str]) -> Any:
-    """Recursively sanitize strings and sensitive keyed values before JSON."""
-    if isinstance(value, dict):
-        sanitized: dict[Any, Any] = {}
-        for key, item in value.items():
-            if isinstance(key, str) and _is_sensitive_env_key(key):
-                sanitized[key] = "<REDACTED>"
-            else:
-                sanitized[key] = _redact_metadata(item, sensitive_values)
-        return sanitized
-    if isinstance(value, list):
-        return [_redact_metadata(item, sensitive_values) for item in value]
-    if isinstance(value, tuple):
-        return tuple(_redact_metadata(item, sensitive_values) for item in value)
-    if isinstance(value, str):
-        return _redact_value(value, sensitive_values)
-    return value
 
 
 def redact_env(env: dict[str, str]) -> dict[str, str]:
@@ -527,50 +449,6 @@ class EvidenceBundle:
         return {"artifacts": entries}
 
 
-def _audit_recursive_manifest(
-    root: Path,
-    manifest: dict[str, object],
-) -> dict[str, object]:
-    """Mechanically audit exact recursive coverage, byte sizes and SHA-256.
-
-    The exact outer ``root/manifest.json`` is the sole exclusion.  Nested files
-    named ``manifest.json`` are ordinary retained artifacts and must be listed.
-    """
-    root = root.resolve()
-    outer_manifest = root / "manifest.json"
-    actual: dict[str, dict[str, object]] = {}
-    for path in sorted(root.rglob("*")):
-        if not path.is_file() or path.resolve() == outer_manifest:
-            continue
-        data = path.read_bytes()
-        actual[str(path.relative_to(root))] = {
-            "bytes": len(data),
-            "sha256": hashlib.sha256(data).hexdigest(),
-        }
-
-    raw_artifacts = manifest.get("artifacts", {})
-    artifacts = raw_artifacts if isinstance(raw_artifacts, dict) else {}
-    actual_names = set(actual)
-    manifest_names = set(artifacts)
-    mismatches: list[str] = []
-    for name in sorted(actual_names & manifest_names):
-        if artifacts[name] != actual[name]:
-            mismatches.append(name)
-
-    return {
-        "actual_retained_files": len(actual_names),
-        "manifest_entries": len(manifest_names),
-        "inventory_equal": actual_names == manifest_names,
-        "size_hash_equal": not mismatches,
-        "missing": sorted(actual_names - manifest_names),
-        "extra": sorted(manifest_names - actual_names),
-        "size_hash_mismatches": mismatches,
-        "nested_manifests": sorted(
-            name for name in actual_names if name.endswith("/manifest.json")
-        ),
-    }
-
-
 # ---------------------------------------------------------------------------
 # Subprocess execution with evidence capture
 # ---------------------------------------------------------------------------
@@ -593,8 +471,6 @@ def run_subprocess(
     """
     sensitive_values = _collect_sensitive_values(env)
     start = datetime.now(UTC).isoformat()
-    failure_category: str | None = None
-    error_type: str | None = None
     try:
         result = subprocess.run(
             argv,
@@ -605,8 +481,6 @@ def run_subprocess(
             timeout=timeout,
         )
     except subprocess.TimeoutExpired as exc:
-        failure_category = "timeout"
-        error_type = type(exc).__name__
         result = subprocess.CompletedProcess(
             args=argv,
             returncode=124,
@@ -616,18 +490,7 @@ def run_subprocess(
                 sensitive_values,
             ),
         )
-    except KeyboardInterrupt:
-        failure_category = "interrupted"
-        error_type = "KeyboardInterrupt"
-        result = subprocess.CompletedProcess(
-            args=argv,
-            returncode=130,
-            stdout="",
-            stderr="INTERRUPTED: KeyboardInterrupt",
-        )
     except Exception as exc:  # noqa: BLE001
-        failure_category = "startup_failure"
-        error_type = type(exc).__name__
         result = subprocess.CompletedProcess(
             args=argv,
             returncode=1,
@@ -644,25 +507,17 @@ def run_subprocess(
         f"{step_name}.stderr.txt",
         _redact_value(result.stderr, sensitive_values),
     )
-    if failure_category is None and result.returncode != 0:
-        failure_category = "subprocess_nonzero"
-    result.tg_failure_category = failure_category
     bundle.write_json(
         f"{step_name}.meta.json",
-        _redact_metadata(
-            {
-                "argv": argv,
-                "cwd": str(cwd),
-                "env": redact_env(env),
-                "start_utc": start,
-                "end_utc": end,
-                "returncode": result.returncode,
-                "failure_category": failure_category,
-                "error_type": error_type,
-                "timeout_seconds": timeout,
-            },
-            sensitive_values,
-        ),
+        {
+            "argv": argv,
+            "cwd": str(cwd),
+            "env": redact_env(env),
+            "start_utc": start,
+            "end_utc": end,
+            "returncode": result.returncode,
+            "timeout_seconds": timeout,
+        },
     )
     return result
 
@@ -674,93 +529,26 @@ def run_subprocess(
 
 def _build_minimal_env(
     collection_json: Path,
-    staged: StagedPlugin,
-    ledger_path: Path,
-    guard_pythonpath: Path | None = None,
+    plugin_dir: Path,
+    existing_pythonpath: str,
 ) -> dict[str, str]:
-    """Build a fixed, verifier-owned child environment for pytest.
-
-    No credential-bearing inherited variables are consulted.  The optional
-    guard path is an explicit runner input and must resolve to a directory.
-    """
+    """Build an explicit minimal child environment for the pytest subprocess."""
     env: dict[str, str] = {
         "PATH": os.environ.get("PATH", "/usr/bin:/bin"),
         "PYTHONDONTWRITEBYTECODE": "1",
         "TG_R4_COLLECTION_JSON": str(collection_json),
         "TG_R4_INVOCATION_NONCE": secrets.token_hex(16),
-        "TG_R4_PLUGIN_SHA256": staged.source_sha256,
-        "TG_TEST_ADMIN_DATABASE_URL": SYNTHETIC_DB_GUARD_URL,
-        "TG_EVIDENCE_PG_LEDGER": str(ledger_path.resolve()),
     }
-    # Preserve only non-credential process basics from a fixed allowlist.
+    # Preserve HOME/USER only if present (needed by some conftest setups).
     for key in ("HOME", "USER", "LANG", "LC_ALL"):
         val = os.environ.get(key)
         if val is not None:
             env[key] = val
-
-    python_paths = [str(staged.root)]
-    if guard_pythonpath is not None:
-        try:
-            resolved_guard = guard_pythonpath.resolve(strict=True)
-        except OSError as exc:
-            raise ValueError("guard_pythonpath must resolve to an existing directory") from exc
-        if not resolved_guard.is_dir():
-            raise ValueError("guard_pythonpath must resolve to an existing directory")
-        python_paths.append(str(resolved_guard))
-    env["PYTHONPATH"] = os.pathsep.join(python_paths)
+    pythonpath = str(plugin_dir)
+    if existing_pythonpath:
+        pythonpath += ":" + existing_pythonpath
+    env["PYTHONPATH"] = pythonpath
     return env
-
-
-def _close_bundle(
-    bundle: EvidenceBundle,
-    result: dict[str, object],
-    *,
-    sensitive_values: frozenset[str] = frozenset(),
-) -> dict[str, object]:
-    """Atomically publish a sanitized result and final recursive manifest."""
-    sanitized = _redact_metadata(result, sensitive_values)
-    bundle.write_json("result.json", sanitized)
-    bundle.write_json("manifest.json", bundle.manifest())
-    return sanitized
-
-
-def _source_hashes(
-    runner_src: Path,
-    plugin_src: Path,
-    bundle: EvidenceBundle,
-    staged: StagedPlugin | None = None,
-) -> dict[str, object]:
-    """Return live/staged/retained source attribution and equality verdicts."""
-    runner_live = sha256_file(runner_src)
-    plugin_live = sha256_file(plugin_src)
-    runner_retained = sha256_file(bundle.root / "runner.source.py")
-    plugin_retained = sha256_file(bundle.root / "plugin.source.py")
-    data: dict[str, object] = {
-        "runner": {
-            "live": runner_live,
-            "retained": runner_retained,
-            "equal": runner_live == runner_retained,
-        },
-        "plugin": {
-            "live": plugin_live,
-            "retained": plugin_retained,
-            "equal_live_retained": plugin_live == plugin_retained,
-        },
-    }
-    if staged is not None:
-        staged_actual = sha256_file(staged.plugin_path) if staged.plugin_path.is_file() else None
-        plugin_data = data["plugin"]
-        assert isinstance(plugin_data, dict)
-        plugin_data.update(
-            {
-                "staged": staged_actual,
-                "staged_recorded": staged.staged_sha256,
-                "equal_live_staged_retained": (
-                    plugin_live == staged_actual == plugin_retained == staged.staged_sha256
-                ),
-            }
-        )
-    return data
 
 
 def run_collect_only(
@@ -769,130 +557,132 @@ def run_collect_only(
     evidence_root: Path,
     *,
     pytest_path: str = "pytest",
-    guard_pythonpath: Path | None = None,
 ) -> dict[str, object]:
-    """Execute authenticated structured collect-only and fail closed."""
+    """Execute structured collect-only and return a result dict.
+
+    Fail-closed checks (in order):
+
+    0. Reject pre-existing evidence leaf without modification.
+    1. Verify main Git identity (HEAD).
+    2. Verify candidate Git identity (branch, HEAD, parent, cleanliness).
+    3. Verify main file pins.
+    4. Verify candidate file pins.
+    5. Require pytest return code 0.
+    6. Require current invocation nonce in collection JSON.
+    """
     evidence_root = evidence_root.resolve()
+
+    # --- F-04: reject pre-existing evidence leaf ---------------------------
     if evidence_root.exists():
-        return {"valid": False, "verdict": "BLOCKED", "reason": "evidence_path_exists"}
+        return {
+            "valid": False,
+            "verdict": "BLOCKED",
+            "reason": "evidence_path_exists",
+        }
 
     bundle = EvidenceBundle(evidence_root)
+
+    # --- Save runner + plugin source + SHA256 -------------------------------
     runner_src = Path(__file__).resolve()
     plugin_src = runner_src.parent / "wp04_02_r4_pytest_plugin.py"
     bundle.copy_file(runner_src, "runner.source.py")
     bundle.copy_file(plugin_src, "plugin.source.py")
-    bundle.write_json("source-hashes.json", _source_hashes(runner_src, plugin_src, bundle))
-    # Before the minimal child environment exists there are deliberately no
-    # inherited credential literals to inspect or use for redaction.
-    sensitive_values: frozenset[str] = frozenset()
-    staged: StagedPlugin | None = None
+    bundle.write_json(
+        "source-hashes.json",
+        {
+            "runner": sha256_file(runner_src),
+            "plugin": sha256_file(plugin_src),
+        },
+    )
+
+    # --- F-02: Git identity verification ------------------------------------
+    main_git_mismatches = verify_main_git_identity(main_root)
+    candidate_git_mismatches = verify_candidate_git_identity(candidate_root)
+
+    # --- F-01 + pin verification --------------------------------------------
+    candidate_pin_mismatches = verify_candidate_pins(candidate_root)
+    main_pin_mismatches = verify_main_pins(main_root)
+
+    all_mismatches: dict[str, list[str]] = {
+        "main_git_mismatches": main_git_mismatches,
+        "candidate_git_mismatches": candidate_git_mismatches,
+        "candidate_pin_mismatches": candidate_pin_mismatches,
+        "main_pin_mismatches": main_pin_mismatches,
+    }
+    bundle.write_json(
+        "baseline-pins.json",
+        {
+            **all_mismatches,
+            "main_head": MAIN_HEAD,
+            "candidate_commit": CANDIDATE_COMMIT,
+            "candidate_branch": CANDIDATE_BRANCH,
+            "candidate_parent": CANDIDATE_PARENT,
+        },
+    )
+
+    # Fail closed on ANY mismatch (F-01: main mismatches now block too).
+    total_mismatches = (
+        len(main_git_mismatches)
+        + len(candidate_git_mismatches)
+        + len(candidate_pin_mismatches)
+        + len(main_pin_mismatches)
+    )
+    if total_mismatches > 0:
+        bundle.write_json(
+            "result.json",
+            {
+                "valid": False,
+                "verdict": "BLOCKED",
+                "reason": "baseline_mismatch",
+                **all_mismatches,
+            },
+        )
+        bundle.write_json("manifest.json", bundle.manifest())
+        return {
+            "valid": False,
+            "verdict": "BLOCKED",
+            "reason": "baseline_mismatch",
+            **all_mismatches,
+        }
+
+    # --- Structured collection via plugin -----------------------------------
+    collection_json = evidence_root / "_collected-nodeids.json"
+    # Stage the plugin to an isolated temp dir to avoid __pycache__ conflicts.
+    plugin_dir = _stage_plugin_to_temp()
+    bundle.write_json(
+        "plugin-staging.json",
+        {
+            "staging_dir": str(plugin_dir),
+            "source_package": str(Path(__file__).resolve().parent.parent),
+        },
+    )
+
+    # Build minimal child environment (F-06: no full inherited env dump).
+    env = _build_minimal_env(collection_json, plugin_dir, os.environ.get("PYTHONPATH", ""))
+    invocation_nonce = env["TG_R4_INVOCATION_NONCE"]
+
+    # If --pytest points to a python interpreter (e.g. /usr/bin/python3),
+    # invoke via ``python3 -m pytest`` so the plugin can be loaded.
+    pytest_path_obj = Path(pytest_path)
+    is_python_interpreter = pytest_path_obj.name.startswith("python")
+    base_argv = (
+        [str(pytest_path_obj), "-m", "pytest"] if is_python_interpreter else [str(pytest_path_obj)]
+    )
+
+    collect_argv = base_argv + [
+        "-p",
+        "tg_verifier_tools.verification.wp04_02_r4_pytest_plugin",
+        "-p",
+        "no:cacheprovider",
+        "--collect-only",
+        "-q",
+        "tests/test_evidence_services.py::test_r1c05c01_forbidden_status_commit_fresh_no_residue",
+        "tests/test_evidence_services.py::test_r1c05c01_allowed_routing_history_audit",
+        "tests/test_evidence_services.py::test_r1c05c01_committed_exact_replay_read_only",
+        "tests/test_evidence_services.py::test_r1c05c01_legacy_forbidden_prior_committed_replay",
+    ]
 
     try:
-        main_git_mismatches = verify_main_git_identity(main_root)
-        if main_git_mismatches:
-            return _close_bundle(
-                bundle,
-                {
-                    "valid": False,
-                    "verdict": "BLOCKED",
-                    "reason": "main_git_identity_mismatch",
-                    "main_git_mismatches": main_git_mismatches,
-                },
-                sensitive_values=sensitive_values,
-            )
-
-        candidate_git_mismatches = verify_candidate_git_identity(candidate_root)
-        if candidate_git_mismatches:
-            return _close_bundle(
-                bundle,
-                {
-                    "valid": False,
-                    "verdict": "BLOCKED",
-                    "reason": "candidate_git_identity_mismatch",
-                    "candidate_git_mismatches": candidate_git_mismatches,
-                },
-                sensitive_values=sensitive_values,
-            )
-
-        candidate_pin_mismatches = verify_candidate_pins(candidate_root)
-        main_pin_mismatches = verify_main_pins(main_root)
-        all_mismatches = {
-            "candidate_pin_mismatches": candidate_pin_mismatches,
-            "main_pin_mismatches": main_pin_mismatches,
-        }
-        bundle.write_json(
-            "baseline-pins.json",
-            {
-                "main_git_mismatches": main_git_mismatches,
-                "candidate_git_mismatches": candidate_git_mismatches,
-                **all_mismatches,
-                "main_head": MAIN_HEAD,
-                "candidate_commit": CANDIDATE_COMMIT,
-                "candidate_branch": CANDIDATE_BRANCH,
-                "candidate_parent": CANDIDATE_PARENT,
-            },
-        )
-        if candidate_pin_mismatches or main_pin_mismatches:
-            return _close_bundle(
-                bundle,
-                {
-                    "valid": False,
-                    "verdict": "BLOCKED",
-                    "reason": "baseline_pin_mismatch",
-                    **all_mismatches,
-                },
-                sensitive_values=sensitive_values,
-            )
-
-        collection_json = evidence_root / "_collected-nodeids.json"
-        staged = _stage_plugin_to_temp()
-        staged_ok = _verify_staged_plugin(staged)
-        bundle.write_json(
-            "plugin-staging.json",
-            {
-                "namespace": staged.namespace,
-                "module_name": staged.module_name,
-                "source_sha256": staged.source_sha256,
-                "staged_sha256": sha256_file(staged.plugin_path),
-                "verified_before_pytest": staged_ok,
-            },
-        )
-        bundle.write_json(
-            "source-hashes.json", _source_hashes(runner_src, plugin_src, bundle, staged)
-        )
-        if not staged_ok:
-            return _close_bundle(
-                bundle,
-                {"valid": False, "verdict": "BLOCKED", "reason": "staged_plugin_mismatch"},
-                sensitive_values=sensitive_values,
-            )
-
-        env = _build_minimal_env(
-            collection_json,
-            staged,
-            evidence_root / "_fixture-ledger.jsonl",
-            guard_pythonpath,
-        )
-        sensitive_values = _collect_sensitive_values(env)
-        invocation_nonce = env["TG_R4_INVOCATION_NONCE"]
-        pytest_path_obj = Path(pytest_path)
-        base_argv = (
-            [str(pytest_path_obj), "-m", "pytest"]
-            if pytest_path_obj.name.startswith("python")
-            else [str(pytest_path_obj)]
-        )
-        collect_argv = base_argv + [
-            "-p",
-            staged.module_name,
-            "-p",
-            "no:cacheprovider",
-            "--collect-only",
-            "-q",
-            "tests/test_evidence_services.py::test_r1c05c01_forbidden_status_commit_fresh_no_residue",
-            "tests/test_evidence_services.py::test_r1c05c01_allowed_routing_history_audit",
-            "tests/test_evidence_services.py::test_r1c05c01_committed_exact_replay_read_only",
-            "tests/test_evidence_services.py::test_r1c05c01_legacy_forbidden_prior_committed_replay",
-        ]
         result = run_subprocess(
             collect_argv,
             cwd=candidate_root,
@@ -900,135 +690,117 @@ def run_collect_only(
             bundle=bundle,
             step_name="collect-only",
         )
-        if result.returncode != 0:
-            category = getattr(result, "tg_failure_category", None)
-            reason = {
-                "timeout": "timeout",
-                "interrupted": "interrupted",
-                "startup_failure": "subprocess_startup_failure",
-            }.get(category, "pytest_nonzero")
-            return _close_bundle(
-                bundle,
-                {
-                    "valid": False,
-                    "verdict": "BLOCKED",
-                    "reason": reason,
-                    "failure_category": category,
-                    "pytest_returncode": result.returncode,
-                },
-                sensitive_values=sensitive_values,
-            )
-
-        if not collection_json.exists():
-            return _close_bundle(
-                bundle,
-                {"valid": False, "verdict": "BLOCKED", "reason": "collection_json_missing"},
-                sensitive_values=sensitive_values,
-            )
-        try:
-            raw = json.loads(collection_json.read_text(encoding="utf-8"))
-        except (json.JSONDecodeError, ValueError) as exc:
-            return _close_bundle(
-                bundle,
-                {
-                    "valid": False,
-                    "verdict": "BLOCKED",
-                    "reason": "collection_json_malformed",
-                    "error": f"{type(exc).__name__}: {exc}",
-                },
-                sensitive_values=sensitive_values,
-            )
-        if raw.get("nonce") != invocation_nonce:
-            return _close_bundle(
-                bundle,
-                {"valid": False, "verdict": "BLOCKED", "reason": "invocation_nonce_mismatch"},
-                sensitive_values=sensitive_values,
-            )
-        if raw.get("test_body_calls") != 0:
-            return _close_bundle(
-                bundle,
-                {
-                    "valid": False,
-                    "verdict": "BLOCKED",
-                    "reason": "test_body_execution_detected",
-                    "test_body_calls": raw.get("test_body_calls"),
-                },
-                sensitive_values=sensitive_values,
-            )
-
-        source_hashes = _source_hashes(runner_src, plugin_src, bundle, staged)
-        runner_hashes = source_hashes["runner"]
-        plugin_hashes = source_hashes["plugin"]
-        assert isinstance(runner_hashes, dict) and isinstance(plugin_hashes, dict)
-        bundle.write_json("source-hashes.json", source_hashes)
-        if not runner_hashes["equal"] or not plugin_hashes["equal_live_staged_retained"]:
-            return _close_bundle(
-                bundle,
-                {"valid": False, "verdict": "BLOCKED", "reason": "source_attribution_mismatch"},
-                sensitive_values=sensitive_values,
-            )
-
-        nodeids = raw.get("nodeids", [])
-        if not isinstance(nodeids, list) or not all(isinstance(item, str) for item in nodeids):
-            return _close_bundle(
-                bundle,
-                {"valid": False, "verdict": "BLOCKED", "reason": "collection_schema_invalid"},
-                sensitive_values=sensitive_values,
-            )
-        validation = validate_collection(nodeids)
-        os.replace(str(collection_json), str(evidence_root / "collected-nodeids.json"))
-        closed = _close_bundle(
-            bundle,
-            {
-                "valid": validation["valid"],
-                "verdict": "PASS" if validation["valid"] else "FAIL",
-                "count": validation["count"],
-                "expected_count": validation["expected_count"],
-                "distribution": validation["distribution"],
-                "expected_distribution": validation["expected_distribution"],
-                "missing": validation["missing"],
-                "extra": validation["extra"],
-                "duplicates": validation["duplicates"],
-                "unclassified": validation["unclassified"],
-                "pytest_returncode": result.returncode,
-                "invocation_nonce": invocation_nonce,
-                "plugin_module": staged.module_name,
-                "test_body_calls": raw["test_body_calls"],
-            },
-            sensitive_values=sensitive_values,
-        )
-        return {
-            "valid": closed["valid"],
-            "verdict": closed["verdict"],
-            "count": closed["count"],
-            "distribution": closed["distribution"],
-        }
-    except KeyboardInterrupt:
-        return _close_bundle(
-            bundle,
-            {
-                "valid": False,
-                "verdict": "BLOCKED",
-                "reason": "interrupted",
-                "failure_category": "KeyboardInterrupt",
-                "returncode": 130,
-            },
-            sensitive_values=sensitive_values,
-        )
-    except Exception as exc:  # noqa: BLE001
-        return _close_bundle(
-            bundle,
-            {
-                "valid": False,
-                "verdict": "BLOCKED",
-                "reason": "runner_error",
-                "error": {"type": type(exc).__name__, "detail": str(exc)},
-            },
-            sensitive_values=sensitive_values,
-        )
     finally:
-        if staged is not None:
-            shutil.rmtree(staged.root, ignore_errors=True)
+        # Clean up temporary plugin staging (TOP-AC-05).
+        if plugin_dir.exists():
+            shutil.rmtree(plugin_dir, ignore_errors=True)
+
+    # --- F-03: require pytest return code 0 --------------------------------
+    if result.returncode != 0:
+        bundle.write_json(
+            "result.json",
+            {
+                "valid": False,
+                "verdict": "BLOCKED",
+                "reason": "pytest_nonzero",
+                "pytest_returncode": result.returncode,
+            },
+        )
+        bundle.write_json("manifest.json", bundle.manifest())
+        return {
+            "valid": False,
+            "verdict": "BLOCKED",
+            "reason": "pytest_nonzero",
+            "pytest_returncode": result.returncode,
+        }
+
+    # --- Read structured output ---------------------------------------------
+    if not collection_json.exists():
+        bundle.write_json(
+            "result.json",
+            {
+                "valid": False,
+                "verdict": "BLOCKED",
+                "reason": "collection_json_missing",
+            },
+        )
+        bundle.write_json("manifest.json", bundle.manifest())
+        return {
+            "valid": False,
+            "verdict": "BLOCKED",
+            "reason": "collection_json_missing",
+        }
+
+    # --- F-07: guard malformed JSON -----------------------------------------
+    try:
+        raw = json.loads(collection_json.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, ValueError) as exc:
+        bundle.write_json(
+            "result.json",
+            {
+                "valid": False,
+                "verdict": "BLOCKED",
+                "reason": "collection_json_malformed",
+                "error": f"{type(exc).__name__}: {exc}",
+            },
+        )
+        bundle.write_json("manifest.json", bundle.manifest())
+        return {
+            "valid": False,
+            "verdict": "BLOCKED",
+            "reason": "collection_json_malformed",
+        }
+
+    # --- F-03: verify invocation nonce --------------------------------------
+    collection_nonce = raw.get("nonce")
+    if collection_nonce != invocation_nonce:
+        bundle.write_json(
+            "result.json",
+            {
+                "valid": False,
+                "verdict": "BLOCKED",
+                "reason": "invocation_nonce_mismatch",
+            },
+        )
+        bundle.write_json("manifest.json", bundle.manifest())
+        return {
+            "valid": False,
+            "verdict": "BLOCKED",
+            "reason": "invocation_nonce_mismatch",
+        }
+
+    nodeids: list[str] = raw.get("nodeids", [])
+    validation = validate_collection(nodeids)
+
+    # Move the collection JSON to its final name (F-05: now covered by manifest).
+    final_collection = evidence_root / "collected-nodeids.json"
+    os.replace(str(collection_json), str(final_collection))
+
+    bundle.write_json(
+        "result.json",
+        {
+            "valid": validation["valid"],
+            "verdict": "PASS" if validation["valid"] else "FAIL",
+            "count": validation["count"],
+            "expected_count": validation["expected_count"],
+            "distribution": validation["distribution"],
+            "expected_distribution": validation["expected_distribution"],
+            "missing": validation["missing"],
+            "extra": validation["extra"],
+            "duplicates": validation["duplicates"],
+            "unclassified": validation["unclassified"],
+            "pytest_returncode": result.returncode,
+            "invocation_nonce": invocation_nonce,
+        },
+    )
+    bundle.write_json("manifest.json", bundle.manifest())
+
+    return {
+        "valid": validation["valid"],
+        "verdict": "PASS" if validation["valid"] else "FAIL",
+        "count": validation["count"],
+        "distribution": validation["distribution"],
+    }
 
 
 # ---------------------------------------------------------------------------
@@ -1069,12 +841,6 @@ def main(argv: list[str] | None = None) -> int:
         default="pytest",
         help="pytest executable (default: pytest on PATH)",
     )
-    parser.add_argument(
-        "--guard-pythonpath",
-        type=Path,
-        default=None,
-        help="Explicit verifier-owned sitecustomize guard directory",
-    )
     args = parser.parse_args(argv)
 
     evidence_dir: Path = args.evidence_dir or (Path.cwd() / "evidence")
@@ -1087,7 +853,6 @@ def main(argv: list[str] | None = None) -> int:
         main_root=args.main_root.resolve(),
         evidence_root=evidence_dir.resolve(),
         pytest_path=args.pytest,
-        guard_pythonpath=args.guard_pythonpath,
     )
     print(json.dumps(result, indent=2))
     return 0 if result.get("valid") else 1
@@ -1107,23 +872,13 @@ def _run_self_tests(args: argparse.Namespace) -> int:
         "PATH": os.environ.get("PATH", "/usr/bin:/bin"),
         "PYTHONDONTWRITEBYTECODE": "1",
     }
-    try:
-        result = subprocess.run(
-            [args.pytest, str(test_file), "-v", "--tb=short"],
-            cwd=str(args.main_root.resolve()),
-            env=env,
-            capture_output=True,
-            text=True,
-        )
-    except KeyboardInterrupt:
-        print("SELF-TEST BLOCKED: interrupted", file=sys.stderr)
-        return 130
-    except OSError as exc:
-        print(
-            _redact_value(f"SELF-TEST BLOCKED: {type(exc).__name__}: {exc}", frozenset()),
-            file=sys.stderr,
-        )
-        return 1
+    result = subprocess.run(
+        [args.pytest, str(test_file), "-v", "--tb=short"],
+        cwd=str(args.main_root.resolve()),
+        env=env,
+        capture_output=True,
+        text=True,
+    )
     print(result.stdout)
     if result.stderr:
         print(result.stderr, file=sys.stderr)

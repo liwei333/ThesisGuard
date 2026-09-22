@@ -20,7 +20,6 @@ R5 repairs:
 
 from __future__ import annotations
 
-import hashlib
 import json
 import os
 from pathlib import Path
@@ -89,8 +88,6 @@ DISTRIBUTION = {
     "committed_exact_replay_read_only": 3,
     "legacy_forbidden_prior_committed_replay": 2,
 }
-
-_TEST_BODY_CALLS = 0
 
 
 def _classify_nodeid(nodeid: str) -> str | None:
@@ -164,22 +161,10 @@ def validate_collection(nodeids: list[str]) -> dict[str, Any]:
 
 
 def pytest_configure(config: pytest.Config) -> None:
-    """Authenticate the staged module and register its requested output path."""
-    expected_hash = os.environ.get("TG_R4_PLUGIN_SHA256")
-    if expected_hash:
-        actual_hash = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
-        if actual_hash != expected_hash:
-            raise pytest.UsageError("verifier plugin byte authentication failed")
+    """Register the plugin only when an output path is requested."""
     output_path = os.environ.get("TG_R4_COLLECTION_JSON")
     if output_path:
         config._r4_collection_output = Path(output_path)  # type[attr-defined]
-
-
-def pytest_runtest_call(item: pytest.Item) -> None:
-    """Count body execution so collect-only evidence can prove it stayed zero."""
-    del item
-    global _TEST_BODY_CALLS  # noqa: PLW0603
-    _TEST_BODY_CALLS += 1
 
 
 def pytest_collection_finish(session: pytest.Session) -> None:
@@ -209,7 +194,6 @@ def pytest_collection_finish(session: pytest.Session) -> None:
             "nodeids": nodeids,
             "validation": validation,
             "nonce": nonce,
-            "test_body_calls": _TEST_BODY_CALLS,
         },
         indent=2,
         sort_keys=False,
