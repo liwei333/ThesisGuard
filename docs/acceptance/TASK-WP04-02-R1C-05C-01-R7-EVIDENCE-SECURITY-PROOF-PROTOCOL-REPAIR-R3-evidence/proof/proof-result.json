@@ -1,0 +1,11 @@
+{
+  "child_return_code": 42,
+  "connection_count": 0,
+  "invocation_id": "e7030ddcd9e95d1f99b84c03581c76a6c9cf659c6beae8500b592d245d6aec4a",
+  "outcome": "FAILURE",
+  "parent_return_code": 1,
+  "query_count": 0,
+  "schema_valid_result_count": 0,
+  "schema_version": 1,
+  "stage": "OPAQUE_VALUE_UNAVAILABLE_OR_INVALID"
+}

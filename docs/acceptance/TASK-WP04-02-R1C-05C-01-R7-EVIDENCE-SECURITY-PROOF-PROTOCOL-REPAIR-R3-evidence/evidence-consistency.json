@@ -1,0 +1,15 @@
+{
+  "baseline_identity_match": true,
+  "r2_patch_identity_match": true,
+  "imported_source_hashes_match": true,
+  "final_source_hashes_match_implementation_commit": true,
+  "implementation_commit_scope_match": true,
+  "proof_invocation_audit_matches_safe_result": true,
+  "proof_file_hash_matches_staging": true,
+  "offline_gate_summaries_consistent": true,
+  "mutation_audits_consistent": true,
+  "report_status_matches_proof_result": true,
+  "expected_manifest_eligible_files": 21,
+  "manifest_final_nonwriting_rebuild_required": true,
+  "final_post_commit_git_check_required": true
+}

@@ -1,0 +1,112 @@
+{
+  "file_count": 21,
+  "files": [
+    {
+      "bytes": 288,
+      "path": "baseline-git-identity.json",
+      "sha256": "20438c6640e778335fbf4269fd256adb7e036dd08310c27693f92e28e2309d9b"
+    },
+    {
+      "bytes": 398,
+      "path": "branch-worktree-identity.json",
+      "sha256": "da4f24d5756a7aa6f057717628a43cfd9fd35e4ee1ab46d031de2de187de74ce"
+    },
+    {
+      "bytes": 264,
+      "path": "candidate-identity.json",
+      "sha256": "281079713e559b6d188d4beb455d2ebec69b185518f432f274af090dc5fcd2c7"
+    },
+    {
+      "bytes": 442,
+      "path": "credential-scan.json",
+      "sha256": "4a69f7643915488a40c30dc49ddb6a470590d717c1eeca857185da0a0938678f"
+    },
+    {
+      "bytes": 773,
+      "path": "docker-postgresql-preflight.json",
+      "sha256": "b0a44c0049e8eb58e0a30158aaa5dd4ca690f2a9e16ab22e7b9913d53cb2d645"
+    },
+    {
+      "bytes": 587,
+      "path": "evidence-consistency.json",
+      "sha256": "55927d2d27dc9792f2e3c0d10be84a932262a6260006967f725e9a62065a8e8e"
+    },
+    {
+      "bytes": 736,
+      "path": "execution-events.jsonl",
+      "sha256": "bb667ca98d7b71077ba0625e21868c2a23f2d74fff4a1037e2072547df611cd4"
+    },
+    {
+      "bytes": 523,
+      "path": "final-git-state.json",
+      "sha256": "c3b5ea9112ed042b81f1bc7fea8116b186dee7bc8db48f9c2fa9ce5401a18c44"
+    },
+    {
+      "bytes": 552,
+      "path": "historical-main-audit.json",
+      "sha256": "836fe49894a95e1d79013fb8db3cef4a6620ac9cc7ba7541db6046113488119c"
+    },
+    {
+      "bytes": 656,
+      "path": "implementation-commit.json",
+      "sha256": "ced21330398bda9a231f44f670c332796ba531e78135f7a8222554701bbd2db9"
+    },
+    {
+      "bytes": 262,
+      "path": "json-audit.json",
+      "sha256": "2458e46d909ce89f9430651d36511d756fbfe1587ff1640dc623eb7401502b18"
+    },
+    {
+      "bytes": 588,
+      "path": "mutation-audit.json",
+      "sha256": "5a190b2329ca72d66bedba6eee49d48898f89fe712514623ef2cbdc08e3bcf2e"
+    },
+    {
+      "bytes": 620,
+      "path": "offline-gates.json",
+      "sha256": "75040ec3b56b6303246657e9c7f3d6e802e1068fa546c0d1a86e0799a5739bc3"
+    },
+    {
+      "bytes": 932,
+      "path": "proof/proof-invocation-audit.json",
+      "sha256": "fd37a09564e74e3b62de1cec3ee36f06cff1a0adee45676437c66b4a9ad7dcab"
+    },
+    {
+      "bytes": 320,
+      "path": "proof/proof-result.json",
+      "sha256": "38c6739ea0911a57b721b39b5f61b4cdffbfd88b8925b722e5d6edfc23365328"
+    },
+    {
+      "bytes": 433,
+      "path": "protected-output-audit.json",
+      "sha256": "eb44a25956d341e43bf9e1159bf8356266a13731965f681f6d2368a0be325b1d"
+    },
+    {
+      "bytes": 934,
+      "path": "r2-patch-identity.json",
+      "sha256": "10f16d0f7dd6e93bc0070f2150dbd55fbafab332537151a37364e6654ed4c51c"
+    },
+    {
+      "bytes": 489,
+      "path": "repair-cycle-audit.json",
+      "sha256": "b4e6c3394e21c2179930d7a9218d9160668665952b550f73dee18dac6db449a1"
+    },
+    {
+      "bytes": 526,
+      "path": "scope-audit.json",
+      "sha256": "1bd1de7ceb525b8f345256e2cc738a1f1de9aa022c22a33744b07e7180fac0f1"
+    },
+    {
+      "bytes": 1376,
+      "path": "source-hashes.json",
+      "sha256": "5db7f608749e0c1acd0092655829d39886026e2b19e3278f946938cfef6f43e7"
+    },
+    {
+      "bytes": 8869,
+      "path": "source-snapshots/allowed-files.diff",
+      "sha256": "fa7e2f352e7967182f76c1fd99f55d09b96726164b8a0d5b15568a946fd408f0"
+    }
+  ],
+  "root_manifest_exclusion": "manifest.json",
+  "schema_version": 1
+}

@@ -1,0 +1,11 @@
+{
+  "ruff_check": {"exit_code": 0, "findings": 0, "file_count": 3},
+  "ruff_format_check": {"exit_code": 0, "formatted": true, "file_count": 3},
+  "python_compile": {"exit_code": 0, "file_count": 3},
+  "secure_proof_tests": {"exit_code": 0, "collected": 74, "passed": 74, "failed": 0, "skipped": 0},
+  "runner_tests": {"exit_code": 0, "collected": 83, "passed": 83, "failed": 0, "skipped": 0},
+  "combined_regression": {"exit_code": 0, "collected": 157, "passed": 157, "failed": 0, "skipped": 0},
+  "pytest_cache_provider_disabled": true,
+  "repo_cache_directories_before_proof": 0,
+  "all_offline_gates_passed": true
+}

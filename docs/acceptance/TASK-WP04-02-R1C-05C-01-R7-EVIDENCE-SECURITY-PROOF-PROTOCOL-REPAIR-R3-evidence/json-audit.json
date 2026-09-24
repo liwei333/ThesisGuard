@@ -1,0 +1,8 @@
+{
+  "scope": "complete evidence tree including this audit and excluding not-yet-generated root manifest",
+  "json_jsonl_files": 20,
+  "parsed_documents": 29,
+  "invalid_files": 0,
+  "all_parseable": true,
+  "root_manifest_parse_checked_after_generation": true
+}

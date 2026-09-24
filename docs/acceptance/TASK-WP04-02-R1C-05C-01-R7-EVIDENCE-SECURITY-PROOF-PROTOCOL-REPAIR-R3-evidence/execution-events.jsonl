@@ -1,0 +1,10 @@
+{"event":"baseline_preflight","exit_code":0,"status":"PASS"}
+{"event":"r2_patch_identity","exit_code":0,"status":"PASS"}
+{"event":"initial_ruff","exit_code":1,"status":"EXPECTED_RED","finding":"I001"}
+{"event":"controlled_repair_cycle_1","status":"APPLIED","scope":"import_order_only"}
+{"event":"full_offline_gates","exit_code":0,"status":"PASS"}
+{"event":"implementation_commit","commit":"af6d6909b0c10a3e703e3d601c85568b22c58014","status":"CREATED"}
+{"event":"postgresql_preflight","exit_code":0,"status":"PASS"}
+{"event":"proof_parent","exit_code":1,"child_return_code":42,"status":"OPAQUE_VALUE_UNAVAILABLE_OR_INVALID"}
+{"event":"proof_retry","count":0,"status":"NOT_RUN"}
+{"event":"final_status","status":"BLOCKED_PROOF_PROTOCOL"}

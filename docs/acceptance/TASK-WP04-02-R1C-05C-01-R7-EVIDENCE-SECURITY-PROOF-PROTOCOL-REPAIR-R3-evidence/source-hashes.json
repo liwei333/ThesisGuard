@@ -1,0 +1,18 @@
+{
+  "baseline": {
+    "tg_verifier_tools/verification/wp04_02_secure_pg_proof.py": "03dfe2e63a9b8332fbd7f17e39144709a397eba8440ed4783a2eb7631b0fcb5c",
+    "tg_verifier_tests/verification/test_wp04_02_secure_pg_proof.py": "aeb418d9369c21035148c68dd44f69303e3e82885a614b55731c248d363a0ea8",
+    "tg_verifier_tests/verification/test_wp04_02_r4_runner.py": "aafa9e54ab1bd1fbf7ce3d3cf78c2854125264e73291c264a49dba142cf8ff75"
+  },
+  "imported_r2": {
+    "tg_verifier_tools/verification/wp04_02_secure_pg_proof.py": "098fb1235f3abb3e92e21fa3a0ce1ee0d8f4fd0660fec0601225d7f1b04a0a61",
+    "tg_verifier_tests/verification/test_wp04_02_secure_pg_proof.py": "d7a170a42a47782793c9c08453c48ca5b1c0e0ef0e54d053be3b40d6c6703dec",
+    "tg_verifier_tests/verification/test_wp04_02_r4_runner.py": "0b4d025b47ac599d2ad10d343d4cd7617d031c5c04e1b5345c50fb71e22927b4"
+  },
+  "final": {
+    "tg_verifier_tools/verification/wp04_02_secure_pg_proof.py": "098fb1235f3abb3e92e21fa3a0ce1ee0d8f4fd0660fec0601225d7f1b04a0a61",
+    "tg_verifier_tests/verification/test_wp04_02_secure_pg_proof.py": "d7a170a42a47782793c9c08453c48ca5b1c0e0ef0e54d053be3b40d6c6703dec",
+    "tg_verifier_tests/verification/test_wp04_02_r4_runner.py": "5d89c7cb9267bccfd5874e1be7588b6457a405517729772e1632b2be6e6f36ae"
+  },
+  "protected_runner_source_sha256": "3b3145f0a17e593db8d7689ba942ad43fcd4f4be15ddc61d7196e0cc061c3b36"
+}

@@ -1,0 +1,13 @@
+{
+  "branch": "codex/wp04-02-r7-proof-protocol-repair-r3",
+  "implementation_commit": "af6d6909b0c10a3e703e3d601c85568b22c58014",
+  "evidence_commit_recorded_in_final_delivery": true,
+  "expected_commit_count_after_baseline": 2,
+  "tracked_source_diff_after_implementation_commit": 0,
+  "index_diff_before_evidence_commit": 0,
+  "formal_output_paths_new": true,
+  "final_clean_state_requires_post_commit_external_verification": true,
+  "push_performed": false,
+  "merge_performed": false,
+  "pull_request_created": false
+}

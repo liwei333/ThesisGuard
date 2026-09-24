@@ -1,0 +1,19 @@
+{
+  "source_branch": "codex/wp04-02-r7-proof-protocol-repair-r2",
+  "source_head": "43df5fbf9e2b1a748ebd7ac22e8ba02c2832285b",
+  "source_index_diff_count": 0,
+  "tracked_files": [
+    "tg_verifier_tests/verification/test_wp04_02_r4_runner.py",
+    "tg_verifier_tests/verification/test_wp04_02_secure_pg_proof.py",
+    "tg_verifier_tools/verification/wp04_02_secure_pg_proof.py"
+  ],
+  "tracked_binary_diff_sha256": "72f5fa9c8cf31c83dcb8aa1bd33440d171cf443a54b974d05b0f7bb1f6989a45",
+  "patch_bytes": 8863,
+  "private_patch_directory_mode": "0700",
+  "private_patch_file_mode": "0600",
+  "patch_applied": true,
+  "r2_report_sha256": "491de2921da58a3324a439c1f51810ef31607e52f1825023fd530a5ef1bcac68",
+  "r2_manifest_sha256": "d7b7d5675b66549846707654f972ad1101f834ae25ff0345bdd5cb1d3f2dcfd5",
+  "r2_independent_review_sha256": "533e1f2a10c4279afa154a1a2ffbebec3cd923e67a8c91c0328f459fa2d68e51",
+  "r2_worktree_modified_by_r3": false
+}

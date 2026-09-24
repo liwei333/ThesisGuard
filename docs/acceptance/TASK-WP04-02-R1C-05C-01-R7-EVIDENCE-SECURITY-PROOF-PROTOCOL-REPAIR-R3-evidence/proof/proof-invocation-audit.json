@@ -1,0 +1,23 @@
+{
+  "invocation_id": "e7030ddcd9e95d1f99b84c03581c76a6c9cf659c6beae8500b592d245d6aec4a",
+  "parent_proof_invocation_count": 1,
+  "retry_count": 0,
+  "child_process_count": 1,
+  "pre_invocation_guard_rejection_count": 1,
+  "pre_invocation_guard_reached_parent_command": false,
+  "proof_output_path_preexisted": false,
+  "proof_file_sha256": "38c6739ea0911a57b721b39b5f61b4cdffbfd88b8925b722e5d6edfc23365328",
+  "parent_stdout_retained": false,
+  "parent_stderr_retained": false,
+  "raw_child_stdout_retained": false,
+  "raw_child_stderr_retained": false,
+  "driver_exception_retained": false,
+  "traceback_retained": false,
+  "exception_repr_retained": false,
+  "connection_value_read_by_parent": false,
+  "connection_value_in_argv": false,
+  "connection_value_explicitly_passed_in_environment": false,
+  "connection_value_written_to_temporary_file": false,
+  "failure_record_schema_valid": true,
+  "failure_record_field_count": 9
+}

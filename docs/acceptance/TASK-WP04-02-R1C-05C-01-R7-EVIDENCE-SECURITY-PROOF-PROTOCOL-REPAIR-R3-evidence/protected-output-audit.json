@@ -1,0 +1,12 @@
+{
+  "historical_acceptance_modified": false,
+  "historical_evidence_modified": false,
+  "r2_report_copied_into_r3": false,
+  "r2_evidence_copied_into_r3": false,
+  "r2_untracked_files_copied_into_r3": false,
+  "raw_subprocess_output_in_formal_output": false,
+  "credential_value_in_formal_output": false,
+  "url_userinfo_in_formal_output": false,
+  "driver_exception_in_formal_output": false,
+  "traceback_in_formal_output": false
+}

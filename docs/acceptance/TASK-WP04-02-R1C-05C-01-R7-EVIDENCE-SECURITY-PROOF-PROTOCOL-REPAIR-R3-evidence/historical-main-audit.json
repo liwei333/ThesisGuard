@@ -1,0 +1,18 @@
+{
+  "historical_main_pin": "675217c3a15c0f416aa4462ca6edc491bf99f9f6",
+  "clone_without_hardlinks": true,
+  "detached": true,
+  "clean": true,
+  "head_exact": true,
+  "wrong_head_rejected": true,
+  "dirty_checkout_rejected": true,
+  "missing_candidate_not_skipped": true,
+  "collect_only_executed": true,
+  "unique_node_ids": 41,
+  "distribution": {"integration": 20, "service": 16, "repository": 3, "migration": 2},
+  "test_body_calls": 0,
+  "socket_attempts": 0,
+  "create_attempts": 0,
+  "ledger_exists": false,
+  "invocation_nonce_matched": true
+}

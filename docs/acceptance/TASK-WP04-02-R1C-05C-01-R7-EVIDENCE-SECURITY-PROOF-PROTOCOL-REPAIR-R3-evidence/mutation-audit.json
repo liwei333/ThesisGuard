@@ -1,0 +1,22 @@
+{
+  "database_create_count": 0,
+  "database_drop_count": 0,
+  "database_alter_count": 0,
+  "migration_count": 0,
+  "fixture_count": 0,
+  "schema_ddl_count": 0,
+  "business_dml_count": 0,
+  "database_cleanup_count": 0,
+  "terminate_backend_count": 0,
+  "successful_sql_connection_count": 0,
+  "sql_query_count": 0,
+  "docker_mutation_count": 0,
+  "candidate_mutation_count": 0,
+  "r2_mutation_count": 0,
+  "main_mutation_count": 0,
+  "r8_invocation_count": 0,
+  "focused_41_scenario_postgresql_suite_invocation_count": 0,
+  "push_count": 0,
+  "merge_count": 0,
+  "pull_request_count": 0
+}

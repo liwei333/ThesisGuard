@@ -1,0 +1,12 @@
+{
+  "initial_ruff_exit_code": 1,
+  "initial_finding_count": 1,
+  "initial_finding_code": "I001",
+  "initial_finding_file": "tg_verifier_tests/verification/test_wp04_02_r4_runner.py",
+  "controlled_repair_cycles_used": 1,
+  "controlled_repair_cycles_allowed": 2,
+  "repair": "MAIN_HEAD sorted before EvidenceBundle in one import list",
+  "runtime_logic_changed_by_r3_mechanical_repair": false,
+  "targeted_gate_after_repair_exit_code": 0,
+  "full_offline_gates_after_repair_passed": true
+}
