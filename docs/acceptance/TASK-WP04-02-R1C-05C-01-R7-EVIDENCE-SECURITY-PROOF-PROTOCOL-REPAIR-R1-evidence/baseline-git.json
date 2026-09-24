@@ -1,0 +1,14 @@
+{
+  "base_sha": "282d37055b39dde7772dfca443f814c243c43dd9",
+  "implementation_commit": "9ba7334",
+  "isolated_branch": "codex/wp04-02-r7-proof-protocol-repair-r1",
+  "isolated_head": "9ba733448ba2941f70cc109cffb2399986ff7cc2",
+  "main_branch": "main",
+  "main_head": "282d37055b39dde7772dfca443f814c243c43dd9",
+  "main_index_empty": true,
+  "main_tracked_diff_empty": true,
+  "origin_main": "282d37055b39dde7772dfca443f814c243c43dd9",
+  "repository": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard",
+  "required_commit_is_ancestor": true,
+  "resolved_baseline_branch": "origin/main"
+}

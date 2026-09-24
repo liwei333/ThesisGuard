@@ -1,0 +1,14 @@
+{
+  "container_environment_read_count": 0,
+  "container_log_read_count": 0,
+  "docker_open_count": 0,
+  "docker_start_count": 0,
+  "environment_dump_count": 0,
+  "fixed_select_count": 0,
+  "focused_41_scenario_suite_invocation_count": 0,
+  "git_fetch_count": 1,
+  "live_proof_invocation_count": 0,
+  "proof_retry_count": 0,
+  "r8_invocation_count": 0,
+  "sql_connection_count": 0
+}

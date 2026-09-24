@@ -1,0 +1,12 @@
+{
+  "child_return_code": "NOT_RUN",
+  "connection_count": 0,
+  "outcome": "BLOCKED_BEFORE_PROOF",
+  "parent_return_code": "NOT_RUN",
+  "query_count": 0,
+  "raw_stderr_retained": false,
+  "raw_stdout_retained": false,
+  "schema_valid_result_count": 0,
+  "schema_version": 1,
+  "stage": "REGRESSION_GATE_REQUIRES_PROHIBITED_SCOPE_CHANGE"
+}

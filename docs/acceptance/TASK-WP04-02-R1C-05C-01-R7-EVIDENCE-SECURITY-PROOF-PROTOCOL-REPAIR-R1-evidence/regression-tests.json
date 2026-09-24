@@ -1,0 +1,16 @@
+{
+  "combined_collected": 138,
+  "combined_command_exit_code": 1,
+  "combined_failed": 1,
+  "combined_passed": 137,
+  "gate_satisfied": false,
+  "isolated_failure": "test_collect_only_end_to_end",
+  "isolated_failure_reason": "historical MAIN_HEAD pin does not equal resolved baseline",
+  "regression_introduced_by_this_change": false,
+  "repair_requires_prohibited_existing_runner_or_test_change": true,
+  "same_failure_reproduced_on_unchanged_main": true,
+  "unchanged_main_baseline_collected": 82,
+  "unchanged_main_baseline_exit_code": 1,
+  "unchanged_main_baseline_failed": 1,
+  "unchanged_main_baseline_passed": 81
+}

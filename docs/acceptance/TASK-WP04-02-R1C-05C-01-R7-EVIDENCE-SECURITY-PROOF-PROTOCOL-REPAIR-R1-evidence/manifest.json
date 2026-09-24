@@ -1,0 +1,152 @@
+{
+  "file_count": 29,
+  "files": [
+    {
+      "bytes": 584,
+      "path": "baseline-git.json",
+      "sha256": "fbcccecd6f5b96295f0da793ad6daa1294d88102d6c93a00faf948abeb21b1eb"
+    },
+    {
+      "bytes": 382,
+      "path": "command-audit.json",
+      "sha256": "37ececb7dfbdd4a716a1661376bcb9955b8d97e6830bbf5643b339eaa513c007"
+    },
+    {
+      "bytes": 55,
+      "path": "compile-check.json",
+      "sha256": "661ff0f1e79b3fef895ac592625950cde4791f943f0868e788b5488f8727e4a7"
+    },
+    {
+      "bytes": 262,
+      "path": "credential-scan.json",
+      "sha256": "57993087647b46d9031332742963d5b661f2ebe8699ec32eeb56d0a339770de9"
+    },
+    {
+      "bytes": 241,
+      "path": "deterministic-tests.json",
+      "sha256": "95c4048bab3ab1f294e485946ca1322ac6dfac210508e9136811359bfd7c3371"
+    },
+    {
+      "bytes": 578,
+      "path": "docker-preflight.json",
+      "sha256": "d3aacd1f266282c83f82da8ad328ebd6ea7ce845606b85b5c649b3f0d8d7175e"
+    },
+    {
+      "bytes": 90,
+      "path": "docker-recovery-action.json",
+      "sha256": "a100664e4f9d476e88937b7e7b7076162fea257f35c461df348f473c9820f45b"
+    },
+    {
+      "bytes": 216,
+      "path": "dry-run.json",
+      "sha256": "8ab51cd5a2113c957923c698c08e5fdeb102b48414c3e65266d0d1219d4d92d6"
+    },
+    {
+      "bytes": 139,
+      "path": "evidence-consistency-audit.json",
+      "sha256": "3d90a3abbf462b72ee9d24a059a867bb27c8f281e85aa430f7dd6704a95c27df"
+    },
+    {
+      "bytes": 325,
+      "path": "git-final-state.json",
+      "sha256": "ddb7d0ada0877f3dc19097b0e4b7f37944a5eb74dd0bb8d4c0df6c8adf9d03f6"
+    },
+    {
+      "bytes": 112,
+      "path": "json-parse-audit.json",
+      "sha256": "78a82379b694dafabd968271d50efff98c4c279290e99babff0dbb3381991e0f"
+    },
+    {
+      "bytes": 240,
+      "path": "mutation-audit.json",
+      "sha256": "8c8bea958b2d866d74d37c95a80d4d4f619fafd588f380f3e13221e24d28fcbe"
+    },
+    {
+      "bytes": 187,
+      "path": "negative-security-scenarios.json",
+      "sha256": "da34c148138bfe20a50aec449472918211f1f0ef0483d0c67fbe35bf026410e0"
+    },
+    {
+      "bytes": 181,
+      "path": "no-clobber-race.json",
+      "sha256": "5091c9b49ff1242d180117a4593ebbda43be448ab5ee4bbbbd724e6817542843"
+    },
+    {
+      "bytes": 287,
+      "path": "not-run-matrix.json",
+      "sha256": "64281d3f4f5706aa0c0ab40f730132883f81a7b4213dc5bc845eb5c446b6544a"
+    },
+    {
+      "bytes": 153,
+      "path": "output-path-preflight.json",
+      "sha256": "588ad8c38bb765c08b12276a65432c1d795b07407443d65bebb2a48c768db4ca"
+    },
+    {
+      "bytes": 101,
+      "path": "pg-isready.json",
+      "sha256": "5896c6eaf255fdb47fab104ec66dc1be23d4bb62295f38398f502315e5b9ec3f"
+    },
+    {
+      "bytes": 338,
+      "path": "proof-failure.json",
+      "sha256": "58815ac1c5d9bdf02c5e9447697acde1868f57bb08d9f41d6ee4fd4c8c56b245"
+    },
+    {
+      "bytes": 214,
+      "path": "proof-invocation.json",
+      "sha256": "482af7647fcde573a4848e3a20f8adabd2a03f581604f4e72247a3c5967150c7"
+    },
+    {
+      "bytes": 161,
+      "path": "protected-untracked-after.json",
+      "sha256": "7a6231407971ee280bffefe3af59185eed320a75ec1e68a5b774bf70536196c5"
+    },
+    {
+      "bytes": 161,
+      "path": "protected-untracked-before.json",
+      "sha256": "7a6231407971ee280bffefe3af59185eed320a75ec1e68a5b774bf70536196c5"
+    },
+    {
+      "bytes": 133,
+      "path": "protected-untracked-comparison.json",
+      "sha256": "c47e7c64d996e2bc6d358327b03f62e7e4b9ad40a0b92f49284daf898f0bcafb"
+    },
+    {
+      "bytes": 623,
+      "path": "regression-tests.json",
+      "sha256": "5058170ac4d79ed90af756207d451758e994c2931e715db1b372fc514fb8d89e"
+    },
+    {
+      "bytes": 68,
+      "path": "ruff-check.json",
+      "sha256": "d329199222c1588af53aef981638ed9d8daff56fd8c2e69b12b0a2da67e33fab"
+    },
+    {
+      "bytes": 60,
+      "path": "ruff-format-check.json",
+      "sha256": "352ca0e773014040438c8a92a5d643bb6b2ddba9ed87de0c57002b7fecce8c4c"
+    },
+    {
+      "bytes": 20462,
+      "path": "secure-pg-proof.source.py",
+      "sha256": "03dfe2e63a9b8332fbd7f17e39144709a397eba8440ed4783a2eb7631b0fcb5c"
+    },
+    {
+      "bytes": 350,
+      "path": "source-hashes.json",
+      "sha256": "2ff7d5a7338e9c9892e09b7cb4477a719f0cba4af00802e71589f7a9a432d219"
+    },
+    {
+      "bytes": 15707,
+      "path": "test-secure-pg-proof.source.py",
+      "sha256": "aeb418d9369c21035148c68dd44f69303e3e82885a614b55731c248d363a0ea8"
+    },
+    {
+      "bytes": 380,
+      "path": "toolchain.json",
+      "sha256": "3dffb4af31ea0a32571dceb1b5a1fdc58b2bb4791086f4e7166fb98652665389"
+    }
+  ],
+  "root_manifest_exclusion": "manifest.json",
+  "schema_version": 1
+}

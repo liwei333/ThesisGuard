@@ -1,0 +1,16 @@
+{
+  "python": {
+    "asyncpg_available": true,
+    "asyncpg_version": "0.31.0",
+    "opaque_loader_module_available": true,
+    "path": "/opt/homebrew/bin/python3.12",
+    "pytest_version": "9.1.1",
+    "sqlalchemy_available": true,
+    "sqlalchemy_version": "2.0.52",
+    "version": "3.12.9"
+  },
+  "ruff": {
+    "path": "/opt/miniconda3/bin/ruff",
+    "version": "0.16.1"
+  }
+}

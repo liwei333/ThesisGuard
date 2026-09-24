@@ -1,0 +1,9 @@
+{
+  "covered_scenarios": 45,
+  "failed": 0,
+  "formal_source_scan_findings": 0,
+  "passed": 56,
+  "real_database_used": false,
+  "synthetic_canary_persisted": false,
+  "test_items": 56
+}

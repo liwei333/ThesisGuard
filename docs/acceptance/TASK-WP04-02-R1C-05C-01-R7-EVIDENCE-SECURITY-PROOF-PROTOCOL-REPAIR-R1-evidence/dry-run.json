@@ -1,0 +1,8 @@
+{
+  "database_connections": 0,
+  "exit_code": 0,
+  "raw_stream_fields": 0,
+  "synthetic_failure_child_return_code": 43,
+  "synthetic_failure_stage": "SQL_CONNECTION_FAILURE",
+  "synthetic_success_stage": "SUCCESS"
+}

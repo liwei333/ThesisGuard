@@ -1,0 +1,10 @@
+{
+  "tg_verifier_tests/verification/test_wp04_02_secure_pg_proof.py": {
+    "bytes": 15707,
+    "sha256": "aeb418d9369c21035148c68dd44f69303e3e82885a614b55731c248d363a0ea8"
+  },
+  "tg_verifier_tools/verification/wp04_02_secure_pg_proof.py": {
+    "bytes": 20462,
+    "sha256": "03dfe2e63a9b8332fbd7f17e39144709a397eba8440ed4783a2eb7631b0fcb5c"
+  }
+}

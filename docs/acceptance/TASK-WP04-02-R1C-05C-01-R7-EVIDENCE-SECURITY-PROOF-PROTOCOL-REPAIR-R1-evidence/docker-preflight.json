@@ -1,0 +1,18 @@
+{
+  "container": "thesisguard-postgres",
+  "container_environment_read": false,
+  "container_logs_read": false,
+  "container_port": 5432,
+  "context": "desktop-linux",
+  "daemon_available": true,
+  "health": "healthy",
+  "host_port": 15432,
+  "image": "pgvector/pgvector:pg17",
+  "image_id": "sha256:cf134a767f474095eeba57e0117be8e568e011a63f33fbf252f14c9b760f8e6f",
+  "mount_destination": "/var/lib/postgresql/data",
+  "restart_policy": "unless-stopped",
+  "server_version": "29.7.2",
+  "state": "running",
+  "volume": "thesisguard-postgres-data",
+  "volume_driver": "local"
+}

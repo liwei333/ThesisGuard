@@ -1,0 +1,13 @@
+{
+  "alter_database": 0,
+  "business_dml": 0,
+  "cleanup": 0,
+  "create_database": 0,
+  "database_mutations": 0,
+  "docker_mutations": 0,
+  "drop_database": 0,
+  "fixture": 0,
+  "migration": 0,
+  "schema_ddl": 0,
+  "terminate_backend": 0
+}

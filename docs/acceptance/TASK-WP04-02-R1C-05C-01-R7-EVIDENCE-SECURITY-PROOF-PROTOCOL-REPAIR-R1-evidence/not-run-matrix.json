@@ -1,0 +1,11 @@
+{
+  "business_tests": "NOT_RUN",
+  "fixtures": "NOT_RUN",
+  "focused_41_scenario_suite": "NOT_AUTHORIZED",
+  "live_postgresql_proof": "NOT_RUN_REGRESSION_GATE",
+  "merge": "NOT_RUN",
+  "migrations": "NOT_RUN",
+  "pull_request": "NOT_RUN",
+  "push": "NOT_RUN",
+  "r8": "NOT_AUTHORIZED"
+}

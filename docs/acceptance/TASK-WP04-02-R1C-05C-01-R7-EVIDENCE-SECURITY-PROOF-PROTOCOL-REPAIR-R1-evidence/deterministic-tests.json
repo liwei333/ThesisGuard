@@ -1,0 +1,8 @@
+{
+  "collected": 56,
+  "command": "/opt/homebrew/bin/python3.12 -m pytest -q -p no:cacheprovider tg_verifier_tests/verification/test_wp04_02_secure_pg_proof.py",
+  "database_connections": 0,
+  "exit_code": 0,
+  "failed": 0,
+  "passed": 56
+}

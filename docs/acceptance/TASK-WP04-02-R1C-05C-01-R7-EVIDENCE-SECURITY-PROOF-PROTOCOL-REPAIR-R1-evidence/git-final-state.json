@@ -1,0 +1,8 @@
+{
+  "branch": "codex/wp04-02-r7-proof-protocol-repair-r1",
+  "evidence_commit": "PENDING_OUTER_GIT_COMMIT",
+  "head_before_evidence_commit": "9ba733448ba2941f70cc109cffb2399986ff7cc2",
+  "implementation_commit": "9ba7334",
+  "index_empty_before_evidence_publish": true,
+  "tracked_diff_empty_before_evidence_publish": true
+}

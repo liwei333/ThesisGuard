@@ -1,0 +1,5 @@
+{
+  "accepting_connections": true,
+  "sql_executed": false,
+  "target": "exact_container_loopback"
+}

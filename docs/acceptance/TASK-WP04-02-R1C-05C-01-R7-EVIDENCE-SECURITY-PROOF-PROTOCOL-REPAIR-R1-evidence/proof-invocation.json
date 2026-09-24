@@ -1,0 +1,8 @@
+{
+  "blocked_before_invocation": true,
+  "blocking_gate": "existing_runner_regression_test_must_pass",
+  "budget_consumed": false,
+  "invocation_count": 0,
+  "invocation_id_generated": false,
+  "proof_budget": 1
+}

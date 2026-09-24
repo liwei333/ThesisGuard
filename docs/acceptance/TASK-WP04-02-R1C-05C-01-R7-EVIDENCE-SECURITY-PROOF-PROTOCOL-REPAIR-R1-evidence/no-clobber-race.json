@@ -1,0 +1,7 @@
+{
+  "competitor_preserved": true,
+  "nested_manifest_included": true,
+  "preexisting_output_refused": true,
+  "race_output_refused": true,
+  "root_manifest_exact_exclusion": true
+}
