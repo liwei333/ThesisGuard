@@ -1,0 +1,6 @@
+{
+  "container_was_already_running_and_healthy": true,
+  "docker_start_invocation_count": 0,
+  "open_docker_invocation_count": 0,
+  "recovery_path": "A0"
+}

@@ -1,0 +1,238 @@
+{
+  "declared_file_count": 38,
+  "files": [
+    {
+      "byte_count": 1210,
+      "file_type": "regular",
+      "relative_path": "baseline-git.json",
+      "sha256": "b7c918738736bdee5073ed09448baae62eb6458e2d61e1eda10632102ecbb0b4"
+    },
+    {
+      "byte_count": 23225,
+      "file_type": "regular",
+      "relative_path": "closure-helper.source.py",
+      "sha256": "76908733507367e127462c1217dc60aa288f8c003f8993aef337e16fee22b258"
+    },
+    {
+      "byte_count": 3231,
+      "file_type": "regular",
+      "relative_path": "command-audit.json",
+      "sha256": "f3a9031e647846322e7272bf4511346c3b74e13c85b487d16d1c3a0815fd5671"
+    },
+    {
+      "byte_count": 8778,
+      "file_type": "regular",
+      "relative_path": "credential-scan.json",
+      "sha256": "45712ccba9f3712766218bc8631b56fcc5c9721dca513bbb44e56f4e124baffe"
+    },
+    {
+      "byte_count": 1058,
+      "file_type": "regular",
+      "relative_path": "docker-context-receipt.json",
+      "sha256": "a75f6acbbb23899d9bb6618e84edff557c0c3fcc483972eca2706300ea6ae58a"
+    },
+    {
+      "byte_count": 1365,
+      "file_type": "regular",
+      "relative_path": "docker-identity-receipt.json",
+      "sha256": "b991c9d3ddea33d04d14d2c08ed5dfd1bdc845b33e3de8cfece2ae6564428486"
+    },
+    {
+      "byte_count": 2337,
+      "file_type": "regular",
+      "relative_path": "evidence-consistency-audit.json",
+      "sha256": "62d9150967a77eca23f481e2cb55043ca9e6873b1cb3184214aa009f1fd9028b"
+    },
+    {
+      "byte_count": 3393,
+      "file_type": "regular",
+      "relative_path": "fixed-input-hashes.json",
+      "sha256": "b228a69cbd4e38a41fdc79c5319dfc22abe68fb8e54c6a91a737bac6acad34dd"
+    },
+    {
+      "byte_count": 1877,
+      "file_type": "regular",
+      "relative_path": "formal-artifact-validation.json",
+      "sha256": "b2d70a8b4561e8778244f611f1e8a2ecc62a265444ae384d5d252f9029ec81e7"
+    },
+    {
+      "byte_count": 1159,
+      "file_type": "regular",
+      "relative_path": "formal-path-absence-receipt.json",
+      "sha256": "82ce0562ca76e646efb48591ffbcfece70b8ddd561ac29d4c3f9c26164890091"
+    },
+    {
+      "byte_count": 502,
+      "file_type": "regular",
+      "relative_path": "git-final-state.json",
+      "sha256": "22cda54763e15cda1968e0b4d4e34fac44ae3b662d8b370425b6b05b786424f3"
+    },
+    {
+      "byte_count": 1019,
+      "file_type": "regular",
+      "relative_path": "helper-compile-receipt.json",
+      "sha256": "9cb8ce39ccfbf49a3388b8860fbe259e251a0c0dc4be7e69fadda4d6ff204713"
+    },
+    {
+      "byte_count": 1103,
+      "file_type": "regular",
+      "relative_path": "helper-dry-run-receipt.json",
+      "sha256": "050d51bc6e2acec3cc5546ded6f22082d6b537f94fb70466a265b84021ee435c"
+    },
+    {
+      "byte_count": 1263,
+      "file_type": "regular",
+      "relative_path": "helper-selftest-receipt.json",
+      "sha256": "c5b8ea45744ffb334780c29b5d929f32824045592b1ecaf46731640b1aa9c27c"
+    },
+    {
+      "byte_count": 2459,
+      "file_type": "regular",
+      "relative_path": "helper-source-hashes.json",
+      "sha256": "e0cdbbff0450badc6f11e6c41964d9589bd54ab4d1d6c4508f099fdb800ef8da"
+    },
+    {
+      "byte_count": 7719,
+      "file_type": "regular",
+      "relative_path": "json-parse-audit.json",
+      "sha256": "7920e23ed225ef0426419cace4c8806376f68b664ce5d778f91593c3bebaa454"
+    },
+    {
+      "byte_count": 761,
+      "file_type": "regular",
+      "relative_path": "mutation-audit.json",
+      "sha256": "892db5618ef97b4b92415a42e48c735a05df4631e6f94d159c1c6419a4521bad"
+    },
+    {
+      "byte_count": 276,
+      "file_type": "regular",
+      "relative_path": "no-bytecode-final.json",
+      "sha256": "ce9e3ba8f4e909bfaa7ab4ab8f3fced9dc6ef30f6e9016faf0fba3c6a2c5b55e"
+    },
+    {
+      "byte_count": 1244,
+      "file_type": "regular",
+      "relative_path": "no-bytecode-prewindow-receipt.json",
+      "sha256": "298e459cb86c6eed39a7412f9d52198c07f09f132a172f21f9f896f06496dc98"
+    },
+    {
+      "byte_count": 991,
+      "file_type": "regular",
+      "relative_path": "output-path-preflight.json",
+      "sha256": "e0727919308e48e15754656a87e062119cbda6d2f9b32539aafd6fd2afbb4ec8"
+    },
+    {
+      "byte_count": 967,
+      "file_type": "regular",
+      "relative_path": "pg-isready-receipt.json",
+      "sha256": "cfd9b531ee8d2c6e03163c5f568f5fe9bff89b1f9db555eaf74e7cd486b65ad5"
+    },
+    {
+      "byte_count": 2128,
+      "file_type": "regular",
+      "relative_path": "postgres-preflight-receipt.json",
+      "sha256": "4ed9c092b6585b053bdd94b6022752087af06a1b0676231637b92c187525e74c"
+    },
+    {
+      "byte_count": 455,
+      "file_type": "regular",
+      "relative_path": "prewindow-gate-index-validation.json",
+      "sha256": "efb9aebd9d721190936ccc4cb539951e5b476ace3eeadc6a24d20ec960bf2fc8"
+    },
+    {
+      "byte_count": 5379,
+      "file_type": "regular",
+      "relative_path": "prewindow-gate-index.json",
+      "sha256": "4fe778816bd65d81c2a9f72bd9c178b4059dcb531df0f5bcc19c17ab0f5d8464"
+    },
+    {
+      "byte_count": 60248,
+      "file_type": "regular",
+      "relative_path": "protected-untracked-after.json",
+      "sha256": "1ede6ab39de4fb29b283a8ac42a7a4ff3bbf9d0317792d0a8a76364bd1cee860"
+    },
+    {
+      "byte_count": 63587,
+      "file_type": "regular",
+      "relative_path": "protected-untracked-before.json",
+      "sha256": "fe7bbeb6110b0165564210e07a639220158032b77b523707a576785293472406"
+    },
+    {
+      "byte_count": 453,
+      "file_type": "regular",
+      "relative_path": "protected-untracked-comparison.json",
+      "sha256": "8e40bff60872d83168c4c0ace182521a81ba39546084d6a379b5569c465c1f71"
+    },
+    {
+      "byte_count": 416,
+      "file_type": "regular",
+      "relative_path": "r5-publisher-race-red.json",
+      "sha256": "9811f181c993550796c590c17e1e8c9b0a07f6a1e083338c45785de9f48fd874"
+    },
+    {
+      "byte_count": 348,
+      "file_type": "regular",
+      "relative_path": "repair-publisher-race-green.json",
+      "sha256": "c9aedbf5dcd0afe19d4b63b4843847a20ac23d4bea947d44e0715e57d3381a20"
+    },
+    {
+      "byte_count": 26427,
+      "file_type": "regular",
+      "relative_path": "repaired-observer.source.py",
+      "sha256": "6e9fe43652360cd30d1242deb49fb0750e3d7f66758a1a7dcaa3d054ec41ed93"
+    },
+    {
+      "byte_count": 5102,
+      "file_type": "regular",
+      "relative_path": "repaired-supervisor.source.py",
+      "sha256": "b8bca5d8f5e78e296d59c3c183960aac744b8d2a58ac79a9756baa7b3af1153b"
+    },
+    {
+      "byte_count": 33821,
+      "file_type": "regular",
+      "relative_path": "repaired-tests.source.py",
+      "sha256": "84dd154df6d4eae24d1f542cb6ebe860372205fb408a88bcfca6bb6d9ea351e3"
+    },
+    {
+      "byte_count": 643,
+      "file_type": "regular",
+      "relative_path": "stability-completion.json",
+      "sha256": "403bdb4d55b7c36d447cc782d364df6f7da71f8d5cfbe51775b459879f9faa00"
+    },
+    {
+      "byte_count": 747,
+      "file_type": "regular",
+      "relative_path": "stability-invocation.json",
+      "sha256": "71300070bb6d555f7e64ce3defd8fa6f141829bfe36b9e996e092742ea90bf83"
+    },
+    {
+      "byte_count": 524,
+      "file_type": "regular",
+      "relative_path": "stability-process-outcome.json",
+      "sha256": "d28c01d656c0a81ef3f7e2f21dac84395985d0e849f96d5019aad13f6725fe17"
+    },
+    {
+      "byte_count": 4832,
+      "file_type": "regular",
+      "relative_path": "stability-timeline.jsonl",
+      "sha256": "83fd88fcce416d7dbfd6ca04bfed482182cbd83f4dcf5399ad54d8ea035ab0f1"
+    },
+    {
+      "byte_count": 3297,
+      "file_type": "regular",
+      "relative_path": "worktrees-after.json",
+      "sha256": "943d58296d177fdeac034eb1d6e2480ee609e74280e77f3da08423cfef58b3c2"
+    },
+    {
+      "byte_count": 3271,
+      "file_type": "regular",
+      "relative_path": "worktrees-before.json",
+      "sha256": "7c83f3758855e54aa6475d4a11f7c263efffefe14aae2cdc737186fb9093f626"
+    }
+  ],
+  "generated_at_utc": "2026-09-23T09:57:07.788594+00:00",
+  "root": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-REPAIR-R1-evidence",
+  "schema_version": 1,
+  "self_excluded": true,
+  "task_id": "TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-REPAIR-R1"
+}

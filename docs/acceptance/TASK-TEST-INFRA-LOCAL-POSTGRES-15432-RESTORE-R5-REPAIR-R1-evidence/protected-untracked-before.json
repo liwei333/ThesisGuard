@@ -1,0 +1,1319 @@
+{
+  "completed_at_utc": "2026-09-23T09:56:36.196408+00:00",
+  "credential_safe_failure_classification": "NONE",
+  "criteria_satisfied": true,
+  "exit_code": 0,
+  "monotonic_finished": 34138.363076041,
+  "monotonic_started": 34138.36306675,
+  "original_task_id": "TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5",
+  "receipt_schema_version": 1,
+  "receipt_type": "protected-untracked-before",
+  "relevant_result": {
+    "canonical_sha256": "28251b87f633260b79c346ab9743d193a1b3f095d7ed52970307fe185288fdff",
+    "entries": [
+      {
+        "byte_count": 2739,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R2-evidence/baseline-git.json",
+        "sha256": "d56071321787f3426214a0b9e1ddf2d16efd78a2ca8ea8dcf5da0876f1433ee6"
+      },
+      {
+        "byte_count": 1191,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R2-evidence/command-audit.json",
+        "sha256": "4b1dff9ee97edff77185fa1a43b8041825f5bb8f4ebb61c5c538542160c168b6"
+      },
+      {
+        "byte_count": 548,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R2-evidence/credential-scan.json",
+        "sha256": "d3150498b9b9cd3c7c40074f5c133101d728530aff366549361c3d58919db4c2"
+      },
+      {
+        "byte_count": 879,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R2-evidence/docker-daemon-after.json",
+        "sha256": "ff56d2e7322377b3f956a6cbff63d8f3f30e2599f1abe8e225d27179050fd47d"
+      },
+      {
+        "byte_count": 800,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R2-evidence/docker-daemon-before.json",
+        "sha256": "b1494b5d0681d2e81418146fa0cd5ca43dcf3cceda77d6f224b90690f7ee2936"
+      },
+      {
+        "byte_count": 217,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R2-evidence/docker-launch-action.json",
+        "sha256": "e254f04ccab73d963aa575086d6b28e79af675f58a4e5db45249656f0c0e9420"
+      },
+      {
+        "byte_count": 519,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R2-evidence/fixed-input-hashes.json",
+        "sha256": "c071400fd075d4ef332ed57d3c686cf0953d4ac18f5f0087c0ec67830973ae90"
+      },
+      {
+        "byte_count": 3010,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R2-evidence/git-final-state.json",
+        "sha256": "b68db6fb2a77ca5ff1af5078f6c038621622430d25990d128266b1726098c5bc"
+      },
+      {
+        "byte_count": 212,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R2-evidence/json-parse-audit.json",
+        "sha256": "377c415d8db781ecc79aba970ca4b9ea37ce5b6a7b6bdb3d997cc67b9570b3ba"
+      },
+      {
+        "byte_count": 2793,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R2-evidence/manifest.json",
+        "sha256": "4ac31f11a642552f840b05b782c26c0a7a07a8848d63ecca2e2eedfeb93030f0"
+      },
+      {
+        "byte_count": 521,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R2-evidence/mutation-audit.json",
+        "sha256": "4abe282a826d031c5e8ab0ab157030cd87c0cc70864a7dc907516ae680668a83"
+      },
+      {
+        "byte_count": 138,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R2-evidence/output-path-preflight.json",
+        "sha256": "d09da99069da83a2430f32df2007e53798b3f7cf81cbace1be87b735b72093fe"
+      },
+      {
+        "byte_count": 42,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R2-evidence/pg-isready-after.txt",
+        "sha256": "becaf394c2b3b2f412fa45007ef11c9465f6cfdd3c8d7da8b18c5635ae285b83"
+      },
+      {
+        "byte_count": 42,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R2-evidence/pg-isready-before.txt",
+        "sha256": "becaf394c2b3b2f412fa45007ef11c9465f6cfdd3c8d7da8b18c5635ae285b83"
+      },
+      {
+        "byte_count": 400,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R2-evidence/port-after.json",
+        "sha256": "0ce995f87b6c696cf0d55b94a105a577f938d94ea199c33929aeb0d3140a9eb1"
+      },
+      {
+        "byte_count": 232,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R2-evidence/port-before.json",
+        "sha256": "9bd9fbf4161a16bb2fa552ec016f723f5ba6a9dc45ef1e6645a09798894410bd"
+      },
+      {
+        "byte_count": 27606,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R2-evidence/protected-untracked-after.json",
+        "sha256": "26650f8af7ca159ea2cb10cc0f57727a428790195258cadd30763ca66ce5e24e"
+      },
+      {
+        "byte_count": 27320,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R2-evidence/protected-untracked-before.json",
+        "sha256": "d18914cba7a4cb7460a294384502c22486f64ebe57738f5be26f07fda4f28be3"
+      },
+      {
+        "byte_count": 4416,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R2-execution-report.md",
+        "sha256": "4a567d45dfb6785f62676f4424675ab26f7bb48c42615fe34d6fff362b060ad8"
+      },
+      {
+        "byte_count": 15035,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R3-INDEPENDENT-REVIEW-R1-acceptance.md",
+        "sha256": "abf028546ecfe64dd7998d9115a58b482eecc0ff2771ce66090ce96aca595875"
+      },
+      {
+        "byte_count": 5443,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R3-STALE-REDISPATCH-REVIEW-R1-acceptance.md",
+        "sha256": "ef5fca2d87dc795c74a9a4aeec74baf16eea1a4a0babfa222b4f9af21b0b36cc"
+      },
+      {
+        "byte_count": 396,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R3-evidence/baseline-git.json",
+        "sha256": "38cc10237939c1d3a80e2a6d1e630389dfbd629f574b719b1601ad7993a38579"
+      },
+      {
+        "byte_count": 468,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R3-evidence/credential-scan.json",
+        "sha256": "c5029d67e286f01f55bc3276bf4d169d595b02bbf674be685d17e97aa54b622a"
+      },
+      {
+        "byte_count": 306,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R3-evidence/docker-daemon-before.json",
+        "sha256": "f21a70c8772efb8e102a8c5df57336749d1046379be397a99eb6a25bfa52bbb5"
+      },
+      {
+        "byte_count": 587,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R3-evidence/docker-execution-context.json",
+        "sha256": "4378692210aec71310552698f07fbd2163490ec916be1c4aca94be374779bde4"
+      },
+      {
+        "byte_count": 239,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R3-evidence/docker-launch-action.json",
+        "sha256": "a7e8eedf75342e849953d88a4680812755d04e96fd83b5566f9d3fab504d9648"
+      },
+      {
+        "byte_count": 295,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R3-evidence/docker-recovery-action.json",
+        "sha256": "e572fc2a378415e45a3e2df4efbdf0527e73acd03d8810670ba11ba55a4b2739"
+      },
+      {
+        "byte_count": 537,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R3-evidence/failure-observation.json",
+        "sha256": "9284ecf5cd225f377b84d38cd7138d38540b9c7318b61253ca8c627f7f9ad741"
+      },
+      {
+        "byte_count": 612,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R3-evidence/final-state.json",
+        "sha256": "0f07788cc3ad1b785dcce7f58c160901dc339514aef1cd7a87de110a9488f55b"
+      },
+      {
+        "byte_count": 1659,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R3-evidence/fixed-input-hashes.json",
+        "sha256": "a45da166d9312492f99224d420f10a826a27d3c74fb3bfd600d57fac7e43518a"
+      },
+      {
+        "byte_count": 516,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R3-evidence/git-final-state.json",
+        "sha256": "77b08fb523ae1c900d1ef99bd1aa7db70508ab1e4a26e494ada47caf48b1467b"
+      },
+      {
+        "byte_count": 192,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R3-evidence/json-parse-audit.json",
+        "sha256": "4bd18cb8ff4846a58eb127cf7e281d5e1a3af8f097c92ea1bd10e9b8042b5f15"
+      },
+      {
+        "byte_count": 2888,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R3-evidence/manifest.json",
+        "sha256": "24c321a3b32fa53f1a8e30a9f67c223fdb739aba5b269c06fe537d3414c9105d"
+      },
+      {
+        "byte_count": 707,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R3-evidence/mutation-audit.json",
+        "sha256": "a5a7d172ad2dd54f0fda057be76aa0dc2af7ac11f79ffb5429685e3128a4bd93"
+      },
+      {
+        "byte_count": 154,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R3-evidence/output-path-preflight.json",
+        "sha256": "30cc1d076a289e47dbd5981e339de033d00952c1fc4bb37e0000b9e0d0443470"
+      },
+      {
+        "byte_count": 32106,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R3-evidence/protected-untracked-after.json",
+        "sha256": "34540ea1152a6251e07f2d0e36083bc02cd763c15008f5dda107083c577853f7"
+      },
+      {
+        "byte_count": 32072,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R3-evidence/protected-untracked-before.json",
+        "sha256": "34b30fb520071cc8533afbd34d41cb05ffefc5f9c09acc5f6fbf1cc522283d67"
+      },
+      {
+        "byte_count": 3934,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R3-evidence/worktrees-after.json",
+        "sha256": "6539e51f1a1aba2f389d7808805cabf0fa0aff651ab5eb8f58d0cc53c1ba9f53"
+      },
+      {
+        "byte_count": 3908,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R3-evidence/worktrees-before.json",
+        "sha256": "a43e92d1a2fd2fb9f7ddc22d5325bc189fbccf86db83456784674f22b37a4ad7"
+      },
+      {
+        "byte_count": 3458,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R3-execution-report.md",
+        "sha256": "74587b051eac44801c4b04bc29e8fa2714e00a43bf6c378296b190f012ac80ac"
+      },
+      {
+        "byte_count": 9625,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R4-INDEPENDENT-REVIEW-R1-acceptance.md",
+        "sha256": "baf3145ab6b1bfbea66e850f3620f766561e62d5745aaab6667677f3640acd52"
+      },
+      {
+        "byte_count": 428,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R4-evidence/baseline-git.json",
+        "sha256": "7bcd4e30a35b8cc2f1b89378b110838cb7eff40f628980bd2c85b8fb99e6c998"
+      },
+      {
+        "byte_count": 218,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R4-evidence/collector-dry-run.json",
+        "sha256": "41c7d2ba39abcb93ef0f8ac8481c7aede050d5c36c6e16cb20e5109d54578ab6"
+      },
+      {
+        "byte_count": 329,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R4-evidence/collector-selftest.json",
+        "sha256": "7a9c946c31df8d801d4e28a987862a8141972ef1099e5bf75e5074ad7b32dafd"
+      },
+      {
+        "byte_count": 286,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R4-evidence/collector-source-hash.json",
+        "sha256": "23c2b3cb56f76d8523a3a696adb7a4ccfc10cd803e91943331d415e52976324b"
+      },
+      {
+        "byte_count": 6910,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R4-evidence/collector-test.source.py",
+        "sha256": "c7c9bf0cae35a4061d297051245229a486be276ad33292c1adcecb36cae99991"
+      },
+      {
+        "byte_count": 10896,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R4-evidence/collector.source.py",
+        "sha256": "6e4f27ed0e652cdfea52af2eb2beea019fac3f7bceac9dcc440a033a88fe749c"
+      },
+      {
+        "byte_count": 966,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R4-evidence/command-audit.json",
+        "sha256": "ffe8d1ee85ad5bf15043f6237d7a2fba77002c990ef1810c88277269baafd2bf"
+      },
+      {
+        "byte_count": 379,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R4-evidence/credential-scan.json",
+        "sha256": "b9703ada390402a3ba11a7dbd0de21bce1483d155ffc606b70ad33119bde0fa4"
+      },
+      {
+        "byte_count": 819,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R4-evidence/docker-container-identity.json",
+        "sha256": "e5357c6d062a781a9edddabf4a3e1fc6aa7f7f2cdb8429aae1213cff6cce06cc"
+      },
+      {
+        "byte_count": 453,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R4-evidence/docker-execution-context.json",
+        "sha256": "6ce4df5394b79eb622baf50bf98d3b357c2cf72b5a427704a5c7db80cac12c4d"
+      },
+      {
+        "byte_count": 108,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R4-evidence/docker-launch-action.json",
+        "sha256": "9f263c1983faa308123122fa49c1380838714f7b760c2601e70b2fce15f93d8d"
+      },
+      {
+        "byte_count": 156,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R4-evidence/docker-recovery-action.json",
+        "sha256": "1dcd5067788141de66d43706f1feb61bc483c268813e4033365c49e32449f34c"
+      },
+      {
+        "byte_count": 1129,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R4-evidence/evidence-consistency-audit.json",
+        "sha256": "fbb02643a87e6ad2f3d71940b590cf77c99d03f3bc9682da0f62f4ea55626cb3"
+      },
+      {
+        "byte_count": 510,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R4-evidence/failure-observation.json",
+        "sha256": "81841a5be3f1566871596aeaf94a9fb377c416d1cb296535d9ed045f160d247e"
+      },
+      {
+        "byte_count": 504,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R4-evidence/final-credential-scan.json",
+        "sha256": "7d6e6b49e7f24593d7d0480a8a3f9f6fbc8752f25889335efe5afb6434babab1"
+      },
+      {
+        "byte_count": 411,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R4-evidence/final-state.json",
+        "sha256": "455b77c815698249e4116fe346aa95d88b23d4468253e4267532a5ca8d8af8d2"
+      },
+      {
+        "byte_count": 2992,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R4-evidence/fixed-input-hashes.json",
+        "sha256": "5bb8087fe0e2afad321372da241835a503e0c803d9af091a045f7b197a9038a2"
+      },
+      {
+        "byte_count": 428,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R4-evidence/git-final-state.json",
+        "sha256": "4d4bdc35e5ad95204fa1932c50789f5243427149aa485bd11cfc13339a399cb9"
+      },
+      {
+        "byte_count": 275,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R4-evidence/json-parse-audit.json",
+        "sha256": "ff84ddc494e0ff72ab58ed679e4a59bd0cd32a8bdd64bf70e38d702734eb8fcb"
+      },
+      {
+        "byte_count": 4825,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R4-evidence/manifest.json",
+        "sha256": "9ef897b67e9ae418ac92762b1c01841e58c55cb258baa172f425872714f50e03"
+      },
+      {
+        "byte_count": 777,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R4-evidence/mutation-audit.json",
+        "sha256": "8e6dee49e4fe302da4ee72f108ab038138195d09f7e8d9e39854ce912fb23485"
+      },
+      {
+        "byte_count": 197,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R4-evidence/output-path-preflight.json",
+        "sha256": "76db7274eb0d5d7c8ba05785b3bfc82c7cfee67ef63ffd5cdbfcca507c7c0a6d"
+      },
+      {
+        "byte_count": 115,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R4-evidence/pg-isready.txt",
+        "sha256": "cef1bfab18ced5f33a555ca724ec2f3cf9768444dc2b5ee215ce47a2a824ffc3"
+      },
+      {
+        "byte_count": 11646,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R4-evidence/postgres-observer.source.py",
+        "sha256": "10cc97a0468e7f8132c04ad39a3dc61f6fc77751025dac51d0ff0708ff1b26cf"
+      },
+      {
+        "byte_count": 8666,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R4-evidence/postgres-preflight.json",
+        "sha256": "a794bd3b81ab86286e16cce2d678c62d65e6f5dd5df143245d7e66b8f7243f31"
+      },
+      {
+        "byte_count": 37564,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R4-evidence/protected-untracked-after.json",
+        "sha256": "67b7e00e643528d9731f66f37819db33d7cc887dbf03b16a6e7d651dfcf9af5d"
+      },
+      {
+        "byte_count": 37564,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R4-evidence/protected-untracked-before.json",
+        "sha256": "ff553200883290389a5f052e3aec859edf6a2fd93645f6aac6fb910336f67ad2"
+      },
+      {
+        "byte_count": 276,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R4-evidence/protected-untracked-comparison.json",
+        "sha256": "7432731cc1fc1325a23b4774d406d3aec81a359fe50c051874eae37717ff5ba4"
+      },
+      {
+        "byte_count": 259,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R4-evidence/stability-window.json",
+        "sha256": "f1b5b3cf4c62e1bbf84ca0b525e12266cc5d77b0e43c599ee93272d108100100"
+      },
+      {
+        "byte_count": 3933,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R4-evidence/worktrees-after.json",
+        "sha256": "68cad097ad9652bb2cb2fae51d551699c26a8745cd7acc5dc21d994a8a3b200f"
+      },
+      {
+        "byte_count": 3933,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R4-evidence/worktrees-before.json",
+        "sha256": "d5a4355def097548f57c1bb485e4fa65f539c3d9a8de5f782a8a65ff09304fe6"
+      },
+      {
+        "byte_count": 3582,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R4-execution-report.md",
+        "sha256": "2548b15ff329b8c04138da359cd398b1e76e8cc8aad24328dc6a7aec045deb0a"
+      },
+      {
+        "byte_count": 15381,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-INDEPENDENT-REVIEW-R1-acceptance.md",
+        "sha256": "70488ca8e63888d92dfc8f53204e213e5447e44a2376a5ab815107aa47132688"
+      },
+      {
+        "byte_count": 581,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-evidence/baseline-git.json",
+        "sha256": "20ef79c07570ddb12671863b0fce9b9ddd853afc2a31e11e48ed9d07b59e139a"
+      },
+      {
+        "byte_count": 3331,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-evidence/command-audit.json",
+        "sha256": "5bf0891f689611230f1b58dcd7ceb95745244b1278b0624e57271655c9255f98"
+      },
+      {
+        "byte_count": 6675,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-evidence/credential-scan.json",
+        "sha256": "51c7eabd27751ed8c60f341c67de56247240e8b2516cc8ffa6417a4cdb471753"
+      },
+      {
+        "byte_count": 760,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-evidence/docker-container-identity.json",
+        "sha256": "5ffda53d38b6ab46cca13973fdd16fba131603173db08c80683659d4369e9b33"
+      },
+      {
+        "byte_count": 567,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-evidence/docker-execution-context.json",
+        "sha256": "1e76da0d33d903bf70b562bb65ca8388ccbca4b182fd3a6de66bb922faef89b6"
+      },
+      {
+        "byte_count": 240,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-evidence/docker-launch-action.json",
+        "sha256": "7e8f8ab38edecdf55e580042067b235e59a7174e7e65fd2d0ad8f179216fa039"
+      },
+      {
+        "byte_count": 240,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-evidence/docker-recovery-action.json",
+        "sha256": "a8ebaaf74206dd90d34a0ac2a89e90829f27280fca33682fc006e19d1e3df191"
+      },
+      {
+        "byte_count": 937,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-evidence/evidence-consistency-audit.json",
+        "sha256": "b845a3bcca39a8ecf46b83e1c88fd98649023ce1cf914997fc306c04249c6abc"
+      },
+      {
+        "byte_count": 4545,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-evidence/fixed-input-hashes.json",
+        "sha256": "4b7614fd17060ae1476b16376f8c5d7f8aa096f3ac9466492759430560762290"
+      },
+      {
+        "byte_count": 517,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-evidence/git-final-state.json",
+        "sha256": "1dd62521896aa50a29ca75d0b5179c68fe597840f31b466eb60a363851e42188"
+      },
+      {
+        "byte_count": 408,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-evidence/helper-compile.json",
+        "sha256": "46cbecb86a8cb24e2e859d06483c31d3e77349d5409d43ff9fd94442e5b1b95c"
+      },
+      {
+        "byte_count": 624,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-evidence/helper-dry-run.json",
+        "sha256": "c3e32fe9d438570bf9368f6aec202d66039678373bea2e059c2a00f4a3b2310a"
+      },
+      {
+        "byte_count": 497,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-evidence/helper-selftest.json",
+        "sha256": "c4dde1211edc27f83c9c1636567cc0154ecb185aacffc00d2d1cc4e75a109f62"
+      },
+      {
+        "byte_count": 1749,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-evidence/helper-source-hashes.json",
+        "sha256": "e33ad71b4944d77fe4464c42c75275682773a3cf0b5bafca367e33bdaa1b4731"
+      },
+      {
+        "byte_count": 569,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-evidence/helper-tdd-red.json",
+        "sha256": "5dab507faf71102dc7af6138be57a5a5b60b691f411c0b2f7d2952b3d4b3e63d"
+      },
+      {
+        "byte_count": 1184,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-evidence/json-parse-audit.json",
+        "sha256": "1866f8fddf7fa924dc5e20e8b3a814b8daf5e65a26ba038d39b1b11d807e128a"
+      },
+      {
+        "byte_count": 753,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-evidence/legacy-r4-durability-red.source.py",
+        "sha256": "ac4e28146f09711af142f50c9e4647a5c0dec82b8d9f31e7aaa8a81da63a15b7"
+      },
+      {
+        "byte_count": 6598,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-evidence/manifest.json",
+        "sha256": "d4945a5d3075b5d66d906e65cec09301e51c8138600e8e5cca09c4e86dfbdb5c"
+      },
+      {
+        "byte_count": 709,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-evidence/mutation-audit.json",
+        "sha256": "464a314596b32e9c7815224c598dfeb14d07edede1b87278e116c7524040f859"
+      },
+      {
+        "byte_count": 294,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-evidence/output-path-preflight.json",
+        "sha256": "e6c4af428712bd8729dc4a54f56fddc882dcb12b5db4e50a11b8f948e33ffd15"
+      },
+      {
+        "byte_count": 224,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-evidence/pg-isready.txt",
+        "sha256": "6df0bf7f909b2e7b926175501ce439890489135e4a24a74ecbefd702d187a79f"
+      },
+      {
+        "byte_count": 25845,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-evidence/postgres-observer.source.py",
+        "sha256": "cbbd8182ddce5e23121b7208478627895d4cfbf5e90db8669304059679778b44"
+      },
+      {
+        "byte_count": 8734,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-evidence/postgres-preflight.json",
+        "sha256": "fe4fb7c5b0a1174c2f167c47902dbc72f264e49a1cfbdf2f048807dd6a539fe8"
+      },
+      {
+        "byte_count": 25845,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-evidence/postgres_observer.py",
+        "sha256": "cbbd8182ddce5e23121b7208478627895d4cfbf5e90db8669304059679778b44"
+      },
+      {
+        "byte_count": 49663,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-evidence/protected-untracked-after.json",
+        "sha256": "ea80712af54b85d2461bb292eb4e37d61d37768c3261e8e1c036de422e50c002"
+      },
+      {
+        "byte_count": 49663,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-evidence/protected-untracked-before.json",
+        "sha256": "ea80712af54b85d2461bb292eb4e37d61d37768c3261e8e1c036de422e50c002"
+      },
+      {
+        "byte_count": 379,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-evidence/protected-untracked-comparison.json",
+        "sha256": "03df7e7bbf328ddb0f6535d935e6eb01eb588733cf56e0ee3eeaf6d99030268e"
+      },
+      {
+        "byte_count": 532,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-evidence/stability-completion.json",
+        "sha256": "a4789ddd9d76860d2647498cb43c2decec261d23da72181477d3d8ea139caf19"
+      },
+      {
+        "byte_count": 636,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-evidence/stability-invocation.json",
+        "sha256": "51294b583134d3e931e941d3d61e1a027a8bc0e2fe584af376aba1343af27398"
+      },
+      {
+        "byte_count": 413,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-evidence/stability-process-outcome.json",
+        "sha256": "749cfb6728d5032a3901f83da4494a79f1195a24fb6d1e1db1c92c74c1bd25ab"
+      },
+      {
+        "byte_count": 4242,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-evidence/stability-supervisor.source.py",
+        "sha256": "fa7c1921cf18d5487d61ec0740eae5c8b1bebe290be942217735696f6112404d"
+      },
+      {
+        "byte_count": 4082,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-evidence/stability-timeline.jsonl",
+        "sha256": "3e547b0599f169f34b0ee3b15c5cba0289c4d8f81d62229e1240700407ddc7e4"
+      },
+      {
+        "byte_count": 4242,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-evidence/stability_supervisor.py",
+        "sha256": "fa7c1921cf18d5487d61ec0740eae5c8b1bebe290be942217735696f6112404d"
+      },
+      {
+        "byte_count": 12640,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-evidence/test-postgres-observer.source.py",
+        "sha256": "538071a46b1618b71f2b5a0046bd5931d18c55a785b2e4feb062eb1a264192a0"
+      },
+      {
+        "byte_count": 3991,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-evidence/worktrees-after.json",
+        "sha256": "4a9a660cbf3e6f34014284366a1cab927fdf82d8330430dc06e24a05134851e9"
+      },
+      {
+        "byte_count": 3965,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-evidence/worktrees-before.json",
+        "sha256": "06cf203a22f5e7d3298d18ae902f12e411c3c024adfe787e73d5d6051fd7ebd4"
+      },
+      {
+        "byte_count": 5028,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-execution-report.md",
+        "sha256": "f779628a6c3048ec79e5aec672fb12763c59b16bbbe9bf27fc4cc161e8a98651"
+      },
+      {
+        "byte_count": 8050,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-WRONG-SESSION-FEEDBACK-REVIEW-acceptance.md",
+        "sha256": "c2c4c6c551c0dbfe0b021a070d11e8e84ea40fb028476f93c2aae66ce23c801d"
+      },
+      {
+        "byte_count": 10508,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-acceptance.md",
+        "sha256": "7a76be1fa3dbc8daf18e3d50699a17eb357b67579eb110aff822694ace026d75"
+      },
+      {
+        "byte_count": 359,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/baseline-state.json",
+        "sha256": "8b7cc9fd7f77763a0c75aff8e3893e93222737b9502421a6a9931e36c21a042d"
+      },
+      {
+        "byte_count": 317,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/candidate-state.json",
+        "sha256": "ad0a67a304ccbd07ef3f6a3e8760b763917513f3e747dc4681f55023e48ef75d"
+      },
+      {
+        "byte_count": 742,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/catalog-delta-attribution.json",
+        "sha256": "7e64fa9736717131ee604de9acbda2677f297fcf7206f6019fe3a9ad4fae15f7"
+      },
+      {
+        "byte_count": 723,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/collect-only-audit.json",
+        "sha256": "0b5d5687e4dc0c0606d1f16b29214e4292bc86d25962b4197dcbc16b38b78204"
+      },
+      {
+        "byte_count": 382,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/collect-only-harness-run/baseline-pins.json",
+        "sha256": "bcccf6fdc59e13841b4addf2b2f18c3f28bf574ea1f536ed375cd8bc50041ed6"
+      },
+      {
+        "byte_count": 1821,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/collect-only-harness-run/collect-only.meta.json",
+        "sha256": "137688c639fe2a558dfe38cb8ae64c023e994860cee532851f1b570c47fda5e4"
+      },
+      {
+        "byte_count": 0,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/collect-only-harness-run/collect-only.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "byte_count": 5428,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/collect-only-harness-run/collect-only.stdout.txt",
+        "sha256": "e3966cc239eeadf157581a692642dfe5b662533fcefab5434dddfcc7322db1ae"
+      },
+      {
+        "byte_count": 5327,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/collect-only-harness-run/collected-nodeids.json",
+        "sha256": "439768d429261a803198f87cc815aa1fa668066d703b7a8eb1d4a8a65281693d"
+      },
+      {
+        "byte_count": 1416,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/collect-only-harness-run/manifest.json",
+        "sha256": "9ad2d26a2bb185aa8f95facc4cd622007bfb36011f3efe5bd91878ef10201faf"
+      },
+      {
+        "byte_count": 363,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/collect-only-harness-run/plugin-staging.json",
+        "sha256": "c7a4b694db553b8b6b4ca73291a19861761d26b74753584010f99dfe858c31c9"
+      },
+      {
+        "byte_count": 11175,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/collect-only-harness-run/plugin.source.py",
+        "sha256": "3ab4b45feb356fcecdaa5363f09d3256dc0c6a2b8f2bb067d32da8438f3bdbc4"
+      },
+      {
+        "byte_count": 773,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/collect-only-harness-run/result.json",
+        "sha256": "924c8b40eb474f75ae4c893a42e16afba165e8ba9a4b3ca229a4448d37f8fff4"
+      },
+      {
+        "byte_count": 40951,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/collect-only-harness-run/runner.source.py",
+        "sha256": "3b3145f0a17e593db8d7689ba942ad43fcd4f4be15ddc61d7196e0cc061c3b36"
+      },
+      {
+        "byte_count": 631,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/collect-only-harness-run/source-hashes.json",
+        "sha256": "a0e45a99be82fb70548be5bbd3e55faa1860ff537365a987e92783476bc1924e"
+      },
+      {
+        "byte_count": 5327,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/collected-nodeids.json",
+        "sha256": "439768d429261a803198f87cc815aa1fa668066d703b7a8eb1d4a8a65281693d"
+      },
+      {
+        "byte_count": 21233,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/credential-scan.json",
+        "sha256": "49944f241e5a72e63dc6bc3050fe1ffe85cea667ff08f44642e7fe5f49ca01ea"
+      },
+      {
+        "byte_count": 617,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/current-main-state.json",
+        "sha256": "d396aa73c0b4544285fada21a2a40fb4a543497fd29828c52df293bc49836063"
+      },
+      {
+        "byte_count": 11369,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/database-resource-audit.json",
+        "sha256": "c7a30551a8d652c0bf9c2310f0dfe0061f2ac65aa2563981e3e48bd9e37701e8"
+      },
+      {
+        "byte_count": 216,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/detached-main-state.json",
+        "sha256": "cb98565acc23339524f759b56137ce6a87661097f5114d9dec4dd9df58531573"
+      },
+      {
+        "byte_count": 127,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/evidence-parse-audit.json",
+        "sha256": "a3c2332c350f9f6649a4c982596fdf45b65353835f1922cf34182af1e9af0e30"
+      },
+      {
+        "byte_count": 2218,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/final-state.json",
+        "sha256": "585160eedbf739f7905f9878b9b5b0c6c05e96f011248b8f41645b9e9c0c8953"
+      },
+      {
+        "byte_count": 7842,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/full-catalog-after.json",
+        "sha256": "f162d6af349bbb4cbaf8d7d848a89210ed570ed1becbc9a9b0d96ca07f5e39a0"
+      },
+      {
+        "byte_count": 7656,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/full-catalog-before.json",
+        "sha256": "25733a41993ee674903c981bdcba30de7fc525d357eb8e2214fd1ed5c4213862"
+      },
+      {
+        "byte_count": 296,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/harness-state.json",
+        "sha256": "e53b50b306c9919d4506fac88b5def31e0e6774cf60e7d06784a51694fcdb966"
+      },
+      {
+        "byte_count": 7145,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/historical-unknown-after.json",
+        "sha256": "d88e88bfe8b4e18d4fcf6f4d8e07a378dea08806eff89b286232194fdf579fcd"
+      },
+      {
+        "byte_count": 7173,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/historical-unknown-before.json",
+        "sha256": "8ad0892030207a6fefe9d011c5a01a2e764ee44da458ad0918a6d350461fbee0"
+      },
+      {
+        "byte_count": 8924,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/ledger-audit.json",
+        "sha256": "38d5fe33149147518ab0a9bf1e870945161474ec28e2f170c454dff809380d92"
+      },
+      {
+        "byte_count": 8349,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/manifest.json",
+        "sha256": "a10316c137050a9af53292f5043dd30129c9f10213094dd6fafd683967ebb014"
+      },
+      {
+        "byte_count": 1571,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/post-run-stability-timeline.jsonl",
+        "sha256": "36d9b412c3c36dd3c173558a46b4cea0b23c9b26eddc3bfba832f57f13c29e9b"
+      },
+      {
+        "byte_count": 12474,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/post_run_audit.py",
+        "sha256": "aadfede61815c1f41a24cb694bc1110234e8639563837a35d74dc5feba91d679"
+      },
+      {
+        "byte_count": 699,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/postgres-service-state.json",
+        "sha256": "826140d99fc681b2433fac8243c0bd049f796d37b659414d5ffb3f88a33c8aa7"
+      },
+      {
+        "byte_count": 1106,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/preflight-quiescence-summary.json",
+        "sha256": "89cdc220662c1d8865f2e50185578f9f40da1a7a09e3c1061312562c7615d944"
+      },
+      {
+        "byte_count": 6667,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/preflight-quiescence-timeline.jsonl",
+        "sha256": "5ac53022f116ac0fab278b3189f14e86ac297ea263cd536921cc1470aebc225a"
+      },
+      {
+        "byte_count": 7338,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/preflight_quiescence_observer.py",
+        "sha256": "44bec002900bd415fdda473ce9e836ec43da9ff41f5fd0e730fcb8d4e3e7df1b"
+      },
+      {
+        "byte_count": 1215,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/real-pytest.meta.json",
+        "sha256": "cdc2616202d9770f40d438c0b0828abc83a199775f7cc0f5ca3ea9c66a6ee23e"
+      },
+      {
+        "byte_count": 0,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/real-pytest.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "byte_count": 7339,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/real-pytest.stdout.txt",
+        "sha256": "e2b8c2dfa1d55522c4012b1899e53ef0a5efeb47bc29c29e0c0d66d1d0073f6d"
+      },
+      {
+        "byte_count": 53917,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/resources.jsonl",
+        "sha256": "10cfd7c3a0fc457ded717c22f60fc25d3a00f2d76bbcaafe93860860f4ce8688"
+      },
+      {
+        "byte_count": 7323,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/run_real_once.py",
+        "sha256": "072c8fe4f399eb210f4c3c82943eec533f964d5e7689f45ccd0e9e69c6c0d105"
+      },
+      {
+        "byte_count": 54663,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/runtime-catalog-timeline.jsonl",
+        "sha256": "730c62a7151d394dfbf15a7c326b70007c448b5eed43d05c96365860e8559f7e"
+      },
+      {
+        "byte_count": 223,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/runtime-observer-ready.json",
+        "sha256": "1ccb6f8895954a08b825f433af123a9b0b582b81cab641d8bd1ae407948d0f66"
+      },
+      {
+        "byte_count": 141,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/runtime-observer-source-sha256.json",
+        "sha256": "19388ff4d533bf1655ab21f96e1b0ed9075a8c334151b46037e69f202c0e109c"
+      },
+      {
+        "byte_count": 0,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/runtime-observer.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "byte_count": 0,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/runtime-observer.stdout.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "byte_count": 5,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/runtime-observer.stop",
+        "sha256": "a11c3d917a2149a4b548217038bc8f2dd2130a1966e0c7af5c4225d81f25a8c3"
+      },
+      {
+        "byte_count": 3054,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/runtime_catalog_observer.py",
+        "sha256": "c9ca50232754cfea004d68c298d70723c82f1436bd6ae1ec9120303d52763bc9"
+      },
+      {
+        "byte_count": 390,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/scenario-results.json",
+        "sha256": "88fa4520d5cfe183e7c97007104157b0e75702c0e85d96d171da4e55b5c0dff0"
+      },
+      {
+        "byte_count": 487,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/session-independence.json",
+        "sha256": "0d6463bcff97083aa2945b842edb3739e7b8607cd966e3c697d1d3ae8670001a"
+      },
+      {
+        "byte_count": 1602,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/source-hashes.json",
+        "sha256": "635faf35cf60c535e8a7735ac2156799e5768d28254085c5d59541e7830253ba"
+      },
+      {
+        "byte_count": 502,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/tool-preflight.json",
+        "sha256": "4c806e98a3caea3298856ce1cade1a86416a072a8fe33060db8fdf8a4fe8b7ed"
+      },
+      {
+        "byte_count": 7629,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R6-FEEDBACK-INDEPENDENT-REVIEW-R1-acceptance.md",
+        "sha256": "a04d90b78d531219a4f4eb9f647604be7059ede22f320532f20eda61e1ed1466"
+      },
+      {
+        "byte_count": 13679,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R6-acceptance.md",
+        "sha256": "bbe483feb18a610613e0248ea9724c988160f38b6c1ee6ea2b826f9cfcaa2e38"
+      },
+      {
+        "byte_count": 291,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R6-evidence/alembic-heads.json",
+        "sha256": "1903740f9bb0f7f3c4f9b7283cde88d622b04531114811f68ed547ea0eb2f62d"
+      },
+      {
+        "byte_count": 1885,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R6-evidence/baseline-git.json",
+        "sha256": "9843c9046207fb1a685a78e45aa0a8a83b147591e851cf403db876ad395ab11d"
+      },
+      {
+        "byte_count": 468,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R6-evidence/candidate-identity.json",
+        "sha256": "7b8858ea5e991b6b7534b9c5b6aa7086235a6afbc0c30de76b8dc6dd5bc6ea00"
+      },
+      {
+        "byte_count": 1644,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R6-evidence/collect-only-audit.json",
+        "sha256": "4d3ec55ad07fa981dc23a98d0dda1784135cb945971374f2287351ca026c6315"
+      },
+      {
+        "byte_count": 382,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R6-evidence/collect-only-harness-run/baseline-pins.json",
+        "sha256": "bcccf6fdc59e13841b4addf2b2f18c3f28bf574ea1f536ed375cd8bc50041ed6"
+      },
+      {
+        "byte_count": 3307,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R6-evidence/collect-only-harness-run/collect-only.meta.json",
+        "sha256": "7f494c5a7bf05ae348f1692b0976ffa256c8e3042f7168755b0f2ccd007cae42"
+      },
+      {
+        "byte_count": 0,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R6-evidence/collect-only-harness-run/collect-only.stderr.txt",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "byte_count": 5428,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R6-evidence/collect-only-harness-run/collect-only.stdout.txt",
+        "sha256": "5aad2ebcc3beafb0fcb7252f302724bc75e7819497b8eba4eee792c551105027"
+      },
+      {
+        "byte_count": 5327,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R6-evidence/collect-only-harness-run/collected-nodeids.json",
+        "sha256": "a4fbc23750b86ae056ee7dd9e5f8a34486917a0eb4e2c56e974d8cb5cff381a5"
+      },
+      {
+        "byte_count": 1416,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R6-evidence/collect-only-harness-run/manifest.json",
+        "sha256": "468e2b50f8ee0e93e9ca3a3b234c54a526dfd51aeb84c8cd19d7ef71257704a0"
+      },
+      {
+        "byte_count": 363,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R6-evidence/collect-only-harness-run/plugin-staging.json",
+        "sha256": "22c6f60ebc9271d6fda15b86c301974fb02e83758a405ba6a49fa959074bb752"
+      },
+      {
+        "byte_count": 11175,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R6-evidence/collect-only-harness-run/plugin.source.py",
+        "sha256": "3ab4b45feb356fcecdaa5363f09d3256dc0c6a2b8f2bb067d32da8438f3bdbc4"
+      },
+      {
+        "byte_count": 773,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R6-evidence/collect-only-harness-run/result.json",
+        "sha256": "5c03208109a4e4040ee7f7344c5643fb3a4db0e0dc876e85289c57a5a1cb148d"
+      },
+      {
+        "byte_count": 40951,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R6-evidence/collect-only-harness-run/runner.source.py",
+        "sha256": "3b3145f0a17e593db8d7689ba942ad43fcd4f4be15ddc61d7196e0cc061c3b36"
+      },
+      {
+        "byte_count": 631,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R6-evidence/collect-only-harness-run/source-hashes.json",
+        "sha256": "a0e45a99be82fb70548be5bbd3e55faa1860ff537365a987e92783476bc1924e"
+      },
+      {
+        "byte_count": 806,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R6-evidence/credential-scan.json",
+        "sha256": "cb2662478653e797a94f5ae792bff1d84fe202618c915844ecce54ba9a66586b"
+      },
+      {
+        "byte_count": 437,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R6-evidence/detached-main-worktree.json",
+        "sha256": "ff89bf9eb04cddf9b83ff46d857a9f9e0e41aba72a256f11b239a8b549acf701"
+      },
+      {
+        "byte_count": 3627,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R6-evidence/fixed-source-hashes.json",
+        "sha256": "1a4e4f5d237999bb53196ccf251291f601b31c34a15054d7f87fa6fd61f5de78"
+      },
+      {
+        "byte_count": 6315,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R6-evidence/git-final-state.json",
+        "sha256": "dfe038f9eb8edd60d51fb3078beb58858b82b6ea2f6550e0bb3f4e7d13a0a5da"
+      },
+      {
+        "byte_count": 447,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R6-evidence/harness-identity.json",
+        "sha256": "08254160ab41ae2f087b81b26ffa93020a80873d75bab45cb938a443d264aaab"
+      },
+      {
+        "byte_count": 440,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R6-evidence/historical-main-identity.json",
+        "sha256": "36a3c978b1e48e2b0cff4733c8e8ae6c3aa2cfef12057c0fa75ef516a097448a"
+      },
+      {
+        "byte_count": 268,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R6-evidence/json-parse-audit.json",
+        "sha256": "979f8c50c16b698d57f69607d4462a25d3d25e07055608951b77f66b4dbd6e75"
+      },
+      {
+        "byte_count": 4564,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R6-evidence/manifest.json",
+        "sha256": "fbc801059480e9da02eb26aac2054da59de46eae2b1347f3d6b451336f0bfbff"
+      },
+      {
+        "byte_count": 419,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R6-evidence/output-path-preflight.json",
+        "sha256": "0f8e1a0a9bd0cc8fbc2277c3358945183903c78a89cb2bf47986ae844a51c29d"
+      },
+      {
+        "byte_count": 586,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R6-evidence/postgres-preflight-summary.json",
+        "sha256": "9170f83a5bcd4f0b7904cf27e5e25aeb67b935b932ce3f470fa3f1f587b6b5e0"
+      },
+      {
+        "byte_count": 912,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R6-evidence/postgres-service-identity.json",
+        "sha256": "757cc2dc632a326ebefefab390fc115bfaa738447e214c858081b16c3760ec69"
+      },
+      {
+        "byte_count": 19287,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R6-evidence/protected-untracked-after.json",
+        "sha256": "1b2cf6019310b0faf4c07a039980c725f0f7742d6d487877e1ff6766ba12fb28"
+      },
+      {
+        "byte_count": 18922,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R6-evidence/protected-untracked-before.json",
+        "sha256": "679c7ce8ebdc27d128a550f44445eeea99b3894622adc6245c024a2f6a948f42"
+      },
+      {
+        "byte_count": 457,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R6-evidence/repair-identity.json",
+        "sha256": "f3f24702faa896acc063243144fdac6542ada7f18738c161aa7d0207cc69e572"
+      },
+      {
+        "byte_count": 758,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R6-evidence/session-independence.json",
+        "sha256": "4dbe166c93fcd15ad59ecb1f36f8177280988b84c31dd4ce92cd30379a117eea"
+      },
+      {
+        "byte_count": 594,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R6-evidence/toolchain.json",
+        "sha256": "956cb3547249cb3ac0be6e836d4115d46403be44c9427441b7fa7411afa4998e"
+      },
+      {
+        "byte_count": 13604,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-GIT-INTEGRATION-R1-INDEPENDENT-REVIEW-R1-acceptance.md",
+        "sha256": "f31be88c6b49f77e0d54ef1cfbcb329aa629f0c28c5bcd24bf1262a25d8bae2c"
+      },
+      {
+        "byte_count": 4513,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-GIT-INTEGRATION-R1-STALE-REDISPATCH-REVIEW-acceptance.md",
+        "sha256": "d68eb734fb9ec191ed8667565d3e5f65ab62dc080b398510d6d642a740e21280"
+      },
+      {
+        "byte_count": 708,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-GIT-INTEGRATION-R1-evidence/acceptance-commit.json",
+        "sha256": "64f40d7c215e71ca0ed27b6ebb6c4defb0ddcc9dd09bcf8e6990ed43b48dd315"
+      },
+      {
+        "byte_count": 2729,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-GIT-INTEGRATION-R1-evidence/accepted-input-hashes.json",
+        "sha256": "47ec8fcb3a8ff80e8fa30b2bda17a4edc61ec8a51ef5a557bf1925af5c726f15"
+      },
+      {
+        "byte_count": 9474,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-GIT-INTEGRATION-R1-evidence/baseline.json",
+        "sha256": "0af5358b51789ede06b26f50a4d426c4a94b102a04064dfd9439eb77ad5a7496"
+      },
+      {
+        "byte_count": 1661,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-GIT-INTEGRATION-R1-evidence/blob-hashes.json",
+        "sha256": "bc0f14a1d2bf30e1c2a220c63c005cabc10aa2c41ca9ddb4fa0241111367e740"
+      },
+      {
+        "byte_count": 3301,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-GIT-INTEGRATION-R1-evidence/commit-file-matrix.json",
+        "sha256": "556011e234c093f7820154263918a84dca7b8aceb734249beb8496c274ce13af"
+      },
+      {
+        "byte_count": 3330,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-GIT-INTEGRATION-R1-evidence/credential-scan.json",
+        "sha256": "ba6d7d30a3fae080d7e41a45928f4c39d82e63cf6ea55d749faf8bcec1bd218d"
+      },
+      {
+        "byte_count": 2403,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-GIT-INTEGRATION-R1-evidence/deterministic-tests.json",
+        "sha256": "5035def770f5cdefe59b08f912f7191debabe30249dcbaa381d2dfbd17cff91a"
+      },
+      {
+        "byte_count": 2716,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-GIT-INTEGRATION-R1-evidence/evidence-commit.json",
+        "sha256": "5ebbb538b45b150e12c750ccb3f18c0e2775146f58e4231583f1d42919583d6f"
+      },
+      {
+        "byte_count": 602,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-GIT-INTEGRATION-R1-evidence/fast-forward.json",
+        "sha256": "af1a4fdc956f7bd2f8d162984dd1bde0f5a7bc228169a3d6748a17a9aaa54f18"
+      },
+      {
+        "byte_count": 1285,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-GIT-INTEGRATION-R1-evidence/final-git-state.json",
+        "sha256": "a68635a385785181c44a652482d31c35e3f507681625fbedfb68e161ca1e6b05"
+      },
+      {
+        "byte_count": 2672,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-GIT-INTEGRATION-R1-evidence/manifest.json",
+        "sha256": "3288c302033eb3fa79bf2425c025ffd65647951c827797336e2aca461e94a371"
+      },
+      {
+        "byte_count": 13341,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-GIT-INTEGRATION-R1-evidence/protected-untracked-after.json",
+        "sha256": "a1734f8cab2c84b6cbb63ab0eb00649d7b8364f70236744bbeddff87ec2025cf"
+      },
+      {
+        "byte_count": 13345,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-GIT-INTEGRATION-R1-evidence/protected-untracked-before.json",
+        "sha256": "676fbd0113ab45719247231edef7896e2923b6e14b242046266424551a63d601"
+      },
+      {
+        "byte_count": 680,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-GIT-INTEGRATION-R1-evidence/repair-commit.json",
+        "sha256": "821bc1a598753abec904c006191854ebe325a2b5a0ab70c4d5fa6f32976918f2"
+      },
+      {
+        "byte_count": 2513,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-GIT-INTEGRATION-R1-evidence/static-checks.json",
+        "sha256": "95edd2b73fedc51e492774b05e97b8810f9cb516bf224b349e4129b0068a6c1d"
+      },
+      {
+        "byte_count": 2999,
+        "file_type": "regular",
+        "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-GIT-INTEGRATION-R1-execution-report.md",
+        "sha256": "fb7fc6581cda1fc1d86e34d90fc3df3850902a0ea0f9ad1b37af532aa9b07c35"
+      },
+      {
+        "byte_count": 114165,
+        "file_type": "regular",
+        "relative_path": "docs/workbench.html",
+        "sha256": "1dbd4d40accd6edcdd03ab68dc9b8b0370bac49d635a64aa4a989b5ddf96a6b0"
+      }
+    ],
+    "entry_count": 216
+  },
+  "repair_id": "TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-REPAIR-R1",
+  "repair_invocation_id": "1F2E2619-E72E-4D65-8F30-5BB87497BB27",
+  "semantic_command": "recursive protected-untracked path/type/byte/SHA-256 snapshot",
+  "source_config_sha256": "fa663971e5fe9acee70d50df5fc6798cf4c8b329bf763b644dd4e0880f0fd87c",
+  "started_at_utc": "2026-09-23T09:56:36.196396+00:00",
+  "task_id": "TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-REPAIR-R1"
+}

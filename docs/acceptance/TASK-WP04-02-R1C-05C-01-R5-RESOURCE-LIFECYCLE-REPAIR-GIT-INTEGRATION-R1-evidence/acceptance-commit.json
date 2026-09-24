@@ -1,0 +1,14 @@
+{
+  "blob_sha256": "1659140342ed5978ca48e95d9ee24e25bde1dbeeff6a2314506acd5ecc34d342",
+  "commit": "5c4b930f4948815e3ad2ab26b5e7c81de8c20e5b",
+  "expected_parent": "bd6b5b88783fd4de4d7d89787778e1b36bb4006e",
+  "file_set_exact": true,
+  "files": [
+    "docs/acceptance/TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-R1-INDEPENDENT-REVIEW-R1-acceptance.md"
+  ],
+  "fixed_input_preserved": true,
+  "note": "The fixed accepted report contains a blank line at EOF; it was not edited because its accepted SHA-256 is authoritative.",
+  "parent": "bd6b5b88783fd4de4d7d89787778e1b36bb4006e",
+  "subject": "docs(acceptance): accept R5 lifecycle repair",
+  "verified_at_utc": "2026-09-22T08:46:27.563839+00:00"
+}

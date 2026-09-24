@@ -1,0 +1,38 @@
+{
+  "child_environment_keys": [
+    "HOME",
+    "LANG",
+    "PATH",
+    "PYTHONDONTWRITEBYTECODE",
+    "PYTHONPATH",
+    "TG_EVIDENCE_PG_LEDGER",
+    "TG_EVIDENCE_PG_RUN_ID",
+    "USER"
+  ],
+  "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+  "end_utc": "2026-09-22T06:41:26.895084+00:00",
+  "executable": "/opt/homebrew/bin/pytest",
+  "flags": [
+    "-p",
+    "no:cacheprovider",
+    "-x",
+    "-vv",
+    "-s",
+    "--tb=short"
+  ],
+  "forbidden_diagnostic_variables_present": false,
+  "invocation_count": 1,
+  "observer_initial_catalog_equal": true,
+  "observer_nonce": "c07c606ac8c5c17a54c3617a88ee0c90",
+  "observer_returncode": 0,
+  "returncode": 1,
+  "run_id": "2fbae112c2c0e6829ff3ff77efd03e28",
+  "selectors": [
+    "tests/test_evidence_services.py::test_r1c05c01_forbidden_status_commit_fresh_no_residue",
+    "tests/test_evidence_services.py::test_r1c05c01_allowed_routing_history_audit",
+    "tests/test_evidence_services.py::test_r1c05c01_committed_exact_replay_read_only",
+    "tests/test_evidence_services.py::test_r1c05c01_legacy_forbidden_prior_committed_replay"
+  ],
+  "start_utc": "2026-09-22T06:41:11.901231+00:00",
+  "started": true
+}

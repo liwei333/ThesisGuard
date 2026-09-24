@@ -1,0 +1,20 @@
+{
+  "alter_database": 0,
+  "business_dml": 0,
+  "captured_at_utc": "2026-09-23T01:45:17.411058+00:00",
+  "container_create_recreate_remove": 0,
+  "create_database": 0,
+  "database_cleanup": 0,
+  "database_session_established": 0,
+  "docker_desktop_launch": 1,
+  "docker_start": 0,
+  "drop_database": 0,
+  "fixture": 0,
+  "git_add_commit_merge_rebase_reset_clean_stash_push": 0,
+  "image_pull_build_remove": 0,
+  "migration": 0,
+  "pg_terminate_backend": 0,
+  "pytest": 0,
+  "schema_ddl": 0,
+  "volume_create_remove": 0
+}

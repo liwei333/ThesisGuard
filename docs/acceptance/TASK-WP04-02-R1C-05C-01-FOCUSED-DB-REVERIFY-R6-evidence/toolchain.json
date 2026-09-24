@@ -1,0 +1,27 @@
+{
+  "captured_at_utc": "2026-09-22T11:26:24.667880+00:00",
+  "complete_environment_enumerated": false,
+  "forbidden_environment_keys": {
+    "TG_R1C02_REPLAY_PRIOR": "ABSENT",
+    "TG_R1C_REPLAY_BASELINE": "ABSENT",
+    "TG_TEST_ADMIN_DATABASE_URL": "ABSENT"
+  },
+  "pytest": {
+    "argv": [
+      "/opt/homebrew/bin/pytest",
+      "--version"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "pytest 9.1.1\n"
+  },
+  "python": {
+    "argv": [
+      "/opt/homebrew/bin/python3.12",
+      "--version"
+    ],
+    "returncode": 0,
+    "stderr": "",
+    "stdout": "Python 3.12.9\n"
+  }
+}

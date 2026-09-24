@@ -1,0 +1,11 @@
+{
+  "exit_code": 0,
+  "formal_runtime": "/opt/miniconda3/bin/python3",
+  "generated_bytecode_removed_before_manifest": true,
+  "recorded_at_utc": "2026-09-23T08:39:55.331711+00:00",
+  "schema_version": 1,
+  "semantic_command": "Python bytecode compile of retained observer, supervisor, and tests",
+  "source_count": 3,
+  "syntax_valid": true,
+  "task_id": "TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5"
+}

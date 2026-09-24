@@ -1,0 +1,26 @@
+{
+  "all_consistency_assertions_pass": true,
+  "captured_at_utc": "2026-09-23T07:12:05.488779+00:00",
+  "checks": {
+    "docker_start_count_cross_file_consistent": true,
+    "market_provider_count_zero_cross_file": true,
+    "mutation_audit_matches_command_evidence": true,
+    "open_count_cross_file_consistent": true,
+    "postgresql_confirmed_connection_count_cross_file_consistent": true,
+    "protected_before_after_exact": true,
+    "r7_count_zero_cross_file": true,
+    "recovery_path_cross_file_consistent": true,
+    "report_catalog_45_residual_session_values_match_json": true,
+    "report_manifest_count_matches_planned_manifest": true,
+    "report_status_matches_final_state": true,
+    "stability_completed_not_observed_cross_file": true,
+    "stability_invocation_count_one_cross_file": true,
+    "stability_samples_not_claimed": true,
+    "stability_started_true_cross_file": true,
+    "unknown_not_observed_not_promoted_to_verified": true
+  },
+  "implementation_complete_allowed": false,
+  "planned_manifest_file_count": 29,
+  "reason": "required stability-window result is not retained",
+  "status": "BLOCKED"
+}

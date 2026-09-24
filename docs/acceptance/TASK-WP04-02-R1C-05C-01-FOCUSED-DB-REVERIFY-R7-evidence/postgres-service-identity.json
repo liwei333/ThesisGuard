@@ -1,0 +1,42 @@
+{
+  "captured_at_utc": "2026-09-23T11:08:59.671297+00:00",
+  "docker": {
+    "container": "thesisguard-postgres",
+    "context": "desktop-linux",
+    "daemon_name": "docker-desktop",
+    "daemon_server_version": "29.7.2",
+    "health": "healthy",
+    "identity_passed": true,
+    "image": "pgvector/pgvector:pg17",
+    "image_id": "sha256:cf134a767f474095eeba57e0117be8e568e011a63f33fbf252f14c9b760f8e6f",
+    "mutations_performed": [],
+    "port_mapping": {
+      "container": 5432,
+      "host": 15432,
+      "protocol": "tcp"
+    },
+    "restart_policy": "unless-stopped",
+    "status": "running",
+    "volume": {
+      "destination": "/var/lib/postgresql/data",
+      "driver": "local",
+      "name": "thesisguard-postgres-data"
+    }
+  },
+  "overall_gate": "FAIL_EVIDENCE_SECURITY_CONTRACT",
+  "pg_isready": {
+    "database": "postgres",
+    "host": "127.0.0.1",
+    "port": 15432,
+    "result": "accepting connections",
+    "returncode": 0
+  },
+  "sql_identity": {
+    "current_database": null,
+    "current_user": null,
+    "reason": "Fail-closed stop after prohibited credential material was exposed while inspecting a tracked test source snippet; no permitted credential channel was used.",
+    "server_version": null,
+    "status": "NOT_CONFIRMED",
+    "successful_connections": 0
+  }
+}

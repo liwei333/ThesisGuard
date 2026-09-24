@@ -1,0 +1,35 @@
+{
+  "captured_at_utc": "2026-09-23T02:41:19.881203+00:00",
+  "files": [
+    {
+      "actual_sha256": "eed9951ef6b4e900d7abc29a55df25bc51e44a0e637e17dc62017fca5cca500b",
+      "expected_sha256": "eed9951ef6b4e900d7abc29a55df25bc51e44a0e637e17dc62017fca5cca500b",
+      "match": true,
+      "path": "docker-compose.yml"
+    },
+    {
+      "actual_sha256": "4a567d45dfb6785f62676f4424675ab26f7bb48c42615fe34d6fff362b060ad8",
+      "expected_sha256": "4a567d45dfb6785f62676f4424675ab26f7bb48c42615fe34d6fff362b060ad8",
+      "match": true,
+      "path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R2-execution-report.md"
+    },
+    {
+      "actual_sha256": "4ac31f11a642552f840b05b782c26c0a7a07a8848d63ecca2e2eedfeb93030f0",
+      "expected_sha256": "4ac31f11a642552f840b05b782c26c0a7a07a8848d63ecca2e2eedfeb93030f0",
+      "match": true,
+      "path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R2-evidence/manifest.json"
+    },
+    {
+      "actual_sha256": "9f6a1e0d7b04a5b0c7ed45f897c285135072506bdd651890b252390326994ff1",
+      "expected_sha256": "9f6a1e0d7b04a5b0c7ed45f897c285135072506bdd651890b252390326994ff1",
+      "match": true,
+      "path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R1-evidence/historical-unknown-comparison.json"
+    },
+    {
+      "actual_sha256": "635ba4aad0468c15b4360733c784d52f4430f03477a14ef8a271a1e32bada360",
+      "expected_sha256": "635ba4aad0468c15b4360733c784d52f4430f03477a14ef8a271a1e32bada360",
+      "match": true,
+      "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-INDEPENDENT-REVERIFY-R1-evidence/phase-a-20260916-exact-cleanup-plan.json"
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+{
+  "matches_before": true,
+  "observed_at_utc": "2026-09-23T08:39:55.217467+00:00",
+  "schema_version": 1,
+  "task_id": "TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5",
+  "worktrees": [
+    {
+      "branch": "refs/heads/main",
+      "head": "5c4b930f4948815e3ad2ab26b5e7c81de8c20e5b",
+      "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard"
+    },
+    {
+      "branch": "refs/heads/codex/integrate-latest-20260922",
+      "head": "12fe04fd98fe4c897f3a4b063e9665678c58e827",
+      "path": "/private/tmp/tg-integrate-latest-20260922",
+      "prunable_reason": "gitdir file points to non-existent location"
+    },
+    {
+      "detached": true,
+      "head": "5c4b930f4948815e3ad2ab26b5e7c81de8c20e5b",
+      "path": "/private/tmp/tg-r6-current-main.6ZDMqb/review",
+      "prunable_reason": "gitdir file points to non-existent location"
+    },
+    {
+      "detached": true,
+      "head": "5c4b930f4948815e3ad2ab26b5e7c81de8c20e5b",
+      "path": "/private/tmp/tg-r6-current-main.H1UFGD/review",
+      "prunable_reason": "gitdir file points to non-existent location"
+    },
+    {
+      "detached": true,
+      "head": "675217c3a15c0f416aa4462ca6edc491bf99f9f6",
+      "path": "/private/tmp/tg-r6-historical-main.gEo5wp/review",
+      "prunable_reason": "gitdir file points to non-existent location"
+    },
+    {
+      "detached": true,
+      "head": "675217c3a15c0f416aa4462ca6edc491bf99f9f6",
+      "path": "/private/tmp/tg-r6-historical-main.HXNnnK/review",
+      "prunable_reason": "gitdir file points to non-existent location"
+    },
+    {
+      "detached": true,
+      "head": "df836cb39a1234aae967553b3783a67df9ad6672",
+      "path": "/private/tmp/tg-wp04-02-r4-review-r1.o31SWt/review",
+      "prunable_reason": "gitdir file points to non-existent location"
+    },
+    {
+      "branch": "refs/heads/codex/review-v16-trading-loop-20260922-77abbe7",
+      "head": "77abbe72decfe5437ffed90521b8101f1eae1153",
+      "path": "/private/tmp/ThesisGuard-review-v16-trading-loop-20260922-77abbe7",
+      "prunable_reason": "gitdir file points to non-existent location"
+    },
+    {
+      "branch": "refs/heads/codex/review-oss-reuse-20260918-675217c",
+      "head": "7d285fba5baaa4504b51f5ce50dca63dc8ed3cfe",
+      "path": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-review-oss-reuse-20260918-675217c"
+    },
+    {
+      "branch": "refs/heads/codex/wp04-01-readiness-r1",
+      "head": "cb36e84515fddc8183630757a01078c655a1b8c2",
+      "path": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-01-readiness-r1"
+    },
+    {
+      "branch": "refs/heads/codex/wp04-02-evidence-domain-service",
+      "head": "e942cbcc9e0b5d95a6c7ee46d4d74ee90ff03ad4",
+      "path": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service"
+    },
+    {
+      "branch": "refs/heads/codex/wp04-evidence-contract",
+      "head": "2066488f1b5a6d464006742d8ffdb605b2ea2cb7",
+      "path": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-evidence-contract"
+    },
+    {
+      "branch": "refs/heads/codex/wp04-evidence-persistence",
+      "head": "4201ae754c0cf71188965987964d2221795cb5eb",
+      "path": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-evidence-persistence"
+    },
+    {
+      "branch": "refs/heads/codex/wp04-02-r5-resource-lifecycle-repair-r1",
+      "head": "bd6b5b88783fd4de4d7d89787778e1b36bb4006e",
+      "path": "/Users/qianduoduo/Desktop/AI_app/codex-wp04-02-r5-resource-lifecycle-repair-r1"
+    },
+    {
+      "branch": "refs/heads/codex/wp04-02-verifier-harness-r4",
+      "head": "df836cb39a1234aae967553b3783a67df9ad6672",
+      "path": "/Users/qianduoduo/Desktop/AI_app/codex-wp04-02-verifier-harness-r4"
+    },
+    {
+      "branch": "refs/heads/codex/wp04-02-verifier-harness-r5-repair",
+      "head": "f9a41ea045d3ab8ad18db32d65a8484d6c96ec25",
+      "path": "/Users/qianduoduo/Desktop/AI_app/codex-wp04-02-verifier-harness-r5-repair"
+    }
+  ]
+}

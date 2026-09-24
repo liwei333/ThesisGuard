@@ -1,0 +1,11 @@
+{
+  "all_receipts_before_index": true,
+  "criteria_satisfied": true,
+  "formal_artifact_paths_absent": true,
+  "formal_invocation_not_started_at_validation": true,
+  "index_before_formal_invocation": true,
+  "prewindow_gate_index_sha256": "4fe778816bd65d81c2a9f72bd9c178b4059dcb531df0f5bcc19c17ab0f5d8464",
+  "receipt_count": 14,
+  "repair_invocation_id": "1F2E2619-E72E-4D65-8F30-5BB87497BB27",
+  "validated_at_utc": "2026-09-23T09:56:37.476473+00:00"
+}

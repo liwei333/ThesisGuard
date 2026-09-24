@@ -1,0 +1,36 @@
+{
+  "completed_at_utc": "2026-09-23T09:56:36.640426+00:00",
+  "credential_safe_failure_classification": "NONE",
+  "criteria_satisfied": true,
+  "exit_code": 0,
+  "monotonic_finished": 34138.807089958,
+  "monotonic_started": 34138.378757458,
+  "original_task_id": "TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5",
+  "receipt_schema_version": 1,
+  "receipt_type": "repair-helper-self-test",
+  "relevant_result": {
+    "full_repair_suite": {
+      "errors": 0,
+      "exit_code": 0,
+      "failed": 0,
+      "output_classification": "UNITTEST_OK",
+      "skipped": 0,
+      "test_count": 65
+    },
+    "new_test_count": 39,
+    "original_r5_regression": {
+      "errors": 0,
+      "exit_code": 0,
+      "failed": 0,
+      "output_classification": "UNITTEST_OK",
+      "skipped": 0,
+      "test_count": 26
+    }
+  },
+  "repair_id": "TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-REPAIR-R1",
+  "repair_invocation_id": "1F2E2619-E72E-4D65-8F30-5BB87497BB27",
+  "semantic_command": "26-test R5 regression plus 65-test Repair unittest suite",
+  "source_config_sha256": "fa663971e5fe9acee70d50df5fc6798cf4c8b329bf763b644dd4e0880f0fd87c",
+  "started_at_utc": "2026-09-23T09:56:36.212094+00:00",
+  "task_id": "TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-REPAIR-R1"
+}

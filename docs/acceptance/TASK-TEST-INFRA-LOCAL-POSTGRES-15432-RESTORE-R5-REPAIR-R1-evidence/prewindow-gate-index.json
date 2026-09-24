@@ -1,0 +1,142 @@
+{
+  "all_receipts_criteria_satisfied": true,
+  "bytecode_count": 0,
+  "formal_artifact_paths_absent": true,
+  "formal_window_started": false,
+  "generated_at_utc": "2026-09-23T09:56:37.473519+00:00",
+  "original_task_id": "TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5",
+  "receipts": [
+    {
+      "byte_count": 991,
+      "completed_at_utc": "2026-09-23T09:56:35.936496+00:00",
+      "criteria_satisfied": true,
+      "receipt_type": "output-path",
+      "relative_path": "output-path-preflight.json",
+      "sha256": "e0727919308e48e15754656a87e062119cbda6d2f9b32539aafd6fd2afbb4ec8"
+    },
+    {
+      "byte_count": 1210,
+      "completed_at_utc": "2026-09-23T09:56:36.141321+00:00",
+      "criteria_satisfied": true,
+      "receipt_type": "git-baseline",
+      "relative_path": "baseline-git.json",
+      "sha256": "b7c918738736bdee5073ed09448baae62eb6458e2d61e1eda10632102ecbb0b4"
+    },
+    {
+      "byte_count": 3393,
+      "completed_at_utc": "2026-09-23T09:56:36.144530+00:00",
+      "criteria_satisfied": true,
+      "receipt_type": "fixed-input-hash",
+      "relative_path": "fixed-input-hashes.json",
+      "sha256": "b228a69cbd4e38a41fdc79c5319dfc22abe68fb8e54c6a91a737bac6acad34dd"
+    },
+    {
+      "byte_count": 63587,
+      "completed_at_utc": "2026-09-23T09:56:36.196408+00:00",
+      "criteria_satisfied": true,
+      "receipt_type": "protected-untracked-before",
+      "relative_path": "protected-untracked-before.json",
+      "sha256": "fe7bbeb6110b0165564210e07a639220158032b77b523707a576785293472406"
+    },
+    {
+      "byte_count": 2459,
+      "completed_at_utc": "2026-09-23T09:56:36.200222+00:00",
+      "criteria_satisfied": true,
+      "receipt_type": "r5-helper-source-import-hash",
+      "relative_path": "helper-source-hashes.json",
+      "sha256": "e0cdbbff0450badc6f11e6c41964d9589bd54ab4d1d6c4508f099fdb800ef8da"
+    },
+    {
+      "byte_count": 1019,
+      "completed_at_utc": "2026-09-23T09:56:36.211526+00:00",
+      "criteria_satisfied": true,
+      "receipt_type": "repair-helper-compile",
+      "relative_path": "helper-compile-receipt.json",
+      "sha256": "9cb8ce39ccfbf49a3388b8860fbe259e251a0c0dc4be7e69fadda4d6ff204713"
+    },
+    {
+      "byte_count": 1263,
+      "completed_at_utc": "2026-09-23T09:56:36.640426+00:00",
+      "criteria_satisfied": true,
+      "receipt_type": "repair-helper-self-test",
+      "relative_path": "helper-selftest-receipt.json",
+      "sha256": "c5b8ea45744ffb334780c29b5d929f32824045592b1ecaf46731640b1aa9c27c"
+    },
+    {
+      "byte_count": 1103,
+      "completed_at_utc": "2026-09-23T09:56:36.690310+00:00",
+      "criteria_satisfied": true,
+      "receipt_type": "repair-helper-dry-run",
+      "relative_path": "helper-dry-run-receipt.json",
+      "sha256": "050d51bc6e2acec3cc5546ded6f22082d6b537f94fb70466a265b84021ee435c"
+    },
+    {
+      "byte_count": 1244,
+      "completed_at_utc": "2026-09-23T09:56:36.691770+00:00",
+      "criteria_satisfied": true,
+      "receipt_type": "no-bytecode",
+      "relative_path": "no-bytecode-prewindow-receipt.json",
+      "sha256": "298e459cb86c6eed39a7412f9d52198c07f09f132a172f21f9f896f06496dc98"
+    },
+    {
+      "byte_count": 1058,
+      "completed_at_utc": "2026-09-23T09:56:36.745887+00:00",
+      "criteria_satisfied": true,
+      "receipt_type": "docker-context",
+      "relative_path": "docker-context-receipt.json",
+      "sha256": "a75f6acbbb23899d9bb6618e84edff557c0c3fcc483972eca2706300ea6ae58a"
+    },
+    {
+      "byte_count": 1365,
+      "completed_at_utc": "2026-09-23T09:56:36.954175+00:00",
+      "criteria_satisfied": true,
+      "receipt_type": "docker-identity",
+      "relative_path": "docker-identity-receipt.json",
+      "sha256": "b991c9d3ddea33d04d14d2c08ed5dfd1bdc845b33e3de8cfece2ae6564428486"
+    },
+    {
+      "byte_count": 967,
+      "completed_at_utc": "2026-09-23T09:56:37.194776+00:00",
+      "criteria_satisfied": true,
+      "receipt_type": "pg-isready",
+      "relative_path": "pg-isready-receipt.json",
+      "sha256": "cfd9b531ee8d2c6e03163c5f568f5fe9bff89b1f9db555eaf74e7cd486b65ad5"
+    },
+    {
+      "byte_count": 2128,
+      "completed_at_utc": "2026-09-23T09:56:37.472200+00:00",
+      "criteria_satisfied": true,
+      "receipt_type": "postgres-read-only-preflight",
+      "relative_path": "postgres-preflight-receipt.json",
+      "sha256": "4ed9c092b6585b053bdd94b6022752087af06a1b0676231637b92c187525e74c"
+    },
+    {
+      "byte_count": 1159,
+      "completed_at_utc": "2026-09-23T09:56:37.472902+00:00",
+      "criteria_satisfied": true,
+      "receipt_type": "formal-artifact-path-absence",
+      "relative_path": "formal-path-absence-receipt.json",
+      "sha256": "82ce0562ca76e646efb48591ffbcfece70b8ddd561ac29d4c3f9c26164890091"
+    }
+  ],
+  "repair_id": "TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-REPAIR-R1",
+  "repair_invocation_id": "1F2E2619-E72E-4D65-8F30-5BB87497BB27",
+  "required_receipt_types": [
+    "output-path",
+    "git-baseline",
+    "fixed-input-hash",
+    "protected-untracked-before",
+    "r5-helper-source-import-hash",
+    "repair-helper-compile",
+    "repair-helper-self-test",
+    "repair-helper-dry-run",
+    "no-bytecode",
+    "docker-context",
+    "docker-identity",
+    "pg-isready",
+    "postgres-read-only-preflight",
+    "formal-artifact-path-absence"
+  ],
+  "schema_version": 1,
+  "task_id": "TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-REPAIR-R1"
+}

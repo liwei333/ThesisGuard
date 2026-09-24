@@ -1,0 +1,31 @@
+{
+  "container_name": "thesisguard-postgres",
+  "container_port": "5432/tcp",
+  "formal_collector_invocation_count": 1,
+  "health_status": "healthy",
+  "host_port": "15432",
+  "identity_match": true,
+  "image_id": "sha256:cf134a767f474095eeba57e0117be8e568e011a63f33fbf252f14c9b760f8e6f",
+  "image_reference": "pgvector/pgvector:pg17",
+  "mounts": [
+    {
+      "destination": "/var/lib/postgresql/data",
+      "driver": "local",
+      "name": "thesisguard-postgres-data",
+      "read_write": true,
+      "type": "volume"
+    }
+  ],
+  "port_bindings": [
+    {
+      "host_ip": "",
+      "host_port": "15432"
+    }
+  ],
+  "restart_policy": "unless-stopped",
+  "runtime_ready": true,
+  "state_status": "running",
+  "static_identity_match": true,
+  "volume_driver": "local",
+  "volume_name": "thesisguard-postgres-data"
+}

@@ -1,0 +1,32 @@
+{
+  "docker_start_invocations": 0,
+  "formal_collector_invocations": 1,
+  "formal_pg_isready_invocations": 1,
+  "formal_postgres_preflight_invocations": 1,
+  "formal_stability_window_invocations": 1,
+  "open_docker_invocations": 0,
+  "prohibited_operation_counts": {
+    "alter_database": 0,
+    "business_dml": 0,
+    "container_create_recreate_remove": 0,
+    "create_database": 0,
+    "database_cleanup": 0,
+    "docker_compose_up_down": 0,
+    "docker_start_invocation": 0,
+    "docker_stop_restart": 0,
+    "drop_database": 0,
+    "fixture": 0,
+    "git_add_commit_merge_rebase_reset_clean_stash_push_pull_fetch": 0,
+    "image_pull_build_remove": 0,
+    "market_provider_spike_invocation": 0,
+    "migration": 0,
+    "open_docker_invocation": 0,
+    "pg_terminate_backend": 0,
+    "pytest": 0,
+    "r7_invocation": 0,
+    "schema_ddl": 0,
+    "unrelated_container_operations": 0,
+    "volume_create_remove": 0
+  },
+  "second_stability_window_invocations": 0
+}

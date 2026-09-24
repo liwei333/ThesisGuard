@@ -1,0 +1,11 @@
+{
+  "output_paths_initially_absent": true,
+  "main_shape": "A",
+  "r5_start_main_head": "77abbe72decfe5437ffed90521b8101f1eae1153",
+  "main_head_frozen": true,
+  "candidate_commit_is_main_ancestor": true,
+  "harness_commit_is_main_ancestor": true,
+  "real_pytest_invocation_count": 0,
+  "create_attempt_count": 0,
+  "checked_at_utc": "2026-09-22T06:33:26Z"
+}

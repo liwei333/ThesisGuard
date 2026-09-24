@@ -1,0 +1,62 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.12.9, pytest-9.1.1, pluggy-1.6.0 -- /opt/homebrew/opt/python@3.12/bin/python3.12
+rootdir: /Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service
+configfile: pyproject.toml
+plugins: asyncio-1.4.0, anyio-4.15.1
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collecting ... collected 41 items
+
+tests/test_evidence_services.py::test_r1c05c01_forbidden_status_commit_fresh_no_residue[PENDING_REVIEW-same] r1c05c01 committed setup: route=same, status=PENDING_REVIEW, exact=77898b0d-6e1a-43db-aa1d-b0653e831e81, server=(17, 11)
+r1c05c01 caller-commit fresh-nine-table equality: same/PENDING_REVIEW, before=2c893de67ade59f2e683e85842d4287b86f83de04d56427f2a2028971ae51e3f, after=2c893de67ade59f2e683e85842d4287b86f83de04d56427f2a2028971ae51e3f
+PASSED
+tests/test_evidence_services.py::test_r1c05c01_forbidden_status_commit_fresh_no_residue[PENDING_REVIEW-automatic] r1c05c01 lawful automatic support exact IDs: 689a8fd4-7062-485f-8a9f-7d478568a39b, 71396dd5-092b-447b-a100-b7411551066c
+r1c05c01 committed setup: route=automatic, status=PENDING_REVIEW, exact=7c4b692e-3f3f-4450-97bb-12c8cb4ea707, server=(17, 11)
+r1c05c01 caller-commit fresh-nine-table equality: automatic/PENDING_REVIEW, before=9ce18e75299bb6bf0ee7ec352092622f3f593febc5dd0c632bd89652e14d44f6, after=9ce18e75299bb6bf0ee7ec352092622f3f593febc5dd0c632bd89652e14d44f6
+PASSED
+tests/test_evidence_services.py::test_r1c05c01_forbidden_status_commit_fresh_no_residue[PENDING_REVIEW-direct] r1c05c01 committed setup: route=direct, status=PENDING_REVIEW, exact=f4f03984-ed88-4a91-bfb6-2b62d059c1e5, server=(17, 11)
+r1c05c01 caller-commit fresh-nine-table equality: direct/PENDING_REVIEW, before=68a55de4d78501cae6e35a3191c8517c44032268e5b2923f0d6768b1cb0bb4ae, after=68a55de4d78501cae6e35a3191c8517c44032268e5b2923f0d6768b1cb0bb4ae
+PASSED
+tests/test_evidence_services.py::test_r1c05c01_forbidden_status_commit_fresh_no_residue[PENDING_REVIEW-underlying] r1c05c01 committed setup: route=underlying, status=PENDING_REVIEW, exact=fd5427fb-f880-4ae7-b113-1c11d07da500, server=(17, 11)
+r1c05c01 caller-commit fresh-nine-table equality: underlying/PENDING_REVIEW, before=1dd91a995b243c4f330bf756ab9bb3e6045bfd1ce7a66b6daefc72ae26aa0865, after=1dd91a995b243c4f330bf756ab9bb3e6045bfd1ce7a66b6daefc72ae26aa0865
+PASSED
+tests/test_evidence_services.py::test_r1c05c01_forbidden_status_commit_fresh_no_residue[DISPUTED-same] r1c05c01 committed setup: route=same, status=DISPUTED, exact=342d2659-1d7e-4c0e-a2c9-0110f5ee673c, server=(17, 11)
+r1c05c01 caller-commit fresh-nine-table equality: same/DISPUTED, before=6160cbe596846ff1f20c8b69d35137ce97afe770ca595fd0cd0a7bb194c28957, after=6160cbe596846ff1f20c8b69d35137ce97afe770ca595fd0cd0a7bb194c28957
+PASSED
+tests/test_evidence_services.py::test_r1c05c01_forbidden_status_commit_fresh_no_residue[DISPUTED-automatic] r1c05c01 lawful automatic support exact IDs: 1fc4bb9e-99fc-48a8-9a7d-6bd97a69ef3e, 1c0b2257-347b-45c6-869c-18462d5dc799
+r1c05c01 committed setup: route=automatic, status=DISPUTED, exact=02669d11-6089-4f80-9327-95157f4f1ddf, server=(17, 11)
+r1c05c01 caller-commit fresh-nine-table equality: automatic/DISPUTED, before=b550deed45eccf47adc20c2aad203510b6e364f3f898b3ceb3b2fbb7b7748ff5, after=b550deed45eccf47adc20c2aad203510b6e364f3f898b3ceb3b2fbb7b7748ff5
+PASSED
+tests/test_evidence_services.py::test_r1c05c01_forbidden_status_commit_fresh_no_residue[DISPUTED-direct] r1c05c01 committed setup: route=direct, status=DISPUTED, exact=bbaf27ed-c057-4231-9b0f-a7b9ab2993f5, server=(17, 11)
+r1c05c01 caller-commit fresh-nine-table equality: direct/DISPUTED, before=707c6f8001ac8774f6a8c94521c22b854735a4728a28b37ac611276f4bcf6e17, after=707c6f8001ac8774f6a8c94521c22b854735a4728a28b37ac611276f4bcf6e17
+PASSED
+tests/test_evidence_services.py::test_r1c05c01_forbidden_status_commit_fresh_no_residue[DISPUTED-underlying] r1c05c01 committed setup: route=underlying, status=DISPUTED, exact=80e88916-22ee-4557-8f0c-9cae58cdd861, server=(17, 11)
+r1c05c01 caller-commit fresh-nine-table equality: underlying/DISPUTED, before=a5356c2087b8ba4d3b44f8c8ef38f48b8c9f5648f2d573b222200d1801330fcf, after=a5356c2087b8ba4d3b44f8c8ef38f48b8c9f5648f2d573b222200d1801330fcf
+PASSED
+tests/test_evidence_services.py::test_r1c05c01_forbidden_status_commit_fresh_no_residue[REJECTED-same] r1c05c01 committed setup: route=same, status=REJECTED, exact=2f809db5-1e6f-4820-a664-ea3c2c22f94a, server=(17, 11)
+r1c05c01 caller-commit fresh-nine-table equality: same/REJECTED, before=722d5755f5147705c6b7d721d66c4758f2794a5143507599aee01690253e0098, after=722d5755f5147705c6b7d721d66c4758f2794a5143507599aee01690253e0098
+PASSED
+tests/test_evidence_services.py::test_r1c05c01_forbidden_status_commit_fresh_no_residue[REJECTED-same] ERROR
+
+==================================== ERRORS ====================================
+_ ERROR at teardown of test_r1c05c01_forbidden_status_commit_fresh_no_residue[REJECTED-same] _
+tests/test_evidence_services.py:90: in pg_sessionmaker
+    async with disposable_sessionmaker(
+/opt/homebrew/Cellar/python@3.12/3.12.9/Frameworks/Python.framework/Versions/3.12/lib/python3.12/contextlib.py:217: in __aexit__
+    await anext(self.gen)
+tests/evidence_pg_fixture.py:281: in disposable_sessionmaker
+    raise EvidencePGCleanupError(detail)
+E   tests.evidence_pg_fixture.EvidencePGCleanupError: Evidence PostgreSQL cleanup failed; target=tg_wp04_service_53ea9a765404436e8fc6a6ecf2f51187; ledger=/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/resources.jsonl; errors=['database_cleanup:EvidencePGCleanupError']
+=============================== warnings summary ===============================
+../../../../../../../opt/homebrew/lib/python3.12/site-packages/fastapi/testclient.py:1
+  /opt/homebrew/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+../../../../../../../opt/homebrew/lib/python3.12/site-packages/starlette/testclient.py:53
+  /opt/homebrew/lib/python3.12/site-packages/starlette/testclient.py:53: DeprecationWarning: The anyio.abc.BlockingPortal alias is deprecated, use anyio.from_thread.BlockingPortal instead.
+    _PortalFactoryType = Callable[[], AbstractContextManager[anyio.abc.BlockingPortal]]
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+ERROR tests/test_evidence_services.py::test_r1c05c01_forbidden_status_commit_fresh_no_residue[REJECTED-same] - tests.evidence_pg_fixture.EvidencePGCleanupError: Evidence PostgreSQL cleanup failed; target=tg_wp04_service_53ea9a765404436e8fc6a6ecf2f51187; ledger=/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/resources.jsonl; errors=['database_cleanup:EvidencePGCleanupError']
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!
+=================== 9 passed, 2 warnings, 1 error in 14.12s ====================

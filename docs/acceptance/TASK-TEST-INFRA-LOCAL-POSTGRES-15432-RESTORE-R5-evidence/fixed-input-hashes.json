@@ -1,0 +1,87 @@
+{
+  "all_match": true,
+  "count": 13,
+  "files": [
+    {
+      "actual_sha256": "eed9951ef6b4e900d7abc29a55df25bc51e44a0e637e17dc62017fca5cca500b",
+      "expected_sha256": "eed9951ef6b4e900d7abc29a55df25bc51e44a0e637e17dc62017fca5cca500b",
+      "matches": true,
+      "relative_path": "docker-compose.yml"
+    },
+    {
+      "actual_sha256": "4a567d45dfb6785f62676f4424675ab26f7bb48c42615fe34d6fff362b060ad8",
+      "expected_sha256": "4a567d45dfb6785f62676f4424675ab26f7bb48c42615fe34d6fff362b060ad8",
+      "matches": true,
+      "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R2-execution-report.md"
+    },
+    {
+      "actual_sha256": "4ac31f11a642552f840b05b782c26c0a7a07a8848d63ecca2e2eedfeb93030f0",
+      "expected_sha256": "4ac31f11a642552f840b05b782c26c0a7a07a8848d63ecca2e2eedfeb93030f0",
+      "matches": true,
+      "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R2-evidence/manifest.json"
+    },
+    {
+      "actual_sha256": "9f6a1e0d7b04a5b0c7ed45f897c285135072506bdd651890b252390326994ff1",
+      "expected_sha256": "9f6a1e0d7b04a5b0c7ed45f897c285135072506bdd651890b252390326994ff1",
+      "matches": true,
+      "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R1-evidence/historical-unknown-comparison.json"
+    },
+    {
+      "actual_sha256": "635ba4aad0468c15b4360733c784d52f4430f03477a14ef8a271a1e32bada360",
+      "expected_sha256": "635ba4aad0468c15b4360733c784d52f4430f03477a14ef8a271a1e32bada360",
+      "matches": true,
+      "relative_path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-INDEPENDENT-REVERIFY-R1-evidence/phase-a-20260916-exact-cleanup-plan.json"
+    },
+    {
+      "actual_sha256": "74587b051eac44801c4b04bc29e8fa2714e00a43bf6c378296b190f012ac80ac",
+      "expected_sha256": "74587b051eac44801c4b04bc29e8fa2714e00a43bf6c378296b190f012ac80ac",
+      "matches": true,
+      "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R3-execution-report.md"
+    },
+    {
+      "actual_sha256": "24c321a3b32fa53f1a8e30a9f67c223fdb739aba5b269c06fe537d3414c9105d",
+      "expected_sha256": "24c321a3b32fa53f1a8e30a9f67c223fdb739aba5b269c06fe537d3414c9105d",
+      "matches": true,
+      "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R3-evidence/manifest.json"
+    },
+    {
+      "actual_sha256": "abf028546ecfe64dd7998d9115a58b482eecc0ff2771ce66090ce96aca595875",
+      "expected_sha256": "abf028546ecfe64dd7998d9115a58b482eecc0ff2771ce66090ce96aca595875",
+      "matches": true,
+      "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R3-INDEPENDENT-REVIEW-R1-acceptance.md"
+    },
+    {
+      "actual_sha256": "ef5fca2d87dc795c74a9a4aeec74baf16eea1a4a0babfa222b4f9af21b0b36cc",
+      "expected_sha256": "ef5fca2d87dc795c74a9a4aeec74baf16eea1a4a0babfa222b4f9af21b0b36cc",
+      "matches": true,
+      "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R3-STALE-REDISPATCH-REVIEW-R1-acceptance.md"
+    },
+    {
+      "actual_sha256": "2548b15ff329b8c04138da359cd398b1e76e8cc8aad24328dc6a7aec045deb0a",
+      "expected_sha256": "2548b15ff329b8c04138da359cd398b1e76e8cc8aad24328dc6a7aec045deb0a",
+      "matches": true,
+      "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R4-execution-report.md"
+    },
+    {
+      "actual_sha256": "9ef897b67e9ae418ac92762b1c01841e58c55cb258baa172f425872714f50e03",
+      "expected_sha256": "9ef897b67e9ae418ac92762b1c01841e58c55cb258baa172f425872714f50e03",
+      "matches": true,
+      "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R4-evidence/manifest.json"
+    },
+    {
+      "actual_sha256": "10cc97a0468e7f8132c04ad39a3dc61f6fc77751025dac51d0ff0708ff1b26cf",
+      "expected_sha256": "10cc97a0468e7f8132c04ad39a3dc61f6fc77751025dac51d0ff0708ff1b26cf",
+      "matches": true,
+      "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R4-evidence/postgres-observer.source.py"
+    },
+    {
+      "actual_sha256": "baf3145ab6b1bfbea66e850f3620f766561e62d5745aaab6667677f3640acd52",
+      "expected_sha256": "baf3145ab6b1bfbea66e850f3620f766561e62d5745aaab6667677f3640acd52",
+      "matches": true,
+      "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R4-INDEPENDENT-REVIEW-R1-acceptance.md"
+    }
+  ],
+  "observed_at_utc": "2026-09-23T08:24:23.253512+00:00",
+  "schema_version": 1,
+  "task_id": "TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5"
+}

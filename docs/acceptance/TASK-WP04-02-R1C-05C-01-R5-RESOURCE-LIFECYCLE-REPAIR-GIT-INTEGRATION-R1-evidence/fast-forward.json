@@ -1,0 +1,19 @@
+{
+  "approved_retry": {
+    "exit_code": 0,
+    "result": "fast-forward"
+  },
+  "base": "77abbe72decfe5437ffed90521b8101f1eae1153",
+  "first_attempt": {
+    "exit_code": 128,
+    "reason": "sandbox denied creation of .git/ORIG_HEAD.lock before ref update",
+    "state_change": false
+  },
+  "main_after_fast_forward": "bd6b5b88783fd4de4d7d89787778e1b36bb4006e",
+  "merge_commits": [],
+  "method": "git merge --ff-only",
+  "prohibited_methods_used": [],
+  "recorded_at_utc": "2026-09-22T08:46:27.563688+00:00",
+  "strict_linear_descendant": true,
+  "target": "bd6b5b88783fd4de4d7d89787778e1b36bb4006e"
+}

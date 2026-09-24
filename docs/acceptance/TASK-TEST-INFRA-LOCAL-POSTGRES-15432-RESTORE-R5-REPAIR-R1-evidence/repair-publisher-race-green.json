@@ -1,0 +1,11 @@
+{
+  "bytecode_test_count": 3,
+  "closure_test_count": 11,
+  "criteria_satisfied": true,
+  "gate_hash_binding_test_count": 3,
+  "generated_at_utc": "2026-09-23T09:56:36.639732+00:00",
+  "new_test_count": 39,
+  "no_clobber_test_count": 10,
+  "prewindow_gate_test_count": 12,
+  "task_id": "TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-REPAIR-R1"
+}

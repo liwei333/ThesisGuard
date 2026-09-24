@@ -1,0 +1,45 @@
+{
+  "formal_observer_path": "postgres-observer.source.py",
+  "formal_observer_pre_run_sha256": "cbbd8182ddce5e23121b7208478627895d4cfbf5e90db8669304059679778b44",
+  "formal_observer_unchanged_after_run": true,
+  "formal_supervisor_path": "stability-supervisor.source.py",
+  "formal_supervisor_pre_run_sha256": "fa7c1921cf18d5487d61ec0740eae5c8b1bebe290be942217735696f6112404d",
+  "formal_supervisor_unchanged_after_run": true,
+  "module_copy_matches_observer_source": true,
+  "module_copy_matches_supervisor_source": true,
+  "recorded_at_utc": "2026-09-23T08:39:55.330977+00:00",
+  "schema_version": 1,
+  "sources": [
+    {
+      "byte_count": 25845,
+      "relative_path": "postgres-observer.source.py",
+      "sha256": "cbbd8182ddce5e23121b7208478627895d4cfbf5e90db8669304059679778b44"
+    },
+    {
+      "byte_count": 4242,
+      "relative_path": "stability-supervisor.source.py",
+      "sha256": "fa7c1921cf18d5487d61ec0740eae5c8b1bebe290be942217735696f6112404d"
+    },
+    {
+      "byte_count": 12640,
+      "relative_path": "test-postgres-observer.source.py",
+      "sha256": "538071a46b1618b71f2b5a0046bd5931d18c55a785b2e4feb062eb1a264192a0"
+    },
+    {
+      "byte_count": 753,
+      "relative_path": "legacy-r4-durability-red.source.py",
+      "sha256": "ac4e28146f09711af142f50c9e4647a5c0dec82b8d9f31e7aaa8a81da63a15b7"
+    },
+    {
+      "byte_count": 25845,
+      "relative_path": "postgres_observer.py",
+      "sha256": "cbbd8182ddce5e23121b7208478627895d4cfbf5e90db8669304059679778b44"
+    },
+    {
+      "byte_count": 4242,
+      "relative_path": "stability_supervisor.py",
+      "sha256": "fa7c1921cf18d5487d61ec0740eae5c8b1bebe290be942217735696f6112404d"
+    }
+  ],
+  "task_id": "TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5"
+}

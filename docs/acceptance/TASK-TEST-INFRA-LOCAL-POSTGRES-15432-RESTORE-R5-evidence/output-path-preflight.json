@@ -1,0 +1,9 @@
+{
+  "checked_at_utc": "2026-09-23T08:24:23.182777+00:00",
+  "checked_before_any_r5_output_creation": true,
+  "evidence_directory_existed": false,
+  "execution_report_existed": false,
+  "gate_passed": true,
+  "schema_version": 1,
+  "task_id": "TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5"
+}

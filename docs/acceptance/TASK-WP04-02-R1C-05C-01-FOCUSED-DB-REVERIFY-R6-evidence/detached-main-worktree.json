@@ -1,0 +1,14 @@
+{
+  "branch": null,
+  "captured_at_utc": "2026-09-22T11:25:22.363935+00:00",
+  "clean": true,
+  "detached": true,
+  "head": "5c4b930f4948815e3ad2ab26b5e7c81de8c20e5b",
+  "index_diff": [],
+  "parent": "bd6b5b88783fd4de4d7d89787778e1b36bb4006e",
+  "path": "/private/tmp/tg-r6-current-main.6ZDMqb/review",
+  "recreated_after_interrupted_turn_temp_cleanup": true,
+  "status_porcelain_v2": [],
+  "tracked_clean": true,
+  "tracked_diff": []
+}

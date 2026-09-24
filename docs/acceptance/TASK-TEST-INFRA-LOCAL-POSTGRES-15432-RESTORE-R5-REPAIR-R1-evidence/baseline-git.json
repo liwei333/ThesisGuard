@@ -1,0 +1,28 @@
+{
+  "completed_at_utc": "2026-09-23T09:56:36.141321+00:00",
+  "credential_safe_failure_classification": "NONE",
+  "criteria_satisfied": true,
+  "exit_code": 0,
+  "monotonic_finished": 34138.308032166,
+  "monotonic_started": 34138.225246083,
+  "original_task_id": "TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5",
+  "receipt_schema_version": 1,
+  "receipt_type": "git-baseline",
+  "relevant_result": {
+    "ahead": 3,
+    "behind": 0,
+    "branch": "main",
+    "grandparent": "35349b207d622872bc0025a813ff3e6af6ef7d97",
+    "head": "5c4b930f4948815e3ad2ab26b5e7c81de8c20e5b",
+    "index_empty": true,
+    "origin_main": "77abbe72decfe5437ffed90521b8101f1eae1153",
+    "parent": "bd6b5b88783fd4de4d7d89787778e1b36bb4006e",
+    "tracked_diff_empty": true
+  },
+  "repair_id": "TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-REPAIR-R1",
+  "repair_invocation_id": "1F2E2619-E72E-4D65-8F30-5BB87497BB27",
+  "semantic_command": "fixed Git identity, tracked diff, index, and local ref gate",
+  "source_config_sha256": "fa663971e5fe9acee70d50df5fc6798cf4c8b329bf763b644dd4e0880f0fd87c",
+  "started_at_utc": "2026-09-23T09:56:36.058565+00:00",
+  "task_id": "TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-REPAIR-R1"
+}

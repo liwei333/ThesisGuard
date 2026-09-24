@@ -1,0 +1,35 @@
+{
+  "argv": [
+    "/opt/homebrew/bin/pytest",
+    "-p",
+    "_tg_wp04_02_verifier_ea306a1584f3becceaf4684d1ac8c3aa.plugin",
+    "-p",
+    "no:cacheprovider",
+    "--collect-only",
+    "-q",
+    "tests/test_evidence_services.py::test_r1c05c01_forbidden_status_commit_fresh_no_residue",
+    "tests/test_evidence_services.py::test_r1c05c01_allowed_routing_history_audit",
+    "tests/test_evidence_services.py::test_r1c05c01_committed_exact_replay_read_only",
+    "tests/test_evidence_services.py::test_r1c05c01_legacy_forbidden_prior_committed_replay"
+  ],
+  "cwd": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+  "env": {
+    "HOME": "/Users/qianduoduo",
+    "LANG": "en_US.UTF-8",
+    "PATH": "/opt/miniconda3/bin:/opt/homebrew/bin:/opt/homebrew/opt/postgresql@16/bin:/usr/bin:/bin:/usr/sbin:/sbin",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONPATH": "/tmp/tg_wp04_02_verifier_osobayph:/private/tmp/thesisguard-r5-verify.qabgRt/guard",
+    "TG_EVIDENCE_PG_LEDGER": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/collect-only-harness-run/_fixture-ledger.jsonl",
+    "TG_R4_COLLECTION_JSON": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/collect-only-harness-run/_collected-nodeids.json",
+    "TG_R4_INVOCATION_NONCE": "1248563e561688af6218a13f8c27ac6a",
+    "TG_R4_PLUGIN_SHA256": "3ab4b45feb356fcecdaa5363f09d3256dc0c6a2b8f2bb067d32da8438f3bdbc4",
+    "TG_TEST_ADMIN_DATABASE_URL": "<REDACTED>",
+    "USER": "qianduoduo"
+  },
+  "start_utc": "2026-09-22T06:34:34.556799+00:00",
+  "end_utc": "2026-09-22T06:34:35.823566+00:00",
+  "returncode": 0,
+  "failure_category": null,
+  "error_type": null,
+  "timeout_seconds": 120
+}

@@ -1,0 +1,85 @@
+{
+  "excluded": [
+    "manifest.json"
+  ],
+  "execution_report": {
+    "bytes": 2999,
+    "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-GIT-INTEGRATION-R1-execution-report.md",
+    "sha256": "fb7fc6581cda1fc1d86e34d90fc3df3850902a0ea0f9ad1b37af532aa9b07c35"
+  },
+  "file_count": 14,
+  "files": [
+    {
+      "bytes": 708,
+      "path": "acceptance-commit.json",
+      "sha256": "64f40d7c215e71ca0ed27b6ebb6c4defb0ddcc9dd09bcf8e6990ed43b48dd315"
+    },
+    {
+      "bytes": 2729,
+      "path": "accepted-input-hashes.json",
+      "sha256": "47ec8fcb3a8ff80e8fa30b2bda17a4edc61ec8a51ef5a557bf1925af5c726f15"
+    },
+    {
+      "bytes": 9474,
+      "path": "baseline.json",
+      "sha256": "0af5358b51789ede06b26f50a4d426c4a94b102a04064dfd9439eb77ad5a7496"
+    },
+    {
+      "bytes": 1661,
+      "path": "blob-hashes.json",
+      "sha256": "bc0f14a1d2bf30e1c2a220c63c005cabc10aa2c41ca9ddb4fa0241111367e740"
+    },
+    {
+      "bytes": 3301,
+      "path": "commit-file-matrix.json",
+      "sha256": "556011e234c093f7820154263918a84dca7b8aceb734249beb8496c274ce13af"
+    },
+    {
+      "bytes": 3330,
+      "path": "credential-scan.json",
+      "sha256": "ba6d7d30a3fae080d7e41a45928f4c39d82e63cf6ea55d749faf8bcec1bd218d"
+    },
+    {
+      "bytes": 2403,
+      "path": "deterministic-tests.json",
+      "sha256": "5035def770f5cdefe59b08f912f7191debabe30249dcbaa381d2dfbd17cff91a"
+    },
+    {
+      "bytes": 2716,
+      "path": "evidence-commit.json",
+      "sha256": "5ebbb538b45b150e12c750ccb3f18c0e2775146f58e4231583f1d42919583d6f"
+    },
+    {
+      "bytes": 602,
+      "path": "fast-forward.json",
+      "sha256": "af1a4fdc956f7bd2f8d162984dd1bde0f5a7bc228169a3d6748a17a9aaa54f18"
+    },
+    {
+      "bytes": 1285,
+      "path": "final-git-state.json",
+      "sha256": "a68635a385785181c44a652482d31c35e3f507681625fbedfb68e161ca1e6b05"
+    },
+    {
+      "bytes": 13341,
+      "path": "protected-untracked-after.json",
+      "sha256": "a1734f8cab2c84b6cbb63ab0eb00649d7b8364f70236744bbeddff87ec2025cf"
+    },
+    {
+      "bytes": 13345,
+      "path": "protected-untracked-before.json",
+      "sha256": "676fbd0113ab45719247231edef7896e2923b6e14b242046266424551a63d601"
+    },
+    {
+      "bytes": 680,
+      "path": "repair-commit.json",
+      "sha256": "821bc1a598753abec904c006191854ebe325a2b5a0ab70c4d5fa6f32976918f2"
+    },
+    {
+      "bytes": 2513,
+      "path": "static-checks.json",
+      "sha256": "95edd2b73fedc51e492774b05e97b8810f9cb516bf224b349e4129b0068a6c1d"
+    }
+  ],
+  "generated_at_utc": "2026-09-22T08:46:33.103946+00:00",
+  "root": "TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-GIT-INTEGRATION-R1-evidence"
+}

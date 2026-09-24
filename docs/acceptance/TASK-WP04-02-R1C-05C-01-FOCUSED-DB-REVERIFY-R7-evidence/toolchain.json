@@ -1,0 +1,36 @@
+{
+  "alembic": {
+    "config": "migrations/alembic.ini",
+    "executable": "/opt/miniconda3/bin/alembic",
+    "heads": [
+      "000000000004 (head)"
+    ],
+    "returncode": 0
+  },
+  "captured_at_utc": "2026-09-23T11:01:45.356501+00:00",
+  "complete_environment_enumerated": false,
+  "forbidden_environment_keys": {
+    "TG_R1C02_REPLAY_PRIOR": "ABSENT",
+    "TG_R1C_REPLAY_BASELINE": "ABSENT",
+    "TG_TEST_ADMIN_DATABASE_URL": "ABSENT"
+  },
+  "initial_dot_venv_probes": {
+    "returncodes": [
+      127,
+      127,
+      127
+    ],
+    "status": "NOT_APPLICABLE_PATH_ABSENT"
+  },
+  "passed": true,
+  "pytest": {
+    "executable": "/opt/homebrew/bin/pytest",
+    "returncode": 0,
+    "version": "pytest 9.1.1"
+  },
+  "python": {
+    "executable": "/opt/homebrew/bin/python3.12",
+    "returncode": 0,
+    "version": "Python 3.12.9"
+  }
+}

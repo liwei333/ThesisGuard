@@ -1,0 +1,89 @@
+{
+  "all_passed": true,
+  "commands": [
+    {
+      "argv": [
+        "/opt/miniconda3/bin/ruff",
+        "check",
+        "tests/evidence_pg_fixture.py",
+        "tests/test_evidence_pg_fixture_lifecycle.py"
+      ],
+      "cwd": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard",
+      "environment_overrides": {
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPYCACHEPREFIX": "/private/tmp/tg-r5-git-integration-pycache-final",
+        "RUFF_CACHE_DIR": "/private/tmp/tg-r5-git-integration-ruff-cache-final"
+      },
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": "All checks passed!\n"
+    },
+    {
+      "argv": [
+        "/opt/miniconda3/bin/ruff",
+        "format",
+        "--check",
+        "tests/evidence_pg_fixture.py",
+        "tests/test_evidence_pg_fixture_lifecycle.py"
+      ],
+      "cwd": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard",
+      "environment_overrides": {
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPYCACHEPREFIX": "/private/tmp/tg-r5-git-integration-pycache-final",
+        "RUFF_CACHE_DIR": "/private/tmp/tg-r5-git-integration-ruff-cache-final"
+      },
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": "2 files already formatted\n"
+    },
+    {
+      "argv": [
+        "/Users/qianduoduo/.local/bin/python3.12",
+        "-m",
+        "compileall",
+        "-q",
+        "tests/evidence_pg_fixture.py",
+        "tests/test_evidence_pg_fixture_lifecycle.py"
+      ],
+      "cwd": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard",
+      "environment_overrides": {
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPYCACHEPREFIX": "/private/tmp/tg-r5-git-integration-pycache-final",
+        "RUFF_CACHE_DIR": "/private/tmp/tg-r5-git-integration-ruff-cache-final"
+      },
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "argv": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "cwd": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard",
+      "environment_overrides": {},
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": ""
+    },
+    {
+      "argv": [
+        "git",
+        "ls-files",
+        "-u"
+      ],
+      "cwd": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard",
+      "environment_overrides": {},
+      "exit_code": 0,
+      "stderr": "",
+      "stdout": ""
+    }
+  ],
+  "executed_at_utc": "2026-09-22T08:46:27.869949+00:00",
+  "repository_cache_or_bytecode_written": false,
+  "scope": [
+    "tests/evidence_pg_fixture.py",
+    "tests/test_evidence_pg_fixture_lifecycle.py"
+  ]
+}

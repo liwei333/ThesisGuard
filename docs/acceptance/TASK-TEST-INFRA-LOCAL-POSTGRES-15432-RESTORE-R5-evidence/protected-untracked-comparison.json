@@ -1,0 +1,15 @@
+{
+  "added": [],
+  "after_count": 178,
+  "before_count": 178,
+  "byte_counts_equal": true,
+  "changed": [],
+  "compared_at_utc": "2026-09-23T08:39:55.184770+00:00",
+  "criteria_satisfied": true,
+  "file_types_equal": true,
+  "missing": [],
+  "path_sets_equal": true,
+  "schema_version": 1,
+  "sha256_equal": true,
+  "task_id": "TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5"
+}

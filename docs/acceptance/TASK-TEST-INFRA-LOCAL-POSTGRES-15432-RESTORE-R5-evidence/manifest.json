@@ -1,0 +1,190 @@
+{
+  "declared_file_count": 36,
+  "files": [
+    {
+      "byte_count": 34734,
+      "relative_path": "__pycache__/postgres_observer.cpython-312.pyc",
+      "sha256": "e7b07d3d17c79b08fb8a8f04b7d67f39d15bd3410108278b823f5b353126f5c0"
+    },
+    {
+      "byte_count": 581,
+      "relative_path": "baseline-git.json",
+      "sha256": "20ef79c07570ddb12671863b0fce9b9ddd853afc2a31e11e48ed9d07b59e139a"
+    },
+    {
+      "byte_count": 3331,
+      "relative_path": "command-audit.json",
+      "sha256": "5bf0891f689611230f1b58dcd7ceb95745244b1278b0624e57271655c9255f98"
+    },
+    {
+      "byte_count": 6675,
+      "relative_path": "credential-scan.json",
+      "sha256": "51c7eabd27751ed8c60f341c67de56247240e8b2516cc8ffa6417a4cdb471753"
+    },
+    {
+      "byte_count": 760,
+      "relative_path": "docker-container-identity.json",
+      "sha256": "5ffda53d38b6ab46cca13973fdd16fba131603173db08c80683659d4369e9b33"
+    },
+    {
+      "byte_count": 567,
+      "relative_path": "docker-execution-context.json",
+      "sha256": "1e76da0d33d903bf70b562bb65ca8388ccbca4b182fd3a6de66bb922faef89b6"
+    },
+    {
+      "byte_count": 240,
+      "relative_path": "docker-launch-action.json",
+      "sha256": "7e8f8ab38edecdf55e580042067b235e59a7174e7e65fd2d0ad8f179216fa039"
+    },
+    {
+      "byte_count": 240,
+      "relative_path": "docker-recovery-action.json",
+      "sha256": "a8ebaaf74206dd90d34a0ac2a89e90829f27280fca33682fc006e19d1e3df191"
+    },
+    {
+      "byte_count": 937,
+      "relative_path": "evidence-consistency-audit.json",
+      "sha256": "b845a3bcca39a8ecf46b83e1c88fd98649023ce1cf914997fc306c04249c6abc"
+    },
+    {
+      "byte_count": 4545,
+      "relative_path": "fixed-input-hashes.json",
+      "sha256": "4b7614fd17060ae1476b16376f8c5d7f8aa096f3ac9466492759430560762290"
+    },
+    {
+      "byte_count": 517,
+      "relative_path": "git-final-state.json",
+      "sha256": "1dd62521896aa50a29ca75d0b5179c68fe597840f31b466eb60a363851e42188"
+    },
+    {
+      "byte_count": 408,
+      "relative_path": "helper-compile.json",
+      "sha256": "46cbecb86a8cb24e2e859d06483c31d3e77349d5409d43ff9fd94442e5b1b95c"
+    },
+    {
+      "byte_count": 624,
+      "relative_path": "helper-dry-run.json",
+      "sha256": "c3e32fe9d438570bf9368f6aec202d66039678373bea2e059c2a00f4a3b2310a"
+    },
+    {
+      "byte_count": 497,
+      "relative_path": "helper-selftest.json",
+      "sha256": "c4dde1211edc27f83c9c1636567cc0154ecb185aacffc00d2d1cc4e75a109f62"
+    },
+    {
+      "byte_count": 1749,
+      "relative_path": "helper-source-hashes.json",
+      "sha256": "e33ad71b4944d77fe4464c42c75275682773a3cf0b5bafca367e33bdaa1b4731"
+    },
+    {
+      "byte_count": 569,
+      "relative_path": "helper-tdd-red.json",
+      "sha256": "5dab507faf71102dc7af6138be57a5a5b60b691f411c0b2f7d2952b3d4b3e63d"
+    },
+    {
+      "byte_count": 1184,
+      "relative_path": "json-parse-audit.json",
+      "sha256": "1866f8fddf7fa924dc5e20e8b3a814b8daf5e65a26ba038d39b1b11d807e128a"
+    },
+    {
+      "byte_count": 753,
+      "relative_path": "legacy-r4-durability-red.source.py",
+      "sha256": "ac4e28146f09711af142f50c9e4647a5c0dec82b8d9f31e7aaa8a81da63a15b7"
+    },
+    {
+      "byte_count": 709,
+      "relative_path": "mutation-audit.json",
+      "sha256": "464a314596b32e9c7815224c598dfeb14d07edede1b87278e116c7524040f859"
+    },
+    {
+      "byte_count": 294,
+      "relative_path": "output-path-preflight.json",
+      "sha256": "e6c4af428712bd8729dc4a54f56fddc882dcb12b5db4e50a11b8f948e33ffd15"
+    },
+    {
+      "byte_count": 224,
+      "relative_path": "pg-isready.txt",
+      "sha256": "6df0bf7f909b2e7b926175501ce439890489135e4a24a74ecbefd702d187a79f"
+    },
+    {
+      "byte_count": 25845,
+      "relative_path": "postgres-observer.source.py",
+      "sha256": "cbbd8182ddce5e23121b7208478627895d4cfbf5e90db8669304059679778b44"
+    },
+    {
+      "byte_count": 8734,
+      "relative_path": "postgres-preflight.json",
+      "sha256": "fe4fb7c5b0a1174c2f167c47902dbc72f264e49a1cfbdf2f048807dd6a539fe8"
+    },
+    {
+      "byte_count": 25845,
+      "relative_path": "postgres_observer.py",
+      "sha256": "cbbd8182ddce5e23121b7208478627895d4cfbf5e90db8669304059679778b44"
+    },
+    {
+      "byte_count": 49663,
+      "relative_path": "protected-untracked-after.json",
+      "sha256": "ea80712af54b85d2461bb292eb4e37d61d37768c3261e8e1c036de422e50c002"
+    },
+    {
+      "byte_count": 49663,
+      "relative_path": "protected-untracked-before.json",
+      "sha256": "ea80712af54b85d2461bb292eb4e37d61d37768c3261e8e1c036de422e50c002"
+    },
+    {
+      "byte_count": 379,
+      "relative_path": "protected-untracked-comparison.json",
+      "sha256": "03df7e7bbf328ddb0f6535d935e6eb01eb588733cf56e0ee3eeaf6d99030268e"
+    },
+    {
+      "byte_count": 532,
+      "relative_path": "stability-completion.json",
+      "sha256": "a4789ddd9d76860d2647498cb43c2decec261d23da72181477d3d8ea139caf19"
+    },
+    {
+      "byte_count": 636,
+      "relative_path": "stability-invocation.json",
+      "sha256": "51294b583134d3e931e941d3d61e1a027a8bc0e2fe584af376aba1343af27398"
+    },
+    {
+      "byte_count": 413,
+      "relative_path": "stability-process-outcome.json",
+      "sha256": "749cfb6728d5032a3901f83da4494a79f1195a24fb6d1e1db1c92c74c1bd25ab"
+    },
+    {
+      "byte_count": 4242,
+      "relative_path": "stability-supervisor.source.py",
+      "sha256": "fa7c1921cf18d5487d61ec0740eae5c8b1bebe290be942217735696f6112404d"
+    },
+    {
+      "byte_count": 4082,
+      "relative_path": "stability-timeline.jsonl",
+      "sha256": "3e547b0599f169f34b0ee3b15c5cba0289c4d8f81d62229e1240700407ddc7e4"
+    },
+    {
+      "byte_count": 4242,
+      "relative_path": "stability_supervisor.py",
+      "sha256": "fa7c1921cf18d5487d61ec0740eae5c8b1bebe290be942217735696f6112404d"
+    },
+    {
+      "byte_count": 12640,
+      "relative_path": "test-postgres-observer.source.py",
+      "sha256": "538071a46b1618b71f2b5a0046bd5931d18c55a785b2e4feb062eb1a264192a0"
+    },
+    {
+      "byte_count": 3991,
+      "relative_path": "worktrees-after.json",
+      "sha256": "4a9a660cbf3e6f34014284366a1cab927fdf82d8330430dc06e24a05134851e9"
+    },
+    {
+      "byte_count": 3965,
+      "relative_path": "worktrees-before.json",
+      "sha256": "06cf203a22f5e7d3298d18ae902f12e411c3c024adfe787e73d5d6051fd7ebd4"
+    }
+  ],
+  "generated_at_utc": "2026-09-23T08:39:55.384593+00:00",
+  "root": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard/docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-evidence",
+  "schema_version": 1,
+  "self_excluded": true,
+  "task_id": "TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5"
+}

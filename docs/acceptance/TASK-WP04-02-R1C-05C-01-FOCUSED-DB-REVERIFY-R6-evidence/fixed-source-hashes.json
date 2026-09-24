@@ -1,0 +1,80 @@
+{
+  "all_match": true,
+  "captured_at_utc": "2026-09-22T11:03:16.657349+00:00",
+  "detached_current_main": {
+    "backend/evidence/errors.py": {
+      "bytes": 2173,
+      "expected_sha256": "3cf37eb3efbf4c7bf7ab3d4213e4ce9865f2b9209fdbeb3d6c267fe84b06d1ec",
+      "matches": true,
+      "sha256": "3cf37eb3efbf4c7bf7ab3d4213e4ce9865f2b9209fdbeb3d6c267fe84b06d1ec"
+    },
+    "backend/evidence/services.py": {
+      "bytes": 100697,
+      "expected_sha256": "7ce76b02928019347625048e7d0acb523d74168cd6bbbdf03184163ac277f959",
+      "matches": true,
+      "sha256": "7ce76b02928019347625048e7d0acb523d74168cd6bbbdf03184163ac277f959"
+    },
+    "docs/WP04_EVIDENCE_CORRECTION_POLICY_ADDENDUM_2026-09-16.md": {
+      "bytes": 12483,
+      "expected_sha256": "af345e2604497171dc2d2ef13489ec3cffa1528caa5175c2ccf245b6a987a955",
+      "matches": true,
+      "sha256": "af345e2604497171dc2d2ef13489ec3cffa1528caa5175c2ccf245b6a987a955"
+    },
+    "docs/WP04_EVIDENCE_DOMAIN_CONTRACT.md": {
+      "bytes": 119927,
+      "expected_sha256": "b179ecc6ea60ffed75f7179a2d36e47ad2b55153f6d4fa62b8be7e4926fd1288",
+      "matches": true,
+      "sha256": "b179ecc6ea60ffed75f7179a2d36e47ad2b55153f6d4fa62b8be7e4926fd1288"
+    },
+    "docs/acceptance/TASK-WP04-02-R1C-05C-01-INDEPENDENT-REVERIFY-R1-evidence/phase-a-20260916-exact-cleanup-plan.json": {
+      "bytes": 61989,
+      "expected_sha256": "635ba4aad0468c15b4360733c784d52f4430f03477a14ef8a271a1e32bada360",
+      "matches": true,
+      "sha256": "635ba4aad0468c15b4360733c784d52f4430f03477a14ef8a271a1e32bada360"
+    },
+    "docs/acceptance/TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-R1-INDEPENDENT-REVIEW-R1-acceptance.md": {
+      "bytes": 8946,
+      "expected_sha256": "1659140342ed5978ca48e95d9ee24e25bde1dbeeff6a2314506acd5ecc34d342",
+      "matches": true,
+      "sha256": "1659140342ed5978ca48e95d9ee24e25bde1dbeeff6a2314506acd5ecc34d342"
+    },
+    "tests/evidence_pg_fixture.py": {
+      "bytes": 14969,
+      "expected_sha256": "894630daace9489e19534cdff9b8b4f95b5c33e31bdce7452512ff76a584b42b",
+      "matches": true,
+      "sha256": "894630daace9489e19534cdff9b8b4f95b5c33e31bdce7452512ff76a584b42b"
+    },
+    "tests/test_evidence_pg_fixture_lifecycle.py": {
+      "bytes": 29005,
+      "expected_sha256": "5c8e4ed5a9cfdadb00ebde21fa3057a2687b05aa34b0f9bba54160c57a10de36",
+      "matches": true,
+      "sha256": "5c8e4ed5a9cfdadb00ebde21fa3057a2687b05aa34b0f9bba54160c57a10de36"
+    },
+    "tests/test_evidence_services.py": {
+      "bytes": 213015,
+      "expected_sha256": "c54e2306b7ec9625f0498faeebd8a23ceb55c6366769ac0d944f228e2aa84851",
+      "matches": true,
+      "sha256": "c54e2306b7ec9625f0498faeebd8a23ceb55c6366769ac0d944f228e2aa84851"
+    }
+  },
+  "harness": {
+    "tg_verifier_tests/verification/test_wp04_02_r4_runner.py": {
+      "bytes": 48928,
+      "expected_sha256": "aafa9e54ab1bd1fbf7ce3d3cf78c2854125264e73291c264a49dba142cf8ff75",
+      "matches": true,
+      "sha256": "aafa9e54ab1bd1fbf7ce3d3cf78c2854125264e73291c264a49dba142cf8ff75"
+    },
+    "tg_verifier_tools/verification/wp04_02_r4_pytest_plugin.py": {
+      "bytes": 11175,
+      "expected_sha256": "3ab4b45feb356fcecdaa5363f09d3256dc0c6a2b8f2bb067d32da8438f3bdbc4",
+      "matches": true,
+      "sha256": "3ab4b45feb356fcecdaa5363f09d3256dc0c6a2b8f2bb067d32da8438f3bdbc4"
+    },
+    "tg_verifier_tools/verification/wp04_02_r4_runner.py": {
+      "bytes": 40951,
+      "expected_sha256": "3b3145f0a17e593db8d7689ba942ad43fcd4f4be15ddc61d7196e0cc061c3b36",
+      "matches": true,
+      "sha256": "3b3145f0a17e593db8d7689ba942ad43fcd4f4be15ddc61d7196e0cc061c3b36"
+    }
+  }
+}

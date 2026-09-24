@@ -1,0 +1,9 @@
+{
+  "docker_called": false,
+  "exit_code": 0,
+  "fixture_directory": "/private/tmp/thesisguard-r4-fixtures.TCV6PM",
+  "identity_match": true,
+  "mode": "fixture-dry-run",
+  "runtime_ready": true,
+  "side_effects": 0
+}

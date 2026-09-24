@@ -1,0 +1,35 @@
+{
+  "candidate": {
+    "head": "e942cbcc9e0b5d95a6c7ee46d4d74ee90ff03ad4",
+    "status": ""
+  },
+  "captured_at_utc": "2026-09-22T08:46:32.959375+00:00",
+  "harness": {
+    "head": "f9a41ea045d3ab8ad18db32d65a8484d6c96ec25",
+    "status": ""
+  },
+  "main": {
+    "branch": "main",
+    "head": "5c4b930f4948815e3ad2ab26b5e7c81de8c20e5b",
+    "index": "",
+    "origin_main": "77abbe72decfe5437ffed90521b8101f1eae1153",
+    "tracked_diff": "",
+    "unmerged": "",
+    "untracked_normal": [
+      "?? docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-WRONG-SESSION-FEEDBACK-REVIEW-acceptance.md",
+      "?? docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-acceptance.md",
+      "?? docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/",
+      "?? docs/acceptance/TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-GIT-INTEGRATION-R1-evidence/",
+      "?? docs/acceptance/TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-GIT-INTEGRATION-R1-execution-report.md",
+      "?? docs/workbench.html"
+    ]
+  },
+  "original_41_scenario_suite_run": false,
+  "pull_request_created": false,
+  "push_performed": false,
+  "real_postgresql_test_run": false,
+  "repair": {
+    "head": "bd6b5b88783fd4de4d7d89787778e1b36bb4006e",
+    "status": ""
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "business_assertion_failure": false,
+  "collected": 41,
+  "errors": 1,
+  "failed": 0,
+  "failure_node": "tests/test_evidence_services.py::test_r1c05c01_forbidden_status_commit_fresh_no_residue[REJECTED-same]",
+  "failure_type": "EvidencePGCleanupError",
+  "not_executed_after_x": 31,
+  "passed": 9,
+  "resource_lifecycle_failure": true,
+  "skipped": 0,
+  "xfailed": 0,
+  "xpassed": 0
+}

@@ -1,0 +1,9 @@
+{
+  "container_create_calls": 0,
+  "container_recreate_calls": 0,
+  "docker_start_calls": 0,
+  "other_container_mutations": 0,
+  "recovery_path": "A0",
+  "schema_version": 1,
+  "task_id": "TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5"
+}

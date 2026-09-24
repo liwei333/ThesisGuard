@@ -1,0 +1,156 @@
+{
+  "excluded": [
+    "manifest.json",
+    "final-credential-scan.json"
+  ],
+  "file_count": 29,
+  "files": [
+    {
+      "bytes": 428,
+      "path": "baseline-git.json",
+      "sha256": "7bcd4e30a35b8cc2f1b89378b110838cb7eff40f628980bd2c85b8fb99e6c998"
+    },
+    {
+      "bytes": 218,
+      "path": "collector-dry-run.json",
+      "sha256": "41c7d2ba39abcb93ef0f8ac8481c7aede050d5c36c6e16cb20e5109d54578ab6"
+    },
+    {
+      "bytes": 329,
+      "path": "collector-selftest.json",
+      "sha256": "7a9c946c31df8d801d4e28a987862a8141972ef1099e5bf75e5074ad7b32dafd"
+    },
+    {
+      "bytes": 286,
+      "path": "collector-source-hash.json",
+      "sha256": "23c2b3cb56f76d8523a3a696adb7a4ccfc10cd803e91943331d415e52976324b"
+    },
+    {
+      "bytes": 6910,
+      "path": "collector-test.source.py",
+      "sha256": "c7c9bf0cae35a4061d297051245229a486be276ad33292c1adcecb36cae99991"
+    },
+    {
+      "bytes": 10896,
+      "path": "collector.source.py",
+      "sha256": "6e4f27ed0e652cdfea52af2eb2beea019fac3f7bceac9dcc440a033a88fe749c"
+    },
+    {
+      "bytes": 966,
+      "path": "command-audit.json",
+      "sha256": "ffe8d1ee85ad5bf15043f6237d7a2fba77002c990ef1810c88277269baafd2bf"
+    },
+    {
+      "bytes": 379,
+      "path": "credential-scan.json",
+      "sha256": "b9703ada390402a3ba11a7dbd0de21bce1483d155ffc606b70ad33119bde0fa4"
+    },
+    {
+      "bytes": 819,
+      "path": "docker-container-identity.json",
+      "sha256": "e5357c6d062a781a9edddabf4a3e1fc6aa7f7f2cdb8429aae1213cff6cce06cc"
+    },
+    {
+      "bytes": 453,
+      "path": "docker-execution-context.json",
+      "sha256": "6ce4df5394b79eb622baf50bf98d3b357c2cf72b5a427704a5c7db80cac12c4d"
+    },
+    {
+      "bytes": 108,
+      "path": "docker-launch-action.json",
+      "sha256": "9f263c1983faa308123122fa49c1380838714f7b760c2601e70b2fce15f93d8d"
+    },
+    {
+      "bytes": 156,
+      "path": "docker-recovery-action.json",
+      "sha256": "1dcd5067788141de66d43706f1feb61bc483c268813e4033365c49e32449f34c"
+    },
+    {
+      "bytes": 1129,
+      "path": "evidence-consistency-audit.json",
+      "sha256": "fbb02643a87e6ad2f3d71940b590cf77c99d03f3bc9682da0f62f4ea55626cb3"
+    },
+    {
+      "bytes": 510,
+      "path": "failure-observation.json",
+      "sha256": "81841a5be3f1566871596aeaf94a9fb377c416d1cb296535d9ed045f160d247e"
+    },
+    {
+      "bytes": 411,
+      "path": "final-state.json",
+      "sha256": "455b77c815698249e4116fe346aa95d88b23d4468253e4267532a5ca8d8af8d2"
+    },
+    {
+      "bytes": 2992,
+      "path": "fixed-input-hashes.json",
+      "sha256": "5bb8087fe0e2afad321372da241835a503e0c803d9af091a045f7b197a9038a2"
+    },
+    {
+      "bytes": 428,
+      "path": "git-final-state.json",
+      "sha256": "4d4bdc35e5ad95204fa1932c50789f5243427149aa485bd11cfc13339a399cb9"
+    },
+    {
+      "bytes": 275,
+      "path": "json-parse-audit.json",
+      "sha256": "ff84ddc494e0ff72ab58ed679e4a59bd0cd32a8bdd64bf70e38d702734eb8fcb"
+    },
+    {
+      "bytes": 777,
+      "path": "mutation-audit.json",
+      "sha256": "8e6dee49e4fe302da4ee72f108ab038138195d09f7e8d9e39854ce912fb23485"
+    },
+    {
+      "bytes": 197,
+      "path": "output-path-preflight.json",
+      "sha256": "76db7274eb0d5d7c8ba05785b3bfc82c7cfee67ef63ffd5cdbfcca507c7c0a6d"
+    },
+    {
+      "bytes": 115,
+      "path": "pg-isready.txt",
+      "sha256": "cef1bfab18ced5f33a555ca724ec2f3cf9768444dc2b5ee215ce47a2a824ffc3"
+    },
+    {
+      "bytes": 11646,
+      "path": "postgres-observer.source.py",
+      "sha256": "10cc97a0468e7f8132c04ad39a3dc61f6fc77751025dac51d0ff0708ff1b26cf"
+    },
+    {
+      "bytes": 8666,
+      "path": "postgres-preflight.json",
+      "sha256": "a794bd3b81ab86286e16cce2d678c62d65e6f5dd5df143245d7e66b8f7243f31"
+    },
+    {
+      "bytes": 37564,
+      "path": "protected-untracked-after.json",
+      "sha256": "67b7e00e643528d9731f66f37819db33d7cc887dbf03b16a6e7d651dfcf9af5d"
+    },
+    {
+      "bytes": 37564,
+      "path": "protected-untracked-before.json",
+      "sha256": "ff553200883290389a5f052e3aec859edf6a2fd93645f6aac6fb910336f67ad2"
+    },
+    {
+      "bytes": 276,
+      "path": "protected-untracked-comparison.json",
+      "sha256": "7432731cc1fc1325a23b4774d406d3aec81a359fe50c051874eae37717ff5ba4"
+    },
+    {
+      "bytes": 259,
+      "path": "stability-window.json",
+      "sha256": "f1b5b3cf4c62e1bbf84ca0b525e12266cc5d77b0e43c599ee93272d108100100"
+    },
+    {
+      "bytes": 3933,
+      "path": "worktrees-after.json",
+      "sha256": "68cad097ad9652bb2cb2fae51d551699c26a8745cd7acc5dc21d994a8a3b200f"
+    },
+    {
+      "bytes": 3933,
+      "path": "worktrees-before.json",
+      "sha256": "d5a4355def097548f57c1bb485e4fa65f539c3d9a8de5f782a8a65ff09304fe6"
+    }
+  ],
+  "generated_at_utc": "2026-09-23T07:12:05.499013+00:00",
+  "root": "TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R4-evidence"
+}

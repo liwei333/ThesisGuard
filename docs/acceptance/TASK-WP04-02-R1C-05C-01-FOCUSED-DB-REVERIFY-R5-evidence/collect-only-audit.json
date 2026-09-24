@@ -1,0 +1,29 @@
+{
+  "count": 41,
+  "create_count": 0,
+  "distribution": {
+    "allowed_routing_history_audit": 16,
+    "committed_exact_replay_read_only": 3,
+    "forbidden_status_commit_fresh_no_residue": 20,
+    "legacy_forbidden_prior_committed_replay": 2
+  },
+  "duplicates": [],
+  "extra": [],
+  "fixture_ledger_exists": false,
+  "manifest_actual": 10,
+  "manifest_content_equal": true,
+  "manifest_extra": [],
+  "manifest_listed": 10,
+  "manifest_mismatches": [],
+  "manifest_missing": [],
+  "manifest_paths_equal": true,
+  "missing": [],
+  "nonce_matches": true,
+  "pytest_returncode": 0,
+  "runner_exit": 0,
+  "socket_attempt_log_exists": false,
+  "test_body_calls": 0,
+  "unclassified": [],
+  "valid": true,
+  "verdict": "PASS"
+}

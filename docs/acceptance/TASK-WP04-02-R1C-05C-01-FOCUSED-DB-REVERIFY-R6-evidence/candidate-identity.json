@@ -1,0 +1,13 @@
+{
+  "branch": "codex/wp04-02-evidence-domain-service",
+  "captured_at_utc": "2026-09-22T11:03:16.248908+00:00",
+  "clean": true,
+  "detached": false,
+  "head": "e942cbcc9e0b5d95a6c7ee46d4d74ee90ff03ad4",
+  "index_diff": [],
+  "parent": "af4f2cbbb0a50bd6c215bcaa78dd9fcd98414cc8",
+  "path": "/Users/qianduoduo/.config/superpowers/worktrees/ThesisGuard/codex-wp04-02-evidence-domain-service",
+  "status_porcelain_v2": [],
+  "tracked_clean": true,
+  "tracked_diff": []
+}

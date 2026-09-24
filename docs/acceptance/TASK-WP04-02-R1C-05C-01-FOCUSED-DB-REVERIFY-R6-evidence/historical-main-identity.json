@@ -1,0 +1,14 @@
+{
+  "branch": null,
+  "captured_at_utc": "2026-09-22T11:25:22.444689+00:00",
+  "clean": true,
+  "detached": true,
+  "head": "675217c3a15c0f416aa4462ca6edc491bf99f9f6",
+  "index_diff": [],
+  "parent": "554a87dce995c98d41021f6ae99c2173f4221c09",
+  "path": "/private/tmp/tg-r6-historical-main.HXNnnK/review",
+  "recreated_after_interrupted_turn_temp_cleanup": true,
+  "status_porcelain_v2": [],
+  "tracked_clean": true,
+  "tracked_diff": []
+}

@@ -1,0 +1,13 @@
+{
+  "captured_at_utc": "2026-09-23T07:12:05.407219+00:00",
+  "client_context": "desktop-linux",
+  "client_version": "29.7.2",
+  "daemon_name": "docker-desktop",
+  "docker_desktop_identity": "Docker Desktop",
+  "execution_context": "authorized host context with daemon access",
+  "server_returned": true,
+  "server_version": "29.7.2",
+  "socket_error_type": "none",
+  "socket_exists": true,
+  "socket_path": "/Users/qianduoduo/.docker/run/docker.sock"
+}

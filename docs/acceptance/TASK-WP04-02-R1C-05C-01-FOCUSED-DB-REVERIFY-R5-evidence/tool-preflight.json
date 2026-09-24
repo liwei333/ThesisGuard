@@ -1,0 +1,15 @@
+{
+  "python": "/opt/homebrew/bin/python3.12",
+  "python_version": "3.12.9",
+  "pytest": "/opt/homebrew/bin/pytest",
+  "pytest_version": "9.1.1",
+  "child_alembic": "/opt/miniconda3/bin/alembic",
+  "alembic_heads": "000000000004 (head)",
+  "diagnostic_variables": {
+    "TG_TEST_ADMIN_DATABASE_URL": "ABSENT",
+    "TG_R1C_REPLAY_BASELINE": "ABSENT",
+    "TG_R1C02_REPLAY_PRIOR": "ABSENT"
+  },
+  "first_sql_probe_parse_error_before_socket": "SyntaxError",
+  "corrected_read_only_probe_succeeded": true
+}

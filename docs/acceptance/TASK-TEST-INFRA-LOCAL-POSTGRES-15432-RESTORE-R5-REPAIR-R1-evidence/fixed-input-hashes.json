@@ -1,0 +1,65 @@
+{
+  "completed_at_utc": "2026-09-23T09:56:36.144530+00:00",
+  "credential_safe_failure_classification": "NONE",
+  "criteria_satisfied": true,
+  "exit_code": 0,
+  "monotonic_finished": 34138.311193958,
+  "monotonic_started": 34138.309567041,
+  "original_task_id": "TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5",
+  "receipt_schema_version": 1,
+  "receipt_type": "fixed-input-hash",
+  "relevant_result": {
+    "checked_count": 7,
+    "files": [
+      {
+        "actual_sha256": "f779628a6c3048ec79e5aec672fb12763c59b16bbbe9bf27fc4cc161e8a98651",
+        "expected_sha256": "f779628a6c3048ec79e5aec672fb12763c59b16bbbe9bf27fc4cc161e8a98651",
+        "matches": true,
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-execution-report.md"
+      },
+      {
+        "actual_sha256": "d4945a5d3075b5d66d906e65cec09301e51c8138600e8e5cca09c4e86dfbdb5c",
+        "expected_sha256": "d4945a5d3075b5d66d906e65cec09301e51c8138600e8e5cca09c4e86dfbdb5c",
+        "matches": true,
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-evidence/manifest.json"
+      },
+      {
+        "actual_sha256": "70488ca8e63888d92dfc8f53204e213e5447e44a2376a5ab815107aa47132688",
+        "expected_sha256": "70488ca8e63888d92dfc8f53204e213e5447e44a2376a5ab815107aa47132688",
+        "matches": true,
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-INDEPENDENT-REVIEW-R1-acceptance.md"
+      },
+      {
+        "actual_sha256": "cbbd8182ddce5e23121b7208478627895d4cfbf5e90db8669304059679778b44",
+        "expected_sha256": "cbbd8182ddce5e23121b7208478627895d4cfbf5e90db8669304059679778b44",
+        "matches": true,
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-evidence/postgres-observer.source.py"
+      },
+      {
+        "actual_sha256": "fa7c1921cf18d5487d61ec0740eae5c8b1bebe290be942217735696f6112404d",
+        "expected_sha256": "fa7c1921cf18d5487d61ec0740eae5c8b1bebe290be942217735696f6112404d",
+        "matches": true,
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-evidence/stability-supervisor.source.py"
+      },
+      {
+        "actual_sha256": "538071a46b1618b71f2b5a0046bd5931d18c55a785b2e4feb062eb1a264192a0",
+        "expected_sha256": "538071a46b1618b71f2b5a0046bd5931d18c55a785b2e4feb062eb1a264192a0",
+        "matches": true,
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-evidence/test-postgres-observer.source.py"
+      },
+      {
+        "actual_sha256": "baf3145ab6b1bfbea66e850f3620f766561e62d5745aaab6667677f3640acd52",
+        "expected_sha256": "baf3145ab6b1bfbea66e850f3620f766561e62d5745aaab6667677f3640acd52",
+        "matches": true,
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R4-INDEPENDENT-REVIEW-R1-acceptance.md"
+      }
+    ],
+    "matching_count": 7
+  },
+  "repair_id": "TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-REPAIR-R1",
+  "repair_invocation_id": "1F2E2619-E72E-4D65-8F30-5BB87497BB27",
+  "semantic_command": "seven fixed Repair input SHA-256 checks",
+  "source_config_sha256": "fa663971e5fe9acee70d50df5fc6798cf4c8b329bf763b644dd4e0880f0fd87c",
+  "started_at_utc": "2026-09-23T09:56:36.142903+00:00",
+  "task_id": "TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-REPAIR-R1"
+}

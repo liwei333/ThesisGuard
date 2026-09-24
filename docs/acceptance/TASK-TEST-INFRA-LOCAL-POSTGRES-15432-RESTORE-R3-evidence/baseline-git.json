@@ -1,0 +1,11 @@
+{
+  "branch": "main",
+  "captured_at_utc": "2026-09-23T02:41:19.785478+00:00",
+  "grandparent": "35349b207d622872bc0025a813ff3e6af6ef7d97",
+  "head": "5c4b930f4948815e3ad2ab26b5e7c81de8c20e5b",
+  "index_empty": true,
+  "origin_divergence": "0\t3",
+  "origin_main": "77abbe72decfe5437ffed90521b8101f1eae1153",
+  "parent": "bd6b5b88783fd4de4d7d89787778e1b36bb4006e",
+  "tracked_diff_empty": true
+}

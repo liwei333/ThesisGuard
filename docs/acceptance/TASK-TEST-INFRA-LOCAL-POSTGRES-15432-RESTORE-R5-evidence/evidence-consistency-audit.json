@@ -1,0 +1,30 @@
+{
+  "audited_at_utc": "2026-09-23T08:39:55.343174+00:00",
+  "checks": {
+    "baseline_git": true,
+    "catalog_matches_preflight": true,
+    "child_return_code": true,
+    "completion_present": true,
+    "docker_identity": true,
+    "failure_absent": true,
+    "final_git": true,
+    "fixed_input_hashes": true,
+    "formal_invocation_count": true,
+    "formal_observer_source_unchanged": true,
+    "formal_supervisor_source_unchanged": true,
+    "helper_compile": true,
+    "helper_dry_run": true,
+    "helper_selftest": true,
+    "mutation_counters_zero": true,
+    "postgres_preflight": true,
+    "process_outcome_present": true,
+    "protected_untracked": true,
+    "stability_validation": true,
+    "worktrees_unchanged": true
+  },
+  "criteria_satisfied": true,
+  "failed_checks": [],
+  "invocation_id": "192A0648-1943-4DC1-8436-A4B29564616F",
+  "schema_version": 1,
+  "task_id": "TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5"
+}

@@ -1,0 +1,16 @@
+{
+  "captured_at_utc": "2026-09-23T11:08:59.671996+00:00",
+  "catalog_delta_attribution": "NOT_RUN",
+  "complete_after_catalog": "NOT_RUN",
+  "complete_before_catalog": "NOT_RUN",
+  "formal_120_second_25_sample_window": "NOT_RUN",
+  "historical_unknown_after_comparison": "NOT_RUN",
+  "historical_unknown_before_comparison": "NOT_RUN",
+  "post_run_30_second_7_sample_window": "NOT_RUN",
+  "pre_run_external_activity_sql_check": "NOT_RUN",
+  "real_pytest": "NOT_RUN",
+  "residual_absence_sql_check": "NOT_RUN",
+  "resource_ledger": "NOT_CREATED",
+  "runtime_observer": "NOT_RUN",
+  "scenario_results": "NOT_RUN"
+}

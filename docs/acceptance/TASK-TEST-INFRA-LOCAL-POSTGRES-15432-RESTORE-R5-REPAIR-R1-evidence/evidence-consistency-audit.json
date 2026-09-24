@@ -1,0 +1,68 @@
+{
+  "all_prewindow_gates_before_formal_invocation": true,
+  "all_receipts_before_index": true,
+  "audited_at_utc": "2026-09-23T09:57:07.768713+00:00",
+  "bytecode_consistency": {
+    "bytecode_file_count": 0,
+    "bytecode_files": [],
+    "checks": {
+      "actual_bytecode_zero": true,
+      "actual_pycache_zero": true,
+      "compile_receipt_bytecode_zero": true,
+      "compile_receipt_pycache_zero": true,
+      "compile_receipt_satisfied": true,
+      "planned_manifest_has_no_bytecode": true
+    },
+    "criteria_satisfied": true,
+    "planned_bytecode_paths": [],
+    "pycache_directories": [],
+    "pycache_directory_count": 0
+  },
+  "criteria_satisfied": true,
+  "formal_binding": {
+    "completion_gate_hash_matches": true,
+    "invocation_gate_hash_matches": true,
+    "outcome_gate_hash_matches": true,
+    "timeline_gate_hash_matches": true
+  },
+  "prewindow_index_before_formal_invocation": true,
+  "schema_version": 1,
+  "task_id": "TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-REPAIR-R1",
+  "top_blocking_ac": {
+    "TOP-AC-01": {
+      "boundary": "independent verification pending",
+      "evidence": "repair-publisher-race-green.json",
+      "implementation": "closure-helper.source.py publish_bytes_no_clobber",
+      "result": "IMPLEMENTED",
+      "test": "tests 27-36"
+    },
+    "TOP-AC-02": {
+      "boundary": "independent verification pending",
+      "evidence": "prewindow-gate-index.json",
+      "implementation": "receipt/index writer and supervisor validator",
+      "result": "IMPLEMENTED",
+      "test": "tests 37-48"
+    },
+    "TOP-AC-03": {
+      "boundary": "R5 historical bytecode preserved",
+      "evidence": "no-bytecode-final.json",
+      "implementation": "in-memory compile and bytecode consistency",
+      "result": "IMPLEMENTED",
+      "test": "tests 49-51"
+    },
+    "TOP-AC-04": {
+      "boundary": "final verifier full scan pending",
+      "evidence": "closure order completed after this audit",
+      "implementation": "ClosureStateMachine",
+      "result": "IMPLEMENTED",
+      "test": "tests 52-62"
+    },
+    "TOP-AC-05": {
+      "boundary": "PostgreSQL-service scope only",
+      "evidence": "formal-artifact-validation.json",
+      "implementation": "repaired observer/supervisor binding",
+      "result": "IMPLEMENTED",
+      "test": "tests 63-65 plus original 26"
+    }
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "captured_at_utc": "2026-09-23T11:01:45.356248+00:00",
+  "files": {
+    "backend/evidence/errors.py": {
+      "actual": "3cf37eb3efbf4c7bf7ab3d4213e4ce9865f2b9209fdbeb3d6c267fe84b06d1ec",
+      "expected": "3cf37eb3efbf4c7bf7ab3d4213e4ce9865f2b9209fdbeb3d6c267fe84b06d1ec",
+      "match": true
+    },
+    "backend/evidence/services.py": {
+      "actual": "7ce76b02928019347625048e7d0acb523d74168cd6bbbdf03184163ac277f959",
+      "expected": "7ce76b02928019347625048e7d0acb523d74168cd6bbbdf03184163ac277f959",
+      "match": true
+    },
+    "docs/WP04_EVIDENCE_CORRECTION_POLICY_ADDENDUM_2026-09-16.md": {
+      "actual": "af345e2604497171dc2d2ef13489ec3cffa1528caa5175c2ccf245b6a987a955",
+      "expected": "af345e2604497171dc2d2ef13489ec3cffa1528caa5175c2ccf245b6a987a955",
+      "match": true
+    },
+    "docs/WP04_EVIDENCE_DOMAIN_CONTRACT.md": {
+      "actual": "b179ecc6ea60ffed75f7179a2d36e47ad2b55153f6d4fa62b8be7e4926fd1288",
+      "expected": "b179ecc6ea60ffed75f7179a2d36e47ad2b55153f6d4fa62b8be7e4926fd1288",
+      "match": true
+    },
+    "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-REPAIR-R1-INDEPENDENT-REVIEW-R1-acceptance.md": {
+      "actual": "86969ae927db34dd3572f1cce508c700c891549eb23359c18cce2780ef9c9d67",
+      "expected": "86969ae927db34dd3572f1cce508c700c891549eb23359c18cce2780ef9c9d67",
+      "match": true
+    },
+    "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-REPAIR-R1-evidence/manifest.json": {
+      "actual": "7d2209b896f959cd1f5736b42c998cb652a41bd2500c5c4540c0a4328a17f862",
+      "expected": "7d2209b896f959cd1f5736b42c998cb652a41bd2500c5c4540c0a4328a17f862",
+      "match": true
+    },
+    "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-REPAIR-R1-execution-report.md": {
+      "actual": "02adb5e4161992c3c2b467e6fd522252716b4456700fa8c221f110801a2e3a1d",
+      "expected": "02adb5e4161992c3c2b467e6fd522252716b4456700fa8c221f110801a2e3a1d",
+      "match": true
+    },
+    "docs/acceptance/TASK-WP04-02-R1C-05C-01-INDEPENDENT-REVERIFY-R1-evidence/phase-a-20260916-exact-cleanup-plan.json": {
+      "actual": "635ba4aad0468c15b4360733c784d52f4430f03477a14ef8a271a1e32bada360",
+      "expected": "635ba4aad0468c15b4360733c784d52f4430f03477a14ef8a271a1e32bada360",
+      "match": true
+    },
+    "docs/acceptance/TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-R1-INDEPENDENT-REVIEW-R1-acceptance.md": {
+      "actual": "1659140342ed5978ca48e95d9ee24e25bde1dbeeff6a2314506acd5ecc34d342",
+      "expected": "1659140342ed5978ca48e95d9ee24e25bde1dbeeff6a2314506acd5ecc34d342",
+      "match": true
+    },
+    "tests/evidence_pg_fixture.py": {
+      "actual": "894630daace9489e19534cdff9b8b4f95b5c33e31bdce7452512ff76a584b42b",
+      "expected": "894630daace9489e19534cdff9b8b4f95b5c33e31bdce7452512ff76a584b42b",
+      "match": true
+    },
+    "tests/test_evidence_pg_fixture_lifecycle.py": {
+      "actual": "5c8e4ed5a9cfdadb00ebde21fa3057a2687b05aa34b0f9bba54160c57a10de36",
+      "expected": "5c8e4ed5a9cfdadb00ebde21fa3057a2687b05aa34b0f9bba54160c57a10de36",
+      "match": true
+    },
+    "tests/test_evidence_services.py": {
+      "actual": "c54e2306b7ec9625f0498faeebd8a23ceb55c6366769ac0d944f228e2aa84851",
+      "expected": "c54e2306b7ec9625f0498faeebd8a23ceb55c6366769ac0d944f228e2aa84851",
+      "match": true
+    },
+    "tg_verifier_tests/verification/test_wp04_02_r4_runner.py": {
+      "actual": "aafa9e54ab1bd1fbf7ce3d3cf78c2854125264e73291c264a49dba142cf8ff75",
+      "expected": "aafa9e54ab1bd1fbf7ce3d3cf78c2854125264e73291c264a49dba142cf8ff75",
+      "match": true
+    },
+    "tg_verifier_tools/verification/wp04_02_r4_pytest_plugin.py": {
+      "actual": "3ab4b45feb356fcecdaa5363f09d3256dc0c6a2b8f2bb067d32da8438f3bdbc4",
+      "expected": "3ab4b45feb356fcecdaa5363f09d3256dc0c6a2b8f2bb067d32da8438f3bdbc4",
+      "match": true
+    },
+    "tg_verifier_tools/verification/wp04_02_r4_runner.py": {
+      "actual": "3b3145f0a17e593db8d7689ba942ad43fcd4f4be15ddc61d7196e0cc061c3b36",
+      "expected": "3b3145f0a17e593db8d7689ba942ad43fcd4f4be15ddc61d7196e0cc061c3b36",
+      "match": true
+    }
+  },
+  "passed": true
+}

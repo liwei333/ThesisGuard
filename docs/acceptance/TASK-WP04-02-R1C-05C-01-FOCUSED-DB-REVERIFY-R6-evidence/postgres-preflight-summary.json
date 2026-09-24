@@ -1,0 +1,17 @@
+{
+  "captured_at_utc": "2026-09-22T11:27:18Z",
+  "passed": false,
+  "reason": "postgresql_service_not_accepting_connections",
+  "status": "BLOCKED_POSTGRESQL_SERVICE",
+  "database_session_established": false,
+  "catalog_snapshot_captured": false,
+  "historical_unknown_identity_checked": false,
+  "r5_residual_absence_checked": false,
+  "external_activity_checked": false,
+  "quiescence_started": false,
+  "real_pytest_started": false,
+  "real_pytest_invocation_count": 0,
+  "create_count": 0,
+  "service_mutation_attempted": false,
+  "docker_or_container_operation_attempted": false
+}

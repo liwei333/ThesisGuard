@@ -1,0 +1,14 @@
+{
+  "captured_at_utc": "2026-09-23T01:45:17.410696+00:00",
+  "listener_probe": {
+    "argv": [
+      "lsof",
+      "-nP",
+      "-iTCP:15432",
+      "-sTCP:LISTEN"
+    ],
+    "exit_code": 0,
+    "stderr": "",
+    "stdout": "COMMAND     PID       USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME\ncom.docke 53694 qianduoduo  135u  IPv6 0x499c91ab6345e920      0t0  TCP *:15432 (LISTEN)\n"
+  }
+}

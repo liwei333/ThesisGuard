@@ -1,0 +1,7 @@
+{
+  "docker_desktop_open_calls": 0,
+  "reason": "daemon was already accessible and container was already running and healthy",
+  "recovery_path": "A0",
+  "schema_version": 1,
+  "task_id": "TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5"
+}

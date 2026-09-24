@@ -1,0 +1,16 @@
+{
+  "captured_at_utc": "2026-09-23T01:38:47.931084+00:00",
+  "docker_app_installed": true,
+  "socket_exists": false,
+  "version_probe": {
+    "argv": [
+      "docker",
+      "version",
+      "--format",
+      "{{json .}}"
+    ],
+    "exit_code": 1,
+    "stderr": "failed to connect to the docker API at unix:///Users/qianduoduo/.docker/run/docker.sock; check if the path is correct and if the daemon is running: dial unix /Users/qianduoduo/.docker/run/docker.sock: connect: no such file or directory\n",
+    "stdout": "{\"Client\":{\"Version\":\"29.7.2\",\"ApiVersion\":\"1.55\",\"DefaultAPIVersion\":\"1.55\",\"GitCommit\":\"a7dcaa6\",\"GoVersion\":\"go1.26.5\",\"Os\":\"darwin\",\"Arch\":\"arm64\",\"BuildTime\":\"Wed Aug  5 18:27:50 2026\",\"Context\":\"desktop-linux\"},\"Server\":null}\n"
+  }
+}

@@ -1,0 +1,119 @@
+{
+  "audited_at_utc": "2026-09-23T09:57:07.762429+00:00",
+  "commands": [
+    {
+      "exit_code": 0,
+      "semantics": "Repair output-path absence gate and exclusive evidence-directory creation",
+      "sequence": 1
+    },
+    {
+      "exit_code": 1,
+      "expected_red": true,
+      "semantics": "R5 check-to-replace race RED counterexample",
+      "sequence": 2
+    },
+    {
+      "exit_code": 0,
+      "semantics": "fixed Git identity, tracked diff, index, and local ref gate",
+      "sequence": 3
+    },
+    {
+      "exit_code": 0,
+      "semantics": "seven fixed Repair input SHA-256 checks",
+      "sequence": 4
+    },
+    {
+      "exit_code": 0,
+      "semantics": "recursive protected-untracked path/type/byte/SHA-256 snapshot",
+      "sequence": 5
+    },
+    {
+      "exit_code": 0,
+      "semantics": "R5 helper source import/hash and repaired source publication",
+      "sequence": 6
+    },
+    {
+      "exit_code": 0,
+      "semantics": "in-memory compile of all repaired helper sources",
+      "sequence": 7
+    },
+    {
+      "exit_code": 0,
+      "semantics": "26-test R5 regression plus 65-test Repair unittest suite",
+      "sequence": 8
+    },
+    {
+      "exit_code": 0,
+      "semantics": "synthetic no-Docker/no-PostgreSQL/no-network dry run",
+      "sequence": 9
+    },
+    {
+      "exit_code": 0,
+      "semantics": "prewindow Repair evidence and helper workspace bytecode absence gate",
+      "sequence": 10
+    },
+    {
+      "exit_code": 0,
+      "semantics": "authorized host Docker client/server/context gate",
+      "sequence": 11
+    },
+    {
+      "exit_code": 0,
+      "semantics": "selective fixed thesisguard-postgres identity and health gate",
+      "sequence": 12
+    },
+    {
+      "exit_code": 0,
+      "semantics": "pg_isready fixed endpoint readiness gate",
+      "sequence": 13
+    },
+    {
+      "exit_code": 0,
+      "semantics": "single read-only PostgreSQL identity/catalog preflight",
+      "sequence": 14
+    },
+    {
+      "exit_code": 0,
+      "semantics": "formal invocation/timeline/completion/outcome/failure path absence gate",
+      "sequence": 15
+    },
+    {
+      "exit_code": 0,
+      "semantics": "prewindow receipt/hash/timestamp/index validator",
+      "sequence": 16
+    },
+    {
+      "exit_code": 0,
+      "invocation_id": "1F2E2619-E72E-4D65-8F30-5BB87497BB27",
+      "semantics": "single formal 30-second supervisor invocation",
+      "sequence": 17
+    }
+  ],
+  "credentials_in_commands": false,
+  "forbidden_operation_counts": {
+    "alter_database": 0,
+    "broker_connections": 0,
+    "business_dml": 0,
+    "create_database": 0,
+    "database_cleanup": 0,
+    "database_rename": 0,
+    "drop_database": 0,
+    "extension_modification": 0,
+    "fixture": 0,
+    "focused_pytest": 0,
+    "market_provider_spike_invocation": 0,
+    "migration": 0,
+    "owner_change": 0,
+    "pg_terminate_backend": 0,
+    "pytest": 0,
+    "r7_invocation": 0,
+    "real_trades": 0,
+    "schema_ddl": 0,
+    "trading_strategy_starts": 0
+  },
+  "formal_stability_invocation_count": 1,
+  "invocation_id": "1F2E2619-E72E-4D65-8F30-5BB87497BB27",
+  "raw_environment_enumerations": 0,
+  "schema_version": 1,
+  "task_id": "TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-REPAIR-R1"
+}

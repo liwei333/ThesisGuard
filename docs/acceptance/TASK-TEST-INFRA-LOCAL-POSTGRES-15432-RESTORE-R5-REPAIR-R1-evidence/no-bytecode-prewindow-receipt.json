@@ -1,0 +1,33 @@
+{
+  "completed_at_utc": "2026-09-23T09:56:36.691770+00:00",
+  "credential_safe_failure_classification": "NONE",
+  "criteria_satisfied": true,
+  "exit_code": 0,
+  "monotonic_finished": 34138.858430833,
+  "monotonic_started": 34138.857932333,
+  "original_task_id": "TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5",
+  "receipt_schema_version": 1,
+  "receipt_type": "no-bytecode",
+  "relevant_result": {
+    "bytecode_file_count": 0,
+    "evidence": {
+      "bytecode_file_count": 0,
+      "bytecode_files": [],
+      "pycache_directories": [],
+      "pycache_directory_count": 0
+    },
+    "helper_workspace": {
+      "bytecode_file_count": 0,
+      "bytecode_files": [],
+      "pycache_directories": [],
+      "pycache_directory_count": 0
+    },
+    "pycache_directory_count": 0
+  },
+  "repair_id": "TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-REPAIR-R1",
+  "repair_invocation_id": "1F2E2619-E72E-4D65-8F30-5BB87497BB27",
+  "semantic_command": "prewindow Repair evidence and helper workspace bytecode absence gate",
+  "source_config_sha256": "fa663971e5fe9acee70d50df5fc6798cf4c8b329bf763b644dd4e0880f0fd87c",
+  "started_at_utc": "2026-09-23T09:56:36.691275+00:00",
+  "task_id": "TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-REPAIR-R1"
+}

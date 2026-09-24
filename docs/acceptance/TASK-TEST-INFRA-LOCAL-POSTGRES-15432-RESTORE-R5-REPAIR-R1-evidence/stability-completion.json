@@ -1,0 +1,18 @@
+{
+  "catalog_canonical_sha256_values": [
+    "5b347fab6f6a78e2fa9749bc0e0c97cd387273c31fe39495ab060ad016dc9910"
+  ],
+  "catalog_row_counts": [
+    49
+  ],
+  "completed_at_utc": "2026-09-23T09:57:07.576350+00:00",
+  "criteria_satisfied": true,
+  "duration_seconds": 30.009698,
+  "invocation_id": "1F2E2619-E72E-4D65-8F30-5BB87497BB27",
+  "max_external_active_client_count": 0,
+  "max_task_prefix_external_session_count": 0,
+  "prewindow_gate_index_sha256": "4fe778816bd65d81c2a9f72bd9c178b4059dcb531df0f5bcc19c17ab0f5d8464",
+  "sample_count": 7,
+  "schema_version": 1,
+  "task_id": "TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-REPAIR-R1"
+}

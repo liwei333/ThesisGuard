@@ -1,0 +1,29 @@
+{
+  "audited_at_utc": "2026-09-23T09:57:07.761837+00:00",
+  "criteria_satisfied": true,
+  "docker_start_count": 0,
+  "forbidden_operation_counts": {
+    "alter_database": 0,
+    "broker_connections": 0,
+    "business_dml": 0,
+    "create_database": 0,
+    "database_cleanup": 0,
+    "database_rename": 0,
+    "drop_database": 0,
+    "extension_modification": 0,
+    "fixture": 0,
+    "focused_pytest": 0,
+    "market_provider_spike_invocation": 0,
+    "migration": 0,
+    "owner_change": 0,
+    "pg_terminate_backend": 0,
+    "pytest": 0,
+    "r7_invocation": 0,
+    "real_trades": 0,
+    "schema_ddl": 0,
+    "trading_strategy_starts": 0
+  },
+  "open_count": 0,
+  "schema_version": 1,
+  "task_id": "TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-REPAIR-R1"
+}

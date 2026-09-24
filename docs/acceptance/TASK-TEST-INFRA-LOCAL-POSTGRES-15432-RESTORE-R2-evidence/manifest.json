@@ -1,0 +1,94 @@
+{
+  "excluded": [
+    "manifest.json"
+  ],
+  "file_count": 17,
+  "files": [
+    {
+      "bytes": 2739,
+      "path": "baseline-git.json",
+      "sha256": "d56071321787f3426214a0b9e1ddf2d16efd78a2ca8ea8dcf5da0876f1433ee6"
+    },
+    {
+      "bytes": 1191,
+      "path": "command-audit.json",
+      "sha256": "4b1dff9ee97edff77185fa1a43b8041825f5bb8f4ebb61c5c538542160c168b6"
+    },
+    {
+      "bytes": 548,
+      "path": "credential-scan.json",
+      "sha256": "d3150498b9b9cd3c7c40074f5c133101d728530aff366549361c3d58919db4c2"
+    },
+    {
+      "bytes": 879,
+      "path": "docker-daemon-after.json",
+      "sha256": "ff56d2e7322377b3f956a6cbff63d8f3f30e2599f1abe8e225d27179050fd47d"
+    },
+    {
+      "bytes": 800,
+      "path": "docker-daemon-before.json",
+      "sha256": "b1494b5d0681d2e81418146fa0cd5ca43dcf3cceda77d6f224b90690f7ee2936"
+    },
+    {
+      "bytes": 217,
+      "path": "docker-launch-action.json",
+      "sha256": "e254f04ccab73d963aa575086d6b28e79af675f58a4e5db45249656f0c0e9420"
+    },
+    {
+      "bytes": 519,
+      "path": "fixed-input-hashes.json",
+      "sha256": "c071400fd075d4ef332ed57d3c686cf0953d4ac18f5f0087c0ec67830973ae90"
+    },
+    {
+      "bytes": 3010,
+      "path": "git-final-state.json",
+      "sha256": "b68db6fb2a77ca5ff1af5078f6c038621622430d25990d128266b1726098c5bc"
+    },
+    {
+      "bytes": 212,
+      "path": "json-parse-audit.json",
+      "sha256": "377c415d8db781ecc79aba970ca4b9ea37ce5b6a7b6bdb3d997cc67b9570b3ba"
+    },
+    {
+      "bytes": 521,
+      "path": "mutation-audit.json",
+      "sha256": "4abe282a826d031c5e8ab0ab157030cd87c0cc70864a7dc907516ae680668a83"
+    },
+    {
+      "bytes": 138,
+      "path": "output-path-preflight.json",
+      "sha256": "d09da99069da83a2430f32df2007e53798b3f7cf81cbace1be87b735b72093fe"
+    },
+    {
+      "bytes": 42,
+      "path": "pg-isready-after.txt",
+      "sha256": "becaf394c2b3b2f412fa45007ef11c9465f6cfdd3c8d7da8b18c5635ae285b83"
+    },
+    {
+      "bytes": 42,
+      "path": "pg-isready-before.txt",
+      "sha256": "becaf394c2b3b2f412fa45007ef11c9465f6cfdd3c8d7da8b18c5635ae285b83"
+    },
+    {
+      "bytes": 400,
+      "path": "port-after.json",
+      "sha256": "0ce995f87b6c696cf0d55b94a105a577f938d94ea199c33929aeb0d3140a9eb1"
+    },
+    {
+      "bytes": 232,
+      "path": "port-before.json",
+      "sha256": "9bd9fbf4161a16bb2fa552ec016f723f5ba6a9dc45ef1e6645a09798894410bd"
+    },
+    {
+      "bytes": 27606,
+      "path": "protected-untracked-after.json",
+      "sha256": "26650f8af7ca159ea2cb10cc0f57727a428790195258cadd30763ca66ce5e24e"
+    },
+    {
+      "bytes": 27320,
+      "path": "protected-untracked-before.json",
+      "sha256": "d18914cba7a4cb7460a294384502c22486f64ebe57738f5be26f07fda4f28be3"
+    }
+  ],
+  "generated_at_utc": "2026-09-23T01:46:50.446650+00:00"
+}

@@ -1,0 +1,10 @@
+{
+  "completed": null,
+  "duration_seconds_retained": null,
+  "invocation_count": 1,
+  "output_capture_retained": false,
+  "result": "UNKNOWN_NOT_OBSERVED",
+  "sample_count_retained": 0,
+  "second_invocation_prohibited_and_not_run": true,
+  "started": true
+}

@@ -1,0 +1,14 @@
+{
+  "captured_at_utc": "2026-09-23T01:38:47.931237+00:00",
+  "listener_probe": {
+    "argv": [
+      "lsof",
+      "-nP",
+      "-iTCP:15432",
+      "-sTCP:LISTEN"
+    ],
+    "exit_code": 1,
+    "stderr": "",
+    "stdout": ""
+  }
+}

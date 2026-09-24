@@ -1,0 +1,33 @@
+{
+  "commit": "bd6b5b88783fd4de4d7d89787778e1b36bb4006e",
+  "execution_report_sha256": "374de34f56e1c574ff73a63894e688a8645684de46c9e6970e5f1e4cc0a0dd57",
+  "expected_parent": "35349b207d622872bc0025a813ff3e6af6ef7d97",
+  "file_count": 20,
+  "file_set_exact": true,
+  "files": [
+    "docs/acceptance/TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-R1-evidence/baseline-and-scope.json",
+    "docs/acceptance/TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-R1-evidence/credential-scan.json",
+    "docs/acceptance/TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-R1-evidence/deterministic-lifecycle.json",
+    "docs/acceptance/TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-R1-evidence/git-identity-closure.json",
+    "docs/acceptance/TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-R1-evidence/ledger-audit.json",
+    "docs/acceptance/TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-R1-evidence/manifest.json",
+    "docs/acceptance/TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-R1-evidence/real-catalog-after.json",
+    "docs/acceptance/TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-R1-evidence/real-catalog-before.json",
+    "docs/acceptance/TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-R1-evidence/real-pytest.meta.json",
+    "docs/acceptance/TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-R1-evidence/real-pytest.stderr.txt",
+    "docs/acceptance/TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-R1-evidence/real-pytest.stdout.txt",
+    "docs/acceptance/TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-R1-evidence/residual-recovery.json",
+    "docs/acceptance/TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-R1-evidence/resources.jsonl",
+    "docs/acceptance/TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-R1-evidence/root-cause.json",
+    "docs/acceptance/TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-R1-evidence/source-hashes.json",
+    "docs/acceptance/TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-R1-evidence/static-checks.json",
+    "docs/acceptance/TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-R1-evidence/tdd-green.json",
+    "docs/acceptance/TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-R1-evidence/tdd-red-output.txt",
+    "docs/acceptance/TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-R1-evidence/tdd-red.json",
+    "docs/acceptance/TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-R1-execution-report.md"
+  ],
+  "manifest_sha256": "8e42c819c2b9b28a8cc1249e90dcb3a2f7788e205d0fcc1ea45838c254dd1f24",
+  "parent": "35349b207d622872bc0025a813ff3e6af6ef7d97",
+  "subject": "docs(acceptance): record R5 lifecycle repair evidence",
+  "verified_at_utc": "2026-09-22T08:46:27.548566+00:00"
+}

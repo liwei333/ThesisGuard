@@ -1,0 +1,38 @@
+{
+  "captured_at_utc": "2026-09-22T11:27:18Z",
+  "sanitized_target": {
+    "host": "127.0.0.1",
+    "port": 15432,
+    "database": "postgres",
+    "expected_current_user": "thesisguard"
+  },
+  "sandbox_probe": {
+    "connected": false,
+    "failure_type": "PermissionError",
+    "meaning": "local sandbox denied socket creation; not a PostgreSQL service observation"
+  },
+  "approved_read_only_probe": {
+    "connected": false,
+    "failure_type": "ConnectionRefusedError",
+    "errno": 61,
+    "database_session_established": false
+  },
+  "pg_isready": {
+    "argv": [
+      "/opt/homebrew/opt/postgresql@16/bin/pg_isready",
+      "-h",
+      "127.0.0.1",
+      "-p",
+      "15432",
+      "-d",
+      "postgres",
+      "-U",
+      "thesisguard"
+    ],
+    "returncode": 2,
+    "result": "no response"
+  },
+  "service_accepting_connections": false,
+  "passed": false,
+  "blocker": "BLOCKED_POSTGRESQL_SERVICE"
+}

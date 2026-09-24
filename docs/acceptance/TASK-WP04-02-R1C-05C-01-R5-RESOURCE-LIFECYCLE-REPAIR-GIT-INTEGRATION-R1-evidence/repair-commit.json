@@ -1,0 +1,16 @@
+{
+  "blob_sha256": {
+    "tests/evidence_pg_fixture.py": "894630daace9489e19534cdff9b8b4f95b5c33e31bdce7452512ff76a584b42b",
+    "tests/test_evidence_pg_fixture_lifecycle.py": "5c8e4ed5a9cfdadb00ebde21fa3057a2687b05aa34b0f9bba54160c57a10de36"
+  },
+  "commit": "35349b207d622872bc0025a813ff3e6af6ef7d97",
+  "expected_parent": "77abbe72decfe5437ffed90521b8101f1eae1153",
+  "file_set_exact": true,
+  "files": [
+    "tests/evidence_pg_fixture.py",
+    "tests/test_evidence_pg_fixture_lifecycle.py"
+  ],
+  "parent": "77abbe72decfe5437ffed90521b8101f1eae1153",
+  "subject": "fix(test): bound Evidence PostgreSQL cleanup drain",
+  "verified_at_utc": "2026-09-22T08:46:27.534541+00:00"
+}

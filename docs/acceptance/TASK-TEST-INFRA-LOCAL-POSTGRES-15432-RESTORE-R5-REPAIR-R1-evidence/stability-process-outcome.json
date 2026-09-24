@@ -1,0 +1,13 @@
+{
+  "child_return_code": 0,
+  "completed_at_utc": "2026-09-23T09:57:07.607419+00:00",
+  "invocation_id": "1F2E2619-E72E-4D65-8F30-5BB87497BB27",
+  "prewindow_gate_index_sha256": "4fe778816bd65d81c2a9f72bd9c178b4059dcb531df0f5bcc19c17ab0f5d8464",
+  "raw_output_retained": false,
+  "schema_version": 1,
+  "started_at_utc": "2026-09-23T09:56:37.521839+00:00",
+  "status": "OBSERVER_EXITED",
+  "stderr_empty": true,
+  "stdout_fixed_status_valid": true,
+  "task_id": "TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-REPAIR-R1"
+}

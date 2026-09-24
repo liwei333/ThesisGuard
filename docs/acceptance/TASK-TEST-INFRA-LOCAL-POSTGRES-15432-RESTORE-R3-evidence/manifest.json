@@ -1,0 +1,95 @@
+{
+  "excluded": [
+    "manifest.json"
+  ],
+  "file_count": 17,
+  "files": [
+    {
+      "bytes": 396,
+      "path": "baseline-git.json",
+      "sha256": "38cc10237939c1d3a80e2a6d1e630389dfbd629f574b719b1601ad7993a38579"
+    },
+    {
+      "bytes": 468,
+      "path": "credential-scan.json",
+      "sha256": "c5029d67e286f01f55bc3276bf4d169d595b02bbf674be685d17e97aa54b622a"
+    },
+    {
+      "bytes": 306,
+      "path": "docker-daemon-before.json",
+      "sha256": "f21a70c8772efb8e102a8c5df57336749d1046379be397a99eb6a25bfa52bbb5"
+    },
+    {
+      "bytes": 587,
+      "path": "docker-execution-context.json",
+      "sha256": "4378692210aec71310552698f07fbd2163490ec916be1c4aca94be374779bde4"
+    },
+    {
+      "bytes": 239,
+      "path": "docker-launch-action.json",
+      "sha256": "a7e8eedf75342e849953d88a4680812755d04e96fd83b5566f9d3fab504d9648"
+    },
+    {
+      "bytes": 295,
+      "path": "docker-recovery-action.json",
+      "sha256": "e572fc2a378415e45a3e2df4efbdf0527e73acd03d8810670ba11ba55a4b2739"
+    },
+    {
+      "bytes": 537,
+      "path": "failure-observation.json",
+      "sha256": "9284ecf5cd225f377b84d38cd7138d38540b9c7318b61253ca8c627f7f9ad741"
+    },
+    {
+      "bytes": 612,
+      "path": "final-state.json",
+      "sha256": "0f07788cc3ad1b785dcce7f58c160901dc339514aef1cd7a87de110a9488f55b"
+    },
+    {
+      "bytes": 1659,
+      "path": "fixed-input-hashes.json",
+      "sha256": "a45da166d9312492f99224d420f10a826a27d3c74fb3bfd600d57fac7e43518a"
+    },
+    {
+      "bytes": 516,
+      "path": "git-final-state.json",
+      "sha256": "77b08fb523ae1c900d1ef99bd1aa7db70508ab1e4a26e494ada47caf48b1467b"
+    },
+    {
+      "bytes": 192,
+      "path": "json-parse-audit.json",
+      "sha256": "4bd18cb8ff4846a58eb127cf7e281d5e1a3af8f097c92ea1bd10e9b8042b5f15"
+    },
+    {
+      "bytes": 707,
+      "path": "mutation-audit.json",
+      "sha256": "a5a7d172ad2dd54f0fda057be76aa0dc2af7ac11f79ffb5429685e3128a4bd93"
+    },
+    {
+      "bytes": 154,
+      "path": "output-path-preflight.json",
+      "sha256": "30cc1d076a289e47dbd5981e339de033d00952c1fc4bb37e0000b9e0d0443470"
+    },
+    {
+      "bytes": 32106,
+      "path": "protected-untracked-after.json",
+      "sha256": "34540ea1152a6251e07f2d0e36083bc02cd763c15008f5dda107083c577853f7"
+    },
+    {
+      "bytes": 32072,
+      "path": "protected-untracked-before.json",
+      "sha256": "34b30fb520071cc8533afbd34d41cb05ffefc5f9c09acc5f6fbf1cc522283d67"
+    },
+    {
+      "bytes": 3934,
+      "path": "worktrees-after.json",
+      "sha256": "6539e51f1a1aba2f389d7808805cabf0fa0aff651ab5eb8f58d0cc53c1ba9f53"
+    },
+    {
+      "bytes": 3908,
+      "path": "worktrees-before.json",
+      "sha256": "a43e92d1a2fd2fb9f7ddc22d5325bc189fbccf86db83456784674f22b37a4ad7"
+    }
+  ],
+  "generated_at_utc": "2026-09-23T02:44:14.042011+00:00",
+  "root": "TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R3-evidence"
+}

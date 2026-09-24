@@ -1,0 +1,17 @@
+{
+  "authorized_host_context": true,
+  "client_api_version": "1.55",
+  "client_os_arch": "darwin/arm64",
+  "client_version": "29.7.2",
+  "daemon_accessible": true,
+  "docker_context": "desktop-linux",
+  "observed_at_utc": "2026-09-23T08:39:55.328229+00:00",
+  "sandbox_permission_denied_probes": 0,
+  "schema_version": 1,
+  "server_api_version": "1.55",
+  "server_available": true,
+  "server_os_arch": "linux/arm64",
+  "server_platform": "Docker Desktop 4.90.0 (238679)",
+  "server_version": "29.7.2",
+  "task_id": "TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5"
+}

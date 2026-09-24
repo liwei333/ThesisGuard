@@ -1,0 +1,296 @@
+{
+  "all_run_ids_match": true,
+  "attempt": 9,
+  "cleanup_failed": 1,
+  "create_failed": 0,
+  "create_sent": 9,
+  "created": 9,
+  "current_run_residual": 1,
+  "current_run_unknown": 0,
+  "drop_sent": 8,
+  "dropped": 8,
+  "ledger_rows": 116,
+  "other_run_rows": 0,
+  "resources": [
+    {
+      "attempt_id": "ccc93ebdc1d941febdd720b34a3a9512",
+      "cleanup_failed": false,
+      "confirmed_dropped": true,
+      "created_identity": {
+        "datname": "tg_wp04_service_ccc93ebdc1d941febdd720b34a3a9512",
+        "oid": 9263097,
+        "owner": "thesisguard",
+        "owner_oid": 10
+      },
+      "events": [
+        "attempt",
+        "tools_checked",
+        "target_checked",
+        "create_sent",
+        "created",
+        "admin_closed",
+        "migrated",
+        "ready",
+        "engine_disposed",
+        "cleanup_checked",
+        "drop_sent",
+        "dropped",
+        "cleanup_admin_closed"
+      ],
+      "name": "tg_wp04_service_ccc93ebdc1d941febdd720b34a3a9512",
+      "node": "tests/test_evidence_services.py::test_r1c05c01_forbidden_status_commit_fresh_no_residue[PENDING_REVIEW-same]",
+      "residual_exact_identity": false,
+      "run_id": "2fbae112c2c0e6829ff3ff77efd03e28",
+      "unknown": false
+    },
+    {
+      "attempt_id": "60a9cf9018d04011a49328b1fea2dd90",
+      "cleanup_failed": false,
+      "confirmed_dropped": true,
+      "created_identity": {
+        "datname": "tg_wp04_service_60a9cf9018d04011a49328b1fea2dd90",
+        "oid": 9263797,
+        "owner": "thesisguard",
+        "owner_oid": 10
+      },
+      "events": [
+        "attempt",
+        "tools_checked",
+        "target_checked",
+        "create_sent",
+        "created",
+        "admin_closed",
+        "migrated",
+        "ready",
+        "engine_disposed",
+        "cleanup_checked",
+        "drop_sent",
+        "dropped",
+        "cleanup_admin_closed"
+      ],
+      "name": "tg_wp04_service_60a9cf9018d04011a49328b1fea2dd90",
+      "node": "tests/test_evidence_services.py::test_r1c05c01_forbidden_status_commit_fresh_no_residue[PENDING_REVIEW-automatic]",
+      "residual_exact_identity": false,
+      "run_id": "2fbae112c2c0e6829ff3ff77efd03e28",
+      "unknown": false
+    },
+    {
+      "attempt_id": "d4ef1fcb2ec846c68c7067e6f7113227",
+      "cleanup_failed": false,
+      "confirmed_dropped": true,
+      "created_identity": {
+        "datname": "tg_wp04_service_d4ef1fcb2ec846c68c7067e6f7113227",
+        "oid": 9264497,
+        "owner": "thesisguard",
+        "owner_oid": 10
+      },
+      "events": [
+        "attempt",
+        "tools_checked",
+        "target_checked",
+        "create_sent",
+        "created",
+        "admin_closed",
+        "migrated",
+        "ready",
+        "engine_disposed",
+        "cleanup_checked",
+        "drop_sent",
+        "dropped",
+        "cleanup_admin_closed"
+      ],
+      "name": "tg_wp04_service_d4ef1fcb2ec846c68c7067e6f7113227",
+      "node": "tests/test_evidence_services.py::test_r1c05c01_forbidden_status_commit_fresh_no_residue[PENDING_REVIEW-direct]",
+      "residual_exact_identity": false,
+      "run_id": "2fbae112c2c0e6829ff3ff77efd03e28",
+      "unknown": false
+    },
+    {
+      "attempt_id": "0e2f01bd1098467aa414902508ed1469",
+      "cleanup_failed": false,
+      "confirmed_dropped": true,
+      "created_identity": {
+        "datname": "tg_wp04_service_0e2f01bd1098467aa414902508ed1469",
+        "oid": 9265197,
+        "owner": "thesisguard",
+        "owner_oid": 10
+      },
+      "events": [
+        "attempt",
+        "tools_checked",
+        "target_checked",
+        "create_sent",
+        "created",
+        "admin_closed",
+        "migrated",
+        "ready",
+        "engine_disposed",
+        "cleanup_checked",
+        "drop_sent",
+        "dropped",
+        "cleanup_admin_closed"
+      ],
+      "name": "tg_wp04_service_0e2f01bd1098467aa414902508ed1469",
+      "node": "tests/test_evidence_services.py::test_r1c05c01_forbidden_status_commit_fresh_no_residue[PENDING_REVIEW-underlying]",
+      "residual_exact_identity": false,
+      "run_id": "2fbae112c2c0e6829ff3ff77efd03e28",
+      "unknown": false
+    },
+    {
+      "attempt_id": "d79d23fd39494517884223cb3b16f214",
+      "cleanup_failed": false,
+      "confirmed_dropped": true,
+      "created_identity": {
+        "datname": "tg_wp04_service_d79d23fd39494517884223cb3b16f214",
+        "oid": 9265898,
+        "owner": "thesisguard",
+        "owner_oid": 10
+      },
+      "events": [
+        "attempt",
+        "tools_checked",
+        "target_checked",
+        "create_sent",
+        "created",
+        "admin_closed",
+        "migrated",
+        "ready",
+        "engine_disposed",
+        "cleanup_checked",
+        "drop_sent",
+        "dropped",
+        "cleanup_admin_closed"
+      ],
+      "name": "tg_wp04_service_d79d23fd39494517884223cb3b16f214",
+      "node": "tests/test_evidence_services.py::test_r1c05c01_forbidden_status_commit_fresh_no_residue[DISPUTED-same]",
+      "residual_exact_identity": false,
+      "run_id": "2fbae112c2c0e6829ff3ff77efd03e28",
+      "unknown": false
+    },
+    {
+      "attempt_id": "144901697f624b4b83c884909bbbd288",
+      "cleanup_failed": false,
+      "confirmed_dropped": true,
+      "created_identity": {
+        "datname": "tg_wp04_service_144901697f624b4b83c884909bbbd288",
+        "oid": 9266598,
+        "owner": "thesisguard",
+        "owner_oid": 10
+      },
+      "events": [
+        "attempt",
+        "tools_checked",
+        "target_checked",
+        "create_sent",
+        "created",
+        "admin_closed",
+        "migrated",
+        "ready",
+        "engine_disposed",
+        "cleanup_checked",
+        "drop_sent",
+        "dropped",
+        "cleanup_admin_closed"
+      ],
+      "name": "tg_wp04_service_144901697f624b4b83c884909bbbd288",
+      "node": "tests/test_evidence_services.py::test_r1c05c01_forbidden_status_commit_fresh_no_residue[DISPUTED-automatic]",
+      "residual_exact_identity": false,
+      "run_id": "2fbae112c2c0e6829ff3ff77efd03e28",
+      "unknown": false
+    },
+    {
+      "attempt_id": "4830f476befc40a5aa33b2d4c04de1a2",
+      "cleanup_failed": false,
+      "confirmed_dropped": true,
+      "created_identity": {
+        "datname": "tg_wp04_service_4830f476befc40a5aa33b2d4c04de1a2",
+        "oid": 9267298,
+        "owner": "thesisguard",
+        "owner_oid": 10
+      },
+      "events": [
+        "attempt",
+        "tools_checked",
+        "target_checked",
+        "create_sent",
+        "created",
+        "admin_closed",
+        "migrated",
+        "ready",
+        "engine_disposed",
+        "cleanup_checked",
+        "drop_sent",
+        "dropped",
+        "cleanup_admin_closed"
+      ],
+      "name": "tg_wp04_service_4830f476befc40a5aa33b2d4c04de1a2",
+      "node": "tests/test_evidence_services.py::test_r1c05c01_forbidden_status_commit_fresh_no_residue[DISPUTED-direct]",
+      "residual_exact_identity": false,
+      "run_id": "2fbae112c2c0e6829ff3ff77efd03e28",
+      "unknown": false
+    },
+    {
+      "attempt_id": "21f2216ea56d4821a6351d837091e208",
+      "cleanup_failed": false,
+      "confirmed_dropped": true,
+      "created_identity": {
+        "datname": "tg_wp04_service_21f2216ea56d4821a6351d837091e208",
+        "oid": 9267998,
+        "owner": "thesisguard",
+        "owner_oid": 10
+      },
+      "events": [
+        "attempt",
+        "tools_checked",
+        "target_checked",
+        "create_sent",
+        "created",
+        "admin_closed",
+        "migrated",
+        "ready",
+        "engine_disposed",
+        "cleanup_checked",
+        "drop_sent",
+        "dropped",
+        "cleanup_admin_closed"
+      ],
+      "name": "tg_wp04_service_21f2216ea56d4821a6351d837091e208",
+      "node": "tests/test_evidence_services.py::test_r1c05c01_forbidden_status_commit_fresh_no_residue[DISPUTED-underlying]",
+      "residual_exact_identity": false,
+      "run_id": "2fbae112c2c0e6829ff3ff77efd03e28",
+      "unknown": false
+    },
+    {
+      "attempt_id": "53ea9a765404436e8fc6a6ecf2f51187",
+      "cleanup_failed": true,
+      "confirmed_dropped": false,
+      "created_identity": {
+        "datname": "tg_wp04_service_53ea9a765404436e8fc6a6ecf2f51187",
+        "oid": 9268698,
+        "owner": "thesisguard",
+        "owner_oid": 10
+      },
+      "events": [
+        "attempt",
+        "tools_checked",
+        "target_checked",
+        "create_sent",
+        "created",
+        "admin_closed",
+        "migrated",
+        "ready",
+        "engine_disposed",
+        "cleanup_checked",
+        "cleanup_admin_closed",
+        "cleanup_failed"
+      ],
+      "name": "tg_wp04_service_53ea9a765404436e8fc6a6ecf2f51187",
+      "node": "tests/test_evidence_services.py::test_r1c05c01_forbidden_status_commit_fresh_no_residue[REJECTED-same]",
+      "residual_exact_identity": true,
+      "run_id": "2fbae112c2c0e6829ff3ff77efd03e28",
+      "unknown": false
+    }
+  ],
+  "run_id": "2fbae112c2c0e6829ff3ff77efd03e28",
+  "within_create_budget": true
+}

@@ -1,0 +1,33 @@
+{
+  "completed_at_utc": "2026-09-23T09:56:36.954175+00:00",
+  "credential_safe_failure_classification": "NONE",
+  "criteria_satisfied": true,
+  "exit_code": 0,
+  "monotonic_finished": 34139.120877,
+  "monotonic_started": 34138.913249375,
+  "original_task_id": "TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5",
+  "receipt_schema_version": 1,
+  "receipt_type": "docker-identity",
+  "relevant_result": {
+    "container_port": "5432/tcp",
+    "docker_start_count": 0,
+    "health": "healthy",
+    "host_port": 15432,
+    "image": "pgvector/pgvector:pg17",
+    "image_id": "sha256:cf134a767f474095eeba57e0117be8e568e011a63f33fbf252f14c9b760f8e6f",
+    "mount": "/var/lib/postgresql/data",
+    "name": "thesisguard-postgres",
+    "open_count": 0,
+    "recovery_path": "A0",
+    "restart_policy": "unless-stopped",
+    "status": "running",
+    "volume": "thesisguard-postgres-data",
+    "volume_driver": "local"
+  },
+  "repair_id": "TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-REPAIR-R1",
+  "repair_invocation_id": "1F2E2619-E72E-4D65-8F30-5BB87497BB27",
+  "semantic_command": "selective fixed thesisguard-postgres identity and health gate",
+  "source_config_sha256": "fa663971e5fe9acee70d50df5fc6798cf4c8b329bf763b644dd4e0880f0fd87c",
+  "started_at_utc": "2026-09-23T09:56:36.746594+00:00",
+  "task_id": "TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-REPAIR-R1"
+}

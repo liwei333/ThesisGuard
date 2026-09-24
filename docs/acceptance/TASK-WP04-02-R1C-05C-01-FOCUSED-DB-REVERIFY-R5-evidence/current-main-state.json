@@ -1,0 +1,15 @@
+{
+  "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard",
+  "branch": "main",
+  "head": "77abbe72decfe5437ffed90521b8101f1eae1153",
+  "parent": "cc55162341fd99653b4ac6cd8f81da043cf7484c",
+  "shape": "A",
+  "tracked_diff": [],
+  "index_diff": [],
+  "allowed_untracked": [
+    "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-WRONG-SESSION-FEEDBACK-REVIEW-acceptance.md",
+    "docs/workbench.html"
+  ],
+  "wrong_session_feedback_sha256": "c2c4c6c551c0dbfe0b021a070d11e8e84ea40fb028476f93c2aae66ce23c801d",
+  "restore_review_sha256": "0c67fad09162f903fe1f8d086dcc4986c4a73d49e448823174fc6477aca3fb8a"
+}

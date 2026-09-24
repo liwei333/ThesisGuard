@@ -1,0 +1,12 @@
+{
+  "child_return_code": 0,
+  "completed_at_utc": "2026-09-23T08:30:09.103359+00:00",
+  "invocation_id": "192A0648-1943-4DC1-8436-A4B29564616F",
+  "raw_output_retained": false,
+  "schema_version": 1,
+  "started_at_utc": "2026-09-23T08:29:38.996870+00:00",
+  "status": "OBSERVER_EXITED",
+  "stderr_empty": true,
+  "stdout_fixed_status_valid": true,
+  "task_id": "TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5"
+}

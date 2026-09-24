@@ -1,0 +1,5 @@
+{
+  "collector_sha256": "6e4f27ed0e652cdfea52af2eb2beea019fac3f7bceac9dcc440a033a88fe749c",
+  "collector_test_sha256": "c7c9bf0cae35a4061d297051245229a486be276ad33292c1adcecb36cae99991",
+  "postgres_observer_sha256": "10cc97a0468e7f8132c04ad39a3dc61f6fc77751025dac51d0ff0708ff1b26cf"
+}

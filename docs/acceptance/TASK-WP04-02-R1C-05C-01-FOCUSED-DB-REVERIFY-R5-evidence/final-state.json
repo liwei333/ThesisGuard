@@ -1,0 +1,73 @@
+{
+  "task_id": "TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5",
+  "verdict": "FAIL_DB_RESOURCE_LIFECYCLE",
+  "session_independent": true,
+  "main_shape": "A",
+  "r5_start_main_head": "77abbe72decfe5437ffed90521b8101f1eae1153",
+  "main_head_unchanged": true,
+  "candidate_head_unchanged": true,
+  "candidate_clean": true,
+  "harness_head_unchanged": true,
+  "harness_clean": true,
+  "detached_historical_main_removed": true,
+  "collect_only": {
+    "verdict": "PASS",
+    "count": 41,
+    "distribution": "20/16/3/2",
+    "test_body_calls": 0,
+    "socket_attempts": 0,
+    "ledger_or_create": 0
+  },
+  "preflight_quiescence": {
+    "passed": true,
+    "sample_count": 25,
+    "duration_seconds": 120.016,
+    "catalog_count": 49,
+    "catalog_sha256": "8b74281638af2471d514f38c77ae08391deb8491cba6af12f0be9cb48c8a7b04"
+  },
+  "real_pytest": {
+    "invocation_count": 1,
+    "collected": 41,
+    "passed": 9,
+    "failed": 0,
+    "errors": 1,
+    "not_executed_after_x": 31,
+    "failure_node": "tests/test_evidence_services.py::test_r1c05c01_forbidden_status_commit_fresh_no_residue[REJECTED-same]",
+    "failure_type": "EvidencePGCleanupError",
+    "business_assertion_failure": false
+  },
+  "ledger": {
+    "run_id": "2fbae112c2c0e6829ff3ff77efd03e28",
+    "attempt": 9,
+    "create_sent": 9,
+    "created": 9,
+    "drop_sent": 8,
+    "dropped": 8,
+    "cleanup_failed": 1,
+    "current_run_unknown": 0,
+    "current_run_residual": 1
+  },
+  "residual_identity": {
+    "datname": "tg_wp04_service_53ea9a765404436e8fc6a6ecf2f51187",
+    "oid": 9268698,
+    "owner": "thesisguard",
+    "owner_oid": 10
+  },
+  "catalog": {
+    "before_count": 49,
+    "after_count": 50,
+    "before_after_equal": false,
+    "historical_unknown_before_exact": 45,
+    "historical_unknown_after_exact": 45,
+    "unattributed_external_catalog_delta": false,
+    "post_run_stability_equal_before": false
+  },
+  "prohibited_actions": {
+    "source_test_fixture_harness_contract_migration_config_modified": false,
+    "historical_unknown_connected_or_cleaned": false,
+    "manual_residual_cleanup": false,
+    "pg_terminate_backend": false,
+    "second_real_pytest": false,
+    "commit_stage_merge_rebase_push_reset_clean_stash": false
+  }
+}

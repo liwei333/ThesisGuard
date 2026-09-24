@@ -1,0 +1,62 @@
+{
+  "completion_gate_hash_matches": true,
+  "criteria_satisfied": true,
+  "failure_marker_absent": true,
+  "fixed_stdout_token_valid": true,
+  "invocation_gate_hash_matches": true,
+  "outcome_gate_hash_matches": true,
+  "prewindow_gate_index_sha256": "4fe778816bd65d81c2a9f72bd9c178b4059dcb531df0f5bcc19c17ab0f5d8464",
+  "schema_version": 1,
+  "stderr_empty": true,
+  "task_id": "TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-REPAIR-R1",
+  "timeline_gate_hash_matches": true,
+  "validated_at_utc": "2026-09-23T09:57:07.616721+00:00",
+  "validation": {
+    "catalog_canonical_sha256_values": [
+      "5b347fab6f6a78e2fa9749bc0e0c97cd387273c31fe39495ab060ad016dc9910"
+    ],
+    "catalog_row_counts": [
+      49
+    ],
+    "checks": {
+      "catalog_hash_stable": true,
+      "catalog_row_count_stable": true,
+      "child_return_code": true,
+      "completion_criteria": true,
+      "completion_duration": true,
+      "completion_external": true,
+      "completion_gate_index_binding": true,
+      "completion_hashes": true,
+      "completion_invocation": true,
+      "completion_row_counts": true,
+      "completion_sample_count": true,
+      "completion_task_sessions": true,
+      "database_identity": true,
+      "duration": true,
+      "exact_sample_count": true,
+      "exact_sequence": true,
+      "external_active_zero": true,
+      "major_version": true,
+      "outcome_gate_index_binding": true,
+      "outcome_invocation": true,
+      "task_prefix_sessions_zero": true,
+      "timeline_gate_index_binding": true,
+      "timeline_invocation": true,
+      "user_identity": true
+    },
+    "criteria_satisfied": true,
+    "duration_seconds": 30.009698,
+    "max_external_active_client_count": 0,
+    "max_task_prefix_external_session_count": 0,
+    "sample_count": 7,
+    "sequence_numbers": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ]
+  }
+}

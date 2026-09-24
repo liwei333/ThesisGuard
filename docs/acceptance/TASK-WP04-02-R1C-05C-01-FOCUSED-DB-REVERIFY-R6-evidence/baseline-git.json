@@ -1,0 +1,38 @@
+{
+  "branch": "main",
+  "captured_at_utc": "2026-09-22T11:03:16.159619+00:00",
+  "clean": false,
+  "detached": false,
+  "exact_parent_chain": [
+    "77abbe72decfe5437ffed90521b8101f1eae1153",
+    "35349b207d622872bc0025a813ff3e6af6ef7d97",
+    "bd6b5b88783fd4de4d7d89787778e1b36bb4006e",
+    "5c4b930f4948815e3ad2ab26b5e7c81de8c20e5b"
+  ],
+  "expected_linear_chain": [
+    "77abbe72decfe5437ffed90521b8101f1eae1153",
+    "35349b207d622872bc0025a813ff3e6af6ef7d97",
+    "bd6b5b88783fd4de4d7d89787778e1b36bb4006e",
+    "5c4b930f4948815e3ad2ab26b5e7c81de8c20e5b"
+  ],
+  "grandparent": "35349b207d622872bc0025a813ff3e6af6ef7d97",
+  "head": "5c4b930f4948815e3ad2ab26b5e7c81de8c20e5b",
+  "index_diff": [],
+  "origin_main": "77abbe72decfe5437ffed90521b8101f1eae1153",
+  "origin_main_vs_head_left_right": "0\t3",
+  "parent": "bd6b5b88783fd4de4d7d89787778e1b36bb4006e",
+  "path": "/Users/qianduoduo/Desktop/AI_app/ThesisGuard",
+  "status_porcelain_v2": [
+    "? docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-WRONG-SESSION-FEEDBACK-REVIEW-acceptance.md",
+    "? docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-acceptance.md",
+    "? docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/",
+    "? docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R6-evidence/",
+    "? docs/acceptance/TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-GIT-INTEGRATION-R1-INDEPENDENT-REVIEW-R1-acceptance.md",
+    "? docs/acceptance/TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-GIT-INTEGRATION-R1-STALE-REDISPATCH-REVIEW-acceptance.md",
+    "? docs/acceptance/TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-GIT-INTEGRATION-R1-evidence/",
+    "? docs/acceptance/TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-GIT-INTEGRATION-R1-execution-report.md",
+    "? docs/workbench.html"
+  ],
+  "tracked_clean": true,
+  "tracked_diff": []
+}

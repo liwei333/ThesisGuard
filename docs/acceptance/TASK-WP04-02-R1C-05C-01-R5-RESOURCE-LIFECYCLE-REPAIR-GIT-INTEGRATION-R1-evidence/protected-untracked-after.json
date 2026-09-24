@@ -1,0 +1,289 @@
+{
+  "acceptance_report_now_tracked": {
+    "bytes": 8946,
+    "matches_before_snapshot": true,
+    "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-R1-INDEPENDENT-REVIEW-R1-acceptance.md",
+    "sha256": "1659140342ed5978ca48e95d9ee24e25bde1dbeeff6a2314506acd5ecc34d342"
+  },
+  "captured_at_utc": "2026-09-22T08:46:32.958642+00:00",
+  "file_count": 54,
+  "files": [
+    {
+      "bytes": 8050,
+      "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-WRONG-SESSION-FEEDBACK-REVIEW-acceptance.md",
+      "sha256": "c2c4c6c551c0dbfe0b021a070d11e8e84ea40fb028476f93c2aae66ce23c801d"
+    },
+    {
+      "bytes": 10508,
+      "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-acceptance.md",
+      "sha256": "7a76be1fa3dbc8daf18e3d50699a17eb357b67579eb110aff822694ace026d75"
+    },
+    {
+      "bytes": 359,
+      "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/baseline-state.json",
+      "sha256": "8b7cc9fd7f77763a0c75aff8e3893e93222737b9502421a6a9931e36c21a042d"
+    },
+    {
+      "bytes": 317,
+      "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/candidate-state.json",
+      "sha256": "ad0a67a304ccbd07ef3f6a3e8760b763917513f3e747dc4681f55023e48ef75d"
+    },
+    {
+      "bytes": 742,
+      "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/catalog-delta-attribution.json",
+      "sha256": "7e64fa9736717131ee604de9acbda2677f297fcf7206f6019fe3a9ad4fae15f7"
+    },
+    {
+      "bytes": 723,
+      "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/collect-only-audit.json",
+      "sha256": "0b5d5687e4dc0c0606d1f16b29214e4292bc86d25962b4197dcbc16b38b78204"
+    },
+    {
+      "bytes": 382,
+      "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/collect-only-harness-run/baseline-pins.json",
+      "sha256": "bcccf6fdc59e13841b4addf2b2f18c3f28bf574ea1f536ed375cd8bc50041ed6"
+    },
+    {
+      "bytes": 1821,
+      "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/collect-only-harness-run/collect-only.meta.json",
+      "sha256": "137688c639fe2a558dfe38cb8ae64c023e994860cee532851f1b570c47fda5e4"
+    },
+    {
+      "bytes": 0,
+      "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/collect-only-harness-run/collect-only.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 5428,
+      "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/collect-only-harness-run/collect-only.stdout.txt",
+      "sha256": "e3966cc239eeadf157581a692642dfe5b662533fcefab5434dddfcc7322db1ae"
+    },
+    {
+      "bytes": 5327,
+      "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/collect-only-harness-run/collected-nodeids.json",
+      "sha256": "439768d429261a803198f87cc815aa1fa668066d703b7a8eb1d4a8a65281693d"
+    },
+    {
+      "bytes": 1416,
+      "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/collect-only-harness-run/manifest.json",
+      "sha256": "9ad2d26a2bb185aa8f95facc4cd622007bfb36011f3efe5bd91878ef10201faf"
+    },
+    {
+      "bytes": 363,
+      "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/collect-only-harness-run/plugin-staging.json",
+      "sha256": "c7a4b694db553b8b6b4ca73291a19861761d26b74753584010f99dfe858c31c9"
+    },
+    {
+      "bytes": 11175,
+      "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/collect-only-harness-run/plugin.source.py",
+      "sha256": "3ab4b45feb356fcecdaa5363f09d3256dc0c6a2b8f2bb067d32da8438f3bdbc4"
+    },
+    {
+      "bytes": 773,
+      "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/collect-only-harness-run/result.json",
+      "sha256": "924c8b40eb474f75ae4c893a42e16afba165e8ba9a4b3ca229a4448d37f8fff4"
+    },
+    {
+      "bytes": 40951,
+      "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/collect-only-harness-run/runner.source.py",
+      "sha256": "3b3145f0a17e593db8d7689ba942ad43fcd4f4be15ddc61d7196e0cc061c3b36"
+    },
+    {
+      "bytes": 631,
+      "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/collect-only-harness-run/source-hashes.json",
+      "sha256": "a0e45a99be82fb70548be5bbd3e55faa1860ff537365a987e92783476bc1924e"
+    },
+    {
+      "bytes": 5327,
+      "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/collected-nodeids.json",
+      "sha256": "439768d429261a803198f87cc815aa1fa668066d703b7a8eb1d4a8a65281693d"
+    },
+    {
+      "bytes": 21233,
+      "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/credential-scan.json",
+      "sha256": "49944f241e5a72e63dc6bc3050fe1ffe85cea667ff08f44642e7fe5f49ca01ea"
+    },
+    {
+      "bytes": 617,
+      "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/current-main-state.json",
+      "sha256": "d396aa73c0b4544285fada21a2a40fb4a543497fd29828c52df293bc49836063"
+    },
+    {
+      "bytes": 11369,
+      "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/database-resource-audit.json",
+      "sha256": "c7a30551a8d652c0bf9c2310f0dfe0061f2ac65aa2563981e3e48bd9e37701e8"
+    },
+    {
+      "bytes": 216,
+      "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/detached-main-state.json",
+      "sha256": "cb98565acc23339524f759b56137ce6a87661097f5114d9dec4dd9df58531573"
+    },
+    {
+      "bytes": 127,
+      "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/evidence-parse-audit.json",
+      "sha256": "a3c2332c350f9f6649a4c982596fdf45b65353835f1922cf34182af1e9af0e30"
+    },
+    {
+      "bytes": 2218,
+      "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/final-state.json",
+      "sha256": "585160eedbf739f7905f9878b9b5b0c6c05e96f011248b8f41645b9e9c0c8953"
+    },
+    {
+      "bytes": 7842,
+      "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/full-catalog-after.json",
+      "sha256": "f162d6af349bbb4cbaf8d7d848a89210ed570ed1becbc9a9b0d96ca07f5e39a0"
+    },
+    {
+      "bytes": 7656,
+      "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/full-catalog-before.json",
+      "sha256": "25733a41993ee674903c981bdcba30de7fc525d357eb8e2214fd1ed5c4213862"
+    },
+    {
+      "bytes": 296,
+      "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/harness-state.json",
+      "sha256": "e53b50b306c9919d4506fac88b5def31e0e6774cf60e7d06784a51694fcdb966"
+    },
+    {
+      "bytes": 7145,
+      "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/historical-unknown-after.json",
+      "sha256": "d88e88bfe8b4e18d4fcf6f4d8e07a378dea08806eff89b286232194fdf579fcd"
+    },
+    {
+      "bytes": 7173,
+      "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/historical-unknown-before.json",
+      "sha256": "8ad0892030207a6fefe9d011c5a01a2e764ee44da458ad0918a6d350461fbee0"
+    },
+    {
+      "bytes": 8924,
+      "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/ledger-audit.json",
+      "sha256": "38d5fe33149147518ab0a9bf1e870945161474ec28e2f170c454dff809380d92"
+    },
+    {
+      "bytes": 8349,
+      "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/manifest.json",
+      "sha256": "a10316c137050a9af53292f5043dd30129c9f10213094dd6fafd683967ebb014"
+    },
+    {
+      "bytes": 1571,
+      "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/post-run-stability-timeline.jsonl",
+      "sha256": "36d9b412c3c36dd3c173558a46b4cea0b23c9b26eddc3bfba832f57f13c29e9b"
+    },
+    {
+      "bytes": 12474,
+      "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/post_run_audit.py",
+      "sha256": "aadfede61815c1f41a24cb694bc1110234e8639563837a35d74dc5feba91d679"
+    },
+    {
+      "bytes": 699,
+      "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/postgres-service-state.json",
+      "sha256": "826140d99fc681b2433fac8243c0bd049f796d37b659414d5ffb3f88a33c8aa7"
+    },
+    {
+      "bytes": 1106,
+      "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/preflight-quiescence-summary.json",
+      "sha256": "89cdc220662c1d8865f2e50185578f9f40da1a7a09e3c1061312562c7615d944"
+    },
+    {
+      "bytes": 6667,
+      "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/preflight-quiescence-timeline.jsonl",
+      "sha256": "5ac53022f116ac0fab278b3189f14e86ac297ea263cd536921cc1470aebc225a"
+    },
+    {
+      "bytes": 7338,
+      "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/preflight_quiescence_observer.py",
+      "sha256": "44bec002900bd415fdda473ce9e836ec43da9ff41f5fd0e730fcb8d4e3e7df1b"
+    },
+    {
+      "bytes": 1215,
+      "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/real-pytest.meta.json",
+      "sha256": "cdc2616202d9770f40d438c0b0828abc83a199775f7cc0f5ca3ea9c66a6ee23e"
+    },
+    {
+      "bytes": 0,
+      "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/real-pytest.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 7339,
+      "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/real-pytest.stdout.txt",
+      "sha256": "e2b8c2dfa1d55522c4012b1899e53ef0a5efeb47bc29c29e0c0d66d1d0073f6d"
+    },
+    {
+      "bytes": 53917,
+      "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/resources.jsonl",
+      "sha256": "10cfd7c3a0fc457ded717c22f60fc25d3a00f2d76bbcaafe93860860f4ce8688"
+    },
+    {
+      "bytes": 7323,
+      "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/run_real_once.py",
+      "sha256": "072c8fe4f399eb210f4c3c82943eec533f964d5e7689f45ccd0e9e69c6c0d105"
+    },
+    {
+      "bytes": 54663,
+      "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/runtime-catalog-timeline.jsonl",
+      "sha256": "730c62a7151d394dfbf15a7c326b70007c448b5eed43d05c96365860e8559f7e"
+    },
+    {
+      "bytes": 223,
+      "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/runtime-observer-ready.json",
+      "sha256": "1ccb6f8895954a08b825f433af123a9b0b582b81cab641d8bd1ae407948d0f66"
+    },
+    {
+      "bytes": 141,
+      "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/runtime-observer-source-sha256.json",
+      "sha256": "19388ff4d533bf1655ab21f96e1b0ed9075a8c334151b46037e69f202c0e109c"
+    },
+    {
+      "bytes": 0,
+      "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/runtime-observer.stderr.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 0,
+      "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/runtime-observer.stdout.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 5,
+      "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/runtime-observer.stop",
+      "sha256": "a11c3d917a2149a4b548217038bc8f2dd2130a1966e0c7af5c4225d81f25a8c3"
+    },
+    {
+      "bytes": 3054,
+      "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/runtime_catalog_observer.py",
+      "sha256": "c9ca50232754cfea004d68c298d70723c82f1436bd6ae1ec9120303d52763bc9"
+    },
+    {
+      "bytes": 390,
+      "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/scenario-results.json",
+      "sha256": "88fa4520d5cfe183e7c97007104157b0e75702c0e85d96d171da4e55b5c0dff0"
+    },
+    {
+      "bytes": 487,
+      "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/session-independence.json",
+      "sha256": "0d6463bcff97083aa2945b842edb3739e7b8607cd966e3c697d1d3ae8670001a"
+    },
+    {
+      "bytes": 1602,
+      "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/source-hashes.json",
+      "sha256": "635faf35cf60c535e8a7735ac2156799e5768d28254085c5d59541e7830253ba"
+    },
+    {
+      "bytes": 502,
+      "path": "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/tool-preflight.json",
+      "sha256": "4c806e98a3caea3298856ce1cade1a86416a072a8fe33060db8fdf8a4fe8b7ed"
+    },
+    {
+      "bytes": 114165,
+      "path": "docs/workbench.html",
+      "sha256": "1dbd4d40accd6edcdd03ab68dc9b8b0370bac49d635a64aa4a989b5ddf96a6b0"
+    }
+  ],
+  "matches_before_snapshot": true,
+  "roots_still_untracked": [
+    "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-WRONG-SESSION-FEEDBACK-REVIEW-acceptance.md",
+    "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-acceptance.md",
+    "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence",
+    "docs/workbench.html"
+  ]
+}

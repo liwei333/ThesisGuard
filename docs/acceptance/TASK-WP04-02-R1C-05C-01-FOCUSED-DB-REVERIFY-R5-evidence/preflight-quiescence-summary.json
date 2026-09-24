@@ -1,0 +1,33 @@
+{
+  "all_catalog_identities_equal": true,
+  "all_external_active_zero": true,
+  "all_external_tg_sessions_zero": true,
+  "baseline_catalog_count": 49,
+  "baseline_catalog_sha256": "8b74281638af2471d514f38c77ae08391deb8491cba6af12f0be9cb48c8a7b04",
+  "create_count": 0,
+  "duration_seconds": 120.016,
+  "first_sample": {
+    "catalog_count": 49,
+    "catalog_sha256": "8b74281638af2471d514f38c77ae08391deb8491cba6af12f0be9cb48c8a7b04",
+    "elapsed_seconds": 0.011,
+    "external_active_client_backends": 0,
+    "external_tg_sessions": 0,
+    "sample": 1,
+    "utc_timestamp": "2026-09-22T06:36:47.651560+00:00"
+  },
+  "interval_seconds": 5,
+  "last_sample": {
+    "catalog_count": 49,
+    "catalog_sha256": "8b74281638af2471d514f38c77ae08391deb8491cba6af12f0be9cb48c8a7b04",
+    "elapsed_seconds": 120.016,
+    "external_active_client_backends": 0,
+    "external_tg_sessions": 0,
+    "sample": 25,
+    "utc_timestamp": "2026-09-22T06:38:47.637288+00:00"
+  },
+  "observer_nonce": "8268534a13f0a85d897b2c405819da7e",
+  "passed": true,
+  "real_pytest_started": false,
+  "reason": null,
+  "sample_count": 25
+}

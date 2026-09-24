@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "/opt/miniconda3/bin/alembic",
+    "-c",
+    "migrations/alembic.ini",
+    "heads"
+  ],
+  "captured_at_utc": "2026-09-22T11:26:24.668251+00:00",
+  "expected": "000000000004 (head)",
+  "passed": true,
+  "returncode": 0,
+  "stderr": "",
+  "stdout": "000000000004 (head)\n"
+}

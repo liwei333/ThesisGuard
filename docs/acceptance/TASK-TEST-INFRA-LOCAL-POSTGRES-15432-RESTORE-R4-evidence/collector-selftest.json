@@ -1,0 +1,13 @@
+{
+  "credential_values_retained": false,
+  "docker_called": false,
+  "errors": 0,
+  "failures": 0,
+  "mode": "synthetic-self-test",
+  "required_cases_minimum": 16,
+  "skipped": 0,
+  "successful": true,
+  "syntax_compile_exit_code": 0,
+  "tdd_red_observed": "ModuleNotFoundError: No module named 'collector'",
+  "tests_run": 18
+}

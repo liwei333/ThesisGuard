@@ -1,0 +1,26 @@
+{
+  "clock_mode": "real-monotonic",
+  "declared_at_utc": "2026-09-23T09:56:37.519135+00:00",
+  "expected_offsets_seconds": [
+    0,
+    5,
+    10,
+    15,
+    20,
+    25,
+    30
+  ],
+  "invocation_count": 1,
+  "invocation_id": "1F2E2619-E72E-4D65-8F30-5BB87497BB27",
+  "paths": {
+    "completion": "stability-completion.json",
+    "failure": "stability-failure.json",
+    "invocation": "stability-invocation.json",
+    "outcome": "stability-process-outcome.json",
+    "timeline": "stability-timeline.jsonl"
+  },
+  "prewindow_gate_index_sha256": "4fe778816bd65d81c2a9f72bd9c178b4059dcb531df0f5bcc19c17ab0f5d8464",
+  "schema_version": 1,
+  "synthetic_clock_allowed": false,
+  "task_id": "TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-REPAIR-R1"
+}

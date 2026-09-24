@@ -1,0 +1,32 @@
+{
+  "authorized_host_actions": [
+    {
+      "command": "open -a Docker",
+      "count": 1,
+      "exit_code": 0
+    }
+  ],
+  "captured_at_utc": "2026-09-23T01:45:17.410920+00:00",
+  "container_create_recreate_remove_commands": 0,
+  "docker_compose_up_commands": 0,
+  "docker_start_commands": 0,
+  "fixture_commands": 0,
+  "git_mutation_commands": 0,
+  "image_pull_build_remove_commands": 0,
+  "migration_commands": 0,
+  "polling_disclosure": "The 36th probe occurred at the 180-second observation point; the loop then slept approximately five additional seconds before returning failure.",
+  "pytest_commands": 0,
+  "r7_commands": 0,
+  "read_only_operations": [
+    "Git baseline and final ref/status/diff checks",
+    "recursive protected untracked file byte/SHA-256 snapshots",
+    "fixed input SHA-256 checks",
+    "Docker client/server probes before and after launch",
+    "36 Docker daemon availability polls at approximately five-second intervals",
+    "Docker socket existence checks",
+    "port 15432 listener probes before and after launch",
+    "pg_isready probes before and after launch"
+  ],
+  "unrelated_container_operation_commands": 0,
+  "volume_create_remove_commands": 0
+}

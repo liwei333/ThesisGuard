@@ -1,0 +1,124 @@
+{
+  "artifacts": {
+    "alembic-heads.json": {
+      "bytes": 291,
+      "sha256": "1903740f9bb0f7f3c4f9b7283cde88d622b04531114811f68ed547ea0eb2f62d"
+    },
+    "baseline-git.json": {
+      "bytes": 1885,
+      "sha256": "9843c9046207fb1a685a78e45aa0a8a83b147591e851cf403db876ad395ab11d"
+    },
+    "candidate-identity.json": {
+      "bytes": 468,
+      "sha256": "7b8858ea5e991b6b7534b9c5b6aa7086235a6afbc0c30de76b8dc6dd5bc6ea00"
+    },
+    "collect-only-audit.json": {
+      "bytes": 1644,
+      "sha256": "4d3ec55ad07fa981dc23a98d0dda1784135cb945971374f2287351ca026c6315"
+    },
+    "collect-only-harness-run/baseline-pins.json": {
+      "bytes": 382,
+      "sha256": "bcccf6fdc59e13841b4addf2b2f18c3f28bf574ea1f536ed375cd8bc50041ed6"
+    },
+    "collect-only-harness-run/collect-only.meta.json": {
+      "bytes": 3307,
+      "sha256": "7f494c5a7bf05ae348f1692b0976ffa256c8e3042f7168755b0f2ccd007cae42"
+    },
+    "collect-only-harness-run/collect-only.stderr.txt": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "collect-only-harness-run/collect-only.stdout.txt": {
+      "bytes": 5428,
+      "sha256": "5aad2ebcc3beafb0fcb7252f302724bc75e7819497b8eba4eee792c551105027"
+    },
+    "collect-only-harness-run/collected-nodeids.json": {
+      "bytes": 5327,
+      "sha256": "a4fbc23750b86ae056ee7dd9e5f8a34486917a0eb4e2c56e974d8cb5cff381a5"
+    },
+    "collect-only-harness-run/manifest.json": {
+      "bytes": 1416,
+      "sha256": "468e2b50f8ee0e93e9ca3a3b234c54a526dfd51aeb84c8cd19d7ef71257704a0"
+    },
+    "collect-only-harness-run/plugin-staging.json": {
+      "bytes": 363,
+      "sha256": "22c6f60ebc9271d6fda15b86c301974fb02e83758a405ba6a49fa959074bb752"
+    },
+    "collect-only-harness-run/plugin.source.py": {
+      "bytes": 11175,
+      "sha256": "3ab4b45feb356fcecdaa5363f09d3256dc0c6a2b8f2bb067d32da8438f3bdbc4"
+    },
+    "collect-only-harness-run/result.json": {
+      "bytes": 773,
+      "sha256": "5c03208109a4e4040ee7f7344c5643fb3a4db0e0dc876e85289c57a5a1cb148d"
+    },
+    "collect-only-harness-run/runner.source.py": {
+      "bytes": 40951,
+      "sha256": "3b3145f0a17e593db8d7689ba942ad43fcd4f4be15ddc61d7196e0cc061c3b36"
+    },
+    "collect-only-harness-run/source-hashes.json": {
+      "bytes": 631,
+      "sha256": "a0e45a99be82fb70548be5bbd3e55faa1860ff537365a987e92783476bc1924e"
+    },
+    "credential-scan.json": {
+      "bytes": 806,
+      "sha256": "cb2662478653e797a94f5ae792bff1d84fe202618c915844ecce54ba9a66586b"
+    },
+    "detached-main-worktree.json": {
+      "bytes": 437,
+      "sha256": "ff89bf9eb04cddf9b83ff46d857a9f9e0e41aba72a256f11b239a8b549acf701"
+    },
+    "fixed-source-hashes.json": {
+      "bytes": 3627,
+      "sha256": "1a4e4f5d237999bb53196ccf251291f601b31c34a15054d7f87fa6fd61f5de78"
+    },
+    "git-final-state.json": {
+      "bytes": 6315,
+      "sha256": "dfe038f9eb8edd60d51fb3078beb58858b82b6ea2f6550e0bb3f4e7d13a0a5da"
+    },
+    "harness-identity.json": {
+      "bytes": 447,
+      "sha256": "08254160ab41ae2f087b81b26ffa93020a80873d75bab45cb938a443d264aaab"
+    },
+    "historical-main-identity.json": {
+      "bytes": 440,
+      "sha256": "36a3c978b1e48e2b0cff4733c8e8ae6c3aa2cfef12057c0fa75ef516a097448a"
+    },
+    "json-parse-audit.json": {
+      "bytes": 268,
+      "sha256": "979f8c50c16b698d57f69607d4462a25d3d25e07055608951b77f66b4dbd6e75"
+    },
+    "output-path-preflight.json": {
+      "bytes": 419,
+      "sha256": "0f8e1a0a9bd0cc8fbc2277c3358945183903c78a89cb2bf47986ae844a51c29d"
+    },
+    "postgres-preflight-summary.json": {
+      "bytes": 586,
+      "sha256": "9170f83a5bcd4f0b7904cf27e5e25aeb67b935b932ce3f470fa3f1f587b6b5e0"
+    },
+    "postgres-service-identity.json": {
+      "bytes": 912,
+      "sha256": "757cc2dc632a326ebefefab390fc115bfaa738447e214c858081b16c3760ec69"
+    },
+    "protected-untracked-after.json": {
+      "bytes": 19287,
+      "sha256": "1b2cf6019310b0faf4c07a039980c725f0f7742d6d487877e1ff6766ba12fb28"
+    },
+    "protected-untracked-before.json": {
+      "bytes": 18922,
+      "sha256": "679c7ce8ebdc27d128a550f44445eeea99b3894622adc6245c024a2f6a948f42"
+    },
+    "repair-identity.json": {
+      "bytes": 457,
+      "sha256": "f3f24702faa896acc063243144fdac6542ada7f18738c161aa7d0207cc69e572"
+    },
+    "session-independence.json": {
+      "bytes": 758,
+      "sha256": "4dbe166c93fcd15ad59ecb1f36f8177280988b84c31dd4ce92cd30379a117eea"
+    },
+    "toolchain.json": {
+      "bytes": 594,
+      "sha256": "956cb3547249cb3ac0be6e836d4115d46403be44c9427441b7fa7411afa4998e"
+    }
+  }
+}

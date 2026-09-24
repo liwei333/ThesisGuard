@@ -1,0 +1,20 @@
+{
+  "blocking_stage": "phase_2_container_identity_collection",
+  "captured_at_utc": "2026-09-23T02:44:14.025906+00:00",
+  "database_logical_change_count": 0,
+  "docker_start_budget_consumed": false,
+  "docker_start_count": 0,
+  "open_count": 0,
+  "partial_r3_evidence_created": true,
+  "postgresql_connection_attempted": false,
+  "r7_executed": false,
+  "reason": "BLOCKED_EVIDENCE_HELPER_EXCEPTION",
+  "recovery_path": "BLOCKED",
+  "required_acceptance_achieved": [
+    "L1_STATIC_REVIEWED"
+  ],
+  "required_acceptance_missing": [
+    "PostgreSQL-service-scope L4_RUNTIME_VERIFIED"
+  ],
+  "status": "BLOCKED"
+}

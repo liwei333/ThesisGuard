@@ -1,0 +1,20 @@
+{
+  "docker_context": "desktop-linux",
+  "docker_daemon": "docker-desktop",
+  "docker_server_version": "29.7.2",
+  "container": "thesisguard-postgres",
+  "container_image": "pgvector/pgvector:pg17",
+  "image_id": "sha256:cf134a767f474095eeba57e0117be8e568e011a63f33fbf252f14c9b760f8e6f",
+  "volume": "thesisguard-postgres-data",
+  "mount_target": "/var/lib/postgresql/data",
+  "restart_policy": "unless-stopped",
+  "state": "running",
+  "health": "healthy",
+  "host_port": 15432,
+  "container_port": "5432/tcp",
+  "pg_isready": "accepting connections",
+  "database": "postgres",
+  "current_user": "thesisguard",
+  "server_version": "17.11 (Debian 17.11-1.pgdg12+2)",
+  "read_only_preflight": true
+}

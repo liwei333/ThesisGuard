@@ -1,0 +1,40 @@
+{
+  "baseline_pin_mismatches": {
+    "candidate": [],
+    "main": []
+  },
+  "captured_at_utc": "2026-09-23T11:03:29.560093+00:00",
+  "create_attempts": 0,
+  "distribution": {
+    "allowed_routing_history_audit": 16,
+    "committed_exact_replay_read_only": 3,
+    "forbidden_status_commit_fresh_no_residue": 20,
+    "legacy_forbidden_prior_committed_replay": 2
+  },
+  "distribution_matches": true,
+  "duplicates": [],
+  "extra": [],
+  "fixture_ledger_bytes": 0,
+  "fixture_ledger_exists": false,
+  "manifest_actual_count": 10,
+  "manifest_declared_count": 10,
+  "manifest_extra": [],
+  "manifest_mismatches": [],
+  "manifest_missing": [],
+  "missing": [],
+  "nonce": "458b7481dbfa731becea8a3c7438d39a",
+  "nonce_matches_meta": true,
+  "passed": true,
+  "plugin_hashes_equal": true,
+  "pytest_returncode": 0,
+  "runner_exit": 0,
+  "runner_hashes_equal": true,
+  "socket_attempt_log_bytes": 0,
+  "socket_attempt_log_exists": false,
+  "socket_attempts": 0,
+  "test_body_calls": 0,
+  "unclassified": [],
+  "unique_nodeids": 41,
+  "valid": true,
+  "verdict": "PASS"
+}

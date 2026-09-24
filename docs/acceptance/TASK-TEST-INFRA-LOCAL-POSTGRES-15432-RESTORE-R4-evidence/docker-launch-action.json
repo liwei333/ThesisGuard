@@ -1,0 +1,4 @@
+{
+  "open_docker_invocation_count": 0,
+  "reason": "daemon already accessible in authorized host context"
+}

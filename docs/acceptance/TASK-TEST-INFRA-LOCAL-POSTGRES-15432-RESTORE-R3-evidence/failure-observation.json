@@ -1,0 +1,13 @@
+{
+  "blocking_stage": "phase_2_container_identity_collection",
+  "captured_at_utc": "2026-09-23T02:44:14.023224+00:00",
+  "container_identity_retained": false,
+  "error_type": "JSONDecodeError",
+  "failure_boundary": "selective docker container inspect output parsing",
+  "helper_rerun_prohibited": true,
+  "last_completed_gate": "phase_1 Docker daemon authorized-context identity",
+  "postgresql_connection_attempted": false,
+  "reason": "BLOCKED_EVIDENCE_HELPER_EXCEPTION",
+  "stability_window_started": false,
+  "status": "BLOCKED"
+}

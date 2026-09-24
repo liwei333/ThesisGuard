@@ -1,0 +1,12 @@
+{
+  "captured_at_utc": "2026-09-23T11:08:59.671750+00:00",
+  "category": "credential_handling_and_retained_tool_output",
+  "credential_value_reproduced_in_evidence": false,
+  "database_write_performed": false,
+  "detail": "A tracked test-source excerpt containing plaintext development credential material was inadvertently displayed in tool output while looking for a non-disclosing credential injection path.",
+  "fail_closed_action": "Stopped before catalog preflight, formal 120-second window, runtime observer, real pytest, and CREATE DATABASE.",
+  "overall": "FAIL",
+  "repair_or_retry_performed": false,
+  "status": "FAIL_EVIDENCE_SECURITY_CONTRACT",
+  "successful_postgresql_connection": false
+}

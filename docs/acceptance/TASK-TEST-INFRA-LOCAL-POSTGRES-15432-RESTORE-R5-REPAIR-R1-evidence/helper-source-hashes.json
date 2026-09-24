@@ -1,0 +1,58 @@
+{
+  "completed_at_utc": "2026-09-23T09:56:36.200222+00:00",
+  "credential_safe_failure_classification": "NONE",
+  "criteria_satisfied": true,
+  "exit_code": 0,
+  "monotonic_finished": 34138.366885333,
+  "monotonic_started": 34138.364345708,
+  "original_task_id": "TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5",
+  "receipt_schema_version": 1,
+  "receipt_type": "r5-helper-source-import-hash",
+  "relevant_result": {
+    "r5_source_imports": [
+      {
+        "matches": true,
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-evidence/postgres-observer.source.py",
+        "sha256": "cbbd8182ddce5e23121b7208478627895d4cfbf5e90db8669304059679778b44"
+      },
+      {
+        "matches": true,
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-evidence/stability-supervisor.source.py",
+        "sha256": "fa7c1921cf18d5487d61ec0740eae5c8b1bebe290be942217735696f6112404d"
+      },
+      {
+        "matches": true,
+        "relative_path": "docs/acceptance/TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-evidence/test-postgres-observer.source.py",
+        "sha256": "538071a46b1618b71f2b5a0046bd5931d18c55a785b2e4feb062eb1a264192a0"
+      }
+    ],
+    "repaired_sources": [
+      {
+        "byte_count": 26427,
+        "relative_path": "repaired-observer.source.py",
+        "sha256": "6e9fe43652360cd30d1242deb49fb0750e3d7f66758a1a7dcaa3d054ec41ed93"
+      },
+      {
+        "byte_count": 5102,
+        "relative_path": "repaired-supervisor.source.py",
+        "sha256": "b8bca5d8f5e78e296d59c3c183960aac744b8d2a58ac79a9756baa7b3af1153b"
+      },
+      {
+        "byte_count": 33821,
+        "relative_path": "repaired-tests.source.py",
+        "sha256": "84dd154df6d4eae24d1f542cb6ebe860372205fb408a88bcfca6bb6d9ea351e3"
+      },
+      {
+        "byte_count": 23225,
+        "relative_path": "closure-helper.source.py",
+        "sha256": "76908733507367e127462c1217dc60aa288f8c003f8993aef337e16fee22b258"
+      }
+    ]
+  },
+  "repair_id": "TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-REPAIR-R1",
+  "repair_invocation_id": "1F2E2619-E72E-4D65-8F30-5BB87497BB27",
+  "semantic_command": "R5 helper source import/hash and repaired source publication",
+  "source_config_sha256": "fa663971e5fe9acee70d50df5fc6798cf4c8b329bf763b644dd4e0880f0fd87c",
+  "started_at_utc": "2026-09-23T09:56:36.197683+00:00",
+  "task_id": "TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-REPAIR-R1"
+}

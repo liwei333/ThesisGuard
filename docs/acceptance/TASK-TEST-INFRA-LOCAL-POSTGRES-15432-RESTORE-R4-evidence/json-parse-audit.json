@@ -1,0 +1,12 @@
+{
+  "captured_at_utc": "2026-09-23T07:12:05.489767+00:00",
+  "excluded_not_yet_created": [
+    "json-parse-audit.json",
+    "credential-scan.json",
+    "manifest.json",
+    "final-credential-scan.json"
+  ],
+  "failure_count": 0,
+  "failures": [],
+  "parsed_file_count": 23
+}

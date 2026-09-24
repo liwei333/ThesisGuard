@@ -1,0 +1,16 @@
+{
+  "captured_at_utc": "2026-09-23T02:41:20.632410+00:00",
+  "client_available": true,
+  "client_context": "desktop-linux",
+  "client_version": "29.7.2",
+  "daemon_id": "ce947e54-c61d-470d-b71b-511d67cab4f6",
+  "daemon_name": "docker-desktop",
+  "daemon_ready_wait_seconds": 0.0,
+  "docker_desktop_version": "Docker Desktop 4.90.0 (238679)",
+  "execution_context": "authorized host context with daemon access",
+  "server_returned": true,
+  "server_version": "29.7.2",
+  "socket_error_type": "none",
+  "socket_exists": true,
+  "socket_path": "/Users/qianduoduo/.docker/run/docker.sock"
+}

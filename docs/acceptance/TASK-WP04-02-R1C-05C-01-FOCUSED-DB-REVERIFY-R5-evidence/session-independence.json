@@ -1,0 +1,13 @@
+{
+  "task_id": "TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5",
+  "role": "VERIFIER",
+  "executor": "Codex",
+  "session_new_for_this_task": true,
+  "participated_in_restore_execution": false,
+  "participated_in_candidate_implementation": false,
+  "participated_in_harness_implementation_or_repair": false,
+  "participated_in_candidate_or_harness_git_integration": false,
+  "authored_predecessor_execution_report": false,
+  "eligible": true,
+  "checked_at_utc": "2026-09-22T06:33:26Z"
+}

@@ -1,0 +1,8 @@
+{
+  "captured_at_utc": "2026-09-23T01:38:47.928857+00:00",
+  "cleanup_plan_sha256": "635ba4aad0468c15b4360733c784d52f4430f03477a14ef8a271a1e32bada360",
+  "compose_sha256": "eed9951ef6b4e900d7abc29a55df25bc51e44a0e637e17dc62017fca5cca500b",
+  "r6_acceptance_sha256": "bbe483feb18a610613e0248ea9724c988160f38b6c1ee6ea2b826f9cfcaa2e38",
+  "r6_feedback_sha256": "a04d90b78d531219a4f4eb9f647604be7059ede22f320532f20eda61e1ed1466",
+  "r6_manifest_sha256": "fbc801059480e9da02eb26aac2054da59de46eae2b1347f3d6b451336f0bfbff"
+}

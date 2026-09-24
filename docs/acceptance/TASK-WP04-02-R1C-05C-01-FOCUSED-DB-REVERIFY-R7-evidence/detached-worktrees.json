@@ -1,0 +1,17 @@
+{
+  "captured_at_utc": "2026-09-23T11:01:45.356621+00:00",
+  "current_main": {
+    "detached": true,
+    "fresh_for_r7": true,
+    "head": "5c4b930f4948815e3ad2ab26b5e7c81de8c20e5b",
+    "path": "/private/tmp/tg-wp04-r7.vGR7ws/current-main"
+  },
+  "historical_main": {
+    "detached": true,
+    "fresh_for_r7": true,
+    "head": "675217c3a15c0f416aa4462ca6edc491bf99f9f6",
+    "path": "/private/tmp/tg-wp04-r7.vGR7ws/historical-main"
+  },
+  "passed": true,
+  "protected_snapshot_sha256": "2916eba0e13db2e4a2c21ebf30ce7ef5400d8dc43393988f21be6e7323248ce3"
+}

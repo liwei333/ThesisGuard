@@ -1,0 +1,11 @@
+{
+  "blocking_stage": "phase_4_single_30_second_stability_window",
+  "captured_at_utc": "2026-09-23T07:12:05.408445+00:00",
+  "error_type": "ORCHESTRATION_OUTPUT_CAPTURE_LOSS",
+  "formal_stability_command_invocations": 1,
+  "formal_stability_output_retained": false,
+  "last_completed_gate": "PostgreSQL identity, full catalog, fixed 45 comparison, residual and point-in-time session preflight",
+  "reason": "BLOCKED_STABILITY_WINDOW_EVIDENCE_NOT_RETAINED",
+  "rerun_prohibited": true,
+  "status": "BLOCKED"
+}

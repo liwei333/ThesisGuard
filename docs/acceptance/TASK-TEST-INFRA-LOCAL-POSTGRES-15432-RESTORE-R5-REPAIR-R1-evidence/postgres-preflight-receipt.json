@@ -1,0 +1,57 @@
+{
+  "completed_at_utc": "2026-09-23T09:56:37.472200+00:00",
+  "credential_safe_failure_classification": "NONE",
+  "criteria_satisfied": true,
+  "exit_code": 0,
+  "monotonic_finished": 34139.638853958,
+  "monotonic_started": 34139.362679791,
+  "original_task_id": "TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5",
+  "receipt_schema_version": 1,
+  "receipt_type": "postgres-read-only-preflight",
+  "relevant_result": {
+    "additional_database_count": 0,
+    "catalog_canonical_sha256": "5b347fab6f6a78e2fa9749bc0e0c97cd387273c31fe39495ab060ad016dc9910",
+    "catalog_row_count": 49,
+    "connection_target": {
+      "database": "postgres",
+      "host": "127.0.0.1",
+      "port": 15432
+    },
+    "criteria_satisfied": true,
+    "external_active_client_count": 0,
+    "historical_individual_database_connections": 0,
+    "historical_unknown_comparison": {
+      "comparison_fields": [
+        "name",
+        "oid",
+        "owner",
+        "owner_oid"
+      ],
+      "exact_match_count": 45,
+      "expected_count": 45,
+      "mismatches": [],
+      "missing": [],
+      "observed_count": 45
+    },
+    "identity": {
+      "current_database": "postgres",
+      "current_user": "thesisguard",
+      "observer_backend_pid": 47489,
+      "postgresql_major_version": 17,
+      "postgresql_version": "PostgreSQL 17.11 (Debian 17.11-1.pgdg12+2) on aarch64-unknown-linux-gnu, compiled by gcc (Debian 12.2.0-14+deb12u1) 12.2.0, 64-bit",
+      "postgresql_version_num": 170011
+    },
+    "postgresql_connection_count": 1,
+    "r5_residual": {
+      "name": "tg_wp04_service_53ea9a765404436e8fc6a6ecf2f51187",
+      "present": false
+    },
+    "task_prefix_external_session_count": 0
+  },
+  "repair_id": "TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-REPAIR-R1",
+  "repair_invocation_id": "1F2E2619-E72E-4D65-8F30-5BB87497BB27",
+  "semantic_command": "single read-only PostgreSQL identity/catalog preflight",
+  "source_config_sha256": "fa663971e5fe9acee70d50df5fc6798cf4c8b329bf763b644dd4e0880f0fd87c",
+  "started_at_utc": "2026-09-23T09:56:37.196026+00:00",
+  "task_id": "TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5-REPAIR-R1"
+}

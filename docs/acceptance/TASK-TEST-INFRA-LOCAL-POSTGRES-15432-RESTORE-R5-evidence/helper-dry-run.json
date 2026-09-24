@@ -1,0 +1,20 @@
+{
+  "clock_mode": "synthetic",
+  "criteria_satisfied": true,
+  "exit_code": 0,
+  "fixed_stdout_status": "DRY_RUN_OK",
+  "formal_clock_mode": "real-monotonic only",
+  "mode": "synthetic-no-side-effect-dry-run",
+  "recorded_at_utc": "2026-09-23T08:24:23.276265+00:00",
+  "sample_count": 7,
+  "schema_version": 1,
+  "side_effect_counts": {
+    "docker_calls": 0,
+    "docker_start_calls": 0,
+    "network_connections": 0,
+    "open_calls": 0,
+    "postgresql_connections": 0
+  },
+  "task_id": "TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R5",
+  "temporary_scope": "/private/tmp/tg-postgres-restore-r5.gn5SL7/formal-dry-run"
+}

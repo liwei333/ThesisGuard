@@ -1,0 +1,33 @@
+{
+  "actual": {
+    "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-acceptance.md": "7a76be1fa3dbc8daf18e3d50699a17eb357b67579eb110aff822694ace026d75",
+    "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/manifest.json": "a10316c137050a9af53292f5043dd30129c9f10213094dd6fafd683967ebb014",
+    "docs/acceptance/TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-R1-INDEPENDENT-REVIEW-R1-acceptance.md": "1659140342ed5978ca48e95d9ee24e25bde1dbeeff6a2314506acd5ecc34d342",
+    "docs/acceptance/TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-R1-evidence/manifest.json": "8e42c819c2b9b28a8cc1249e90dcb3a2f7788e205d0fcc1ea45838c254dd1f24",
+    "docs/acceptance/TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-R1-execution-report.md": "374de34f56e1c574ff73a63894e688a8645684de46c9e6970e5f1e4cc0a0dd57",
+    "tests/evidence_pg_fixture.py": "894630daace9489e19534cdff9b8b4f95b5c33e31bdce7452512ff76a584b42b",
+    "tests/test_evidence_pg_fixture_lifecycle.py": "5c8e4ed5a9cfdadb00ebde21fa3057a2687b05aa34b0f9bba54160c57a10de36",
+    "two_file_diff": "8ee1f97635eecca7452b46b90062e7f70152e54b395b3f5ba2a28cc4edffa127"
+  },
+  "all_match": true,
+  "captured_at_utc": "2026-09-22T08:35:54.314113+00:00",
+  "expected": {
+    "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-acceptance.md": "7a76be1fa3dbc8daf18e3d50699a17eb357b67579eb110aff822694ace026d75",
+    "docs/acceptance/TASK-WP04-02-R1C-05C-01-FOCUSED-DB-REVERIFY-R5-evidence/manifest.json": "a10316c137050a9af53292f5043dd30129c9f10213094dd6fafd683967ebb014",
+    "docs/acceptance/TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-R1-INDEPENDENT-REVIEW-R1-acceptance.md": "1659140342ed5978ca48e95d9ee24e25bde1dbeeff6a2314506acd5ecc34d342",
+    "docs/acceptance/TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-R1-evidence/manifest.json": "8e42c819c2b9b28a8cc1249e90dcb3a2f7788e205d0fcc1ea45838c254dd1f24",
+    "docs/acceptance/TASK-WP04-02-R1C-05C-01-R5-RESOURCE-LIFECYCLE-REPAIR-R1-execution-report.md": "374de34f56e1c574ff73a63894e688a8645684de46c9e6970e5f1e4cc0a0dd57",
+    "tests/evidence_pg_fixture.py": "894630daace9489e19534cdff9b8b4f95b5c33e31bdce7452512ff76a584b42b",
+    "tests/test_evidence_pg_fixture_lifecycle.py": "5c8e4ed5a9cfdadb00ebde21fa3057a2687b05aa34b0f9bba54160c57a10de36",
+    "two_file_diff": "8ee1f97635eecca7452b46b90062e7f70152e54b395b3f5ba2a28cc4edffa127"
+  },
+  "repair_evidence_validation": {
+    "all_json_parse": true,
+    "bytes_and_sha256_exact": true,
+    "manifest_entries": 18,
+    "manifest_sha256": "8e42c819c2b9b28a8cc1249e90dcb3a2f7788e205d0fcc1ea45838c254dd1f24",
+    "non_manifest_physical_files": 18,
+    "path_set_exact": true,
+    "total_physical_files": 19
+  }
+}

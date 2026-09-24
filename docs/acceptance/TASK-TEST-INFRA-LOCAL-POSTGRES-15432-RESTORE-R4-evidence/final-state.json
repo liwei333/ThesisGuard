@@ -1,0 +1,11 @@
+{
+  "blocking_reason": "BLOCKED_STABILITY_WINDOW_EVIDENCE_NOT_RETAINED",
+  "container_identity_observed": true,
+  "independent_acceptance_performed": false,
+  "postgres_preflight_observed": true,
+  "postgresql_service_scope_l4_runtime_verified": false,
+  "recovery_path": "A0",
+  "stability_window_result_observed": false,
+  "status": "BLOCKED",
+  "task_id": "TASK-TEST-INFRA-LOCAL-POSTGRES-15432-RESTORE-R4"
+}

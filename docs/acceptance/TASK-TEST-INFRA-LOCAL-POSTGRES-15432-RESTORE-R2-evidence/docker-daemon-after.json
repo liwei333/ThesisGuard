@@ -1,0 +1,21 @@
+{
+  "captured_at_utc": "2026-09-23T01:45:17.410279+00:00",
+  "contract_observation_point_seconds": 180,
+  "daemon_available_at_end": false,
+  "docker_app_installed": true,
+  "implementation_exit_delay_disclosure_seconds_approx": 5,
+  "poll_interval_seconds_approx": 5,
+  "poll_probe_count": 36,
+  "socket_exists": true,
+  "version_probe": {
+    "argv": [
+      "docker",
+      "version",
+      "--format",
+      "{{json .}}"
+    ],
+    "exit_code": 1,
+    "stderr": "permission denied while trying to connect to the docker API at unix:///Users/qianduoduo/.docker/run/docker.sock\n",
+    "stdout": "{\"Client\":{\"Version\":\"29.7.2\",\"ApiVersion\":\"1.55\",\"DefaultAPIVersion\":\"1.55\",\"GitCommit\":\"a7dcaa6\",\"GoVersion\":\"go1.26.5\",\"Os\":\"darwin\",\"Arch\":\"arm64\",\"BuildTime\":\"Wed Aug  5 18:27:50 2026\",\"Context\":\"desktop-linux\"},\"Server\":null}\n"
+  }
+}

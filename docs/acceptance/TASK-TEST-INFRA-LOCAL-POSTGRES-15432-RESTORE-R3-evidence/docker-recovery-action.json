@@ -1,0 +1,10 @@
+{
+  "called": false,
+  "captured_at_utc": "2026-09-23T02:44:14.024830+00:00",
+  "count": 0,
+  "docker_start_budget_consumed": false,
+  "exit_code": null,
+  "identity_gate_passed_first": false,
+  "reason": "helper blocked before container identity gate completed",
+  "recovery_path": "BLOCKED"
+}
