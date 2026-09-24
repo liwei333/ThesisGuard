@@ -73,9 +73,14 @@ _SUCCESS_FIELDS = frozenset(
 )
 _SAFE_ID = re.compile(r"\A[0-9a-f]{64}\Z")
 _SAFE_DB_IDENTIFIER = re.compile(r"\A[A-Za-z0-9_.-]{1,128}\Z")
-_URL_USERINFO = re.compile(rb"[A-Za-z][A-Za-z0-9+.-]*://[^\s/@:]+:[^\s/@]+@")
+_URL_USERINFO = re.compile(rb"[A-Za-z][A-Za-z0-9+.-]*://[^\s/?#@]+@")
+_SENSITIVE_QUERY_PARAMETER = re.compile(
+    rb"(?i)[?&](?:password|passwd|token|secret|database_url|db_url|dsn|api_key|"
+    rb"access_key|auth|credentials?)=[^&#\s\"']+"
+)
 _SENSITIVE_ASSIGNMENT = re.compile(
-    rb"(?i)(?:password|passwd|token|secret|database_url|dsn)\s*[:=]\s*"
+    rb"(?i)(?:password|passwd|token|secret|database_url|db_url|dsn|api_key|"
+    rb"access_key|auth|credentials?)\s*[:=]\s*"
     rb"[\"'][A-Za-z0-9_./+=-]{12,}[\"']"
 )
 
@@ -509,6 +514,7 @@ def credential_scan_bytes(data: bytes, path: str) -> list[dict[str, object]]:
     findings: list[dict[str, object]] = []
     for finding_type, pattern in (
         ("URL_USERINFO", _URL_USERINFO),
+        ("SENSITIVE_QUERY_PARAMETER", _SENSITIVE_QUERY_PARAMETER),
         ("SENSITIVE_ASSIGNMENT", _SENSITIVE_ASSIGNMENT),
     ):
         count = len(pattern.findall(data))
