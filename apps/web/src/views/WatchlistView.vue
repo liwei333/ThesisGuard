@@ -26,6 +26,7 @@ const query = ref('301128')
 const loading = ref(true)
 const adding = ref(false)
 const error = ref<string | null>(null)
+let latestSearchRequest = 0
 
 const classifications = computed(() => {
   const existing = watchlistItems.value.map((item) => item.classification)
@@ -68,15 +69,23 @@ async function fetchWatchlist(): Promise<void> {
 }
 
 async function runSearch(): Promise<void> {
-  if (!query.value.trim()) {
+  const searchRequest = ++latestSearchRequest
+  const searchQuery = query.value.trim()
+  if (!searchQuery) {
     searchResults.value = []
     return
   }
   try {
-    searchResults.value = await searchInstruments(query.value.trim())
+    const results = await searchInstruments(searchQuery)
+    if (searchRequest !== latestSearchRequest) {
+      return
+    }
+    searchResults.value = results
     error.value = null
   } catch (e: unknown) {
-    error.value = errorMessage(e)
+    if (searchRequest === latestSearchRequest) {
+      error.value = errorMessage(e)
+    }
   }
 }
 
@@ -107,10 +116,15 @@ async function addToWatchlist(searchQuery = query.value): Promise<void> {
 }
 
 async function removeItem(item: WatchlistItem): Promise<void> {
-  await deleteWatchlistItem(item.id)
-  watchlistItems.value = watchlistItems.value.filter(
-    (entry) => entry.id !== item.id,
-  )
+  try {
+    await deleteWatchlistItem(item.id)
+    watchlistItems.value = watchlistItems.value.filter(
+      (entry) => entry.id !== item.id,
+    )
+    error.value = null
+  } catch (e: unknown) {
+    error.value = errorMessage(e)
+  }
 }
 
 onMounted(async () => {

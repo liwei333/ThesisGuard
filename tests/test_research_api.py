@@ -20,14 +20,12 @@ from collections.abc import AsyncIterator
 from uuid import uuid4
 
 import asyncpg
-import pytest
 import pytest_asyncio
+from apps.api.main import create_app
+from backend.common.db.session import get_db
 from httpx import ASGITransport, AsyncClient
 from sqlalchemy.engine import make_url
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
-
-from apps.api.main import create_app
-from backend.common.db.session import get_db
 
 QIANGRUI_INSTRUMENT_ID = "11111111-1111-4111-8111-111111111111"
 UNKNOWN_INSTRUMENT_ID = "99999999-9999-4999-8999-999999999999"
@@ -55,7 +53,8 @@ async def api_sessionmaker() -> AsyncIterator[async_sessionmaker[AsyncSession]]:
 
     test_url = admin_url.set(database=test_db_name)
     database_url = test_url.render_as_string(hide_password=False)
-    subprocess.run(
+    await asyncio.to_thread(
+        subprocess.run,
         ["alembic", "-c", "migrations/alembic.ini", "upgrade", "head"],
         check=True,
         env={**os.environ, "DATABASE_URL": database_url},

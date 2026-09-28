@@ -3,7 +3,10 @@
 from datetime import datetime
 
 from backend.instrument.schemas import InstrumentRead
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, field_validator
+
+WATCHLIST_CLASSIFICATIONS = ("INSTITUTIONAL_TREND", "HOT_MONEY", "EVENT_DRIVEN")
+WATCHLIST_RESEARCH_STATUSES = ("ACTIVE", "PAUSED", "ARCHIVED")
 
 
 class WatchlistAddRequest(BaseModel):
@@ -20,6 +23,20 @@ class WatchlistUpdateRequest(BaseModel):
     research_status: str | None = Field(default=None, max_length=32)
     agent_action: str | None = Field(default=None, max_length=128)
     notes: str | None = Field(default=None, max_length=2000)
+
+    @field_validator("classification")
+    @classmethod
+    def validate_classification(cls, value: str | None) -> str | None:
+        if value is not None and value not in WATCHLIST_CLASSIFICATIONS:
+            raise ValueError("Invalid watchlist classification")
+        return value
+
+    @field_validator("research_status")
+    @classmethod
+    def validate_research_status(cls, value: str | None) -> str | None:
+        if value is not None and value not in WATCHLIST_RESEARCH_STATUSES:
+            raise ValueError("Invalid watchlist research status")
+        return value
 
 
 class WatchlistItemRead(BaseModel):

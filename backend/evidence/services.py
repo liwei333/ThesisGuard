@@ -285,7 +285,7 @@ async def register_source_document(
         external_document_id=external_document_id,
         canonical_url=canonical_url_value,
     )
-    request_hash = stable_hash(payload)
+    request_hash = stable_hash({**payload, "as_of": as_of})
     replay = await _idempotent_replay(
         db,
         scope=idempotency_scope,
@@ -434,6 +434,7 @@ async def append_source_document_version(
         "object_key": object_key,
         "text_object_key": text_object_key,
         "fingerprint_payload": fingerprint_payload,
+        "as_of": as_of,
     }
     audit_payload = {
         **request_payload,
@@ -677,7 +678,50 @@ async def create_evidence_series_version(
         "derivation_links": [link.__dict__ for link in derivation_links],
         "verification_status": verification_status,
     }
-    request_hash = stable_hash(payload)
+    request_payload = {
+        "operation": "create_evidence_series_version",
+        "scope_type": scope_type,
+        "scope_key": scope_key,
+        "information_type": information_type,
+        "claim_key": claim_key,
+        "metric_key": metric_key,
+        "period_start": period_start,
+        "period_end": period_end,
+        "provenance_kind": provenance_kind,
+        "primary_source_document_id": primary_source_document_id,
+        "origin_key": origin_key,
+        "source_document_version_id": source_document_version_id,
+        "display_title": display_title,
+        "display_text": display_text,
+        "raw_value": raw_value,
+        "raw_unit": raw_unit,
+        "normalized_value": normalized_value,
+        "normalized_text_value": normalized_text_value,
+        "normalized_unit": normalized_unit,
+        "currency": currency,
+        "as_of": as_of,
+        "effective_from": effective_from,
+        "effective_to": effective_to,
+        "locators": [locator.__dict__ for locator in locators],
+        "instrument_links": [link.__dict__ for link in instrument_links],
+        "derivation_links": [link.__dict__ for link in derivation_links],
+        "corroborates_evidence_version_ids": list(corroborates_evidence_version_ids or ()),
+        "extractor_name": extractor_name,
+        "extractor_version": extractor_version,
+        "prompt_template_version": prompt_template_version,
+        "manual_entry_reason": manual_entry_reason,
+        "manual_observed_at": manual_observed_at,
+        "verification_status": verification_status,
+        "status_changed_at": status_changed_at,
+        "status_changed_by_actor": status_changed_by_actor,
+        "status_change_kind": status_change_kind,
+        "status_reason": status_reason,
+        "trusted_correction_rule": trusted_correction_rule,
+        "created_by_actor": created_by_actor,
+        "created_at": created_at,
+        "supersedes_evidence_version_id": supersedes_evidence_version_id,
+    }
+    request_hash = stable_hash(request_payload)
     replay = await _idempotent_replay(
         db,
         scope="create_evidence_series_version",
@@ -924,6 +968,47 @@ async def revise_correct_evidence(
         "instrument_links": [link.__dict__ for link in replacement_children["instrument_links"]],
         "derivation_links": [link.__dict__ for link in replacement_children["derivation_links"]],
     }
+    request_payload = {
+        "operation": "revise_correct_evidence",
+        "evidence_series_id": evidence_series_id,
+        "current_evidence_version_id": current.id,
+        "expected_version": expected_version,
+        "status_changed_at": status_changed_at,
+        "status_changed_by_actor": status_changed_by_actor,
+        "status_change_kind": "CORRECTION",
+        "status_reason": status_reason,
+        "display_title": _override(overrides, "display_title", current.display_title),
+        "display_text": _override(overrides, "display_text", current.display_text),
+        "raw_value": _override(overrides, "raw_value", current.raw_value),
+        "raw_unit": _override(overrides, "raw_unit", current.raw_unit),
+        "normalized_value": _override(
+            overrides, "normalized_value", current.normalized_value
+        ),
+        "normalized_text_value": _override(
+            overrides, "normalized_text_value", current.normalized_text_value
+        ),
+        "normalized_unit": _override(overrides, "normalized_unit", current.normalized_unit),
+        "currency": _override(overrides, "currency", current.currency),
+        "as_of": _override(overrides, "as_of", current.as_of),
+        "effective_from": _override(overrides, "effective_from", current.effective_from),
+        "effective_to": _override(overrides, "effective_to", current.effective_to),
+        "trusted_correction_rule": effective_trusted_correction_rule,
+        "source_document_version_id": current.source_document_version_id,
+        "information_type": current.information_type,
+        "provenance_kind": current.provenance_kind,
+        "claim_key": current.claim_key,
+        "metric_key": current.metric_key,
+        "period_start": current.period_start,
+        "period_end": current.period_end,
+        "instrument_links": [
+            link.__dict__ for link in replacement_children["instrument_links"]
+        ],
+        "derivation_links": [
+            link.__dict__ for link in replacement_children["derivation_links"]
+        ],
+        "locators": [locator.__dict__ for locator in _current_locator_inputs(current)],
+        "created_by_actor": current.created_by_actor,
+    }
     if _revision_identity_changed(current, current_series, replacement_children):
         return await create_replacement_evidence_series(
             db,
@@ -983,6 +1068,7 @@ async def revise_correct_evidence(
         status_changed_by_actor=status_changed_by_actor,
         status_reason=status_reason,
         overrides=overrides,
+        request_identity=request_payload,
         instrument_links=replacement_children["instrument_links"],
         derivation_links=replacement_children["derivation_links"],
     )
@@ -1190,16 +1276,46 @@ async def create_replacement_evidence_series(
 
     if not isinstance(display_text, str):
         _validate_display_text(display_text)
-    payload = {
+    request_payload = {
+        "operation": "create_replacement_evidence_series",
         "prior_evidence_version_id": prior_evidence_version_id,
-        "new_identity": new_identity,
+        "scope_type": scope_type,
+        "scope_key": scope_key,
+        "information_type": information_type,
+        "claim_key": claim_key,
+        "metric_key": metric_key,
+        "period_start": period_start,
+        "period_end": period_end,
+        "provenance_kind": provenance_kind,
+        "primary_source_document_id": primary_source_document_id,
+        "origin_key": origin_key,
+        "source_document_version_id": source_document_version_id,
         "display_title": display_title,
         "display_text": display_text,
+        "raw_value": raw_value,
+        "raw_unit": raw_unit,
+        "normalized_value": normalized_value,
+        "normalized_text_value": normalized_text_value,
+        "normalized_unit": normalized_unit,
+        "currency": currency,
+        "as_of": as_of,
+        "effective_from": effective_from,
+        "effective_to": effective_to,
+        "locators": [locator.__dict__ for locator in (locators or ())],
+        "instrument_links": [link.__dict__ for link in (instrument_links or ())],
+        "derivation_links": [link.__dict__ for link in (derivation_links or ())],
+        "extractor_name": extractor_name,
+        "extractor_version": extractor_version,
+        "prompt_template_version": prompt_template_version,
+        "manual_entry_reason": manual_entry_reason,
+        "manual_observed_at": manual_observed_at,
         "status_changed_at": status_changed_at,
         "status_changed_by_actor": status_changed_by_actor,
         "status_reason": status_reason,
+        "trusted_correction_rule": trusted_correction_rule,
+        "created_by_actor": created_by_actor,
     }
-    request_hash = stable_hash(payload)
+    request_hash = stable_hash(request_payload)
     replay = await _idempotent_replay(
         db,
         scope="create_replacement_evidence_series",
@@ -1378,12 +1494,19 @@ async def _status_command(
     current = await _get_current_evidence_for_update(db, evidence_series_id)
     if current is None:
         raise EvidenceVersionNotFound(f"No EvidenceVersion exists for series {evidence_series_id}")
+    effective_status_change_kind = (
+        status_change_kind_by_from.get(current.verification_status, status_change_kind)
+        if status_change_kind_by_from is not None
+        else status_change_kind
+    )
     payload = {
         "evidence_series_id": evidence_series_id,
         "expected_version": expected_version,
         "target_status": target_status,
+        "status_change_kind": effective_status_change_kind,
         "reason": reason,
         "actor": actor,
+        "as_of": as_of,
     }
     replay = await _idempotent_replay(
         db,
@@ -1403,11 +1526,6 @@ async def _status_command(
             from_status=current.verification_status,
             requested_status=target_status,
         )
-    effective_status_change_kind = (
-        status_change_kind_by_from.get(current.verification_status, status_change_kind)
-        if status_change_kind_by_from is not None
-        else status_change_kind
-    )
     return await _append_status_or_revision(
         db,
         current=current,
@@ -1436,6 +1554,7 @@ async def _append_status_or_revision(
     status_changed_by_actor: str,
     status_reason: str,
     overrides: dict[str, Any],
+    request_identity: dict[str, Any] | None = None,
     instrument_links: Sequence[InstrumentLinkInput] | None = None,
     derivation_links: Sequence[DerivationLinkInput] | None = None,
 ) -> EvidenceVersion:
@@ -1451,7 +1570,18 @@ async def _append_status_or_revision(
         # Invalid runtime types must fail with the domain error before hashing;
         # they cannot be exact replays of a persisted string rule.
         _validate_trusted_correction_rule(correction_rule)
-    request_hash = stable_hash(payload)
+    child_locators = _current_locator_inputs(current)
+    child_links = (
+        list(instrument_links)
+        if instrument_links is not None
+        else _current_instrument_inputs(current)
+    )
+    child_derivation_links = (
+        list(derivation_links)
+        if derivation_links is not None
+        else _current_derivation_inputs(current)
+    )
+    request_hash = stable_hash(request_identity if request_identity is not None else payload)
     replay = await _idempotent_replay(
         db,
         scope=idempotency_scope,
@@ -1471,17 +1601,6 @@ async def _append_status_or_revision(
         if correction_rule is None:
             _validate_ordinary_correction_prior(current)
             verification_status = "UNREVIEWED"
-    child_locators = _current_locator_inputs(current)
-    child_links = (
-        list(instrument_links)
-        if instrument_links is not None
-        else _current_instrument_inputs(current)
-    )
-    child_derivation_links = (
-        list(derivation_links)
-        if derivation_links is not None
-        else _current_derivation_inputs(current)
-    )
     version = EvidenceVersion(
         id=uuid_str(),
         evidence_series_id=current.evidence_series_id,

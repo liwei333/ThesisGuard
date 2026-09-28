@@ -7,6 +7,7 @@ Redis 使用三个逻辑 DB：/0 通用、/1 缓存、/2 队列，避免 key 冲
 
 from functools import lru_cache
 
+from pydantic import model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -23,7 +24,9 @@ class Settings(BaseSettings):
     # Application
     APP_NAME: str = "ThesisGuard"
     APP_VERSION: str = "0.1.0"
+    APP_ENV: str = "development"
     DEBUG: bool = False
+    API_DEBUG: bool = False
     LOG_LEVEL: str = "INFO"
     # SECRET_KEY 仅用于 JWT 签名，生产环境必须通过环境变量覆盖
     SECRET_KEY: str = "dev-secret-key-change-in-production"
@@ -100,6 +103,16 @@ class Settings(BaseSettings):
     # Worker
     WORKER_CONCURRENCY: int = 4
     WORKER_LOG_LEVEL: str = "INFO"
+
+    @model_validator(mode="after")
+    def validate_runtime_security(self) -> "Settings":
+        """Reject development-only security settings in production."""
+        if self.APP_ENV.lower() == "production":
+            if self.SECRET_KEY == "dev-secret-key-change-in-production":
+                raise ValueError("SECRET_KEY must be changed in production")
+            if self.API_DEBUG or self.DEBUG:
+                raise ValueError("DEBUG must be disabled in production")
+        return self
 
 
 @lru_cache

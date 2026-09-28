@@ -56,14 +56,17 @@ async def update_watchlist_endpoint(
     item = await get_watchlist_item(db, item_id)
     if item is None:
         raise HTTPException(status_code=404, detail="Watchlist item not found")
-    updated = await update_watchlist_item(
-        db,
-        item,
-        classification=payload.classification,
-        research_status=payload.research_status,
-        agent_action=payload.agent_action,
-        notes=payload.notes,
-    )
+    try:
+        updated = await update_watchlist_item(
+            db,
+            item,
+            classification=payload.classification,
+            research_status=payload.research_status,
+            agent_action=payload.agent_action,
+            notes=payload.notes,
+        )
+    except ValueError as exc:
+        raise HTTPException(status_code=422, detail="Invalid watchlist state") from exc
     return WatchlistItemRead.model_validate(updated)
 
 

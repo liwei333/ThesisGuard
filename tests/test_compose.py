@@ -75,7 +75,7 @@ def test_compose_uses_dedicated_postgres_host_port() -> None:
     """Docker Postgres should not collide with a local PostgreSQL on 5432."""
     compose = Path("docker-compose.yml").read_text(encoding="utf-8")
 
-    assert '"${POSTGRES_HOST_PORT:-15432}:5432"' in compose
+    assert '"127.0.0.1:${POSTGRES_HOST_PORT:-15432}:5432"' in compose
 
 
 def test_makefile_typecheck_uses_explicit_package_bases() -> None:

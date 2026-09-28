@@ -1,0 +1,2006 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-page-node-id="ek9oABLmxV2pypqx15R0kL">
+<head data-page-node-id="UbXLpBdl2pGcGhaNHQBP2c">
+<meta charset="UTF-8" data-page-node-id="8H4F4AmQnvvz7Uj1kKDrH8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" data-page-node-id="lNKpfXp5OEimjzFzShe7pD">
+<title>ThesisGuard 论衡 · 开发工作台</title>
+<style>
+/* ========================================
+   设计变量 — 浅色主题，匹配项目紫色品牌色
+   ======================================== */
+:root {
+  --bg-page: #f4f1fa;
+  --bg-card: #ffffff;
+  --bg-sidebar: #faf8ff;
+  --bg-hover: #f0edf7;
+  --bg-code: #f5f3fa;
+  --bg-inset: #f8f7fb;
+  --bg-badge: #ede9f8;
+
+  --text-primary: #1d1a29;
+  --text-secondary: #625e70;
+  --text-muted: #9994a6;
+  --text-inverse: #ffffff;
+
+  --border: #e8e5ee;
+  --border-light: #f0edf7;
+  --border-dark: #d4cfe4;
+
+  --brand-dark: #302945;
+  --brand-purple: #6c57dc;
+  --brand-light: #9d8ef0;
+  --brand-grad: linear-gradient(135deg, #302945, #6c57dc);
+
+  --status-implemented: #1ca77b;
+  --status-partial: #f59e0b;
+  --status-design: #6366f1;
+  --status-planned: #94a3b8;
+  --status-unproven: #ef4444;
+  --status-contract: #8b5cf6;
+
+  --shadow-sm: 0 1px 3px rgba(48,41,69,0.06);
+  --shadow-md: 0 4px 12px rgba(48,41,69,0.08);
+  --shadow-lg: 0 8px 24px rgba(48,41,69,0.10);
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+
+  --transition: 0.2s ease;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, "SF Pro Text", "Helvetica Neue", "PingFang SC", "Noto Sans SC", sans-serif;
+  background: var(--bg-page);
+  color: var(--text-primary);
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ========================================
+   布局骨架
+   ======================================== */
+.workbench {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  min-height: 100vh;
+}
+
+/* ---- 侧边栏 ---- */
+.sidebar {
+  background: var(--bg-sidebar);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  z-index: 100;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 22px 18px 18px;
+}
+
+.brand-logo {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: var(--brand-grad);
+  color: var(--text-inverse);
+  font-weight: 800;
+  font-size: 20px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(108,87,220,0.3);
+}
+
+.brand-info { display: flex; flex-direction: column; }
+.brand-name { font-size: 15px; font-weight: 700; color: var(--text-primary); }
+.brand-tag { font-size: 11px; color: var(--text-muted); letter-spacing: 0.5px; }
+
+.nav-section {
+  padding: 8px 10px 4px;
+}
+
+.nav-section-title {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 8px 10px 4px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all var(--transition);
+  cursor: pointer;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+}
+
+.nav-item:hover { background: var(--bg-hover); color: var(--brand-dark); }
+
+.nav-item.active {
+  background: var(--brand-dark);
+  color: var(--text-inverse);
+}
+
+.nav-item.active .nav-icon { opacity: 1; }
+
+.nav-icon {
+  font-size: 15px;
+  width: 20px;
+  text-align: center;
+  opacity: 0.7;
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  padding: 16px 18px;
+  border-top: 1px solid var(--border);
+  font-size: 11px;
+  color: var(--text-muted);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.footer-row { display: flex; align-items: center; gap: 8px; }
+
+.status-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  display: inline-block;
+}
+.dot-green { background: var(--status-implemented); box-shadow: 0 0 0 3px rgba(28,167,123,0.15); }
+.dot-amber { background: var(--status-partial); box-shadow: 0 0 0 3px rgba(245,158,11,0.15); }
+
+/* ---- 主内容区 ---- */
+.main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow-x: hidden;
+}
+
+.topbar {
+  height: 60px;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  padding: 0 28px;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  gap: 16px;
+}
+
+.topbar-title h1 {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.topbar-title span {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.topbar-actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.badge-branch { background: var(--bg-badge); color: var(--brand-purple); }
+.badge-status { background: rgba(245,158,11,0.12); color: #b45309; }
+.badge-ver { background: rgba(108,87,220,0.12); color: var(--brand-purple); }
+
+.content { padding: 28px; }
+
+/* ========================================
+   卡片组件
+   ======================================== */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition);
+}
+
+.card:hover { box-shadow: var(--shadow-md); }
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.card-icon {
+  width: 32px; height: 32px;
+  border-radius: 8px;
+  display: grid; place-items: center;
+  font-size: 16px;
+  background: var(--bg-badge);
+  color: var(--brand-purple);
+  flex-shrink: 0;
+}
+
+.card-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.card-subtitle {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+/* ========================================
+   网格布局
+   ======================================== */
+.grid-overview {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.grid-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px; }
+.grid-3col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-bottom: 24px; }
+.grid-full { margin-bottom: 24px; }
+
+@media (max-width: 1100px) {
+  .grid-overview, .grid-2col, .grid-3col { grid-template-columns: 1fr; }
+}
+
+/* ========================================
+   北极星概览面板
+   ======================================== */
+.north-star {
+  background: var(--brand-dark);
+  color: var(--text-inverse);
+  border: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.north-star::before {
+  content: '';
+  position: absolute;
+  top: -40px; right: -40px;
+  width: 200px; height: 200px;
+  background: radial-gradient(circle, rgba(108,87,220,0.3), transparent 70%);
+  border-radius: 50%;
+}
+
+.north-star-content { position: relative; z-index: 1; }
+
+.north-star-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--brand-light);
+  margin-bottom: 8px;
+}
+
+.north-star-text {
+  font-size: 15px;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.9);
+}
+
+.north-star-meta {
+  display: flex;
+  gap: 20px;
+  margin-top: 18px;
+  flex-wrap: wrap;
+}
+
+.meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.meta-label {
+  font-size: 10px;
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.meta-value {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-inverse);
+}
+
+/* ========================================
+   统计指标卡
+   ======================================== */
+.stat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.stat-card {
+  background: var(--bg-inset);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--brand-dark);
+  line-height: 1.2;
+}
+
+.stat-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* ========================================
+   模块架构网格
+   ======================================== */
+.module-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 10px;
+}
+
+.module-card {
+  background: var(--bg-inset);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  transition: all var(--transition);
+  cursor: default;
+  position: relative;
+}
+
+.module-card:hover {
+  border-color: var(--border-dark);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.module-card.has-code {
+  border-left: 3px solid var(--status-implemented);
+}
+.module-card.has-models {
+  border-left: 3px solid var(--status-partial);
+}
+.module-card.empty {
+  border-left: 3px solid var(--status-planned);
+  opacity: 0.85;
+}
+
+.module-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.module-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.module-status-tag {
+  font-size: 9px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.tag-impl { background: rgba(28,167,123,0.12); color: var(--status-implemented); }
+.tag-partial { background: rgba(245,158,11,0.12); color: #b45309; }
+.tag-planned { background: rgba(148,163,184,0.15); color: #64748b; }
+.tag-design { background: rgba(99,102,241,0.12); color: var(--status-design); }
+
+.module-files {
+  font-size: 10px;
+  color: var(--text-muted);
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.file-chip {
+  background: var(--bg-card);
+  padding: 1px 5px;
+  border-radius: 3px;
+  border: 1px solid var(--border-light);
+  font-family: "SF Mono", "Fira Code", monospace;
+  font-size: 9px;
+}
+
+/* ========================================
+   工作包进度条
+   ======================================== */
+.wp-list { display: flex; flex-direction: column; gap: 10px; }
+
+.wp-item {
+  display: grid;
+  grid-template-columns: 80px 1fr auto;
+  align-items: center;
+  gap: 14px;
+  padding: 12px 14px;
+  background: var(--bg-inset);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-light);
+  transition: all var(--transition);
+}
+
+.wp-item:hover { border-color: var(--border-dark); }
+
+.wp-id {
+  font-family: "SF Mono", monospace;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--brand-purple);
+}
+
+.wp-body { display: flex; flex-direction: column; gap: 4px; }
+
+.wp-name { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+
+.wp-progress {
+  height: 6px;
+  background: var(--border-light);
+  border-radius: 3px;
+  overflow: hidden;
+  position: relative;
+}
+
+.wp-progress-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.8s ease;
+}
+
+.fill-impl { background: var(--status-implemented); }
+.fill-partial { background: var(--status-partial); }
+.fill-design { background: var(--status-design); }
+.fill-planned { background: var(--status-planned); }
+
+.wp-percent {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  min-width: 36px;
+  text-align: right;
+}
+
+.wp-status-tag {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 4px;
+  margin-top: 2px;
+  display: inline-block;
+  width: fit-content;
+}
+
+/* ========================================
+   技术栈表
+   ======================================== */
+.tech-table { width: 100%; border-collapse: collapse; }
+
+.tech-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border-light);
+  font-size: 13px;
+}
+
+.tech-table td:first-child {
+  font-weight: 600;
+  color: var(--text-secondary);
+  width: 100px;
+}
+
+.tech-table td:last-child {
+  color: var(--text-primary);
+  font-family: "SF Mono", monospace;
+  font-size: 12px;
+}
+
+.tech-table tr:last-child td { border-bottom: none; }
+
+/* ========================================
+   命令面板
+   ======================================== */
+.cmd-group { margin-bottom: 16px; }
+.cmd-group:last-child { margin-bottom: 0; }
+
+.cmd-group-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 8px;
+}
+
+.cmd-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  background: var(--bg-code);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  margin-bottom: 6px;
+  transition: all var(--transition);
+  cursor: pointer;
+  position: relative;
+}
+
+.cmd-item:hover {
+  border-color: var(--brand-purple);
+  background: #f0ecfb;
+}
+
+.cmd-code {
+  font-family: "SF Mono", "Fira Code", monospace;
+  font-size: 12px;
+  color: var(--brand-dark);
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cmd-desc {
+  font-size: 11px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.cmd-copy {
+  font-size: 10px;
+  color: var(--brand-purple);
+  opacity: 0;
+  transition: opacity var(--transition);
+}
+
+.cmd-item:hover .cmd-copy { opacity: 1; }
+
+.cmd-item.copied {
+  border-color: var(--status-implemented);
+  background: rgba(28,167,123,0.06);
+}
+
+.cmd-item.copied .cmd-copy { opacity: 1; color: var(--status-implemented); }
+
+/* ========================================
+   服务地图
+   ======================================== */
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 10px;
+}
+
+.service-card {
+  background: var(--bg-inset);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.service-name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.service-img {
+  font-size: 10px;
+  color: var(--text-muted);
+  font-family: monospace;
+}
+
+.service-ports {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.port-chip {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-family: monospace;
+  color: var(--brand-purple);
+  font-weight: 600;
+}
+
+.service-role {
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+/* ========================================
+   Git 活动
+   ======================================== */
+.commit-list { display: flex; flex-direction: column; gap: 8px; }
+
+.commit-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 12px;
+  background: var(--bg-inset);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-light);
+}
+
+.commit-hash {
+  font-family: monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--brand-purple);
+  background: var(--bg-badge);
+  padding: 2px 6px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.commit-msg {
+  font-size: 12px;
+  color: var(--text-primary);
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+/* ========================================
+   设计规则列表
+   ======================================== */
+.rules-list { display: flex; flex-direction: column; gap: 8px; }
+
+.rule-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 14px;
+  background: var(--bg-inset);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-light);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.rule-num {
+  font-weight: 800;
+  color: var(--brand-purple);
+  font-size: 11px;
+  flex-shrink: 0;
+  min-width: 18px;
+}
+
+.rule-text { color: var(--text-secondary); }
+
+.rule-text strong { color: var(--text-primary); }
+
+/* ========================================
+   测试模块网格
+   ======================================== */
+.test-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 8px;
+}
+
+.test-card {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  background: var(--bg-inset);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+}
+
+.test-icon { color: var(--status-implemented); font-size: 14px; }
+
+.test-name {
+  font-family: monospace;
+  font-size: 11px;
+  color: var(--text-secondary);
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ========================================
+   迁移版本时间线
+   ======================================== */
+.migration-list { display: flex; flex-direction: column; gap: 0; }
+
+.migration-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  position: relative;
+}
+
+.migration-item:not(:last-child)::before {
+  content: '';
+  position: absolute;
+  left: 7px;
+  top: 24px;
+  bottom: -4px;
+  width: 2px;
+  background: var(--border);
+}
+
+.migration-dot {
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--brand-purple);
+  border: 3px solid var(--bg-card);
+  box-shadow: 0 0 0 2px var(--brand-purple);
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+.migration-info { display: flex; flex-direction: column; gap: 2px; }
+
+.migration-name {
+  font-family: monospace;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.migration-date {
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+/* ========================================
+   依赖链图
+   ======================================== */
+.dep-chain {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-family: monospace;
+  line-height: 1.8;
+}
+
+.dep-node {
+  padding: 4px 10px;
+  background: var(--bg-badge);
+  color: var(--brand-purple);
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+.dep-arrow { color: var(--text-muted); }
+
+.dep-new {
+  background: rgba(245,158,11,0.12);
+  color: #b45309;
+}
+
+/* ========================================
+   Section 标题
+   ======================================== */
+.section-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section-title .section-count {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: var(--bg-badge);
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+/* ========================================
+   可隐藏面板
+   ======================================== */
+.panel { display: none; }
+.panel.active { display: block; }
+
+/* ========================================
+   滚动条美化
+   ======================================== */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border-dark); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--brand-light); }
+
+/* Toast 提示 */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--brand-dark);
+  color: var(--text-inverse);
+  padding: 10px 18px;
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  font-weight: 600;
+  box-shadow: var(--shadow-lg);
+  z-index: 9999;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s ease;
+}
+
+.toast.show { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body data-page-node-id="hbf6YWMAoDce4wHCmNZznY">
+
+<div class="workbench" data-page-node-id="ClYRaMdg88PKwAJYsc1Dn9">
+  <!-- ====== 侧边栏 ====== -->
+  <aside class="sidebar" data-page-node-id="sO1uuEakbGQ8yq1P5TyRrm">
+    <div class="brand" data-page-node-id="t5cFUa4bdAzPCzg1OYt4cD">
+      <div class="brand-logo" data-page-node-id="FV5UguE1Ef0lI0HGL8TFTV">论</div>
+      <div class="brand-info" data-page-node-id="eB59IKE2OfixKedtFuG9LQ">
+        <span class="brand-name" data-page-node-id="QIuljIkcrW7ixRRqI4Sy02">ThesisGuard</span>
+        <span class="brand-tag" data-page-node-id="eoAH2gf5B8G5iiOKY6JMfR">论衡 · 开发工作台</span>
+      </div>
+    </div>
+
+    <div class="nav-section" data-page-node-id="7r4VPir0y7VPkm9Y8to2MM">
+      <button class="nav-item active" data-panel="overview" data-page-node-id="kAiNV0bQm8S6t4t09FLTH7">
+        <span class="nav-icon" data-page-node-id="71LFTZqnSWeZr8hiZ3h1vC">◫</span> 总览
+      </button>
+      <button class="nav-item" data-panel="architecture" data-page-node-id="aGRuW7ILFR0iXe6oz2RgHE">
+        <span class="nav-icon" data-page-node-id="4g7OnZ4LDD6WFEQ6uUPhrS">▤</span> 模块架构
+      </button>
+      <button class="nav-item" data-panel="workpackages" data-page-node-id="2rGZiUx2U5gbADlCpeGlFh">
+        <span class="nav-icon" data-page-node-id="5DpmlWIGyB8MQT5Skc8wxP">▸</span> 工作包
+      </button>
+      <button class="nav-item" data-panel="commands" data-page-node-id="UmaxiSuiPcluo0ECmH0u3u">
+        <span class="nav-icon" data-page-node-id="FR2QNw2zSkKlpOtGH1cA5O">⌘</span> 命令中心
+      </button>
+    </div>
+
+    <div class="nav-section" data-page-node-id="v3YYDUwVZoKeizyW8jvz6O">
+      <div class="nav-section-title" data-page-node-id="OiaZgWGbBrwOFzyrCu1oN4">基础设施</div>
+      <button class="nav-item" data-panel="services" data-page-node-id="AliY7kER06M3ASdCPAJ1IW">
+        <span class="nav-icon" data-page-node-id="1BPxRdBjArkUP1ZK0uqN11">∯</span> 服务地图
+      </button>
+      <button class="nav-item" data-panel="git" data-page-node-id="hzCkP0HJLWjBneQWHHFebi">
+        <span class="nav-icon" data-page-node-id="dWAdXNbTp6xvGX1qaf9Kiv">⎇</span> Git 活动
+      </button>
+      <button class="nav-item" data-panel="migrations" data-page-node-id="kF3MDo2VZSmvvrxahrO3Qu">
+        <span class="nav-icon" data-page-node-id="AT1V9tvJkqj5AYPXbsH3qZ">⇋</span> 数据库迁移
+      </button>
+    </div>
+
+    <div class="nav-section" data-page-node-id="PutfrYj6ArcHQDFuDceRcS">
+      <div class="nav-section-title" data-page-node-id="w3cGeupp0dTKPpGTghwXBv">质量与规范</div>
+      <button class="nav-item" data-panel="tests" data-page-node-id="TCi5jS7chtZDF7fQY3Ubs7">
+        <span class="nav-icon" data-page-node-id="Zyejuc7BvFSYWPM8T0ZF2I">✓</span> 测试矩阵
+      </button>
+      <button class="nav-item" data-panel="rules" data-page-node-id="gsGmmrIIkOYCbVhMXczkEB">
+        <span class="nav-icon" data-page-node-id="akld19pPFgxJ6pEQwWdWNY">⚖</span> 设计规则
+      </button>
+    </div>
+
+    <div class="sidebar-footer" data-page-node-id="8mxQikFHPyuEan9ckvTzG3">
+      <div class="footer-row" data-page-node-id="TRzTTLjG9AVJ1xQudCrFDQ">
+        <span class="status-dot dot-amber" data-page-node-id="sN2RkO4iJHyIuAYHLP6ULB"></span>
+        <span data-page-node-id="mld8g4KqOCaSHzJHJeMhYd">整体状态: NOT_READY</span>
+      </div>
+      <div class="footer-row" data-page-node-id="IiEIABIaw8tKN4gZttmjEb">
+        <span class="status-dot dot-green" data-page-node-id="Gf4yDyPIjvOlN3XRsSH7f3"></span>
+        <span data-page-node-id="twKCbvvLWoUlGfahTUfkXE">Evidence: 18 tests passed</span>
+      </div>
+      <div data-page-node-id="0EHw6JrHAHANeuUcDHdaFG">main @ 675217c · 29 commits</div>
+    </div>
+  </aside>
+
+  <!-- ====== 主内容区 ====== -->
+  <main class="main" data-page-node-id="jNrDsZRGXlZi6FWXBSvOl0">
+    <!-- 顶栏 -->
+    <header class="topbar" data-page-node-id="rhiBV7w77SVGcZtwldCthr">
+      <div class="topbar-title" data-page-node-id="eopJ4EnLkmTcDneva0bCqP">
+        <h1 id="page-title" data-page-node-id="5b94qQrDgk6M7Fyuxmh6hm">开发工作台</h1>
+        <span data-page-node-id="niG4y9QOeoYh0Fhy9dqaRx">ThesisGuard 论衡 — 证据驱动的风险与决策操作系统</span>
+      </div>
+      <div class="topbar-actions" data-page-node-id="lvsvvDlrjUtuLdv2IJ37H8">
+        <span class="badge badge-branch" data-page-node-id="9GmnPz3rcB8mT2L9AWoSlg">⎇ main</span>
+        <span class="badge badge-status" data-page-node-id="kFl3QH9XU9nFJ5ijRo8nHj">模型 v1.3 / 系统 v1.1 · UNPROVEN</span>
+        <span class="badge badge-ver" data-page-node-id="HmmVm2zxpW72QfMaN5wfu5">Evidence cutoff 2026-09-14</span>
+      </div>
+    </header>
+
+    <div class="content" data-page-node-id="gBInrpVG26g7QoqaDlpZrE">
+      <!-- ============================================
+           面板: 总览
+           ============================================ -->
+      <div class="panel active" id="panel-overview" data-page-node-id="vxpZQyuVdgK8IYFNv5TzHQ">
+        <div class="grid-overview" data-page-node-id="ELnSue42ZjkKmzbxw7FSQp">
+          <!-- 北极星 -->
+          <div class="card north-star" data-page-node-id="momiAWD2fBvzzAeMXAe7jY">
+            <div class="north-star-content" data-page-node-id="RZIh7HN6jbcaIsWRYA5wSO">
+              <div class="north-star-label" data-page-node-id="0AWCvyDhI3ZdvXKBwgEYEK">★ 北极星</div>
+              <p class="north-star-text" data-page-node-id="aAb2kJ2gs4Mf3yydFB0gJM">
+                通过不可覆盖的研究证据、投资逻辑、市场状态、账户风险、交易计划和纪律记录，
+                帮助用户避免无法承受的错误，并用可审计的前瞻数据判断个人交易方法是否存在扣除成本后的优势。
+              </p>
+              <div class="north-star-meta" data-page-node-id="sw9rwBV6Ynri1CZECBgqpH">
+                <div class="meta-item" data-page-node-id="Szgv4v5phiiZBxwFotCjm3">
+                  <span class="meta-label" data-page-node-id="XaMLjUbWzGebH46VkLawmq">当前里程碑</span>
+                  <span class="meta-value" data-page-node-id="JEGdzsZzX68ZaD9lcz82Ok">WP-04-02 Evidence Domain Service</span>
+                </div>
+                <div class="meta-item" data-page-node-id="2p0MQfgVjUAx7Y2Ccc5mXW">
+                  <span class="meta-label" data-page-node-id="dpDSbsE2oUFdWwPDbulsQS">Alembic Head</span>
+                  <span class="meta-value" data-page-node-id="dPbBspmtt9UjjQp2ySV45N">000000000004</span>
+                </div>
+                <div class="meta-item" data-page-node-id="T6kNXqhdCEzSi6TnxsuivJ">
+                  <span class="meta-label" data-page-node-id="cCuYES8dYmid0GVqwiypgC">模块数</span>
+                  <span class="meta-value" data-page-node-id="cNwC1D6knts9ALcI3AkyRx">18 domains</span>
+                </div>
+                <div class="meta-item" data-page-node-id="RXyxGUJDwyLrUrInAJeXPK">
+                  <span class="meta-label" data-page-node-id="C19ZBqxCWXztwcEmlbv2MM">技术栈</span>
+                  <span class="meta-value" data-page-node-id="7739An0WdnKT7zxIM8blcX">FastAPI + Vue3 + PG17</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 统计 -->
+          <div class="card" data-page-node-id="q3iQx7VD3LSDWOKenmShRZ">
+            <div class="card-header" data-page-node-id="fwBWR962s8agBKR0FSUk9t">
+              <div class="card-icon" data-page-node-id="3Yh6WoHlrEjKEzVk6Ev2CX">⚡</div>
+              <div data-page-node-id="xWRHv9P5HdkuPyuHi6iJBH">
+                <div class="card-title" data-page-node-id="qVAqm0fEATeH9BbMQmsR0B">项目指标</div>
+                <div class="card-subtitle" data-page-node-id="OXbfS2ToH46c3sbZjoIVaC">实时统计</div>
+              </div>
+            </div>
+            <div class="stat-grid" data-page-node-id="8JWPoyBso76Gp6n3FEnmJZ">
+              <div class="stat-card" data-page-node-id="rywfM0Al0qlNtp6WlIpM5F">
+                <div class="stat-number" data-page-node-id="YGOyQFoXc4lD4NF2au58mu">4</div>
+                <div class="stat-label" data-page-node-id="dC2705RleP5l4PffJuDkN8">已实现模块</div>
+              </div>
+              <div class="stat-card" data-page-node-id="PrABOQWE4tKN53MMliU0gQ">
+                <div class="stat-number" data-page-node-id="tqPNkBtyD0YgqI6YEAtRbC">14</div>
+                <div class="stat-label" data-page-node-id="4FKM1lEAGC98yp26T8USnl">待实现模块</div>
+              </div>
+              <div class="stat-card" data-page-node-id="AimEHsQdZzxGUgwxhGzclI">
+                <div class="stat-number" data-page-node-id="CENmkumkApvF91yDCdQ1Tb">15</div>
+                <div class="stat-label" data-page-node-id="KIXeWEHWBnXEPvkDbJ3j6Z">测试文件</div>
+              </div>
+              <div class="stat-card" data-page-node-id="5CRfFb982ESybrmdOe77sO">
+                <div class="stat-number" data-page-node-id="5GRUBKzqvL0evKAcEv2PuO">4</div>
+                <div class="stat-label" data-page-node-id="iHUC38yUgE3HmDnCQEr03p">迁移版本</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-3col" data-page-node-id="E5cTh3iaNAD7yqlthY5ymb">
+          <!-- 工作包概览 -->
+          <div class="card" data-page-node-id="wSoRwGVo0RscMkBWTilqfC">
+            <div class="card-header" data-page-node-id="05JYuN2fzxqm3kL9DEje5S">
+              <div class="card-icon" data-page-node-id="yzIJkBjm1x72JMFW86RB0y">▸</div>
+              <div data-page-node-id="C2JWurYHXC8QIfVft5KPsA"><div class="card-title" data-page-node-id="PbAqXKuGgs71t67zeYLnDu">工作包进度</div><div class="card-subtitle" data-page-node-id="1eF9lcaG00kVA4uHNpXefW">8 核心 + 4 新增</div></div>
+            </div>
+            <div class="wp-list" data-page-node-id="UmCVvZPRwmAGQw5WQMvPy6">
+              <div class="wp-item" data-page-node-id="ijQpZxPFOjmShaNtm2n56J">
+                <span class="wp-id" data-page-node-id="KALWbKveWzsyDahLtBC5ta">WP-01</span>
+                <div class="wp-body" data-page-node-id="OAE8pGi1QRrpqf5Hi8102C">
+                  <span class="wp-name" data-page-node-id="lKJOPyvaR9j1RGUveviRQv">Engineering Skeleton</span>
+                  <div class="wp-progress" data-page-node-id="j8jwQUsX12HDYm8Q1TrFfz"><div class="wp-progress-fill fill-impl" style="width:100%" data-page-node-id="A8wm0uL3R7y4171tTwxdBF"></div></div>
+                </div>
+                <span class="wp-percent" data-page-node-id="nN0oZxEDVbPay8mphnnDCB">100%</span>
+              </div>
+              <div class="wp-item" data-page-node-id="thZBOUf14Bw0i2akwNskuB">
+                <span class="wp-id" data-page-node-id="0UYl3dbT5WyHmihOE8yXmI">WP-02</span>
+                <div class="wp-body" data-page-node-id="yBhajCAbvWHqyHgN5XT4bR">
+                  <span class="wp-name" data-page-node-id="mjWOiWPGDHdyUozL2gFLqR">Instrument + Watchlist</span>
+                  <div class="wp-progress" data-page-node-id="CRBhJTLuNKWd0etyX1U24p"><div class="wp-progress-fill fill-partial" style="width:60%" data-page-node-id="GgBFDdQAVE0vxEPRVD2BY0"></div></div>
+                </div>
+                <span class="wp-percent" data-page-node-id="C9wIDPAFKM9Cj3nr3c7LoH">60%</span>
+              </div>
+              <div class="wp-item" data-page-node-id="nDO6CFuwYPxM6vpOKX6dZQ">
+                <span class="wp-id" data-page-node-id="63Sn3hTD4I5DTY18dxCKfW">WP-03</span>
+                <div class="wp-body" data-page-node-id="cnJAkOOkZkdofb8SVUWsQY">
+                  <span class="wp-name" data-page-node-id="CwWevqohTtFVhqErcYYG0D">Research Package</span>
+                  <div class="wp-progress" data-page-node-id="XbcFl9Z4A3Afp8P3qqlh2T"><div class="wp-progress-fill fill-impl" style="width:90%" data-page-node-id="ruJqjV0DKTu2ODQc1dlU0p"></div></div>
+                </div>
+                <span class="wp-percent" data-page-node-id="KePEXDBso4zZiT4tfb3fUB">90%</span>
+              </div>
+              <div class="wp-item" data-page-node-id="KM8hBEtVH7IYlNLjNgiFdQ">
+                <span class="wp-id" data-page-node-id="ZJ60tpTExpoPqpeAdXOUZ0">WP-04</span>
+                <div class="wp-body" data-page-node-id="hnuShZB4aQfeATvE54MDzL">
+                  <span class="wp-name" data-page-node-id="qGQVAWc9FsSLmXbQKFtHwe">Evidence</span>
+                  <div class="wp-progress" data-page-node-id="VJDYNXncv00L69svEVkQ0M"><div class="wp-progress-fill fill-partial" style="width:35%" data-page-node-id="z7SAKnKq61UOh0WTCCQ1Sy"></div></div>
+                </div>
+                <span class="wp-percent" data-page-node-id="YHOuEoJqETky4IYVtD3Qar">35%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 技术栈 -->
+          <div class="card" data-page-node-id="rjzU034odCErhA1XzCsGbV">
+            <div class="card-header" data-page-node-id="coqUoPdY4VB4DzWW610EM7">
+              <div class="card-icon" data-page-node-id="uAu06YfddVBEr4ezAaEAA9">⛏</div>
+              <div data-page-node-id="98vflWeX1LFrpmJyqATiYu"><div class="card-title" data-page-node-id="3ZLhG6eGy82A9jhhtTBBRh">技术栈</div><div class="card-subtitle" data-page-node-id="3BK4y8EIzUiyBRJpECGKEH">分层架构</div></div>
+            </div>
+            <table class="tech-table" data-page-node-id="fLa0qTMKw5ZJ0tDbWCZMHH">
+              <tr data-page-node-id="1CKKWO7DEgcoi6ExhFWek4"><td data-page-node-id="CZAVUjITdYZYp81nLlZ0yl">前端</td><td data-page-node-id="eMIN3esDsF4EhQNRk5KtSg">Vue 3 + TS + Vite</td></tr>
+              <tr data-page-node-id="7asqOfvdFTQV5GS9F51cTw"><td data-page-node-id="47HcUthR4qlDXECVMyCRcu">API</td><td data-page-node-id="kxhvqr3AT11KXoBQH9wPTL">FastAPI + Pydantic v2</td></tr>
+              <tr data-page-node-id="z0aHXPxHLDe4DASHuUF2la"><td data-page-node-id="b2HiFEADcFGrDPRwtsPARn">数据库</td><td data-page-node-id="W1jlfP6r4wFWjEbNEZulK8">PostgreSQL 17 + pgvector</td></tr>
+              <tr data-page-node-id="ia3qSPbjbUuAl4mDdTBmUy"><td data-page-node-id="YCV0gOJZviPek7ADrwNBSB">迁移</td><td data-page-node-id="4guu3QRJojwJYiPl2QpGG1">Alembic</td></tr>
+              <tr data-page-node-id="4L8GW4DoeJYuum0VaCDcFo"><td data-page-node-id="s8CL7Pkg2tTgdpfjkBXfMt">缓存/队列</td><td data-page-node-id="g9PaGYBDU6WWnat3kSBFF8">Redis</td></tr>
+              <tr data-page-node-id="zvWO99cG2YLM9OzIcNhplT"><td data-page-node-id="H2R0ezahJacjEluiCjbcKU">对象存储</td><td data-page-node-id="fBfYubGxqr41lg3BT7uZVN">MinIO (S3)</td></tr>
+              <tr data-page-node-id="eAZR7DjdhowOf5iFmkuSka"><td data-page-node-id="ugfh7l7SCmdivhdZGdOydq">Worker</td><td data-page-node-id="8qvZJh6qePQn60vHB6VV7z">Dramatiq + Redis</td></tr>
+              <tr data-page-node-id="vcd0zgHNA0svCGEMCHF9Px"><td data-page-node-id="aLTDheX9vSDClLECX9eixY">基础设施</td><td data-page-node-id="EM3R5Nu5Z1CssYTfrCsAEu">Docker Compose</td></tr>
+            </table>
+          </div>
+
+          <!-- 依赖链 -->
+          <div class="card" data-page-node-id="e4HMaVBv6gqm5UDL6QfkbK">
+            <div class="card-header" data-page-node-id="RNOCCnCxwhgfFZc3TSARrw">
+              <div class="card-icon" data-page-node-id="h30U9Hp3xM5aMCtYDHxPCX">🔗</div>
+              <div data-page-node-id="BiKnHTND6OXXE60gv2sOWI"><div class="card-title" data-page-node-id="oZ6ysZ1knGsbHwgLEVsqKY">WP 依赖链</div><div class="card-subtitle" data-page-node-id="YsILtKdTmtkQz7EZxdCQZy">规范化路径</div></div>
+            </div>
+            <div class="dep-chain" data-page-node-id="JNHoik9h5RF5BNiQp3rLUh">
+              <span class="dep-node" data-page-node-id="se49zqesfJWpV31grUF8Bp">WP-01</span><span class="dep-arrow" data-page-node-id="utWSYOI3cTPuAtuMZufKPX">→</span>
+              <span class="dep-node" data-page-node-id="y7scx0LL9O5lbgWVGSYIom">WP-02</span><span class="dep-arrow" data-page-node-id="ZiOdmjbFoQCym2TDblGtIt">→</span>
+              <span class="dep-node" data-page-node-id="IqKPBo5C6J3s6bzpmNYVcC">WP-03</span><span class="dep-arrow" data-page-node-id="9tFOieR7wnzImHGTbTzFAE">→</span>
+              <span class="dep-node" data-page-node-id="PWZX5vJb9aTBhgJSrjCqRW">WP-04</span><span class="dep-arrow" data-page-node-id="XcYFHEVMtGlgN7lK5kTJ5j">→</span>
+              <span class="dep-node" data-page-node-id="VIEFMxzmsm4bsKM1rEjnJb">WP-05</span><span class="dep-arrow" data-page-node-id="HDFk9TzEJB0xGbQ3QjYyoJ">→</span>
+              <span class="dep-node dep-new" data-page-node-id="WykwlJtLLCro9EIWp05Pcr">WP-RISK-01</span>
+              <br data-page-node-id="0YVD2WmW8BpGJUkPak0WSh">
+              <span class="dep-arrow" data-page-node-id="5zs9u2x80jFnTJaJRjXFln">↳</span>
+              <span class="dep-node" data-page-node-id="o8Ii7tVAHbRv7HhgaEfDMj">WP-06</span><span class="dep-arrow" data-page-node-id="rDCF5D1HuhIgj2kQDhf9DO">→</span>
+              <span class="dep-node" data-page-node-id="DZTc3ySf7QRnJyCPD16i37">WP-07</span><span class="dep-arrow" data-page-node-id="hCukCs1vfK47h7qA95Jtgl">→</span>
+              <span class="dep-node" data-page-node-id="oWN2mATydVzRgyjcZnq6P7">WP-08</span><span class="dep-arrow" data-page-node-id="GBtuyIb2qp2YWj30QbgCdo">→</span>
+              <span class="dep-node dep-new" data-page-node-id="SWaALVR7QLqz136CIG9SkK">WP-ALERT-01</span>
+              <br data-page-node-id="1INaGOQqBFyHRZrQ5G2U3l">
+              <span class="dep-arrow" data-page-node-id="OCeLpqxlVsjF5iAIFvjrRe">↳</span>
+              <span class="dep-node dep-new" data-page-node-id="zdCYmWai3Pl6asguEg7lSt">WP-MACRO-01</span><span class="dep-arrow" data-page-node-id="gNzF72xJi5xNj7xYFFGrru">→</span>
+              <span class="dep-node dep-new" data-page-node-id="IjDRENjupIQpzCnTAQHQgk">WP-VALIDATION-01</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================
+           面板: 模块架构
+           ============================================ -->
+      <div class="panel" id="panel-architecture" data-page-node-id="OzwCpmJbxoZiZnBsDkJhQA">
+        <div class="section-title" data-page-node-id="6MvBVxmzAZSL9eIkIhiG5o">模块架构 (Modular Monolith) <span class="section-count" data-page-node-id="AFgorBviLq1kzs4EDhZr0d">18 domains</span></div>
+        <div class="card grid-full" data-page-node-id="qN7PsSUunElxCBaMe5vTF3">
+          <div class="module-grid" data-page-node-id="p4PG5xmzr1sJuj5DHNFgGa">
+            <!-- 有完整代码的模块 -->
+            <div class="module-card has-code" data-page-node-id="GKzbnVUDSVjZGL1mjGyw2T">
+              <div class="module-header-row" data-page-node-id="4NCCHWQZwZQSOvVpUzJtSk">
+                <span class="module-name" data-page-node-id="XmRwnDG8lToj2Q1AAzZwRG">common</span>
+                <span class="module-status-tag tag-impl" data-page-node-id="58csEKl6a78t3VGS8whBWL">IMPL</span>
+              </div>
+              <div class="module-files" data-page-node-id="iKBDR4nqAV5wRwm3yM4DRR">
+                <span class="file-chip" data-page-node-id="eMLUr1xhv0NIkDZegIrjla">config.py</span>
+                <span class="file-chip" data-page-node-id="c7RPPgIuk8u3FtSbOPWplk">db/</span>
+                <span class="file-chip" data-page-node-id="QXWyBxE2pMOogzEr4L0LTJ">health.py</span>
+                <span class="file-chip" data-page-node-id="0KVj7IG3UNUquuSxhApuMC">storage.py</span>
+                <span class="file-chip" data-page-node-id="DUw1e5AiTpC5RfBydFip0e">redis_client.py</span>
+                <span class="file-chip" data-page-node-id="CNj2A8L5n9XC9O1Xj2qGwx">events.py</span>
+                <span class="file-chip" data-page-node-id="GgLVD8mMZqwjIoOPYzrcQ0">security.py</span>
+              </div>
+            </div>
+            <div class="module-card has-code" data-page-node-id="Zwpd8lvvq3anLb7i5SlhSL">
+              <div class="module-header-row" data-page-node-id="OMs5rPmFD5hoYwgGExXbYV">
+                <span class="module-name" data-page-node-id="lUznafQZCzjCFqlZvU3AEZ">instrument</span>
+                <span class="module-status-tag tag-impl" data-page-node-id="e9UpaXDh0EuWSHIuAGlMT7">IMPL</span>
+              </div>
+              <div class="module-files" data-page-node-id="9WEqjODdCwLhxNkBTWUzLP">
+                <span class="file-chip" data-page-node-id="S0Z7GfbHij5Oa6BXRFaQ1v">models.py</span>
+                <span class="file-chip" data-page-node-id="b1TII6LCruI5UrnQEwhIYh">schemas.py</span>
+                <span class="file-chip" data-page-node-id="BP0iujCmzChmCoLqh9dIc8">services.py</span>
+                <span class="file-chip" data-page-node-id="ZNxMLUqGWEiHzF4kNTx7pW">api.py</span>
+              </div>
+            </div>
+            <div class="module-card has-code" data-page-node-id="ZsaSLTFiHD6eAjoYKiMqVu">
+              <div class="module-header-row" data-page-node-id="aK7GVHkgPzRlT5IQQ2E5AW">
+                <span class="module-name" data-page-node-id="luGWnX86VWWgujuJ6D8CtS">watchlist</span>
+                <span class="module-status-tag tag-impl" data-page-node-id="BuPbilnAIRJHYrgHdXSxVx">IMPL</span>
+              </div>
+              <div class="module-files" data-page-node-id="cQNcpCwruAYarGkZDQm81x">
+                <span class="file-chip" data-page-node-id="DVD4aQXHDFJE2IGocxPJG3">models.py</span>
+                <span class="file-chip" data-page-node-id="k3HSv2NRz5UmhflNhgXt7G">schemas.py</span>
+                <span class="file-chip" data-page-node-id="9Aj164myIZAk1YCsNeV9cj">services.py</span>
+                <span class="file-chip" data-page-node-id="rEpXVgX9R6uB8KFUVTHsOh">api.py</span>
+              </div>
+            </div>
+            <div class="module-card has-code" data-page-node-id="si40jkLGOVjIHbOdk3cqHE">
+              <div class="module-header-row" data-page-node-id="2xWqEBpEHPZFTRC9v2O0QB">
+                <span class="module-name" data-page-node-id="tqbz6eERU06G5NzGJHImgD">research</span>
+                <span class="module-status-tag tag-impl" data-page-node-id="dPlVCsV6QyDCoBUVfxPIwy">IMPL</span>
+              </div>
+              <div class="module-files" data-page-node-id="xNISB159KkNJn2LqPNdSh2">
+                <span class="file-chip" data-page-node-id="lN0WL5ZAWbBnmRS4TP1GAc">models.py</span>
+                <span class="file-chip" data-page-node-id="Bmr8zkZozITJqtbdkqCG6h">schemas.py</span>
+                <span class="file-chip" data-page-node-id="3Fx9lELNGZW1XjzMJndt9O">services.py</span>
+                <span class="file-chip" data-page-node-id="MTZ86z8jcZ5eAkekkZtJmr">api.py</span>
+              </div>
+            </div>
+            <div class="module-card has-models" data-page-node-id="pGtYFotPSBuIAIDuFtShlg">
+              <div class="module-header-row" data-page-node-id="xbWiqE15B64EAUmJVRpTHF">
+                <span class="module-name" data-page-node-id="lcEQbUngbOENGcr4hck9sH">evidence</span>
+                <span class="module-status-tag tag-partial" data-page-node-id="GKUBbJhlJF1vEtkY66sSey">PARTIAL</span>
+              </div>
+              <div class="module-files" data-page-node-id="iIA9EUAIM4hFYhLSnPwii1">
+                <span class="file-chip" data-page-node-id="hEnDVV4dED6vxn97Td1esf">models.py</span>
+                <span class="file-chip" data-page-node-id="lrm2sfloBBCA3cBI8Bbn8B">repositories.py</span>
+              </div>
+            </div>
+            <!-- 空模块 -->
+            <div class="module-card empty" data-page-node-id="T2DgUD6jHiFtCWQDLAHiZy">
+              <div class="module-header-row" data-page-node-id="1BGB1C5PdcT3SVy4D5Ygab">
+                <span class="module-name" data-page-node-id="RBsghDrlVGfLvrA2zWDrhK">thesis</span>
+                <span class="module-status-tag tag-design" data-page-node-id="hWeNEhnyvBkGViR684MbwM">DESIGN</span>
+              </div>
+              <div class="module-files" data-page-node-id="if9zUlG4nZtTtR0hyxBj9F"><span class="file-chip" data-page-node-id="knMhOx0WCkzmdBwoV3ijla">__init__.py</span></div>
+            </div>
+            <div class="module-card empty" data-page-node-id="d4eH22Vzs0jG0zWnQCh3jl">
+              <div class="module-header-row" data-page-node-id="Fz3DXi9sGuNuGlsIo9vsDs">
+                <span class="module-name" data-page-node-id="VLoAKwaCqb3FRHOQ7Lvzsa">expectation</span>
+                <span class="module-status-tag tag-planned" data-page-node-id="tdiVE8XnaOyDiu4GB4Qp3R">PLANNED</span>
+              </div>
+              <div class="module-files" data-page-node-id="votR8mpbsXkJch3eZbcu8Z"><span class="file-chip" data-page-node-id="Wi44Erfk4N5cNWtJjxdTg9">__init__.py</span></div>
+            </div>
+            <div class="module-card empty" data-page-node-id="NGchxN1FPylSXd6GlMvKUO">
+              <div class="module-header-row" data-page-node-id="2L7W8KnEPiBpYKjHZ6Vmce">
+                <span class="module-name" data-page-node-id="FCwvmmrsujLnl2IG3pE0HX">valuation</span>
+                <span class="module-status-tag tag-planned" data-page-node-id="DlS7w1qbyGbWTejtVq7gLA">PLANNED</span>
+              </div>
+              <div class="module-files" data-page-node-id="rCJaUFsS7oHLBsY8kGjkx1"><span class="file-chip" data-page-node-id="pWvvFzMzljTCEjO5SGZjoU">__init__.py</span></div>
+            </div>
+            <div class="module-card empty" data-page-node-id="MXsadJSTxhgd5DE7YknFvF">
+              <div class="module-header-row" data-page-node-id="BMBJVTxJC3Mzer7uezCe5B">
+                <span class="module-name" data-page-node-id="uwhFUFk66GwyeCyUHz4MJE">price_in</span>
+                <span class="module-status-tag tag-planned" data-page-node-id="3RjOGGaZP9mpqyMyBRYalU">PLANNED</span>
+              </div>
+              <div class="module-files" data-page-node-id="FGbVO5b5DGoQtrbUK3bZHa"><span class="file-chip" data-page-node-id="ptyfiYDQgoOvrz0gpGEEOo">__init__.py</span></div>
+            </div>
+            <div class="module-card empty" data-page-node-id="0TFtmfLSRFGCqn30cQwRuJ">
+              <div class="module-header-row" data-page-node-id="0sdrDAyPiJNQa0zQXoUDA1">
+                <span class="module-name" data-page-node-id="2KFs5yqgZcHR4QsOCi2NuE">market</span>
+                <span class="module-status-tag tag-planned" data-page-node-id="dLKbaj8WL3VixKnmO8W9qj">PLANNED</span>
+              </div>
+              <div class="module-files" data-page-node-id="W0iPgMW6FjIhSmRfdFqTGT"><span class="file-chip" data-page-node-id="jGpKtsCULAbahVHqCfwwvG">__init__.py</span></div>
+            </div>
+            <div class="module-card empty" data-page-node-id="5V5daQnaY1DSZv46PE4O9S">
+              <div class="module-header-row" data-page-node-id="9cGKvXp9HnPKsW7zq9sNPV">
+                <span class="module-name" data-page-node-id="vah1JAJexnClsmGNuVoTHW">portfolio</span>
+                <span class="module-status-tag tag-planned" data-page-node-id="bKC4OP0DOgZQoUfF7DRb9f">PLANNED</span>
+              </div>
+              <div class="module-files" data-page-node-id="IMC5EAq6E2FXqqj0azMmeM"><span class="file-chip" data-page-node-id="HT5kZqGspCRnLu4gZ1yD0r">__init__.py</span></div>
+            </div>
+            <div class="module-card empty" data-page-node-id="8O3hIAIW5BtSl7HBiSjVdZ">
+              <div class="module-header-row" data-page-node-id="7oQT1ZcK9gev5TYhGDFBrg">
+                <span class="module-name" data-page-node-id="NA5UxxKYBOdHXGQIOc71vV">trade_plan</span>
+                <span class="module-status-tag tag-planned" data-page-node-id="EUG4Vo5BOG8oo2aeu0PE5N">PLANNED</span>
+              </div>
+              <div class="module-files" data-page-node-id="xnQN6MYLX5rKRRH6SHyyDr"><span class="file-chip" data-page-node-id="2ku8e7DPXjGKKfHsp71fyp">__init__.py</span></div>
+            </div>
+            <div class="module-card empty" data-page-node-id="EPU4LXCyOTE9C2WGAt2nEF">
+              <div class="module-header-row" data-page-node-id="XW6VW7CFH50AC7BZ7zNQQY">
+                <span class="module-name" data-page-node-id="lBc8o3cVstI2UZLaKfoCpl">catalyst</span>
+                <span class="module-status-tag tag-planned" data-page-node-id="wutGMca6J2fu5OPiUqlEbS">PLANNED</span>
+              </div>
+              <div class="module-files" data-page-node-id="nfyGM2R9mqbK6I0vN4r1CN"><span class="file-chip" data-page-node-id="hI47QhHkRR5mCGc1AOLDXG">__init__.py</span></div>
+            </div>
+            <div class="module-card empty" data-page-node-id="MJr5CY1QzqdBlIHjbtC6gH">
+              <div class="module-header-row" data-page-node-id="EYksevrpxFd5n3dCZAlJTd">
+                <span class="module-name" data-page-node-id="tX1Kl4B7oQBicrLIsqsHYI">discipline</span>
+                <span class="module-status-tag tag-planned" data-page-node-id="Khuf3cQGeMo5seK2LoMmZV">PLANNED</span>
+              </div>
+              <div class="module-files" data-page-node-id="m5D9HOpxWBlDn0IeHkIRZF"><span class="file-chip" data-page-node-id="hc7Xq6uudZQaQSRLMYv2PF">__init__.py</span></div>
+            </div>
+            <div class="module-card empty" data-page-node-id="KLUppTH1AB2bd7Fl0hq1zh">
+              <div class="module-header-row" data-page-node-id="NERdGWGlU8vkaBnRUfzesi">
+                <span class="module-name" data-page-node-id="bMhrSgnKjW6Q6ir5aCBG1Z">intelligence</span>
+                <span class="module-status-tag tag-planned" data-page-node-id="cFUYmYqYL3vU4hVPvGIC6I">PLANNED</span>
+              </div>
+              <div class="module-files" data-page-node-id="pc857b9zGHfPgPFnkZKLSv"><span class="file-chip" data-page-node-id="F9nPQHsQHNEUgNh7eEd4Mf">__init__.py</span></div>
+            </div>
+            <div class="module-card empty" data-page-node-id="uN8tGNvS1YPsF6civdibWH">
+              <div class="module-header-row" data-page-node-id="hb99pcKGRu8ddFc1tF0weC">
+                <span class="module-name" data-page-node-id="gtkGUPfAE2W3M59p4GJ1QC">notification</span>
+                <span class="module-status-tag tag-planned" data-page-node-id="H0vFaNtf9gFyfngYqmmMYF">PLANNED</span>
+              </div>
+              <div class="module-files" data-page-node-id="PjqF5lZ4iJTVZENI99e3WK"><span class="file-chip" data-page-node-id="cBKcvdnLYAqSC5Z6lXNl80">__init__.py</span></div>
+            </div>
+            <div class="module-card empty" data-page-node-id="lIGm0cq2FZFqM3ZQpnNvNj">
+              <div class="module-header-row" data-page-node-id="14h8ehNjslQNi7C3poZgmO">
+                <span class="module-name" data-page-node-id="fftqys14tCwvENeK4A6NOo">agent</span>
+                <span class="module-status-tag tag-design" data-page-node-id="TLslVjpEdPozrBSDFS5Wnf">DESIGN</span>
+              </div>
+              <div class="module-files" data-page-node-id="f5Fzr25tr9QF49EvHcfB0M"><span class="file-chip" data-page-node-id="RPEW2FYxbj4powefERH1Xw">__init__.py</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card grid-full" style="margin-top:20px" data-page-node-id="tsVRTg0jsyqb2XvyaZbFMx">
+          <div class="card-header" data-page-node-id="k9rpDglDePNxQ0VyayuNiJ">
+            <div class="card-icon" data-page-node-id="iCWLXCH3kj8FI8QTAfQTX0">📐</div>
+            <div data-page-node-id="cnJRcKSxZCRhDAcJNy7Sec"><div class="card-title" data-page-node-id="KX2E5DqbHeM8yfub5wj0KZ">目录结构</div><div class="card-subtitle" data-page-node-id="qZaIFhsN9QjbopCwKHiGjp">backend/ 模块化单体</div></div>
+          </div>
+          <pre style="background:var(--bg-code);border-radius:var(--radius-md);padding:16px;font-family:monospace;font-size:12px;line-height:1.7;color:var(--text-secondary);overflow-x:auto" data-page-node-id="kU81jtb96Isn8VtdJ0jNk4">backend/
+├── <span style="color:var(--status-implemented);font-weight:600" data-page-node-id="ZhHBbh1h54wwP5lKBM8GSo">common/</span>         # shared infrastructure; not a domain-state bypass
+├── <span style="color:var(--status-implemented);font-weight:600" data-page-node-id="oZTy8dlTgKVGXzVLKUHf6b">instrument/</span>     # stock/ETF/index master data
+├── <span style="color:var(--status-implemented);font-weight:600" data-page-node-id="OCgjG3I4fQqX0ttSrXEp7t">watchlist/</span>      # watchlist management
+├── <span style="color:var(--status-implemented);font-weight:600" data-page-node-id="P3GTJN2HxLtJ4KQO6AVZyB">research/</span>       # Research Package/Module (implemented bounded slice)
+├── <span style="color:var(--status-partial);font-weight:600" data-page-node-id="Tq1m48yeMHdJsxu1i18A6A">evidence/</span>       # WP-04-01 persistence foundation integrated; service/API pending
+├── <span style="color:var(--status-design)" data-page-node-id="GaLOQizTI2dF3A73WGaESW">thesis/</span>         # Thesis versions and validation (planned)
+├── <span style="color:var(--text-muted)" data-page-node-id="gDu2CRhQWsnEyrqhoK5mLM">expectation/</span>    # estimates and expectation snapshots (planned)
+├── <span style="color:var(--text-muted)" data-page-node-id="Z6k9HKOidkXDCA5NGWi526">valuation/</span>      # Bull/Base/Bear scenarios (planned)
+├── <span style="color:var(--text-muted)" data-page-node-id="ndcdG8M4SKKsMHDFhgGIH0">price_in/</span>       # price-in analysis (planned)
+├── <span style="color:var(--text-muted)" data-page-node-id="a6b6wstIw0x4V4w8MaPqOb">market/</span>         # deterministic market gate (planned)
+├── <span style="color:var(--text-muted)" data-page-node-id="qcMttJFcZrTo9Yh7o2NQDx">portfolio/</span>      # positions, capacity, correlation (planned)
+├── <span style="color:var(--text-muted)" data-page-node-id="kkzvat98kUSeO9eURwXKwb">trade_plan/</span>     # immutable plans, orders and exits (planned)
+├── <span style="color:var(--text-muted)" data-page-node-id="plHXWfvB8QAj2oeWi6wW8Z">catalyst/</span>       # catalyst tracking (planned)
+├── <span style="color:var(--text-muted)" data-page-node-id="2uRkslGdUY5b7minWpvqHd">discipline/</span>     # violations, pause and recovery (planned)
+├── <span style="color:var(--text-muted)" data-page-node-id="V6MFLd7k5BBwe9pDiD4uF4">intelligence/</span>   # policy/market intelligence (planned)
+├── <span style="color:var(--text-muted)" data-page-node-id="2fgkiKkCtYne2NdsvoLK4s">notification/</span>   # delivery only; not system of record (planned)
+└── <span style="color:var(--status-design)" data-page-node-id="Y3Ev8vRfcK7PeIRoT3qReT">agent/</span>          # read-only explanation/proposal layer (planned)</pre>
+        </div>
+      </div>
+
+      <!-- ============================================
+           面板: 工作包
+           ============================================ -->
+      <div class="panel" id="panel-workpackages" data-page-node-id="gnB2ZCZ4S7PUaq5lD8tvmf">
+        <div class="section-title" data-page-node-id="GI4Zu2ZgFMbawM546yAIJc">工作包状态 <span class="section-count" data-page-node-id="EaqswCT9RIAd8s5CGJANxi">12 WPs</span></div>
+
+        <div class="grid-2col" data-page-node-id="SIbjNChAlZ4pEV4FWbSith">
+          <div class="card" data-page-node-id="8h9g7DApZ8Nl5dE4k2qe4P">
+            <div class="card-header" data-page-node-id="Sf2dECsAdxbH2n5nYCkEty">
+              <div class="card-icon" data-page-node-id="m48IruGZCSVkXyqnHijgnK">📋</div>
+              <div data-page-node-id="pncHiWG3MqZ11oUHt1yLRj"><div class="card-title" data-page-node-id="0qA0PFoPUDgJzEc8u3SOX0">核心工作包</div><div class="card-subtitle" data-page-node-id="vc5gjj8qLhJIq0HxQ2VFEx">WP-01 ~ WP-08</div></div>
+            </div>
+            <div class="wp-list" data-page-node-id="NA0tdv0ujclicn1wEvIoml">
+              <div class="wp-item" data-page-node-id="PDBxLKKyqgXHGeRS6erm2e">
+                <span class="wp-id" data-page-node-id="KLaScLP5mfy8FqXaak3ebY">WP-01</span>
+                <div class="wp-body" data-page-node-id="vCYnoruGFvva7Wq0LST3x5">
+                  <span class="wp-name" data-page-node-id="fPOk1ybzhD8iDuU7m44OVT">Engineering Skeleton</span>
+                  <span class="wp-status-tag tag-impl" data-page-node-id="m0d4wrKTkvFWEhTM6AoPhX">IMPLEMENTED</span>
+                  <div class="wp-progress" data-page-node-id="J63cxFvkETYkejNrBBNC9z"><div class="wp-progress-fill fill-impl" style="width:100%" data-page-node-id="oRLbBS49xZE6nliktYm5OV"></div></div>
+                </div>
+                <span class="wp-percent" data-page-node-id="QbUxpgPg36WARmxZf11t3l">100%</span>
+              </div>
+              <div class="wp-item" data-page-node-id="PzBIFq0Zhf7AWAPcGdZLwX">
+                <span class="wp-id" data-page-node-id="BbzlLnFyLI2Ez9Uffg5eRw">WP-02</span>
+                <div class="wp-body" data-page-node-id="6LXFc4oyPiG8G1HxZ4fO6x">
+                  <span class="wp-name" data-page-node-id="tpQ5nnjuPU23tkRqLBD6zW">Instrument + Watchlist</span>
+                  <span class="wp-status-tag tag-partial" data-page-node-id="8CKEgbs3m2brMNNkawG17q">PARTIALLY_IMPLEMENTED</span>
+                  <div class="wp-progress" data-page-node-id="LRv4uL57gpO7pWLsDaa46r"><div class="wp-progress-fill fill-partial" style="width:60%" data-page-node-id="dRpIWeCZfNnqnI9K6Ga1KJ"></div></div>
+                </div>
+                <span class="wp-percent" data-page-node-id="iMzaDfxH6hwvBSaYm7lsph">60%</span>
+              </div>
+              <div class="wp-item" data-page-node-id="6rDis9DcudIyE4HOs9uwLT">
+                <span class="wp-id" data-page-node-id="h1H83uh7hJYh7VcG6vjG7K">WP-03</span>
+                <div class="wp-body" data-page-node-id="MeU4RDU372GkJWwlE6TLUv">
+                  <span class="wp-name" data-page-node-id="Ylf2Y5wyEQ7zWXywahBPms">Research Package</span>
+                  <span class="wp-status-tag tag-impl" data-page-node-id="9Z6i7B7JyZbjRZdBmFEGb8">IMPLEMENTED (L3 verified)</span>
+                  <div class="wp-progress" data-page-node-id="0c4iMkNdBCxsFb6KY2lz1u"><div class="wp-progress-fill fill-impl" style="width:90%" data-page-node-id="UPAuzczKdw66BUL43LbhZ7"></div></div>
+                </div>
+                <span class="wp-percent" data-page-node-id="BFMGuVS3aDTfquzFS72itF">90%</span>
+              </div>
+              <div class="wp-item" data-page-node-id="CNwUe2KSz7H8YAGbEDt8sD">
+                <span class="wp-id" data-page-node-id="qqFIHWJ8Hpdt3gIhVEaeEg">WP-04</span>
+                <div class="wp-body" data-page-node-id="Apn716nEoT2Amf5DbuKxYG">
+                  <span class="wp-name" data-page-node-id="8uWBiHwxv5ExWRGPbE57bD">Evidence</span>
+                  <span class="wp-status-tag tag-partial" data-page-node-id="QbP0RyvVpVF7DFiaPICreK">PARTIALLY_IMPLEMENTED</span>
+                  <div class="wp-progress" data-page-node-id="48vc6QQfZW4THvxcP8h8RF"><div class="wp-progress-fill fill-partial" style="width:35%" data-page-node-id="4FWjvRkWv3YukyE8KroyyU"></div></div>
+                </div>
+                <span class="wp-percent" data-page-node-id="5PxwqPOcOarB98FcQU05Xg">35%</span>
+              </div>
+              <div class="wp-item" data-page-node-id="l9Sjp9mGLN9bq3rf3261K0">
+                <span class="wp-id" data-page-node-id="IzNWGObyKFVggcplvW8oLe">WP-05</span>
+                <div class="wp-body" data-page-node-id="XBrT5duLvEqyINmVMdJJKd">
+                  <span class="wp-name" data-page-node-id="CCe52ElyECzhOOdfJgBqcG">Thesis Engine</span>
+                  <span class="wp-status-tag tag-design" data-page-node-id="39y3SXmCMHVAudtxY9BZP6">DESIGN_ONLY</span>
+                  <div class="wp-progress" data-page-node-id="uhPKjW0Ys6IAW3KEg37vHR"><div class="wp-progress-fill fill-design" style="width:10%" data-page-node-id="5gGlaw8fuvGQjlkmCDHFvB"></div></div>
+                </div>
+                <span class="wp-percent" data-page-node-id="AwB9jblQKC4mEYfBinxNbg">10%</span>
+              </div>
+              <div class="wp-item" data-page-node-id="XKQ817iHYwp7dUq7xhc7Ev">
+                <span class="wp-id" data-page-node-id="mcjtjIGxH8lJ0CtTM6VXZr">WP-06</span>
+                <div class="wp-body" data-page-node-id="7LQneDJTMBrb4SVnMWYHVu">
+                  <span class="wp-name" data-page-node-id="atLitLDPWDG7sqQ5eMm3Z1">Research UI</span>
+                  <span class="wp-status-tag tag-planned" data-page-node-id="BPjhK01EaSnv637UqOVhKK">PLANNED</span>
+                  <div class="wp-progress" data-page-node-id="AsVlovmocl3wlk6UblcT1G"><div class="wp-progress-fill fill-planned" style="width:5%" data-page-node-id="djbBxGKK1ii0FJkrauxD9n"></div></div>
+                </div>
+                <span class="wp-percent" data-page-node-id="nwFG7JWHf1E3TuMQoHGTPR">5%</span>
+              </div>
+              <div class="wp-item" data-page-node-id="MXJ6nJfDYBNqT41Dhrz9US">
+                <span class="wp-id" data-page-node-id="dlgUX4P2biUAAc4M8DZNdA">WP-07</span>
+                <div class="wp-body" data-page-node-id="BH83Y0Wx2Mq7iwKPbHYgSP">
+                  <span class="wp-name" data-page-node-id="ZaRDCFLMVCDUcHYBjkI1DZ">Read-only Agent</span>
+                  <span class="wp-status-tag tag-design" data-page-node-id="SxTE0Wze1U1yGAP74dUYto">DESIGN_ONLY</span>
+                  <div class="wp-progress" data-page-node-id="Bm5bUi7oq29nfb5FV2Q2bz"><div class="wp-progress-fill fill-design" style="width:10%" data-page-node-id="8HUv3rsw7FiD7OaFna62Qw"></div></div>
+                </div>
+                <span class="wp-percent" data-page-node-id="k9ZKxzxwiyGJj5vHmB8ZW6">10%</span>
+              </div>
+              <div class="wp-item" data-page-node-id="jOl4XuBTqF8MX8oxeUQFqm">
+                <span class="wp-id" data-page-node-id="phzSmcyFQcUBDnAa6w8W5B">WP-08</span>
+                <div class="wp-body" data-page-node-id="OmRtIPTxY97yUV6LX09hAI">
+                  <span class="wp-name" data-page-node-id="cI3WTRKBt4UeY0O7cRlbDe">Incremental Update</span>
+                  <span class="wp-status-tag tag-planned" data-page-node-id="9z9jRyn5R4U0JSUbFXrfiK">PLANNED</span>
+                  <div class="wp-progress" data-page-node-id="jGHU58HNA7zON0tkCYnGCC"><div class="wp-progress-fill fill-planned" style="width:5%" data-page-node-id="e6gmTTaWCurMAAfEfoKnVJ"></div></div>
+                </div>
+                <span class="wp-percent" data-page-node-id="HONSrQCv0nHwwZbVsXXrOj">5%</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" data-page-node-id="EGqwIEUxr0va5q9f9b6aw4">
+            <div class="card-header" data-page-node-id="A7i2mYIAWsQMk17qVUWrUh">
+              <div class="card-icon" data-page-node-id="cWTs1UBZjBzcGy0n5rvmeM">🆕</div>
+              <div data-page-node-id="IHITIBvL43WYGAwDQ1b8ZT"><div class="card-title" data-page-node-id="S7NbdxjmbYKGAyVELDFHN5">新增工作包</div><div class="card-subtitle" data-page-node-id="Ipcs6zHlPTegdr2Wj0hYpH">风险与治理</div></div>
+            </div>
+            <div class="wp-list" data-page-node-id="DmzTf6QkFmQFcBheGTHYdr">
+              <div class="wp-item" data-page-node-id="6Ss8AUGxGnKJxn1wUNj544">
+                <span class="wp-id" data-page-node-id="218emoTzhUTlWcGlfsq5jG">RISK-01</span>
+                <div class="wp-body" data-page-node-id="60HACWjhD0b4NGpmPLOUi4">
+                  <span class="wp-name" data-page-node-id="N6IbFCBqbbkv9YQIACAPaj">Personal Risk OS</span>
+                  <span class="wp-status-tag tag-design" data-page-node-id="XHzclMNRZCXVFoEMVkEug7">PRODUCT/DOMAIN DESIGN</span>
+                  <div class="wp-progress" data-page-node-id="owOdevT5lj2a9KwugWYvTD"><div class="wp-progress-fill fill-design" style="width:10%" data-page-node-id="mVYsMLNO9VrPR3G7TAwFQI"></div></div>
+                </div>
+                <span class="wp-percent" data-page-node-id="FXKujULqOFWCT41bc0BaKi">10%</span>
+              </div>
+              <div class="wp-item" data-page-node-id="lYZUtBaq9scBDlmo4qYKTJ">
+                <span class="wp-id" data-page-node-id="Nlzb6KFlrbOtlhIu0gXPUx">ALERT-01</span>
+                <div class="wp-body" data-page-node-id="mCkzxGk0XqpkqpsdGSDDV3">
+                  <span class="wp-name" data-page-node-id="5OA54nFWHPTY9lEZx7kREl">Basic Policy & Market Alert</span>
+                  <span class="wp-status-tag tag-planned" data-page-node-id="etdb4GIHBYUGKVLYYDMQMX">PLANNED</span>
+                  <div class="wp-progress" data-page-node-id="msIKk4PuSUb0APvoBBo7Ih"><div class="wp-progress-fill fill-planned" style="width:5%" data-page-node-id="PWitGtAViz3VVlX3EZ58EF"></div></div>
+                </div>
+                <span class="wp-percent" data-page-node-id="s5FEwnkhfTbgkCmjfNvD9S">5%</span>
+              </div>
+              <div class="wp-item" data-page-node-id="cLssYJeDPkgbaTnp5hFqvD">
+                <span class="wp-id" data-page-node-id="urNEiCqvTGFjMllYgAE3uJ">MACRO-01</span>
+                <div class="wp-body" data-page-node-id="p994oTuEw2BMlMNQfBqJmL">
+                  <span class="wp-name" data-page-node-id="ZrRo3cphNKLrFPmKLVeXr0">Systemic Risk Sentinel</span>
+                  <span class="wp-status-tag tag-planned" data-page-node-id="MzZpCDByboYSuo1vM5KDxp">PLANNED</span>
+                  <div class="wp-progress" data-page-node-id="pjDH5FyG2MxDxSTxBPa2eH"><div class="wp-progress-fill fill-planned" style="width:5%" data-page-node-id="j9YL8EP1EZorkuo4WMHfGw"></div></div>
+                </div>
+                <span class="wp-percent" data-page-node-id="X93V4DZfh3FzCAogrJEeDn">5%</span>
+              </div>
+              <div class="wp-item" data-page-node-id="9aG1RRzEE2hTTY8ZCg8Bv8">
+                <span class="wp-id" data-page-node-id="sqig6N816DLLVU7N7U1Ko1">VALID-01</span>
+                <div class="wp-body" data-page-node-id="jrnRn0TqnbQAJ1faSkTWoV">
+                  <span class="wp-name" data-page-node-id="F7zF6GbHlqllKhn3jB4DS6">Forward Validation & Model Governance</span>
+                  <span class="wp-status-tag tag-planned" data-page-node-id="7JGbHsvk7rYuSnUrI3LyA3">PLANNED</span>
+                  <div class="wp-progress" data-page-node-id="bskp33DUxONREEFlH9cb2V"><div class="wp-progress-fill fill-planned" style="width:5%" data-page-node-id="AVbhWrtxEdJ3tgMFy26spf"></div></div>
+                </div>
+                <span class="wp-percent" data-page-node-id="OyKGhL9o6STH23vaqPhjEw">5%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card grid-full" style="margin-top:0" data-page-node-id="IFJhkITWNYMzCAAgnnwgQd">
+          <div class="card-header" data-page-node-id="Miu6CqZooSpUvUrLIeZHcS">
+            <div class="card-icon" data-page-node-id="cqymUYLBDaotcFa5CegLcH">ℹ</div>
+            <div data-page-node-id="md6U03p8ICeO0AQtpi8NWw"><div class="card-title" data-page-node-id="eRrvdqs11zXfTVaRidi7Bq">当前里程碑焦点</div><div class="card-subtitle" data-page-node-id="tyc1VA5hgT0nqrYw07zNep">WP-04-02 Evidence Domain Service</div></div>
+          </div>
+          <div style="font-size:13px;color:var(--text-secondary);line-height:1.7" data-page-node-id="atVpz3gy7aFTaqlqpQeK45">
+            <p style="margin-bottom:10px" data-page-node-id="IuvBdzjKUF6Zi36byYoThi"><strong style="color:var(--text-primary)" data-page-node-id="TDV47b4Z5oVjTtXgFUfFTC">已实现:</strong> Evidence ORM models、repositories、Alembic migration 0004、model registry、persistence/migration 测试。WP-04-01 集成已通过独立验收 <code style="background:var(--bg-code);padding:1px 5px;border-radius:3px;font-size:11px" data-page-node-id="kcSwiUXDoMwkhDE17JMNiE">TASK-WP04-01-GIT-INTEGRATION-R1</code>。</p>
+            <p data-page-node-id="g13m4Uxr2JBJClORGU8Z29"><strong style="color:var(--text-primary)" data-page-node-id="8aeP1aGrCZ3Q5zpCsSaKy1">待实现:</strong> WP-04-02 Evidence Domain Service、WP-04-03 Evidence API/OpenAPI、WP-04-04 Research exact Evidence references、worker、MinIO writes、parser/extractor pipeline、embedding、pgvector/RAG 和 Thesis integration。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================
+           面板: 命令中心
+           ============================================ -->
+      <div class="panel" id="panel-commands" data-page-node-id="HInNic5uKXStdClR2odKIE">
+        <div class="section-title" data-page-node-id="sXfpBGVRHFKy0CcGyMejAP">命令中心 <span class="section-count" data-page-node-id="rcTlAL6fgRWv0HXK4QTpn3">make</span></div>
+        <p style="font-size:12px;color:var(--text-muted);margin-bottom:20px" data-page-node-id="ChJDTlg4CUaFPb2pWDYTLq">点击命令卡片复制到剪贴板 · 所有命令通过 Makefile 执行</p>
+
+        <div class="grid-2col" data-page-node-id="hFfAVPVq7NoF18yje8O6jk">
+          <div class="card" data-page-node-id="AEIhnBENeBFBJfANuqHSYE">
+            <div class="card-header" data-page-node-id="7xz4FsorkvPVIJOnMMLzMM">
+              <div class="card-icon" data-page-node-id="Dd1Obb5gFMfnP2rR8iEtSR">🐳</div>
+              <div data-page-node-id="QDBwi1Ro6qsAOSJHSefug8"><div class="card-title" data-page-node-id="rQAtyXOyXD3ocGJMBUbDHi">Docker Compose</div><div class="card-subtitle" data-page-node-id="NxB6sz1ZQ8fCPFFUhBEriv">容器编排</div></div>
+            </div>
+            <div class="cmd-group" data-page-node-id="JC1Tx8CBD5sd3UEIrPHjqH">
+              <div class="cmd-item" data-cmd="make up" data-page-node-id="6Cqm4PydFyif9Wb24MXxED">
+                <span class="cmd-code" data-page-node-id="P5HgePjcr9gC5V7VvA0Ocy">make up</span>
+                <span class="cmd-desc" data-page-node-id="QeO1R9HV52YxAGXGBm0AEk">启动所有服务</span>
+                <span class="cmd-copy" data-page-node-id="BSAC1Zqwabpwd5y6Tt5aOK">复制</span>
+              </div>
+              <div class="cmd-item" data-cmd="make down" data-page-node-id="vclo7Mp3yunp0FMnW3XgTn">
+                <span class="cmd-code" data-page-node-id="TwlYEvGE2pRgONcAQpRgtU">make down</span>
+                <span class="cmd-desc" data-page-node-id="cv6ReXhIpu8El7I1wGu1vS">停止所有服务</span>
+                <span class="cmd-copy" data-page-node-id="Bn3gCu9pvwEx35L4FcaRgr">复制</span>
+              </div>
+              <div class="cmd-item" data-cmd="make logs" data-page-node-id="9iGUzi18OCg9HEHbD1xKv1">
+                <span class="cmd-code" data-page-node-id="G7HgLtFOdGbyhaB5r2FueM">make logs</span>
+                <span class="cmd-desc" data-page-node-id="HtNBfU6kCq2cGKd9GFEdGc">查看实时日志</span>
+                <span class="cmd-copy" data-page-node-id="a3GaurRHwUJ1fUECqifIt3">复制</span>
+              </div>
+              <div class="cmd-item" data-cmd="make rebuild" data-page-node-id="Zo1KqTFs5unkH4SUBHUpCo">
+                <span class="cmd-code" data-page-node-id="CxKSF5vUDsfSYIBWcaEPob">make rebuild</span>
+                <span class="cmd-desc" data-page-node-id="jRVa7YW4mPsy7KdTDCCuTl">重建并重启</span>
+                <span class="cmd-copy" data-page-node-id="k3SrSzD0DhYxCtTa9iyJlC">复制</span>
+              </div>
+              <div class="cmd-item" data-cmd="make ps" data-page-node-id="qG3GbUcyhLACRfx4vYypUZ">
+                <span class="cmd-code" data-page-node-id="NxyLDzecMkiAIuwhgqq2fx">make ps</span>
+                <span class="cmd-desc" data-page-node-id="cURDMEBLIdDcg5oVgAsgCc">查看运行容器</span>
+                <span class="cmd-copy" data-page-node-id="4kYaOReFYG599NESF1GYs1">复制</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" data-page-node-id="eFpyW0YKfM68guwj9Ut8Fp">
+            <div class="card-header" data-page-node-id="7yYeNqqAKH309IFhrlqUUV">
+              <div class="card-icon" data-page-node-id="OERHYhyFQV9a9ywq7kZjoV">⚡</div>
+              <div data-page-node-id="vezhQ6Y538mDOPTsWkUQAi"><div class="card-title" data-page-node-id="bltAvoQdpVISE4E3iX0UPw">本地开发</div><div class="card-subtitle" data-page-node-id="jIcuFOdWIMp0GvSsHtMThR">非 Docker 模式</div></div>
+            </div>
+            <div class="cmd-group" data-page-node-id="kGMUHvYenocwCIoZAXVbhH">
+              <div class="cmd-item" data-cmd="make dev-api" data-page-node-id="gB6HuIGtD1d16ZGSlOZW1l">
+                <span class="cmd-code" data-page-node-id="IhL2lucPS8gXL02URZdEKX">make dev-api</span>
+                <span class="cmd-desc" data-page-node-id="NU3j1C0sgkZG5PtaFU7jQl">本地运行 API</span>
+                <span class="cmd-copy" data-page-node-id="ltF28I7nlnWnx8tkM6u46Q">复制</span>
+              </div>
+              <div class="cmd-item" data-cmd="make dev-web" data-page-node-id="sML558Qjz4EZJfeImmkVvG">
+                <span class="cmd-code" data-page-node-id="oGVyeMVQSQn6yW7tYrsq9Q">make dev-web</span>
+                <span class="cmd-desc" data-page-node-id="MCDWSVvTCH00YRwZnawHPl">本地运行前端</span>
+                <span class="cmd-copy" data-page-node-id="Bnn35oMv1FqZboKEBirHNw">复制</span>
+              </div>
+              <div class="cmd-item" data-cmd="make worker" data-page-node-id="AaYMUFzKGmX2W5wiFA6gar">
+                <span class="cmd-code" data-page-node-id="I1BygJr3HDb7VZcjtDGbdj">make worker</span>
+                <span class="cmd-desc" data-page-node-id="FGGgEwDxjpsiR57mrZN7dF">本地运行 Worker</span>
+                <span class="cmd-copy" data-page-node-id="Dt4QPurdEOXrT0eBcrK1Cb">复制</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" data-page-node-id="aKaGEmKHCeWSCAyreXVhG2">
+            <div class="card-header" data-page-node-id="JmIyfmKGdafPZ4rTt9tq07">
+              <div class="card-icon" data-page-node-id="pTk5sSPUp0dVB0ra4XCUO5">🗄</div>
+              <div data-page-node-id="is5ZxT4etlCa5UueHZACtX"><div class="card-title" data-page-node-id="1m6S20GzkJ8Z5vQ0l0hDmh">数据库迁移</div><div class="card-subtitle" data-page-node-id="d2EpcJMqGu4gf9tdW3Zw27">Alembic</div></div>
+            </div>
+            <div class="cmd-group" data-page-node-id="CRXQ8yWIKoNZON2oGuJg6W">
+              <div class="cmd-item" data-cmd="make migrate" data-page-node-id="iawoZ3sbYU7cRabrhuBNLa">
+                <span class="cmd-code" data-page-node-id="FiAXjDWs5dPFpLPGX4fMtw">make migrate</span>
+                <span class="cmd-desc" data-page-node-id="V4GlyamDl513aK7ABcFAxa">执行迁移到 head</span>
+                <span class="cmd-copy" data-page-node-id="6JtBSJYS2HO3lQ43MAYmgr">复制</span>
+              </div>
+              <div class="cmd-item" data-cmd='make migrate-gen MESSAGE="description"' data-page-node-id="xmfdORUyPv7pa3yOqFSexy">
+                <span class="cmd-code" data-page-node-id="SgeuIVUGkcBKwQTTCEPZuc">make migrate-gen MESSAGE="..."</span>
+                <span class="cmd-desc" data-page-node-id="rie9RAscDAp6M4UAagb7UO">生成新迁移</span>
+                <span class="cmd-copy" data-page-node-id="wppvagEKOJH2IP3nrfh9mU">复制</span>
+              </div>
+              <div class="cmd-item" data-cmd="make migrate-down" data-page-node-id="Q6r7r5ORObPWCeDD3aPdyQ">
+                <span class="cmd-code" data-page-node-id="KPvDA44M2SotGzG44r8H4D">make migrate-down</span>
+                <span class="cmd-desc" data-page-node-id="SFMHnsx5RGcIRjLxGA9zmy">回退一个版本</span>
+                <span class="cmd-copy" data-page-node-id="oUmdEF9BSCfr39XfxKtodb">复制</span>
+              </div>
+              <div class="cmd-item" data-cmd="make db-reset" data-page-node-id="BbSDtKE18A6HUYSru3S9uE">
+                <span class="cmd-code" data-page-node-id="EkpqvSSOSVA8DSUxWgwQGI">make db-reset</span>
+                <span class="cmd-desc" data-page-node-id="9CSKzSWRSN5G3UFlx5PAFl">重置数据库</span>
+                <span class="cmd-copy" data-page-node-id="aKfRtXaDhwafY01rRAwDVz">复制</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" data-page-node-id="AMUJXxNiAs5nr16Olws1Mj">
+            <div class="card-header" data-page-node-id="a6DInhEUbzIXRFj4D2in4Q">
+              <div class="card-icon" data-page-node-id="GtFq4kpqt3vkHwPK8X7CbF">✓</div>
+              <div data-page-node-id="Nqf9XIRnSLqn2couFWxblv"><div class="card-title" data-page-node-id="crrsbmle8FIaOp5b0ijKd8">质量检查</div><div class="card-subtitle" data-page-node-id="7gPY5EvvlS0iNYyWvu3jk3">Lint + TypeCheck + Test</div></div>
+            </div>
+            <div class="cmd-group" data-page-node-id="za2b849mURMkz5dFauhQoj">
+              <div class="cmd-item" data-cmd="make test" data-page-node-id="XFlGIXXrJLD0rilPGHNlcm">
+                <span class="cmd-code" data-page-node-id="HlkvVIzWyB4v4CIfm2uDWj">make test</span>
+                <span class="cmd-desc" data-page-node-id="ChJgW0jyNpBVFvVWGznKDP">运行所有后端测试</span>
+                <span class="cmd-copy" data-page-node-id="ZIUpTwSEAMLjKnpwOhfdh3">复制</span>
+              </div>
+              <div class="cmd-item" data-cmd="make test-coverage" data-page-node-id="cs9aVZl5YjSILBgXHYInXm">
+                <span class="cmd-code" data-page-node-id="BCck4R30cV4uPrLxTOfQBx">make test-coverage</span>
+                <span class="cmd-desc" data-page-node-id="CHi4VV2CtCXXh7i22GUbgJ">测试 + 覆盖率报告</span>
+                <span class="cmd-copy" data-page-node-id="xJlkUnNyx5Q7YLR4Nc3ZrG">复制</span>
+              </div>
+              <div class="cmd-item" data-cmd="make lint" data-page-node-id="tosF2Ysa0K5QXe8IdT5pfz">
+                <span class="cmd-code" data-page-node-id="r8Tnev1sH66jfNiR8RDpmY">make lint</span>
+                <span class="cmd-desc" data-page-node-id="HVeoWQ0D5BFSkRp2iap2uH">Ruff 检查</span>
+                <span class="cmd-copy" data-page-node-id="3NIvxHzwvTJVxtcOfo9gkK">复制</span>
+              </div>
+              <div class="cmd-item" data-cmd="make lint-fix" data-page-node-id="K9mDPTCC6mjT3fil1XV1M8">
+                <span class="cmd-code" data-page-node-id="ppLFoVFz0EgpHTBxCzAzXm">make lint-fix</span>
+                <span class="cmd-desc" data-page-node-id="1Asd0D0OnAHL0zdKUJWFWg">Ruff 自动修复</span>
+                <span class="cmd-copy" data-page-node-id="k1FHDHnIqCKLueGz5BxqC6">复制</span>
+              </div>
+              <div class="cmd-item" data-cmd="make format" data-page-node-id="E9fAz6tCdQ9fQME5i101Gt">
+                <span class="cmd-code" data-page-node-id="zsGCCJ4AC5LLNSuskwBzCf">make format</span>
+                <span class="cmd-desc" data-page-node-id="HAGryMvCYfVfC0JH0pg0Y8">格式化代码</span>
+                <span class="cmd-copy" data-page-node-id="Yrm7VukT5Ein0Zx8uzY0PD">复制</span>
+              </div>
+              <div class="cmd-item" data-cmd="make typecheck" data-page-node-id="QCQIH2rBUlzuFcIBYBMLh9">
+                <span class="cmd-code" data-page-node-id="EHhNtHfNn0Q0z5MmEcRNbJ">make typecheck</span>
+                <span class="cmd-desc" data-page-node-id="ms23mCHkHgSXFwPVcH042z">mypy 类型检查</span>
+                <span class="cmd-copy" data-page-node-id="1LG6s6SucDxpxHkx8kv6pJ">复制</span>
+              </div>
+              <div class="cmd-item" data-cmd="make check" data-page-node-id="Qtw4CHuZeqxf1C2Zq2MF1A">
+                <span class="cmd-code" data-page-node-id="95WUkZcPv1BHKZad3v9e8s">make check</span>
+                <span class="cmd-desc" data-page-node-id="PF5AVCaiYLBdQTe3PcqXE0">全部检查 (lint+type+test)</span>
+                <span class="cmd-copy" data-page-node-id="3HHsaPoni7qIE8WuOPW91I">复制</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" data-page-node-id="MZRLXvmgPVRZDLqgAkSEvG">
+            <div class="card-header" data-page-node-id="vVHHB6XDZWkLPI1P8x6vQQ">
+              <div class="card-icon" data-page-node-id="IyfhdzdjzFFvX8BPVLm62E">🌐</div>
+              <div data-page-node-id="tw7FCT668ioJpKi3CWXFx0"><div class="card-title" data-page-node-id="frhrvYFawyuRXWhGst2IDl">前端</div><div class="card-subtitle" data-page-node-id="NnpLdX9s1Ic1ssAUqBtGu9">Vue 3 + Vite</div></div>
+            </div>
+            <div class="cmd-group" data-page-node-id="WOO5KG3plSTtFEEpG2e4BC">
+              <div class="cmd-item" data-cmd="make frontend-install" data-page-node-id="etFhcEKEoKTbx12fPLVkxT">
+                <span class="cmd-code" data-page-node-id="BbUgsxoks3TYZa2Wfx6pvk">make frontend-install</span>
+                <span class="cmd-desc" data-page-node-id="FFJQJ5iDbGqbc5hhRS1Exx">安装前端依赖</span>
+                <span class="cmd-copy" data-page-node-id="oCUeq8jNN3OJFpxdxN4wGC">复制</span>
+              </div>
+              <div class="cmd-item" data-cmd="make frontend-api-generate" data-page-node-id="syloReMFtiwEzAqerAk9LK">
+                <span class="cmd-code" data-page-node-id="YWkngIFtXIlqng15PnEC57">make frontend-api-generate</span>
+                <span class="cmd-desc" data-page-node-id="GXjqkqnJRmtsVzMCFfVcny">生成 OpenAPI 客户端</span>
+                <span class="cmd-copy" data-page-node-id="kg1OmVQqf1QVhTxgKFdux5">复制</span>
+              </div>
+              <div class="cmd-item" data-cmd="make frontend-api-check" data-page-node-id="MFWYl3Fq3ZnhTrOIg9j2RO">
+                <span class="cmd-code" data-page-node-id="nIx6HFepaYM9ZlG9hTfLWF">make frontend-api-check</span>
+                <span class="cmd-desc" data-page-node-id="uJNt97TkxR61IJQrBBQngr">检查 OpenAPI 漂移</span>
+                <span class="cmd-copy" data-page-node-id="ngjcDR9cizepkiY8ee0alC">复制</span>
+              </div>
+              <div class="cmd-item" data-cmd="make frontend-check" data-page-node-id="vSlnF2ailOZmxUYs3HLeTn">
+                <span class="cmd-code" data-page-node-id="06OAcFZU6QwytD7P3UzhMh">make frontend-check</span>
+                <span class="cmd-desc" data-page-node-id="b6gFZAN6TPQQc0qxZgJRn7">前端类型+Lint</span>
+                <span class="cmd-copy" data-page-node-id="ubCvEG1JfZtcPlKnoGf59R">复制</span>
+              </div>
+              <div class="cmd-item" data-cmd="make frontend-build" data-page-node-id="4vXOCtedn5ZOSiwHj7BpZd">
+                <span class="cmd-code" data-page-node-id="9jT1mPA9lSn4skzDbfGPJt">make frontend-build</span>
+                <span class="cmd-desc" data-page-node-id="kMhlckol07NobmZBvmXHva">构建前端生产包</span>
+                <span class="cmd-copy" data-page-node-id="IGz9fLJCMxaezfOKIff2Jq">复制</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================
+           面板: 服务地图
+           ============================================ -->
+      <div class="panel" id="panel-services" data-page-node-id="fXUVyjCpzqN5DcNVLeh2Mo">
+        <div class="section-title" data-page-node-id="HErhZ1Xxi1yRyWqYvaTCaq">服务地图 <span class="section-count" data-page-node-id="EdKGC0woDixgFJkuSHXb4j">6 services</span></div>
+        <div class="card grid-full" data-page-node-id="gjFL3i50IEG25uvwphjdUE">
+          <div class="service-grid" data-page-node-id="YaHEkmhyOD6zDZ1RfnWXZx">
+            <div class="service-card" data-page-node-id="sTbOOdEnWP4c4VyFDSSTnG">
+              <div class="service-name" data-page-node-id="o5MUFyJIOhfdnAh6Tsa3A7"><span class="status-dot dot-green" data-page-node-id="qVH62nGQOKb8NIQEt0HfQw"></span> PostgreSQL + pgvector</div>
+              <div class="service-img" data-page-node-id="ERvPw1TamhF6ZfncVKVP5J">pgvector/pgvector:pg17</div>
+              <div class="service-ports" data-page-node-id="TCgiFRDEkdrd9MWBGFNecg"><span class="port-chip" data-page-node-id="B2diPc4iDKvKe9BuyIPnFu">:15432</span></div>
+              <div class="service-role" data-page-node-id="81BuFIQidRskvOriu5BWRL">结构化持久真值存储 · 向量相似度搜索</div>
+            </div>
+            <div class="service-card" data-page-node-id="V5mdBbhdcsG5xRTpoe7rtW">
+              <div class="service-name" data-page-node-id="Ub59NVobBGgN83tcrD52L7"><span class="status-dot dot-green" data-page-node-id="uaYp90uA76fbj5hJEXhnX9"></span> Redis</div>
+              <div class="service-img" data-page-node-id="9UOAR1JLO6tbOyiv7gsnCL">redis:7-alpine</div>
+              <div class="service-ports" data-page-node-id="IydfVQ4Qg72dWZEpXj6QcU"><span class="port-chip" data-page-node-id="f3X4hxeJfSFcBuvc7S1hjf">:6379</span></div>
+              <div class="service-role" data-page-node-id="RaOLsP5pshB27vTYQTIMZE">缓存 /0 · 队列 /2 · 非金融真值</div>
+            </div>
+            <div class="service-card" data-page-node-id="C3yAzJ2k7BDx4rGXwGlnUl">
+              <div class="service-name" data-page-node-id="moiBfspXfb2Qtfu6q9dxr8"><span class="status-dot dot-green" data-page-node-id="sDhJOSErbPDBChYdo9ezAs"></span> MinIO</div>
+              <div class="service-img" data-page-node-id="A9qYHpAeTCBtoiDgmQTHcP">minio/minio:latest</div>
+              <div class="service-ports" data-page-node-id="FNHESPDMheIyCYuyXdiAEi"><span class="port-chip" data-page-node-id="CmP05FRay9H3Cm8MaXcFxk">:9000</span><span class="port-chip" data-page-node-id="D4xB37051z8gc61RdH1S5G">:9001</span></div>
+              <div class="service-role" data-page-node-id="sgq5AbC0vVUwmxNsFm3heC">原始文件存储 (S3 兼容)</div>
+            </div>
+            <div class="service-card" data-page-node-id="cianYKz3TKxAExV49LQEcc">
+              <div class="service-name" data-page-node-id="ZXRlY5dNxoHVDR9CiauSs8"><span class="status-dot dot-green" data-page-node-id="R93pvGs7ZgXkxyEjNXNAaN"></span> FastAPI</div>
+              <div class="service-img" data-page-node-id="RYPoyQugt9J7HvjtcN2t3J">thesisguard-api</div>
+              <div class="service-ports" data-page-node-id="fNDinAEH6GMJEtDsBgFU8T"><span class="port-chip" data-page-node-id="14GjPNKZXlCWJQDccr9WuP">:8000</span></div>
+              <div class="service-role" data-page-node-id="2nWG3pIRhB7tibY3EQOn8c">API 服务 · 依赖 PG/Redis/MinIO</div>
+            </div>
+            <div class="service-card" data-page-node-id="Ff5mnDEflxcIwFKMLlfzN2">
+              <div class="service-name" data-page-node-id="Xb4HT4JXEybMbH10A96OKL"><span class="status-dot dot-green" data-page-node-id="xtwZ4Zhy41jIC2e8VxliXA"></span> Dramatiq Worker</div>
+              <div class="service-img" data-page-node-id="2WLOTHF0O3zVZybEFHHwTa">thesisguard-worker</div>
+              <div class="service-ports" data-page-node-id="DcSUVLOIvLOpm0G62DHGlk"><span class="port-chip" data-page-node-id="ecdNFqtHegX28MhXIpX8KI">无端口</span></div>
+              <div class="service-role" data-page-node-id="mmuTJ0oyo2d99PSB66HMhs">后台任务消费 · Redis 队列</div>
+            </div>
+            <div class="service-card" data-page-node-id="odrjlwAoCPRzNtYvmly4S8">
+              <div class="service-name" data-page-node-id="vX8PLoZUPqffFzTTrXsUAm"><span class="status-dot dot-green" data-page-node-id="vImQKZabG6OB8rM3oleF27"></span> Vue Web (Vite)</div>
+              <div class="service-img" data-page-node-id="k9fjqsiocbekeupiYtyUi5">thesisguard-web</div>
+              <div class="service-ports" data-page-node-id="rGTHoFKIoHBIzIUafG14Uz"><span class="port-chip" data-page-node-id="oVtEeX6LAeDjnEl7DgF8k1">:5173</span></div>
+              <div class="service-role" data-page-node-id="Oq1D4yHf5oEcVhQitO3Boh">前端开发服务器</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card grid-full" style="margin-top:20px" data-page-node-id="JkHQ3fHGURrJCCHqde0fOP">
+          <div class="card-header" data-page-node-id="MF5asSKEsgPLbqCCNLJcyi">
+            <div class="card-icon" data-page-node-id="Oj4UcVxSKRMbKwLr6BK15r">🗺</div>
+            <div data-page-node-id="QH2kNvFDVYJf1A9tN861VR"><div class="card-title" data-page-node-id="WqlKebaNqMGhtBrvIDbTxw">真值边界</div><div class="card-subtitle" data-page-node-id="2GVWcuINGTKW12rETwXH27">Truth Boundaries</div></div>
+          </div>
+          <table class="tech-table" data-page-node-id="sjnYp9Eavd1lAFkp1Isqyc">
+            <tr data-page-node-id="NH5gXeiAtVQp3O2WUMKjSH"><td data-page-node-id="yvv2hfnnKfER8GIetQmGAc">PostgreSQL</td><td data-page-node-id="fJh37afyK5rXa1nqCGZ56e">结构化持久真值 (唯一金融真值)</td></tr>
+            <tr data-page-node-id="ABrH7LxRaGxZ43kL8v6Jpb"><td data-page-node-id="c5Z6TNMX8Krs3A5hGEYRs2">MinIO</td><td data-page-node-id="Rb0u8yYBBRfp6DUgMjRi9x">原始文件 (不可变)</td></tr>
+            <tr data-page-node-id="ZEgdqG3yDNe6GPJAjOFYqr"><td data-page-node-id="ZWz3cooiZFNEiw3XLH7oSE">pgvector/RAG</td><td data-page-node-id="HpDSAJ7rCLjGxr26ew81LL">可重建的检索索引</td></tr>
+            <tr data-page-node-id="DMCMFYh0ZbJZBF1XRap2jk"><td data-page-node-id="jEdvwlCZvtSQWbeOGbV6DG">Redis</td><td data-page-node-id="aNKNpXwnCit55oKs2MwYJ1">缓存/队列/扇出 (非真值)</td></tr>
+            <tr data-page-node-id="3PcWBspI8g9AJRBsriGW5F"><td data-page-node-id="uSCBTEArpIUUjiZFL2KdID">LLM</td><td data-page-node-id="XsddCfIbCl5j4r8FRED7Fv">仅提议 — 确定性域服务验证并提交</td></tr>
+            <tr data-page-node-id="MFD81Cf04GvUtSsdFHr0gO"><td data-page-node-id="fGoil7C4bBptLisZ1xgjPC">Notification</td><td data-page-node-id="hIGVSs70s9WNkv5lxJWQZg">仅投递 — 非记录系统</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- ============================================
+           面板: Git 活动
+           ============================================ -->
+      <div class="panel" id="panel-git" data-page-node-id="NZCiIxiEf1Z0JHun1hbewS">
+        <div class="section-title" data-page-node-id="16FMEViUfRWGHK9ZKSjH9J">Git 活动 <span class="section-count" data-page-node-id="s4DDqHALb5nCQK7MV2JPGL">29 commits · main</span></div>
+        <div class="grid-2col" data-page-node-id="hM7WGmzagJrlGkIyBfGN05">
+          <div class="card" data-page-node-id="LImQeeBRrabbFnCWrd0bMm">
+            <div class="card-header" data-page-node-id="CmSVzjxzzuYV5k27iGYPkR">
+              <div class="card-icon" data-page-node-id="M44M6farvdb5E05sC3zpm3">⎇</div>
+              <div data-page-node-id="FcBHAskCBa5rwd4TrrniB6"><div class="card-title" data-page-node-id="NS63L7MH96DtRZ1V1NJ9qC">最近提交</div><div class="card-subtitle" data-page-node-id="emicatocAqHtId1uZMlH61">main @ 675217c</div></div>
+            </div>
+            <div class="commit-list" data-page-node-id="nYsUD8wTitg7rWbVzF526k">
+              <div class="commit-item" data-page-node-id="MRNYAwEsVcMqQBOqqrCjjv">
+                <span class="commit-hash" data-page-node-id="DnHmM3P6FxVEOHoJHKpdQP">675217c</span>
+                <span class="commit-msg" data-page-node-id="Bi4CrLYvHBGfkHRvtt9qjj">docs: add WP04-02-R1C-05C-01聚焦DB重验证的验收证据与报告</span>
+              </div>
+              <div class="commit-item" data-page-node-id="GSeOGmOTNUAYfByMoIpvyh">
+                <span class="commit-hash" data-page-node-id="psf9dXczruXacCwDvnDeD8">554a87d</span>
+                <span class="commit-msg" data-page-node-id="cfclgZOnHCPHVCBGDBevQl">docs: update 2026-09-16 capability evaluation and add R1/reverify docs</span>
+              </div>
+              <div class="commit-item" data-page-node-id="W5qcyyE2RYPr7tzZS38xPM">
+                <span class="commit-hash" data-page-node-id="gE9oRKB8jjCYaFC56ZGFfX">0dc2c5f</span>
+                <span class="commit-msg" data-page-node-id="zekMcjzMtDZ6h1tzjqyvPb">docs: add zcode agent routing, evaluation docs and acceptance materials</span>
+              </div>
+              <div class="commit-item" data-page-node-id="rXBFRVlYtRbQcCYlG6IG56">
+                <span class="commit-hash" data-page-node-id="WPQsmehSCDyRhQLxliac4i">d3acc1c</span>
+                <span class="commit-msg" data-page-node-id="OIJRAaNbnKS41cYYIWfNKg">docs: add WP04 R1C04A和R1C05C01验收测试证据文档</span>
+              </div>
+              <div class="commit-item" data-page-node-id="Lyk5Fw3fnyV4IEMCPgBobQ">
+                <span class="commit-hash" data-page-node-id="No7oo3LJCvHCOdFcLiP2vR">438738c</span>
+                <span class="commit-msg" data-page-node-id="DygL9BmUytFSkaClkCKdga">docs: add WP04-02 R1C-03A prerequisite verification evidence</span>
+              </div>
+              <div class="commit-item" data-page-node-id="KwtURsiGgL5HPDJK7EtHdj">
+                <span class="commit-hash" data-page-node-id="MpTU6b9Y0rRd3ggZ6moMOA">7d3734b</span>
+                <span class="commit-msg" data-page-node-id="TOnP155qwOoqYOvSQRc91y">docs: add two R1B/R1C acceptance handoff documents</span>
+              </div>
+              <div class="commit-item" data-page-node-id="EO0NZ4gHk1oq3Pjn8CFfag">
+                <span class="commit-hash" data-page-node-id="TczK6Lt7Al9nAiDgYghp8p">6e1d38e</span>
+                <span class="commit-msg" data-page-node-id="rmo4SXY0Ss2ti5xgIYGG5I">docs: 更新2026-09-15的Sector Crowding延后决策文档</span>
+              </div>
+              <div class="commit-item" data-page-node-id="xHswDfIuF8XYMbbFBSL5Dq">
+                <span class="commit-hash" data-page-node-id="QADIgoe6njyxGvF05gZ3pb">7d4e395</span>
+                <span class="commit-msg" data-page-node-id="8rRnvC3K8noVUONUbg3zMC">docs: 新增WP04-02系列验收与治理文档</span>
+              </div>
+              <div class="commit-item" data-page-node-id="LXIZ0MDEp9tR9tZmzsFkqx">
+                <span class="commit-hash" data-page-node-id="KIBfGYhmA4aMGS7WEbPFEF">3eb494e</span>
+                <span class="commit-msg" data-page-node-id="PREvQBwrevKYFcCbStMRRf">docs(governance): close out WP-04-01 integration state</span>
+              </div>
+              <div class="commit-item" data-page-node-id="P3avrPt9TT9ugYgGd2UeM3">
+                <span class="commit-hash" data-page-node-id="M2kZ4EWfEOI6IJkB0wtqg2">d8f38dd</span>
+                <span class="commit-msg" data-page-node-id="TyYrBRTduHu8VwWZNupAsc">docs(acceptance): record WP-04-01 integration evidence</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" data-page-node-id="aCuLySv42wR7RBVDDb1pQo">
+            <div class="card-header" data-page-node-id="xKAoJR90qCchujbolA9l3F">
+              <div class="card-icon" data-page-node-id="qCqpiJfdbKRw0cIcz6r021">📊</div>
+              <div data-page-node-id="n84Jz6gOC7X8y4V3nx6o1V"><div class="card-title" data-page-node-id="ZfErJfFwsaMjngJKGBNNSP">仓库统计</div><div class="card-subtitle" data-page-node-id="eUU3WJBySGk0ao6tSMEsfx">本地 main 分支</div></div>
+            </div>
+            <table class="tech-table" data-page-node-id="YxXECN4WrubWElvPOK8dDj">
+              <tr data-page-node-id="Qw1pGCdPlnChXLp4e2NX9f"><td data-page-node-id="DaDLR2GAd0UUEfR06yI0aE">分支</td><td data-page-node-id="MocY1AC5TEm0kq9RhaJwjN">main</td></tr>
+              <tr data-page-node-id="bR1CaZxZd3yYhNpS4CjgXX"><td data-page-node-id="s6ui4BbOERHm86mJ4JpN6t">提交数</td><td data-page-node-id="02dLIV71nq3MrqVFhALrZI">29</td></tr>
+              <tr data-page-node-id="cEau6JUH7zwAOQ9OzhM48T"><td data-page-node-id="nJpqLfPX1ZdOGsjSTjicEw">HEAD</td><td data-page-node-id="EmJN3TmET2Az6Rfg2lUqUM">675217c</td></tr>
+              <tr data-page-node-id="52MYU9Z7z6kppHGDvwyGtk"><td data-page-node-id="J5DkY5L2QZcoctCnFAwgG2">最近提交</td><td data-page-node-id="m3XFlCufEyreHf1ymgF84s">2026-09-17 17:54</td></tr>
+              <tr data-page-node-id="kocPGIPtCBtf2Jno8g4vE2"><td data-page-node-id="jW3HjHMcSwLr4Mn9Cx1teI">贡献者</td><td data-page-node-id="67VX0bbnpq9uH6FqdNFDDI">1 (17628027582)</td></tr>
+              <tr data-page-node-id="XyTmvBQPIxta6RRKRnlFjs"><td data-page-node-id="mBQIqVDGyXSVH6ZRVacFxz">工作树状态</td><td data-page-node-id="Mpu2E1YO8FK2aWWY12rvWA">clean (无未提交变更)</td></tr>
+            </table>
+
+            <div style="margin-top:16px" data-page-node-id="JqHbOyZQtnnEvA6JawSyH2">
+              <div class="cmd-group-title" data-page-node-id="cFNAIT6NMWVCOkwJ9kMKuS">快捷命令</div>
+              <div class="cmd-item" data-cmd="git log --oneline -20" data-page-node-id="l6uYT5NERAoZyS6fBJlDdZ">
+                <span class="cmd-code" data-page-node-id="5pCawkCubgrNxHDR3tmhpM">git log --oneline -20</span>
+                <span class="cmd-copy" data-page-node-id="aFHcQowtBNZfZxtJlzNVCR">复制</span>
+              </div>
+              <div class="cmd-item" data-cmd="git status" data-page-node-id="HpH3IGhbFggLCmE12XIojt">
+                <span class="cmd-code" data-page-node-id="6j53UBiaok1u1WSIJXmJlQ">git status</span>
+                <span class="cmd-copy" data-page-node-id="nyep4BFExHkaoBBUU6zsny">复制</span>
+              </div>
+              <div class="cmd-item" data-cmd="git diff --stat" data-page-node-id="Qr1gwGQa52c58GCH9GqdzX">
+                <span class="cmd-code" data-page-node-id="Dxg4pr9RqpupjppMnYPgy2">git diff --stat</span>
+                <span class="cmd-copy" data-page-node-id="rlXrefDmQHSO8zAzOw5gBS">复制</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================
+           面板: 数据库迁移
+           ============================================ -->
+      <div class="panel" id="panel-migrations" data-page-node-id="xUNUpUIDf1TSU9CbxDcDBl">
+        <div class="section-title" data-page-node-id="SiVjHUHvL6mKvFopsTogT5">数据库迁移历史 <span class="section-count" data-page-node-id="1lI7CAioOpJoDEXzLCnDZ4">head: 0004</span></div>
+        <div class="card grid-full" data-page-node-id="xUcGfA1W6qyY9xGRzo0omj">
+          <div class="card-header" data-page-node-id="JUL9EFsR45XPJVQFoTFjad">
+            <div class="card-icon" data-page-node-id="whQ1V6iWSgBJ2SIoEfhPXv">⇋</div>
+            <div data-page-node-id="kZFaFbgZlAeAhUbHFGW8HA"><div class="card-title" data-page-node-id="yTuoXZ3PAI4bWJzWH2gOML">Alembic 版本链</div><div class="card-subtitle" data-page-node-id="U1nQdmRuYLvJbUTToK85qQ">PostgreSQL 17 + pgvector</div></div>
+          </div>
+          <div class="migration-list" data-page-node-id="tO8GY4citz4mxuSjmpXC8t">
+            <div class="migration-item" data-page-node-id="8LqToPRqChbb8y91Eiz12U">
+              <div class="migration-dot" data-page-node-id="QPaR3tm4dLHbW9Viv8fRDM"></div>
+              <div class="migration-info" data-page-node-id="8LjZWBNIOt1AWclHQySiHM">
+                <span class="migration-name" data-page-node-id="xRMVrp7PSILWgb1dbeiily">20260912_001_initial_pgvector_extension</span>
+                <span class="migration-date" data-page-node-id="mZ0sTM4WKAikkjas6DbYDs">2026-09-12 · 初始化 pgvector 扩展</span>
+              </div>
+            </div>
+            <div class="migration-item" data-page-node-id="oTspZu473dxqLEKwicfqkk">
+              <div class="migration-dot" data-page-node-id="1kqwEnk3gJck5CFRs9O7U0"></div>
+              <div class="migration-info" data-page-node-id="RanbpXW3kYDhi23hbPF9Me">
+                <span class="migration-name" data-page-node-id="ObasfWAjRRHUxvD1WhPlq4">20260912_002_instrument_watchlist</span>
+                <span class="migration-date" data-page-node-id="uuIyjL09NbCWhVLpH4ZXcC">2026-09-12 · Instrument + Watchlist 表结构</span>
+              </div>
+            </div>
+            <div class="migration-item" data-page-node-id="CIQWgWSB5hPph45lPC0zAO">
+              <div class="migration-dot" data-page-node-id="6xmGrAt7BRuIEp4KWsQfdM"></div>
+              <div class="migration-info" data-page-node-id="B1cvThdjLnKxhQQiF07NWe">
+                <span class="migration-name" data-page-node-id="cmo2LX0LLu7qHvwMK35z8G">20260912_003_research_package</span>
+                <span class="migration-date" data-page-node-id="SRCzf9n6A0GI2kZJqTtyQb">2026-09-12 · Research Package/Module 表结构</span>
+              </div>
+            </div>
+            <div class="migration-item" data-page-node-id="eaJQFIczXLAH7BsqE2KA8N">
+              <div class="migration-dot" data-page-node-id="g8WgVDNDWyYpiaNdYA4tby"></div>
+              <div class="migration-info" data-page-node-id="ITr3LyEkZFoO5jTs9USqWX">
+                <span class="migration-name" data-page-node-id="BvySJtVAA7vpNpFVQABSxn">20260914_004_evidence_persistence</span>
+                <span class="migration-date" data-page-node-id="9KDWlbkynouPGAoSVivtmO">2026-09-14 · Evidence 持久化基础 (HEAD)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============================================
+           面板: 测试矩阵
+           ============================================ -->
+      <div class="panel" id="panel-tests" data-page-node-id="nSf5cERnMRSgTwb8Cp6Qgx">
+        <div class="section-title" data-page-node-id="9lPpjOezK0yBiCxgn1qjG4">测试矩阵 <span class="section-count" data-page-node-id="8sc0FUf9nQpmUisuBsBW3e">15 files</span></div>
+        <div class="card grid-full" data-page-node-id="M2TlXZoBj3uCz1Hjq2FO3l">
+          <div class="card-header" data-page-node-id="FvcTxZGwZc9E2gVE76uGIR">
+            <div class="card-icon" data-page-node-id="JNAmXa4EhfrelM8ndYtpBG">✓</div>
+            <div data-page-node-id="lG8zSFkh6RhD1Uw5OtBYGF"><div class="card-title" data-page-node-id="FZaWzamReNKjDIf3JHuibD">测试文件清单</div><div class="card-subtitle" data-page-node-id="JDz7BKN2sCRQFLI1KCCqYk">tests/ 目录</div></div>
+          </div>
+          <div class="test-grid" data-page-node-id="RYu96LVyqFE0aW1oJhexne">
+            <div class="test-card" data-page-node-id="LF95f14XL0kFgEgt6a1y2A"><span class="test-icon" data-page-node-id="yJDMMW4xc3P8mDWqcVqGP4">✔</span><span class="test-name" data-page-node-id="qiGIMlLllmqCcyoOv9E12x">test_compose.py</span></div>
+            <div class="test-card" data-page-node-id="HrgY5z94g7hypNyIdc9Nwp"><span class="test-icon" data-page-node-id="wx66C7N2qmqIoShzMMKCEo">✔</span><span class="test-name" data-page-node-id="5hhAOvkA7qNu0l2u4wtbdK">test_config.py</span></div>
+            <div class="test-card" data-page-node-id="yHFaa0TX5r2GICAn0a9Nk9"><span class="test-icon" data-page-node-id="2tExztbguGnelylzFy2SsE">✔</span><span class="test-name" data-page-node-id="hIDeQUe9Kqjqi5eRBkm5DG">test_evidence_migrations.py</span></div>
+            <div class="test-card" data-page-node-id="kgTZuIkaC0H3mDITaQg0RJ"><span class="test-icon" data-page-node-id="UtG3QMjz9N5MPHbvepc6C6">✔</span><span class="test-name" data-page-node-id="vDqgjIdD0cMhxby7QDbufp">test_evidence_persistence.py</span></div>
+            <div class="test-card" data-page-node-id="l9PhkUvVnOqQyumwmCDc1n"><span class="test-icon" data-page-node-id="OeZAfqEVZZ1GVbyldmFRkw">✔</span><span class="test-name" data-page-node-id="6B9QAT0VOOkx9YBEdgHHRz">test_frontend_config.py</span></div>
+            <div class="test-card" data-page-node-id="V16T8nw4pbzIPWpDYi7UyQ"><span class="test-icon" data-page-node-id="XWCS3ZZHZog7ogC6adrYds">✔</span><span class="test-name" data-page-node-id="UjCrqRDDhSIvqV5t8hnP1Q">test_frontend_openapi_client.py</span></div>
+            <div class="test-card" data-page-node-id="PvTP0nzEzxOJ4rnqXtZ5YT"><span class="test-icon" data-page-node-id="oZSExNRshpK8Fo2nQKx6Sd">✔</span><span class="test-name" data-page-node-id="qpEXMwxmWvDo92wQHBleC1">test_health.py</span></div>
+            <div class="test-card" data-page-node-id="GDVRsGn1kxH3UMPX7GDRbU"><span class="test-icon" data-page-node-id="kGKXVgNunCpDpHk0M7FWlm">✔</span><span class="test-name" data-page-node-id="iAp14agztjozCoX2xYheR7">test_instrument_watchlist.py</span></div>
+            <div class="test-card" data-page-node-id="5gpEZjKEBMVBJos1nARvzE"><span class="test-icon" data-page-node-id="qy0hCVf5mZKKBmErAizpWQ">✔</span><span class="test-name" data-page-node-id="qfbA3MCRIpvuarb0IjDFKv">test_migrations.py</span></div>
+            <div class="test-card" data-page-node-id="UQahu0tiYpvlZXkX3V2ri7"><span class="test-icon" data-page-node-id="4ik3qwL88ZHoMHuBNnRKGB">✔</span><span class="test-name" data-page-node-id="aCnLQvpBY5hZT1bsD4IuhW">test_research_api.py</span></div>
+            <div class="test-card" data-page-node-id="10xaBn1ueApzvtX47XFdvj"><span class="test-icon" data-page-node-id="Dp02hJWj4vbfmUfi8MM3Zw">✔</span><span class="test-name" data-page-node-id="2UiUhB0YYQC6UmFWBwdAhU">test_research_persistence.py</span></div>
+            <div class="test-card" data-page-node-id="AHw7FQin9YQbH5NR1Se2xU"><span class="test-icon" data-page-node-id="RRZBn3k6sNDPtqIktDjiph">✔</span><span class="test-name" data-page-node-id="NwjIvj7E0sWvcHoLpa0Jtz">test_system_status.py</span></div>
+            <div class="test-card" data-page-node-id="DuVAPOPvaVk9jvxwRZcf0a"><span class="test-icon" data-page-node-id="qxN0uMJN1RixV6luGXYMrZ">✔</span><span class="test-name" data-page-node-id="1RZGqaY30IeKLzA2PWDRLO">test_tasks.py</span></div>
+            <div class="test-card" data-page-node-id="ry0AN2nkOq35uAL0u1Ae2G"><span class="test-icon" data-page-node-id="ZsU7qrIR4vlrcCXEaj630H">✔</span><span class="test-name" data-page-node-id="ufj2qBpKUHtSpTqAVBRFAa">conftest.py</span></div>
+            <div class="test-card" data-page-node-id="X6Zu33SzDELLl8lUepu1pZ"><span class="test-icon" data-page-node-id="8tyvBy9zQMDcECEskDBc80">✔</span><span class="test-name" data-page-node-id="FgDAKu69wmCMEECGN84KKi">__init__.py</span></div>
+          </div>
+        </div>
+
+        <div class="card grid-full" style="margin-top:20px" data-page-node-id="lGGf36iWykdjh8QCJC72qM">
+          <div class="card-header" data-page-node-id="H9vYFEAs9LlbBEFQBuAiIX">
+            <div class="card-icon" data-page-node-id="eyXXIP3J46xy9FgQmS7a8a">📋</div>
+            <div data-page-node-id="7SBYBzQ5F7kqFQY8Ix5VnU"><div class="card-title" data-page-node-id="X49xDCu39aaRBh0A480G49">测试策略</div><div class="card-subtitle" data-page-node-id="DmVstuMLYzZvkj4Oec0hc0">分层验证</div></div>
+          </div>
+          <table class="tech-table" data-page-node-id="FKuviBxRlnWuY5eR2UeeLo">
+            <tr data-page-node-id="9GAULGnvYgJ5TpkgFBvHsd"><td data-page-node-id="VNyxFS8AZihTspTumdJYBd">单元测试</td><td data-page-node-id="1YYwL8aGBWAHbKPOLrdrM1">确定性域服务 + 冻结策略评估</td></tr>
+            <tr data-page-node-id="dZAyGjK0MwHfPlv47M2KuF"><td data-page-node-id="PEA413ogcnCBTV6OnmTKTX">集成测试</td><td data-page-node-id="Xxp7YJuDJEr9Ei4hsmJxtJ">API · PostgreSQL 约束 · 幂等性 · append-only</td></tr>
+            <tr data-page-node-id="S2bgJqG6Hth3uReYOCJg7G"><td data-page-node-id="3QXObPG1FIIbQIA93Ioa5E">Worker 测试</td><td data-page-node-id="JXeVsFiIm8ELQNMn7ox5pa">Mock brokers + 真实入队分离</td></tr>
+            <tr data-page-node-id="JZkClVE7UhCaNTynmAi6tV"><td data-page-node-id="52pZAkpiR9CshAOcb0SWDw">前端测试</td><td data-page-node-id="0b79Cm1VDebnFBBHfkNHVA">OpenAPI 漂移检测 + 配置验证</td></tr>
+          </table>
+        </div>
+      </div>
+
+      <!-- ============================================
+           面板: 设计规则
+           ============================================ -->
+      <div class="panel" id="panel-rules" data-page-node-id="AFr4dNHOCGdKg35Ek5y40H">
+        <div class="section-title" data-page-node-id="aUxxe1tNbFRDThVx8aGgLX">设计规则 <span class="section-count" data-page-node-id="87GzmTCf0m0caidXwa95f7">13 rules</span></div>
+        <div class="card grid-full" data-page-node-id="9ZEIVdNnmUEDfX85C1u3pY">
+          <div class="rules-list" data-page-node-id="alfSiTaivE8BjBBB0dYbt5">
+            <div class="rule-item" data-page-node-id="QX9lWHmJsG1yorYkvVMaWB"><span class="rule-num" data-page-node-id="XIG4DF1OoYtVU1BierQfYs">01</span><span class="rule-text" data-page-node-id="3eGSpTUzwH6vc4higyQQYw"><strong data-page-node-id="9025ScF7OeXGlTAACtGGQx">Personal Risk OS first</strong> — 确定性 Account/Portfolio/Order/Trade Plan/Discipline/Market gates 先于 Agent 核心</span></div>
+            <div class="rule-item" data-page-node-id="8WFvWQF6xm130E69SASwis"><span class="rule-num" data-page-node-id="bWtLL67rFDGht07wHXXKrX">02</span><span class="rule-text" data-page-node-id="o0RE1ltykZgIN45yxCzctF"><strong data-page-node-id="52q2JCwvXushNm37hhhyOB">LLM only proposes</strong> — LLM 输出是提议；确定性域服务验证并提交最终状态</span></div>
+            <div class="rule-item" data-page-node-id="jdKBQijldK5QwNP71bxPEO"><span class="rule-num" data-page-node-id="WMBJ8eRDUkBEqeL0vcs6RC">03</span><span class="rule-text" data-page-node-id="YLaPKwgeH6Byy8qAsh7RQ5"><strong data-page-node-id="E1F4R7tUep2Dn41aiMsxo6">Truth boundaries</strong> — PostgreSQL 存结构化持久真值；MinIO 存原始文件；pgvector/RAG 可重建；Redis 非真值</span></div>
+            <div class="rule-item" data-page-node-id="SjAATir84CxmDDA3x1UJ6W"><span class="rule-num" data-page-node-id="RymSXF9Ruisi4LQYL7SrT1">04</span><span class="rule-text" data-page-node-id="9PLO09DBd3Gr4ZMySu2iDg"><strong data-page-node-id="kNZVtvmi8DrfBfys8mCD0L">Immutable history</strong> — Evidence/Thesis/Trade Plan/orders/fills/exits/discipline/alerts/rule versions 永不覆盖</span></div>
+            <div class="rule-item" data-page-node-id="7tPdwSr3kYmMVqLgGPnUj0"><span class="rule-num" data-page-node-id="N50k1Wact281xhuzeCv8Q9">05</span><span class="rule-text" data-page-node-id="IxVqCW33DmHZHaTqamJHBv"><strong data-page-node-id="mcstOzBa8Ty75WwAmuk6Qh">Fail closed</strong> — 缺失/过期/冲突/不可验证的决策关键数据禁止新风险</span></div>
+            <div class="rule-item" data-page-node-id="QHlL5jqrXyjLpK5QWUKw2G"><span class="rule-num" data-page-node-id="owYeP2rhU7wjk0iJp6ZKxu">06</span><span class="rule-text" data-page-node-id="6SbtwjVgv5jdf4zODqduDo"><strong data-page-node-id="1W4c6oKFfEEkHRLIxFAUUC">Market before new stock risk</strong> — 冻结双指数 gate 先于个股准入；市场失败不自动卖出现有仓位</span></div>
+            <div class="rule-item" data-page-node-id="FIZiikJaZgrKVl9ROPzy7Q"><span class="rule-num" data-page-node-id="bAy65MfLPGOerVbFB6NiRG">07</span><span class="rule-text" data-page-node-id="IzXgtiopoWq5FdXM9CsIqB"><strong data-page-node-id="xCj2lQGtCYPpFRYEWSbXhA">Agent is read-only</strong> — 可读/解释/挑战/创建无副作用提议；不可提交订单/写事实/改阈值/清暂停</span></div>
+            <div class="rule-item" data-page-node-id="MULehnP0HJJiak5xaCBrDz"><span class="rule-num" data-page-node-id="VumWkDQRmMJKvMa1pGXTwr">08</span><span class="rule-text" data-page-node-id="eH1GzK8e6GB6YJ4boSNZnY"><strong data-page-node-id="v325Q4PjHbvowocalboWii">User confirms trades</strong> — 系统不控制券商、不替代用户最终确认和计划亏损接受</span></div>
+            <div class="rule-item" data-page-node-id="SkIo2NN9DruSWCEepafZTq"><span class="rule-num" data-page-node-id="YEp5vaDKJqZu7UwfVWYXVF">09</span><span class="rule-text" data-page-node-id="IpZ9z4MzoLBGKSTJa9GdYZ"><strong data-page-node-id="DhIhjUlGjlTsVZ3Jy3gzG1">Maximum four stocks</strong> — 第五只需 Position Replacement PK 和实际容量释放</span></div>
+            <div class="rule-item" data-page-node-id="SxuCR3GthqVv54HeFLbw59"><span class="rule-num" data-page-node-id="xzmxjvFmPkJRA8hEcwCSZG">10</span><span class="rule-text" data-page-node-id="nnVBgpYYjQXJZbsltr6PtN"><strong data-page-node-id="0ojb8gAg5L9KvlxjVASqta">Frozen model boundary</strong> — 不静默改变 v1.3 模型 / v1.1 系统 / Setup B / ActionDecision / 风险阈值 / 退出路径 / 恢复规则</span></div>
+            <div class="rule-item" data-page-node-id="NhswSHOmlJZjEqzDRp1b92"><span class="rule-num" data-page-node-id="I4WBLOSXIPAfYbLUADVEW5">11</span><span class="rule-text" data-page-node-id="CgguZyUeBCSiuvyfemUliZ"><strong data-page-node-id="98CoUGkNZazLmbGfMZjHIU">Strategy is UNPROVEN</strong> — 10/30/50 样本是审查门，不是盈利证明或提险许可</span></div>
+            <div class="rule-item" data-page-node-id="hfhLjEsL0KvEEwPSU13OkQ"><span class="rule-num" data-page-node-id="ZqnWcCgxfCIAWLHRKuj5YV">12</span><span class="rule-text" data-page-node-id="cEIS8oCusyleWVmsGC38aK"><strong data-page-node-id="ZASfkgaYFniRhH6r5eE8an">Macro is staged</strong> — 告警表达脆弱性和压力；无确定性危机日期声明；单一宏观分数不自动清仓</span></div>
+            <div class="rule-item" data-page-node-id="03wBJD4U9V497qPaFkitiG"><span class="rule-num" data-page-node-id="fdfLUwoinOgtDI5PFiWDm9">13</span><span class="rule-text" data-page-node-id="0El7mkr94PUev7sgyj9cvj"><strong data-page-node-id="JdDddpPARSflOS0j4BAxqb">Version all policy changes</strong> — 生产规则变更需新版本/重放/前瞻验证/用户批准</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /content -->
+  </main>
+</div><!-- /workbench -->
+
+<!-- Toast -->
+<div class="toast" id="toast" data-page-node-id="VRy3R56ui2wcGCiqtGRx0r">已复制到剪贴板</div>
+
+<script>
+// ========================================
+// 面板切换
+// ========================================
+const navItems = document.querySelectorAll('.nav-item[data-panel]');
+const panels = document.querySelectorAll('.panel');
+const pageTitle = document.getElementById('page-title');
+const titles = {
+  overview: '总览',
+  architecture: '模块架构',
+  workpackages: '工作包',
+  commands: '命令中心',
+  services: '服务地图',
+  git: 'Git 活动',
+  migrations: '数据库迁移',
+  tests: '测试矩阵',
+  rules: '设计规则'
+};
+
+navItems.forEach(item => {
+  item.addEventListener('click', () => {
+    const panelId = item.dataset.panel;
+    navItems.forEach(n => n.classList.remove('active'));
+    item.classList.add('active');
+    panels.forEach(p => p.classList.remove('active'));
+    document.getElementById('panel-' + panelId).classList.add('active');
+    pageTitle.textContent = titles[panelId] || '开发工作台';
+  });
+});
+
+// ========================================
+// 复制命令
+// ========================================
+const toast = document.getElementById('toast');
+let toastTimer;
+
+function showToast(msg) {
+  toast.textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove('show'), 2000);
+}
+
+document.querySelectorAll('.cmd-item').forEach(item => {
+  item.addEventListener('click', () => {
+    const cmd = item.dataset.cmd;
+    if (!cmd) return;
+
+    // 使用 Clipboard API
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(cmd).then(() => {
+        item.classList.add('copied');
+        showToast('已复制: ' + cmd);
+        setTimeout(() => item.classList.remove('copied'), 1500);
+      }).catch(() => {
+        fallbackCopy(cmd, item);
+      });
+    } else {
+      fallbackCopy(cmd, item);
+    }
+  });
+});
+
+function fallbackCopy(text, item) {
+  const textarea = document.createElement('textarea');
+  textarea.value = text;
+  textarea.style.position = 'fixed';
+  textarea.style.opacity = '0';
+  document.body.appendChild(textarea);
+  textarea.select();
+  try {
+    document.execCommand('copy');
+    item.classList.add('copied');
+    showToast('已复制: ' + text);
+    setTimeout(() => item.classList.remove('copied'), 1500);
+  } catch (e) {
+    showToast('复制失败，请手动复制');
+  }
+  document.body.removeChild(textarea);
+}
+
+// ========================================
+// 进度条动画 — 页面加载时触发
+// ========================================
+window.addEventListener('load', () => {
+  // 进度条已经在 CSS 中设置了 width，这里添加渐入效果
+  document.querySelectorAll('.wp-progress-fill').forEach(fill => {
+    const w = fill.style.width;
+    fill.style.width = '0';
+    setTimeout(() => { fill.style.width = w; }, 100);
+  });
+});
+</script>
+
+</body>
+</html>

@@ -6,11 +6,13 @@ ensure_instrument 实现了幂等写入：先查 symbol 是否已存在，不存
 搜索策略：先查数据库，无结果时回退到内置目录并自动持久化匹配项。
 """
 
+import re
 from dataclasses import dataclass
 from datetime import UTC, datetime
 
 from backend.instrument.models import Instrument, InstrumentAlias, InstrumentTag
 from sqlalchemy import Select, or_, select
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
@@ -92,6 +94,39 @@ CATALOG: tuple[CatalogInstrument, ...] = (
     ),
 )
 
+EXCHANGE_ALIASES: dict[str, str] = {
+    "SH": "SSE",
+    "SSE": "SSE",
+    "SS": "SSE",
+    "SZ": "SZSE",
+    "SZE": "SZSE",
+    "SZSE": "SZSE",
+    "BJ": "BSE",
+    "BSE": "BSE",
+    "HK": "HKEX",
+    "HKEX": "HKEX",
+    "EVENT": "EVENT",
+}
+_QUALIFIED_SYMBOL = re.compile(r"^(?P<left>[A-Za-z0-9]+)[\.:](?P<right>[A-Za-z0-9]+)$")
+
+
+def parse_instrument_query(query: str) -> tuple[str, str | None]:
+    """Parse an optional exchange-qualified symbol into canonical identity."""
+    value = query.strip().upper()
+    match = _QUALIFIED_SYMBOL.fullmatch(value)
+    if match is None:
+        return value, None
+
+    left = match.group("left")
+    right = match.group("right")
+    left_exchange = EXCHANGE_ALIASES.get(left)
+    right_exchange = EXCHANGE_ALIASES.get(right)
+    if left_exchange is not None and right_exchange is None:
+        return right, left_exchange
+    if right_exchange is not None and left_exchange is None:
+        return left, right_exchange
+    return value, None
+
 
 def normalize_query(query: str) -> str:
     """Normalize user search text."""
@@ -100,12 +135,15 @@ def normalize_query(query: str) -> str:
 
 def search_catalog(query: str, limit: int = 10) -> list[CatalogInstrument]:
     """Search the built-in instrument catalog."""
-    needle = normalize_query(query)
+    parsed_symbol, parsed_exchange = parse_instrument_query(query)
+    needle = normalize_query(parsed_symbol if parsed_exchange else query)
     if not needle:
         return []
 
     matches: list[CatalogInstrument] = []
     for item in CATALOG:
+        if parsed_exchange is not None and item.exchange != parsed_exchange:
+            continue
         haystack = [
             item.symbol.lower(),
             item.name.lower(),
@@ -120,19 +158,26 @@ def search_catalog(query: str, limit: int = 10) -> list[CatalogInstrument]:
     return matches
 
 
-def _search_statement(query: str, limit: int) -> Select[tuple[Instrument]]:
+def _search_statement(
+    query: str,
+    limit: int,
+    exchange: str | None = None,
+) -> Select[tuple[Instrument]]:
     like = f"%{query}%"
+    predicates = [
+        or_(
+            Instrument.symbol.ilike(like),
+            Instrument.name.ilike(like),
+            InstrumentAlias.alias.ilike(like),
+        )
+    ]
+    if exchange is not None:
+        predicates.append(Instrument.exchange == exchange)
     return (
         select(Instrument)
         .outerjoin(InstrumentAlias)
         .options(selectinload(Instrument.aliases), selectinload(Instrument.tags))
-        .where(
-            or_(
-                Instrument.symbol.ilike(like),
-                Instrument.name.ilike(like),
-                InstrumentAlias.alias.ilike(like),
-            )
-        )
+        .where(*predicates)
         .order_by(Instrument.symbol)
         .limit(limit)
     )
@@ -153,7 +198,9 @@ async def search_instruments(
     if not normalized:
         return []
 
-    result = await db.execute(_search_statement(normalized, limit))
+    parsed_symbol, exchange = parse_instrument_query(normalized)
+    search_value = parsed_symbol if exchange is not None else normalized
+    result = await db.execute(_search_statement(search_value, limit, exchange))
     instruments = list(result.scalars().unique().all())
     if instruments:
         return instruments
@@ -169,14 +216,26 @@ async def search_instruments(
 async def get_instrument_by_symbol(
     db: AsyncSession,
     symbol: str,
+    exchange: str | None = None,
 ) -> Instrument | None:
-    """Fetch an instrument by symbol."""
+    """Fetch an instrument by canonical symbol and optional exchange."""
+    parsed_symbol, parsed_exchange = parse_instrument_query(symbol)
+    explicit_exchange = exchange.strip().upper() if exchange is not None else None
+    resolved_exchange = (
+        EXCHANGE_ALIASES.get(explicit_exchange, explicit_exchange)
+        if explicit_exchange is not None
+        else parsed_exchange
+    )
+    filters = [Instrument.symbol == parsed_symbol]
+    if resolved_exchange is not None:
+        filters.append(Instrument.exchange == resolved_exchange)
     result = await db.execute(
         select(Instrument)
         .options(selectinload(Instrument.aliases), selectinload(Instrument.tags))
-        .where(Instrument.symbol == symbol.upper())
+        .where(*filters)
     )
-    return result.scalar_one_or_none()
+    matches = list(result.scalars().unique().all())
+    return matches[0] if len(matches) == 1 else None
 
 
 async def resolve_instrument(db: AsyncSession, query: str) -> Instrument | None:
@@ -194,7 +253,7 @@ async def ensure_instrument(
     幂等写入：symbol 已存在则直接返回，否则新建并级联写入
     aliases 和 tags。flush 后立即 refresh 以获取关联对象。
     """
-    existing = await get_instrument_by_symbol(db, catalog_item.symbol)
+    existing = await get_instrument_by_symbol(db, catalog_item.symbol, catalog_item.exchange)
     if existing is not None:
         return existing
 
@@ -219,7 +278,14 @@ async def ensure_instrument(
         for alias in catalog_item.aliases
     ]
     instrument.tags = [InstrumentTag(tag=tag) for tag in catalog_item.tags]
-    db.add(instrument)
-    await db.flush()
+    try:
+        async with db.begin_nested():
+            db.add(instrument)
+            await db.flush()
+    except IntegrityError:
+        existing = await get_instrument_by_symbol(db, catalog_item.symbol, catalog_item.exchange)
+        if existing is None:
+            raise
+        return existing
     await db.refresh(instrument, attribute_names=["aliases", "tags"])
     return instrument

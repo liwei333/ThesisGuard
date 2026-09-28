@@ -34,5 +34,9 @@ async def health_check_db(db: AsyncSession = Depends(get_db)) -> dict[str, str]:
         result = await db.execute(text("SELECT 1"))
         result.scalar()
         return {"status": "ok", "service": "postgres"}
-    except Exception as e:
-        return {"status": "error", "service": "postgres", "message": str(e)}
+    except Exception:
+        return {
+            "status": "error",
+            "service": "postgres",
+            "message": "PostgreSQL unavailable",
+        }

@@ -45,47 +45,65 @@ async def check_postgres() -> HealthResult:
             result = await conn.execute(text("SELECT 1"))
             result.scalar()
         return {"status": "ok", "message": "Connected"}
-    except Exception as e:
-        return {"status": "error", "message": str(e)[:100]}
+    except Exception:
+        return {"status": "error", "message": "PostgreSQL unavailable"}
 
 
 @with_timeout(3.0)
 async def check_redis() -> HealthResult:
     """Check Redis connectivity."""
     try:
-        r = redis_client.cache
-        r.ping()
+        await asyncio.to_thread(_ping_cache)
         return {"status": "ok", "message": "Connected"}
-    except Exception as e:
-        return {"status": "error", "message": str(e)[:100]}
+    except Exception:
+        return {"status": "error", "message": "Redis unavailable"}
 
 
 @with_timeout(3.0)
 async def check_minio() -> HealthResult:
     """Check MinIO connectivity."""
     try:
-        storage.client.list_buckets()
+        await asyncio.to_thread(_list_buckets)
         return {"status": "ok", "message": "Service accessible"}
-    except Exception as e:
-        return {"status": "error", "message": str(e)[:100]}
+    except Exception:
+        return {"status": "error", "message": "Object storage unavailable"}
+
+
+def _ping_queue(url: str) -> None:
+    """Ping the worker Redis DB and always release the synchronous client."""
+    import redis as sync_redis
+
+    client = sync_redis.Redis.from_url(
+        url,
+        decode_responses=True,
+        socket_timeout=2,
+        socket_connect_timeout=2,
+    )
+    try:
+        client.ping()
+    finally:
+        client.close()
+
+
+def _ping_cache() -> None:
+    """Ping the cache Redis DB from a synchronous worker thread."""
+    redis_client.cache.ping()
+
+
+def _list_buckets() -> None:
+    """List object-storage buckets from a synchronous worker thread."""
+    storage.client.list_buckets()
 
 
 @with_timeout(3.0)
 async def check_worker() -> HealthResult:
     """Check if worker queue (Redis) is reachable."""
     try:
-        import redis as sync_redis
         queue_url = settings.redis_queue_url_resolved
-        r = sync_redis.Redis.from_url(
-            queue_url,
-            decode_responses=True,
-            socket_timeout=2,
-            socket_connect_timeout=2,
-        )
-        r.ping()
+        await asyncio.to_thread(_ping_queue, queue_url)
         return {"status": "ok", "message": "Queue accessible"}
-    except Exception as e:
-        return {"status": "error", "message": str(e)[:100]}
+    except Exception:
+        return {"status": "error", "message": "Worker queue unavailable"}
 
 
 async def get_system_status() -> dict[str, Any]:

@@ -23,11 +23,6 @@ from uuid import uuid4
 import asyncpg
 import pytest
 import pytest_asyncio
-from sqlalchemy import func, select
-from sqlalchemy.engine import make_url
-from sqlalchemy.exc import IntegrityError
-from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
-
 from backend.research import services
 from backend.research.models import ResearchModule, ResearchPackage
 from backend.research.services import (
@@ -42,6 +37,10 @@ from backend.research.services import (
     get_package_version,
     list_package_history,
 )
+from sqlalchemy import func, select
+from sqlalchemy.engine import make_url
+from sqlalchemy.exc import IntegrityError
+from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 
 QIANGRUI_INSTRUMENT_ID = "11111111-1111-4111-8111-111111111111"
 DEFAULT_ADMIN_DATABASE_URL = (
@@ -80,7 +79,8 @@ async def pg_sessionmaker() -> AsyncIterator[async_sessionmaker[AsyncSession]]:
     test_url = admin_url.set(database=test_db_name)
     test_database_url = test_url.render_as_string(hide_password=False)
     env = {**os.environ, "DATABASE_URL": test_database_url}
-    subprocess.run(
+    await asyncio.to_thread(
+        subprocess.run,
         ["alembic", "-c", "migrations/alembic.ini", "upgrade", "head"],
         check=True,
         env=env,

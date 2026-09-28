@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import asyncio
 import os
 import subprocess
 from collections.abc import AsyncIterator
@@ -15,14 +16,14 @@ import asyncpg
 import pytest
 import pytest_asyncio
 from backend.evidence.models import (
+    INITIAL_STATE_CHECK,
     EvidenceCorroborationLink,
     EvidenceDerivationLink,
-    EvidenceInstrumentLink,
     EvidenceIdempotencyRecord,
+    EvidenceInstrumentLink,
     EvidenceSeries,
     EvidenceSourceLocator,
     EvidenceVersion,
-    INITIAL_STATE_CHECK,
     SourceDocument,
     SourceDocumentVersion,
 )
@@ -1177,9 +1178,9 @@ async def test_evidence_migration_creates_contract_tables_and_constraints(
             row.conname: row.definition for row in constraints
         }
         constraint_names = set(constraint_definitions)
-        migration_text = Path(
-            "migrations/versions/20260914_004_evidence_persistence.py"
-        ).read_text()
+        migration_text = await asyncio.to_thread(
+            Path("migrations/versions/20260914_004_evidence_persistence.py").read_text
+        )
         model_initial_constraint = next(
             constraint
             for constraint in EvidenceVersion.__table__.constraints

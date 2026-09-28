@@ -8,14 +8,25 @@ import { getHealth, dispatchHealthCheckTask, TaskDispatchResponse } from '@/api/
 
 const taskResult = ref<TaskDispatchResponse | null>(null)
 const apiVersion = ref('loading...')
+const error = ref<string | null>(null)
 
 async function checkApi() {
-  const health = await getHealth()
-  apiVersion.value = health.version
+  try {
+    const health = await getHealth()
+    apiVersion.value = health.version
+    error.value = null
+  } catch {
+    error.value = 'API 暂时不可用'
+  }
 }
 
 async function runWorkerTask() {
-  taskResult.value = await dispatchHealthCheckTask()
+  try {
+    taskResult.value = await dispatchHealthCheckTask()
+    error.value = null
+  } catch {
+    error.value = 'Worker 队列暂时不可用'
+  }
 }
 
 checkApi()
@@ -23,6 +34,12 @@ checkApi()
 
 <template>
   <div class="settings">
+    <div
+      v-if="error"
+      class="error-card"
+    >
+      {{ error }}
+    </div>
     <div class="page-header">
       <h2>设置</h2>
       <p class="text-muted">

@@ -1,6 +1,5 @@
 """Tests for system status endpoints."""
 
-import pytest
 from fastapi.testclient import TestClient
 
 
@@ -34,7 +33,7 @@ class TestSystemStatusEndpoint:
         """Each service should have status and message."""
         response = client.get("/api/v1/system/status")
         data = response.json()
-        for service_name, service_data in data["services"].items():
+        for _service_name, service_data in data["services"].items():
             assert "status" in service_data
             assert "message" in service_data
             assert service_data["status"] in ("ok", "error")

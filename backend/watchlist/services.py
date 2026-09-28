@@ -18,7 +18,9 @@ from datetime import UTC, datetime
 from backend.instrument.models import Instrument
 from backend.instrument.services import CatalogInstrument, resolve_instrument
 from backend.watchlist.models import WatchlistItem
+from backend.watchlist.schemas import WATCHLIST_CLASSIFICATIONS, WATCHLIST_RESEARCH_STATUSES
 from sqlalchemy import select
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import joinedload
 
@@ -33,6 +35,10 @@ class ClassificationResult:
     research_score: int | None
     thesis_summary: str
     agent_action: str
+
+
+CLASSIFICATION_VALUES = set(WATCHLIST_CLASSIFICATIONS)
+RESEARCH_STATUS_VALUES = set(WATCHLIST_RESEARCH_STATUSES)
 
 
 def classify_instrument(instrument: CatalogInstrument | Instrument) -> ClassificationResult:
@@ -134,8 +140,15 @@ async def add_to_watchlist(
         created_at=now,
         updated_at=now,
     )
-    db.add(item)
-    await db.flush()
+    try:
+        async with db.begin_nested():
+            db.add(item)
+            await db.flush()
+    except IntegrityError:
+        existing = await get_watchlist_item_by_instrument(db, instrument.id)
+        if existing is None:
+            raise
+        return existing
     await db.refresh(item, attribute_names=["instrument"])
     return item
 
@@ -173,8 +186,12 @@ async def update_watchlist_item(
 ) -> WatchlistItem:
     """Update editable watchlist fields."""
     if classification is not None:
+        if classification not in CLASSIFICATION_VALUES:
+            raise ValueError(f"Invalid watchlist classification: {classification}")
         item.classification = classification
     if research_status is not None:
+        if research_status not in RESEARCH_STATUS_VALUES:
+            raise ValueError(f"Invalid watchlist research status: {research_status}")
         item.research_status = research_status
     if agent_action is not None:
         item.agent_action = agent_action

@@ -38,10 +38,10 @@ async def dispatch_health_check() -> TaskDispatchResponse:
             message="Health check task queued successfully",
         )
     except Exception as e:
-        logger.error(f"Failed to dispatch health check task: {e}")
+        logger.exception("Failed to dispatch health check task")
         raise HTTPException(
             status_code=503,
-            detail=f"Task queue unavailable: {str(e)[:100]}",
+            detail="Task queue unavailable",
         ) from e
 
 
@@ -57,8 +57,8 @@ async def dispatch_echo(payload: EchoRequest) -> TaskDispatchResponse:
             message=f"Echo task queued with message: {payload.message}",
         )
     except Exception as e:
-        logger.error(f"Failed to dispatch echo task: {e}")
+        logger.exception("Failed to dispatch echo task")
         raise HTTPException(
             status_code=503,
-            detail=f"Task queue unavailable: {str(e)[:100]}",
+            detail="Task queue unavailable",
         ) from e

@@ -37,11 +37,18 @@ class StorageClient:
 
     def ensure_bucket(self) -> None:
         """Create the bucket if it doesn't exist."""
-        # head_bucket 失败说明 bucket 不存在，此时创建；其他 ClientError 向上抛出
         try:
             self.client.head_bucket(Bucket=self._bucket)
-        except ClientError:
+        except ClientError as exc:
+            if not self._is_not_found(exc):
+                raise
             self.client.create_bucket(Bucket=self._bucket)
+
+    @staticmethod
+    def _is_not_found(error: ClientError) -> bool:
+        """Return whether an S3 error means that the requested object is absent."""
+        code = str(error.response.get("Error", {}).get("Code", ""))
+        return code in {"404", "NoSuchBucket", "NoSuchKey", "NoSuchObject", "NotFound"}
 
     def put_object(
         self,
@@ -64,24 +71,30 @@ class StorageClient:
             response = self.client.get_object(Bucket=self._bucket, Key=key)
             body = response["Body"]
             return bytes(body.read())
-        except ClientError:
-            return None
+        except ClientError as exc:
+            if self._is_not_found(exc):
+                return None
+            raise
 
     def delete_object(self, key: str) -> bool:
         """Delete an object. Returns True if successful."""
         try:
             self.client.delete_object(Bucket=self._bucket, Key=key)
             return True
-        except ClientError:
-            return False
+        except ClientError as exc:
+            if self._is_not_found(exc):
+                return False
+            raise
 
     def object_exists(self, key: str) -> bool:
         """Check if an object exists."""
         try:
             self.client.head_object(Bucket=self._bucket, Key=key)
             return True
-        except ClientError:
-            return False
+        except ClientError as exc:
+            if self._is_not_found(exc):
+                return False
+            raise
 
     def health_check(self) -> bool:
         """Check if MinIO is reachable and bucket exists."""

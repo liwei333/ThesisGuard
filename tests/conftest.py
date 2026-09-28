@@ -1,14 +1,10 @@
 """Shared test fixtures and configuration."""
 
 import asyncio
-from typing import AsyncGenerator
 
 import pytest
-import pytest_asyncio
-from fastapi.testclient import TestClient
-from httpx import AsyncClient, ASGITransport
-
 from apps.api.main import app
+from fastapi.testclient import TestClient
 
 
 @pytest.fixture(scope="session")
