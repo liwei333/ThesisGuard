@@ -61,6 +61,14 @@ def _synthetic_url() -> str:
     return "postgresql" + "://" + "canary-user" + ":" + "canary-pass" + "@db.invalid/x"
 
 
+def _synthetic_authority(userinfo: bytes) -> bytes:
+    return b"postgresql" + b"://" + userinfo + b"@db.invalid/x"
+
+
+def _synthetic_query(key: bytes) -> bytes:
+    return b"https" + b"://db.invalid/x?" + key + b"=" + b"memory-only-canary-value"
+
+
 def _launcher(returncode: int, stdout: bytes = b"", *, calls: list[int] | None = None):
     def launch(**_: object) -> tuple[int, bytes]:
         if calls is not None:
@@ -401,10 +409,62 @@ def test_credential_scanner_detects_memory_only_canary() -> None:
     assert findings == [{"finding_type": "URL_USERINFO", "path": "memory-only", "count": 1}]
 
 
+def test_credential_scanner_detects_colonless_authority_userinfo() -> None:
+    canary = _synthetic_authority(b"memory-only-userinfo")
+    findings = credential_scan_bytes(canary, "memory-only")
+    assert findings == [{"finding_type": "URL_USERINFO", "path": "memory-only", "count": 1}]
+
+
+def test_credential_scanner_detects_percent_encoded_userinfo() -> None:
+    userinfo = b"memory%2Donly" + b":" + b"canary%2Dvalue"
+    findings = credential_scan_bytes(_synthetic_authority(userinfo), "memory-only")
+    assert findings == [{"finding_type": "URL_USERINFO", "path": "memory-only", "count": 1}]
+
+
+@pytest.mark.parametrize(
+    "key",
+    [
+        b"password",
+        b"passwd",
+        b"token",
+        b"secret",
+        b"database_url",
+        b"db_url",
+        b"dsn",
+        b"api_key",
+        b"access_key",
+        b"auth",
+        b"credential",
+        b"credentials",
+        b"DaTaBaSe_Url",
+        b"ToKeN",
+    ],
+)
+def test_credential_scanner_detects_unquoted_sensitive_query_parameter(key: bytes) -> None:
+    findings = credential_scan_bytes(_synthetic_query(key), "memory-only")
+    assert findings == [
+        {"finding_type": "SENSITIVE_QUERY_PARAMETER", "path": "memory-only", "count": 1}
+    ]
+
+
 def test_credential_scanner_detects_memory_only_sensitive_assignment() -> None:
     canary = ("password" + ' = "' + "memory-only-canary-value" + '"').encode()
     findings = credential_scan_bytes(canary, "memory-only")
     assert findings == [{"finding_type": "SENSITIVE_ASSIGNMENT", "path": "memory-only", "count": 1}]
+
+
+def test_credential_scanner_ignores_safe_url() -> None:
+    safe_url = b"https" + b"://example.invalid/path?page=1&view=summary"
+    assert credential_scan_bytes(safe_url, "memory-only") == []
+
+
+def test_credential_scanner_findings_never_contain_matched_value() -> None:
+    canary_value = b"memory-only-secret-value"
+    canary = _synthetic_authority(b"user" + b":" + canary_value) + b"?token=" + canary_value
+    findings = credential_scan_bytes(canary, "memory-only")
+    serialized = json.dumps(findings, sort_keys=True).encode()
+    assert canary_value not in serialized
+    assert all(set(finding) == {"finding_type", "path", "count"} for finding in findings)
 
 
 def test_credential_scanner_does_not_self_match_formal_sources() -> None:
@@ -423,6 +483,8 @@ def test_credential_scanner_does_not_self_match_formal_sources() -> None:
 def test_synthetic_canary_is_not_a_literal_in_test_source() -> None:
     source = Path(__file__).read_text(encoding="utf-8")
     assert _synthetic_url() not in source
+    assert _synthetic_authority(b"memory-only-userinfo").decode() not in source
+    assert _synthetic_query(b"password").decode() not in source
 
 
 def test_proof_failure_closes_bundle_without_second_invocation(tmp_path: Path) -> None:

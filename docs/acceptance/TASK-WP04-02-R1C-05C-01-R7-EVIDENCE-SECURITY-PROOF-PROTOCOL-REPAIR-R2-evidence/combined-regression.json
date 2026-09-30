@@ -1,0 +1,8 @@
+{
+  "collected": 157,
+  "command": "fixed Python pytest combined secure proof and runner suites with cacheprovider disabled",
+  "exit_code": 0,
+  "failed": 0,
+  "passed": 157,
+  "skipped": 0
+}

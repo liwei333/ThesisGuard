@@ -1,0 +1,22 @@
+{
+  "file_count": 3,
+  "files": [
+    {
+      "bytes": 916,
+      "path": "after.json",
+      "sha256": "58713ef3ce5408e2a8bdd9e1b27c86bc2fce413e3d696a4b2a80c1477503e3ab"
+    },
+    {
+      "bytes": 8863,
+      "path": "allowed-files.diff",
+      "sha256": "72f5fa9c8cf31c83dcb8aa1bd33440d171cf443a54b974d05b0f7bb1f6989a45"
+    },
+    {
+      "bytes": 916,
+      "path": "before.json",
+      "sha256": "f42738d63b4f963c34f8142c7d6fffac6422d65290725eaf1cca46664bea2dcf"
+    }
+  ],
+  "root_manifest_exclusion": "manifest.json",
+  "schema_version": 1
+}

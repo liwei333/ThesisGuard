@@ -1,0 +1,20 @@
+{
+  "collect_only_unique_node_ids": 41,
+  "collected": 83,
+  "command": "fixed Python pytest existing runner suite with cacheprovider disabled",
+  "create_attempts": 0,
+  "distribution": [
+    20,
+    16,
+    3,
+    2
+  ],
+  "end_to_end_executed": true,
+  "exit_code": 0,
+  "failed": 0,
+  "ledger_exists": false,
+  "passed": 83,
+  "skipped": 0,
+  "socket_attempts": 0,
+  "test_body_calls": 0
+}

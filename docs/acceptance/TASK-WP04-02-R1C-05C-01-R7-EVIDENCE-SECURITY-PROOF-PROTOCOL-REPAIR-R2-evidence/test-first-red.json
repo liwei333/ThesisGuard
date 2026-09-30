@@ -1,0 +1,21 @@
+{
+  "runner_reproduction": {
+    "collected": 1,
+    "exit_code": 1,
+    "failed": 1,
+    "failure": "main_git_identity_mismatch",
+    "passed": 0,
+    "skipped": 0
+  },
+  "scanner_negative_coverage": {
+    "collected": 22,
+    "exit_code": 1,
+    "expected_missing_behaviors": [
+      "colonless authority userinfo",
+      "unquoted sensitive query parameters"
+    ],
+    "failed": 15,
+    "passed": 7,
+    "skipped": 0
+  }
+}

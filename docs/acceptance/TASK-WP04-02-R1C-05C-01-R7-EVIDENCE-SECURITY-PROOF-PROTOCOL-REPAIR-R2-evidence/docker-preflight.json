@@ -1,0 +1,5 @@
+{
+  "exit_code": null,
+  "reason": "earlier offline blocking gate ruff-check returned exit 1",
+  "status": "NOT_RUN"
+}

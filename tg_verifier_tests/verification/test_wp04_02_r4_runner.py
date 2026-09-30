@@ -41,6 +41,7 @@ from tg_verifier_tools.verification.wp04_02_r4_pytest_plugin import (  # noqa: E
 )
 from tg_verifier_tools.verification.wp04_02_r4_runner import (  # noqa: E402
     EvidenceBundle,
+    MAIN_HEAD,
     _is_sensitive_env_key,
     _redact_url_value,
     _redact_value,
@@ -1227,17 +1228,77 @@ def _find_main_root() -> Path:
     return well_known
 
 
-@pytest.mark.skipif(
-    _find_candidate_root() is None,
-    reason="Candidate worktree not available on this machine",
-)
+def _assert_historical_main_checkout(checkout: Path, expected_head: str = MAIN_HEAD) -> None:
+    head = subprocess.run(
+        ["git", "-C", str(checkout), "rev-parse", "HEAD"],
+        capture_output=True,
+        text=True,
+        check=True,
+    ).stdout.strip()
+    if head != expected_head:
+        raise AssertionError(f"historical main HEAD mismatch: expected {expected_head}, got {head}")
+
+    attached = subprocess.run(
+        ["git", "-C", str(checkout), "symbolic-ref", "-q", "HEAD"],
+        capture_output=True,
+        text=True,
+        check=False,
+    )
+    if attached.returncode == 0:
+        raise AssertionError("historical main checkout is not detached")
+
+    status = subprocess.run(
+        ["git", "-C", str(checkout), "status", "--porcelain", "--untracked-files=all"],
+        capture_output=True,
+        text=True,
+        check=True,
+    ).stdout
+    if status:
+        raise AssertionError("historical main checkout is not clean")
+
+
+def _clone_historical_main(source_root: Path, tmp_path: Path) -> Path:
+    checkout = tmp_path / "historical-main"
+    subprocess.run(
+        [
+            "git",
+            "clone",
+            "--no-hardlinks",
+            "--no-checkout",
+            str(source_root),
+            str(checkout),
+        ],
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    subprocess.run(
+        ["git", "-C", str(checkout), "checkout", "--detach", MAIN_HEAD],
+        capture_output=True,
+        text=True,
+        check=True,
+    )
+    _assert_historical_main_checkout(checkout)
+    return checkout
+
+
+def test_historical_main_checkout_rejects_wrong_head_and_dirty(tmp_path: Path) -> None:
+    checkout = _clone_historical_main(_find_main_root(), tmp_path)
+    with pytest.raises(AssertionError, match="HEAD mismatch"):
+        _assert_historical_main_checkout(checkout, "0" * 40)
+
+    (checkout / "untracked-sentinel").write_text("not clean\n", encoding="utf-8")
+    with pytest.raises(AssertionError, match="not clean"):
+        _assert_historical_main_checkout(checkout)
+
+
 def test_collect_only_end_to_end(tmp_path: Path) -> None:
     """Run the runner in collect-only mode and verify the 41/20/16/3/2 result."""
     from tg_verifier_tools.verification.wp04_02_r4_runner import run_collect_only
 
     candidate_root = _find_candidate_root()
     assert candidate_root is not None
-    main_root = _find_main_root()
+    main_root = _clone_historical_main(_find_main_root(), tmp_path)
     evidence_dir = tmp_path / "evidence"
 
     # Use a pytest whose Python has boto3 (required by candidate conftest.py).

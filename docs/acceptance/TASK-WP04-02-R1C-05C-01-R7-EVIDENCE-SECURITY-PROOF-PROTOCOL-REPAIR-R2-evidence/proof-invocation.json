@@ -1,0 +1,6 @@
+{
+  "invocation_count": 0,
+  "reason": "offline blocking gate ruff-check returned exit 1",
+  "retry_count": 0,
+  "status": "NOT_RUN"
+}

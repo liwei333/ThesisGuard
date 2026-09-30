@@ -1,0 +1,9 @@
+{
+  "collected": 74,
+  "command": "fixed Python pytest secure proof deterministic suite with cacheprovider disabled",
+  "database_connection_count": 0,
+  "exit_code": 0,
+  "failed": 0,
+  "passed": 74,
+  "skipped": 0
+}

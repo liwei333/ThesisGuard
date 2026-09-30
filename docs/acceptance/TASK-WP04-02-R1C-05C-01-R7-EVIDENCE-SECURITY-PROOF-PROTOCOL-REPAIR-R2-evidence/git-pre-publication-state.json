@@ -1,0 +1,14 @@
+{
+  "blocking_status": "BLOCKED_OFFLINE_RUFF_CHECK",
+  "branch": "codex/wp04-02-r7-proof-protocol-repair-r2",
+  "formal_evidence_present": false,
+  "formal_report_present": false,
+  "head": "43df5fbf9e2b1a748ebd7ac22e8ba02c2832285b",
+  "implementation_commit": null,
+  "index_empty": true,
+  "tracked_worktree_changes": [
+    "tg_verifier_tests/verification/test_wp04_02_r4_runner.py",
+    "tg_verifier_tests/verification/test_wp04_02_secure_pg_proof.py",
+    "tg_verifier_tools/verification/wp04_02_secure_pg_proof.py"
+  ]
+}

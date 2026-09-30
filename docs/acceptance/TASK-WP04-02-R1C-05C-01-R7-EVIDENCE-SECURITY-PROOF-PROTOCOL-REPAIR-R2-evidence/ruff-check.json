@@ -1,0 +1,14 @@
+{
+  "blocking": true,
+  "command": "fixed Ruff check over the three allowed Python files",
+  "exit_code": 1,
+  "issue_count": 1,
+  "issues": [
+    {
+      "code": "I001",
+      "line": 34,
+      "message": "import block is unsorted or unformatted",
+      "path": "tg_verifier_tests/verification/test_wp04_02_r4_runner.py"
+    }
+  ]
+}

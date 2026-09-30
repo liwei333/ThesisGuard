@@ -1,0 +1,12 @@
+{
+  "child_return_code": null,
+  "connection_count": 0,
+  "current_database": null,
+  "current_user": null,
+  "outcome": "NOT_RUN",
+  "parent_return_code": null,
+  "postgres_server_major": null,
+  "query_count": 0,
+  "schema_valid_result_count": 0,
+  "stage": "NOT_RUN_OFFLINE_RUFF_CHECK"
+}

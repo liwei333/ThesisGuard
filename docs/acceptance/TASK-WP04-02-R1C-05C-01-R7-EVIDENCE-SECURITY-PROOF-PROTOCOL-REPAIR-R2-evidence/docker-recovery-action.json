@@ -1,0 +1,11 @@
+{
+  "docker_build_count": 0,
+  "docker_create_count": 0,
+  "docker_open_count": 0,
+  "docker_pull_count": 0,
+  "docker_recreate_count": 0,
+  "docker_remove_count": 0,
+  "docker_start_count": 0,
+  "reason": "offline blocking gate failed",
+  "status": "NOT_RUN"
+}

@@ -1,0 +1,9 @@
+{
+  "blocking_gate": "ruff-check",
+  "missing": [],
+  "present_count": 29,
+  "proof_invocation_count": 0,
+  "report_present_in_staging": true,
+  "required_count": 29,
+  "unexpected": []
+}
