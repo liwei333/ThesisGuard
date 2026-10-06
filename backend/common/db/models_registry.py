@@ -28,6 +28,12 @@ from backend.instrument.models import (  # noqa: F401
     InstrumentRelation,
     InstrumentTag,
 )
+from backend.knowledge.models import (  # noqa: F401
+    KnowledgeBase,
+    KnowledgeDocument,
+    KnowledgeImportTask,
+    KnowledgeInstrumentLink,
+)
 from backend.research.models import ResearchModule, ResearchPackage  # noqa: F401
 from backend.watchlist.models import WatchlistItem  # noqa: F401
 

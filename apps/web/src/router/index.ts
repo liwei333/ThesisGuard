@@ -22,6 +22,12 @@ const routes: RouteRecordRaw[] = [
     meta: { title: '自选池' },
   },
   {
+    path: '/knowledge',
+    name: 'knowledge',
+    component: () => import('@/views/KnowledgeView.vue'),
+    meta: { title: '知识库' },
+  },
+  {
     // 标的详情页，symbol 为路径参数，当前为 Mock 数据骨架
     path: '/stock/:symbol',
     name: 'stock-detail',

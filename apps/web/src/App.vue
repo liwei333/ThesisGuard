@@ -8,6 +8,7 @@ const navItems = [
   { path: '/', label: '总览', icon: '◫' },
   { path: '/dashboard', label: '仪表盘', icon: '◰' },
   { path: '/watchlist', label: '自选', icon: '☆' },
+  { path: '/knowledge', label: '知识库', icon: '◎' },
   { path: '/settings', label: '设置', icon: '⚙' },
 ]
 

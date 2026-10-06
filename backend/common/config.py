@@ -104,6 +104,15 @@ class Settings(BaseSettings):
     WORKER_CONCURRENCY: int = 4
     WORKER_LOG_LEVEL: str = "INFO"
 
+    # WeKnora Knowledge Service
+    # Disabled by default so existing startup paths are unaffected.
+    WEKNORA_ENABLED: bool = False
+    WEKNORA_HOST: str = ""
+    WEKNORA_PORT: int = 8080
+    WEKNORA_BASE_PATH: str = ""
+    WEKNORA_TIMEOUT: float = 10.0
+    WEKNORA_UPLOAD_TIMEOUT: float = 60.0
+
     @model_validator(mode="after")
     def validate_runtime_security(self) -> "Settings":
         """Reject development-only security settings in production."""

@@ -370,4 +370,140 @@ export function refreshResearchPackage(
   )
 }
 
+// ---- Knowledge module ----
+// NOTE: These use direct axios calls via apiClient. Once the OpenAPI client
+// is regenerated with the knowledge endpoints, migrate to generated services.
+
+export interface KnowledgeBase {
+  id: string
+  name: string
+  description: string | null
+  category: string
+  status: string
+  weknora_kb_id: string | null
+  document_count: number
+  created_at: string
+  updated_at: string
+}
+
+export interface KnowledgeDocument {
+  id: string
+  knowledge_base_id: string
+  source_document_version_id: string | null
+  title: string
+  content_hash: string
+  media_type: string
+  file_size_bytes: number
+  processing_status: string
+  retry_count: number
+  last_error: string | null
+  weknora_document_id: string | null
+  published_at: string | null
+  created_at: string
+  updated_at: string
+}
+
+export interface KnowledgeSearchResult {
+  ref_id: string
+  knowledge_base_id: string
+  source_document_version_id: string | null
+  title: string
+  excerpt: string
+  score: number
+  score_type: string
+  published_at: string | null
+  instrument_id: string | null
+  chunk_id: string | null
+  provider_document_id: string | null
+  content_hash: string | null
+  locator_precision: string
+  warnings: string[]
+}
+
+export interface KnowledgeSearchResponse {
+  status: string
+  results: KnowledgeSearchResult[]
+  warnings: string[]
+  query: string
+  knowledge_base_ids: string[]
+}
+
+export async function listKnowledgeBases(): Promise<KnowledgeBase[]> {
+  const response = await apiClient.get('/api/v1/knowledge/bases')
+  return response.data
+}
+
+export async function createKnowledgeBase(payload: {
+  name: string
+  description?: string
+  category?: string
+}): Promise<KnowledgeBase> {
+  const response = await apiClient.post('/api/v1/knowledge/bases', payload)
+  return response.data
+}
+
+export async function getKnowledgeBase(kbId: string): Promise<KnowledgeBase> {
+  const response = await apiClient.get(`/api/v1/knowledge/bases/${kbId}`)
+  return response.data
+}
+
+export async function listKnowledgeDocuments(kbId: string): Promise<KnowledgeDocument[]> {
+  const response = await apiClient.get(`/api/v1/knowledge/bases/${kbId}/documents`)
+  return response.data
+}
+
+export async function uploadKnowledgeDocument(
+  kbId: string,
+  file: File,
+  options?: { title?: string; instrumentId?: string; idempotencyKey?: string },
+): Promise<KnowledgeDocument> {
+  const formData = new FormData()
+  formData.append('file', file)
+  if (options?.title) formData.append('title', options.title)
+  if (options?.instrumentId) formData.append('instrument_id', options.instrumentId)
+  if (options?.idempotencyKey) formData.append('idempotency_key', options.idempotencyKey)
+  const response = await apiClient.post(
+    `/api/v1/knowledge/bases/${kbId}/documents`,
+    formData,
+    { headers: { 'Content-Type': 'multipart/form-data' } },
+  )
+  return response.data
+}
+
+export async function submitKnowledgeDocument(
+  docId: string,
+  idempotencyKey: string,
+): Promise<{ id: string; status: string }> {
+  const response = await apiClient.post(
+    `/api/v1/knowledge/documents/${docId}/submit`,
+    { idempotency_key: idempotencyKey },
+  )
+  return response.data
+}
+
+export async function retireKnowledgeDocument(docId: string): Promise<KnowledgeDocument> {
+  const response = await apiClient.post(`/api/v1/knowledge/documents/${docId}/retire`)
+  return response.data
+}
+
+export async function linkInstrumentToKnowledgeBase(
+  kbId: string,
+  instrumentId: string,
+): Promise<{ id: string; knowledge_base_id: string; instrument_id: string }> {
+  const response = await apiClient.post(`/api/v1/knowledge/bases/${kbId}/instruments`, {
+    instrument_id: instrumentId,
+  })
+  return response.data
+}
+
+export async function searchKnowledge(payload: {
+  query: string
+  knowledge_base_ids?: string[]
+  instrument_id?: string
+  limit?: number
+}): Promise<KnowledgeSearchResponse> {
+  const response = await apiClient.post('/api/v1/knowledge/search', payload)
+  return response.data
+}
+
 export { OpenAPI as openApiConfig }
