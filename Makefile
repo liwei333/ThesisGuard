@@ -2,7 +2,7 @@
 # 数据库迁移命令使用 127.0.0.1:15432（Docker 暴露端口），便于本地执行
 # Redis 使用三个逻辑 DB：/0 通用、/1 缓存、//2 队列
 
-.PHONY: help dev dev-api dev-web worker down up logs rebuild test lint typecheck migrate migrate-gen db-reset frontend-install frontend-api-generate frontend-api-check frontend-check
+.PHONY: help dev dev-api dev-web worker down up logs rebuild test lint typecheck migrate migrate-gen db-reset frontend-install frontend-api-generate frontend-api-check frontend-check knowledge knowledge-up knowledge-down knowledge-logs knowledge-build
 
 # Default target
 help: ## Show this help
@@ -28,6 +28,24 @@ rebuild: ## Rebuild and restart all services
 
 ps: ## Show running containers
 	docker compose ps
+
+# ===========================================
+# WeKnora Knowledge Service (optional)
+# ===========================================
+knowledge: ## Start all services including WeKnora
+	docker compose --profile weknora up -d
+
+knowledge-up: ## Start only WeKnora service
+	docker compose --profile weknora up -d weknora
+
+knowledge-down: ## Stop WeKnora service
+	docker compose stop weknora
+
+knowledge-logs: ## Show WeKnora logs
+	docker compose logs -f weknora
+
+knowledge-build: ## Rebuild WeKnora image from third_party/WeKnora source
+	docker compose --profile weknora build weknora
 
 # ===========================================
 # Development (local, without Docker)

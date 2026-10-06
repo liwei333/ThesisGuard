@@ -1,0 +1,31 @@
+{
+  "upstream": "https://github.com/Tencent/WeKnora",
+  "commit_sha": "bccb4b151bae403508da77fbb174efc79dc47c1a",
+  "tag": "v0.8.2-102-gbccb4b15",
+  "export_method": "git archive HEAD (clean working tree)",
+  "exported_at": "2026-10-06",
+  "source_directory": "/Users/qianduoduo/Desktop/AI_app/WeKnora (used as source only, not modified)",
+  "vendored_path": "third_party/WeKnora/",
+  "license": "LICENSE",
+  "third_party_notices": "THIRD_PARTY_NOTICES.md",
+  "excluded": [
+    ".git", ".env", "*.pem", "*_key", "*.key", "*.crt",
+    "node_modules", "dist", "build", "tmp", "temp", "logs"
+  ],
+  "file_count": 4669,
+  "go_file_count": 2726,
+  "size_mb": 110,
+  "verified_api_routes": {
+    "health": "GET /health",
+    "create_kb": "POST /api/v1/knowledge-bases",
+    "list_kbs": "GET /api/v1/knowledge-bases",
+    "get_kb": "GET /api/v1/knowledge-bases/:id",
+    "upload_file": "POST /api/v1/knowledge-bases/:id/knowledge/file (multipart)",
+    "list_documents": "GET /api/v1/knowledge-bases/:id/knowledge",
+    "get_document": "GET /api/v1/knowledge/:id",
+    "get_spans": "GET /api/v1/knowledge/:id/spans",
+    "download": "GET /api/v1/knowledge/:id/download",
+    "hybrid_search": "POST /api/v1/knowledge-bases/:id/hybrid-search"
+  },
+  "auth": "X-API-Key header or Authorization: Bearer"
+}

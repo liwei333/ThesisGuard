@@ -179,6 +179,40 @@ services:
       - /app/apps/web/node_modules
     command: ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
 
+  # ===========================================
+  # WeKnora Knowledge Service (optional)
+  # 知识库后端服务，提供文档解析和检索
+  # 默认不启动，需要时设置 WEKNORA_ENABLED=true
+  # 使用受控源码 third_party/WeKnora 构建
+  # ===========================================
+  weknora:
+    build:
+      context: ./third_party/WeKnora
+      dockerfile: docker/Dockerfile.app
+      args:
+        APK_MIRROR_ARG: ${APK_MIRROR_ARG:-}
+        WITH_ANYDOC: "0"
+    container_name: thesisguard-weknora
+    restart: unless-stopped
+    env_file:
+      - ./infra/weknora/.env.weknora
+    environment:
+      WEKNORA_HOST: "0.0.0.0"
+      WEKNORA_PORT: "8080"
+    ports:
+      - "127.0.0.1:18080:8080"
+    volumes:
+      - weknora_data:/data
+      - ./infra/weknora/config.yaml:/app/config/config.yaml:ro
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    profiles:
+      - weknora
+
 volumes:
   postgres_data:
     name: thesisguard-postgres-data
@@ -186,3 +220,5 @@ volumes:
     name: thesisguard-redis-data
   minio_data:
     name: thesisguard-minio-data
+  weknora_data:
+    name: thesisguard-weknora-data

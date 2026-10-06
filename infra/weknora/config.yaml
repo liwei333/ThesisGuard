@@ -1,0 +1,18 @@
+# WeKnora minimal config for ThesisGuard knowledge module
+# Only document processing + retrieval enabled. No Wiki/MCP/Agent/Sandbox.
+
+server:
+  port: 8080
+  host: "0.0.0.0"
+
+conversation:
+  keyword_threshold: 0.3
+  vector_threshold: 0.2
+  match_count: 10
+  enable_rerank: false
+
+knowledge_base:
+  chunk_size: 512
+  chunk_overlap: 50
+  split_markers: ["\n\n", "\n", "。"]
+  document_process_timeout: 2h

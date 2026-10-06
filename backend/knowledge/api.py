@@ -37,6 +37,7 @@ from backend.knowledge.schemas import (
 )
 from backend.knowledge.services import (
     create_knowledge_base,
+    get_document_content,
     get_knowledge_base_by_id,
     get_knowledge_documents,
     link_instrument_to_knowledge_base,
@@ -47,6 +48,7 @@ from backend.knowledge.services import (
     upload_knowledge_document,
 )
 from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile, status
+from fastapi.responses import StreamingResponse
 from sqlalchemy.ext.asyncio import AsyncSession
 
 router = APIRouter(prefix="/knowledge", tags=["knowledge"])
@@ -221,6 +223,27 @@ async def list_documents_endpoint(
 
 
 @router.post(
+    "/documents/{doc_id}/sync",
+    response_model=KnowledgeDocumentRead,
+    responses={404: DOC_NOT_FOUND_RESPONSE},
+)
+async def sync_document_status_endpoint(
+    doc_id: str,
+    db: AsyncSession = Depends(get_db),
+) -> KnowledgeDocumentRead:
+    """Poll WeKnora for the real processing status of a document.
+
+    Used by the frontend to refresh status after upload/submit.
+    """
+    from backend.knowledge.services import sync_document_status
+    try:
+        doc = await sync_document_status(db, knowledge_document_id=doc_id)
+    except KnowledgeDomainError as error:
+        raise knowledge_http_exception(error) from error
+    return KnowledgeDocumentRead.model_validate(doc)
+
+
+@router.post(
     "/documents/{doc_id}/submit",
     response_model=ImportTaskRead,
     responses={
@@ -335,4 +358,43 @@ async def search_knowledge_endpoint(
         warnings=response.warnings,
         query=response.query,
         knowledge_base_ids=response.knowledge_base_ids,
+    )
+
+
+# ---- Document content (原文查看) ----
+
+
+@router.get(
+    "/documents/{doc_id}/content",
+    responses={404: DOC_NOT_FOUND_RESPONSE},
+)
+async def get_document_content_endpoint(
+    doc_id: str,
+    db: AsyncSession = Depends(get_db),
+) -> StreamingResponse:
+    """Stream the original document content for viewing.
+
+    Source: MinIO primary, WeKnora fallback.
+    The object_key is validated server-side — clients cannot request arbitrary keys.
+    """
+    try:
+        result = await get_document_content(db, knowledge_document_id=doc_id)
+    except KnowledgeDomainError as error:
+        raise knowledge_http_exception(error) from error
+
+    if result is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Document content not found",
+        )
+
+    content_bytes, filename = result
+    import io
+
+    return StreamingResponse(
+        io.BytesIO(content_bytes),
+        media_type="application/octet-stream",
+        headers={
+            "Content-Disposition": f'attachment; filename="{filename}"',
+        },
     )

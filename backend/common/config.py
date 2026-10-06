@@ -110,6 +110,7 @@ class Settings(BaseSettings):
     WEKNORA_HOST: str = ""
     WEKNORA_PORT: int = 8080
     WEKNORA_BASE_PATH: str = ""
+    WEKNORA_API_KEY: str = ""
     WEKNORA_TIMEOUT: float = 10.0
     WEKNORA_UPLOAD_TIMEOUT: float = 60.0
 

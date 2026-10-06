@@ -19,6 +19,7 @@ from typing import Any
 
 from backend.common.config import settings
 from backend.common.storage import storage as minio_storage
+from backend.evidence.repositories import get_latest_source_document_version
 from backend.evidence.services import (
     append_source_document_version,
     register_source_document,
@@ -51,9 +52,13 @@ from backend.knowledge.repositories import (
 from backend.knowledge.weknora_client import (
     WeKnoraError,
     WeKnoraStatus,
+    get_document_status,
 )
 from backend.knowledge.weknora_client import (
     create_knowledge_base as weknora_create_kb,
+)
+from backend.knowledge.weknora_client import (
+    get_document_content as weknora_get_document_content,
 )
 from backend.knowledge.weknora_client import (
     hybrid_search as weknora_search,
@@ -61,6 +66,7 @@ from backend.knowledge.weknora_client import (
 from backend.knowledge.weknora_client import (
     upload_document as weknora_upload,
 )
+from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -76,6 +82,44 @@ def _stable_hash(value: Any) -> str:
     """Return a SHA-256 hash for a JSON-serializable value."""
     canonical = json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
     return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+
+
+async def get_document_content(
+    db: AsyncSession,
+    *,
+    knowledge_document_id: str,
+) -> tuple[bytes, str] | None:
+    """Get the original document content for viewing.
+
+    Returns (bytes, filename) or None if not found.
+    Primary source: MinIO. Fallback: WeKnora download endpoint.
+    """
+    doc = await get_knowledge_document(db, knowledge_document_id)
+    if doc is None:
+        raise KnowledgeDocumentNotFound(
+            f"Document {knowledge_document_id} not found",
+            knowledge_document_id=knowledge_document_id,
+        )
+
+    # Primary: MinIO
+    content = minio_storage.get_object(doc.object_key)
+    if content is not None:
+        return (content, doc.title)
+
+    # Fallback: WeKnora
+    if doc.weknora_document_id and _weknora_available():
+        kb = await get_knowledge_base(db, doc.knowledge_base_id)
+        if kb and kb.weknora_kb_id:
+            try:
+                weknora_content = await weknora_get_document_content(
+                    kb.weknora_kb_id, doc.weknora_document_id
+                )
+                if weknora_content:
+                    return (weknora_content, doc.title)
+            except WeKnoraError as exc:
+                logger.warning("WeKnora download failed for doc %s: %s", doc.id, exc)
+
+    return None
 
 
 def _weknora_available() -> bool:
@@ -225,30 +269,44 @@ async def upload_knowledge_document(
             content_hash=content_hash,
         )
 
-    # Persist raw file in MinIO
-    object_key = f"knowledge/{knowledge_base_id}/{content_hash}/{filename}"
+    # Build a stable logical identity for the local file.
+    # This is NOT a fabricated exchange URL — it namespaced local import ID
+    # that is deterministic for the same (kb, filename) pair.
+    safe_name = filename.strip().replace("/", "_").replace("\\", "_")
+    external_id = f"local:{knowledge_base_id}:{safe_name}"
+
+    # Persist raw file in MinIO (outside any DB transaction).
+    object_key = f"knowledge/{knowledge_base_id}/{content_hash}/{safe_name}"
     minio_storage.put_object(
         key=object_key,
         data=file_content,
         content_type=media_type,
     )
 
-    # Register source document + version via existing Evidence services
+    # Register source document + version via existing Evidence services.
+    # The external_document_id provides the required identity anchor.
     source = await register_source_document(
         db,
         publisher_key=publisher_key,
         publisher_name=publisher_name,
         source_type=source_type,
+        external_document_id=external_id,
         title=title or filename,
         created_by_actor=created_by_actor,
         idempotency_key=idempotency_key or _stable_hash(
             {"kb": knowledge_base_id, "file": filename, "hash": content_hash}
         ),
     )
+
+    # Use repository query for expected_version — avoids lazy-loading
+    # source.versions outside the service layer.
+    latest_version = await get_latest_source_document_version(db, source.id)
+    expected_version = latest_version.version if latest_version is not None else 0
+
     source_version = await append_source_document_version(
         db,
         source_document_id=source.id,
-        expected_version=0 if not source.versions else source.versions[-1].version,
+        expected_version=expected_version,
         version_reason="NEW_CONTENT",
         source_grade="F",  # Knowledge content is low-grade by default
         published_at=published_at,
@@ -300,23 +358,59 @@ async def upload_knowledge_document(
     return doc
 
 
+MAX_RETRY_COUNT = 3
+
+
 async def submit_document_to_weknora(
     db: AsyncSession,
     *,
     knowledge_document_id: str,
     idempotency_key: str,
 ) -> KnowledgeImportTask:
-    """Submit a document to WeKnora for processing."""
+    """Submit a document to WeKnora for processing.
+
+    Flow:
+    1. Validate state in a short transaction (idempotency + guard checks).
+    2. Call WeKnora HTTP OUTSIDE any DB transaction.
+    3. Persist the result in a second short transaction.
+    """
     if not _weknora_available():
         raise KnowledgeWeKnoraNotConfigured(
             "WeKnora is not configured or disabled"
         )
 
+    # --- Phase 1: Validate and create task record (short transaction) ---
     doc = await get_knowledge_document(db, knowledge_document_id)
     if doc is None:
         raise KnowledgeDocumentNotFound(
             f"Document {knowledge_document_id} not found",
             knowledge_document_id=knowledge_document_id,
+        )
+
+    # Guard: retired documents cannot be submitted
+    if doc.processing_status == "RETIRED":
+        raise KnowledgeInvalidStateTransition(
+            "Cannot submit a retired document",
+            from_status=doc.processing_status,
+        )
+
+    # Guard: already processing — prevent concurrent duplicate tasks
+    if doc.processing_status in ("SUBMITTING", "PROCESSING"):
+        existing_task = await get_import_task_by_idempotency(
+            db, knowledge_document_id, idempotency_key
+        )
+        if existing_task is not None:
+            return existing_task
+        raise KnowledgeIdempotencyConflict(
+            "Document is already being processed",
+            knowledge_document_id=knowledge_document_id,
+        )
+
+    # Guard: max retries exceeded
+    if doc.retry_count >= MAX_RETRY_COUNT:
+        raise KnowledgeInvalidStateTransition(
+            f"Max retry count ({MAX_RETRY_COUNT}) exceeded",
+            retry_count=doc.retry_count,
         )
 
     kb = await get_knowledge_base(db, doc.knowledge_base_id)
@@ -342,12 +436,14 @@ async def submit_document_to_weknora(
             task_id=existing_task.id,
         )
 
+    # Read raw file from MinIO (sync I/O — bounded by file size)
     file_bytes = minio_storage.get_object(doc.object_key)
     if file_bytes is None:
         raise KnowledgeValidationError(
             f"Raw file not found in storage: {doc.object_key}"
         )
 
+    # Create task and update document status
     task = KnowledgeImportTask(
         knowledge_document_id=knowledge_document_id,
         idempotency_key=idempotency_key,
@@ -357,37 +453,163 @@ async def submit_document_to_weknora(
         status="PENDING",
     )
     doc.processing_status = "SUBMITTING"
+    doc.last_error = None
 
     try:
         async with db.begin_nested():
             db.add(task)
             await db.flush()
-            # Submit to WeKnora outside the DB transaction
-            try:
-                upload_result = await weknora_upload(
-                    kb_id=kb.weknora_kb_id,
-                    filename=doc.title,
-                    file_content=file_bytes,
-                    content_type=doc.media_type,
-                )
-                task.status = "COMPLETED"
-                task.completed_at = utc_now()
-                weknora_doc_id = upload_result.get("id") or upload_result.get("document_id")
-                doc.weknora_document_id = weknora_doc_id
-                doc.processing_status = "PROCESSING"
-            except WeKnoraError as exc:
-                task.status = "FAILED"
-                task.error_message = exc.message
-                doc.processing_status = "FAILED"
-                doc.last_error = exc.message
-                doc.retry_count += 1
-                logger.warning("WeKnora upload failed for doc %s: %s", doc.id, exc)
     except IntegrityError as exc:
         raise KnowledgePersistenceConflict(
             "Import task write violated constraints"
         ) from exc
 
+    # --- Phase 2: HTTP call OUTSIDE any DB transaction ---
+    try:
+        upload_result = await weknora_upload(
+            kb_id=kb.weknora_kb_id,
+            filename=doc.title,
+            file_content=file_bytes,
+            content_type=doc.media_type,
+        )
+        weknora_knowledge_id = upload_result.get("id") or upload_result.get("ID")
+        if not weknora_knowledge_id:
+            raise WeKnoraError(
+                f"WeKnora upload returned no knowledge ID: {upload_result}"
+            )
+    except WeKnoraError as exc:
+        # --- Phase 3a: Persist failure (short transaction) ---
+        doc = await get_knowledge_document(db, knowledge_document_id)
+        if doc is not None:
+            doc.processing_status = "FAILED"
+            doc.last_error = exc.message
+            doc.retry_count += 1
+            doc.updated_at = utc_now()
+        fail_task = await get_import_task_by_idempotency(
+            db, knowledge_document_id, idempotency_key
+        )
+        if fail_task is not None:
+            fail_task.status = "FAILED"
+            fail_task.error_message = exc.message
+        await db.flush()
+        logger.warning("WeKnora upload failed for doc %s: %s", doc.id if doc else "?", exc)
+        return task  # Return original task (PENDING state preserved)
+
+    # --- Phase 3b: Persist success (short transaction) ---
+    doc = await get_knowledge_document(db, knowledge_document_id)
+    if doc is not None:
+        # Guard: document was retired during the HTTP call
+        if doc.processing_status == "RETIRED":
+            logger.info("Doc %s was retired during upload; keeping RETIRED", doc.id)
+            done_task = await get_import_task_by_idempotency(
+                db, knowledge_document_id, idempotency_key
+            )
+            if done_task is not None:
+                done_task.status = "COMPLETED"
+                done_task.completed_at = utc_now()
+            await db.flush()
+            return task
+
+        doc.weknora_document_id = weknora_knowledge_id
+        doc.processing_status = "PROCESSING"
+        doc.updated_at = utc_now()
+
+    done_task = await get_import_task_by_idempotency(
+        db, knowledge_document_id, idempotency_key
+    )
+    if done_task is not None:
+        done_task.status = "COMPLETED"
+        done_task.completed_at = utc_now()
+        done_task.weknora_task_id = weknora_knowledge_id
+    await db.flush()
+
     return task
+
+
+async def sync_document_status(
+    db: AsyncSession,
+    *,
+    knowledge_document_id: str,
+) -> KnowledgeDocument:
+    """Poll WeKnora for the real parse status of a document.
+
+    Maps WeKnora parse_status → our processing_status:
+      pending     → PENDING
+      processing  → PROCESSING
+      finalizing  → PROCESSING
+      completed   → READY
+      failed      → FAILED
+    """
+    doc = await get_knowledge_document(db, knowledge_document_id)
+    if doc is None:
+        raise KnowledgeDocumentNotFound(
+            f"Document {knowledge_document_id} not found",
+            knowledge_document_id=knowledge_document_id,
+        )
+
+    if doc.processing_status == "RETIRED":
+        return doc  # Never revive retired documents
+
+    if not doc.weknora_document_id:
+        return doc  # Not yet submitted
+
+    if not _weknora_available():
+        return doc  # Can't sync without service
+
+    kb = await get_knowledge_base(db, doc.knowledge_base_id)
+    if kb is None or not kb.weknora_kb_id:
+        return doc
+
+    try:
+        status_data = await get_document_status(
+            kb_id=kb.weknora_kb_id or "",
+            knowledge_id=doc.weknora_document_id or "",
+        )
+    except WeKnoraError as exc:
+        logger.warning("WeKnora status sync failed for doc %s: %s", doc.id, exc)
+        return doc
+
+    parse_status = status_data.get("parse_status", "")
+    status_mapping = {
+        "pending": "PENDING",
+        "processing": "PROCESSING",
+        "finalizing": "PROCESSING",
+        "completed": "READY",
+        "failed": "FAILED",
+    }
+    new_status = status_mapping.get(parse_status)
+    if new_status and new_status != doc.processing_status:
+        doc.processing_status = new_status
+        doc.updated_at = utc_now()
+        if new_status == "FAILED":
+            doc.last_error = status_data.get("last_error", "WeKnora parse failed")
+        await db.flush()
+
+    return doc
+
+
+async def sync_pending_documents(
+    db: AsyncSession,
+    *,
+    limit: int = 10,
+) -> int:
+    """Sync status for all PROCESSING documents. Returns count updated."""
+    if not _weknora_available():
+        return 0
+
+    result = await db.execute(
+        select(KnowledgeDocument).where(
+            KnowledgeDocument.processing_status.in_(["PENDING", "SUBMITTING", "PROCESSING"])
+        ).limit(limit)
+    )
+    pending = list(result.scalars().all())
+    updated = 0
+    for doc in pending:
+        before = doc.processing_status
+        await sync_document_status(db, knowledge_document_id=doc.id)
+        if doc.processing_status != before:
+            updated += 1
+    return updated
 
 
 async def retire_document(
@@ -395,7 +617,10 @@ async def retire_document(
     *,
     knowledge_document_id: str,
 ) -> KnowledgeDocument:
-    """Retire a document — excluded from new search, history preserved."""
+    """Retire a document — excluded from new search, history preserved.
+
+    Retire is idempotent: retiring an already-retired document succeeds.
+    """
     doc = await get_knowledge_document(db, knowledge_document_id)
     if doc is None:
         raise KnowledgeDocumentNotFound(
@@ -403,10 +628,7 @@ async def retire_document(
             knowledge_document_id=knowledge_document_id,
         )
     if doc.processing_status == "RETIRED":
-        raise KnowledgeInvalidStateTransition(
-            "Document is already retired",
-            from_status=doc.processing_status,
-        )
+        return doc  # Idempotent
 
     doc.processing_status = "RETIRED"
     doc.updated_at = utc_now()
@@ -455,7 +677,15 @@ async def search_knowledge(
     instrument_id: str | None = None,
     limit: int = 10,
 ) -> SearchResponse:
-    """Search knowledge bases and return citation-backed excerpts."""
+    """Search knowledge bases and return citation-backed excerpts.
+
+    Scope resolution:
+    - If both knowledge_base_ids and instrument_id are given, we intersect:
+      only KBs that are in the requested list AND linked to the instrument.
+    - Results are post-filtered: only READY, non-retired documents with valid
+      SourceDocumentVersion mappings are included. Unmapped results are counted
+      in diagnostics but never returned as trusted citations.
+    """
     if not query or not query.strip():
         raise KnowledgeValidationError("Search query must not be blank")
 
@@ -469,19 +699,33 @@ async def search_knowledge(
         )
 
     # Resolve target knowledge bases
-    if knowledge_base_ids:
-        target_kbs = []
+    target_kbs: list[KnowledgeBase] = []
+    if knowledge_base_ids and instrument_id:
+        # Intersection: requested KBs that are also linked to the instrument
+        from backend.knowledge.repositories import list_knowledge_bases_by_instrument
+        instrument_kbs = await list_knowledge_bases_by_instrument(db, instrument_id)
+        instrument_kb_ids = {kb.id for kb in instrument_kbs}
+        for kb_id in knowledge_base_ids:
+            kb = await get_knowledge_base(db, kb_id)
+            if (kb is not None
+                    and kb.id in instrument_kb_ids
+                    and kb.status == "READY"
+                    and kb.weknora_kb_id):
+                target_kbs.append(kb)
+    elif knowledge_base_ids:
         for kb_id in knowledge_base_ids:
             kb = await get_knowledge_base(db, kb_id)
             if kb is not None and kb.status == "READY" and kb.weknora_kb_id:
                 target_kbs.append(kb)
     elif instrument_id:
         from backend.knowledge.repositories import list_knowledge_bases_by_instrument
-        target_kbs = await list_knowledge_bases_by_instrument(db, instrument_id)
-        target_kbs = [kb for kb in target_kbs if kb.status == "READY" and kb.weknora_kb_id]
+        instrument_kbs = await list_knowledge_bases_by_instrument(db, instrument_id)
+        target_kbs = [kb for kb in instrument_kbs
+                      if kb.status == "READY" and kb.weknora_kb_id]
     else:
         all_kbs = await list_knowledge_bases(db)
-        target_kbs = [kb for kb in all_kbs if kb.status == "READY" and kb.weknora_kb_id]
+        target_kbs = [kb for kb in all_kbs
+                      if kb.status == "READY" and kb.weknora_kb_id]
 
     if not target_kbs:
         return SearchResponse(
@@ -492,13 +736,31 @@ async def search_knowledge(
             knowledge_base_ids=[],
         )
 
+    # Build a lookup: weknora_knowledge_id → (doc, kb_id) for all non-retired
+    # READY documents in the target KBs. This constrains mapping to the
+    # authorized scope — prevents returning results from other KBs.
+    target_kb_ids = {kb.id for kb in target_kbs}
+    from sqlalchemy import select as sa_select
+    docs_result = await db.execute(
+        sa_select(KnowledgeDocument).where(
+            KnowledgeDocument.knowledge_base_id.in_(list(target_kb_ids)),
+            KnowledgeDocument.weknora_document_id.isnot(None),
+        )
+    )
+    all_kb_docs = list(docs_result.scalars().all())
+    knowledge_id_map: dict[str, KnowledgeDocument] = {}
+    for d in all_kb_docs:
+        if d.weknora_document_id and d.processing_status not in ("RETIRED", "FAILED"):
+            knowledge_id_map[d.weknora_document_id] = d
+
     results: list[SearchResultItem] = []
     warnings: list[str] = []
+    unmapped_count = 0
 
     for kb in target_kbs:
+        if not kb.weknora_kb_id:
+            continue
         try:
-            if not kb.weknora_kb_id:
-                continue
             search_data = await weknora_search(
                 kb_id=kb.weknora_kb_id,
                 query=query,
@@ -506,50 +768,55 @@ async def search_knowledge(
             )
             raw_items = _extract_search_items(search_data)
             for item in raw_items:
-                # Map provider document back to our document
-                mapped_doc = None
-                if item.get("document_id"):
-                    from sqlalchemy import select as sa_select
-                    result = await db.execute(
-                        sa_select(KnowledgeDocument).where(
-                            KnowledgeDocument.weknora_document_id == item["document_id"]
-                        )
-                    )
-                    mapped_doc = result.scalar_one_or_none()
+                knowledge_id = item.get("knowledge_id") or item.get("KnowledgeID")
+                chunk_id = item.get("id") or item.get("chunk_id") or item.get("ChunkIndex", 0)
 
-                if mapped_doc and mapped_doc.processing_status == "RETIRED":
-                    continue  # Skip retired documents
+                # Map to our document — MUST be in authorized scope
+                mapped_doc = knowledge_id_map.get(knowledge_id) if knowledge_id else None
 
-                ref_id = mapped_doc.id if mapped_doc else f"weknora:{kb.id}:{item.get('chunk_id', '')}"
-                source_version_id = (
-                    mapped_doc.source_document_version_id if mapped_doc else None
-                )
-                content_hash = mapped_doc.content_hash if mapped_doc else None
+                if not mapped_doc:
+                    unmapped_count += 1
+                    continue  # Skip unmapped — never return as trusted citation
+
+                # Post-filter: double-check KB归属 + retired status
+                if mapped_doc.knowledge_base_id not in target_kb_ids:
+                    continue
+                if mapped_doc.processing_status == "RETIRED":
+                    continue
+
+                source_version_id = mapped_doc.source_document_version_id
+                content_hash = mapped_doc.content_hash
 
                 results.append(
                     SearchResultItem(
-                        ref_id=ref_id,
+                        ref_id=mapped_doc.id,
                         knowledge_base_id=kb.id,
                         source_document_version_id=source_version_id,
-                        title=item.get("title", kb.name),
-                        excerpt=item.get("content", item.get("text", "")),
-                        score=item.get("score", 0.0),
-                        score_type=item.get("score_type", "hybrid"),
-                        published_at=mapped_doc.published_at if mapped_doc else None,
-                        instrument_id=instrument_id,
-                        chunk_id=item.get("chunk_id"),
-                        provider_document_id=item.get("document_id"),
+                        title=item.get("knowledge_title", item.get("KnowledgeTitle", mapped_doc.title)),
+                        excerpt=item.get("content", item.get("Content", "")),
+                        score=item.get("score", item.get("Score", 0.0)),
+                        score_type=_match_type_label(item.get("match_type", item.get("MatchType"))),
+                        published_at=mapped_doc.published_at,
+                        instrument_id=None,  # Set by caller context if needed
+                        chunk_id=str(chunk_id) if chunk_id else None,
+                        provider_document_id=knowledge_id,
                         content_hash=content_hash,
-                        locator_precision=item.get("locator_precision", "CHUNK"),
-                        warnings=item.get("warnings", []),
+                        locator_precision="CHUNK",
+                        warnings=[],
                     )
                 )
         except WeKnoraError as exc:
             warnings.append(f"Search failed for KB {kb.name}: {exc.message}")
             logger.warning("WeKnora search failed for KB %s: %s", kb.id, exc)
 
+    if unmapped_count > 0:
+        warnings.append(f"{unmapped_count} result(s) could not be mapped to authorized documents")
+
     if not results:
-        status = "PARTIAL" if warnings else "EMPTY"
+        if warnings:
+            status = "UNAVAILABLE" if any("failed" in w.lower() for w in warnings) else "EMPTY"
+        else:
+            status = "EMPTY"
         return SearchResponse(
             status=status,
             results=[],
@@ -558,8 +825,9 @@ async def search_knowledge(
             knowledge_base_ids=[kb.id for kb in target_kbs],
         )
 
+    overall_status = "PARTIAL" if warnings else "SUCCESS"
     return SearchResponse(
-        status="SUCCESS",
+        status=overall_status,
         results=sorted(results, key=lambda r: r.score, reverse=True)[:limit],
         warnings=warnings,
         query=query,
@@ -567,13 +835,24 @@ async def search_knowledge(
     )
 
 
-def _extract_search_items(search_data: dict[str, Any]) -> list[dict[str, Any]]:
-    """Extract result items from various WeKnora response shapes."""
+def _extract_search_items(search_data: Any) -> list[dict[str, Any]]:
+    """Extract result items from WeKnora search response shapes."""
     if isinstance(search_data, list):
-        return list(search_data)
+        return [item for item in search_data if isinstance(item, dict)]
     if not isinstance(search_data, dict):
         return []
     for key in ("results", "data", "items", "hits"):
         if key in search_data and isinstance(search_data[key], list):
-            return list(search_data[key])
+            return [item for item in search_data[key] if isinstance(item, dict)]
+    return []
+
+
+def _match_type_label(raw: Any) -> str:
+    """Convert WeKnora match_type to a readable label."""
+    if isinstance(raw, int):
+        labels = {0: "embedding", 1: "keyword", 2: "nearby", 4: "parent_chunk"}
+        return labels.get(raw, f"type_{raw}")
+    if isinstance(raw, str) and raw:
+        return raw
+    return "hybrid"
     return []
